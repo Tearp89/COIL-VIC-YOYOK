@@ -9,11 +9,7 @@ public class Admin{
     private String adminUser;
     
     public Admin() {
-        this.adminId = adminId;
-        this.password = password;
-        this.adminName = adminName;
-        this.adminRol = adminRol;
-        this.adminUser = adminUser;
+
     }
 
     public String getAdminId() {

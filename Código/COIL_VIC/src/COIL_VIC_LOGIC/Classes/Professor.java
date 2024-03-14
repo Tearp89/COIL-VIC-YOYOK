@@ -18,13 +18,7 @@ public class Professor {
     private int workShopId;
 
     public Professor() {
-        this.name = name;
-        this.status = status;
-        this.type = type;
-        this.country = country;
-        this.universityId = universityId;
-        this.administratorId = administratorId;
-        this.workShopId = workShopId;
+
     }
 
     public void setName(String name) {

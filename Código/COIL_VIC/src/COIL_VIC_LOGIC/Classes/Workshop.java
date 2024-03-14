@@ -7,12 +7,9 @@ public class Workshop {
     Date finishDate;
     String requirements;
     public Workshop() {
-        this.workshopId = workshopId;
-        this.workshopName = workshopName;
-        this.startDate = startDate;
-        this.finishDate = finishDate;
-        this.requirements = requirements;
+       
     }
+    
     public String getWorkshopId() {
         return workshopId;
     }

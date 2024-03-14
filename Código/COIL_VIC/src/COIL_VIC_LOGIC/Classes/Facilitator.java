@@ -5,9 +5,7 @@ public class Facilitator {
     private String workShopId;
 
     public Facilitator() {
-        this.facilitatorId = facilitatorId;
-        this.facilitatorName = facilitatorName;
-        this.workShopId = workShopId;
+       
     }
 
     public String getFacilitatorId() {

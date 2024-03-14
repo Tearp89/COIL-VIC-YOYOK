@@ -8,10 +8,11 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import COIL_VIC_DataAccess.DatabaseManager;
 import COIL_VIC_LOGIC.Classes.University;
-import COIL_VIC_LOGIC.Interfaces.IUniversidad;
+import COIL_VIC_LOGIC.Interfaces.IUniversity;
 
 public class UniversityDAO implements IUniversity{
 
+   
     public int addUniversity(University university){
         DatabaseManager dbManager = new DatabaseManager();
         String query = "INSERT INTO universidad(idUniversidad, nombreUniversidad, país, idioma) VALUES (?,?,?,?,?,?)";

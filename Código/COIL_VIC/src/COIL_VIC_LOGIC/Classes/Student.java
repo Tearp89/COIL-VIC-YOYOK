@@ -4,7 +4,7 @@ public class Student {
     private String email;
 
     public Student() {
-        this.email = email;
+      
     }
 
     public String getEmail() {

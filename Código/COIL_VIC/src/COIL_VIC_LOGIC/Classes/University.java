@@ -7,10 +7,7 @@ public class University {
     private String universityLanguage;
     
     public University() {
-        this.universityId = universityId;
-        this.universityName = universityName;
-        this.universityCountry = universityCountry;
-        this.universityLanguage = universityLanguage;
+      
     }
 
     public String getUniversityId() {

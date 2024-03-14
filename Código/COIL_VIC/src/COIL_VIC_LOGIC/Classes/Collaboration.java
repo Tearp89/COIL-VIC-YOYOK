@@ -8,11 +8,7 @@ public class Collaboration {
     String collaborationName;
 
     public Collaboration() {
-        this.collaborationId = collaborationId;
-        this.description = description;
-        this.finishDate = finishDate;
-        this.startDate = startDate;
-        this.collaborationName = collaborationName;
+        
     }
 
     public String getCollaborationId() {
