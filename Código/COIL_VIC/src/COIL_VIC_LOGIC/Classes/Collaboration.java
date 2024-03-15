@@ -1,3 +1,5 @@
+package COIL_VIC_LOGIC.Classes;
+
 import java.sql.Date;
 
 public class Collaboration {
