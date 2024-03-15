@@ -1,3 +1,5 @@
+package COIL_VIC_LOGIC.Classes;
+
 
 public class Facilitator {
     private String facilitatorId;

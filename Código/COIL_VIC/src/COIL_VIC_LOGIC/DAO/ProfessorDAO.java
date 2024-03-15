@@ -31,5 +31,40 @@ public class ProfessorDAO implements IProfessor{
         return result;
     }
 
+    public int deleteProfessor(Professor professor){
+        DatabaseManager dbMananager = new DatabaseManager();
+        String query = "DELETE FROM  profesor WHERE nombreProfesor = ?";
+        int result = 0;
+        try {
+            Connection connection = dbMananager.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, professor.getName());
+            result = preparedStatement.executeUpdate();
+        } catch (SQLException deleteProfessorException) {
+            Logger.getLogger(DatabaseManager.class.getName()).log(Level.SEVERE,null, deleteProfessorException);
+        }
+        
+        return result;
+    }
+
+    public int updateProfessor(Professor professor){
+        DatabaseManager dbManager = new DatabaseManager();
+        String query = "UPDATE profesor SET nombreProfesor = ?, estado = ?, tipoProfesor = ?, pais = ? WHERE idProfesor = ?";
+        int result = 0;
+        try{
+            Connection connection = dbManager.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, professor.getName());
+            preparedStatement.setString(2, professor.getStatus());
+            preparedStatement.setString(3, professor.getType());
+            preparedStatement.setString(4, professor.getCountry());
+            result = preparedStatement.executeUpdate();
+        } catch (SQLException updateProfessorException){
+            Logger.getLogger(DatabaseManager.class.getName()).log(Level.SEVERE,null, updateProfessorException);
+        }
+        return result;
+    }
+
 
 }
+
