@@ -12,11 +12,11 @@ import COIL_VIC_LOGIC.Classes.Student;
 public class StudentDAO {
 
     public int addStudent(Student student) {
-        DatabaseManager databaseManager = new DatabaseManager();
+        DatabaseManager dbManager = new DatabaseManager();
         String query = "INSERT INTO estudiante(correoElectrónico) VALUES (?)";
         int result = 0;
         try {
-            Connection connection = databaseManager.getConnection();
+            Connection connection = dbManager.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1, student.getEmail());
             result = preparedStatement.executeUpdate();
@@ -25,5 +25,5 @@ public class StudentDAO {
         }
         return result;
     }
-
+    
 }
