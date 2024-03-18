@@ -47,7 +47,7 @@ public class WorkshopDAO {
 
     public int updateWorkshop(Workshop workshop){
         DatabaseManager dbManager = new DatabaseManager();
-        String query = "UPDATE curso-taller SET nombreCursoTaller = ?, fechaInicio = ?, fechaFin = ?, requisitos = ?";
+        String query = "UPDATE curso-taller SET nombreCursoTaller = ?, fechaInicio = ?, fechaFin = ?, requisitos = ? WHERE idCursoTaller = ?";
         int result = 0;
         try {
             Connection connection = dbManager.getConnection();
@@ -56,6 +56,7 @@ public class WorkshopDAO {
             preparedStatement.setObject(2, workshop.getStartDate());
             preparedStatement.setObject(3, workshop.getFinishDate());
             preparedStatement.setString(4, workshop.getRequirements());
+            preparedStatement.setString(5, workshop.getWorkshopId());
             result = preparedStatement.executeUpdate();
         } catch (SQLException  updateWorkshopException) {
             Logger.getLogger(DatabaseManager.class.getName()).log(Level.SEVERE,null, updateWorkshopException);
