@@ -18,7 +18,7 @@ import COIL_VIC_DataAccess.DatabaseManager;
 import COIL_VIC_LOGIC.Classes.Facilitator;
 
 public class FacilitatorDAO{
-    public int addFcilitator (Facilitator facilitator){
+    public int addFacilitator (Facilitator facilitator){
         DatabaseManager dbManager = new DatabaseManager();
         String query = "INSERT INTO facilitador (idFacilitador, nombreFacilitador, Curso-Taller_idCursoTaller) VALUES (?,?,?)";
         int result = 0;

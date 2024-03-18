@@ -2,17 +2,13 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+<<<<<<< HEAD
+        <group/>
+=======
         <group>
-            <file>file:/C:/Users/daur0/OneDrive/Documentos/Universidad/Cuarto%20Semestre/Principios%20de%20Construcción/Proyecto%20COIL-VIC/COIL-VIC-YOYOK/Código/COIL_VIC/test/COIL_VIC_LOGIC/DAO/UniversityDAOTest.java</file>
-            <file>file:/C:/Users/daur0/OneDrive/Documentos/Universidad/Cuarto%20Semestre/Principios%20de%20Construcción/Proyecto%20COIL-VIC/COIL-VIC-YOYOK/Código/COIL_VIC/test/COIL_VIC_LOGIC/DAO/CollaborationDAOTest.java</file>
-            <file>file:/C:/Users/daur0/OneDrive/Documentos/Universidad/Cuarto%20Semestre/Principios%20de%20Construcción/Proyecto%20COIL-VIC/COIL-VIC-YOYOK/Código/COIL_VIC/src/COIL_VIC_LOGIC/DAO/CollaborationDAO.java</file>
-            <file>file:/C:/Users/daur0/OneDrive/Documentos/Universidad/Cuarto%20Semestre/Principios%20de%20Construcción/Proyecto%20COIL-VIC/COIL-VIC-YOYOK/Código/COIL_VIC/test/COIL_VIC_LOGIC/DAO/FacilitatorDAOTest.java</file>
-            <file>file:/C:/Users/daur0/OneDrive/Documentos/Universidad/Cuarto%20Semestre/Principios%20de%20Construcción/Proyecto%20COIL-VIC/COIL-VIC-YOYOK/Código/COIL_VIC/test/COIL_VIC_LOGIC/DAO/WorkshopDAOTest.java</file>
-            <file>file:/C:/Users/daur0/OneDrive/Documentos/Universidad/Cuarto%20Semestre/Principios%20de%20Construcción/Proyecto%20COIL-VIC/COIL-VIC-YOYOK/Código/COIL_VIC/test/COIL_VIC_LOGIC/DAO/StudentDAOTest.java</file>
-            <file>file:/C:/Users/daur0/OneDrive/Documentos/Universidad/Cuarto%20Semestre/Principios%20de%20Construcción/Proyecto%20COIL-VIC/COIL-VIC-YOYOK/Código/COIL_VIC/src/COIL_VIC_LOGIC/DAO/WorkshopDAO.java</file>
-            <file>file:/C:/Users/daur0/OneDrive/Documentos/Universidad/Cuarto%20Semestre/Principios%20de%20Construcción/Proyecto%20COIL-VIC/COIL-VIC-YOYOK/Código/COIL_VIC/test/COIL_VIC_LOGIC/DAO/AdminDAOTest.java</file>
-            <file>file:/C:/Users/daur0/OneDrive/Documentos/Universidad/Cuarto%20Semestre/Principios%20de%20Construcción/Proyecto%20COIL-VIC/COIL-VIC-YOYOK/Código/COIL_VIC/src/COIL_VIC_LOGIC/Classes/Collaboration.java</file>
-            <file>file:/C:/Users/daur0/OneDrive/Documentos/Universidad/Cuarto%20Semestre/Principios%20de%20Construcción/Proyecto%20COIL-VIC/COIL-VIC-YOYOK/Código/COIL_VIC/src/COIL_VIC_LOGIC/Classes/Workshop.java</file>
+            <file>file:/C:/Users/isabe/Desktop/uni%204/Construcción/COIL-VIC-YOYOK/Código/COIL_VIC/test/COIL_VIC_LOGIC/DAO/AdminDAOTest.java</file>
+            <file>file:/C:/Users/isabe/Desktop/uni%204/Construcción/COIL-VIC-YOYOK/Código/COIL_VIC/test/COIL_VIC_DataAccess/DatabaseManagerTest.java</file>
         </group>
+>>>>>>> betty
     </open-files>
 </project-private>

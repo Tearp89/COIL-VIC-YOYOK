@@ -48,7 +48,7 @@ public class AdminDAOTest {
         admin.setAdminUser("UsuarioAdminTest");
         admin.setPassword("ContraseñaTest");
         
-        int rowsAffected = adminDAO.deleteFacilitator(admin);
+        int rowsAffected = adminDAO.deleteAdmin(admin);
         assertEquals(1, rowsAffected);
     }
 

@@ -11,5 +11,7 @@ import COIL_VIC_LOGIC.Classes.Professor;
  */
 public interface IProfessor {
     int addProfessor(Professor professor);
+    int deleteProfessor(Professor professor);
+    int updateProfessor(Professor professor);
 }
 
