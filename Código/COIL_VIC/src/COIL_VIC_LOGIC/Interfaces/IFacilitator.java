@@ -4,10 +4,14 @@
  */
 package COIL_VIC_LOGIC.Interfaces;
 
+import COIL_VIC_LOGIC.Classes.Facilitator;
+
 /**
  *
  * @author isabe
  */
 public interface IFacilitator {
-    
+    int addFacilitator(Facilitator facilitatot);
+    int deleteFacilitator(Facilitator facilitator);
+    int updateFacilitator(Facilitator facilitator);
 }

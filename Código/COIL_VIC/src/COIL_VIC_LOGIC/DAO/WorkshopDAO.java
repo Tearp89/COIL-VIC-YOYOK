@@ -8,8 +8,9 @@ import java.util.logging.Logger;
 
 import COIL_VIC_DataAccess.DatabaseManager;
 import COIL_VIC_LOGIC.Classes.Workshop;
+import COIL_VIC_LOGIC.Interfaces.IWorkshop;
 
-public class WorkshopDAO {
+public class WorkshopDAO implements IWorkshop {
 
     public int addWorkshop(Workshop workshop){
         DatabaseManager dbManager = new DatabaseManager();

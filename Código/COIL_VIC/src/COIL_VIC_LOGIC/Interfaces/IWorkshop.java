@@ -12,6 +12,6 @@ import COIL_VIC_LOGIC.Classes.Workshop;
  */
 public interface IWorkshop {
     int addWorkshop(Workshop workshop);
-    int deleteWorshop(Workshop workshop);
+    int deleteWorkshop(Workshop workshop);
     int updateWorkshop(Workshop workshop);
 }

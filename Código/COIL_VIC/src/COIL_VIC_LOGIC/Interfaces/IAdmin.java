@@ -10,4 +10,6 @@ import COIL_VIC_LOGIC.Classes.Admin;
  */
 public interface IAdmin {
     int addAdmin(Admin admin);
+    int deleteAdmin(Admin admin);
+    int updateAdmin(Admin admin);
 }
