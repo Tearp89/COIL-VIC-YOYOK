@@ -8,8 +8,9 @@ import java.util.logging.Logger;
 
 import COIL_VIC_DataAccess.DatabaseManager;
 import COIL_VIC_LOGIC.Classes.Collaboration;
+import COIL_VIC_LOGIC.Interfaces.ICollaboration;
 
-public class CollaborationDAO {
+public class CollaborationDAO implements ICollaboration {
 
     public int addCollaboration(Collaboration collaboration){
         DatabaseManager dbManager = new DatabaseManager();

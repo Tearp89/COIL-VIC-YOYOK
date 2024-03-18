@@ -8,8 +8,9 @@ import java.util.logging.Logger;
 
 import COIL_VIC_DataAccess.DatabaseManager;
 import COIL_VIC_LOGIC.Classes.Student;
+import COIL_VIC_LOGIC.Interfaces.IStudent;
 
-public class StudentDAO {
+public class StudentDAO implements IStudent {
 
     public int addStudent(Student student) {
         DatabaseManager dbManager = new DatabaseManager();

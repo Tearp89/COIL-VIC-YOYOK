@@ -11,11 +11,12 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import COIL_VIC_DataAccess.DatabaseManager;
 import COIL_VIC_LOGIC.Classes.Admin;
+import COIL_VIC_LOGIC.Interfaces.IAdmin;
 /**
  *
  * @author isabe
  */
-public class AdminDAO {
+public class AdminDAO implements IAdmin {
     public int addAdmin (Admin admin){
         DatabaseManager dbManager = new DatabaseManager();
         String query = "INSERT INTO administrador (idAdministrativo, contraseña, nombreAdministrador, rol, usuario) VALUES (?,?,?,?,?)";

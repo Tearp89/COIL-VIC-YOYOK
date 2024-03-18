@@ -16,8 +16,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import COIL_VIC_DataAccess.DatabaseManager;
 import COIL_VIC_LOGIC.Classes.Facilitator;
+import COIL_VIC_LOGIC.Interfaces.IFacilitator;
 
-public class FacilitatorDAO{
+public class FacilitatorDAO implements IFacilitator{
     public int addFacilitator (Facilitator facilitator){
         DatabaseManager dbManager = new DatabaseManager();
         String query = "INSERT INTO facilitador (idFacilitador, nombreFacilitador, Curso-Taller_idCursoTaller) VALUES (?,?,?)";
