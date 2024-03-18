@@ -35,7 +35,7 @@ public class AdminDAO {
         return result;
     }
     
-    public int deleteFacilitator(Admin admin){
+    public int deleteAdmin(Admin admin){
         DatabaseManager dbManager = new DatabaseManager();
         String query = "DELETE FROM administrador where nombreAdministrador = ?";
         int result = 0;
