@@ -50,7 +50,7 @@ public class UniversityDAO implements IUniversity{
     
     public int updateUniversity(University university){
         DatabaseManager dbManager = new DatabaseManager();
-        String query = "UPDATE profesor SET nombreProfesor = ?, estado = ?, tipoProfesor = ?, pais = ? WHERE idProfesor = ?";
+        String query = "UPDATE universidad SET nombreUniversidad = ?, idioma = ?, pais = ? WHERE idUniversidad = ?";
         int result = 0;
         try{
             Connection connection = dbManager.getConnection();
