@@ -13,6 +13,7 @@ public class Professor {
     private String status;
     private String type;
     private String country;
+    private int professorId;
     private int universityId;
     private int administratorId;
     private int workShopId;
@@ -52,7 +53,14 @@ public class Professor {
     public void setCountry(String country) {
         this.country = country;
     }
-
+    
+    public int getProfessorId(){
+        return professorId;
+    }
+    
+    public void setProfessorId(int professorId){
+        this.professorId = professorId;
+    }
     public int getUniversityId() {
         return universityId;
     }

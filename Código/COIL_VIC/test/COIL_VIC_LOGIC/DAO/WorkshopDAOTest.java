@@ -4,10 +4,13 @@
  */
 package COIL_VIC_LOGIC.DAO;
 
+import COIL_VIC_LOGIC.Classes.Collaboration;
 import COIL_VIC_LOGIC.Classes.Workshop;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import java.sql.Date;
+import java.time.LocalDate;
+import java.util.ArrayList;
 
 /**
  *
@@ -21,10 +24,9 @@ public class WorkshopDAOTest {
     public void testAddWorkshop(){
         Workshop workshop = new Workshop();
         WorkshopDAO instance = new WorkshopDAO();
-        Date dateStartTest = new Date(2000, 0, 1);
-        Date dateFinishtTest = new Date(2000, 1, 1);
+        LocalDate dateStartTest = LocalDate.of(2000, 3, 1);
+        LocalDate dateFinishtTest = LocalDate.of(2000, 1, 1);
         
-        workshop.setWorkshopId("CU-TEST");
         workshop.setWorkshopName("CT-Test");
         workshop.setRequirements("RequisitosTest");
         workshop.setStartDate(dateStartTest);
@@ -42,14 +44,8 @@ public class WorkshopDAOTest {
     public void testDeleteWorkshop() {
         Workshop workshop = new Workshop();
         WorkshopDAO instance = new WorkshopDAO();
-        Date dateStartTest = new Date(2000, 0, 1);
-        Date dateFinishtTest = new Date(2000, 1, 1);
-        
-        workshop.setWorkshopId("CU-TEST");
-        workshop.setWorkshopName("CT-Test");
-        workshop.setRequirements("RequisitosTest");
-        workshop.setStartDate(dateStartTest);
-        workshop.setFinishDate(dateFinishtTest);
+        int expectedResult = 1;
+        workshop.setWorkshopId(2);
         
         
         int rowsAffected = instance.deleteWorkshop(workshop);
@@ -63,18 +59,27 @@ public class WorkshopDAOTest {
     public void testUpdateWorkshop() {
         Workshop workshop = new Workshop();
         WorkshopDAO instance = new WorkshopDAO();
-        Date dateStartTest = new Date(2000, 0, 1);
-        Date dateFinishtTest = new Date(2000, 2, 2);
+        LocalDate dateStartTest =LocalDate.of(2000, 3, 1);
+        LocalDate dateFinishtTest = LocalDate.of(2000, 2, 2);
         
-        workshop.setWorkshopId("CU-TEST");
+
         workshop.setWorkshopName("NuevoNombreCT-Test");
         workshop.setRequirements("NuevosRequisitosTest");
         workshop.setStartDate(dateStartTest);
         workshop.setFinishDate(dateFinishtTest);
+        workshop.setWorkshopId(3);
         
         
-        int rowsAffected = instance.addWorkshop(workshop);
+        int rowsAffected = instance.updateWorkshop(workshop);
         assertEquals(1, rowsAffected);
     }
     
+    @Test
+    public void testSearchWorkshop(){
+        int expectedResult = 1;
+        WorkshopDAO instance = new WorkshopDAO();
+        int workshopId = 3;
+        ArrayList<Workshop> workshops = instance.searchWorkshop(workshopId);
+        assertEquals(expectedResult, workshops.size());
+    }
 }

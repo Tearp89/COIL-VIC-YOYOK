@@ -21,14 +21,13 @@ import COIL_VIC_LOGIC.Interfaces.IFacilitator;
 public class FacilitatorDAO implements IFacilitator{
     public int addFacilitator (Facilitator facilitator){
         DatabaseManager dbManager = new DatabaseManager();
-        String query = "INSERT INTO facilitador (idFacilitador, nombreFacilitador, Curso-Taller_idCursoTaller) VALUES (?,?,?)";
+        String query = "INSERT INTO facilitador (idFacilitador, nombreFacilitador, Curso-Taller_idCursoTaller) VALUES (?,?)";
         int result = 0;
         try {
             Connection connection = dbManager.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setString(1, facilitator.getFacilitatorId());
-            preparedStatement.setString(2, facilitator.getFacilitatorName());
-            preparedStatement.setString(3, facilitator.getWorkShopId());
+            preparedStatement.setString(1, facilitator.getFacilitatorName());
+            preparedStatement.setString(2, facilitator.getWorkShopId());
             result = preparedStatement.executeUpdate();
         } catch (SQLException addFacilitatorException) {
             Logger.getLogger(DatabaseManager.class.getName()).log(Level.SEVERE,null, addFacilitatorException);
@@ -58,7 +57,6 @@ public class FacilitatorDAO implements IFacilitator{
         try{
             Connection connection = dbManager.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setString(1, facilitator.getFacilitatorId());
             preparedStatement.setString(2, facilitator.getFacilitatorName());
             preparedStatement.setString(3, facilitator.getWorkShopId());
             result = preparedStatement.executeUpdate();
