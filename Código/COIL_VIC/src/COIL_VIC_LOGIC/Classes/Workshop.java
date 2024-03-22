@@ -1,21 +1,22 @@
 package COIL_VIC_LOGIC.Classes;
 
 import java.sql.Date;
+import java.time.LocalDate;
 
 public class Workshop {
-    String workshopId;
+    int workshopId;
     String workshopName;
-    Date startDate;
-    Date finishDate;
+    LocalDate startDate;
+    LocalDate finishDate;
     String requirements;
     public Workshop() {
        
     }
     
-    public String getWorkshopId() {
+    public int getWorkshopId() {
         return workshopId;
     }
-    public void setWorkshopId(String workshopId) {
+    public void setWorkshopId(int workshopId) {
         this.workshopId = workshopId;
     }
     public String getWorkshopName() {
@@ -24,16 +25,16 @@ public class Workshop {
     public void setWorkshopName(String workshopName) {
         this.workshopName = workshopName;
     }
-    public Date getStartDate() {
+    public LocalDate getStartDate() {
         return startDate;
     }
-    public void setStartDate(Date startDate) {
+    public void setStartDate(LocalDate startDate) {
         this.startDate = startDate;
     }
-    public Date getFinishDate() {
+    public LocalDate getFinishDate() {
         return finishDate;
     }
-    public void setFinishDate(Date finishDate) {
+    public void setFinishDate(LocalDate finishDate) {
         this.finishDate = finishDate;
     }
     public String getRequirements() {

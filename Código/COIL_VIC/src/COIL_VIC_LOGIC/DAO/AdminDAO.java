@@ -19,16 +19,15 @@ import COIL_VIC_LOGIC.Interfaces.IAdmin;
 public class AdminDAO implements IAdmin {
     public int addAdmin (Admin admin){
         DatabaseManager dbManager = new DatabaseManager();
-        String query = "INSERT INTO administrador (idAdministrativo, contraseña, nombreAdministrador, rol, usuario) VALUES (?,?,?,?,?)";
+        String query = "INSERT INTO administrador (idAdministrativo, contraseña, nombreAdministrador, rol, usuario) VALUES (?,?,?,?)";
         int result = 0;
         try{
             Connection connection = dbManager.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setString(1, admin.getAdminId());
-            preparedStatement.setString(2, admin.getPassword());
-            preparedStatement.setString(3, admin.getAdminName());
-            preparedStatement.setString(4, admin.getAdminRol());
-            preparedStatement.setString(5, admin.getAdminUser());
+            preparedStatement.setString(1, admin.getPassword());
+            preparedStatement.setString(2, admin.getAdminName());
+            preparedStatement.setString(3, admin.getAdminRol());
+            preparedStatement.setString(4, admin.getAdminUser());
             result = preparedStatement.executeUpdate();
         } catch (SQLException addAdminException) {
             Logger.getLogger(DatabaseManager.class.getName()).log(Level.SEVERE,null, addAdminException);
@@ -58,11 +57,10 @@ public class AdminDAO implements IAdmin {
         try{
             Connection connection = dbManager.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setString(1, admin.getAdminId());
-            preparedStatement.setString(2, admin.getPassword());
-            preparedStatement.setString(3, admin.getAdminName());
-            preparedStatement.setString(4, admin.getAdminRol());
-            preparedStatement.setString(5, admin.getAdminUser());
+            preparedStatement.setString(1, admin.getPassword());
+            preparedStatement.setString(2, admin.getAdminName());
+            preparedStatement.setString(3, admin.getAdminRol());
+            preparedStatement.setString(4, admin.getAdminUser());
             result = preparedStatement.executeUpdate();
         } catch (SQLException updateAdminException) {
             Logger.getLogger(DatabaseManager.class.getName()).log(Level.SEVERE,null, updateAdminException);

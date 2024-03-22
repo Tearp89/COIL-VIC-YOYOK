@@ -6,8 +6,11 @@ package COIL_VIC_LOGIC.DAO;
 
 import COIL_VIC_LOGIC.Classes.Collaboration;
 import java.sql.Date;
+import java.time.LocalDate;
+import java.util.ArrayList;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import java.sql.ResultSet;
 
 /**
  *
@@ -26,13 +29,12 @@ public class CollaborationDAOTest {
         Collaboration collaboration = new Collaboration();
         CollaborationDAO instance = new CollaborationDAO();
         
-        Date dateStartTest = new Date(2000, 0, 1);
-        Date dateFinishtTest = new Date(2000, 1, 1);
+        LocalDate dateStartTest =  LocalDate.of(2000, 1, 1); 
+        LocalDate dateFinishTest =  LocalDate.of(2000, 2, 1);
         
-        collaboration.setCollaborationId("ID-Col");
         collaboration.setCollaborationName("TestNombreCol");
         collaboration.setDescription("TestDescripcion");
-        collaboration.setFinishDate(dateFinishtTest);
+        collaboration.setFinishDate(dateFinishTest);
         collaboration.setStartDate(dateStartTest);
         
         
@@ -48,17 +50,17 @@ public class CollaborationDAOTest {
         Collaboration collaboration = new Collaboration();
         CollaborationDAO instance = new CollaborationDAO();
         
-        Date dateStartTest = new Date(2000, 0, 1);
-        Date dateFinishtTest = new Date(2000, 1, 1);
+        LocalDate dateStartTest = LocalDate.of(2000, 3, 1);
+        LocalDate dateFinishtTest = LocalDate.of(2000, 1, 1);
         
-        collaboration.setCollaborationId("ID-Col");
         collaboration.setCollaborationName("TestNombreCol");
         collaboration.setDescription("TestDescripcion");
         collaboration.setFinishDate(dateFinishtTest);
         collaboration.setStartDate(dateStartTest);
+        collaboration.setCollaborationId(2);
         
         
-        int rowsAffected = instance.addCollaboration(collaboration);
+        int rowsAffected = instance.deleteCollaboration(collaboration);
         assertEquals(1, rowsAffected);
     }
 
@@ -70,18 +72,27 @@ public class CollaborationDAOTest {
         Collaboration collaboration = new Collaboration();
         CollaborationDAO instance = new CollaborationDAO();
         
-        Date dateStartTest = new Date(2000, 0, 1);
-        Date dateFinishtTest = new Date(2000, 2, 2);
+        LocalDate dateStartTest = LocalDate.of(2000, 1, 1);
+        LocalDate dateFinishtTest = LocalDate.of(2000, 2, 2);
         
-        collaboration.setCollaborationId("ID-Col");
         collaboration.setCollaborationName("NuevoTestNombreCol");
         collaboration.setDescription("NuevoTestDescripcion");
         collaboration.setFinishDate(dateFinishtTest);
         collaboration.setStartDate(dateStartTest);
+        collaboration.setCollaborationId(1);
         
-        
-        int rowsAffected = instance.addCollaboration(collaboration);
+        int rowsAffected = instance.updateCollaboration(collaboration);
         assertEquals(1, rowsAffected);
+    }
+    
+    
+    @Test
+    public void testSearchCollaboration(){
+        int expectedResult = 3;
+        CollaborationDAO instance = new CollaborationDAO();
+        String name = "TestNombreCol";
+        ArrayList<Collaboration> collaborations = instance.searchCollaboration(name);
+        assertEquals(expectedResult, collaborations.size());
     }
     
 }

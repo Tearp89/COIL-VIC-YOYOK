@@ -22,7 +22,6 @@ public class UniversityDAOTest {
         UniversityDAO universityDAO = new UniversityDAO();
         University university = new University();
         university.setUniversityCountry("PaisTest");
-        university.setUniversityId("IDTest");
         university.setUniversityName("TestNombre");
         university.setUniversityLanguage("IdiomaTest");
         
@@ -38,7 +37,6 @@ public class UniversityDAOTest {
         UniversityDAO universityDAO = new UniversityDAO();
         University university = new University();
         university.setUniversityCountry("PaisTest");
-        university.setUniversityId("IDTest");
         university.setUniversityName("TestNombre");
         university.setUniversityLanguage("IdiomaTest");
         
@@ -54,7 +52,6 @@ public class UniversityDAOTest {
         UniversityDAO universityDAO = new UniversityDAO();
         University university = new University();
         university.setUniversityCountry("NuevoPais");
-        university.setUniversityId("IDTest");
         university.setUniversityName("NuevoNombre");
         university.setUniversityLanguage("NuevoIdioma");
         
