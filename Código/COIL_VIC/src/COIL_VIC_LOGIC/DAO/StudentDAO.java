@@ -8,15 +8,16 @@ import java.util.logging.Logger;
 
 import COIL_VIC_DataAccess.DatabaseManager;
 import COIL_VIC_LOGIC.Classes.Student;
+import COIL_VIC_LOGIC.Interfaces.IStudent;
 
-public class StudentDAO {
+public class StudentDAO implements IStudent {
 
     public int addStudent(Student student) {
-        DatabaseManager databaseManager = new DatabaseManager();
+        DatabaseManager dbManager = new DatabaseManager();
         String query = "INSERT INTO estudiante(correoElectrónico) VALUES (?)";
         int result = 0;
         try {
-            Connection connection = databaseManager.getConnection();
+            Connection connection = dbManager.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1, student.getEmail());
             result = preparedStatement.executeUpdate();
@@ -25,5 +26,5 @@ public class StudentDAO {
         }
         return result;
     }
-
+    
 }

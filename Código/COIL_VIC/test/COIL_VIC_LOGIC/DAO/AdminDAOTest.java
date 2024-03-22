@@ -25,7 +25,7 @@ public class AdminDAOTest {
     public void testAddAdmin() {
         Admin admin = new Admin();
         AdminDAO adminDAO = new AdminDAO();
-        admin.setAdminId("IDAdminTest");
+        admin.setAdminId(1);
         admin.setAdminName("AdminNombreTest");
         admin.setAdminRol("RolTest");
         admin.setAdminUser("UsuarioAdminTest");
@@ -42,13 +42,12 @@ public class AdminDAOTest {
     public void testDeleteFacilitator() {
         Admin admin = new Admin();
         AdminDAO adminDAO = new AdminDAO();
-        admin.setAdminId("IDAdminTest");
         admin.setAdminName("AdminNombreTest");
         admin.setAdminRol("RolTest");
         admin.setAdminUser("UsuarioAdminTest");
         admin.setPassword("ContraseñaTest");
         
-        int rowsAffected = adminDAO.deleteFacilitator(admin);
+        int rowsAffected = adminDAO.deleteAdmin(admin);
         assertEquals(1, rowsAffected);
     }
 
@@ -60,7 +59,6 @@ public class AdminDAOTest {
         Admin admin = new Admin();
         AdminDAO adminDAO = new AdminDAO();
         
-        admin.setAdminId("IDAdminTest");
         admin.setAdminName("NuevoAdminNombreTest");
         admin.setAdminRol("NuevoRolTest");
         admin.setAdminUser("NuevoUsuarioAdminTest");
