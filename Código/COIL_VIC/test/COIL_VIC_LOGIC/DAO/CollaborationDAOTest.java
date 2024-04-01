@@ -88,7 +88,7 @@ public class CollaborationDAOTest {
     
     @Test
     public void testSearchCollaboration(){
-        int expectedResult = 3;
+        int expectedResult = 4;
         CollaborationDAO instance = new CollaborationDAO();
         String name = "TestNombreCol";
         ArrayList<Collaboration> collaborations = instance.searchCollaboration(name);
