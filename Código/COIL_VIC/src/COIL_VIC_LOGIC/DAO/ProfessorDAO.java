@@ -52,7 +52,7 @@ public class ProfessorDAO implements IProfessor{
 
     public int updateProfessor(Professor professor){
         DatabaseManager dbManager = new DatabaseManager();
-        String query = "UPDATE profesor SET nombreProfesor = ?, estado = ?, tipoProfesor = ?, país = ? WHERE idProfesor = ?";
+        String query = "UPDATE profesor SET nombreProfesor = ?, estado = ?, tipoProfesor = ?, país = ?, Universidad_idUniversidad WHERE idProfesor = ?";
         int result = 0;
         try{
             Connection connection = dbManager.getConnection();
@@ -176,6 +176,8 @@ public class ProfessorDAO implements IProfessor{
                    professor.setUniversityId(universityId);
                    professor.setAdministratorId(adminId);
                    professor.setWorkShopId(workShopId);
+                   
+                   professors.add(professor);
                 }
             }
         }catch (SQLException searchProfessorByStatus){

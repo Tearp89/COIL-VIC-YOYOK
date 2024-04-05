@@ -39,7 +39,7 @@ public class AdminDAOTest {
      * Test of deleteFacilitator method, of class AdminDAO.
      */
     @Test
-    public void testDeleteFacilitator() {
+    public void testDeleteAdmin() {
         Admin admin = new Admin();
         AdminDAO adminDAO = new AdminDAO();
         admin.setAdminName("AdminNombreTest");

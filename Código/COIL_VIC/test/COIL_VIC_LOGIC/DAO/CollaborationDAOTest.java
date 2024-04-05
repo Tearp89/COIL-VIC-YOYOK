@@ -41,6 +41,7 @@ public class CollaborationDAOTest {
         int rowsAffected = instance.addCollaboration(collaboration);
         assertEquals(1, rowsAffected);
     }
+    
 
     /**
      * Test of deleteCollaboration method, of class CollaborationDAO.
@@ -63,12 +64,31 @@ public class CollaborationDAOTest {
         int rowsAffected = instance.deleteCollaboration(collaboration);
         assertEquals(1, rowsAffected);
     }
+    
+    @Test
+    public void testDeleteCollaborationFailed(){
+        Collaboration collaboration = new Collaboration();
+        CollaborationDAO instance = new CollaborationDAO();
+        
+        LocalDate dateStartTest = LocalDate.of(2000, 3, 1);
+        LocalDate dateFinishtTest = LocalDate.of(2000, 1, 1);
+        
+        collaboration.setCollaborationName("TestNombreCol");
+        collaboration.setDescription("TestDescripcion");
+        collaboration.setFinishDate(dateFinishtTest);
+        collaboration.setStartDate(dateStartTest);
+        collaboration.setCollaborationId(78);
+        
+        
+        int rowsAffected = instance.deleteCollaboration(collaboration);
+        assertEquals(0, rowsAffected);
+    }
 
     /**
      * Test of updateCollaboration method, of class CollaborationDAO.
      */
     @org.junit.Test
-    public void testUpdateCollaboration() {
+    public void testUpdateCollaborationSuccess() {
         Collaboration collaboration = new Collaboration();
         CollaborationDAO instance = new CollaborationDAO();
         
@@ -85,9 +105,27 @@ public class CollaborationDAOTest {
         assertEquals(1, rowsAffected);
     }
     
+    @Test
+    public void testUpdateCollaborationFailed(){
+        Collaboration collaboration = new Collaboration();
+        CollaborationDAO instance = new CollaborationDAO();
+        
+        LocalDate dateStartTest = LocalDate.of(2000, 1, 1);
+        LocalDate dateFinishtTest = LocalDate.of(2000, 2, 2);
+        
+        collaboration.setCollaborationName("NuevoTestNombreCol");
+        collaboration.setDescription("NuevoTestDescripcion");
+        collaboration.setFinishDate(dateFinishtTest);
+        collaboration.setStartDate(dateStartTest);
+        collaboration.setCollaborationId(17);
+        
+        int rowsAffected = instance.updateCollaboration(collaboration);
+        assertEquals(0, rowsAffected);
+    }
+    
     
     @Test
-    public void testSearchCollaboration(){
+    public void testSearchCollaborationSuccess(){
         int expectedResult = 4;
         CollaborationDAO instance = new CollaborationDAO();
         String name = "TestNombreCol";
@@ -96,7 +134,15 @@ public class CollaborationDAOTest {
     }
     
     @Test
-    public void testSearchCollaborationByYear(){
+    public void testSearchCollaborationFailed(){
+        int expectedResult = 0;
+        CollaborationDAO instance = new CollaborationDAO();
+        String name = "Colaboración-2024";
+        ArrayList<Collaboration> collaborations = instance.searchCollaboration(name);
+        assertEquals(expectedResult, collaborations.size());
+    }
+    @Test
+    public void testSearchCollaborationByYearSuccess(){
         int expectedResult = 12;
         CollaborationDAO instance = new CollaborationDAO();
         String year = "2000";
