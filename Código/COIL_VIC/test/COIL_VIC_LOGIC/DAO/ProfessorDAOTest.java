@@ -45,10 +45,20 @@ public class ProfessorDAOTest {
         Professor professor = new Professor();
         ProfessorDAO instance = new ProfessorDAO();
         int expResult = 1;
-        professor.setProfessorId(12);
+        professor.setProfessorId(14);
         int result = instance.deleteProfessor(professor);
         assertEquals(expResult, result);
        
+    }
+    
+    @Test
+    public void testDeleteProfessorFailed(){
+        Professor professor = new Professor();
+        ProfessorDAO instance = new ProfessorDAO();
+        int expectedResult = 0;
+        professor.setProfessorId(25);
+        int result = instance.deleteProfessor(professor);
+        assertEquals(expectedResult, result);
     }
 
     /**
@@ -73,16 +83,25 @@ public class ProfessorDAOTest {
     }
     
         @Test
-        public void testSearchProfessor(){
+        public void testSearchProfessorSuccess(){
         int expectedResult = 6;
         ProfessorDAO instance = new ProfessorDAO();
         int idUniversidad = 2;
         ArrayList<Professor> professors = instance.searchProfessor(idUniversidad);
         assertEquals(expectedResult, professors.size());
     }
+        
+        @Test
+        public void testSearchProfessorFailed(){
+            int expectedResult = 0;
+            ProfessorDAO instance = new ProfessorDAO();
+            int idUniversidad = 5;
+            ArrayList<Professor> professors = instance.searchProfessor(idUniversidad);
+            assertEquals(expectedResult, professors.size());
+        }
     
         @Test
-        public void testSearchProfessorByCountry(){
+        public void testSearchProfessorByCountrySuccess(){
             int expectedResult = 3;
             ProfessorDAO instance = new ProfessorDAO();
             String country = "México";
@@ -91,11 +110,21 @@ public class ProfessorDAOTest {
         }
         
         @Test
-        public void testSearchProfessorByStatus(){
+        public void testSearchProfessorsByCountryFailed(){
+            int expectedResult = 0;
+            ProfessorDAO instance = new ProfessorDAO();
+            
+            
+        }
+        
+        @Test
+        public void testSearchProfessorByStatusSuccess(){
             int expectedResult = 0;
             ProfessorDAO instance = new ProfessorDAO();
             String status = "Rechazado";
             ArrayList<Professor> professors = instance.searchProfessorByStatus(status);
             assertEquals(expectedResult, professors.size());
         }
+        
+        
 }

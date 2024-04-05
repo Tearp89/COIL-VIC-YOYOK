@@ -103,4 +103,13 @@ public class CollaborationDAOTest {
         ArrayList<Collaboration> collaborations = instance.searchCollaborationByYear(year);
         assertEquals(expectedResult, collaborations.size());
     }
+    
+    @Test 
+    public void testSearchCollaborationByYearFailed(){
+        int expectedResult = 0;
+        CollaborationDAO instance = new CollaborationDAO();
+        String year = "2034";
+        ArrayList<Collaboration> collaborations = instance.searchCollaborationByYear(year);
+        assertEquals(expectedResult, collaborations.size());
+    }
 }
