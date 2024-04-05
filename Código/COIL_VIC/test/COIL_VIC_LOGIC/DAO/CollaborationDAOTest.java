@@ -95,4 +95,12 @@ public class CollaborationDAOTest {
         assertEquals(expectedResult, collaborations.size());
     }
     
+    @Test
+    public void testSearchCollaborationByYear(){
+        int expectedResult = 12;
+        CollaborationDAO instance = new CollaborationDAO();
+        String year = "2000";
+        ArrayList<Collaboration> collaborations = instance.searchCollaborationByYear(year);
+        assertEquals(expectedResult, collaborations.size());
+    }
 }

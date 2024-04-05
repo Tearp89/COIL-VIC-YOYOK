@@ -101,5 +101,41 @@ public class WorkshopDAO implements IWorkshop {
         
         return workshops;
     }
+    
+    public ArrayList<Workshop> searchWorkshopByYear (String year){
+        Workshop workshop = new Workshop();
+        ArrayList<Workshop> workshops = new ArrayList<>();
+        DatabaseManager dbManager = new DatabaseManager();
+        String query = "SELECT * FROM curso_taller WHERE YEAR(fechaInicio) = ?;";
 
+        try{
+            Connection connection = dbManager.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, year);
+            try(ResultSet resultSet = preparedStatement.executeQuery()){
+                while(resultSet.next()){
+                    int workShopId = resultSet.getInt("idCursoTaller");
+                    String name = resultSet.getString("nombreCursoTaller");
+                    LocalDate startDate = resultSet.getObject("fechaInicio", LocalDate.class);
+                    LocalDate finishDate = resultSet.getObject("fechaFin", LocalDate.class);
+                    String requirements = resultSet.getString("requisitos");
+                    
+                    
+                    workshop = new Workshop();
+                    workshop.setWorkshopId(workShopId);
+                    workshop.setWorkshopName(name);
+                    workshop.setStartDate(startDate);
+                    workshop.setFinishDate(finishDate);
+                    workshop.setRequirements(requirements);
+                    workshops.add(workshop);
+        } 
+    }
+
+    } catch (SQLException searchWorkshopByYearException){
+                Logger.getLogger(DatabaseManager.class.getName()).log(Level.SEVERE, null, searchWorkshopByYearException);
+                }
+        
+        return workshops;
+        
+  }
 }

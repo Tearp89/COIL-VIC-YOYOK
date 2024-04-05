@@ -82,4 +82,13 @@ public class WorkshopDAOTest {
         ArrayList<Workshop> workshops = instance.searchWorkshop(workshopId);
         assertEquals(expectedResult, workshops.size());
     }
+    
+    @Test
+    public void testSearchWorkShopByYear(){
+        int expectedResult = 4;
+        WorkshopDAO instance = new WorkshopDAO();
+        String year = "2000";
+        ArrayList<Workshop> workshops = instance.searchWorkshopByYear(year);
+        assertEquals(expectedResult, workshops.size());
+    }
 }
