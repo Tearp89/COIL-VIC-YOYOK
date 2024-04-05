@@ -20,7 +20,7 @@ public class FacilitatorDAOTest {
         Facilitator facilitator = new Facilitator();
         FacilitatorDAO facilitadorDAO = new FacilitatorDAO();
         
-        facilitator.setFacilitatorId("FacilitadorIDTest");
+        facilitator.setFacilitatorId(202020);
         facilitator.setFacilitatorName("NombreFacilitadorTest");
         facilitator.setWorkShopId("CursoIDTest");
         
@@ -36,7 +36,7 @@ public class FacilitatorDAOTest {
         Facilitator facilitator = new Facilitator();
         FacilitatorDAO facilitadorDAO = new FacilitatorDAO();
         
-        facilitator.setFacilitatorId("FacilitadorIDTest");
+        facilitator.setFacilitatorId(202020);
         facilitator.setFacilitatorName("NombreFacilitadorTest");
         facilitator.setWorkShopId("CursoIDTest");
         
@@ -52,7 +52,7 @@ public class FacilitatorDAOTest {
         Facilitator facilitator = new Facilitator();
         FacilitatorDAO facilitadorDAO = new FacilitatorDAO();
         
-        facilitator.setFacilitatorId("FacilitadorIDTest");
+        facilitator.setFacilitatorId(202020);
         facilitator.setFacilitatorName("NuevoNombreFacilitadorTest");
         facilitator.setWorkShopId("CursoIDTest");
         
