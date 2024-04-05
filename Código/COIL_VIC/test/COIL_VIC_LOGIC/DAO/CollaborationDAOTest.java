@@ -88,11 +88,19 @@ public class CollaborationDAOTest {
     
     @Test
     public void testSearchCollaboration(){
-        int expectedResult = 3;
+        int expectedResult = 4;
         CollaborationDAO instance = new CollaborationDAO();
         String name = "TestNombreCol";
         ArrayList<Collaboration> collaborations = instance.searchCollaboration(name);
         assertEquals(expectedResult, collaborations.size());
     }
     
+    @Test
+    public void testSearchCollaborationByYear(){
+        int expectedResult = 12;
+        CollaborationDAO instance = new CollaborationDAO();
+        String year = "2000";
+        ArrayList<Collaboration> collaborations = instance.searchCollaborationByYear(year);
+        assertEquals(expectedResult, collaborations.size());
+    }
 }

@@ -100,5 +100,39 @@ public class CollaborationDAO implements ICollaboration {
         }
         return collaborations;
     }
+    
+    public ArrayList<Collaboration> searchCollaborationByYear(String year){
+        DatabaseManager dbManager = new DatabaseManager();
+        Collaboration collaboration = new Collaboration();
+        ArrayList<Collaboration> collaborations = new ArrayList<>();
+        String query = "SELECT * FROM colaboración WHERE YEAR(fechaInicio) = ?";
+        try{
+            Connection connection = dbManager.getConnection();
+            PreparedStatement preparedStatemen = connection.prepareStatement(query);
+            preparedStatemen.setString(1, year);
+            try(ResultSet resultSet = preparedStatemen.executeQuery()){
+                while(resultSet.next()){
+                     int idCollaboration = resultSet.getInt("idColaboración");
+                    String collaborarionName = resultSet.getString("nombreColaboración");
+                    String description = resultSet.getString("descripción");
+                    LocalDate startDate = resultSet.getObject("fechaInicio", LocalDate.class);
+                    LocalDate finishDate = resultSet.getObject("fechaFin", LocalDate.class);
+                    
+                    collaboration = new Collaboration();
+                    collaboration.setCollaborationId(idCollaboration);
+                    collaboration.setDescription(description);
+                    collaboration.setStartDate(startDate);
+                    collaboration.setFinishDate(finishDate);
+                    
+                    collaborations.add(collaboration);
+                    
+                }
+            }
+        } catch (SQLException searchCollaborationByYearException){
+            Logger.getLogger(DatabaseManager.class.getName()).log(Level.SEVERE,null, searchCollaborationByYearException);
+        }
+        
+        return collaborations;
+    }
 
 }

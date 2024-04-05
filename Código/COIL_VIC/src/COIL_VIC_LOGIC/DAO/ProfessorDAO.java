@@ -9,6 +9,7 @@ import java.util.logging.Logger;
 import COIL_VIC_DataAccess.DatabaseManager;
 import COIL_VIC_LOGIC.Classes.Professor;
 import COIL_VIC_LOGIC.Interfaces.IProfessor;
+import com.mysql.cj.jdbc.PreparedStatementWrapper;
 import java.util.ArrayList;
 import java.sql.ResultSet;
 
@@ -107,7 +108,83 @@ public class ProfessorDAO implements IProfessor{
         
         return professors;
     }
-
-
+    
+    public ArrayList<Professor> searchProfessorByCountry (String country){
+        Professor professor = new Professor();
+        ArrayList<Professor> professors = new ArrayList<>();
+        String query = "SELECT * FROM profesor WHERE país = ?";
+        DatabaseManager dbManager = new DatabaseManager();
+        try{
+            Connection connection = dbManager.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, country);
+            try(ResultSet resultSet = preparedStatement.executeQuery()){
+                while (resultSet.next()){
+                     int idProfesor = resultSet.getInt("idProfesor");
+                    String name = resultSet.getString("nombreProfesor");
+                    String status = resultSet.getString("estado");
+                    String type = resultSet.getString("tipoProfesor");
+                    int universityId = resultSet.getInt("Universidad_idUniversidad");
+                    int adminId = resultSet.getInt("Administrador_idAdministrativo");
+                    int workShopId = resultSet.getInt("Curso-Taller_idCursoTaller");
+                    
+                    professor = new Professor();
+                   professor.setProfessorId(idProfesor);
+                   professor.setName(name);
+                   professor.setStatus(status);
+                   professor.setType(type);
+                   professor.setCountry(country);
+                   professor.setUniversityId(universityId);
+                   professor.setAdministratorId(adminId);
+                   professor.setWorkShopId(workShopId);
+                   
+                   professors.add(professor);
+                }
+            }
+            
+        } catch (SQLException searchProfessorByCountryException){
+            Logger.getLogger(DatabaseManager.class.getName()).log(Level.SEVERE,null, searchProfessorByCountryException);
+        }
+        
+        return professors;
+    }
+    
+    public ArrayList<Professor> searchProfessorByStatus (String status){
+        Professor professor = new Professor();
+        ArrayList<Professor> professors = new ArrayList<>();
+        String query = "SELECT * FROM profesor WHERE estado = ?";
+        DatabaseManager dbManager = new DatabaseManager();
+        try{
+            Connection connection = dbManager.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, status);
+            try(ResultSet resultSet = preparedStatement.executeQuery()){
+                while(resultSet.next()){
+                     int idProfesor = resultSet.getInt("idProfesor");
+                    String name = resultSet.getString("nombreProfesor");
+                    String type = resultSet.getString("tipoProfesor");
+                    int universityId = resultSet.getInt("Universidad_idUniversidad");
+                    int adminId = resultSet.getInt("Administrador_idAdministrativo");
+                    int workShopId = resultSet.getInt("Curso-Taller_idCursoTaller");
+                    String country = resultSet.getString("país");
+                    professor = new Professor();
+                   professor.setProfessorId(idProfesor);
+                   professor.setName(name);
+                   professor.setStatus(status);
+                   professor.setType(type);
+                   professor.setCountry(country);
+                   professor.setUniversityId(universityId);
+                   professor.setAdministratorId(adminId);
+                   professor.setWorkShopId(workShopId);
+                }
+            }
+        }catch (SQLException searchProfessorByStatus){
+             Logger.getLogger(DatabaseManager.class.getName()).log(Level.SEVERE,null, searchProfessorByStatus);
+        }
+        return professors;
+    }
 }
+
+
+
 
