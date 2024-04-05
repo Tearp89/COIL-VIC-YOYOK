@@ -1,23 +1,24 @@
 package COIL_VIC_LOGIC.Classes;
 
 import java.sql.Date;
+import java.time.LocalDate;
 
 public class Collaboration {
-    String collaborationId;
+    int collaborationId;
     String description;
-    Date finishDate;
-    Date startDate;
+    LocalDate finishDate;
+    LocalDate startDate;
     String collaborationName;
 
     public Collaboration() {
         
     }
 
-    public String getCollaborationId() {
+    public int getCollaborationId() {
         return collaborationId;
     }
 
-    public void setCollaborationId(String collaborationId) {
+    public void setCollaborationId(int collaborationId) {
         this.collaborationId = collaborationId;
     }
 
@@ -29,19 +30,19 @@ public class Collaboration {
         this.description = description;
     }
 
-    public Date getFinishDate() {
+    public LocalDate getFinishDate() {
         return finishDate;
     }
 
-    public void setFinishDate(Date finishDate) {
+    public void setFinishDate(LocalDate finishDate) {
         this.finishDate = finishDate;
     }
 
-    public Date getStartDate() {
+    public LocalDate getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(Date startDate) {
+    public void setStartDate(LocalDate startDate) {
         this.startDate = startDate;
     }
 

@@ -2,7 +2,7 @@ package COIL_VIC_LOGIC.Classes;
 
 
 public class Facilitator {
-    private String facilitatorId;
+    private int facilitatorId;
     private String facilitatorName;
     private String workShopId;
 
@@ -10,11 +10,11 @@ public class Facilitator {
        
     }
 
-    public String getFacilitatorId() {
+    public int getFacilitatorId() {
         return facilitatorId;
     }
 
-    public void setFacilitatorId(String facilitatorId) {
+    public void setFacilitatorId(int facilitatorId) {
         this.facilitatorId = facilitatorId;
     }
 

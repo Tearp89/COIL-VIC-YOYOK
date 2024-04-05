@@ -1,7 +1,7 @@
 package COIL_VIC_LOGIC.Classes;
 
 public class University {
-    private String universityId;
+    private int universityId;
     private String universityName;
     private String universityCountry;
     private String universityLanguage;
@@ -10,11 +10,11 @@ public class University {
       
     }
 
-    public String getUniversityId() {
+    public int getUniversityId() {
         return universityId;
     }
 
-    public void setUniversityId(String universityId) {
+    public void setUniversityId(int universityId) {
         this.universityId = universityId;
     }
 
