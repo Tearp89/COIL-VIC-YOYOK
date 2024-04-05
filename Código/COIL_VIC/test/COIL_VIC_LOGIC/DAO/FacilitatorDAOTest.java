@@ -15,14 +15,14 @@ import static org.junit.Assert.*;
  */
 public class FacilitatorDAOTest {
      
-    @Test
+ @Test
     public void testAddFcilitator() {
         Facilitator facilitator = new Facilitator();
         FacilitatorDAO facilitadorDAO = new FacilitatorDAO();
         
-        facilitator.setFacilitatorId(202020);
+       
         facilitator.setFacilitatorName("NombreFacilitadorTest");
-        facilitator.setWorkShopId("CursoIDTest");
+        facilitator.setWorkShopId("Curso-Taller");
         
         int rowsAffected = facilitadorDAO.addFacilitator(facilitator);
         assertEquals(1, rowsAffected);
@@ -36,7 +36,6 @@ public class FacilitatorDAOTest {
         Facilitator facilitator = new Facilitator();
         FacilitatorDAO facilitadorDAO = new FacilitatorDAO();
         
-        facilitator.setFacilitatorId(202020);
         facilitator.setFacilitatorName("NombreFacilitadorTest");
         facilitator.setWorkShopId("CursoIDTest");
         
@@ -52,7 +51,6 @@ public class FacilitatorDAOTest {
         Facilitator facilitator = new Facilitator();
         FacilitatorDAO facilitadorDAO = new FacilitatorDAO();
         
-        facilitator.setFacilitatorId(202020);
         facilitator.setFacilitatorName("NuevoNombreFacilitadorTest");
         facilitator.setWorkShopId("CursoIDTest");
         
