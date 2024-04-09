@@ -12,6 +12,9 @@ import COIL_VIC_LOGIC.Interfaces.IProfessor;
 import com.mysql.cj.jdbc.PreparedStatementWrapper;
 import java.util.ArrayList;
 import java.sql.ResultSet;
+import org.apache.logging.log4j.LogManager;
+
+
 
 public class ProfessorDAO implements IProfessor{
 
