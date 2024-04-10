@@ -22,7 +22,7 @@ public class FacilitatorDAOTest {
         
        
         facilitator.setFacilitatorName("NombreFacilitadorTest");
-        facilitator.setWorkShopId("CursoIDTest");
+        facilitator.setWorkShopId("Curso-Taller");
         
         int rowsAffected = facilitadorDAO.addFacilitator(facilitator);
         assertEquals(1, rowsAffected);
