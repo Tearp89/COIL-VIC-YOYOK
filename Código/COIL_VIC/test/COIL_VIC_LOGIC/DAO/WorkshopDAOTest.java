@@ -4,9 +4,12 @@
  */
 package COIL_VIC_LOGIC.DAO;
 
-import COIL_VIC_LOGIC.Classes.Collaboration;
-import COIL_VIC_LOGIC.Classes.Workshop;
 import org.junit.Test;
+
+import logic.DAO.WorkshopDAO;
+import logic.classes.Collaboration;
+import logic.classes.Workshop;
+
 import static org.junit.Assert.*;
 import java.sql.Date;
 import java.time.LocalDate;

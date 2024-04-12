@@ -6,6 +6,9 @@ package COIL_VIC_LOGIC.DAO;
 
 
 import org.junit.Test;
+
+import logic.DAO.FieldValidatorDAO;
+
 import static org.junit.Assert.*;
 
 /**

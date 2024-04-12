@@ -1,5 +1,5 @@
-package COIL_VIC_LOGIC.Interfaces;
-import COIL_VIC_LOGIC.Classes.University;
+package logic.Interfaces;
+import logic.classes.University;
 
 
 public interface IUniversity {

@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package COIL_VIC_LOGIC.DAO;
+package logic.DAO;
 
 /**
  *
@@ -14,9 +14,10 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import COIL_VIC_DataAccess.DatabaseManager;
-import COIL_VIC_LOGIC.Classes.Facilitator;
-import COIL_VIC_LOGIC.Interfaces.IFacilitator;
+
+import dataAccess.DatabaseManager;
+import logic.Interfaces.IFacilitator;
+import logic.classes.Facilitator;
 
 public class FacilitatorDAO implements IFacilitator{
     public int addFacilitator (Facilitator facilitator){

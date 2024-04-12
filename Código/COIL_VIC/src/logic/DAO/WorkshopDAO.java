@@ -1,4 +1,4 @@
-package COIL_VIC_LOGIC.DAO;
+package logic.DAO;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -6,9 +6,10 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import COIL_VIC_DataAccess.DatabaseManager;
-import COIL_VIC_LOGIC.Classes.Workshop;
-import COIL_VIC_LOGIC.Interfaces.IWorkshop;
+import dataAccess.DatabaseManager;
+import logic.Interfaces.IWorkshop;
+import logic.classes.Workshop;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.sql.ResultSet;

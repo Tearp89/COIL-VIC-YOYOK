@@ -2,14 +2,16 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
  */
-package COIL_VIC_LOGIC.Interfaces;
-import COIL_VIC_LOGIC.Classes.Admin;
+package logic.Interfaces;
+
+import logic.classes.Workshop;
+
 /**
  *
  * @author isabe
  */
-public interface IAdmin {
-    int addAdmin(Admin admin);
-    int deleteAdmin(Admin admin);
-    int updateAdmin(Admin admin);
+public interface IWorkshop {
+    int addWorkshop(Workshop workshop);
+    int deleteWorkshop(Workshop workshop);
+    int updateWorkshop(Workshop workshop);
 }

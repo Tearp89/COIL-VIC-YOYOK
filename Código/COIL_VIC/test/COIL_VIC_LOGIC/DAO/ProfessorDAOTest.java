@@ -4,10 +4,13 @@
  */
 package COIL_VIC_LOGIC.DAO;
 
-import COIL_VIC_LOGIC.Classes.Collaboration;
-import COIL_VIC_LOGIC.Classes.Professor;
 import java.util.ArrayList;
 import org.junit.Test;
+
+import logic.DAO.ProfessorDAO;
+import logic.classes.Collaboration;
+import logic.classes.Professor;
+
 import static org.junit.Assert.*;
 
 /**

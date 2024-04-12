@@ -1,4 +1,4 @@
-package COIL_VIC_LOGIC.Classes;
+package logic.classes;
 
 import java.sql.Date;
 import java.time.LocalDate;

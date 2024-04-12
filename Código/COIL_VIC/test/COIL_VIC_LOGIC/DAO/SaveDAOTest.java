@@ -7,6 +7,9 @@ package COIL_VIC_LOGIC.DAO;
 import java.io.IOException;
 import javax.swing.JTable;
 import org.junit.Test;
+
+import logic.DAO.SaveDAO;
+
 import static org.junit.Assert.*;
 
 /**

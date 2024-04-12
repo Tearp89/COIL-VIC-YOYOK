@@ -4,9 +4,11 @@
  */
 package COIL_VIC_LOGIC.DAO;
 
-import COIL_VIC_LOGIC.Classes.University;
-import COIL_VIC_LOGIC.DAO.UniversityDAO;
 import org.junit.Test;
+
+import logic.DAO.UniversityDAO;
+import logic.classes.University;
+
 import static org.junit.Assert.*;
 
 /**

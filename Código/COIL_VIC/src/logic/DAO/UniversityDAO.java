@@ -1,4 +1,4 @@
-package COIL_VIC_LOGIC.DAO;
+package logic.DAO;
 
 
 import java.sql.Connection;
@@ -6,9 +6,10 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import COIL_VIC_DataAccess.DatabaseManager;
-import COIL_VIC_LOGIC.Classes.University;
-import COIL_VIC_LOGIC.Interfaces.IUniversity;
+
+import dataAccess.DatabaseManager;
+import logic.Interfaces.IUniversity;
+import logic.classes.University;
 
 public class UniversityDAO implements IUniversity{
 

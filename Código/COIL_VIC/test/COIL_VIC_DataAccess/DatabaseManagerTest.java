@@ -11,6 +11,8 @@ import java.sql.SQLException;
 
 import org.junit.Test;
 
+import dataAccess.DatabaseManager;
+
 /**
  *
  * @author marla
