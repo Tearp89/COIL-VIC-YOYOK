@@ -62,7 +62,7 @@ public class CollaborationDAOTest {
         collaboration.setDescription("TestDescripcion");
         collaboration.setFinishDate(dateFinishtTest);
         collaboration.setStartDate(dateStartTest);
-        collaboration.setCollaborationId(16);
+        collaboration.setCollaborationId(20);
         
         
         int rowsAffected = instance.deleteCollaboration(collaboration);
@@ -121,7 +121,7 @@ public class CollaborationDAOTest {
         collaboration.setDescription("NuevoTestDescripcion");
         collaboration.setFinishDate(dateFinishtTest);
         collaboration.setStartDate(dateStartTest);
-        collaboration.setCollaborationId(17);
+        collaboration.setCollaborationId(197);
         
         int rowsAffected = instance.updateCollaboration(collaboration);
         assertEquals(0, rowsAffected);
@@ -130,7 +130,7 @@ public class CollaborationDAOTest {
     
     @Test
     public void testSearchCollaborationSuccess(){
-        int expectedResult = 4;
+        int expectedResult = 5;
         CollaborationDAO instance = new CollaborationDAO();
         String name = "TestNombreCol";
         ArrayList<Collaboration> collaborations = instance.searchCollaboration(name);
