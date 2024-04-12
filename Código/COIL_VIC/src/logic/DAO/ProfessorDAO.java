@@ -8,7 +8,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import dataAccess.DatabaseManager;
-import logic.Interfaces.IProfessor;
+import logic.interfaces.IProfessor;
 import logic.classes.Professor;
 
 import com.mysql.cj.jdbc.PreparedStatementWrapper;
@@ -94,17 +94,17 @@ public class ProfessorDAO implements IProfessor{
                     int adminId = resultSet.getInt("Administrador_idAdministrativo");
                     int workShopId = resultSet.getInt("Curso-Taller_idCursoTaller");
                     
-                   professor = new Professor();
-                   professor.setProfessorId(idProfesor);
-                   professor.setName(name);
-                   professor.setStatus(status);
-                   professor.setType(type);
-                   professor.setCountry(country);
-                   professor.setUniversityId(universityId);
-                   professor.setAdministratorId(adminId);
-                   professor.setWorkShopId(workShopId);
-                   
-                   professors.add(professor);
+                    professor = new Professor();
+                    professor.setProfessorId(idProfesor);
+                    professor.setName(name);
+                    professor.setStatus(status);
+                    professor.setType(type);
+                    professor.setCountry(country);
+                    professor.setUniversityId(universityId);
+                    professor.setAdministratorId(adminId);
+                    professor.setWorkShopId(workShopId);
+                    
+                    professors.add(professor);
                 }
             }
         } catch (SQLException searchProfessorException){
@@ -125,7 +125,7 @@ public class ProfessorDAO implements IProfessor{
             preparedStatement.setString(1, country);
             try(ResultSet resultSet = preparedStatement.executeQuery()){
                 while (resultSet.next()){
-                     int idProfesor = resultSet.getInt("idProfesor");
+                    int idProfesor = resultSet.getInt("idProfesor");
                     String name = resultSet.getString("nombreProfesor");
                     String status = resultSet.getString("estado");
                     String type = resultSet.getString("tipoProfesor");
@@ -134,16 +134,16 @@ public class ProfessorDAO implements IProfessor{
                     int workShopId = resultSet.getInt("Curso-Taller_idCursoTaller");
                     
                     professor = new Professor();
-                   professor.setProfessorId(idProfesor);
-                   professor.setName(name);
-                   professor.setStatus(status);
-                   professor.setType(type);
-                   professor.setCountry(country);
-                   professor.setUniversityId(universityId);
-                   professor.setAdministratorId(adminId);
-                   professor.setWorkShopId(workShopId);
-                   
-                   professors.add(professor);
+                    professor.setProfessorId(idProfesor);
+                    professor.setName(name);
+                    professor.setStatus(status);
+                    professor.setType(type);
+                    professor.setCountry(country);
+                    professor.setUniversityId(universityId);
+                    professor.setAdministratorId(adminId);
+                    professor.setWorkShopId(workShopId);
+                    
+                    professors.add(professor);
                 }
             }
             
@@ -165,7 +165,7 @@ public class ProfessorDAO implements IProfessor{
             preparedStatement.setString(1, status);
             try(ResultSet resultSet = preparedStatement.executeQuery()){
                 while(resultSet.next()){
-                     int idProfesor = resultSet.getInt("idProfesor");
+                    int idProfesor = resultSet.getInt("idProfesor");
                     String name = resultSet.getString("nombreProfesor");
                     String type = resultSet.getString("tipoProfesor");
                     int universityId = resultSet.getInt("Universidad_idUniversidad");
@@ -173,22 +173,84 @@ public class ProfessorDAO implements IProfessor{
                     int workShopId = resultSet.getInt("Curso-Taller_idCursoTaller");
                     String country = resultSet.getString("país");
                     professor = new Professor();
-                   professor.setProfessorId(idProfesor);
-                   professor.setName(name);
-                   professor.setStatus(status);
-                   professor.setType(type);
-                   professor.setCountry(country);
-                   professor.setUniversityId(universityId);
-                   professor.setAdministratorId(adminId);
-                   professor.setWorkShopId(workShopId);
-                   
-                   professors.add(professor);
+                    professor.setProfessorId(idProfesor);
+                    professor.setName(name);
+                    professor.setStatus(status);
+                    professor.setType(type);
+                    professor.setCountry(country);
+                    professor.setUniversityId(universityId);
+                    professor.setAdministratorId(adminId);
+                    professor.setWorkShopId(workShopId);
+                    
+                    professors.add(professor);
                 }
             }
         }catch (SQLException searchProfessorByStatus){
-             Logger.getLogger(DatabaseManager.class.getName()).log(Level.SEVERE,null, searchProfessorByStatus);
+            Logger.getLogger(DatabaseManager.class.getName()).log(Level.SEVERE,null, searchProfessorByStatus);
         }
         return professors;
+    }
+
+    public ArrayList<Professor> searchProfessorByCollaboration(int collaborationId){
+        DatabaseManager dbManager = new DatabaseManager();
+        String query = "SELECT idProfesor, nombreProfesor, estado, Universidad_idUniversidad FROM profesor WHERE idColaboración = ?";
+        Professor professor = new Professor();
+        ArrayList<Professor> professors = new ArrayList<>();
+        try {
+            Connection connection = dbManager.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setInt(1, collaborationId);
+            try(ResultSet resultSet = preparedStatement.executeQuery()){
+                while(resultSet.next()){
+                    int professorId = resultSet.getInt("idProfesor");
+                    String name = resultSet.getString("nombreProfesor");
+                    String status = resultSet.getString("estado");
+                    int universityId = resultSet.getInt("Universidad_idUniversidad");
+                    professor = new Professor();
+                    professor.setProfessorId(professorId);
+                    professor.setName(name);
+                    professor.setStatus(status);
+                    professor.setUniversityId(universityId);
+
+                    professors.add(professor);
+                }
+            }
+        }  catch (SQLException searchProfessorByCollaboration){
+            Logger.getLogger(DatabaseManager.class.getName()).log(Level.SEVERE,null, searchProfessorByCollaboration);
+        }
+        return professors;  
+    }
+
+    public int changeProfessorStatusById(Professor professor){
+    DatabaseManager dbManager = new DatabaseManager();
+    String query = "UPDATE profesor SET estado = ? WHERE idProfesor = ?";
+    int result = 0;
+        try{
+            Connection connection = dbManager.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, professor.getStatus());
+            preparedStatement.setInt(2, professor.getProfessorId());
+            result = preparedStatement.executeUpdate();
+        } catch (SQLException changeProfessorStatusException){
+            Logger.getLogger(DatabaseManager.class.getName()).log(Level.SEVERE,null, changeProfessorStatusException);
+    }
+    return result;
+    }
+
+    public int professorRequestCollaboration(Professor professor){
+        DatabaseManager dbManager = new DatabaseManager();
+        String query = "UPDATE profesor SET idColaboración = ? WHERE idProfesor = ?";
+        int result = 0;
+        try {
+            Connection connection = dbManager.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setInt(1, professor.getCollaborationId());
+            preparedStatement.setInt(2, professor.getProfessorId());
+            result = preparedStatement.executeUpdate();
+        } catch (SQLException professorRequestCollaboratioException){
+            Logger.getLogger(DatabaseManager.class.getName()).log(Level.SEVERE, null, professorRequestCollaboratioException);
+        }
+        return result;
     }
 }
 

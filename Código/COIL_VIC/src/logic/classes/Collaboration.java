@@ -9,6 +9,7 @@ public class Collaboration {
     LocalDate finishDate;
     LocalDate startDate;
     String collaborationName;
+    String collaborationStatus;
 
     public Collaboration() {
         
@@ -52,6 +53,14 @@ public class Collaboration {
 
     public void setCollaborationName(String collaborationName) {
         this.collaborationName = collaborationName;
+    }
+
+    public String getCollaborationStatus(){
+        return collaborationStatus;
+    }
+
+    public void setCollaborationStatus(String collaborationStatus){
+        this.collaborationStatus = collaborationStatus;
     }
 
 }

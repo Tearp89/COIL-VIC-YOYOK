@@ -16,7 +16,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import dataAccess.DatabaseManager;
-import logic.Interfaces.IFacilitator;
+import logic.interfaces.IFacilitator;
 import logic.classes.Facilitator;
 
 public class FacilitatorDAO implements IFacilitator{

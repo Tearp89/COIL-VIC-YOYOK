@@ -17,6 +17,7 @@ public class Professor {
     private int universityId;
     private int administratorId;
     private int workShopId;
+    private int collaborationId;
 
     public Professor() {
 
@@ -85,4 +86,11 @@ public class Professor {
         this.workShopId = workShopId;
     }
 
+    public int getCollaborationId(){
+        return collaborationId;
+    }
+
+    public void setCollaborationId(int collaborationId){
+        this.collaborationId = collaborationId;
+    }
 }

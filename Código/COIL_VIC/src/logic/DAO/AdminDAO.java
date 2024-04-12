@@ -11,7 +11,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import dataAccess.DatabaseManager;
-import logic.Interfaces.IAdmin;
+import logic.interfaces.IAdmin;
 import logic.classes.Admin;
 /**
  *

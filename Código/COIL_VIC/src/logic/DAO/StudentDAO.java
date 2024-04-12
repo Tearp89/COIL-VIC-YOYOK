@@ -7,7 +7,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import dataAccess.DatabaseManager;
-import logic.Interfaces.IStudent;
+import logic.interfaces.IStudent;
 import logic.classes.Student;
 
 public class StudentDAO implements IStudent {
@@ -26,5 +26,7 @@ public class StudentDAO implements IStudent {
         }
         return result;
     }
+
+    
     
 }

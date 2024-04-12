@@ -1,4 +1,4 @@
-package logic.Interfaces;
+package logic.interfaces;
 import logic.classes.Student;
 
 public interface IStudent {

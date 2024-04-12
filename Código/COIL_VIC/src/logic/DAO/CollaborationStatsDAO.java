@@ -11,7 +11,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import dataAccess.DatabaseManager;
-import logic.Interfaces.ICollaboration;
+import logic.interfaces.ICollaboration;
 import logic.classes.Collaboration;
 
 import java.util.ArrayList;

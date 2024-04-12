@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package logic.DAO;
+package logic.classes;
 
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;
@@ -12,7 +12,7 @@ import javax.mail.internet.InternetAddress;
  *
  * @author daur0
  */
-public class FieldValidatorDAO {
+public class FieldValidator {
     
     public static boolean onlyText(String textFieldTrim){
         if(!textFieldTrim.isBlank()){

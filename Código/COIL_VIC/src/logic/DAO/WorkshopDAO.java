@@ -7,7 +7,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import dataAccess.DatabaseManager;
-import logic.Interfaces.IWorkshop;
+import logic.interfaces.IWorkshop;
 import logic.classes.Workshop;
 
 import java.time.LocalDate;

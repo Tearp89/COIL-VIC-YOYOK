@@ -8,7 +8,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import dataAccess.DatabaseManager;
-import logic.Interfaces.IUniversity;
+import logic.interfaces.IUniversity;
 import logic.classes.University;
 
 public class UniversityDAO implements IUniversity{

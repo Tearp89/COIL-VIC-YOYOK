@@ -7,19 +7,17 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import dataAccess.DatabaseManager;
-import logic.Interfaces.ICollaboration;
+import logic.interfaces.ICollaboration;
 import logic.classes.Collaboration;
 
 import java.util.ArrayList;
 import java.sql.ResultSet;
 import java.time.LocalDate;
-import java.util.Date;
-
 public class CollaborationDAO implements ICollaboration {
 
     public int addCollaboration(Collaboration collaboration){
         DatabaseManager dbManager = new DatabaseManager();
-        String query = "INSERT INTO colaboración(descripción, fechaFin, fechaInicio, nombreColaboración) VALUES (?, ?, ?, ?)";
+        String query = "INSERT INTO colaboración(descripción, fechaFin, fechaInicio, nombreColaboración, estado) VALUES (?, ?, ?, ?, ?)";
         int result = 0;
         try {
             Connection connection = dbManager.getConnection();
@@ -28,6 +26,7 @@ public class CollaborationDAO implements ICollaboration {
             preparedStatement.setObject(2, collaboration.getFinishDate());
             preparedStatement.setObject(3, collaboration.getStartDate());
             preparedStatement.setString(4, collaboration.getCollaborationName());
+            preparedStatement.setString(5,collaboration.getCollaborationStatus());
             result = preparedStatement.executeUpdate();
         } catch (SQLException addCollaborarionException) {
             Logger.getLogger(DatabaseManager.class.getName()).log(Level.SEVERE,null, addCollaborarionException);
@@ -82,13 +81,14 @@ public class CollaborationDAO implements ICollaboration {
             try(ResultSet resultSet = preparedStatement.executeQuery()){
                 while(resultSet.next()){
                     int idCollaboration = resultSet.getInt("idColaboración");
-                    String collaborarionName = resultSet.getString("nombreColaboración");
+                    String collaborationName = resultSet.getString("nombreColaboración");
                     String description = resultSet.getString("descripción");
                     LocalDate startDate = resultSet.getObject("fechaInicio", LocalDate.class);
                     LocalDate finishDate = resultSet.getObject("fechaFin", LocalDate.class);
                     
                     collaboration = new Collaboration();
                     collaboration.setCollaborationId(idCollaboration);
+                    collaboration.setCollaborationName(collaborationName);
                     collaboration.setDescription(description);
                     collaboration.setStartDate(startDate);
                     collaboration.setFinishDate(finishDate);
@@ -113,14 +113,15 @@ public class CollaborationDAO implements ICollaboration {
             preparedStatemen.setString(1, year);
             try(ResultSet resultSet = preparedStatemen.executeQuery()){
                 while(resultSet.next()){
-                     int idCollaboration = resultSet.getInt("idColaboración");
-                    String collaborarionName = resultSet.getString("nombreColaboración");
+                    int idCollaboration = resultSet.getInt("idColaboración");
+                    String collaborationName = resultSet.getString("nombreColaboración");
                     String description = resultSet.getString("descripción");
                     LocalDate startDate = resultSet.getObject("fechaInicio", LocalDate.class);
                     LocalDate finishDate = resultSet.getObject("fechaFin", LocalDate.class);
                     
                     collaboration = new Collaboration();
                     collaboration.setCollaborationId(idCollaboration);
+                    collaboration.setCollaborationName(collaborationName);
                     collaboration.setDescription(description);
                     collaboration.setStartDate(startDate);
                     collaboration.setFinishDate(finishDate);
@@ -134,6 +135,57 @@ public class CollaborationDAO implements ICollaboration {
         }
         
         return collaborations;
+    }
+
+    public int changeCollaborationStatus(Collaboration collaboration){
+        DatabaseManager dbManager = new DatabaseManager();
+        String query = "UPDATE colaboración set estado = ? WHERE idColaboración = ?";
+        int result = 0;
+        try{
+            Connection connection = dbManager.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, collaboration.getCollaborationStatus());
+            preparedStatement.setInt(2, collaboration.getCollaborationId());
+            result = preparedStatement.executeUpdate();
+        } catch (SQLException changeCollaborationStatusException){
+            Logger.getLogger(DatabaseManager.class.getName()).log(Level.SEVERE,null, changeCollaborationStatusException);
+        }
+        return result;
+    } 
+
+
+    public int assignProfessorToCollaboration(int professorID, int collaborationId) throws SQLException{
+        DatabaseManager dbManager = new DatabaseManager();
+        String query = "INSERT INTO `Colaboraciones Registradas`(Profesor_idProfesor, Colaboración_idColaboración) VALUES (?, ?)";
+        int result = 0;
+
+        try (Connection connection = dbManager.getConnection();
+        PreparedStatement preparedStatement = connection.prepareStatement(query)){
+            preparedStatement.setInt(1, professorID);
+            preparedStatement.setInt(2, collaborationId);
+            result = preparedStatement.executeUpdate();
+
+            dbManager.closeConnection();
+        }
+
+        return result;
+
+    }
+
+    public int assignStudentToCollaboration(String studentEmail, int collaborationId) throws SQLException{
+        DatabaseManager dbManager = new DatabaseManager();
+        String query = "INSERT INTO participa(Estudiante_correoElectrónico, Colaboración_idColaboración) VALUES (?, ?)";
+        int result = 0;
+        try (Connection connection = dbManager.getConnection();
+                PreparedStatement preparedStatement = connection.prepareStatement(query)){
+                    preparedStatement.setString(1, studentEmail);
+                    preparedStatement.setInt(2, collaborationId);
+                    result = preparedStatement.executeUpdate();
+
+                    dbManager.closeConnection();
+                }
+
+                return result;
     }
 
 }

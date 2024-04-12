@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/UnitTests/JUnit4TestClass.java to edit this template
  */
-package COIL_VIC_LOGIC.DAO;
+package DAO;
 
 import java.sql.Date;
 import java.time.LocalDate;
@@ -15,6 +15,7 @@ import logic.classes.Collaboration;
 
 import static org.junit.Assert.*;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 
 /**
  *
@@ -297,6 +298,55 @@ public class CollaborationDAOTest {
         int actualResult = instance.countProfessorsByRegionAndYear(region, year);
         assertEquals(expectedResult, actualResult);
     }
+
+    @Test
+    public void changeCollaborationStatusSuccess(){
+        System.out.println("changeStateProfessor");
+            Collaboration collaboration = new Collaboration();
+            collaboration.setCollaborationId(13); 
+            collaboration.setCollaborationStatus("Aceptado");
+            
+            CollaborationDAO instance = new CollaborationDAO();
+            int expectedResult = 1;
+            int result = instance.changeCollaborationStatus(collaboration);
+            assertEquals(expectedResult, result);
+    }
+
+    @Test
+    public void changeCllaborationStatusFailed(){
+        System.out.println("changeStateProfessor");
+        Collaboration collaboration = new Collaboration();
+        collaboration.setCollaborationId(1000); 
+        collaboration.setCollaborationStatus("Activo"); 
+            
+        CollaborationDAO instance = new CollaborationDAO();
+        int expectedResult = 0;
+        int result = instance.changeCollaborationStatus(collaboration);
+        assertEquals(expectedResult, result);
+
+        }
+
+        @Test 
+        public void assignStudentToCollaborationSuccess() throws SQLException{
+            CollaborationDAO instance = new CollaborationDAO();
+            int expectedResult = 1;
+            String studentEmail = "zS22013641@estudiantes.uv.mx";
+            int collaborationId = 3;
+            int actualResult = instance.assignStudentToCollaboration(studentEmail, collaborationId);
+            assertEquals(expectedResult, actualResult);
+        }
+
+        @Test
+        public void assignProfessorToCollaborationSuccess() throws SQLException{
+            CollaborationDAO instance = new CollaborationDAO();
+            int expectedResult = 1;
+            int professorId = 8;
+            int collaborationId = 1;
+            int actualResult = instance.assignProfessorToCollaboration(professorId, collaborationId);
+            assertEquals(expectedResult, actualResult);
+
+        }
+
 
 
 
