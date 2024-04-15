@@ -2,10 +2,13 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/UnitTests/JUnit4TestClass.java to edit this template
  */
-package COIL_VIC_LOGIC.DAO;
+package DAO;
 
-import COIL_VIC_LOGIC.Classes.Student;
 import org.junit.Test;
+
+import logic.DAO.StudentDAO;
+import logic.classes.Student;
+
 import static org.junit.Assert.*;
 
 /**

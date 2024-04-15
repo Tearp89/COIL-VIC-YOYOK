@@ -2,15 +2,20 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/UnitTests/JUnit4TestClass.java to edit this template
  */
-package COIL_VIC_LOGIC.DAO;
+package DAO;
 
-import COIL_VIC_LOGIC.Classes.Collaboration;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import org.junit.Test;
+
+import logic.DAO.CollaborationDAO;
+import logic.DAO.CollaborationStatsDAO;
+import logic.classes.Collaboration;
+
 import static org.junit.Assert.*;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 
 /**
  *
@@ -58,7 +63,7 @@ public class CollaborationDAOTest {
         collaboration.setDescription("TestDescripcion");
         collaboration.setFinishDate(dateFinishtTest);
         collaboration.setStartDate(dateStartTest);
-        collaboration.setCollaborationId(2);
+        collaboration.setCollaborationId(20);
         
         
         int rowsAffected = instance.deleteCollaboration(collaboration);
@@ -117,7 +122,7 @@ public class CollaborationDAOTest {
         collaboration.setDescription("NuevoTestDescripcion");
         collaboration.setFinishDate(dateFinishtTest);
         collaboration.setStartDate(dateStartTest);
-        collaboration.setCollaborationId(17);
+        collaboration.setCollaborationId(197);
         
         int rowsAffected = instance.updateCollaboration(collaboration);
         assertEquals(0, rowsAffected);
@@ -126,7 +131,7 @@ public class CollaborationDAOTest {
     
     @Test
     public void testSearchCollaborationSuccess(){
-        int expectedResult = 4;
+        int expectedResult = 5;
         CollaborationDAO instance = new CollaborationDAO();
         String name = "TestNombreCol";
         ArrayList<Collaboration> collaborations = instance.searchCollaboration(name);
@@ -158,4 +163,192 @@ public class CollaborationDAOTest {
         ArrayList<Collaboration> collaborations = instance.searchCollaborationByYear(year);
         assertEquals(expectedResult, collaborations.size());
     }
+
+
+    @Test
+    public void testCountStudentsByRegionSuccess(){
+        CollaborationStatsDAO instance = new CollaborationStatsDAO();
+        int expectedResult = 1;
+        String region = "Veracruz";
+        int actualResult = instance.countStudentsByRegion(region);
+        assertEquals(expectedResult, actualResult);
+    }
+
+    @Test
+    public void testCountStudentsByRegionFailed(){
+        CollaborationStatsDAO instance = new CollaborationStatsDAO();
+        int expectedResult = 0;
+        String region = "Xalapa";
+        int actualResult = instance.countStudentsByRegion(region);
+        assertEquals(expectedResult, actualResult);
+    }
+
+    @Test
+    public void testCountStudentByRegionAndYearSuccess(){
+        CollaborationStatsDAO instance = new CollaborationStatsDAO();
+        int expectedResult = 1;
+        String region = "Veracruz";
+        String year = "2000";
+        int actualResult = instance.countStudentsByRegionAndYear(region, year);
+        assertEquals(expectedResult, actualResult);
+    
+    }
+
+    @Test
+    public void testCountStudentByRegionAndYearFailed(){
+        CollaborationStatsDAO instance = new CollaborationStatsDAO();
+        int expectedResult = 0;
+        String region = "Xalapa";
+        String year = "2000";
+        int realResult = instance.countStudentsByRegionAndYear(region, year);
+        assertEquals(expectedResult, realResult);
+    }
+
+    @Test
+    public void testCountStudentByAcademicAreaSuccess(){
+        CollaborationStatsDAO instance = new CollaborationStatsDAO();
+        int expectedResult = 1;
+        String academicArea = "Técnica";
+        int actualResult = instance.countStudentsByAcademicArea(academicArea);
+        assertEquals(expectedResult, actualResult);
+    }
+
+    @Test
+    public void testCountStudentByAcademicAreaFailed(){
+        CollaborationStatsDAO instance = new CollaborationStatsDAO();
+        int expectedResult = 0;
+        String academicArea = "Económico-Administrativa";
+        int actualResult = instance.countStudentsByAcademicArea(academicArea);
+        assertEquals(expectedResult, actualResult);
+
+    }
+
+    @Test
+    public void testCountProfessorsByAcademicAreaSuccess(){
+        CollaborationStatsDAO instance = new CollaborationStatsDAO();
+        int expectedResult = 1;
+        String academicArea = "Técnica";
+        int actualResult = instance.countProfessorsByAcademicArea(academicArea);
+        assertEquals(expectedResult, actualResult);
+    }
+
+    @Test
+    public void testCountProfessorsByAcademicAreaFailed(){
+        CollaborationStatsDAO instance = new CollaborationStatsDAO();
+        int expectedResult = 0;
+        String academicArea = "Humanidades";
+        int actualResult = instance.countProfessorsByAcademicArea(academicArea);
+        assertEquals(expectedResult, actualResult);
+    }
+
+    @Test
+    public void testCountProfessorsByAcademicAreaAndYearSuccess(){
+        CollaborationStatsDAO instance = new CollaborationStatsDAO();
+        int expectedResult = 1;
+        String academicArea = "Técnica";
+        String year = "2000";
+        int actualResult = instance.countProfessorsByAcademicAreaAndYear(academicArea, year);
+        assertEquals(expectedResult, actualResult);
+    }
+
+    @Test
+    public void testCountProfessorsByAcademicAreaAndYearFailed(){
+        CollaborationStatsDAO instance = new CollaborationStatsDAO();
+        int expectedResult = 0;
+        String academicArea = "Humanidades";
+        String year = "2027";
+        int actualResult = instance.countProfessorsByAcademicAreaAndYear(academicArea, year);
+        assertEquals(expectedResult, actualResult);
+    }
+
+    @Test
+    public void testCountProfessorsByRegionSuccess(){
+        CollaborationStatsDAO instance = new CollaborationStatsDAO();
+        int expectedResult = 1;
+        String region = "Veracruz";
+        int actualResult = instance.countProfessorsByRegion(region);
+        assertEquals(expectedResult, actualResult);
+    }
+
+    @Test
+    public void testCountProfessorsByRegionFailed(){
+        CollaborationStatsDAO instance = new CollaborationStatsDAO();
+        int expectedResult = 0;
+        String region = "Xalapa";
+        int actualResult = instance.countProfessorsByRegion(region);
+        assertEquals(expectedResult, actualResult);
+    }
+
+    @Test
+    public void testCountProfessorByRegionAndYearSuccess(){
+        CollaborationStatsDAO instance = new CollaborationStatsDAO();
+        int expectedResult = 1;
+        String region = "Veracruz";
+        String year = "2000";
+        int actualResult = instance.countProfessorsByRegionAndYear(region, year);
+        assertEquals(expectedResult, actualResult); 
+    }
+
+    @Test
+    public void testCountProfessorByRegionAndYearFailed(){
+        CollaborationStatsDAO instance = new CollaborationStatsDAO();
+        int expectedResult = 0;
+        String region = "Xalapa";
+        String year = "2798";
+        int actualResult = instance.countProfessorsByRegionAndYear(region, year);
+        assertEquals(expectedResult, actualResult);
+    }
+
+    @Test
+    public void changeCollaborationStatusSuccess(){
+        System.out.println("changeStateProfessor");
+            Collaboration collaboration = new Collaboration();
+            collaboration.setCollaborationId(13); 
+            collaboration.setCollaborationStatus("Aceptado");
+            
+            CollaborationDAO instance = new CollaborationDAO();
+            int expectedResult = 1;
+            int result = instance.changeCollaborationStatus(collaboration);
+            assertEquals(expectedResult, result);
+    }
+
+    @Test
+    public void changeCllaborationStatusFailed(){
+        System.out.println("changeStateProfessor");
+        Collaboration collaboration = new Collaboration();
+        collaboration.setCollaborationId(1000); 
+        collaboration.setCollaborationStatus("Activo"); 
+            
+        CollaborationDAO instance = new CollaborationDAO();
+        int expectedResult = 0;
+        int result = instance.changeCollaborationStatus(collaboration);
+        assertEquals(expectedResult, result);
+
+        }
+
+        @Test 
+        public void assignStudentToCollaborationSuccess() throws SQLException{
+            CollaborationDAO instance = new CollaborationDAO();
+            int expectedResult = 1;
+            String studentEmail = "zS22013641@estudiantes.uv.mx";
+            int collaborationId = 3;
+            int actualResult = instance.assignStudentToCollaboration(studentEmail, collaborationId);
+            assertEquals(expectedResult, actualResult);
+        }
+
+        @Test
+        public void assignProfessorToCollaborationSuccess() throws SQLException{
+            CollaborationDAO instance = new CollaborationDAO();
+            int expectedResult = 1;
+            int professorId = 8;
+            int collaborationId = 1;
+            int actualResult = instance.assignProfessorToCollaboration(professorId, collaborationId);
+            assertEquals(expectedResult, actualResult);
+
+        }
+
+
+
+
 }
+
