@@ -4,6 +4,8 @@
  */
 package logic.interfaces;
 
+import java.util.ArrayList;
+
 import logic.classes.Collaboration;
 
 /**
@@ -14,5 +16,7 @@ public interface ICollaboration {
     int addCollaboration(Collaboration collaboration);
     int deleteCollaboration(Collaboration collaboration);
     int updateCollaboration(Collaboration collaboration);
-    
+    /*ArrayList<Collaboration> searchCollaborations(String name);
+    ArrayList<Collaboration> searchCollaborationByYear(String year);*/
+
 }
