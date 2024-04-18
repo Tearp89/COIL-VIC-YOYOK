@@ -8,8 +8,8 @@ import java.sql.SQLException;
 import dataAccess.DatabaseManager;
 
 public class LoginDAO {
-    
-    public boolean validateUser(String username, String password) {
+
+    public boolean validateAdmin(String username, String password) {
         DatabaseManager dbManager = new DatabaseManager();
         String query = "SELECT COUNT(*) AS count FROM administrador WHERE usuario = ? AND contraseña = ?";
         try (Connection connection = dbManager.getConnection();
