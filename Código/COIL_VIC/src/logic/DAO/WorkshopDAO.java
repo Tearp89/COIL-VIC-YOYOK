@@ -3,8 +3,7 @@ package logic.DAO;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
 
 import dataAccess.DatabaseManager;
 import logic.interfaces.IWorkshop;
@@ -13,9 +12,14 @@ import logic.classes.Workshop;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.sql.ResultSet;
+import java.util.logging.Level;
+import log.Log;
+import org.apache.log4j.Logger;
+
 
 public class WorkshopDAO implements IWorkshop {
-
+    private static final org.apache.log4j.Logger LOG = Log.getLogger(WorkshopDAO.class);
+    
     public int addWorkshop(Workshop workshop){
         DatabaseManager dbManager = new DatabaseManager();
         String query = "INSERT INTO curso_taller (nombreCursoTaller, fechaInicio, fechaFin, requisitos) VALUES (?, ?, ?, ?)";
@@ -29,7 +33,7 @@ public class WorkshopDAO implements IWorkshop {
             preparedStatement.setString(4, workshop.getRequirements());
             result = preparedStatement.executeUpdate();
         } catch (SQLException addWorkshopException) {
-            Logger.getLogger(DatabaseManager.class.getName()).log(Level.SEVERE,null, addWorkshopException);
+            LOG.error("ERROR: ", addWorkshopException);
         }
 
         return result;
@@ -45,7 +49,7 @@ public class WorkshopDAO implements IWorkshop {
             preparedStatement.setInt(1, workshop.getWorkshopId());
             result = preparedStatement.executeUpdate();
         } catch (SQLException deleteWorkshopException) {
-            Logger.getLogger(DatabaseManager.class.getName()).log(Level.SEVERE,null, deleteWorkshopException);
+            LOG.error("ERROR: ", deleteWorkshopException);
         }
         return result;
     }
@@ -64,7 +68,7 @@ public class WorkshopDAO implements IWorkshop {
             preparedStatement.setInt(5, workshop.getWorkshopId());
             result = preparedStatement.executeUpdate();
         } catch (SQLException  updateWorkshopException) {
-            Logger.getLogger(DatabaseManager.class.getName()).log(Level.SEVERE,null, updateWorkshopException);
+            LOG.error("ERROR: ", updateWorkshopException);
         }
         return result;
     }
@@ -97,7 +101,7 @@ public class WorkshopDAO implements IWorkshop {
                 }
             }
         }catch (SQLException searchWorkshopException){
-            Logger.getLogger(DatabaseManager.class.getName()).log(Level.SEVERE, null, searchWorkshopException);
+            LOG.error("ERROR: ", searchWorkshopException);
         }
         
         return workshops;
@@ -133,7 +137,7 @@ public class WorkshopDAO implements IWorkshop {
     }
 
     } catch (SQLException searchWorkshopByYearException){
-                Logger.getLogger(DatabaseManager.class.getName()).log(Level.SEVERE, null, searchWorkshopByYearException);
+                LOG.error("ERROR: ", searchWorkshopByYearException);
                 }
         
         return workshops;

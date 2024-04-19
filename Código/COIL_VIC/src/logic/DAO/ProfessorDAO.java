@@ -14,11 +14,13 @@ import logic.classes.Professor;
 import com.mysql.cj.jdbc.PreparedStatementWrapper;
 import java.util.ArrayList;
 import java.sql.ResultSet;
+import log.Log;
 
 
 
 
 public class ProfessorDAO implements IProfessor{
+    private static final org.apache.log4j.Logger LOG = Log.getLogger(ProfessorDAO.class);
 
     public int addProfessor(Professor professor){
         DatabaseManager dbManager = new DatabaseManager();
@@ -34,7 +36,7 @@ public class ProfessorDAO implements IProfessor{
             preparedStatement.setInt(5, professor.getUniversityId());
             result = preparedStatement.executeUpdate();
         } catch (SQLException addProfessorException) {
-            Logger.getLogger(DatabaseManager.class.getName()).log(Level.SEVERE,null, addProfessorException);
+            LOG.error("ERROR: ", addProfessorException);
         }
         return result;
     }
@@ -49,7 +51,7 @@ public class ProfessorDAO implements IProfessor{
             preparedStatement.setInt(1, professor.getProfessorId());
             result = preparedStatement.executeUpdate();
         } catch (SQLException deleteProfessorException) {
-            Logger.getLogger(DatabaseManager.class.getName()).log(Level.SEVERE,null, deleteProfessorException);
+            LOG.error("ERROR: ", deleteProfessorException);
         }
         
         return result;
@@ -69,7 +71,7 @@ public class ProfessorDAO implements IProfessor{
             preparedStatement.setInt(5, professor.getProfessorId());
             result = preparedStatement.executeUpdate();
         } catch (SQLException updateProfessorException){
-            Logger.getLogger(DatabaseManager.class.getName()).log(Level.SEVERE,null, updateProfessorException);
+            LOG.error("ERROR: ", updateProfessorException);
         }
         return result;
     }
@@ -108,7 +110,7 @@ public class ProfessorDAO implements IProfessor{
                 }
             }
         } catch (SQLException searchProfessorException){
-            Logger.getLogger(DatabaseManager.class.getName()).log(Level.SEVERE,null, searchProfessorException);
+            LOG.error("ERROR: ", searchProfessorException);
         }
         
         return professors;
@@ -148,7 +150,7 @@ public class ProfessorDAO implements IProfessor{
             }
             
         } catch (SQLException searchProfessorByCountryException){
-            Logger.getLogger(DatabaseManager.class.getName()).log(Level.SEVERE,null, searchProfessorByCountryException);
+            LOG.error("ERROR: ", searchProfessorByCountryException);
         }
         
         return professors;
@@ -186,7 +188,7 @@ public class ProfessorDAO implements IProfessor{
                 }
             }
         }catch (SQLException searchProfessorByStatus){
-            Logger.getLogger(DatabaseManager.class.getName()).log(Level.SEVERE,null, searchProfessorByStatus);
+            LOG.error("ERROR: ", searchProfessorByStatus);
         }
         return professors;
     }
@@ -216,7 +218,7 @@ public class ProfessorDAO implements IProfessor{
                 }
             }
         }  catch (SQLException searchProfessorByCollaboration){
-            Logger.getLogger(DatabaseManager.class.getName()).log(Level.SEVERE,null, searchProfessorByCollaboration);
+            LOG.error("ERROR: ", searchProfessorByCollaboration);
         }
         return professors;  
     }
@@ -232,7 +234,7 @@ public class ProfessorDAO implements IProfessor{
             preparedStatement.setInt(2, professor.getProfessorId());
             result = preparedStatement.executeUpdate();
         } catch (SQLException changeProfessorStatusException){
-            Logger.getLogger(DatabaseManager.class.getName()).log(Level.SEVERE,null, changeProfessorStatusException);
+            LOG.error("ERROR: ", changeProfessorStatusException);
     }
     return result;
     }
@@ -248,7 +250,7 @@ public class ProfessorDAO implements IProfessor{
             preparedStatement.setInt(2, professor.getProfessorId());
             result = preparedStatement.executeUpdate();
         } catch (SQLException professorRequestCollaboratioException){
-            Logger.getLogger(DatabaseManager.class.getName()).log(Level.SEVERE, null, professorRequestCollaboratioException);
+            LOG.error("ERROR: ", professorRequestCollaboratioException);
         }
         return result;
     }

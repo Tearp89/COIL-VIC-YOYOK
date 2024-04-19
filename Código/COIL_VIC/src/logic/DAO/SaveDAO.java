@@ -20,6 +20,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import log.Log;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 
 /**
@@ -27,6 +28,8 @@ import org.apache.poi.hssf.usermodel.HSSFWorkbook;
  * @author daur0
  */
 public class SaveDAO {
+    private static final org.apache.log4j.Logger LOG = Log.getLogger(CollaborationDAO.class);
+    
     public void exportExcel(JTable t) throws IOException {
         JFileChooser jFileChooser = new JFileChooser();
         FileNameExtensionFilter filter = new FileNameExtensionFilter("Archivos de excel", "xls");
@@ -73,7 +76,7 @@ public class SaveDAO {
                 }
                 Desktop.getDesktop().open(excelFile);
             } catch (IOException | NumberFormatException e) {
-                throw e;
+                LOG.error("ERROR: ", e);
             }
         }
     }

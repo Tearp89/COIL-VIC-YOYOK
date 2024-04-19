@@ -11,6 +11,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import dataAccess.DatabaseManager;
+import log.Log;
 import logic.interfaces.IAdmin;
 import logic.classes.Admin;
 /**
@@ -18,6 +19,8 @@ import logic.classes.Admin;
  * @author isabe
  */
 public class AdminDAO implements IAdmin {
+    private static final org.apache.log4j.Logger LOG = Log.getLogger(CollaborationDAO.class);
+    
     public int addAdmin (Admin admin){
         DatabaseManager dbManager = new DatabaseManager();
         String query = "INSERT INTO administrador (idAdministrativo, contraseña, nombreAdministrador, rol, usuario) VALUES (?,?,?,?)";
@@ -31,7 +34,7 @@ public class AdminDAO implements IAdmin {
             preparedStatement.setString(4, admin.getAdminUser());
             result = preparedStatement.executeUpdate();
         } catch (SQLException addAdminException) {
-            Logger.getLogger(DatabaseManager.class.getName()).log(Level.SEVERE,null, addAdminException);
+            LOG.error("ERROR: ", addAdminException);
         }
         return result;
     }
@@ -46,7 +49,7 @@ public class AdminDAO implements IAdmin {
             preparedStatement.setString(1,admin.getAdminName());
             result = preparedStatement.executeUpdate();
         } catch (SQLException deleteAdminException){
-            Logger.getLogger(DatabaseManager.class.getName()).log(Level.SEVERE,null, deleteAdminException);
+            LOG.error("ERROR: ", deleteAdminException);
         }
         return result;
     }
@@ -64,7 +67,7 @@ public class AdminDAO implements IAdmin {
             preparedStatement.setString(4, admin.getAdminUser());
             result = preparedStatement.executeUpdate();
         } catch (SQLException updateAdminException) {
-            Logger.getLogger(DatabaseManager.class.getName()).log(Level.SEVERE,null, updateAdminException);
+            LOG.error("ERROR: ", updateAdminException);
         }
         return result;
     }

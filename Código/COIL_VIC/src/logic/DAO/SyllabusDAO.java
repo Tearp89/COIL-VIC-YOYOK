@@ -10,6 +10,7 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import dataAccess.DatabaseManager;
+import log.Log;
 import logic.classes.Syllabus;
 import logic.interfaces.ISyllabus;
 
@@ -18,6 +19,8 @@ import logic.interfaces.ISyllabus;
  * @author isabe
  */
 public class SyllabusDAO implements ISyllabus {
+    private static final org.apache.log4j.Logger LOG = Log.getLogger(SyllabusDAO.class);
+    
     public int addSyllabus (Syllabus syllabus) {
         DatabaseManager dbManager = new DatabaseManager();
         String query = "INSERT INTO syllabus (idSyllabus, actividad, descripcion, responsable) VALUES (?, ?, ?, ?)";
@@ -31,7 +34,7 @@ public class SyllabusDAO implements ISyllabus {
             preparedStatement.setString(4, syllabus.getNameOfResponsable());
             result = preparedStatement.executeUpdate();
         } catch (SQLException addSyllabusException) {
-            Logger.getLogger(DatabaseManager.class.getName()).log(Level.SEVERE,null, addSyllabusException);
+            LOG.error("ERROR: ", addSyllabusException);
         }
         return result;       
     }
@@ -46,7 +49,7 @@ public class SyllabusDAO implements ISyllabus {
                 preparedStatement.setInt(1,syllabus.getSyllabusId());
                 result = preparedStatement.executeUpdate();  
             } catch (SQLException deleteSyllabusException){
-                Logger.getLogger(DatabaseManager.class.getName()).log(Level.SEVERE,null, deleteSyllabusException);
+                LOG.error("ERROR: ", deleteSyllabusException);
             }
             return result;
         }
@@ -64,7 +67,7 @@ public class SyllabusDAO implements ISyllabus {
                 preparedStatement.setInt(4, syllabus.getSyllabusId());
                 result = preparedStatement.executeUpdate();
             } catch (SQLException updateSyllabusException) {
-            Logger.getLogger(DatabaseManager.class.getName()).log(Level.SEVERE,null, updateSyllabusException);
+            LOG.error("ERROR: ", updateSyllabusException);
             }
             return result;       
         }
