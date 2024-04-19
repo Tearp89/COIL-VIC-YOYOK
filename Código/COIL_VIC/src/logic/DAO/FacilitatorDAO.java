@@ -16,10 +16,13 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import dataAccess.DatabaseManager;
+import log.Log;
 import logic.interfaces.IFacilitator;
 import logic.classes.Facilitator;
 
 public class FacilitatorDAO implements IFacilitator{
+    private static final org.apache.log4j.Logger LOG = Log.getLogger(FacilitatorDAO.class);
+    
     public int addFacilitator (Facilitator facilitator){
         DatabaseManager dbManager = new DatabaseManager();
         String query = "INSERT INTO facilitador (idFacilitador, nombreFacilitador, Curso-Taller_idCursoTaller) VALUES (?,?)";
@@ -31,7 +34,7 @@ public class FacilitatorDAO implements IFacilitator{
             preparedStatement.setString(2, facilitator.getWorkShopId());
             result = preparedStatement.executeUpdate();
         } catch (SQLException addFacilitatorException) {
-            Logger.getLogger(DatabaseManager.class.getName()).log(Level.SEVERE,null, addFacilitatorException);
+            LOG.error("ERROR: ", addFacilitatorException);
         }
         return result;
     }
@@ -46,7 +49,7 @@ public class FacilitatorDAO implements IFacilitator{
             preparedStatement.setString(1,facilitator.getFacilitatorName());
             result = preparedStatement.executeUpdate();
         } catch (SQLException deleteFacilitatorException){
-            Logger.getLogger(DatabaseManager.class.getName()).log(Level.SEVERE,null, deleteFacilitatorException);
+            LOG.error("ERROR: ", deleteFacilitatorException);
         }
         return result;
     }
@@ -62,7 +65,7 @@ public class FacilitatorDAO implements IFacilitator{
             preparedStatement.setString(3, facilitator.getWorkShopId());
             result = preparedStatement.executeUpdate();
         } catch (SQLException updateFacilitatorException){
-            Logger.getLogger(DatabaseManager.class.getName()).log(Level.SEVERE,null,updateFacilitatorException);
+            LOG.error("ERROR: ", updateFacilitatorException);
         }
         return result;
     }

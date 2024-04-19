@@ -8,7 +8,9 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.logging.Level;
-import java.util.logging.Logger;
+import log.Log;
+import org.apache.log4j.Logger;
+
 
 /**
  *
@@ -19,6 +21,7 @@ public class DatabaseManager {
     private final String DATABASE_NAME="jdbc:mysql://127.0.0.1/COIL_VIC";
     private final String DATABASE_USER="admin";
     private final String DATABASE_PASSWORD="taylor";
+    private static final org.apache.log4j.Logger LOG = Log.getLogger(DatabaseManager.class);
     
     public Connection getConnection() throws SQLException{
         connect();
@@ -35,8 +38,8 @@ public class DatabaseManager {
                 if(!connection.isClosed()){
                     connection.close();
                 }
-            } catch (SQLException exception) {                
-                Logger.getLogger(DatabaseManager.class.getName()).log(Level.SEVERE, null, exception);
+            } catch (SQLException exception) {
+                LOG.error("ERROR: ", exception);
             }
         }
     }

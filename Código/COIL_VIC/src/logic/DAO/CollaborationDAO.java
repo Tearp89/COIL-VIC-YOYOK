@@ -13,7 +13,10 @@ import logic.classes.Collaboration;
 import java.util.ArrayList;
 import java.sql.ResultSet;
 import java.time.LocalDate;
+import log.Log;
+
 public class CollaborationDAO implements ICollaboration {
+    private static final org.apache.log4j.Logger LOG = Log.getLogger(CollaborationDAO.class);
 
     public int addCollaboration(Collaboration collaboration){
         DatabaseManager dbManager = new DatabaseManager();
@@ -29,7 +32,7 @@ public class CollaborationDAO implements ICollaboration {
             preparedStatement.setString(5,collaboration.getCollaborationStatus());
             result = preparedStatement.executeUpdate();
         } catch (SQLException addCollaborarionException) {
-            Logger.getLogger(DatabaseManager.class.getName()).log(Level.SEVERE,null, addCollaborarionException);
+            LOG.error("ERROR: ", addCollaborarionException);
         }
 
         return result;
@@ -45,7 +48,7 @@ public class CollaborationDAO implements ICollaboration {
             preparedStatement.setInt(1, collaboration.getCollaborationId());
             result = preparedStatement.executeUpdate();
         } catch (SQLException deleteCollaborationException) {
-            Logger.getLogger(DatabaseManager.class.getName()).log(Level.SEVERE,null, deleteCollaborationException);
+            LOG.error("ERROR: ", deleteCollaborationException);
         }
         return result;
     }
@@ -64,7 +67,7 @@ public class CollaborationDAO implements ICollaboration {
             preparedStatement.setInt(5, collaboration.getCollaborationId());
             result = preparedStatement.executeUpdate();
         } catch (SQLException updateCollaborationException) {
-            Logger.getLogger(DatabaseManager.class.getName()).log(Level.SEVERE,null, updateCollaborationException);
+            LOG.error("ERROR: ", updateCollaborationException);
         }
         return result;
     }
@@ -97,7 +100,7 @@ public class CollaborationDAO implements ICollaboration {
                 }
             }
         }catch(SQLException SearchCollaborationException){
-            Logger.getLogger(DatabaseManager.class.getName()).log(Level.SEVERE,null, SearchCollaborationException);
+            LOG.error("ERROR: ", SearchCollaborationException);
         }
         return collaborations;
     }
@@ -131,7 +134,7 @@ public class CollaborationDAO implements ICollaboration {
                 }
             }
         } catch (SQLException searchCollaborationByYearException){
-            Logger.getLogger(DatabaseManager.class.getName()).log(Level.SEVERE,null, searchCollaborationByYearException);
+            LOG.error("ERROR: ", searchCollaborationByYearException);
         }
         
         return collaborations;
@@ -148,7 +151,7 @@ public class CollaborationDAO implements ICollaboration {
             preparedStatement.setInt(2, collaboration.getCollaborationId());
             result = preparedStatement.executeUpdate();
         } catch (SQLException changeCollaborationStatusException){
-            Logger.getLogger(DatabaseManager.class.getName()).log(Level.SEVERE,null, changeCollaborationStatusException);
+            LOG.error("ERROR: ", changeCollaborationStatusException);
         }
         return result;
     } 
