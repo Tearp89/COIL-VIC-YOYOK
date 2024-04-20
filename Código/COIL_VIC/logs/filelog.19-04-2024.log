@@ -93,3 +93,8 @@ Caused by: java.net.ConnectException: Connection refused: connect
 	at com.mysql.cj.protocol.StandardSocketFactory.connect(StandardSocketFactory.java:155)
 	at com.mysql.cj.protocol.a.NativeSocketConnection.connect(NativeSocketConnection.java:63)
 	... 66 more
+19-04-2024 17:39:54 ERROR emailControlTest:24: 535-5.7.8 Username and Password not accepted. For more information, go to
+535 5.7.8  https://support.google.com/mail/?p=BadCredentials pj19-20020a05620a1d9300b0078f1ae252c6sm915534qkn.49 - gsmtp
+
+19-04-2024 17:41:51 ERROR emailControlTest:24: Couldn't connect to host, port: smtp-mail.outlook.com, 587; timeout -1
+19-04-2024 17:46:21 INFO  emailControl:52: Se envió un Email a: daur0704@outlook.com
