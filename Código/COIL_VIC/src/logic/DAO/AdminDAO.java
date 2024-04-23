@@ -35,6 +35,7 @@ public class AdminDAO implements IAdmin {
             result = preparedStatement.executeUpdate();
         } catch (SQLException addAdminException) {
             LOG.error("ERROR: ", addAdminException);
+            LOG.warn(addAdminException.getMessage());
         }
         return result;
     }
