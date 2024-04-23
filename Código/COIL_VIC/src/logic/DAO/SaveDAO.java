@@ -28,7 +28,7 @@ import org.apache.poi.hssf.usermodel.HSSFWorkbook;
  * @author daur0
  */
 public class SaveDAO {
-    private static final org.apache.log4j.Logger LOG = Log.getLogger(CollaborationDAO.class);
+    private static final org.apache.log4j.Logger LOG = Log.getLogger(SaveDAO.class);
     
     public void exportExcel(JTable t) throws IOException {
         JFileChooser jFileChooser = new JFileChooser();

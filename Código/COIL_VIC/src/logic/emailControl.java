@@ -14,15 +14,15 @@ import log.Log;
  *
  * @author daur0
  */
-public class emailControl {
-    private static final org.apache.log4j.Logger LOG = Log.getLogger(emailControl.class);
+public class EmailControl {
+    private static final org.apache.log4j.Logger LOG = Log.getLogger(EmailControl.class);
     static final String USERNAME = "coilvic@outlook.com";
     static final String PASSWORD = "proyectocoil2024";
     static final String HOST = "smtp-mail.outlook.com";
     static final int PORT = 587;
     private final Properties properties;
     
-    public emailControl(){
+    public EmailControl(){
         this.properties = new Properties();
         this.properties.put("mail.smtp.auth", "true");
         this.properties.put("mail.smtp.starttls.enable", "true");

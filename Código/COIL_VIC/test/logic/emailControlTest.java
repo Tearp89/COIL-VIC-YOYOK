@@ -7,12 +7,12 @@ import log.Log;
 
 import static org.junit.Assert.*;
 
-public class emailControlTest {
-    private static final org.apache.log4j.Logger LOG = Log.getLogger(emailControlTest.class);
+public class EmailControlTest {
+    private static final org.apache.log4j.Logger LOG = Log.getLogger(EmailControlTest.class);
 
     @Test
     public void testSendEmail() {
-        emailControl emailControl = new emailControl();
+        EmailControl emailControl = new EmailControl();
 
         String toEmail = "daur0704@outlook.com";
         String subject = "Prueba de correo";

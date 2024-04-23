@@ -12,6 +12,7 @@ import java.util.logging.Level;
 import org.apache.log4j.Logger;
 import org.apache.log4j.PatternLayout;
 import org.apache.log4j.RollingFileAppender;
+import org.apache.log4j.net.SMTPAppender;
 
 /**
  *
@@ -37,8 +38,18 @@ public class Log {
             rollingFileAppender.setMaxBackupIndex(5);
             rollingFileAppender.setLayout(defaultLayout);
             
+            SMTPAppender smtpAppender = new SMTPAppender();
+            smtpAppender.setThreshold(org.apache.log4j.Level.WARN);
+            smtpAppender.setSMTPHost("smtp-mail.outlook.com");
+            smtpAppender.setFrom("coilvic@outlook.com");
+            smtpAppender.setTo("daur0704@outlook.com");
+            smtpAppender.setSMTPPassword("proyectocoil2024");
+            smtpAppender.setSubject("Aviso excepción programa COIL - " + fechaAc);
+            smtpAppender.setLayout(defaultLayout);
+            
             LOG.removeAllAppenders();
             LOG.addAppender(rollingFileAppender);
+            LOG.addAppender(smtpAppender);
             LOG.setAdditivity(true);
 
         } catch (IOException ex) {
