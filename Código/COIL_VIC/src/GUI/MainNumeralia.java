@@ -3,36 +3,33 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package GUI;
+
 import javafx.application.Application;
+import static javafx.application.Application.launch;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-
 /**
  *
  * @author marla
  */
-
-
-public class Main extends Application {
-
+public class MainNumeralia extends Application{
+     
     @Override
-    public void start(Stage primaryStage) throws Exception {
-        // Cargar el archivo FXML
-       
-       Parent root = FXMLLoader.load(getClass().getResource("/GUI/addCollaboration.fxml"));
+    public void start(Stage primaryStage) throws Exception{
 
-
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUI/Numeralia.fxml"));
+        Parent root = loader.load();
         
-        // Configurar la escena
+            
         Scene scene = new Scene(root);
         
-        // Establecer la escena en la ventana principal
+
         primaryStage.setScene(scene);
         
-        // Mostrar la ventana principal
+
         primaryStage.show();
         primaryStage.setOnShown(event -> primaryStage.centerOnScreen());
     }
@@ -40,6 +37,4 @@ public class Main extends Application {
     public static void main(String[] args) {
         launch(args);
     }
-    
-    
 }
