@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.BoxBlur?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: F65757;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <ImageView fitHeight="486.0" fitWidth="480.0" layoutX="172.0" layoutY="100.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../gui/descarga-removebg-preview.png" />
+         </image>
+         <effect>
+            <BoxBlur />
+         </effect>
+      </ImageView>
+      <Pane layoutX="46.0" layoutY="76.0" prefHeight="525.0" prefWidth="709.0" style="-fx-background-color: rgba(0, 0, 0, 0.5); -fx-effect: box-blur(5, 5, 3); -fx-background-radius: 10;">
+         <children>
+            <MenuBar prefHeight="47.0" prefWidth="709.0" style="-fx-alignment: CENTER; -fx-background-color: white; -fx-background-radius: 10;">
+               <menus>
+                  <Menu mnemonicParsing="false" style="-fx-cursor: hand;" text="Inicio" />
+                  <Menu mnemonicParsing="false" style="-fx-cursor: hand;" text="Cursos-Talleres">
+                     <items>
+                        <MenuItem mnemonicParsing="false" text="Agregar" />
+                     </items>
+                  </Menu>
+                  <Menu mnemonicParsing="false" style="-fx-cursor: hand;" text="Colaboraciones">
+                     <items>
+                        <MenuItem mnemonicParsing="false" text="Activas" />
+                        <MenuItem mnemonicParsing="false" text="Aplicar" />
+                        <MenuItem mnemonicParsing="false" text="Proponer" />
+                     </items>
+                  </Menu>
+                  <Menu mnemonicParsing="false" style="-fx-cursor: hand;" text="Profesores">
+                     <items>
+                        <MenuItem mnemonicParsing="false" text="Agregar" />
+                        <MenuItem mnemonicParsing="false" text="Consultar" />
+                     </items>
+                  </Menu>
+                  <Menu mnemonicParsing="false" style="-fx-cursor: hand;" text="Numeralia" />
+               </menus>
+               <cursor>
+                  <Cursor fx:constant="DEFAULT" />
+               </cursor>
+            </MenuBar>
+            <Button graphicTextGap="0.0" layoutX="-4.0" layoutY="-6.0" mnemonicParsing="false" prefHeight="22.0" prefWidth="21.0" style="-fx-background-color: transparent;">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <graphic>
+                  <ImageView fitHeight="56.0" fitWidth="52.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../gui/descarga-removebg-preview22.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <TextField fx:id="textFieldProfessorName" layoutX="219.0" layoutY="104.0" prefHeight="25.0" prefWidth="410.0" promptText="Escribe aquí..." style="-fx-background-color: rgba(0, 0, 0, 0.5); -fx-text-fill: WHITE; -fx-background-radius: 7;">
+               <cursor>
+                  <Cursor fx:constant="TEXT" />
+               </cursor>
+               <font>
+                  <Font name="Arial" size="12.0" />
+               </font>
+            </TextField>
+            <Label layoutX="43.0" layoutY="108.0" text="Nombre completo:" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+            <Button fx:id="buttonAddProfessor" layoutX="639.0" layoutY="488.0" mnemonicParsing="false" onAction="#addProfessor" style="-fx-background-color: rgba(0, 0, 0, 0.7);" text="Registrar" textFill="WHITE">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <font>
+                  <Font name="Arial Bold" size="12.0" />
+               </font>
+            </Button>
+            <Button fx:id="buttonCancel" layoutX="563.0" layoutY="488.0" mnemonicParsing="false" onAction="#cancel" style="-fx-background-color: rgba(0, 0, 0, 0.7);" text="Cancelar" textFill="WHITE">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <font>
+                  <Font name="Arial Bold" size="12.0" />
+               </font>
+            </Button>
+            <Label layoutX="43.0" layoutY="168.0" text="Universidad:" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+            <Label layoutX="43.0" layoutY="228.0" text="País:" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+            <ComboBox fx:id="comboBoxUniversity" editable="true" layoutX="226.0" layoutY="164.0" prefHeight="25.0" prefWidth="208.0" promptText="Selecciona..." style="-fx-background-color: rgba(0, 0, 0, 0.5);" />
+            <ComboBox fx:id="comboBoxCountry" editable="true" layoutX="226.0" layoutY="224.0" prefHeight="25.0" prefWidth="208.0" promptText="Selecciona" style="-fx-background-color: rgba(0, 0, 0, 0.5);" />
+            <Label layoutX="42.0" layoutY="293.0" text="Área académica:" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+            <Label layoutX="42.0" layoutY="357.0" text="Correo electrónico:" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+            <TextField fx:id="textFieldEmail" layoutX="219.0" layoutY="353.0" prefHeight="25.0" prefWidth="410.0" promptText="Escribe aquí..." style="-fx-background-color: rgba(0, 0, 0, 0.5); -fx-text-fill: WHITE; -fx-background-radius: 7;">
+               <cursor>
+                  <Cursor fx:constant="TEXT" />
+               </cursor>
+               <font>
+                  <Font name="Arial" size="12.0" />
+               </font>
+            </TextField>
+            <ComboBox fx:id="comboBoxAcademicArea" editable="true" layoutX="226.0" layoutY="289.0" prefHeight="25.0" prefWidth="208.0" promptText="Selecciona" style="-fx-background-color: rgba(0, 0, 0, 0.5);" />
+         </children>
+      </Pane>
+      <Label prefHeight="40.0" prefWidth="800.0" style="-fx-background-color: BLACK;" text="COIL-VIC" textFill="WHITE">
+         <font>
+            <Font name="Bell MT" size="26.0" />
+         </font>
+      </Label>
+      <Hyperlink layoutX="758.0" layoutY="5.0" prefHeight="12.0" prefWidth="18.0">
+         <graphic>
+            <ImageView fitHeight="30.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../gui/2023_Facebook_icon.svg.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Hyperlink>
+      <Hyperlink layoutX="720.0" layoutY="5.0">
+         <graphic>
+            <ImageView fitHeight="25.0" fitWidth="29.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../gui/Twitter_new_X_logo.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Hyperlink>
+      <Hyperlink layoutX="683.0" layoutY="5.0">
+         <graphic>
+            <ImageView fitHeight="34.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../gui/764972.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Hyperlink>
+   </children>
+</Pane>
