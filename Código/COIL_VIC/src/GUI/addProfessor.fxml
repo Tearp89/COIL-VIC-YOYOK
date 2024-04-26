@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: F65757;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: F65757;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.AddProfessorController">
    <children>
       <ImageView fitHeight="486.0" fitWidth="480.0" layoutX="172.0" layoutY="100.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -95,29 +95,28 @@
                   <Font name="Arial Bold" size="12.0" />
                </font>
             </Button>
-            <Label layoutX="43.0" layoutY="168.0" text="Universidad:" textFill="WHITE">
+            <Label layoutX="41.0" layoutY="254.0" text="Universidad:" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
             </Label>
-            <Label layoutX="43.0" layoutY="228.0" text="País:" textFill="WHITE">
+            <Label layoutX="51.0" layoutY="160.0" text="País:" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
             </Label>
-            <ComboBox fx:id="comboBoxUniversity" editable="true" layoutX="226.0" layoutY="164.0" prefHeight="25.0" prefWidth="208.0" promptText="Selecciona..." style="-fx-background-color: rgba(0, 0, 0, 0.5);" />
-            <ComboBox fx:id="comboBoxCountry" editable="true" layoutX="226.0" layoutY="224.0" prefHeight="25.0" prefWidth="208.0" promptText="Selecciona" style="-fx-background-color: rgba(0, 0, 0, 0.5);" />
-            <Label layoutX="42.0" layoutY="293.0" text="Área académica:" textFill="WHITE">
+            <ComboBox fx:id="comboBoxUniversity" editable="true" layoutX="227.0" layoutY="250.0" onAction="#addUniversity" prefHeight="25.0" prefWidth="208.0" promptText="Selecciona..." style="-fx-background-color: rgba(0, 0, 0, 0.5);" />
+            <Label layoutX="40.0" layoutY="306.0" text="Área académica:" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
             </Label>
-            <Label layoutX="42.0" layoutY="357.0" text="Correo electrónico:" textFill="WHITE">
+            <Label layoutX="42.0" layoutY="369.0" text="Correo electrónico:" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
             </Label>
-            <TextField fx:id="textFieldEmail" layoutX="219.0" layoutY="353.0" prefHeight="25.0" prefWidth="410.0" promptText="Escribe aquí..." style="-fx-background-color: rgba(0, 0, 0, 0.5); -fx-text-fill: WHITE; -fx-background-radius: 7;">
+            <TextField fx:id="textFieldEmail" layoutX="219.0" layoutY="365.0" prefHeight="25.0" prefWidth="410.0" promptText="Escribe aquí..." style="-fx-background-color: rgba(0, 0, 0, 0.5); -fx-text-fill: WHITE; -fx-background-radius: 7;">
                <cursor>
                   <Cursor fx:constant="TEXT" />
                </cursor>
@@ -125,7 +124,28 @@
                   <Font name="Arial" size="12.0" />
                </font>
             </TextField>
-            <ComboBox fx:id="comboBoxAcademicArea" editable="true" layoutX="226.0" layoutY="289.0" prefHeight="25.0" prefWidth="208.0" promptText="Selecciona" style="-fx-background-color: rgba(0, 0, 0, 0.5);" />
+            <ComboBox fx:id="comboBoxAcademicArea" editable="true" layoutX="227.0" layoutY="302.0" prefHeight="25.0" prefWidth="208.0" promptText="Selecciona" style="-fx-background-color: rgba(0, 0, 0, 0.5);" />
+            <Label layoutX="43.0" layoutY="203.0" text="Idioma:" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+            <TextField fx:id="textFieldLanguage" layoutX="219.0" layoutY="199.0" prefHeight="25.0" prefWidth="410.0" promptText="Escribe aquí..." style="-fx-background-color: rgba(0, 0, 0, 0.5); -fx-text-fill: WHITE; -fx-background-radius: 7;">
+               <cursor>
+                  <Cursor fx:constant="TEXT" />
+               </cursor>
+               <font>
+                  <Font name="Arial" size="12.0" />
+               </font>
+            </TextField>
+            <TextField fx:id="textFieldCountry" layoutX="219.0" layoutY="156.0" prefHeight="25.0" prefWidth="410.0" promptText="Escribe aquí..." style="-fx-background-color: rgba(0, 0, 0, 0.5); -fx-text-fill: WHITE; -fx-background-radius: 7;">
+               <cursor>
+                  <Cursor fx:constant="TEXT" />
+               </cursor>
+               <font>
+                  <Font name="Arial" size="12.0" />
+               </font>
+            </TextField>
          </children>
       </Pane>
       <Label prefHeight="40.0" prefWidth="800.0" style="-fx-background-color: BLACK;" text="COIL-VIC" textFill="WHITE">
