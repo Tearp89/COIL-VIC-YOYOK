@@ -30,7 +30,7 @@ public class AddProfessorController {
         String professorName = textFieldProfessorName.getText();
         Object selectedUniversity = comboBoxUniversity.getSelectionModel().getSelectedItem();
         String university = selectedUniversity != null ? selectedUniversity.toString() : null;
-        String user = userGenerator(professorName);
+        String user = Access.userGenerator(professorName);
         String password = passwordGenerator(8);
     }
 
