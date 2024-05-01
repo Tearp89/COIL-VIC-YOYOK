@@ -1,7 +1,7 @@
 package logic;
 
 import org.junit.Test;
-
+import logic.EmailControl;
 import javax.mail.MessagingException;
 import log.Log;
 
@@ -21,7 +21,7 @@ public class EmailControlTest {
         try {
             emailControl.sendEmail(toEmail, subject, body);
         } catch (MessagingException e) {
-            LOG.error(e.getMessage());
+            LOG.warn(e.getMessage());
             fail("No se esperaba una excepción");
         }
     }

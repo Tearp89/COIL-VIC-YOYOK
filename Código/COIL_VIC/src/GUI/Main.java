@@ -20,19 +20,19 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        // Cargar el archivo FXML
+
        
        Parent root = FXMLLoader.load(getClass().getResource("/GUI/addCollaboration.fxml"));
 
 
         
-        // Configurar la escena
+
         Scene scene = new Scene(root);
         
-        // Establecer la escena en la ventana principal
+
         primaryStage.setScene(scene);
         
-        // Mostrar la ventana principal
+
         primaryStage.show();
         primaryStage.setOnShown(event -> primaryStage.centerOnScreen());
     }

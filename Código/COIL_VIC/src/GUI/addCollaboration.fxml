@@ -19,7 +19,7 @@
    <children>
       <ImageView fitHeight="486.0" fitWidth="480.0" layoutX="172.0" layoutY="57.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../Downloads/descarga-removebg-preview.png" />
+            <Image url="file:///C:/Users/marla/OneDrive%20-%20Universidad%20Veracruzana/Documentos/4to%20semestre/COIL-VIC-YOYOK/Código/COIL_VIC/gui/descarga-removebg-preview.png" />
          </image>
          <effect>
             <BoxBlur />
@@ -59,7 +59,8 @@
                <graphic>
                   <ImageView fitHeight="56.0" fitWidth="52.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../Downloads/descarga-removebg-preview22.png" />
+                        <Image url="file:///C:/Users/marla/OneDrive%20-%20Universidad%20Veracruzana/Documentos/4to%20semestre/COIL-VIC-YOYOK/Código/COIL_VIC/gui/descarga-removebg-preview22.png" />
+
                      </image>
                   </ImageView>
                </graphic>
