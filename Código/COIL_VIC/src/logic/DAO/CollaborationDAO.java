@@ -191,4 +191,62 @@ public class CollaborationDAO implements ICollaboration {
                 return result;
     }
 
+    public String getCollaborationName(int id){
+        DatabaseManager dbManager = new DatabaseManager();
+        String query = "SELECT nombreColaboración from Colaboración WHERE idColaboración = ?";
+        String result = "";
+        try{
+            Connection connection = dbManager.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setInt(1, id);
+            try(ResultSet resultSet = preparedStatement.executeQuery()){
+                if(resultSet.next()){
+                    return resultSet.getString("nombreColaboración");
+                }
+            }
+        }catch(SQLException getCollaborationNameException){
+            LOG.error("ERROR:", getCollaborationNameException);
+        }
+        return null;
+    }
+
+    public String getCollaborationDescription (int id){
+        DatabaseManager dbManager = new DatabaseManager();
+        String query = "SELECT * descripción FROM Colaboración WHERE idColaboración = ?";
+        String result = "";
+        try{
+            Connection connection = dbManager.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setInt(1, id);
+            try(ResultSet resultSet = preparedStatement.executeQuery()){
+                if(resultSet.next()){
+                    return resultSet.getString("descripción");
+                }
+            }
+        } catch (SQLException getCollaborationDescriptionException){
+            LOG.error("ERROR:", getCollaborationDescriptionException);
+        }
+        return null;
+    }
+
+    public LocalDate getCollaborationStartDate (int id){
+        DatabaseManager dbManager = new DatabaseManager();
+        String query = "SELECT fechaInicio FROM Colaboración WHERE idColaboración = ?";
+        String result = "";
+        try{
+            Connection connection = dbManager.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setInt(1, id);
+            try (ResultSet resultSet = preparedStatement.executeQuery()){
+                if(resultSet.next()){
+                    return resultSet.getDate("fechaInicio").toLocalDate();
+                }
+            }
+        } catch(SQLException getCollaborationStartDateException){
+            LOG.error("ERROR:", getCollaborationStartDateException);
+        }
+
+        return null;
+    }
+
 }
