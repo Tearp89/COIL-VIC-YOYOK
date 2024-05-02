@@ -11,10 +11,8 @@ public class MainSearchDeclinedCollaborations extends Application{
 
     @Override
     public void start(Stage primaryStage)throws Exception{
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUI/DeclinedCollaborations.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUI/inicio.fxml"));
         Parent root = loader.load();
-
-        SearchDeclinedCollaborationsController controller = loader.getController();
 
         
         primaryStage.setScene(new Scene(root, 1000, 600));

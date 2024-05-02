@@ -5,10 +5,13 @@ import java.util.ArrayList;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyEvent;
 import logic.DAO.CollaborationDAO;
 import logic.classes.Collaboration;
 
@@ -26,6 +29,8 @@ public class SearchDeclinedCollaborationsController {
     private TableColumn<Collaboration, String> tableColumnFinishDate;
     @FXML
     private TableColumn<Collaboration, String> tableColumnStatus;
+    @FXML
+    private TextField textFieldSearch; 
 
   
 
@@ -40,6 +45,15 @@ public class SearchDeclinedCollaborationsController {
 
         tableViewDeclinedCollaborations.getItems().addAll(collaborations);
 
+    }
+
+    public void searchDeclinedCollaborations(ActionEvent event){
+        CollaborationDAO collaborationDAO = new CollaborationDAO();
+        ArrayList<Collaboration> collaborations = new ArrayList<>();
+        String collaborationName = "%" + textFieldSearch.getText() + "%";
+        collaborations = collaborationDAO.searchCollaborationByStatusAndName("Rechazada", collaborationName);
+        tableViewDeclinedCollaborations.getItems().clear();
+        tableViewDeclinedCollaborations.getItems().addAll(collaborations);
     }
 
     @FXML
