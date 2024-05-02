@@ -5,7 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import logic.DAO.CollaborationDAO;
+
 
 public class MainSearchDeclinedCollaborations extends Application{
 
