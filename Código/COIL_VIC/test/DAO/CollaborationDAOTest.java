@@ -41,6 +41,7 @@ public class CollaborationDAOTest {
         collaboration.setDescription("TestDescripcion");
         collaboration.setFinishDate(dateFinishTest);
         collaboration.setStartDate(dateStartTest);
+        collaboration.setCollaborationStatus("Rechazada");
         
         
         int rowsAffected = instance.addCollaboration(collaboration);
@@ -134,7 +135,7 @@ public class CollaborationDAOTest {
         int expectedResult = 5;
         CollaborationDAO instance = new CollaborationDAO();
         String name = "TestNombreCol";
-        ArrayList<Collaboration> collaborations = instance.searchCollaboration(name);
+        ArrayList<Collaboration> collaborations = instance.searchCollaborationByStatus(name);
         assertEquals(expectedResult, collaborations.size());
     }
     
@@ -143,7 +144,7 @@ public class CollaborationDAOTest {
         int expectedResult = 0;
         CollaborationDAO instance = new CollaborationDAO();
         String name = "Colaboración-2024";
-        ArrayList<Collaboration> collaborations = instance.searchCollaboration(name);
+        ArrayList<Collaboration> collaborations = instance.searchCollaborationByStatus(name);
         assertEquals(expectedResult, collaborations.size());
     }
     @Test
