@@ -34,8 +34,8 @@ public class CollaborationDAOTest {
         Collaboration collaboration = new Collaboration();
         CollaborationDAO instance = new CollaborationDAO();
         
-        LocalDate dateStartTest =  LocalDate.of(2000, 1, 1); 
-        LocalDate dateFinishTest =  LocalDate.of(2000, 2, 1);
+        LocalDate dateStartTest =  LocalDate.of(2022, 1, 1); 
+        LocalDate dateFinishTest =  LocalDate.of(2026, 2, 1);
         
         collaboration.setCollaborationName("TestNombreCol");
         collaboration.setDescription("TestDescripcion");
@@ -57,8 +57,8 @@ public class CollaborationDAOTest {
         Collaboration collaboration = new Collaboration();
         CollaborationDAO instance = new CollaborationDAO();
         
-        LocalDate dateStartTest = LocalDate.of(2000, 3, 1);
-        LocalDate dateFinishtTest = LocalDate.of(2000, 1, 1);
+        LocalDate dateStartTest = LocalDate.of(2022, 3, 1);
+        LocalDate dateFinishtTest = LocalDate.of(2026, 1, 1);
         
         collaboration.setCollaborationName("TestNombreCol");
         collaboration.setDescription("TestDescripcion");

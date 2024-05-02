@@ -96,6 +96,30 @@ public class CollaborationStatsDAO {
         }
         return result;
     }
+    
+    public int countStudentsByAcademicAreaAndYear(String academicArea, String year) {
+        DatabaseManager dbManager = new DatabaseManager();
+        String query = "SELECT COUNT(DISTINCT correoElectrónico) AS total_students " +
+                        "FROM colaboración c " +
+                        "JOIN participa p ON c.idColaboración = p.Colaboración_idColaboración " +
+                        "JOIN estudiante e ON p.Estudiante_correoElectrónico = e.correoElectrónico " +
+                        "JOIN profesor pr ON e.Profesor_idProfesor = pr.idProfesor " +
+                        "WHERE pr.area_academica = ? AND YEAR(c.fechaInicio) = ?";  
+        int result = 0;
+        try (Connection connection = dbManager.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setString(1, academicArea);
+            preparedStatement.setString(2, year);
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                if (resultSet.next()) {
+                    result = resultSet.getInt("total_students");
+                }
+            }
+        } catch (SQLException e) {
+            LOG.error("ERROR: ", e);
+        }
+        return result;
+    }
 
     public int countProfessorsByAcademicArea(String academicArea) {
         DatabaseManager dbManager = new DatabaseManager();
