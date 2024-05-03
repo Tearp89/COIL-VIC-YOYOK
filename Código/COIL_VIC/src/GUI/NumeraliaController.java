@@ -27,9 +27,30 @@ import logic.SaveToFile;
  * @author daur0
  */
 public class numeraliaController {
-    private static final org.apache.log4j.Logger LOG = Log.getLogger(SaveToFile.class);
+    private static final org.apache.log4j.Logger LOG = Log.getLogger(numeraliaController.class);
 
-
+    @FXML
+    private Menu menuItem2017;
+    
+    @FXML
+    private Menu menuItem2018;
+    
+    @FXML
+    private Menu menuItem2019;
+    
+    @FXML
+    private Menu menuItem2020;
+    
+    @FXML
+    private Menu menuItem2021;
+    
+    @FXML
+    private Menu menuItem2022;
+    
+    @FXML
+    private Menu menuItem2023;
+    
+    
     @FXML
     private TableView<AcademicAreaData> academicAreaTable;
 
@@ -37,28 +58,53 @@ public class numeraliaController {
     private TableView<RegionData> regionTable;
     
     @FXML
-    private Menu year2017;
+    private void handleYear2017(ActionEvent event) {
+        loadDataByYear("2017");
+        menuItem2017.setVisible(false);
+        menuItem2017.setVisible(true);
+    }
 
     @FXML
-    private Menu year2018;
+    private void handleYear2018(ActionEvent event) {
+        loadDataByYear("2018");
+        menuItem2018.setVisible(false);
+        menuItem2018.setVisible(true);
+    }
 
     @FXML
-    private Menu year2019;
+    private void handleYear2019(ActionEvent event) {
+        loadDataByYear("2019");
+        menuItem2019.setVisible(false);
+        menuItem2019.setVisible(true);
+    }
 
     @FXML
-    private Menu year2020;
+    private void handleYear2020(ActionEvent event) {
+        loadDataByYear("2020");
+        menuItem2020.setVisible(false);
+        menuItem2020.setVisible(true);
+    }
 
     @FXML
-    private Menu year2021;
+    private void handleYear2021(ActionEvent event) {
+        loadDataByYear("2021");
+        menuItem2021.setVisible(false);
+        menuItem2021.setVisible(true);
+    }
 
     @FXML
-    private Menu year2022;
+    private void handleYear2022(ActionEvent event) {
+        loadDataByYear("2022");
+        menuItem2022.setVisible(false);
+        menuItem2022.setVisible(true);
+    }
 
     @FXML
-    private Menu year2023;
-
-    @FXML
-    private MenuBar yearMenuBar;
+    private void handleYear2023(ActionEvent event) {
+        loadDataByYear("2023");
+        menuItem2023.setVisible(false);
+        menuItem2023.setVisible(true);
+    }
     
     @FXML
     private Button download;
@@ -71,13 +117,12 @@ public class numeraliaController {
     public void initialize() {
         loadDataByYear("2022");
 
-        for (Menu menu : new Menu[]{year2017, year2018, year2019, year2020, year2021, year2022, year2023}) {
-            menu.setOnAction(this::handleYearMenu);
-        }
         download.setOnAction(this::handleDownloadButton);
     }
     
     private void loadDataByYear(String year) {
+        regionDataList.clear();
+        academicAreaDataList.clear();
         
         ArrayList<RegionData> regionList = new ArrayList<>();
         
@@ -104,7 +149,8 @@ public class numeraliaController {
     @FXML
     private void handleYearMenu(ActionEvent event) {
         MenuItem selectedMenuItem = (MenuItem) event.getSource();
-        String selectedYear = selectedMenuItem.getId().replace("year", "");
+        String selectedYear = selectedMenuItem.getText();
+        System.out.println("Año seleccionado: " + selectedYear);
         loadDataByYear(selectedYear);
     }
     
