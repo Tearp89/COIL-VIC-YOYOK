@@ -34,13 +34,14 @@ public class CollaborationDAOTest {
         Collaboration collaboration = new Collaboration();
         CollaborationDAO instance = new CollaborationDAO();
         
-        LocalDate dateStartTest =  LocalDate.of(2000, 1, 1); 
-        LocalDate dateFinishTest =  LocalDate.of(2000, 2, 1);
+        LocalDate dateStartTest =  LocalDate.of(2022, 1, 1); 
+        LocalDate dateFinishTest =  LocalDate.of(2026, 2, 1);
         
         collaboration.setCollaborationName("TestNombreCol");
         collaboration.setDescription("TestDescripcion");
         collaboration.setFinishDate(dateFinishTest);
         collaboration.setStartDate(dateStartTest);
+        collaboration.setCollaborationStatus("Rechazada");
         
         
         int rowsAffected = instance.addCollaboration(collaboration);
@@ -56,8 +57,8 @@ public class CollaborationDAOTest {
         Collaboration collaboration = new Collaboration();
         CollaborationDAO instance = new CollaborationDAO();
         
-        LocalDate dateStartTest = LocalDate.of(2000, 3, 1);
-        LocalDate dateFinishtTest = LocalDate.of(2000, 1, 1);
+        LocalDate dateStartTest = LocalDate.of(2022, 3, 1);
+        LocalDate dateFinishtTest = LocalDate.of(2026, 1, 1);
         
         collaboration.setCollaborationName("TestNombreCol");
         collaboration.setDescription("TestDescripcion");
@@ -134,7 +135,7 @@ public class CollaborationDAOTest {
         int expectedResult = 5;
         CollaborationDAO instance = new CollaborationDAO();
         String name = "TestNombreCol";
-        ArrayList<Collaboration> collaborations = instance.searchCollaboration(name);
+        ArrayList<Collaboration> collaborations = instance.searchCollaborationByStatus(name);
         assertEquals(expectedResult, collaborations.size());
     }
     
@@ -143,7 +144,7 @@ public class CollaborationDAOTest {
         int expectedResult = 0;
         CollaborationDAO instance = new CollaborationDAO();
         String name = "Colaboración-2024";
-        ArrayList<Collaboration> collaborations = instance.searchCollaboration(name);
+        ArrayList<Collaboration> collaborations = instance.searchCollaborationByStatus(name);
         assertEquals(expectedResult, collaborations.size());
     }
     @Test

@@ -18,6 +18,26 @@ public class Professor {
     private int administratorId;
     private int workShopId;
     private int collaborationId;
+    private String user;
+    private String email;
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    private String password;
+    private String academicArea;
+
+    public String getAcademicArea() {
+        return academicArea;
+    }
+
+    public void setAcademicArea(String academicArea) {
+        this.academicArea = academicArea;
+    }
 
     public Professor() {
 
@@ -92,5 +112,21 @@ public class Professor {
 
     public void setCollaborationId(int collaborationId){
         this.collaborationId = collaborationId;
+    }
+
+    public String getUser() {
+        return user;
+    }
+
+    public void setUser(String user) {
+        this.user = user;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }

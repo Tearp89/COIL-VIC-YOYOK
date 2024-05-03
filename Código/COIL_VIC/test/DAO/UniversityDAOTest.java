@@ -6,10 +6,16 @@ package DAO;
 
 import org.junit.Test;
 
+import dataAccess.DatabaseManager;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import logic.DAO.UniversityDAO;
 import logic.classes.University;
 
 import static org.junit.Assert.*;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 /**
  *
@@ -59,6 +65,34 @@ public class UniversityDAOTest {
         
         int rowsAffected = universityDAO.updateUniversity(university);
         assertEquals(1, rowsAffected);
+    }
+
+    @Test
+    public void testGetUniversityIdSuccess(){
+        UniversityDAO universityDAO = new UniversityDAO();
+        String universityName = "Universidad Veracruzana";
+        int result = universityDAO.getUniversityId(universityName);
+        int expectedResult = 5;
+        assertEquals(result, expectedResult);
+    }
+
+    @Test 
+    public void testUniversityRegisteredSucces(){
+        UniversityDAO universityDAO = new UniversityDAO();
+        String universityName = "Universidad Veracruzana";
+        boolean expectedResult = true;
+        boolean result = universityDAO.isUniversityRegistered(universityName);
+        assertEquals(expectedResult, result);
+
+    }
+
+    @Test
+    public void testLoadUniversities() throws SQLException {
+        UniversityDAO universityDAO = new UniversityDAO();
+       int expectedResult = 7;
+        ObservableList<String> universities = universityDAO.loadUniversities();
+
+        assertEquals(expectedResult, universities.size());
     }
     
 }

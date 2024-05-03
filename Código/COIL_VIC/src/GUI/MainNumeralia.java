@@ -20,7 +20,7 @@ public class MainNumeralia extends Application{
     @Override
     public void start(Stage primaryStage) throws Exception{
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUI/Numeralia.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUI/numeralia.fxml"));
         Parent root = loader.load();
         
             

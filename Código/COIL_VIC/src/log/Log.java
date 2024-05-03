@@ -40,12 +40,16 @@ public class Log {
             
             SMTPAppender smtpAppender = new SMTPAppender();
             smtpAppender.setThreshold(org.apache.log4j.Level.WARN);
+            smtpAppender.setSMTPPort(587);
             smtpAppender.setSMTPHost("smtp-mail.outlook.com");
+            smtpAppender.setSMTPUsername("coilvic@outlook.com");
+            smtpAppender.setSMTPPassword("proyectocoil2024");
             smtpAppender.setFrom("coilvic@outlook.com");
             smtpAppender.setTo("daur0704@outlook.com");
-            smtpAppender.setSMTPPassword("proyectocoil2024");
             smtpAppender.setSubject("Aviso excepción programa COIL - " + fechaAc);
             smtpAppender.setLayout(defaultLayout);
+            smtpAppender.setSendOnClose(true);
+            smtpAppender.close();
             
             LOG.removeAllAppenders();
             LOG.addAppender(rollingFileAppender);

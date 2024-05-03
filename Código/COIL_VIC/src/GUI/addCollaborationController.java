@@ -10,10 +10,7 @@ import javafx.scene.control.TextField;
 import logic.DAO.CollaborationDAO;
 import logic.classes.Collaboration;
 
-public class addCollaborationController {
-
-    
-    
+public class addCollaborationController {    
     
     @FXML
     private TextField textFieldCollaborationName;
@@ -29,7 +26,7 @@ public class addCollaborationController {
     void addCollaboration(ActionEvent event) {
         CollaborationDAO instance = new CollaborationDAO();
         Collaboration collaboration = new Collaboration();
-                String collaborationName = textFieldCollaborationName.getText();
+        String collaborationName = textFieldCollaborationName.getText();
         String collaborationDescription = textAreaCollaborationDescription.getText();
         LocalDate startDate = datePickerStartDate.getValue();
         LocalDate finishDate = datePickerFinishDate.getValue();
