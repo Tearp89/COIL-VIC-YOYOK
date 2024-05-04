@@ -11,12 +11,10 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Menu;
-import javafx.scene.control.MenuBar;
-import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.stage.Stage;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
-import javafx.scene.control.MenuItem;
 import javafx.stage.FileChooser;
 import log.Log;
 import logic.RegionData;
@@ -56,7 +54,55 @@ public class numeraliaController {
 
     @FXML
     private TableView<RegionData> regionTable;
+
+    @FXML
+    private Button buttonDownload;
+
+    @FXML
+    private Button buttonHome;
+
+    @FXML
+    private Button buttonWorkshop;
+
+    @FXML
+    private Button buttonCollaborations;
+
+    @FXML
+    private Button buttonProfessors;
     
+    @FXML
+    private Button buttonLogout;
+
+    @FXML
+    private Button buttonMinimize;
+
+    @FXML
+    private Button buttonClose;
+
+    private ObservableList<RegionData> regionDataList = FXCollections.observableArrayList();
+    private ObservableList<AcademicAreaData> academicAreaDataList = FXCollections.observableArrayList();
+    
+    @FXML
+    private void minimizeWindow(ActionEvent event){
+        Node source = (Node) event.getSource();
+        Stage stage = (Stage) source.getScene().getWindow();
+        stage.setIconified(true);
+    }
+
+    @FXML
+    private void closeWindow(ActionEvent event){
+        Node source = (Node) event.getSource();
+        Stage stage = (Stage) source.getScene().getWindow();
+        stage.close();
+    }
+
+    @FXML
+    private void goHome(ActionEvent event){
+        Node source = (Node) event.getSource();
+        Stage stage = (Stage) source.getScene().getWindow();
+        stage.close();
+    }
+
     @FXML
     private void handleYear2017(ActionEvent event) {
         loadDataByYear("2017");
@@ -107,17 +153,10 @@ public class numeraliaController {
     }
     
     @FXML
-    private Button download;
-    
-    
-    private ObservableList<RegionData> regionDataList = FXCollections.observableArrayList();
-    private ObservableList<AcademicAreaData> academicAreaDataList = FXCollections.observableArrayList();
-    
-    @FXML
     public void initialize() {
         loadDataByYear("2022");
 
-        download.setOnAction(this::handleDownloadButton);
+        buttonDownload.setOnAction(this::handleDownloadButton);
     }
     
     private void loadDataByYear(String year) {
@@ -143,15 +182,6 @@ public class numeraliaController {
         }
         academicAreaTable.setItems(academicAreaDataList);
         academicAreaTable.requestLayout();
-    }
-
-    
-    @FXML
-    private void handleYearMenu(ActionEvent event) {
-        MenuItem selectedMenuItem = (MenuItem) event.getSource();
-        String selectedYear = selectedMenuItem.getText();
-        System.out.println("Año seleccionado: " + selectedYear);
-        loadDataByYear(selectedYear);
     }
     
     @FXML

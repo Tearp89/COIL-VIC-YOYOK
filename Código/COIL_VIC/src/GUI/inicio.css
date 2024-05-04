@@ -52,6 +52,10 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to ed
     -fx-alignment:CENTER-LEFT;
 }
 
+.nav-btn:hover{
+    -fx-background-color: rgba(50, 50, 50, 0.5);
+}
+
 .logout{
     -fx-background-color:white;
     -fx-background-radius:10px;
@@ -136,6 +140,22 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to ed
     -fx-font-size:14px;
     -fx-font-family:"Arial";
     -fx-alignment:CENTER;
+    -fx-background-radius:10px;
+}
+
+.menu{
+    -fx-background-color: #FF3A58;
+    -fx-border-radius: 20px;
+    -fx-background-radius: 20px;
+}
+
+.menu:hover{
+    -fx-background-color: rgba(50, 50, 50, 0.5);
+    
+}
+
+.menuBar:hover{
+    -fx-border-radius:10px;
 }
 
 
