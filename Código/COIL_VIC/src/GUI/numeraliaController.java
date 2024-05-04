@@ -3,15 +3,28 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package GUI;
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Menu;
+import javafx.scene.control.MenuBar;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.cell.PropertyValueFactory;
-import logic.DAO.CollaborationStatsDAO;
-
+import javafx.stage.Stage;
+import javafx.scene.control.Button;
+import javafx.scene.control.MenuItem;
+import javafx.stage.FileChooser;
+import log.Log;
+import logic.RegionData;
+import logic.AcademicAreaData;
+import logic.SaveToFile;
 /**
  *
- * @author marla
+ * @author daur0
  */
 public class numeraliaController {
     private static final org.apache.log4j.Logger LOG = Log.getLogger(numeraliaController.class);
@@ -39,7 +52,8 @@ public class numeraliaController {
     
     
     @FXML
-    private TableView<CollaborationStatsDAO> tableView;
+    private TableView<AcademicAreaData> academicAreaTable;
+
     @FXML
     private TableView<RegionData> regionTable;
     
@@ -93,6 +107,7 @@ public class numeraliaController {
     }
     
     @FXML
+    private Button download;
     
     
     private ObservableList<RegionData> regionDataList = FXCollections.observableArrayList();
