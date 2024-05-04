@@ -1,19 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon?>
 <?import java.lang.String?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.control.cell.PropertyValueFactory?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
-<?import javafx.scene.control.cell.PropertyValueFactory?>
 
 <StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.SearchDeclinedCollaborationsController">
    <children>
@@ -25,15 +24,26 @@
                      <children>
                         <AnchorPane id="semiTopForm" layoutY="-8.0" prefHeight="35.0" prefWidth="800.0" style="-fx-border-color: black;" styleClass="semi-top-form" stylesheets="@../GUI/declinedCollaborations.css" AnchorPane.bottomAnchor="8.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-8.0">
                            <children>
-                              <Button id="close" fx:id="close" layoutX="968.0" layoutY="10.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="32.0" styleClass="close" stylesheets="@../GUI/declinedCollaborations.css" text="x">
+                              <Button id="close" fx:id="close" layoutX="968.0" layoutY="10.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="32.0" styleClass="close" stylesheets="@../GUI/declinedCollaborations.css">
                                  <font>
                                     <Font name="System Bold" size="12.0" />
                                  </font>
+                                 <graphic>
+                                    <FontAwesomeIcon glyphName="CLOSE" />
+                                 </graphic>
                               </Button>
-                              <Button id="minimize" fx:id="minimize" layoutX="930.0" layoutY="10.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="32.0" styleClass="minimize" stylesheets="@../GUI/declinedCollaborations.css" text="-">
+                              <Button id="minimize" fx:id="minimize" layoutX="930.0" layoutY="10.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="32.0" styleClass="minimize" stylesheets="@../GUI/declinedCollaborations.css">
                                  <font>
                                     <Font name="System Bold" size="12.0" />
-                                 </font></Button>
+                                 </font>
+                                 <graphic>
+                                    <FontAwesomeIcon glyphName="MINUS" />
+                                 </graphic></Button>
+                              <Label layoutX="14.0" layoutY="14.0" text="Consultar Colaboraciones Rechazadas " textFill="WHITE">
+                                 <font>
+                                    <Font name="Tahoma Bold" size="17.0" />
+                                 </font>
+                              </Label>
                            </children>
                         </AnchorPane>
                      </children>
@@ -44,11 +54,6 @@
                      <children>
                         <AnchorPane id="navForm" layoutY="103.0" prefHeight="555.0" prefWidth="200.0" styleClass="nav-form" stylesheets="@../GUI/declinedCollaborations.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <children>
-                              <ImageView fitHeight="130.0" fitWidth="124.0" layoutX="38.0" layoutY="34.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../../../../Imagenes/image%205.png" />
-                                 </image>
-                              </ImageView>
                               <Label id="welcome" layoutX="57.0" layoutY="166.0" text="Bienvenido," textFill="WHITE">
                                  <font>
                                     <Font name="Tahoma" size="17.0" />
@@ -62,58 +67,39 @@
                               <Line endX="70.0" layoutX="116.0" layoutY="221.0" startX="-100.0" />
                               <Button id="home" layoutX="11.0" layoutY="238.0" minHeight="40.0" mnemonicParsing="false" prefWidth="180.0" styleClass="nav-btn" stylesheets="@../GUI/declinedCollaborations.css" text="Inicio">
                                  <graphic>
-                                    <ImageView fitHeight="21.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../../../../Imagenes/Home-Silhouette-Transparent-Background.png" />
-                                       </image>
-                                    </ImageView>
+                                    <FontAwesomeIcon fill="WHITE" glyphName="HOME" />
                                  </graphic>
                               </Button>
                               <Button id="whorkshop" layoutX="11.0" layoutY="278.0" minHeight="40.0" mnemonicParsing="false" prefWidth="180.0" styleClass="nav-btn" stylesheets="@../GUI/declinedCollaborations.css" text="Curso-Talleres">
                                  <graphic>
-                                    <ImageView fitHeight="21.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../../../../Imagenes/Home-Silhouette-Transparent-Background.png" />
-                                       </image>
-                                    </ImageView>
+                                    <FontAwesomeIcon fill="WHITE" glyphName="BOOK" />
                                  </graphic>
                               </Button>
                               <Button id="colaborations" layoutX="11.0" layoutY="318.0" minHeight="40.0" mnemonicParsing="false" prefWidth="180.0" styleClass="nav-btn" stylesheets="@../GUI/declinedCollaborations.css" text="Colaboraciones">
                                  <graphic>
-                                    <ImageView fitHeight="21.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../../../../Imagenes/Home-Silhouette-Transparent-Background.png" />
-                                       </image>
-                                    </ImageView>
+                                    <FontAwesomeIcon fill="WHITE" glyphName="GROUP" />
                                  </graphic>
                               </Button>
                               <Button id="records" layoutX="11.0" layoutY="358.0" minHeight="40.0" mnemonicParsing="false" prefWidth="180.0" styleClass="nav-btn" stylesheets="@../GUI/declinedCollaborations.css" text="Constancias">
                                  <graphic>
-                                    <ImageView fitHeight="21.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../../../../Imagenes/Home-Silhouette-Transparent-Background.png" />
-                                       </image>
-                                    </ImageView>
+                                    <FontAwesomeIcon fill="WHITE" glyphName="TROPHY" />
                                  </graphic>
                               </Button>
                               <Button id="logOutB" layoutX="12.0" layoutY="514.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="36.0" stylesheets="@../GUI/declinedCollaborations.css">
-                                 <graphic>
-                                    <ImageView fitHeight="19.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../../../../Imagenes/log-out-icon-2048x2048-cru8zabe.png" />
-                                       </image>
-                                    </ImageView>
-                                 </graphic>
                                  <styleClass>
                                     <String fx:value="logout" />
                                     <String fx:value="shadow" />
                                  </styleClass>
+                                 <graphic>
+                                    <FontAwesomeIcon glyphName="SIGN_OUT" size="1.5EM" />
+                                 </graphic>
                               </Button>
-                              <Label id="logOutL" layoutX="52.0" layoutY="517.0" text="Log out" textFill="WHITE">
+                              <Label id="logOutL" layoutX="54.0" layoutY="517.0" text="Salir" textFill="WHITE">
                                  <font>
-                                    <Font size="14.0" />
+                                    <Font name="Arial" size="14.0" />
                                  </font>
                               </Label>
+                              <FontAwesomeIcon fill="WHITE" glyphName="USER" layoutX="54.0" layoutY="141.0" size="10em" />
                            </children>
                         </AnchorPane>
                      </children>
@@ -130,42 +116,38 @@
                                     <String fx:value="shadow" />
                                  </styleClass>
                                  <children>
-                                    <TableView id="tableView" fx:id="tableViewDeclinedCollaborations" layoutX="6.0" layoutY="61.0" prefHeight="458.0" prefWidth="751.0" style="-fx-text-fill: black;" stylesheets="@../GUI/declinedCollaborations.css">
+                                    <TableView id="tableView" fx:id="tableViewDeclinedCollaborations" layoutX="6.0" layoutY="61.0" prefHeight="458.0" prefWidth="751.0" stylesheets="@../GUI/declinedCollaborations.css">
                                       <columns>
-                                        <TableColumn fx:id="tableColumnCollaborationId" prefWidth="70.0" text="ID">
+                                       <TableColumn fx:id="tableColumnCollaborationId" prefWidth="70.0" text="ID">
                                         <cellValueFactory>
-                                          <PropertyValueFactory property="collaborationId"/>
+                                          <PropertyValueFactory property="collaborationId" />
                                           </cellValueFactory>
                                          </TableColumn>
-                                        <TableColumn fx:id="tableColumnCollaborationName" prefWidth="250.0" text="Nombre Colaboración" >
+                                        <TableColumn fx:id="tableColumnCollaborationName" prefWidth="250.0" text="Nombre Colaboración">
                                           <cellValueFactory>
-                                             <PropertyValueFactory property="collaborationName"/>
+                                             <PropertyValueFactory property="collaborationName" />
                                           </cellValueFactory>
                                         </TableColumn>
                                           <TableColumn fx:id="tableColumnStartDate" minWidth="9.0" prefWidth="150.0" text="Fecha Inicio">
                                           <cellValueFactory>
-                                             <PropertyValueFactory property="startDate"/>
+                                             <PropertyValueFactory property="startDate" />
                                           </cellValueFactory>
                                           </TableColumn>
                                           <TableColumn fx:id="tableColumnFinishDate" minWidth="0.0" prefWidth="150.0" text="Fecha Fin">
                                              <cellValueFactory>
-                                                <PropertyValueFactory property="finishDate"/>
+                                                <PropertyValueFactory property="finishDate" />
                                              </cellValueFactory>
                                           </TableColumn>
                                           <TableColumn fx:id="tableColumnStatus" minWidth="0.0" prefWidth="129.0" text="Estado">
                                              <cellValueFactory>
-                                                <PropertyValueFactory property="collaborationStatus"/>
+                                                <PropertyValueFactory property="collaborationStatus" />
                                              </cellValueFactory>
                                           </TableColumn>
                                       </columns>
                                     </TableView>
                                     <Button id="discard" layoutX="701.0" layoutY="3.0" mnemonicParsing="false" styleClass="descartar" stylesheets="@../GUI/declinedCollaborations.css" text="Descartar" />
-                                    <TextField id="search" fx:id="textFieldCollaborationsStatus" layoutX="20.0" layoutY="23.0" prefHeight="25.0" prefWidth="281.0" promptText="Buscar" styleClass="search" stylesheets="@../GUI/declinedCollaborations.css" />
-                                    <ImageView fitHeight="27.0" fitWidth="22.0" layoutX="24.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../../../../Imagenes/107122.png" />
-                                       </image>
-                                    </ImageView>
+                                    <TextField id="textFieldSearch" fx:id="textFieldSearch" layoutX="24.0" layoutY="23.0" onAction="#searchDeclinedCollaborations" prefHeight="25.0" prefWidth="281.0" promptText="Buscar" styleClass="search" stylesheets="@../GUI/declinedCollaborations.css" />
+                                    <FontAwesomeIcon glyphName="SEARCH" layoutX="28.0" layoutY="42.0" size="1.75em" />
                                  </children>
                               </AnchorPane>
                            </children></AnchorPane>

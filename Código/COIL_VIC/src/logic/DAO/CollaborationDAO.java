@@ -245,7 +245,7 @@ public class CollaborationDAO implements ICollaboration {
 
     public String getCollaborationDescription (int id){
         DatabaseManager dbManager = new DatabaseManager();
-        String query = "SELECT * descripción FROM Colaboración WHERE idColaboración = ?";
+        String query = "SELECT descripción FROM Colaboración WHERE idColaboración = ?";
         String result = "";
         try{
             Connection connection = dbManager.getConnection();
@@ -262,7 +262,7 @@ public class CollaborationDAO implements ICollaboration {
         return null;
     }
 
-    public LocalDate getCollaborationStartDate (int id){
+    public String getCollaborationStartDate (int id){
         DatabaseManager dbManager = new DatabaseManager();
         String query = "SELECT fechaInicio FROM Colaboración WHERE idColaboración = ?";
         String result = "";
@@ -272,7 +272,7 @@ public class CollaborationDAO implements ICollaboration {
             preparedStatement.setInt(1, id);
             try (ResultSet resultSet = preparedStatement.executeQuery()){
                 if(resultSet.next()){
-                    return resultSet.getDate("fechaInicio").toLocalDate();
+                    return resultSet.getDate("fechaInicio").toLocalDate().toString();
                 }
             }
         } catch(SQLException getCollaborationStartDateException){
