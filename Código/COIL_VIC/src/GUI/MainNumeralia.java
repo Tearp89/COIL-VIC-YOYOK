@@ -10,26 +10,22 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 /**
  *
  * @author marla
  */
 public class MainNumeralia extends Application{
-     
+
     @Override
     public void start(Stage primaryStage) throws Exception{
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUI/numeralia.fxml"));
         Parent root = loader.load();
-        
-            
+        primaryStage.initStyle(StageStyle.TRANSPARENT);
         Scene scene = new Scene(root);
-        
-
-        primaryStage.setScene(scene);
-        
-
+        primaryStage.setScene(scene);      
         primaryStage.show();
         primaryStage.setOnShown(event -> primaryStage.centerOnScreen());
     }

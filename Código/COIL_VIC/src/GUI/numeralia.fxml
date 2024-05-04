@@ -2,6 +2,7 @@
 
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon?>
 <?import java.lang.String?>
+<?import java.net.URL?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
@@ -25,7 +26,7 @@
                      <children>
                         <AnchorPane id="semiTopForm" layoutY="-8.0" prefHeight="35.0" prefWidth="800.0" style="-fx-border-color: black;" styleClass="semi-top-form" stylesheets="@inicio.css" AnchorPane.bottomAnchor="8.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-8.0">
                            <children>
-                              <Button id="close" fx:id="close" layoutX="968.0" layoutY="10.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="32.0" styleClass="close" stylesheets="@inicio.css">
+                              <Button id="close" fx:id="buttonClose" layoutX="968.0" layoutY="10.0" mnemonicParsing="false" onAction="#closeWindow" prefHeight="25.0" prefWidth="32.0" styleClass="close" stylesheets="@inicio.css">
                                  <font>
                                     <Font name="System Bold" size="12.0" />
                                  </font>
@@ -33,7 +34,7 @@
                                     <FontAwesomeIcon glyphName="CLOSE" />
                                  </graphic>
                               </Button>
-                              <Button id="minimize" fx:id="minimize" layoutX="930.0" layoutY="10.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="32.0" styleClass="minimize" stylesheets="@inicio.css">
+                              <Button id="minimize" fx:id="buttonMinimize" layoutX="930.0" layoutY="10.0" mnemonicParsing="false" onAction="#minimizeWindow" prefHeight="25.0" prefWidth="32.0" styleClass="minimize" stylesheets="@inicio.css">
                                  <font>
                                     <Font name="System Bold" size="12.0" />
                                  </font>
@@ -67,27 +68,31 @@
                                  </font>
                               </Label>
                               <Line endX="70.0" layoutX="116.0" layoutY="221.0" startX="-100.0" />
-                              <Button id="home" layoutX="11.0" layoutY="238.0" minHeight="40.0" mnemonicParsing="false" prefWidth="180.0" styleClass="nav-btn" stylesheets="@inicio.css" text="Inicio">
+                              <Button id="home" fx:id="buttonHome" layoutX="11.0" layoutY="238.0" minHeight="40.0" mnemonicParsing="false" prefWidth="180.0" styleClass="nav-btn" text="Inicio">
                                  <graphic>
                                     <FontAwesomeIcon fill="WHITE" glyphName="HOME" />
                                  </graphic>
+                                 <stylesheets>
+                                    <URL value="@inicio.css" />
+                                    <URL value="@inicio.css" />
+                                 </stylesheets>
                               </Button>
-                              <Button id="whorkshop" layoutX="11.0" layoutY="278.0" minHeight="40.0" mnemonicParsing="false" prefWidth="180.0" styleClass="nav-btn" stylesheets="@inicio.css" text="Curso-Talleres">
+                              <Button id="whorkshop" fx:id="buttonWorkshop" layoutX="11.0" layoutY="278.0" minHeight="40.0" mnemonicParsing="false" prefWidth="180.0" styleClass="nav-btn" stylesheets="@inicio.css" text="Curso-Talleres">
                                  <graphic>
                                     <FontAwesomeIcon fill="WHITE" glyphName="BOOK" />
                                  </graphic>
                               </Button>
-                              <Button id="colaborations" layoutX="11.0" layoutY="318.0" minHeight="40.0" mnemonicParsing="false" prefWidth="180.0" styleClass="nav-btn" stylesheets="@inicio.css" text="Colaboraciones">
+                              <Button id="colaborations" fx:id="buttonCollaborations" layoutX="11.0" layoutY="318.0" minHeight="40.0" mnemonicParsing="false" prefWidth="180.0" styleClass="nav-btn" stylesheets="@inicio.css" text="Colaboraciones">
                                  <graphic>
                                     <FontAwesomeIcon fill="WHITE" glyphName="GROUP" />
                                  </graphic>
                               </Button>
-                              <Button id="records" layoutX="11.0" layoutY="358.0" minHeight="40.0" mnemonicParsing="false" prefWidth="180.0" styleClass="nav-btn" stylesheets="@inicio.css" text="Profesores">
+                              <Button id="records" fx:id="buttonProfessors" layoutX="11.0" layoutY="358.0" minHeight="40.0" mnemonicParsing="false" prefWidth="180.0" styleClass="nav-btn" stylesheets="@inicio.css" text="Profesores">
                                  <graphic>
                                     <FontAwesomeIcon fill="WHITE" glyphName="PENCIL" />
                                  </graphic>
                               </Button>
-                              <Button id="logOutB" layoutX="12.0" layoutY="514.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="36.0" stylesheets="@inicio.css">
+                              <Button id="logOutB" fx:id="buttonLogout" layoutX="12.0" layoutY="514.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="36.0" stylesheets="@inicio.css">
                                  <styleClass>
                                     <String fx:value="logout" />
                                     <String fx:value="shadow" />
@@ -101,7 +106,7 @@
                                     <Font name="Arial" size="14.0" />
                                  </font>
                               </Label>
-                              <Button id="records" layoutX="11.0" layoutY="398.0" minHeight="40.0" mnemonicParsing="false" prefWidth="180.0" styleClass="nav-btn" stylesheets="@inicio.css" text="Numeralia">
+                              <Button id="records" disable="true" layoutX="11.0" layoutY="398.0" minHeight="40.0" mnemonicParsing="false" prefWidth="180.0" styleClass="nav-btn" stylesheets="@inicio.css" text="Numeralia">
                                  <graphic>
                                     <FontAwesomeIcon fill="WHITE" glyphName="COG" />
                                  </graphic>
@@ -123,7 +128,7 @@
                                     <String fx:value="shadow" />
                                  </styleClass>
                                  <children>
-                                    <Button id="discard" fx:id="download" layoutX="715.0" layoutY="14.0" mnemonicParsing="false" styleClass="descartar" stylesheets="@inicio.css">
+                                    <Button id="discard" fx:id="buttonDownload" layoutX="715.0" layoutY="14.0" mnemonicParsing="false" styleClass="descartar" stylesheets="@inicio.css">
                                        <graphic>
                                           <FontAwesomeIcon glyphName="DOWNLOAD" size="1.5em" />
                                        </graphic></Button>
