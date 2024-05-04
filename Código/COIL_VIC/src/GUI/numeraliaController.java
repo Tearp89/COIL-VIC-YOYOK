@@ -26,7 +26,7 @@ import logic.SaveToFile;
  *
  * @author daur0
  */
-public class numeraliaController {
+public class NumeraliaController {
     private static final org.apache.log4j.Logger LOG = Log.getLogger(SaveToFile.class);
 
 
