@@ -4,6 +4,7 @@ import java.awt.event.MouseEvent;
 import java.time.LocalDate;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
@@ -38,7 +39,11 @@ public class addCollaborationController {
         collaboration.setFinishDate(finishDate);
         collaboration.setCollaborationStatus("En espera");
         
-        instance.addCollaboration(collaboration);
+        int result = instance.addCollaboration(collaboration);
+        if(result == 1){
+            Alert collaborationAdded = new Alert(null);
+            
+        }
         
     }
 

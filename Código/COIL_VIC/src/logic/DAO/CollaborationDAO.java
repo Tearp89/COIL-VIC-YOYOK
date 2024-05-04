@@ -85,7 +85,6 @@ public class CollaborationDAO implements ICollaboration {
                 while(resultSet.next()){
                     int idCollaboration = resultSet.getInt("idColaboración");
                     String collaborationName = resultSet.getString("nombreColaboración");
-                    String description = resultSet.getString("descripción");
                     LocalDate startDate = resultSet.getObject("fechaInicio", LocalDate.class);
                     LocalDate finishDate = resultSet.getObject("fechaFin", LocalDate.class);
                     
@@ -104,6 +103,40 @@ public class CollaborationDAO implements ICollaboration {
         }
         return collaborations;
     }
+
+    public ArrayList<Collaboration> searchCollaborationByStatusAndName(String status, String name){
+        DatabaseManager dbManager = new DatabaseManager();
+        Collaboration collaboration = new Collaboration();
+        ArrayList<Collaboration> collaborations = new ArrayList<>();
+        String query = "SELECT * FROM colaboración WHERE estado = ? AND nombreColaboración LIKE ?";
+        try{
+            Connection connection = dbManager.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, status);
+            preparedStatement.setString(2, name);
+            try(ResultSet resultSet = preparedStatement.executeQuery()){
+                while(resultSet.next()){
+                    int idCollaboration = resultSet.getInt("idColaboración");
+                    String collaborationName = resultSet.getString("nombreColaboración");
+                    LocalDate startDate = resultSet.getObject("fechaInicio", LocalDate.class);
+                    LocalDate finishDate = resultSet.getObject("fechaFin", LocalDate.class);
+                    
+                    collaboration = new Collaboration();
+                    collaboration.setCollaborationId(idCollaboration);
+                    collaboration.setCollaborationName(collaborationName);
+                    collaboration.setStartDate(startDate);
+                    collaboration.setFinishDate(finishDate);
+                    collaboration.setCollaborationStatus(status);
+                    
+                    collaborations.add(collaboration);
+                }
+            }
+        }catch(SQLException SearchCollaborationException){
+            LOG.error("ERROR: ", SearchCollaborationException);
+        }
+        return collaborations;
+    }
+
     
     public ArrayList<Collaboration> searchCollaborationByYear(String year){
         DatabaseManager dbManager = new DatabaseManager();
@@ -212,7 +245,7 @@ public class CollaborationDAO implements ICollaboration {
 
     public String getCollaborationDescription (int id){
         DatabaseManager dbManager = new DatabaseManager();
-        String query = "SELECT * descripción FROM Colaboración WHERE idColaboración = ?";
+        String query = "SELECT descripción FROM Colaboración WHERE idColaboración = ?";
         String result = "";
         try{
             Connection connection = dbManager.getConnection();
@@ -229,7 +262,7 @@ public class CollaborationDAO implements ICollaboration {
         return null;
     }
 
-    public LocalDate getCollaborationStartDate (int id){
+    public String getCollaborationStartDate (int id){
         DatabaseManager dbManager = new DatabaseManager();
         String query = "SELECT fechaInicio FROM Colaboración WHERE idColaboración = ?";
         String result = "";
@@ -239,7 +272,7 @@ public class CollaborationDAO implements ICollaboration {
             preparedStatement.setInt(1, id);
             try (ResultSet resultSet = preparedStatement.executeQuery()){
                 if(resultSet.next()){
-                    return resultSet.getDate("fechaInicio").toLocalDate();
+                    return resultSet.getDate("fechaInicio").toLocalDate().toString();
                 }
             }
         } catch(SQLException getCollaborationStartDateException){

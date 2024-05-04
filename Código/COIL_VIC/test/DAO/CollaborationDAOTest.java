@@ -37,7 +37,7 @@ public class CollaborationDAOTest {
         LocalDate dateStartTest =  LocalDate.of(2022, 1, 1); 
         LocalDate dateFinishTest =  LocalDate.of(2026, 2, 1);
         
-        collaboration.setCollaborationName("TestNombreCol");
+        collaboration.setCollaborationName("Comunicación en lengua entranjera");
         collaboration.setDescription("TestDescripcion");
         collaboration.setFinishDate(dateFinishTest);
         collaboration.setStartDate(dateStartTest);
@@ -304,8 +304,8 @@ public class CollaborationDAOTest {
     public void changeCollaborationStatusSuccess(){
         System.out.println("changeStateProfessor");
             Collaboration collaboration = new Collaboration();
-            collaboration.setCollaborationId(13); 
-            collaboration.setCollaborationStatus("Aceptado");
+            collaboration.setCollaborationId(22); 
+            collaboration.setCollaborationStatus("Activa");
             
             CollaborationDAO instance = new CollaborationDAO();
             int expectedResult = 1;
@@ -346,6 +346,30 @@ public class CollaborationDAOTest {
             int actualResult = instance.assignProfessorToCollaboration(professorId, collaborationId);
             assertEquals(expectedResult, actualResult);
 
+        }
+
+        @Test
+        public void getCollaborationNameSuccess(){
+            CollaborationDAO instance = new CollaborationDAO();
+            String expectedResult = "Interculturalidad UV";
+            String actualResult = instance.getCollaborationName(36);
+            assertEquals(expectedResult, actualResult);
+        }
+
+        @Test
+        public void getCollaborationDescriptionSuccess(){
+            CollaborationDAO instance = new CollaborationDAO();
+            String expectedResult = "TestDescripcion";
+            String actualResult = instance.getCollaborationDescription(36);
+            assertEquals(expectedResult, actualResult);
+        }
+
+        @Test
+        public void getCollaborationStartDateSuccess(){
+            CollaborationDAO instance = new CollaborationDAO();
+            String expectedResult = "2025-04-11";
+            String actualResult = instance.getCollaborationStartDate(22);
+            assertEquals(expectedResult, actualResult);
         }
 
 
