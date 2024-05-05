@@ -98,7 +98,7 @@ public class ProfessorDAO implements IProfessor{
                     String type = resultSet.getString("tipoProfesor");
                     String country = resultSet.getString("país");
                     int adminId = resultSet.getInt("Administrador_idAdministrativo");
-                    int workShopId = resultSet.getInt("Curso-Taller_idCursoTaller");
+                    
                     
                     professor = new Professor();
                     professor.setProfessorId(idProfesor);
@@ -108,7 +108,7 @@ public class ProfessorDAO implements IProfessor{
                     professor.setCountry(country);
                     professor.setUniversityId(universityId);
                     professor.setAdministratorId(adminId);
-                    professor.setWorkShopId(workShopId);
+                    
                     
                     professors.add(professor);
                 }
@@ -137,7 +137,6 @@ public class ProfessorDAO implements IProfessor{
                     String type = resultSet.getString("tipoProfesor");
                     int universityId = resultSet.getInt("Universidad_idUniversidad");
                     int adminId = resultSet.getInt("Administrador_idAdministrativo");
-                    int workShopId = resultSet.getInt("Curso-Taller_idCursoTaller");
                     
                     professor = new Professor();
                     professor.setProfessorId(idProfesor);
@@ -147,7 +146,6 @@ public class ProfessorDAO implements IProfessor{
                     professor.setCountry(country);
                     professor.setUniversityId(universityId);
                     professor.setAdministratorId(adminId);
-                    professor.setWorkShopId(workShopId);
                     
                     professors.add(professor);
                 }
@@ -176,7 +174,6 @@ public class ProfessorDAO implements IProfessor{
                     String type = resultSet.getString("tipoProfesor");
                     int universityId = resultSet.getInt("Universidad_idUniversidad");
                     int adminId = resultSet.getInt("Administrador_idAdministrativo");
-                    int workShopId = resultSet.getInt("Curso-Taller_idCursoTaller");
                     String country = resultSet.getString("país");
                     professor = new Professor();
                     professor.setProfessorId(idProfesor);
@@ -186,7 +183,6 @@ public class ProfessorDAO implements IProfessor{
                     professor.setCountry(country);
                     professor.setUniversityId(universityId);
                     professor.setAdministratorId(adminId);
-                    professor.setWorkShopId(workShopId);
                     
                     professors.add(professor);
                 }

@@ -16,10 +16,20 @@ public class Professor {
     private int professorId;
     private int universityId;
     private int administratorId;
-    private int workShopId;
     private int collaborationId;
     private String user;
     private String email;
+    private String password;
+    private String academicArea;
+    private int personalNumber;
+    private String region;
+    private String contractType;
+    private String contractCategory;
+    private String phoneNumber;
+    private String discipline;
+    
+
+
     public String getEmail() {
         return email;
     }
@@ -28,8 +38,7 @@ public class Professor {
         this.email = email;
     }
 
-    private String password;
-    private String academicArea;
+    
 
     public String getAcademicArea() {
         return academicArea;
@@ -98,14 +107,6 @@ public class Professor {
         this.administratorId = administratorId;
     }
 
-    public int getWorkShopId() {
-        return workShopId;
-    }
-
-    public void setWorkShopId(int workShopId) {
-        this.workShopId = workShopId;
-    }
-
     public int getCollaborationId(){
         return collaborationId;
     }
@@ -128,5 +129,53 @@ public class Professor {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public int getPersonalNumber() {
+        return personalNumber;
+    }
+
+    public void setPersonalNumber(int personalNumber) {
+        this.personalNumber = personalNumber;
+    }
+
+    public String getRegion() {
+        return region;
+    }
+
+    public void setRegion(String region) {
+        this.region = region;
+    }
+
+    public String getContractType() {
+        return contractType;
+    }
+
+    public void setContractType(String contractType) {
+        this.contractType = contractType;
+    }
+
+    public String getContractCategory() {
+        return contractCategory;
+    }
+
+    public void setContractCategory(String contractCategory) {
+        this.contractCategory = contractCategory;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public String getDiscipline() {
+        return discipline;
+    }
+
+    public void setDiscipline(String discipline) {
+        this.discipline = discipline;
     }
 }
