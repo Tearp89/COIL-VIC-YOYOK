@@ -4,9 +4,13 @@ import java.util.Random;
 
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.text.Text;
 import logic.DAO.ProfessorDAO;
 import logic.DAO.UniversityDAO;
@@ -28,6 +32,11 @@ public class AddProfessorController {
     private TextField textFieldEmail;
     @FXML
     private TextField textFieldLanguage;
+    @FXML
+    private Button buttonConfirmation = new Button("Aceptar");
+    @FXML 
+    private Alert professorAdded = new Alert(AlertType.NONE);
+
 
 
     @FXML
@@ -82,10 +91,22 @@ public class AddProfessorController {
         }else{
             professor.setType("Externo");
         }
-        professorDAO.addProfessor(professor);
-
+        int result = professorDAO.addProfessor(professor);
+        if(result == 1){
+            professorAdded.setAlertType(AlertType.CONFIRMATION);
+            professorAdded.setContentText("Profesor agregado correctamente.");
+            professorAdded.show();
+        }
         
     }
+
+    EventHandler<ActionEvent> confirmationAlert = new EventHandler<ActionEvent>() {
+        public void handle(ActionEvent e){
+            professorAdded.setAlertType(AlertType.CONFIRMATION);
+            professorAdded.show();
+        }
+    };
+    
 
     @FXML
     void cancel(ActionEvent event){
@@ -102,6 +123,8 @@ public class AddProfessorController {
         ObservableList<String> academicAreas = comboBoxAcademicArea.getItems();
         academicAreas.setAll("Técnica", "Humanidades", "Económico-Administrativo", "Ciencias de la salud", "Biológico-Agropecuarias", "AFGB", "DGRI");
         comboBoxAcademicArea.setItems(academicAreas);
+        
+        buttonConfirmation.setOnAction(confirmationAlert);
 
     }
 }
