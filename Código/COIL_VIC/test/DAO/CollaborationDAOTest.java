@@ -41,7 +41,11 @@ public class CollaborationDAOTest {
         collaboration.setDescription("TestDescripcion");
         collaboration.setFinishDate(dateFinishTest);
         collaboration.setStartDate(dateStartTest);
-        collaboration.setCollaborationStatus("Rechazada");
+        collaboration.setCollaborationStatus("Activa");
+        collaboration.setCollaborationGoal("Unir estudiantes");
+        collaboration.setNoStudents(25);
+        collaboration.setStudentProfile("Inglés, ");
+        collaboration.setSubject("Trabajo colaborativo");
         
         
         int rowsAffected = instance.addCollaboration(collaboration);

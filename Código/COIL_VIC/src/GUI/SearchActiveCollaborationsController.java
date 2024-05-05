@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -25,6 +26,7 @@ public class SearchActiveCollaborationsController {
     private TableColumn<Collaboration, String> tableColumnFinishDate;
     @FXML
     private TableColumn<Collaboration, String> tableColumnStatus;
+    @FXML Label labelCollaborationNotFound = new Label("No se encontraron colaboraciones");
 
 
     public void loadActiveCollaborations(){
@@ -32,6 +34,9 @@ public class SearchActiveCollaborationsController {
         ArrayList<Collaboration> activeCollaborations = new ArrayList<>();
         activeCollaborations = collaborationDAO.searchCollaborationByStatus("Activa");
         tableViewActiveCollaborations.getItems().addAll(activeCollaborations);
+        if (activeCollaborations.size() == 0){
+            tableViewActiveCollaborations.setPlaceholder(labelCollaborationNotFound);
+        }
 
     }
 
@@ -45,12 +50,17 @@ public class SearchActiveCollaborationsController {
         activeCollaborations = collaborationDAO.searchCollaborationByStatusAndName("Activa", collaborationName);
         tableViewActiveCollaborations.getItems().clear();
         tableViewActiveCollaborations.getItems().addAll(activeCollaborations);
+        if(activeCollaborations.size() == 0){
+            tableViewActiveCollaborations.setPlaceholder(labelCollaborationNotFound);
+        }
+        
 
     }
 
     @FXML
     private void initialize(){
         loadActiveCollaborations();
+        
 
         
     }

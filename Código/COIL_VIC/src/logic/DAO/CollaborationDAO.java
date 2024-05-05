@@ -20,16 +20,20 @@ public class CollaborationDAO implements ICollaboration {
 
     public int addCollaboration(Collaboration collaboration){
         DatabaseManager dbManager = new DatabaseManager();
-        String query = "INSERT INTO colaboración(descripción, fechaFin, fechaInicio, nombreColaboración, estado) VALUES (?, ?, ?, ?, ?)";
+        String query = "INSERT INTO colaboración(nombreColaboración, descripción, fechaInicio, fechaFin, estado, objetivo, temaInterés, noEstudiantes, perfilEstudiante) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
         int result = 0;
         try {
             Connection connection = dbManager.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setString(1, collaboration.getDescription());
-            preparedStatement.setObject(2, collaboration.getFinishDate());
+            preparedStatement.setString(1, collaboration.getCollaborationName());
+            preparedStatement.setObject(2, collaboration.getDescription());
             preparedStatement.setObject(3, collaboration.getStartDate());
-            preparedStatement.setString(4, collaboration.getCollaborationName());
+            preparedStatement.setObject(4, collaboration.getFinishDate());
             preparedStatement.setString(5,collaboration.getCollaborationStatus());
+            preparedStatement.setString(6, collaboration.getCollaborationGoal());
+            preparedStatement.setString(7, collaboration.getSubject());
+            preparedStatement.setInt(8, collaboration.getNoStudents());
+            preparedStatement.setString(9, collaboration.getStudentProfile());
             result = preparedStatement.executeUpdate();
         } catch (SQLException addCollaborarionException) {
             LOG.error("ERROR: ", addCollaborarionException);
