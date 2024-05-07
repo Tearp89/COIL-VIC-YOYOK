@@ -16,9 +16,10 @@ public class Professor {
     private int professorId;
     private int universityId;
     private int administratorId;
-    private int workShopId;
+    private int workShitopId;
     private int collaborationId;
     private String user;
+    private int phoneNumber;
     private String email;
     public String getEmail() {
         return email;

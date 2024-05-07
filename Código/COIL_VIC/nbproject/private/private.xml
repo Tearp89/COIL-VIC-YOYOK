@@ -3,29 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-
-            <file>file:/C:/Users/marla/OneDrive%20-%20Universidad%20Veracruzana/Documentos/4to%20semestre/COIL-VIC-YOYOK/Código/COIL_VIC/src/logic/classes/Collaboration.java</file>
-            <file>file:/C:/Users/marla/OneDrive%20-%20Universidad%20Veracruzana/Documentos/4to%20semestre/COIL-VIC-YOYOK/Código/COIL_VIC/src/logic/EmailControl.java</file>
-            <file>file:/C:/Users/marla/OneDrive%20-%20Universidad%20Veracruzana/Documentos/4to%20semestre/COIL-VIC-YOYOK/Código/COIL_VIC/src/GUI/inicio.fxml</file>
-            <file>file:/C:/Users/marla/OneDrive%20-%20Universidad%20Veracruzana/Documentos/4to%20semestre/COIL-VIC-YOYOK/Código/COIL_VIC/test/DAO/CollaborationDAOTest.java</file>
-            <file>file:/C:/Users/marla/OneDrive%20-%20Universidad%20Veracruzana/Documentos/4to%20semestre/COIL-VIC-YOYOK/Código/COIL_VIC/src/GUI/MainNumeralia.java</file>
-            <file>file:/C:/Users/marla/OneDrive%20-%20Universidad%20Veracruzana/Documentos/4to%20semestre/COIL-VIC-YOYOK/Código/COIL_VIC/src/GUI/DeclinedCollaborations.fxml</file>
-            <file>file:/C:/Users/marla/OneDrive%20-%20Universidad%20Veracruzana/Documentos/4to%20semestre/COIL-VIC-YOYOK/Código/COIL_VIC/src/logic/DAO/LoginDAO.java</file>
-            <file>file:/C:/Users/marla/OneDrive%20-%20Universidad%20Veracruzana/Documentos/4to%20semestre/COIL-VIC-YOYOK/Código/COIL_VIC/src/logic/DAO/CollaborationStatsDAO.java</file>
-            <file>file:/C:/Users/marla/OneDrive%20-%20Universidad%20Veracruzana/Documentos/4to%20semestre/COIL-VIC-YOYOK/Código/COIL_VIC/src/GUI/MainLogin.java</file>
-            <file>file:/C:/Users/marla/OneDrive%20-%20Universidad%20Veracruzana/Documentos/4to%20semestre/COIL-VIC-YOYOK/Código/COIL_VIC/src/GUI/SearchDeclinedCollaborationsController.java</file>
-            <file>file:/C:/Users/marla/OneDrive%20-%20Universidad%20Veracruzana/Documentos/4to%20semestre/COIL-VIC-YOYOK/Código/COIL_VIC/src/log/Log.java</file>
-            <file>file:/C:/Users/marla/OneDrive%20-%20Universidad%20Veracruzana/Documentos/4to%20semestre/COIL-VIC-YOYOK/Código/COIL_VIC/src/GUI/numeralia.fxml</file>
-            <file>file:/C:/Users/marla/OneDrive%20-%20Universidad%20Veracruzana/Documentos/4to%20semestre/COIL-VIC-YOYOK/Código/COIL_VIC/src/GUI/addCollaborationController.java</file>
-            <file>file:/C:/Users/marla/OneDrive%20-%20Universidad%20Veracruzana/Documentos/4to%20semestre/COIL-VIC-YOYOK/Código/COIL_VIC/src/GUI/login.fxml</file>
-            <file>file:/C:/Users/marla/OneDrive%20-%20Universidad%20Veracruzana/Documentos/4to%20semestre/COIL-VIC-YOYOK/Código/COIL_VIC/src/logic/DAO/CollaborationDAO.java</file>
-            <file>file:/C:/Users/marla/OneDrive%20-%20Universidad%20Veracruzana/Documentos/4to%20semestre/COIL-VIC-YOYOK/Código/COIL_VIC/test/DAO/LoginDAOTest.java</file>
-            <file>file:/C:/Users/marla/OneDrive%20-%20Universidad%20Veracruzana/Documentos/4to%20semestre/COIL-VIC-YOYOK/Código/COIL_VIC/src/logic/DAO/AdminDAO.java</file>
-            <file>file:/C:/Users/marla/OneDrive%20-%20Universidad%20Veracruzana/Documentos/4to%20semestre/COIL-VIC-YOYOK/Código/COIL_VIC/src/GUI/loginController.java</file>
-            <file>file:/C:/Users/marla/OneDrive%20-%20Universidad%20Veracruzana/Documentos/4to%20semestre/COIL-VIC-YOYOK/Código/COIL_VIC/src/GUI/MainSearchDeclinedCollaborations.java</file>
-            <file>file:/C:/Users/marla/OneDrive%20-%20Universidad%20Veracruzana/Documentos/4to%20semestre/COIL-VIC-YOYOK/Código/COIL_VIC/test/DAO/AdminDAOTest.java</file>
-            <file>file:/C:/Users/marla/OneDrive%20-%20Universidad%20Veracruzana/Documentos/4to%20semestre/COIL-VIC-YOYOK/Código/COIL_VIC/src/GUI/MainAddCollaboration.java</file>
-            <file>file:/C:/Users/marla/OneDrive%20-%20Universidad%20Veracruzana/Documentos/4to%20semestre/COIL-VIC-YOYOK/Código/COIL_VIC/src/logic/DAO/FacilitatorDAO.java</file>
+            <file>file:/C:/Users/isabe/Desktop/uni%204/Construcción/COIL-VIC-YOYOK/Código/COIL_VIC/test/DAO/AdminDAOTest.java</file>
+            <file>file:/C:/Users/isabe/Desktop/uni%204/Construcción/COIL-VIC-YOYOK/Código/COIL_VIC/src/GUI/loginController.java</file>
+            <file>file:/C:/Users/isabe/Desktop/uni%204/Construcción/COIL-VIC-YOYOK/Código/COIL_VIC/src/GUI/inicio.css</file>
         </group>
     </open-files>
 </project-private>
