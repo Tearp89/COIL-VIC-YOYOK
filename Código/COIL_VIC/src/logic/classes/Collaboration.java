@@ -10,6 +10,11 @@ public class Collaboration {
     LocalDate startDate;
     String collaborationName;
     String collaborationStatus;
+    String collaborationGoal;
+    String subject;
+    int noStudents;
+    String studentProfile;
+
 
     public Collaboration() {
         
@@ -61,6 +66,38 @@ public class Collaboration {
 
     public void setCollaborationStatus(String collaborationStatus){
         this.collaborationStatus = collaborationStatus;
+    }
+
+    public String getCollaborationGoal() {
+        return collaborationGoal;
+    }
+
+    public void setCollaborationGoal(String collaborationGoal) {
+        this.collaborationGoal = collaborationGoal;
+    }
+
+    public String getSubject() {
+        return subject;
+    }
+
+    public void setSubject(String subject) {
+        this.subject = subject;
+    }
+
+    public int getNoStudents() {
+        return noStudents;
+    }
+
+    public void setNoStudents(int noStudents) {
+        this.noStudents = noStudents;
+    }
+
+    public String getStudentProfile() {
+        return studentProfile;
+    }
+
+    public void setStudentProfile(String studentProfile) {
+        this.studentProfile = studentProfile;
     }
 
 }
