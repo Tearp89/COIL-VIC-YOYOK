@@ -123,10 +123,10 @@ public class CollaborationStatsDAO {
 
     public int countProfessorsByAcademicArea(String academicArea) {
         DatabaseManager dbManager = new DatabaseManager();
-        String query = "SELECT COUNT(DISTINCT cr.Profesor_idProfesor) AS total_professors\r\n" + //
-                        "FROM `colaboraciones registradas` cr\r\n" + //
-                        "JOIN profesor p ON cr.Profesor_idProfesor = p.idProfesor\r\n" + //
-                        "WHERE p.area_academica = ?;\r\n";
+        String query = "SELECT COUNT(DISTINCT cr.Profesor_idProfesor) AS total_professors " + 
+                        "FROM colaboraciones_registradas cr " + 
+                        "JOIN profesor p ON cr.Profesor_idProfesor = p.idProfesor " + 
+                        "WHERE p.area_academica = ?";
         int result = 0;
         try (Connection connection = dbManager.getConnection();
                 PreparedStatement preparedStatement = connection.prepareStatement(query)) {
@@ -144,13 +144,12 @@ public class CollaborationStatsDAO {
 
     public int countProfessorsByAcademicAreaAndYear(String academicArea, String year) {
         DatabaseManager dbManager = new DatabaseManager();
-        String query = "SELECT COUNT(DISTINCT cr.Profesor_idProfesor) AS total_professors\r\n" + //
-                        "FROM colaboraciones_registradas cr\r\n" + //
-                        "JOIN profesor p ON cr.Profesor_idProfesor = p.idProfesor\r\n" + //
-                        "JOIN colaboración c ON cr.Colaboración_idColaboración = c.idColaboración\r\n" + //
-                        "WHERE p.area_academica = ?\r\n" + //
-                        "AND YEAR(c.fechaInicio) = ?;\r\n" + //
-                        "";
+        String query = "SELECT COUNT(DISTINCT cr.Profesor_idProfesor) AS total_professors " + 
+                        "FROM colaboraciones_registradas cr " + 
+                        "JOIN profesor p ON cr.Profesor_idProfesor = p.idProfesor " + 
+                        "JOIN colaboración c ON cr.Colaboración_idColaboración = c.idColaboración " + 
+                        "WHERE p.area_academica = ? " + 
+                        "AND YEAR(c.fechaInicio) = ? ";
         int result = 0;
         try (Connection connection = dbManager.getConnection();
                 PreparedStatement preparedStatement = connection.prepareStatement(query)) {
@@ -169,11 +168,11 @@ public class CollaborationStatsDAO {
 
     public int countProfessorsByRegion(String state) {
         DatabaseManager dbManager = new DatabaseManager();
-        String query = "SELECT COUNT(DISTINCT cr.Profesor_idProfesor) AS total_professors\r\n" + //
-                        "FROM colaboraciones_registradas cr\r\n" + //
-                        "JOIN profesor p ON cr.Profesor_idProfesor = p.idProfesor\r\n" + //
-                        "JOIN regiones_profesor rp ON p.idProfesor = rp.Profesor_idProfesor\r\n" + //
-                        "WHERE rp.region = ?;\r\n";
+        String query = "SELECT COUNT(DISTINCT cr.Profesor_idProfesor) AS total_professors " + 
+                        "FROM colaboraciones_registradas cr " + 
+                        "JOIN profesor p ON cr.Profesor_idProfesor = p.idProfesor " + 
+                        "JOIN regiones_profesor rp ON p.idProfesor = rp.Profesor_idProfesor " + 
+                        "WHERE rp.region = ?";
         int result = 0;
         try (Connection connection = dbManager.getConnection();
                 PreparedStatement preparedStatement = connection.prepareStatement(query)) {
@@ -191,12 +190,12 @@ public class CollaborationStatsDAO {
 
     public int countProfessorsByRegionAndYear(String state, String year) {
         DatabaseManager dbManager = new DatabaseManager();
-        String query = "SELECT COUNT(DISTINCT cr.Profesor_idProfesor) AS total_professors\r\n" + //
-                        "FROM `colaboraciones registradas` cr\r\n" + //
-                        "JOIN profesor p ON cr.Profesor_idProfesor = p.idProfesor\r\n" + //
-                        "JOIN colaboración c ON cr.Colaboración_idColaboración = c.idColaboración\r\n" + //
-                        "WHERE p.region = ?\r\n" + //
-                        "AND YEAR(c.fechaInicio) = ?;\r\n";        
+        String query = "SELECT COUNT(DISTINCT cr.Profesor_idProfesor) AS total_professors " + 
+                        "FROM colaboraciones_registradas cr " + 
+                        "JOIN profesor p ON cr.Profesor_idProfesor = p.idProfesor " + 
+                        "JOIN colaboración c ON cr.Colaboración_idColaboración = c.idColaboración " + 
+                        "WHERE p.region = ? " + 
+                        "AND YEAR(c.fechaInicio) = ?";        
         int result = 0;
         try (Connection connection = dbManager.getConnection();
                 PreparedStatement preparedStatement = connection.prepareStatement(query)) {

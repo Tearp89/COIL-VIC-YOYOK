@@ -59,16 +59,22 @@ public class CollaborationDAO implements ICollaboration {
 
     public int updateCollaboration(Collaboration collaboration){
         DatabaseManager dbManager = new DatabaseManager();
-        String query = "UPDATE colaboración SET descripción = ?, fechaFin = ?, fechaInicio = ?, nombreColaboración = ? WHERE idColaboración = ?";
+        String query = "UPDATE colaboración SET nombreColaboración = ?, descripción = ?, fechaInicio = ?, fechaFin = ?, objetivo = ?, temaInterés = ?, noEstudiantes = ?, perfilEstudiante = ?, estado = ? WHERE idColaboración = ?";
         int result = 0;
         try {
             Connection connection = dbManager.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setString(1, collaboration.getDescription());
-            preparedStatement.setObject(2, collaboration.getFinishDate());
+            preparedStatement.setString(1, collaboration.getCollaborationName());
+            preparedStatement.setString(2, collaboration.getDescription());
             preparedStatement.setObject(3, collaboration.getStartDate());
-            preparedStatement.setString(4, collaboration.getCollaborationName());
-            preparedStatement.setInt(5, collaboration.getCollaborationId());
+            preparedStatement.setObject(4, collaboration.getFinishDate());
+            preparedStatement.setString(5, collaboration.getCollaborationGoal());
+            preparedStatement.setString(6, collaboration.getSubject());
+            preparedStatement.setInt(7, collaboration.getNoStudents());
+            preparedStatement.setString(8, collaboration.getStudentProfile());
+            preparedStatement.setString(9, collaboration.getCollaborationStatus());
+            preparedStatement.setInt(10, collaboration.getCollaborationId());
+
             result = preparedStatement.executeUpdate();
         } catch (SQLException updateCollaborationException) {
             LOG.error("ERROR: ", updateCollaborationException);
@@ -228,7 +234,7 @@ public class CollaborationDAO implements ICollaboration {
                 return result;
     }
 
-    public String getCollaborationName(int id){
+    public String getCollaborationNameById(int id){
         DatabaseManager dbManager = new DatabaseManager();
         String query = "SELECT nombreColaboración from Colaboración WHERE idColaboración = ?";
         String result = "";
@@ -247,7 +253,7 @@ public class CollaborationDAO implements ICollaboration {
         return null;
     }
 
-    public String getCollaborationDescription (int id){
+    public String getCollaborationDescriptionById (int id){
         DatabaseManager dbManager = new DatabaseManager();
         String query = "SELECT descripción FROM Colaboración WHERE idColaboración = ?";
         String result = "";
@@ -266,7 +272,7 @@ public class CollaborationDAO implements ICollaboration {
         return null;
     }
 
-    public String getCollaborationStartDate (int id){
+    public String getCollaborationStartDateById (int id){
         DatabaseManager dbManager = new DatabaseManager();
         String query = "SELECT fechaInicio FROM Colaboración WHERE idColaboración = ?";
         String result = "";
@@ -281,6 +287,107 @@ public class CollaborationDAO implements ICollaboration {
             }
         } catch(SQLException getCollaborationStartDateException){
             LOG.error("ERROR:", getCollaborationStartDateException);
+        }
+
+        return null;
+    }
+
+    public String getCollaborationFinishDateById(int id){
+        DatabaseManager dbManager = new DatabaseManager();
+        String query = "SELECT fechaFin FROM Colaboración WHERE idColaboración = ?";
+        String result = "";
+        try{
+            Connection connection = dbManager.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setInt(1, id);
+            try(ResultSet resultSet = preparedStatement.executeQuery()){
+                if(resultSet.next()){
+                    return resultSet.getDate("fechaFin").toLocalDate().toString();
+                }
+            }
+        } catch(SQLException getCollaborationFinishDateException){
+            LOG.error("ERROR:", getCollaborationFinishDateException);
+        }
+
+        return null;
+    }
+
+    public String getCollaborationGoalById(int id){
+        DatabaseManager dbManager = new DatabaseManager();
+        String query = "SELECT objetivo FROM Colaboración WHERE idColaboración = ?";
+        String result = "";
+        try{
+            Connection connection = dbManager.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setInt(1, id);
+            try(ResultSet resultSet = preparedStatement.executeQuery()){
+                if(resultSet.next()){
+                    return resultSet.getString("objetivo");
+                }
+            }
+        } catch(SQLException getCollaborationGoalException){
+            LOG.error("ERROR:", getCollaborationGoalException);
+        }
+
+        return null;
+
+    }
+
+    public String  getCollaborationSubjectById(int id){
+        DatabaseManager dbManager = new DatabaseManager();
+        String query = "SELECT temaInterés FROM Colaboración WHERE idColaboración = ?";
+        String result = "";
+        try{
+            Connection connection = dbManager.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setInt(1, id);
+            try(ResultSet resultSet = preparedStatement.executeQuery()){
+                if(resultSet.next()){
+                    return resultSet.getString("temaInterés");
+                }
+            }
+        } catch(SQLException getCollaborationSubjectException){
+            LOG.error("ERROR:", getCollaborationSubjectException);
+        }
+
+        return null;
+    }
+
+    public int getNumberStudentsById(int id){
+        DatabaseManager dbManager = new DatabaseManager();
+        String query = "SELECT noEstudiantes FROM Colaboración WHERE idColaboración = ?";
+        int result = 0;
+        try{
+            Connection connection = dbManager.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setInt(1, id);
+            try(ResultSet resultSet = preparedStatement.executeQuery()){
+                if(resultSet.next()){
+                    return resultSet.getInt("noEstudiantes");
+                }
+            }
+        } catch(SQLException getNoStudentsException){
+            LOG.error("ERROR:", getNoStudentsException);
+        }
+
+        return 0;
+    }
+
+    public String getStudentProfileById(int id){
+        DatabaseManager dbManager = new DatabaseManager();
+        String query = "SELECT perfilEstudiante FROM Colaboración WHERE idColaboración = ?";
+        String result = "";
+        try{
+            Connection connection = dbManager.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setInt(1, id);
+            try(ResultSet resultSet = preparedStatement.executeQuery()){
+                if(resultSet.next()){
+                    return resultSet.getString("perfilEstudiante");
+                }
+            }
+        } catch(SQLException getStudentProfileException){
+            LOG.error("ERROR:", getStudentProfileException);
         }
 
         return null;

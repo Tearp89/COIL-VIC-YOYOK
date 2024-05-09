@@ -37,11 +37,11 @@ public class CollaborationDAOTest {
         LocalDate dateStartTest =  LocalDate.of(2022, 1, 1); 
         LocalDate dateFinishTest =  LocalDate.of(2026, 2, 1);
         
-        collaboration.setCollaborationName("Comunicación en lengua entranjera");
+        collaboration.setCollaborationName("Interculturalidad");
         collaboration.setDescription("TestDescripcion");
         collaboration.setFinishDate(dateFinishTest);
         collaboration.setStartDate(dateStartTest);
-        collaboration.setCollaborationStatus("Activa");
+        collaboration.setCollaborationStatus("Rechazada");
         collaboration.setCollaborationGoal("Unir estudiantes");
         collaboration.setNoStudents(25);
         collaboration.setStudentProfile("Inglés, ");
@@ -356,7 +356,7 @@ public class CollaborationDAOTest {
         public void getCollaborationNameSuccess(){
             CollaborationDAO instance = new CollaborationDAO();
             String expectedResult = "Interculturalidad UV";
-            String actualResult = instance.getCollaborationName(36);
+            String actualResult = instance.getCollaborationNameById(36);
             assertEquals(expectedResult, actualResult);
         }
 
@@ -364,7 +364,7 @@ public class CollaborationDAOTest {
         public void getCollaborationDescriptionSuccess(){
             CollaborationDAO instance = new CollaborationDAO();
             String expectedResult = "TestDescripcion";
-            String actualResult = instance.getCollaborationDescription(36);
+            String actualResult = instance.getCollaborationDescriptionById(36);
             assertEquals(expectedResult, actualResult);
         }
 
@@ -372,7 +372,7 @@ public class CollaborationDAOTest {
         public void getCollaborationStartDateSuccess(){
             CollaborationDAO instance = new CollaborationDAO();
             String expectedResult = "2025-04-11";
-            String actualResult = instance.getCollaborationStartDate(22);
+            String actualResult = instance.getCollaborationStartDateById(22);
             assertEquals(expectedResult, actualResult);
         }
 
