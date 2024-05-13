@@ -24,7 +24,7 @@ public class ProfessorDAO implements IProfessor{
 
     public int addProfessor(Professor professor){
         DatabaseManager dbManager = new DatabaseManager();
-        String query = "INSERT INTO profesor(nombreProfesor, estado, tipoProfesor, país, Universidad_idUniversidad, area_academica, correo, usuario, contraseña) VALUES (?,?,?,?,?,?, ?, ?, ?)";
+        String query = "INSERT INTO profesor(nombreProfesor, estado, tipoProfesor, país, Universidad_idUniversidad, area_academica, correo, usuario, contraseña, telefono) VALUES (?,?,?,?,?,?,?,?,?,?)";
         int result = 0;
         try {
             Connection connection = dbManager.getConnection();
@@ -38,9 +38,10 @@ public class ProfessorDAO implements IProfessor{
             preparedStatement.setString(7, professor.getEmail());
             preparedStatement.setString(8, professor.getUser());
             preparedStatement.setString(9, professor.getPassword());
+            preparedStatement.setString(10, professor.getPhoneNumber());
             result = preparedStatement.executeUpdate();
         } catch (SQLException addProfessorException) {
-            LOG.error("ERROR: ", addProfessorException);
+            LOG.error(addProfessorException);
         }
         return result;
     }

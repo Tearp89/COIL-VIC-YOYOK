@@ -27,11 +27,16 @@ public class ProfessorDAOTest {
         Professor professor = new Professor();
         ProfessorDAO instance = new ProfessorDAO();
         int expResult = 1;
-        professor.setName("Juan Díaz");
+        professor.setName("Jorge Alberto");
         professor.setStatus("Aceptado");
-        professor.setType("Externo");
+        professor.setType("UV");
         professor.setCountry("México");
-        professor.setUniversityId(2);
+        professor.setUniversityId(1);
+        professor.setAcademicArea("Económico");
+        professor.setEmail("test2@email.com");
+        professor.setUser("Usuario de prueba2");
+        professor.setPassword("testtest");
+        professor.setPhoneNumber("2220000000");
         
         int result = instance.addProfessor(professor);
         assertEquals(expResult, result);
@@ -40,7 +45,7 @@ public class ProfessorDAOTest {
     
     @Test
     public void testAddProfessorFailed(){
-         Professor professor = new Professor();
+        Professor professor = new Professor();
         ProfessorDAO instance = new ProfessorDAO();
         int expResult = 0;
         professor.setName("Juan Díaz");
