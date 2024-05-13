@@ -22,26 +22,56 @@ import log.Log;
 public class ProfessorDAO implements IProfessor{
     private static final org.apache.log4j.Logger LOG = Log.getLogger(ProfessorDAO.class);
 
-    public int addProfessor(Professor professor){
+    public int addProfessorUV(Professor professor){
         DatabaseManager dbManager = new DatabaseManager();
-        String query = "INSERT INTO profesor(nombreProfesor, usuario, telefono, estado, tipoProfesor, país, Universidad_idUniversidad, area_academica, correo, contraseña, No.Personal, region, tipoContratación, categoriaContratacion, disciplina) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+        String query = "INSERT INTO profesor(nombreProfesor, usuario, telefono, estado,"+ 
+        "tipoProfesor, país, Universidad_idUniversidad, area_academica, correo, contraseña, No.Personal," +
+        "region, tipoContratación, categoriaContratacion, disciplina) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
         int result = 0;
         try {
             Connection connection = dbManager.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1, professor.getName());
             preparedStatement.setString(2, professor.getUser());
-            preparedStatement.setString(3, professor.getUser());
-            preparedStatement.setString(2, professor.getStatus());
-            preparedStatement.setString(3, professor.getType());
-            preparedStatement.setString(4, professor.getCountry());
-            preparedStatement.setInt(5, professor.getUniversityId());
-            preparedStatement.setString(6, professor.getAcademicArea());
-            preparedStatement.setString(7, professor.getEmail());
-            preparedStatement.setString(9, professor.getPassword());
+            preparedStatement.setString(3, professor.getPhoneNumber());
+            preparedStatement.setString(4, professor.getStatus());
+            preparedStatement.setString(5, professor.getType());
+            preparedStatement.setString(6, professor.getCountry());
+            preparedStatement.setInt(7, professor.getUniversityId());
+            preparedStatement.setString(8, professor.getAcademicArea());
+            preparedStatement.setString(9, professor.getEmail());
+            preparedStatement.setString(10, professor.getPassword());
+            preparedStatement.setInt(11, professor.getPersonalNumber());
+            preparedStatement.setString(12, professor.getRegion());
+            preparedStatement.setString(13, professor.getContractType());
+            preparedStatement.setString(14, professor.getContractCategory());
+            preparedStatement.setString(15, professor.getDiscipline());
             result = preparedStatement.executeUpdate();
-        } catch (SQLException addProfessorException) {
-            LOG.error("ERROR: ", addProfessorException);
+        } catch (SQLException addProfessorUVException) {
+            LOG.error("ERROR: ", addProfessorUVException);
+        }
+        return result;
+    }
+
+    public int addProfessorForeign(Professor professor){
+        DatabaseManager dbManager = new DatabaseManager();
+        String query = "INSERT INTO profesor(nombreProfesor, usuario, telefono," + 
+        "estado, país, Universidad_idUniversidad, correo, contraseña) VALUES (?,?,?,?,?,?,?,?)";
+        int result = 0;
+        try {
+            Connection connection = dbManager.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, professor.getName());
+            preparedStatement.setString(2, professor.getUser());
+            preparedStatement.setString(3, professor.getPhoneNumber());
+            preparedStatement.setString(4, professor.getStatus());
+            preparedStatement.setString(5, professor.getCountry());
+            preparedStatement.setInt(6, professor.getUniversityId());
+            preparedStatement.setString(7, professor.getEmail());
+            preparedStatement.setString(8, professor.getPassword());
+            result = preparedStatement.executeUpdate();
+        } catch (SQLException addProfessorForeignException) {
+            LOG.error("ERROR: ", addProfessorForeignException);
         }
         return result;
     }
@@ -62,25 +92,58 @@ public class ProfessorDAO implements IProfessor{
         return result;
     }
 
-    public int updateProfessor(Professor professor){
+    public int updateProfessorUV(Professor professor){
         DatabaseManager dbManager = new DatabaseManager();
-        String query = "UPDATE profesor SET nombreProfesor = ?, estado = ?, tipoProfesor = ?, país = ?, Universidad_idUniversidad WHERE idProfesor = ?";
+        String query = "UPDATE profesor SET nombreProfesor = ?, telefono = ?, estado = ?, tipoProfesor = ?," + 
+        "país = ?, Universidad_idUniversidad = ?, area_academica = ?, correo, contraseña = ?, No.Personal = ?," +
+        "region = ?, tipoContratación = ?, categoriaContratacion = ?, disciplina = ?  WHERE idProfesor = ?";
         int result = 0;
         try{
             Connection connection = dbManager.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1, professor.getName());
-            preparedStatement.setString(2, professor.getStatus());
-            preparedStatement.setString(3, professor.getType());
-            preparedStatement.setString(4, professor.getCountry());
-            preparedStatement.setInt(5, professor.getProfessorId());
+            preparedStatement.setString(3, professor.getPhoneNumber());
+            preparedStatement.setString(4, professor.getStatus());
+            preparedStatement.setString(5, professor.getType());
+            preparedStatement.setString(6, professor.getCountry());
+            preparedStatement.setInt(7, professor.getUniversityId());
+            preparedStatement.setString(8, professor.getAcademicArea());
+            preparedStatement.setString(9, professor.getEmail());
+            preparedStatement.setString(10, professor.getPassword());
+            preparedStatement.setInt(11, professor.getPersonalNumber());
+            preparedStatement.setString(12, professor.getRegion());
+            preparedStatement.setString(13, professor.getContractType());
+            preparedStatement.setString(14, professor.getContractCategory());
+            preparedStatement.setString(15, professor.getDiscipline());
             result = preparedStatement.executeUpdate();
-        } catch (SQLException updateProfessorException){
-            LOG.error("ERROR: ", updateProfessorException);
+        } catch (SQLException updateProfessorUVException){
+            LOG.error("ERROR: ", updateProfessorUVException);
         }
         return result;
     }
-    
+
+    public int updateProfessorForeign(Professor professor){
+        DatabaseManager dbManager = new DatabaseManager();
+        String query = "UPDATE profesor SET nombreProfesor = ?, telefono = ?, estado = ?, tipoProfesor = ?," +
+        "país = ?, Universidad_idUniversidad = ?, correo, contraseña = ? WHERE idProfesor = ?";
+        int result = 0;
+        try{
+            Connection connection = dbManager.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, professor.getName());
+            preparedStatement.setString(2, professor.getPhoneNumber());
+            preparedStatement.setString(3, professor.getStatus());
+            preparedStatement.setString(4, professor.getType());
+            preparedStatement.setString(5, professor.getCountry());
+            preparedStatement.setInt(6, professor.getUniversityId());
+            preparedStatement.setString(7, professor.getEmail());
+            preparedStatement.setString(8, professor.getPassword());
+            result = preparedStatement.executeUpdate();
+        } catch (SQLException updateProfessorForeignException){
+            LOG.error("ERROR: ", updateProfessorForeignException);
+        }
+        return result;
+    }
     
     public ArrayList<Professor> searchProfessor (int universityId){
         Professor professor = new Professor();

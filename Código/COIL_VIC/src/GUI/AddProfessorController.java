@@ -23,17 +23,29 @@ public class AddProfessorController {
     @FXML
     private TextField textFieldProfessorName;
     @FXML
-    private ComboBox<String> comboBoxUniversity;
-    @FXML
-    private ComboBox comboBoxAcademicArea;
-    @FXML
-    private TextField textFieldCountry;
+    private TextField textFieldProfessorPhoneNumber;
     @FXML 
     private TextField textFieldEmail;
     @FXML
-    private TextField textFieldLanguage;
+    private TextField textFieldCountry;
+    @FXML
+    private ComboBox<String> comboBoxUniversity;
+    @FXML
+    private ComboBox<String> comboBoxAcademicArea;
+    @FXML
+    private TextField textFieldPersonalNumber;
+    @FXML
+    private ComboBox<String> comboBoxRegion;
+    @FXML
+    private ComboBox<String> comboBoxContractType;
+    @FXML
+    private ComboBox<String> comboBoxContractCategory;
+    @FXML
+    private ComboBox<String> comboBoxDiscipline;
     @FXML
     private Button buttonConfirmation = new Button("Aceptar");
+    @FXML
+    private Button buttonCancelation = new Button("Cancelar");
     @FXML 
     private Alert professorAdded = new Alert(AlertType.NONE);
 
@@ -44,14 +56,12 @@ public class AddProfessorController {
         Object selectedUniversity = comboBoxUniversity.getSelectionModel().getSelectedItem();
         String universityName = selectedUniversity != null ? selectedUniversity.toString() : null;
         String country = textFieldCountry.getText();
-        String language = textFieldLanguage.getText();
         UniversityDAO universityDAO = new UniversityDAO();
 
         if (!universityDAO.isUniversityRegistered(universityName)) {
             University university = new University();
             university.setUniversityName(universityName);
             university.setUniversityCountry(country);
-            university.setUniversityLanguage(language);
             universityDAO.addUniversity(university);
             }
 
@@ -71,7 +81,6 @@ public class AddProfessorController {
         String email = textFieldEmail.getText();
         String user = access.userGenerator(professorName);
         String password = access.passwordGenerator(8);
-        String language = textFieldLanguage.getText();
 
         
         UniversityDAO universityDAO = new UniversityDAO();
@@ -91,7 +100,7 @@ public class AddProfessorController {
         }else{
             professor.setType("Externo");
         }
-        int result = professorDAO.addProfessor(professor);
+        int result = professorDAO.addProfessorForeign(professor);
         if(result == 1){
             professorAdded.setAlertType(AlertType.CONFIRMATION);
             professorAdded.setContentText("Profesor agregado correctamente.");

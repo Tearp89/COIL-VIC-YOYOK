@@ -21,35 +21,95 @@ public class ProfessorDAOTest {
     /**
      * Test of addProfessor method, of class ProfessorDAO.
      */
+
+     @org.junit.Test 
+     public void testAddProfessorUV() {
+        System.out.println("addProfessorUV");
+        Professor professor = new Professor();
+        ProfessorDAO instance = new ProfessorDAO();
+        int expResult = 1;
+        professor.setName("Jorge Alberto");
+        professor.setStatus("Aceptado");
+        professor.setPhoneNumber("2220000000");
+        professor.setEmail("test2@email.com");
+        professor.setCountry("México");
+        professor.setUniversityId(1);
+        professor.setType("UV");
+        professor.setAcademicArea("Económico");
+        professor.setPersonalNumber(222222);
+        professor.setRegion("Xalapa");
+        professor.setContractType("luegocheco");
+        professor.setContractCategory("luegochecox2");
+        professor.setDiscipline("luegochecox3");
+        professor.setUser("Usuario de prueba uv1");
+        professor.setPassword("testtest");
+        
+        int result = instance.addProfessorUV(professor);
+        assertEquals(expResult, result);
+    }
+    
+    @Test
+    public void testAddProfessorUVFailed(){
+         Professor professor = new Professor();
+        ProfessorDAO instance = new ProfessorDAO();
+        int expResult = 0;
+        professor.setName("Jorge Alberto");
+        professor.setStatus("Aceptado");
+        professor.setPhoneNumber("2220000000");
+        professor.setEmail("test2@email.com");
+        professor.setCountry("México");
+        professor.setUniversityId(1);
+        professor.setType("UV");
+        professor.setAcademicArea("Económico");
+        professor.setPersonalNumber(222222);
+        professor.setRegion("Xalapa");
+        professor.setContractType("luegocheco");
+        professor.setContractCategory("luegochecox2");
+        professor.setDiscipline("luegochecox3");
+        professor.setUser("Usuario de prueba uv1");
+        professor.setPassword("testtest");
+        
+        int result = instance.addProfessorUV(professor);
+        assertEquals(expResult, result);
+    }
+    
     @org.junit.Test
-    public void testAddProfessor() {
-        System.out.println("addProfessor");
+    public void testAddProfessorForeign() {
+        System.out.println("addProfessorForeign");
         Professor professor = new Professor();
         ProfessorDAO instance = new ProfessorDAO();
         int expResult = 1;
         professor.setName("Juan Díaz");
         professor.setStatus("Aceptado");
-        professor.setType("Externo");
+        professor.setPhoneNumber("34534522");
+        professor.setEmail("juanDiaz@gmail.com");
         professor.setCountry("México");
         professor.setUniversityId(2);
+        professor.setType("Externo");
+        professor.setUser("Usuario de prueba externo1");
+        professor.setPassword("testtest");
         
-        int result = instance.addProfessor(professor);
+        int result = instance.addProfessorForeign(professor);
         assertEquals(expResult, result);
     }
     
     
     @Test
-    public void testAddProfessorFailed(){
-         Professor professor = new Professor();
+    public void testAddProfessorForeignFailed(){
+        Professor professor = new Professor();
         ProfessorDAO instance = new ProfessorDAO();
         int expResult = 0;
         professor.setName("Juan Díaz");
+        professor.setPhoneNumber("34534522");
         professor.setStatus("Aceptado");
         professor.setType("Externo");
+        professor.setEmail("juanDiaz@gmail.com");
         professor.setCountry("México");
         professor.setUniversityId(4);
+        professor.setUser("Usuario de prueba externo2");
+        professor.setPassword("testtest");
         
-        int result = instance.addProfessor(professor);
+        int result = instance.addProfessorForeign(professor);
         assertEquals(expResult, result);
     }
 
@@ -70,15 +130,15 @@ public class ProfessorDAOTest {
     public void testDeleteProfessorFailed(){
         Professor professor = new Professor();
         ProfessorDAO instance = new ProfessorDAO();
-        int expectedResult = 0;
+        int expResult = 0;
         professor.setProfessorId(25);
         int result = instance.deleteProfessor(professor);
-        assertEquals(expectedResult, result);
+        assertEquals(expResult, result);
     }
 
 
     @org.junit.Test
-    public void testUpdateProfessorSuccess() {
+    public void testUpdateProfessorForeignSuccess() {
         System.out.println("updateProfessor");
         Professor professor = new Professor();
         ProfessorDAO instance = new ProfessorDAO();
@@ -90,12 +150,12 @@ public class ProfessorDAOTest {
         professor.setUniversityId(2);{
         professor.setProfessorId(7);
     }
-        int result = instance.updateProfessor(professor);
+        int result = instance.updateProfessorForeign(professor);
         assertEquals(expResult, result);
     }
     
     @Test
-    public void updateProfessorFailedUniversity(){
+    public void updateProfessorForeignFailedUniversity(){
         Professor professor = new Professor();
         ProfessorDAO instance = new ProfessorDAO();
         int expResult = 0;
@@ -105,9 +165,10 @@ public class ProfessorDAOTest {
         professor.setCountry("Alemania");
         professor.setUniversityId(5);
         professor.setProfessorId(7);
-        int result = instance.updateProfessor(professor);
+        int result = instance.updateProfessorForeign(professor);
         assertEquals(expResult, result);
     }
+
         @Test
         public void testSearchProfessorSuccess(){
         int expectedResult = 6;
