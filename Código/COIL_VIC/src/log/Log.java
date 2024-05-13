@@ -21,6 +21,10 @@ import org.apache.log4j.net.SMTPAppender;
 public class Log {
     
     private static Logger LOG;
+    private static final String SMTP_HOST = "smtp-mail.outlook.com";
+    private static final String SMTP_PORT = "587";
+    private static final String FROM_EMAIL = "coilvic@outlook.com";
+    private static final String TO_EMAIL = "daur0704@outlook.com";
     
     public static Logger getLogger(Class name) {
         try {
@@ -39,17 +43,15 @@ public class Log {
             rollingFileAppender.setLayout(defaultLayout);
             
             SMTPAppender smtpAppender = new SMTPAppender();
-            smtpAppender.setThreshold(org.apache.log4j.Level.WARN);
-            smtpAppender.setSMTPPort(587);
-            smtpAppender.setSMTPHost("smtp-mail.outlook.com");
+            smtpAppender.setSMTPHost(SMTP_HOST);
+            smtpAppender.setSMTPPort(Integer.parseInt(SMTP_PORT));
+            smtpAppender.setFrom(FROM_EMAIL);
+            smtpAppender.setTo(TO_EMAIL);
             smtpAppender.setSMTPUsername("coilvic@outlook.com");
             smtpAppender.setSMTPPassword("proyectocoil2024");
-            smtpAppender.setFrom("coilvic@outlook.com");
-            smtpAppender.setTo("daur0704@outlook.com");
-            smtpAppender.setSubject("Aviso excepción programa COIL - " + fechaAc);
+            smtpAppender.setBufferSize(1);
+            smtpAppender.setSMTPDebug(true);
             smtpAppender.setLayout(defaultLayout);
-            smtpAppender.setSendOnClose(true);
-            smtpAppender.close();
             
             LOG.removeAllAppenders();
             LOG.addAppender(rollingFileAppender);

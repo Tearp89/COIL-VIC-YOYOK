@@ -7,17 +7,8 @@ package logic.DAO;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 import dataAccess.DatabaseManager;
-import logic.interfaces.ICollaboration;
-import logic.classes.Collaboration;
-
-import java.util.ArrayList;
 import java.sql.ResultSet;
-import java.time.LocalDate;
-import java.util.Date;
 import log.Log;
 
 /**
@@ -34,7 +25,7 @@ public class CollaborationStatsDAO {
                         "JOIN participa p ON c.idColaboración = p.Colaboración_idColaboración " +
                         "JOIN estudiante e ON p.Estudiante_correoElectrónico = e.correoElectrónico " +
                         "JOIN profesor pr ON e.Profesor_idProfesor = pr.idProfesor " +
-                        "WHERE pr.estado = ?";
+                        "WHERE pr.region = ?";
         int result = 0;
         try (Connection connection = dbManager.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
@@ -57,7 +48,7 @@ public class CollaborationStatsDAO {
                         "JOIN participa p ON c.idColaboración = p.Colaboración_idColaboración " +
                         "JOIN estudiante e ON p.Estudiante_correoElectrónico = e.correoElectrónico " +
                         "JOIN profesor pr ON e.Profesor_idProfesor = pr.idProfesor " +
-                        "WHERE pr.estado = ? AND YEAR(c.fechaInicio) = ?";
+                        "WHERE pr.region = ? AND YEAR(c.fechaInicio) = ?";
         int result = 0;
         try (Connection connection = dbManager.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
@@ -124,7 +115,7 @@ public class CollaborationStatsDAO {
     public int countProfessorsByAcademicArea(String academicArea) {
         DatabaseManager dbManager = new DatabaseManager();
         String query = "SELECT COUNT(DISTINCT cr.Profesor_idProfesor) AS total_professors\r\n" + //
-                        "FROM `colaboraciones registradas` cr\r\n" + //
+                        "FROM `colaboraciones_registradas` cr\r\n" + //
                         "JOIN profesor p ON cr.Profesor_idProfesor = p.idProfesor\r\n" + //
                         "WHERE p.area_academica = ?;\r\n";
         int result = 0;
@@ -192,7 +183,7 @@ public class CollaborationStatsDAO {
     public int countProfessorsByRegionAndYear(String state, String year) {
         DatabaseManager dbManager = new DatabaseManager();
         String query = "SELECT COUNT(DISTINCT cr.Profesor_idProfesor) AS total_professors\r\n" + //
-                        "FROM `colaboraciones registradas` cr\r\n" + //
+                        "FROM colaboraciones_registradas cr\r\n" + //
                         "JOIN profesor p ON cr.Profesor_idProfesor = p.idProfesor\r\n" + //
                         "JOIN colaboración c ON cr.Colaboración_idColaboración = c.idColaboración\r\n" + //
                         "WHERE p.region = ?\r\n" + //

@@ -196,7 +196,7 @@ public class CollaborationDAO implements ICollaboration {
 
     public int assignProfessorToCollaboration(int professorID, int collaborationId) throws SQLException{
         DatabaseManager dbManager = new DatabaseManager();
-        String query = "INSERT INTO `Colaboraciones Registradas`(Profesor_idProfesor, Colaboración_idColaboración) VALUES (?, ?)";
+        String query = "INSERT INTO `Colaboraciones_Registradas`(Profesor_idProfesor, Colaboración_idColaboración) VALUES (?, ?)";
         int result = 0;
 
         try (Connection connection = dbManager.getConnection();
