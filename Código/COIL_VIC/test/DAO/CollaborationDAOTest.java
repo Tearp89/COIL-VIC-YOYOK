@@ -308,25 +308,24 @@ public class CollaborationDAOTest {
     public void changeCollaborationStatusSuccess(){
         System.out.println("changeStateProfessor");
             Collaboration collaboration = new Collaboration();
-            collaboration.setCollaborationId(22); 
-            collaboration.setCollaborationStatus("Activa");
+            int collaborationId = 22; 
+            String status = "Activa";
             
             CollaborationDAO instance = new CollaborationDAO();
             int expectedResult = 1;
-            int result = instance.changeCollaborationStatus(collaboration);
+            int result = instance.changeCollaborationStatus(status, collaborationId);
             assertEquals(expectedResult, result);
     }
 
     @Test
     public void changeCollaborationStatusFailed(){
         System.out.println("changeStateProfessor");
-        Collaboration collaboration = new Collaboration();
-        collaboration.setCollaborationId(1000); 
-        collaboration.setCollaborationStatus("Activo"); 
+        int collaborationId = 100; 
+            String status = "Activa";
             
         CollaborationDAO instance = new CollaborationDAO();
         int expectedResult = 0;
-        int result = instance.changeCollaborationStatus(collaboration);
+        int result = instance.changeCollaborationStatus(status, collaborationId);
         assertEquals(expectedResult, result);
 
         }
