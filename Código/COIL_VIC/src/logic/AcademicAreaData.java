@@ -16,7 +16,7 @@ public class AcademicAreaData {
     private int professorCount;
     private int studentCount;
 
-    public AcademicAreaData(String academicArea, int professorCount, int studentCount) {
+    public AcademicAreaData(String academicArea, int studentCount, int professorCount) {
         this.academicArea = academicArea;
         this.professorCount = professorCount;
         this.studentCount = studentCount;

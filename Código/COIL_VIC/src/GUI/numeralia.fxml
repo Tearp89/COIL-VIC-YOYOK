@@ -106,7 +106,7 @@
                                     <Font name="Arial" size="14.0" />
                                  </font>
                               </Label>
-                              <Button id="records" disable="true" layoutX="11.0" layoutY="398.0" minHeight="40.0" mnemonicParsing="false" prefWidth="180.0" styleClass="nav-btn" stylesheets="@inicio.css" text="Numeralia">
+                              <Button id="records" layoutX="11.0" layoutY="398.0" minHeight="40.0" mnemonicParsing="false" prefWidth="180.0" styleClass="nav-btn-select" stylesheets="@inicio.css" text="Numeralia">
                                  <graphic>
                                     <FontAwesomeIcon fill="WHITE" glyphName="COG" />
                                  </graphic>
