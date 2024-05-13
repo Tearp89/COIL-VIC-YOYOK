@@ -199,7 +199,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to ed
 }
 */
 
-.label-with-border {
+.label {
     -fx-background-color:
         linear-gradient(to right, black 50%, #f65757 50%),
         linear-gradient(to right, black 50%, #f65757 50%); /* Aquí estamos creando dos gradientes, uno negro y otro de color #f65757 */
