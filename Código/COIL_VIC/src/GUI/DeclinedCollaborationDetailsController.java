@@ -84,18 +84,29 @@ public class DeclinedCollaborationDetailsController {
         collaborationUpdated.setCollaborationId(collaborationId);
         collaborationUpdated.setCollaborationStatus("En revisión");
         CollaborationDAO updateCollaborationDAO = new CollaborationDAO();
-        if(collaborationName.isEmpty() || collaborationDescription.isEmpty() || collaborationStartDate.toString().isEmpty() || collaborationFinishDate.toString().isEmpty() || collaborationGoal.isEmpty() || collaborationSubject.isEmpty() || textFieldNumberStudents.getText().isEmpty() || studentProfile.isEmpty()){
-            Alert emptyFields = new Alert(AlertType.ERROR);
+        if(collaborationName.isEmpty() || collaborationDescription.isEmpty() || collaborationStartDate.toString().isEmpty() || 
+        collaborationFinishDate.toString().isEmpty() || collaborationGoal.isEmpty() || collaborationSubject.isEmpty() || 
+        textFieldNumberStudents.getText().isEmpty() || studentProfile.isEmpty()){
+            Alert emptyFieldsAlert = new Alert(AlertType.ERROR);
+            emptyFieldsAlert.setTitle("Campos vacíos");
+            emptyFieldsAlert.setContentText("No se pudo actualizar la colaboración hay campos vacíos");
+            emptyFieldsAlert.setHeaderText("Campos vacíos");
+            emptyFieldsAlert.show();
+
+
+        }else{
+            int result = updateCollaborationDAO.updateCollaboration(collaborationUpdated);
+            if (result == 1){
+                Alert collaborationUpdatedAlert = new Alert(AlertType.CONFIRMATION);
+                collaborationUpdatedAlert.setTitle("Confirmación registro");
+                collaborationUpdatedAlert.setHeaderText("Confirmación actualización");
+                collaborationUpdatedAlert.setContentText("Se actualizó la información de la convocatoria de manera exitosa");
+                collaborationUpdatedAlert.show();
+            }
 
         }
-        int result = updateCollaborationDAO.updateCollaboration(collaborationUpdated);
-        if (result == 1){
-            Alert collaborationUpdatedAlert = new Alert(AlertType.CONFIRMATION);
-            collaborationUpdatedAlert.setTitle("Confirmación registro");
-            collaborationUpdatedAlert.setHeaderText("Confirmación actualización");
-            collaborationUpdatedAlert.setContentText("Se actualizó la información de la convocatoria de manera exitosa");
-            collaborationUpdatedAlert.show();
-        }
+      
+        
 
     }
 

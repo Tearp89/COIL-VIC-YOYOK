@@ -37,11 +37,11 @@ public class CollaborationDAOTest {
         LocalDate dateStartTest =  LocalDate.of(2022, 1, 1); 
         LocalDate dateFinishTest =  LocalDate.of(2026, 2, 1);
         
-        collaboration.setCollaborationName("Interculturalidad");
+        collaboration.setCollaborationName("Comunicación sin fornteras");
         collaboration.setDescription("TestDescripcion");
         collaboration.setFinishDate(dateFinishTest);
         collaboration.setStartDate(dateStartTest);
-        collaboration.setCollaborationStatus("Rechazada");
+        collaboration.setCollaborationStatus("Aceptada");
         collaboration.setCollaborationGoal("Unir estudiantes");
         collaboration.setNoStudents(25);
         collaboration.setStudentProfile("Inglés, ");
@@ -318,7 +318,7 @@ public class CollaborationDAOTest {
     }
 
     @Test
-    public void changeCllaborationStatusFailed(){
+    public void changeCollaborationStatusFailed(){
         System.out.println("changeStateProfessor");
         Collaboration collaboration = new Collaboration();
         collaboration.setCollaborationId(1000); 
@@ -345,8 +345,8 @@ public class CollaborationDAOTest {
         public void assignProfessorToCollaborationSuccess() throws SQLException{
             CollaborationDAO instance = new CollaborationDAO();
             int expectedResult = 1;
-            int professorId = 8;
-            int collaborationId = 1;
+            int professorId = 24;
+            int collaborationId = 37;
             int actualResult = instance.assignProfessorToCollaboration(professorId, collaborationId);
             assertEquals(expectedResult, actualResult);
 
@@ -374,6 +374,30 @@ public class CollaborationDAOTest {
             String expectedResult = "2025-04-11";
             String actualResult = instance.getCollaborationStartDateById(22);
             assertEquals(expectedResult, actualResult);
+        }
+
+        @Test
+        public void searchCollaborationByStatusAndProfessorIdTestSuccess(){
+            CollaborationDAO instance = new CollaborationDAO();
+            int expectedResult = 1;
+            int professorId = 24;
+            String status = "Activa";
+            int result = instance.searchCollaborationByStatusAndProfessorId(status, professorId).size();
+            assertEquals(expectedResult, result);
+
+        }
+
+        @Test
+        public void searchCollaborationByStatusNameandProfessorIdTestSuccess(){
+            CollaborationDAO instance = new CollaborationDAO();
+            int expectedResult = 1;
+            int professorId = 24;
+            String status = "Activa";
+            String collaborationName = "Comunicación en lengua entranjera";
+            int result = instance.searchCollaborationByStatusAndProfessorId(status, professorId).size();
+            assertEquals(expectedResult, result);
+
+
         }
 
 

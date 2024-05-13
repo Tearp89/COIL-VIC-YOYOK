@@ -254,6 +254,25 @@ public class ProfessorDAO implements IProfessor{
         }
         return result;
     }
+
+    public int getProfessorIdByUser(String user){
+        DatabaseManager dbManager = new DatabaseManager();
+        String query = "SELECT idProfesor FROM Profesor WHERE usuario = ?";
+        try{
+            Connection connection = dbManager.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, user);
+            try(ResultSet resultSet = preparedStatement.executeQuery()){
+                if(resultSet.next()){
+                    return resultSet.getInt("IdProfesor");
+                }
+            }
+
+        } catch(SQLException getProfessorIdByUserException){
+            LOG.error("ERROR:", getProfessorIdByUserException);
+        }
+        return 0;
+    }
 }
 
 

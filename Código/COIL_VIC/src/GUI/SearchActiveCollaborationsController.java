@@ -26,7 +26,8 @@ public class SearchActiveCollaborationsController {
     private TableColumn<Collaboration, String> tableColumnFinishDate;
     @FXML
     private TableColumn<Collaboration, String> tableColumnStatus;
-    @FXML Label labelCollaborationNotFound = new Label("No se encontraron colaboraciones");
+    @FXML 
+    Label labelCollaborationNotFound = new Label("No se encontraron colaboraciones");
 
 
     public void loadActiveCollaborations(){

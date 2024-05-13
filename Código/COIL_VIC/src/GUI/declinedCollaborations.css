@@ -198,3 +198,18 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to ed
     -fx-padding:0px 0px 0px 8px;
 }
 */
+
+.label-with-border {
+    -fx-background-color:
+        linear-gradient(to right, black 50%, #f65757 50%),
+        linear-gradient(to right, black 50%, #f65757 50%); /* Aquí estamos creando dos gradientes, uno negro y otro de color #f65757 */
+    -fx-background-position:
+        0% 0%,
+        100% 0%; /* Establecemos la posición de los gradientes */
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: 50% 100%, 50% 100%; /* Establecemos el tamaño de los gradientes */
+    -fx-border-width: 2px;
+    -fx-border-color: black;
+    -fx-border-radius: 5px;
+    -fx-padding: 5px;
+}

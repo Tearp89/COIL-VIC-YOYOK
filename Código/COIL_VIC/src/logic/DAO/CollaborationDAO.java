@@ -114,6 +114,42 @@ public class CollaborationDAO implements ICollaboration {
         return collaborations;
     }
 
+    public ArrayList<Collaboration> searchCollaborationByStatusAndProfessorId(String status, int professorId) {
+        DatabaseManager dbManager = new DatabaseManager();
+        Collaboration collaboration = new Collaboration();
+        ArrayList<Collaboration> collaborations = new ArrayList<>();
+        String query = "SELECT c.* FROM colaboración c " +
+                       "INNER JOIN colaboraciones_registradas cr ON c.idColaboración = cr.Colaboración_idColaboración " +
+                       "WHERE c.estado = ? AND cr.Profesor_idProfesor = ?";
+        try {
+            Connection connection = dbManager.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, status);
+            preparedStatement.setInt(2, professorId);
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                while (resultSet.next()) {
+                    int idCollaboration = resultSet.getInt("idColaboración");
+                    String collaborationName = resultSet.getString("nombreColaboración");
+                    LocalDate startDate = resultSet.getObject("fechaInicio", LocalDate.class);
+                    LocalDate finishDate = resultSet.getObject("fechaFin", LocalDate.class);
+    
+                    collaboration = new Collaboration();
+                    collaboration.setCollaborationId(idCollaboration);
+                    collaboration.setCollaborationName(collaborationName);
+                    collaboration.setStartDate(startDate);
+                    collaboration.setFinishDate(finishDate);
+                    collaboration.setCollaborationStatus(status);
+    
+                    collaborations.add(collaboration);
+                }
+            }
+        } catch (SQLException SearchCollaborationException) {
+            LOG.error("ERROR: ", SearchCollaborationException);
+        }
+        return collaborations;
+    }
+    
+
     public ArrayList<Collaboration> searchCollaborationByStatusAndName(String status, String name){
         DatabaseManager dbManager = new DatabaseManager();
         Collaboration collaboration = new Collaboration();
@@ -146,6 +182,43 @@ public class CollaborationDAO implements ICollaboration {
         }
         return collaborations;
     }
+
+    public ArrayList<Collaboration> searchCollaborationByStatusNameandProfessorId(String status, String name, int professorId) {
+        DatabaseManager dbManager = new DatabaseManager();
+        Collaboration collaboration = new Collaboration();
+        ArrayList<Collaboration> collaborations = new ArrayList<>();
+        String query = "SELECT c.* FROM colaboración c " +
+                       "INNER JOIN colaboraciones_registradas cr ON c.idColaboración = cr.Colaboración_idColaboración " +
+                       "WHERE c.estado = ? AND c.nombreColaboración LIKE ? AND cr.Profesor_idProfesor = ?";
+        try {
+            Connection connection = dbManager.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, status);
+            preparedStatement.setString(2, name);
+            preparedStatement.setInt(3, professorId);
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                while (resultSet.next()) {
+                    int idCollaboration = resultSet.getInt("idColaboración");
+                    String collaborationName = resultSet.getString("nombreColaboración");
+                    LocalDate startDate = resultSet.getObject("fechaInicio", LocalDate.class);
+                    LocalDate finishDate = resultSet.getObject("fechaFin", LocalDate.class);
+    
+                    collaboration = new Collaboration();
+                    collaboration.setCollaborationId(idCollaboration);
+                    collaboration.setCollaborationName(collaborationName);
+                    collaboration.setStartDate(startDate);
+                    collaboration.setFinishDate(finishDate);
+                    collaboration.setCollaborationStatus(status);
+    
+                    collaborations.add(collaboration);
+                }
+            }
+        } catch (SQLException SearchCollaborationException) {
+            LOG.error("ERROR: ", SearchCollaborationException);
+        }
+        return collaborations;
+    }
+    
 
     
     public ArrayList<Collaboration> searchCollaborationByYear(String year){
@@ -183,15 +256,15 @@ public class CollaborationDAO implements ICollaboration {
         return collaborations;
     }
 
-    public int changeCollaborationStatus(Collaboration collaboration){
+    public int changeCollaborationStatus(String status, int collaborationId){
         DatabaseManager dbManager = new DatabaseManager();
         String query = "UPDATE colaboración set estado = ? WHERE idColaboración = ?";
         int result = 0;
         try{
             Connection connection = dbManager.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setString(1, collaboration.getCollaborationStatus());
-            preparedStatement.setInt(2, collaboration.getCollaborationId());
+            preparedStatement.setString(1, status);
+            preparedStatement.setInt(2, collaborationId);
             result = preparedStatement.executeUpdate();
         } catch (SQLException changeCollaborationStatusException){
             LOG.error("ERROR: ", changeCollaborationStatusException);
@@ -202,7 +275,7 @@ public class CollaborationDAO implements ICollaboration {
 
     public int assignProfessorToCollaboration(int professorID, int collaborationId) throws SQLException{
         DatabaseManager dbManager = new DatabaseManager();
-        String query = "INSERT INTO `Colaboraciones Registradas`(Profesor_idProfesor, Colaboración_idColaboración) VALUES (?, ?)";
+        String query = "INSERT INTO Colaboraciones_Registradas (Profesor_idProfesor, Colaboración_idColaboración) VALUES (?, ?)";
         int result = 0;
 
         try (Connection connection = dbManager.getConnection();
