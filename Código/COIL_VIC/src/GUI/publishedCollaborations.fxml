@@ -14,17 +14,17 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.SearchDeclinedCollaborationsController">
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.PublishedCollaborationsController">
    <children>
       <AnchorPane prefHeight="200.0" prefWidth="200.0">
          <children>
             <BorderPane layoutX="148.0" layoutY="171.0" prefHeight="600.0" prefWidth="800.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <top>
-                  <AnchorPane id="topForm" prefHeight="45.0" prefWidth="200.0" style="-fx-border-color: black;" styleClass="top-form" stylesheets="@../GUI/windowsStyle.css" BorderPane.alignment="CENTER">
+                  <AnchorPane id="topForm" prefHeight="45.0" prefWidth="200.0" style="-fx-border-color: black;" styleClass="top-form" stylesheets="@../OneDrive%20-%20Universidad%20Veracruzana/Documentos/4to%20semestre/COIL-VIC-YOYOK/Código/COIL_VIC/src/GUI/declinedCollaborations.css" BorderPane.alignment="CENTER">
                      <children>
-                        <AnchorPane id="semiTopForm" layoutY="-8.0" prefHeight="35.0" prefWidth="800.0" style="-fx-border-color: black;" styleClass="semi-top-form" stylesheets="@../GUI/windowsStyle.css" AnchorPane.bottomAnchor="8.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-8.0">
+                        <AnchorPane id="semiTopForm" layoutY="-8.0" prefHeight="35.0" prefWidth="800.0" style="-fx-border-color: black;" styleClass="semi-top-form" stylesheets="@../OneDrive%20-%20Universidad%20Veracruzana/Documentos/4to%20semestre/COIL-VIC-YOYOK/Código/COIL_VIC/src/GUI/declinedCollaborations.css" AnchorPane.bottomAnchor="8.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-8.0">
                            <children>
-                              <Button id="close" fx:id="close" layoutX="968.0" layoutY="10.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="32.0" styleClass="close" stylesheets="@../GUI/windowsStyle.css">
+                              <Button id="close" fx:id="close" layoutX="968.0" layoutY="10.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="32.0" styleClass="close" stylesheets="@../OneDrive%20-%20Universidad%20Veracruzana/Documentos/4to%20semestre/COIL-VIC-YOYOK/Código/COIL_VIC/src/GUI/declinedCollaborations.css">
                                  <font>
                                     <Font name="System Bold" size="12.0" />
                                  </font>
@@ -32,14 +32,14 @@
                                     <FontAwesomeIcon glyphName="CLOSE" />
                                  </graphic>
                               </Button>
-                              <Button id="minimize" fx:id="minimize" layoutX="930.0" layoutY="10.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="32.0" styleClass="minimize" stylesheets="@../GUI/windowsStyle.css">
+                              <Button id="minimize" fx:id="minimize" layoutX="930.0" layoutY="10.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="32.0" styleClass="minimize" stylesheets="@../OneDrive%20-%20Universidad%20Veracruzana/Documentos/4to%20semestre/COIL-VIC-YOYOK/Código/COIL_VIC/src/GUI/declinedCollaborations.css">
                                  <font>
                                     <Font name="System Bold" size="12.0" />
                                  </font>
                                  <graphic>
                                     <FontAwesomeIcon glyphName="MINUS" />
                                  </graphic></Button>
-                              <Label layoutX="14.0" layoutY="14.0" text="Consultar Colaboraciones Rechazadas " textFill="WHITE">
+                              <Label layoutX="14.0" layoutY="14.0" text="Consultar Colaboraciones Publicadas " textFill="WHITE">
                                  <font>
                                     <Font name="Tahoma Bold" size="17.0" />
                                  </font>
@@ -52,7 +52,7 @@
                <left>
                   <AnchorPane prefHeight="555.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                      <children>
-                        <AnchorPane id="navForm" layoutY="103.0" prefHeight="555.0" prefWidth="200.0" styleClass="nav-form" stylesheets="@../GUI/windowsStyle.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <AnchorPane id="navForm" layoutY="103.0" prefHeight="555.0" prefWidth="200.0" styleClass="nav-form" stylesheets="@../OneDrive%20-%20Universidad%20Veracruzana/Documentos/4to%20semestre/COIL-VIC-YOYOK/Código/COIL_VIC/src/GUI/declinedCollaborations.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <children>
                               <Label id="welcome" layoutX="57.0" layoutY="166.0" text="Bienvenido," textFill="WHITE">
                                  <font>
@@ -65,27 +65,27 @@
                                  </font>
                               </Label>
                               <Line endX="70.0" layoutX="116.0" layoutY="221.0" startX="-100.0" />
-                              <Button id="home" layoutX="11.0" layoutY="238.0" minHeight="40.0" mnemonicParsing="false" prefWidth="180.0" styleClass="nav-btn" stylesheets="@../GUI/windowsStyle.css" text="Inicio">
+                              <Button id="home" layoutX="11.0" layoutY="238.0" minHeight="40.0" mnemonicParsing="false" prefWidth="180.0" styleClass="nav-btn" stylesheets="@../OneDrive%20-%20Universidad%20Veracruzana/Documentos/4to%20semestre/COIL-VIC-YOYOK/Código/COIL_VIC/src/GUI/declinedCollaborations.css" text="Inicio">
                                  <graphic>
                                     <FontAwesomeIcon fill="WHITE" glyphName="HOME" />
                                  </graphic>
                               </Button>
-                              <Button id="whorkshop" layoutX="11.0" layoutY="278.0" minHeight="40.0" mnemonicParsing="false" prefWidth="180.0" styleClass="nav-btn" stylesheets="@../GUI/windowsStyle.css" text="Curso-Talleres">
+                              <Button id="whorkshop" layoutX="11.0" layoutY="278.0" minHeight="40.0" mnemonicParsing="false" prefWidth="180.0" styleClass="nav-btn" stylesheets="@../OneDrive%20-%20Universidad%20Veracruzana/Documentos/4to%20semestre/COIL-VIC-YOYOK/Código/COIL_VIC/src/GUI/declinedCollaborations.css" text="Curso-Talleres">
                                  <graphic>
                                     <FontAwesomeIcon fill="WHITE" glyphName="BOOK" />
                                  </graphic>
                               </Button>
-                              <Button id="colaborations" layoutX="11.0" layoutY="318.0" minHeight="40.0" mnemonicParsing="false" prefWidth="180.0" styleClass="nav-btn" stylesheets="@../GUI/windowsStyle.css" text="Colaboraciones">
+                              <Button id="colaborations" layoutX="11.0" layoutY="318.0" minHeight="40.0" mnemonicParsing="false" prefWidth="180.0" styleClass="nav-btn" stylesheets="@../OneDrive%20-%20Universidad%20Veracruzana/Documentos/4to%20semestre/COIL-VIC-YOYOK/Código/COIL_VIC/src/GUI/declinedCollaborations.css" text="Colaboraciones">
                                  <graphic>
                                     <FontAwesomeIcon fill="WHITE" glyphName="GROUP" />
                                  </graphic>
                               </Button>
-                              <Button id="records" layoutX="11.0" layoutY="358.0" minHeight="40.0" mnemonicParsing="false" prefWidth="180.0" styleClass="nav-btn" stylesheets="@../GUI/windowsStyle.css" text="Constancias">
+                              <Button id="records" layoutX="11.0" layoutY="358.0" minHeight="40.0" mnemonicParsing="false" prefWidth="180.0" styleClass="nav-btn" stylesheets="@../OneDrive%20-%20Universidad%20Veracruzana/Documentos/4to%20semestre/COIL-VIC-YOYOK/Código/COIL_VIC/src/GUI/declinedCollaborations.css" text="Constancias">
                                  <graphic>
                                     <FontAwesomeIcon fill="WHITE" glyphName="TROPHY" />
                                  </graphic>
                               </Button>
-                              <Button id="logOutB" layoutX="12.0" layoutY="514.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="36.0" stylesheets="@../GUI/windowsStyle.css">
+                              <Button id="logOutB" layoutX="12.0" layoutY="514.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="36.0" stylesheets="@../OneDrive%20-%20Universidad%20Veracruzana/Documentos/4to%20semestre/COIL-VIC-YOYOK/Código/COIL_VIC/src/GUI/declinedCollaborations.css">
                                  <styleClass>
                                     <String fx:value="logout" />
                                     <String fx:value="shadow" />
@@ -110,13 +110,13 @@
                      <children>
                         <AnchorPane layoutX="119.0" layoutY="114.0" prefHeight="555.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <children>
-                              <AnchorPane layoutX="14.0" layoutY="15.0" prefHeight="525.0" prefWidth="772.0" stylesheets="@../GUI/windowsStyle.css">
+                              <AnchorPane layoutX="14.0" layoutY="15.0" prefHeight="525.0" prefWidth="772.0" stylesheets="@../OneDrive%20-%20Universidad%20Veracruzana/Documentos/4to%20semestre/COIL-VIC-YOYOK/Código/COIL_VIC/src/GUI/declinedCollaborations.css">
                                  <styleClass>
                                     <String fx:value="white-bg" />
                                     <String fx:value="shadow" />
                                  </styleClass>
                                  <children>
-                                    <TableView id="tableView" fx:id="tableViewDeclinedCollaborations" layoutX="6.0" layoutY="61.0" prefHeight="458.0" prefWidth="751.0" stylesheets="@../GUI/windowsStyle.css">
+                                    <TableView id="tableView" fx:id="tableViewPublishedCollaborations" layoutX="6.0" layoutY="61.0" prefHeight="458.0" prefWidth="751.0" stylesheets="@../OneDrive%20-%20Universidad%20Veracruzana/Documentos/4to%20semestre/COIL-VIC-YOYOK/Código/COIL_VIC/src/GUI/declinedCollaborations.css">
                                       <columns>
                                        <TableColumn fx:id="tableColumnCollaborationId" prefWidth="70.0" text="ID">
                                         <cellValueFactory>
@@ -145,8 +145,8 @@
                                           </TableColumn>
                                       </columns>
                                     </TableView>
-                                    <Button id="discard" layoutX="701.0" layoutY="3.0" mnemonicParsing="false" styleClass="descartar" stylesheets="@../GUI/windowsStyle.css" text="Descartar" />
-                                    <TextField id="textFieldSearch" fx:id="textFieldSearch" layoutX="24.0" layoutY="23.0" onAction="#searchDeclinedCollaborations" prefHeight="25.0" prefWidth="281.0" promptText="Buscar" styleClass="search" stylesheets="@../GUI/windowsStyle.css" />
+                                    <Button id="discard" layoutX="701.0" layoutY="3.0" mnemonicParsing="false" styleClass="descartar" stylesheets="@../OneDrive%20-%20Universidad%20Veracruzana/Documentos/4to%20semestre/COIL-VIC-YOYOK/Código/COIL_VIC/src/GUI/declinedCollaborations.css" text="Descartar" />
+                                    <TextField id="textFieldSearch" fx:id="textFieldSearch" layoutX="24.0" layoutY="23.0" onAction="#searchPublishedCollaborations" prefHeight="25.0" prefWidth="281.0" promptText="Buscar" styleClass="search" stylesheets="@../OneDrive%20-%20Universidad%20Veracruzana/Documentos/4to%20semestre/COIL-VIC-YOYOK/Código/COIL_VIC/src/GUI/declinedCollaborations.css" />
                                     <FontAwesomeIcon glyphName="SEARCH" layoutX="28.0" layoutY="42.0" size="1.75em" />
                                  </children>
                               </AnchorPane>

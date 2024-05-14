@@ -241,15 +241,15 @@ public class ProfessorDAO implements IProfessor{
     return result;
     }
 
-    public int professorRequestCollaboration(Professor professor){
+    public int professorRequestCollaboration(int idColaboración, int idProfesor){
         DatabaseManager dbManager = new DatabaseManager();
-        String query = "UPDATE profesor SET idColaboración = ? WHERE idProfesor = ?";
+        String query = "INSERT INTO solicitud_Colaboración (idColaboración, idProfesor) VALUES (?,?)";
         int result = 0;
         try {
             Connection connection = dbManager.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setInt(1, professor.getCollaborationId());
-            preparedStatement.setInt(2, professor.getProfessorId());
+            preparedStatement.setInt(1, idColaboración);
+            preparedStatement.setInt(2, idProfesor);
             result = preparedStatement.executeUpdate();
         } catch (SQLException professorRequestCollaboratioException){
             LOG.error("ERROR: ", professorRequestCollaboratioException);

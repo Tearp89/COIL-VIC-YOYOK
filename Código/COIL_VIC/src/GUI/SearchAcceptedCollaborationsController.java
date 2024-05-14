@@ -52,7 +52,7 @@ public class SearchAcceptedCollaborationsController {
 
     @FXML
     private TextField textFieldSearch;
-        public void searchActiveCollaborations(ActionEvent event){
+        public void searchAcceptedCollaborations(ActionEvent event){
         CollaborationDAO collaborationDAO = new CollaborationDAO();
         ArrayList<Collaboration> activeCollaborations = new ArrayList<>();
         String collaborationName = "%" + textFieldSearch.getText() + "%";
@@ -84,7 +84,7 @@ public class SearchAcceptedCollaborationsController {
 
                         
                     } catch (IOException e){
-                        e.printStackTrace();
+                        //TODO: Agregar bitácora
                     }
                 }
             }

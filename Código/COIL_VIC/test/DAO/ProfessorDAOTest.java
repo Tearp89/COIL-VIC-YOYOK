@@ -216,23 +216,22 @@ public class ProfessorDAOTest {
 
         @Test
         public void professorRequestCollaborationSuccess(){
-            Professor professor = new Professor();
+            
             ProfessorDAO professorDAO = new ProfessorDAO();
-            professor.setProfessorId(10);
-            professor.setCollaborationId(15);
+           int idProfesor = 24;
+           int idColaboración = 33;
 
-            int result = professorDAO.professorRequestCollaboration(professor);
+            int result = professorDAO.professorRequestCollaboration(idColaboración, idProfesor);
             assertEquals(1, result);
         }
 
         @Test
         public void professorRequestCollaborationFailed(){
-            Professor professor = new Professor();
             ProfessorDAO professorDAO = new ProfessorDAO();
-            professor.setProfessorId(100000);
-            professor.setCollaborationId(213231);
+            int idProfesor = 12343;
+            int idColaboración = 8239230;
 
-            int result = professorDAO.professorRequestCollaboration(professor);
+            int result = professorDAO.professorRequestCollaboration(idColaboración, idProfesor);
             assertEquals(0, result);
         }
 }       

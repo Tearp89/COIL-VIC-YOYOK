@@ -11,7 +11,7 @@ import javafx.scene.control.TextField;
 import logic.DAO.CollaborationDAO;
 import logic.classes.Collaboration;
 
-public class addCollaborationController {    
+public class AddCollaborationController {    
     
     @FXML
     private TextField textFieldCollaborationName;
@@ -19,7 +19,6 @@ public class addCollaborationController {
     private DatePicker datePickerStartDate;
     @FXML
     private DatePicker datePickerFinishDate;
-
     @FXML
     private TextArea textAreaCollaborationDescription;
 
