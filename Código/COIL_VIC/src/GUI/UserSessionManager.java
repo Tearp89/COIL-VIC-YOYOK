@@ -6,6 +6,10 @@ public class UserSessionManager {
     private Professor professorUser;
     private Admin adminUser;
 
+    private UserSessionManager(){
+
+    }
+    
     public static UserSessionManager getInstance(){
         if (instance == null){
             instance = new UserSessionManager();

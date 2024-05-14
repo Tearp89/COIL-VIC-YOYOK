@@ -6,10 +6,8 @@ package logic.DAO;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 import dataAccess.DatabaseManager;
 import log.Log;
 import logic.interfaces.IAdmin;
@@ -19,7 +17,7 @@ import logic.classes.Admin;
  * @author isabe
  */
 public class AdminDAO implements IAdmin {
-    private static final org.apache.log4j.Logger LOG = Log.getLogger(CollaborationDAO.class);
+    private static final org.apache.log4j.Logger LOG = Log.getLogger(AdminDAO.class);
     
     public int addAdmin (Admin admin){
         DatabaseManager dbManager = new DatabaseManager();
@@ -71,5 +69,28 @@ public class AdminDAO implements IAdmin {
             LOG.error("ERROR: ", updateAdminException);
         }
         return result;
+    }
+
+    public String getAdminNameByUser(String user){
+        String name = null;
+        DatabaseManager dbManager = new DatabaseManager();
+        String query = "SELECT nombreAdministrador FROM administrador WHERE usuario = ? ";
+        try {
+            Connection connection = dbManager.getConnection();
+            try(PreparedStatement preparedStatement = connection.prepareStatement(query)){
+                preparedStatement.setString(1, user);
+                ResultSet resultSet = preparedStatement.executeQuery();
+
+                if(resultSet.next()){
+                    name = resultSet.getString("nombreAdministrador");
+                }
+                
+            }
+        } catch (SQLException getAdminNameByUserException) {
+            LOG.error(getAdminNameByUserException);
+            getAdminNameByUserException.printStackTrace();
+        }   
+
+        return name;
     }
 }

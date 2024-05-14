@@ -10,22 +10,29 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Menu;
 import javafx.scene.control.TableView;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.stage.FileChooser;
 import log.Log;
 import logic.RegionData;
 import logic.AcademicAreaData;
 import logic.SaveToFile;
+import logic.classes.Admin;
 /**
  *
  * @author daur0
  */
-public class numeraliaController {
-    private static final org.apache.log4j.Logger LOG = Log.getLogger(numeraliaController.class);
+public class NumeraliaController {
+    private static final org.apache.log4j.Logger LOG = Log.getLogger(NumeraliaController.class);
+    
 
     @FXML
     private Menu menuItem2017;
@@ -62,9 +69,6 @@ public class numeraliaController {
     private Button buttonHome;
 
     @FXML
-    private Button buttonWorkshop;
-
-    @FXML
     private Button buttonCollaborations;
 
     @FXML
@@ -79,6 +83,12 @@ public class numeraliaController {
     @FXML
     private Button buttonClose;
 
+    @FXML
+    private Button buttonConfiguration;
+
+    @FXML
+    private Label labelName;
+
     private ObservableList<RegionData> regionDataList = FXCollections.observableArrayList();
     private ObservableList<AcademicAreaData> academicAreaDataList = FXCollections.observableArrayList();
     
@@ -91,13 +101,6 @@ public class numeraliaController {
 
     @FXML
     private void closeWindow(ActionEvent event){
-        Node source = (Node) event.getSource();
-        Stage stage = (Stage) source.getScene().getWindow();
-        stage.close();
-    }
-
-    @FXML
-    private void goHome(ActionEvent event){
         Node source = (Node) event.getSource();
         Stage stage = (Stage) source.getScene().getWindow();
         stage.close();
@@ -157,6 +160,9 @@ public class numeraliaController {
         loadDataByYear("2022");
 
         buttonDownload.setOnAction(this::handleDownloadButton);
+        Admin adminData = new Admin();
+        adminData = UserSessionManager.getInstance().getAdminUserData();
+        labelName.setText(adminData.getAdminName());
     }
     
     private void loadDataByYear(String year) {
@@ -204,4 +210,39 @@ public class numeraliaController {
         }
     }
 
+    @FXML
+    private void gotoHome(ActionEvent event){
+        FXMLLoader homeLoader = new FXMLLoader(getClass().getResource("/GUI/adminHome.fxml"));
+        try {
+            Parent root = homeLoader.load();
+            Scene homeScene = new Scene(root);
+            Stage homeStage = new Stage();
+            homeStage.initStyle(StageStyle.TRANSPARENT);
+            homeStage.setScene(homeScene);
+            homeStage.show();
+            Node source = (Node) event.getSource();
+            Stage stage = (Stage) source.getScene().getWindow();
+            stage.close();
+        } catch (IOException goToHomeException){
+            LOG.error(goToHomeException);
+        }
+    }
+
+    @FXML
+    private void logout(ActionEvent event){
+        FXMLLoader loginLoader = new FXMLLoader(getClass().getResource("/GUI/login.fxml"));
+        try {
+            UserSessionManager.getInstance().logoutAdmin();
+            Parent root = loginLoader.load();
+            Scene loginScene = new Scene(root);
+            Stage loginStage = new Stage();
+            loginStage.setScene(loginScene);
+            loginStage.show();
+            Node source = (Node) event.getSource();
+            Stage stage = (Stage) source.getScene().getWindow();
+            stage.close();
+        } catch (IOException goToLoginException){
+            LOG.error(goToLoginException);
+        }
+    }
 }

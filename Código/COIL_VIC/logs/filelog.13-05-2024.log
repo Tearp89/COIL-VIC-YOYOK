@@ -368,3 +368,13 @@ java.sql.SQLSyntaxErrorException: Table 'coil_vic.colaboraciones registradas' do
 	at javafx.graphics@21.0.2/com.sun.glass.ui.win.WinApplication._runLoop(Native Method)
 	at javafx.graphics@21.0.2/com.sun.glass.ui.win.WinApplication.lambda$runLoop$3(WinApplication.java:185)
 	at java.base/java.lang.Thread.run(Thread.java:1583)
+13-05-2024 18:43:18 DEBUG LogTest:22: DEBUG: test
+13-05-2024 18:43:18 INFO  LogTest:23: INFO: test
+13-05-2024 18:43:18 ERROR LogTest:24: ERROR: test
+13-05-2024 18:43:18 WARN  LogTest:25: WARN: test
+13-05-2024 18:43:18 FATAL LogTest:26: FATAL: test
+13-05-2024 18:43:50 DEBUG LogTest:22: DEBUG: test
+13-05-2024 18:43:50 INFO  LogTest:23: INFO: test
+13-05-2024 18:43:50 ERROR LogTest:24: ERROR: test
+13-05-2024 18:43:50 WARN  LogTest:25: WARN: test
+13-05-2024 18:43:50 FATAL LogTest:26: FATAL: test
