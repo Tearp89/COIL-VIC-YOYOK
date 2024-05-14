@@ -12695,3 +12695,32 @@ java.sql.SQLSyntaxErrorException: Table 'coil_vic.colaboraciones registradas' do
 	at javafx.graphics@21.0.2/com.sun.glass.ui.win.WinApplication._runLoop(Native Method)
 	at javafx.graphics@21.0.2/com.sun.glass.ui.win.WinApplication.lambda$runLoop$3(WinApplication.java:185)
 	at java.base/java.lang.Thread.run(Thread.java:1583)
+2024-05-14 15:25:29 ERROR CollaborationDAO:85 - java.sql.SQLSyntaxErrorException: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '?' at line 1
+2024-05-14 15:25:31 ERROR loginController:68 - javafx.fxml.LoadException: 
+/C:/Users/daur0/OneDrive/Documentos/Universidad/4to%20Semestre/Principios%20de%20Construcci%c3%b3n/Proyecto%20COIL-VIC/COIL-VIC-YOYOK/C%c3%b3digo/COIL_VIC/build/classes/GUI/adminHome.fxml:30
+
+2024-05-14 15:29:09 ERROR CollaborationDAO:85 - java.sql.SQLSyntaxErrorException: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '?' at line 1
+2024-05-14 15:29:11 ERROR loginController:68 - javafx.fxml.LoadException: 
+/C:/Users/daur0/OneDrive/Documentos/Universidad/4to%20Semestre/Principios%20de%20Construcci%c3%b3n/Proyecto%20COIL-VIC/COIL-VIC-YOYOK/C%c3%b3digo/COIL_VIC/build/classes/GUI/adminHome.fxml:30
+
+2024-05-14 15:29:43 ERROR CollaborationDAO:85 - java.sql.SQLSyntaxErrorException: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '?' at line 1
+2024-05-14 15:29:44 ERROR loginController:68 - javafx.fxml.LoadException: 
+/C:/Users/daur0/OneDrive/Documentos/Universidad/4to%20Semestre/Principios%20de%20Construcci%c3%b3n/Proyecto%20COIL-VIC/COIL-VIC-YOYOK/C%c3%b3digo/COIL_VIC/build/classes/GUI/adminHome.fxml:30
+
+2024-05-14 15:32:39 ERROR CollaborationDAO:85 - java.sql.SQLSyntaxErrorException: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '?' at line 1
+2024-05-14 15:33:55 ERROR CollaborationDAO:85 - java.sql.SQLSyntaxErrorException: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '?' at line 1
+2024-05-14 15:33:57 ERROR loginController:68 - javafx.fxml.LoadException: 
+/C:/Users/daur0/OneDrive/Documentos/Universidad/4to%20Semestre/Principios%20de%20Construcci%c3%b3n/Proyecto%20COIL-VIC/COIL-VIC-YOYOK/C%c3%b3digo/COIL_VIC/build/classes/GUI/adminHome.fxml:30
+
+2024-05-14 15:34:38 ERROR CollaborationDAO:85 - java.sql.SQLSyntaxErrorException: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '?' at line 1
+2024-05-14 15:34:40 ERROR loginController:68 - javafx.fxml.LoadException: 
+/C:/Users/daur0/OneDrive/Documentos/Universidad/4to%20Semestre/Principios%20de%20Construcci%c3%b3n/Proyecto%20COIL-VIC/COIL-VIC-YOYOK/C%c3%b3digo/COIL_VIC/build/classes/GUI/adminHome.fxml:30
+
+2024-05-14 15:43:45 ERROR CollaborationDAO:85 - java.sql.SQLSyntaxErrorException: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '?' at line 1
+2024-05-14 15:44:14 ERROR CollaborationDAO:85 - java.sql.SQLSyntaxErrorException: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '?' at line 1
+2024-05-14 15:46:23 ERROR CollaborationDAO:85 - java.sql.SQLSyntaxErrorException: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '?' at line 1
+2024-05-14 15:48:04 ERROR AdminDAO:85 - java.sql.SQLSyntaxErrorException: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '?' at line 1
+2024-05-14 15:51:48 ERROR AdminDAO:86 - java.sql.SQLSyntaxErrorException: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '?' at line 1
+2024-05-14 15:52:24 ERROR AdminDAO:86 - [Ljava.lang.StackTraceElement;@5eff5858
+2024-05-14 15:53:45 ERROR AdminDAO:86 - java.sql.SQLSyntaxErrorException: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '?' at line 1
+2024-05-14 15:59:08 ERROR AdminDAO:86 - java.sql.SQLException: Before start of result set
