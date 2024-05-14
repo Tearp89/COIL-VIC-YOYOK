@@ -70,4 +70,23 @@ public class AdminDAOTest {
         assertEquals(1, rowsAffected);
     }
     
+    @Test
+    public void testGetAdminNameByUserSuccess(){
+        Admin admin = new Admin();
+        AdminDAO adminDAO = new AdminDAO();
+
+        admin.setAdminUser("admin");
+        String stringExpected = adminDAO.getAdminNameByUser(admin.getAdminUser());
+        assertEquals("Taylor", stringExpected);
+    }
+
+    @Test
+    public void testGetAdminNameByUserFailed(){
+        Admin admin = new Admin();
+        AdminDAO adminDAO = new AdminDAO();
+
+        admin.setAdminUser("failedTest");
+        String stringExpected = adminDAO.getAdminNameByUser(admin.getAdminUser());
+        assertNotEquals("Taylor", stringExpected);
+    }
 }

@@ -23,13 +23,13 @@ public class MainLogin extends Application{
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUI/login.fxml"));
         Parent root = loader.load();
 
-        loginController loginController = loader.getController();
+        LoginController loginController = loader.getController();
 
         loginController.setStage(primaryStage);
         
 
         Scene scene = new Scene(root);
-       
+
         primaryStage.setScene(scene);
         
         primaryStage.show();
