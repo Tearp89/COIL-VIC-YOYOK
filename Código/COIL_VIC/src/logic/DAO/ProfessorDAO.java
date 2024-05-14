@@ -24,7 +24,8 @@ public class ProfessorDAO implements IProfessor{
 
     public int addProfessor(Professor professor){
         DatabaseManager dbManager = new DatabaseManager();
-        String query = "INSERT INTO profesor(nombreProfesor, estado, tipoProfesor, país, Universidad_idUniversidad, area_academica, correo, usuario, contraseña, telefono) VALUES (?,?,?,?,?,?,?,?,?,?)";
+        String query = "INSERT INTO Profesor (nombreProfesor, estado, tipoProfesor, país, Universidad_idUniversidad, area_academica, correo, usuario, contraseña, telefono) " + 
+                        "VALUES (?, ?, ?, ?, ?, ?, ?, ?, SHA2(?, 256), ?)";
         int result = 0;
         try {
             Connection connection = dbManager.getConnection();

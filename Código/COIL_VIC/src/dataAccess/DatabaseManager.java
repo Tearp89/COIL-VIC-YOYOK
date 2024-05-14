@@ -4,9 +4,13 @@
  */
 package dataAccess;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.Properties;
 import java.util.logging.Level;
 import log.Log;
 import org.apache.log4j.Logger;
@@ -18,10 +22,32 @@ import org.apache.log4j.Logger;
  */
 public class DatabaseManager {
         private Connection connection;
-    private final String DATABASE_NAME="jdbc:mysql://127.0.0.1/COIL_VIC";
-    private final String DATABASE_USER="admin";
-    private final String DATABASE_PASSWORD="taylor";
+    private final String DATABASE_NAME="db.url";
+    private final String DATABASE_USER="db.user";
+    private final String DATABASE_PASSWORD="db.password";
     private static final org.apache.log4j.Logger LOG = Log.getLogger(DatabaseManager.class);
+
+
+    private Properties getDatabaseConfig(){
+        Properties configuration = null;
+        try{
+            FileInputStream databaseConfig = new FileInputStream("src/dataAccess/DatabaseConfig.properties");
+            if(databaseConfig != null){
+                configuration = new Properties();
+                configuration.load(databaseConfig);
+            }
+            databaseConfig.close();
+        } 
+        catch (FileNotFoundException getDatabaseConfigException){
+            LOG.error("ERROR:", getDatabaseConfigException);
+        } 
+        catch (IOException databaseConfigIoException){
+            LOG.error("ERROR:", databaseConfigIoException);
+
+        }
+
+        return configuration;
+    }
     
     public Connection getConnection() throws SQLException{
         connect();
@@ -29,7 +55,15 @@ public class DatabaseManager {
     }
     
     private void connect() throws SQLException{
-        connection=DriverManager.getConnection(DATABASE_NAME,DATABASE_USER,DATABASE_PASSWORD);
+        Properties properties = new DatabaseManager().getDatabaseConfig();
+        if (properties != null){
+            connection=DriverManager.getConnection( properties.getProperty(DATABASE_NAME), 
+             properties.getProperty(DATABASE_USER), 
+            properties.getProperty(DATABASE_PASSWORD));
+        } else {
+            throw new SQLException ("No se pudo conectar a la base de datos");
+        }
+        
     }
     
          public void closeConnection(){

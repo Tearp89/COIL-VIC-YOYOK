@@ -23,7 +23,7 @@ public class AdminDAO implements IAdmin {
     
     public int addAdmin (Admin admin){
         DatabaseManager dbManager = new DatabaseManager();
-        String query = "INSERT INTO administrador (idAdministrativo, contraseña, nombreAdministrador, rol, usuario) VALUES (?,?,?,?)";
+        String query = "INSERT INTO administrador (contraseña, nombreAdministrador, rol, usuario) VALUES (SHA2(?, 256),?,?,?)";
         int result = 0;
         try{
             Connection connection = dbManager.getConnection();

@@ -27,7 +27,6 @@ public class AdminDAOTest {
     public void testAddAdmin() {
         Admin admin = new Admin();
         AdminDAO adminDAO = new AdminDAO();
-        admin.setAdminId(1);
         admin.setAdminName("AdminNombreTest");
         admin.setAdminRol("RolTest");
         admin.setAdminUser("UsuarioAdminTest");

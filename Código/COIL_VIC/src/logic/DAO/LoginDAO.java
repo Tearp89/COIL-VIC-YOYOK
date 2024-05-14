@@ -13,7 +13,7 @@ public class LoginDAO {
 
     public boolean validateAdmin(String username, String password) {
         DatabaseManager dbManager = new DatabaseManager();
-        String query = "SELECT COUNT(*) AS count FROM administrador WHERE usuario = ? AND contraseña = ?";
+        String query = "SELECT COUNT(*) AS count FROM administrador WHERE usuario = ? AND contraseña = SHA2(?, 256)";
         try (Connection connection = dbManager.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setString(1, username);
@@ -21,13 +21,15 @@ public class LoginDAO {
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 if (resultSet.next()) {
                     int count = resultSet.getInt("count");
-                    return count == 1; // Si el conteo es 1, significa que se encontró un usuario con las credenciales proporcionadas
+                    return count == 1; 
                 }
             }
         } catch (SQLException e) {
             LOG.error("ERROR: ", e);
         }
-        return false; // Si ocurre una excepción o no se encontró ningún usuario con las credenciales proporcionadas
+        return false; 
     }
+
+    
     
 }
