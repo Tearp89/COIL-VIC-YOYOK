@@ -76,9 +76,9 @@
                                     <FontAwesomeIcon fill="WHITE" glyphName="GROUP" />
                                  </graphic>
                               </Button>
-                              <Button id="records" layoutX="11.0" layoutY="317.0" minHeight="40.0" mnemonicParsing="false" prefWidth="180.0" styleClass="nav-btn" stylesheets="@inicio.css" text="Constancias">
+                              <Button id="records" layoutX="16.0" layoutY="317.0" minHeight="40.0" mnemonicParsing="false" prefWidth="180.0" styleClass="nav-btn" stylesheets="@inicio.css" text="Estudiantes">
                                  <graphic>
-                                    <FontAwesomeIcon fill="WHITE" glyphName="TROPHY" />
+                                    <FontAwesomeIcon fill="WHITE" glyphName="MALE" />
                                  </graphic>
                               </Button>
                               <Button id="logOutB" fx:id="buttonLogout" layoutX="12.0" layoutY="514.0" mnemonicParsing="false" onAction="#logout" prefHeight="26.0" prefWidth="36.0" stylesheets="@inicio.css">
@@ -119,7 +119,7 @@
                                  <children>
                                     <Button id="buttonEditCollaboration" fx:id="buttonOpenCollaboration" layoutX="726.0" layoutY="484.0" mnemonicParsing="false" onAction="#openCollaboration" prefWidth="38.0" styleClass="descartar" stylesheets="@inicio.css">
                                        <graphic>
-                                          <FontAwesomeIcon id="editButton" glyphName="UPLOAD" size="1.5em" />
+                                          <FontAwesomeIcon id="editButton" glyphName="PLUS" size="1.5em" />
                                        </graphic>
                                     </Button>
                                     <Label layoutX="25.0" layoutY="77.0" text="Descripción:">
@@ -127,7 +127,7 @@
                                           <Font name="Tahoma" size="20.0" />
                                        </font>
                                     </Label>
-                                    <TextArea id="DescriptionTextArea" fx:id="textAreaDescription" layoutX="179.0" layoutY="77.0" prefHeight="161.0" prefWidth="508.0" stylesheets="@inicio.css" wrapText="true">
+                                    <TextArea id="DescriptionTextArea" fx:id="textAreaDescription" editable="false" layoutX="179.0" layoutY="77.0" prefHeight="161.0" prefWidth="508.0" stylesheets="@inicio.css">
                                        <styleClass>
                                           <String fx:value="textfield" />
                                           <String fx:value="shadow" />
@@ -157,7 +157,7 @@
                                           <Font name="Tahoma" size="20.0" />
                                        </font>
                                     </Label>
-                                    <TextField id="goaldTextField" fx:id="textFieldObjective" layoutX="180.0" layoutY="310.0" prefHeight="25.0" prefWidth="512.0" stylesheets="@inicio.css">
+                                    <TextField id="goaldTextField" fx:id="textFieldObjective" editable="false" layoutX="180.0" layoutY="310.0" prefHeight="25.0" prefWidth="512.0" stylesheets="@inicio.css">
                                        <styleClass>
                                           <String fx:value="textfield" />
                                           <String fx:value="shadow" />
@@ -168,7 +168,7 @@
                                           <Font name="Tahoma" size="20.0" />
                                        </font>
                                     </Label>
-                                    <TextField id="numStudentsTextField" fx:id="textFieldStudentCount" layoutX="179.0" layoutY="359.0" prefHeight="25.0" prefWidth="89.0" stylesheets="@inicio.css">
+                                    <TextField id="numStudentsTextField" fx:id="textFieldStudentCount" editable="false" layoutX="179.0" layoutY="359.0" prefHeight="25.0" prefWidth="89.0" stylesheets="@inicio.css">
                                        <styleClass>
                                           <String fx:value="textfield" />
                                           <String fx:value="shadow" />
@@ -189,12 +189,12 @@
                                           <Font name="Tahoma" size="20.0" />
                                        </font>
                                     </Label>
-                                    <TextArea id="studentsTextArea" fx:id="textAreaStudentProfile" layoutX="180.0" layoutY="410.0" prefHeight="70.0" prefWidth="508.0" stylesheets="@inicio.css" wrapText="true">
+                                    <TextArea id="studentsTextArea" fx:id="textAreaStudentProfile" editable="false" layoutX="180.0" layoutY="410.0" prefHeight="70.0" prefWidth="508.0" stylesheets="@inicio.css" wrapText="true">
                                        <styleClass>
                                           <String fx:value="textfield" />
                                           <String fx:value="shadow" />
                                        </styleClass></TextArea>
-                                    <TextField id="nameTextField" fx:id="textFieldName" layoutX="182.0" layoutY="31.0" prefHeight="25.0" prefWidth="506.0" stylesheets="@inicio.css">
+                                    <TextField id="nameTextField" fx:id="textFieldName" editable="false" layoutX="182.0" layoutY="31.0" prefHeight="25.0" prefWidth="506.0" stylesheets="@inicio.css">
                                        <styleClass>
                                           <String fx:value="textfield" />
                                           <String fx:value="shadow" />

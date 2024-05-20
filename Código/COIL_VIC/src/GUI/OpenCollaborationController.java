@@ -2,9 +2,6 @@ package GUI;
 
 import java.io.IOException;
 import java.time.LocalDate;
-import java.util.Arrays;
-import java.util.List;
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -18,7 +15,6 @@ import log.Log;
 import javafx.scene.control.Alert.AlertType;
 import logic.FieldValidator;
 import logic.DAO.CollaborationDAO;
-import logic.classes.Collaboration;
 
 public class OpenCollaborationController {
     private static final org.apache.log4j.Logger LOG = Log.getLogger(OpenCollaborationController.class);
@@ -66,23 +62,42 @@ public class OpenCollaborationController {
     private Button buttonOpenCollaboration;
 
     @FXML
-    private void initialize(){
-        List<String> comboBoxOptions = Arrays.asList("Opcion 1", "Opción 2");
-        comboBoxSubject.getItems().addAll(comboBoxOptions);
+    private int collaborationId;
+
+    @FXML
+    public void initialize(int collaborationIdEdit){
+        this.collaborationId = collaborationIdEdit;
+        CollaborationDAO collaborationDAO = new CollaborationDAO();
+        String name = collaborationDAO.getCollaborationNameById(collaborationId);
+        String description = collaborationDAO.getCollaborationDescriptionById(collaborationId);
+        String startDate = collaborationDAO.getCollaborationStartDateById(collaborationId);
+        String finishDate = collaborationDAO.getCollaborationFinishDateById(collaborationId);
+        String collaborationGoal = collaborationDAO.getCollaborationGoalById(collaborationId);
+        String collaborationSubject = collaborationDAO.getCollaborationSubjectById(collaborationId);
+        int noStudents = collaborationDAO.getNumberStudentsById(collaborationId);
+        String studentProfile = collaborationDAO.getStudentProfileById(collaborationId);
+        textFieldName.setText(name);
+        textAreaDescription.setText(description);
+        datePickerStartDate.setValue(LocalDate.parse(startDate));
+        datePickerFinishDate.setValue(LocalDate.parse(finishDate));
+        textFieldObjective.setText(collaborationGoal);
+        comboBoxSubject.setValue(collaborationSubject);
+        textFieldStudentCount.setText(String.valueOf(noStudents));
+        textAreaStudentProfile.setText(studentProfile);
     }
 
     @FXML
-    private void minimizeWindow(ActionEvent event){
+    public void minimizeWindow(ActionEvent event){
         ChangeWindowManager.minimizeWindow(event);
     }
 
     @FXML
-    private void closeWindow(ActionEvent event){
+    public void closeWindow(ActionEvent event){
         ChangeWindowManager.closeWindow(event);
     }
 
     @FXML
-    private void logout(ActionEvent event){
+    public void logout(ActionEvent event){
         FXMLLoader loginLoader = new FXMLLoader(getClass().getResource("/GUI/login.fxml"));
         try {
             ChangeWindowManager.logout(event, loginLoader);
@@ -93,51 +108,44 @@ public class OpenCollaborationController {
     }
 
     @FXML
-    private void openCollaboration(ActionEvent event){
+    public void openCollaboration(ActionEvent event){
         String collaborationName = textFieldName.getText();
         String collaborationDescription = textAreaDescription.getText();
         String collaborationGoal = textFieldObjective.getText();
         String studentCount = textFieldStudentCount.getText();
         String studentProfile = textAreaStudentProfile.getText();
-        LocalDate starDate = datePickerStartDate.getValue();
-        LocalDate finishDate = datePickerFinishDate.getValue();
         String subject = comboBoxSubject.getValue();
 
-        if (FieldValidator.onlyTextAndNumbers(collaborationName) && FieldValidator.onlyTextAndNumbers(collaborationDescription) && FieldValidator.onlyTextAndNumbers(collaborationGoal) &&
-        FieldValidator.onlyNumber(studentCount) && FieldValidator.onlyText(studentProfile) && FieldValidator.onlyTextAndNumbers(subject)){
+        if (!collaborationName.isBlank() && !collaborationDescription.isBlank() && !collaborationGoal.isBlank() &&
+        FieldValidator.onlyNumber(studentCount) && !studentProfile.isBlank() && !subject.isBlank()){
             int noStudents = Integer.parseInt(studentCount);
-            Collaboration collaboration = new Collaboration();
-            collaboration.setCollaborationName(collaborationName);
-            collaboration.setCollaborationGoal(collaborationGoal);
-            collaboration.setDescription(collaborationDescription);
-            collaboration.setNoStudents(noStudents);
-            collaboration.setStudentProfile(studentProfile);
-            collaboration.setStartDate(starDate);
-            collaboration.setFinishDate(finishDate);
-            collaboration.setSubject(subject);
-
-            CollaborationDAO instance = new CollaborationDAO();
-            int result = instance.addCollaboration(collaboration);
-            if (result == 1){
-                Alert collaborationUpdatedAlert = new Alert(AlertType.CONFIRMATION);
-                collaborationUpdatedAlert.setTitle("Confirmación registro");
-                collaborationUpdatedAlert.setHeaderText("Confirmación colaboración");
-                collaborationUpdatedAlert.setContentText("Se abrio de manera exitosa la colaboración");
-                collaborationUpdatedAlert.show();
-
-                textFieldName.clear();
-                textAreaDescription.clear();
-                textFieldObjective.clear();
-                textFieldStudentCount.clear();
-                textAreaStudentProfile.clear();
-                datePickerStartDate.setValue(null);
-                datePickerFinishDate.setValue(null);
-                comboBoxSubject.setValue(null);
+            if(noStudents > 0) {
+                CollaborationDAO instance = new CollaborationDAO();
+                int result = instance.changeCollaborationStatus("Activa",collaborationId);
+                if (result == 1){
+                    Alert collaborationUpdatedAlert = new Alert(AlertType.CONFIRMATION);
+                    collaborationUpdatedAlert.setTitle("Confirmación registro");
+                    collaborationUpdatedAlert.setHeaderText("Confirmación colaboración");
+                    collaborationUpdatedAlert.setContentText("Se abrio de manera exitosa la colaboración");
+                    collaborationUpdatedAlert.show();
+                } else {
+                    Alert emptyFieldsAlert = new Alert(AlertType.ERROR);
+                    emptyFieldsAlert.setTitle("Ocurrio un error");
+                    emptyFieldsAlert.setContentText("Hubo un error al activar la colaboración");
+                    emptyFieldsAlert.setHeaderText("Ocurrio un error");
+                    emptyFieldsAlert.show();
+                }
+            } else {
+                Alert emptyFieldsAlert = new Alert(AlertType.ERROR);
+                emptyFieldsAlert.setTitle("Cantidad de alumnos invalida");
+                emptyFieldsAlert.setContentText("Se requieren más alumnos para activar una colaboración");
+                emptyFieldsAlert.setHeaderText("Cantidad alumnos invalida");
+                emptyFieldsAlert.show();
             }
         } else {
             Alert emptyFieldsAlert = new Alert(AlertType.ERROR);
             emptyFieldsAlert.setTitle("Campos erroneos");
-            emptyFieldsAlert.setContentText("No se pudo abrir la colaboración hay campos incorrectos");
+            emptyFieldsAlert.setContentText("No se pudo abrir la colaboración, revise los campos");
             emptyFieldsAlert.setHeaderText("Campos erroneos");
             emptyFieldsAlert.show();
         }
