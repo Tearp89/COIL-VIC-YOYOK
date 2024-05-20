@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon?>
+<?import java.lang.String?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.OpenCollaborationController">
+   <children>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0">
+         <children>
+            <BorderPane layoutX="148.0" layoutY="171.0" prefHeight="600.0" prefWidth="800.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <top>
+                  <AnchorPane id="topForm" prefHeight="45.0" prefWidth="200.0" style="-fx-border-color: black;" styleClass="top-form" stylesheets="@inicio.css" BorderPane.alignment="CENTER">
+                     <children>
+                        <AnchorPane id="semiTopForm" layoutY="-8.0" prefHeight="35.0" prefWidth="800.0" style="-fx-border-color: black;" styleClass="semi-top-form" stylesheets="@inicio.css" AnchorPane.bottomAnchor="8.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-8.0">
+                           <children>
+                              <Button id="close" fx:id="buttonClose" layoutX="968.0" layoutY="10.0" mnemonicParsing="false" onAction="#closeWindow" prefHeight="25.0" prefWidth="32.0" styleClass="close" stylesheets="@inicio.css">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                                 <graphic>
+                                    <FontAwesomeIcon glyphName="CLOSE" />
+                                 </graphic>
+                              </Button>
+                              <Button id="minimize" fx:id="buttonMinimize" layoutX="930.0" layoutY="10.0" mnemonicParsing="false" onAction="#minimizeWindow" prefHeight="25.0" prefWidth="32.0" styleClass="minimize" stylesheets="@inicio.css">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                                 <graphic>
+                                    <FontAwesomeIcon glyphName="MINUS" />
+                                 </graphic>
+                              </Button>
+                              <Label layoutX="14.0" layoutY="14.0" text="Abrir Colaboración" textFill="WHITE">
+                                 <font>
+                                    <Font name="Tahoma Bold" size="17.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </AnchorPane>
+                     </children>
+                  </AnchorPane>
+               </top>
+               <left>
+                  <AnchorPane prefHeight="555.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                     <children>
+                        <AnchorPane id="navForm" layoutY="103.0" prefHeight="555.0" prefWidth="200.0" styleClass="nav-form" stylesheets="@inicio.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <children>
+                              <Label id="welcome" layoutX="57.0" layoutY="166.0" stylesheets="@inicio.css" text="Bienvenido," textFill="WHITE">
+                                 <font>
+                                    <Font name="Tahoma" size="17.0" />
+                                 </font>
+                              </Label>
+                              <Label id="user" alignment="CENTER" layoutX="6.0" layoutY="187.0" prefHeight="23.0" prefWidth="190.0" text="user" textFill="WHITE">
+                                 <font>
+                                    <Font name="Arial Bold" size="20.0" />
+                                 </font>
+                              </Label>
+                              <Line endX="70.0" layoutX="116.0" layoutY="221.0" startX="-100.0" />
+                              <Button id="home" fx:id="buttonHome" layoutX="11.0" layoutY="238.0" minHeight="40.0" mnemonicParsing="false" prefWidth="180.0" styleClass="nav-btn" stylesheets="@inicio.css" text="Inicio">
+                                 <graphic>
+                                    <FontAwesomeIcon fill="WHITE" glyphName="HOME" />
+                                 </graphic>
+                              </Button>
+                              <Button id="colaborations" fx:id="buttonCollaborations" layoutX="11.0" layoutY="277.0" minHeight="40.0" mnemonicParsing="false" prefWidth="180.0" styleClass="nav-btn" stylesheets="@inicio.css" text="Colaboraciones">
+                                 <graphic>
+                                    <FontAwesomeIcon fill="WHITE" glyphName="GROUP" />
+                                 </graphic>
+                              </Button>
+                              <Button id="records" layoutX="16.0" layoutY="317.0" minHeight="40.0" mnemonicParsing="false" prefWidth="180.0" styleClass="nav-btn" stylesheets="@inicio.css" text="Estudiantes">
+                                 <graphic>
+                                    <FontAwesomeIcon fill="WHITE" glyphName="MALE" />
+                                 </graphic>
+                              </Button>
+                              <Button id="logOutB" fx:id="buttonLogout" layoutX="12.0" layoutY="514.0" mnemonicParsing="false" onAction="#logout" prefHeight="26.0" prefWidth="36.0" stylesheets="@inicio.css">
+                                 <styleClass>
+                                    <String fx:value="logout" />
+                                    <String fx:value="shadow" />
+                                 </styleClass>
+                                 <graphic>
+                                    <FontAwesomeIcon glyphName="SIGN_OUT" size="1.5EM" />
+                                 </graphic>
+                              </Button>
+                              <Label id="logOutL" layoutX="54.0" layoutY="517.0" text="Salir" textFill="WHITE">
+                                 <font>
+                                    <Font name="Arial" size="14.0" />
+                                 </font>
+                              </Label>
+                              <FontAwesomeIcon fill="WHITE" glyphName="USER" layoutX="54.0" layoutY="141.0" size="10em" />
+                              <Button id="configuration" layoutX="10.0" layoutY="357.0" minHeight="40.0" mnemonicParsing="false" prefWidth="180.0" styleClass="nav-btn" stylesheets="@inicio.css" text="Configuración">
+                                 <graphic>
+                                    <FontAwesomeIcon fill="WHITE" glyphName="COGS" />
+                                 </graphic>
+                              </Button>
+                           </children>
+                        </AnchorPane>
+                     </children>
+                  </AnchorPane>
+               </left>
+               <center>
+                  <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                     <children>
+                        <AnchorPane layoutX="119.0" layoutY="114.0" prefHeight="555.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <children>
+                              <AnchorPane layoutX="14.0" layoutY="15.0" prefHeight="525.0" prefWidth="772.0" stylesheets="@inicio.css">
+                                 <styleClass>
+                                    <String fx:value="white-bg" />
+                                    <String fx:value="shadow" />
+                                 </styleClass>
+                                 <children>
+                                    <Button id="buttonEditCollaboration" fx:id="buttonOpenCollaboration" layoutX="726.0" layoutY="484.0" mnemonicParsing="false" onAction="#openCollaboration" prefWidth="38.0" styleClass="descartar" stylesheets="@inicio.css">
+                                       <graphic>
+                                          <FontAwesomeIcon id="editButton" glyphName="PLUS" size="1.5em" />
+                                       </graphic>
+                                    </Button>
+                                    <Label layoutX="25.0" layoutY="77.0" text="Descripción:">
+                                       <font>
+                                          <Font name="Tahoma" size="20.0" />
+                                       </font>
+                                    </Label>
+                                    <TextArea id="DescriptionTextArea" fx:id="textAreaDescription" editable="false" layoutX="179.0" layoutY="77.0" prefHeight="161.0" prefWidth="508.0" stylesheets="@inicio.css">
+                                       <styleClass>
+                                          <String fx:value="textfield" />
+                                          <String fx:value="shadow" />
+                                       </styleClass></TextArea>
+                                    <Label layoutX="25.0" layoutY="264.0" text="Fecha inicio:">
+                                       <font>
+                                          <Font name="Tahoma" size="20.0" />
+                                       </font>
+                                    </Label>
+                                    <DatePicker id="dateStart" fx:id="datePickerStartDate" editable="false" layoutX="179.0" layoutY="264.0" stylesheets="@inicio.css">
+                                       <styleClass>
+                                          <String fx:value="datePicker" />
+                                          <String fx:value="shadow" />
+                                       </styleClass></DatePicker>
+                                    <Label layoutX="391.0" layoutY="263.0" text="Fecha fin:">
+                                       <font>
+                                          <Font name="Tahoma" size="20.0" />
+                                       </font>
+                                    </Label>
+                                    <DatePicker id="dateEnd" fx:id="datePickerFinishDate" editable="false" layoutX="508.0" layoutY="264.0" stylesheets="@inicio.css">
+                                       <styleClass>
+                                          <String fx:value="datePicker" />
+                                          <String fx:value="shadow" />
+                                       </styleClass></DatePicker>
+                                    <Label layoutX="26.0" layoutY="310.0" text="Objetivo:">
+                                       <font>
+                                          <Font name="Tahoma" size="20.0" />
+                                       </font>
+                                    </Label>
+                                    <TextField id="goaldTextField" fx:id="textFieldObjective" editable="false" layoutX="180.0" layoutY="310.0" prefHeight="25.0" prefWidth="512.0" stylesheets="@inicio.css">
+                                       <styleClass>
+                                          <String fx:value="textfield" />
+                                          <String fx:value="shadow" />
+                                       </styleClass>
+                                    </TextField>
+                                    <Label layoutX="25.0" layoutY="359.0" text="noEstudiantes:">
+                                       <font>
+                                          <Font name="Tahoma" size="20.0" />
+                                       </font>
+                                    </Label>
+                                    <TextField id="numStudentsTextField" fx:id="textFieldStudentCount" editable="false" layoutX="179.0" layoutY="359.0" prefHeight="25.0" prefWidth="89.0" stylesheets="@inicio.css">
+                                       <styleClass>
+                                          <String fx:value="textfield" />
+                                          <String fx:value="shadow" />
+                                       </styleClass>
+                                    </TextField>
+                                    <Label layoutX="315.0" layoutY="365.0" text="Tema de Interes:">
+                                       <font>
+                                          <Font name="Tahoma" size="20.0" />
+                                       </font>
+                                    </Label>
+                                    <ComboBox id="subjectComboBox" fx:id="comboBoxSubject" layoutX="490.0" layoutY="359.0" prefHeight="25.0" prefWidth="196.0" stylesheets="@inicio.css">
+                                       <styleClass>
+                                          <String fx:value="textfield" />
+                                          <String fx:value="shadow" />
+                                       </styleClass></ComboBox>
+                                    <Label layoutX="26.0" layoutY="410.0" text="Perfil de&#10;Estudiantes:">
+                                       <font>
+                                          <Font name="Tahoma" size="20.0" />
+                                       </font>
+                                    </Label>
+                                    <TextArea id="studentsTextArea" fx:id="textAreaStudentProfile" editable="false" layoutX="180.0" layoutY="410.0" prefHeight="70.0" prefWidth="508.0" stylesheets="@inicio.css" wrapText="true">
+                                       <styleClass>
+                                          <String fx:value="textfield" />
+                                          <String fx:value="shadow" />
+                                       </styleClass></TextArea>
+                                    <TextField id="nameTextField" fx:id="textFieldName" editable="false" layoutX="182.0" layoutY="31.0" prefHeight="25.0" prefWidth="506.0" stylesheets="@inicio.css">
+                                       <styleClass>
+                                          <String fx:value="textfield" />
+                                          <String fx:value="shadow" />
+                                       </styleClass>
+                                    </TextField>
+                                    <Label layoutX="25.0" layoutY="31.0" text="Nombre:">
+                                       <font>
+                                          <Font name="Tahoma" size="20.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </AnchorPane>
+                           </children>
+                        </AnchorPane>
+                     </children>
+                  </AnchorPane>
+               </center>
+            </BorderPane>
+         </children>
+      </AnchorPane>
+   </children>
+</StackPane>
