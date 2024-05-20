@@ -37,11 +37,11 @@ public class CollaborationDAOTest {
         LocalDate dateStartTest =  LocalDate.of(2022, 1, 1); 
         LocalDate dateFinishTest =  LocalDate.of(2026, 2, 1);
         
-        collaboration.setCollaborationName("Comunicación sin fornteras");
+        collaboration.setCollaborationName("Innovación tecnológica responsable");
         collaboration.setDescription("TestDescripcion");
         collaboration.setFinishDate(dateFinishTest);
         collaboration.setStartDate(dateStartTest);
-        collaboration.setCollaborationStatus("Aceptada");
+        collaboration.setCollaborationStatus("Pendiente");
         collaboration.setCollaborationGoal("Unir estudiantes");
         collaboration.setNoStudents(25);
         collaboration.setStudentProfile("Inglés, ");

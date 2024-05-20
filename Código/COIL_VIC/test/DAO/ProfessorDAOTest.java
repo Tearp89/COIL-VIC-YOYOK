@@ -27,16 +27,17 @@ public class ProfessorDAOTest {
         Professor professor = new Professor();
         ProfessorDAO instance = new ProfessorDAO();
         int expResult = 1;
-        professor.setName("Jorge Alberto");
-        professor.setStatus("Aceptado");
+        professor.setName("Pedro Jimenez");
+        professor.setStatus("Pendiente");
         professor.setType("UV");
         professor.setCountry("México");
         professor.setUniversityId(1);
         professor.setAcademicArea("Económico");
-        professor.setEmail("test2@email.com");
-        professor.setUser("Usuario de prueba2");
+        professor.setEmail("pppimenz@gmail.com");
+        professor.setUser("jPedro");
         professor.setPassword("testtest");
         professor.setPhoneNumber("2220000000");
+        professor.setWorkShop("Sí");
         
         int result = instance.addProfessor(professor);
         assertEquals(expResult, result);
@@ -115,9 +116,9 @@ public class ProfessorDAOTest {
     }
         @Test
         public void testSearchProfessorSuccess(){
-        int expectedResult = 6;
+        int expectedResult = 5;
         ProfessorDAO instance = new ProfessorDAO();
-        int idUniversidad = 2;
+        int idUniversidad = 1;
         ArrayList<Professor> professors = instance.searchProfessor(idUniversidad);
         assertEquals(expectedResult, professors.size());
     }
@@ -163,7 +164,7 @@ public class ProfessorDAOTest {
         public void testSearchProfessorByStatusSuccess(){
             int expectedResult = 3;
             ProfessorDAO instance = new ProfessorDAO();
-            String status = "En espera";
+            String status = "Aceptado";
             ArrayList<Professor> professors = instance.searchProfessorByStatus(status);
             assertEquals(expectedResult, professors.size());
         }
@@ -189,13 +190,11 @@ public class ProfessorDAOTest {
         @Test
         public void changeProfessorStatusByIdSuccess(){
             System.out.println("changeStateProfessor");
-            Professor professor = new Professor();
-            professor.setProfessorId(10); 
-            professor.setStatus("Activo");
-            
+            int professorId = 10;
+            String status = "Aceptado";
             ProfessorDAO instance = new ProfessorDAO();
             int expectedResult = 1;
-            int result = instance.changeProfessorStatusById(professor);
+            int result = instance.changeProfessorStatusById(status, professorId);
             assertEquals(expectedResult, result);
 
         }
@@ -204,12 +203,11 @@ public class ProfessorDAOTest {
         public void changeProfessorStatusByIdFailed(){
             System.out.println("changeStateProfessor");
             Professor professor = new Professor();
-            professor.setProfessorId(1000); 
-            professor.setStatus("Activo"); 
-            
+            int professorId = 1000000;
+            String status = "Aceptado";
             ProfessorDAO instance = new ProfessorDAO();
             int expectedResult = 0;
-            int result = instance.changeProfessorStatusById(professor);
+            int result = instance.changeProfessorStatusById(status, professorId);
             assertEquals(expectedResult, result);
 
         }

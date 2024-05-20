@@ -27,6 +27,7 @@ public class Professor {
     private String contractCategory;
     private String phoneNumber;
     private String discipline;
+    private String workShop;
     
 
 
@@ -177,5 +178,13 @@ public class Professor {
 
     public void setDiscipline(String discipline) {
         this.discipline = discipline;
+    }
+
+    public String getWorkShop() {
+        return workShop;
+    }
+
+    public void setWorkShop(String workShop) {
+        this.workShop = workShop;
     }
 }

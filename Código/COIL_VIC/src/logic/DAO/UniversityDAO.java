@@ -5,7 +5,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
+import java.util.ArrayList;
 
 import dataAccess.DatabaseManager;
 import javafx.collections.FXCollections;
@@ -54,14 +54,15 @@ public class UniversityDAO implements IUniversity{
     
     public int updateUniversity(University university){
         DatabaseManager dbManager = new DatabaseManager();
-        String query = "UPDATE universidad SET nombreUniversidad = ?, idioma = ?, pais = ? WHERE idUniversidad = ?";
+        String query = "UPDATE universidad SET nombreUniversidad = ?, idioma = ?, país = ? WHERE idUniversidad = ?";
         int result = 0;
         try{
             Connection connection = dbManager.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setString(2, university.getUniversityName());
-            preparedStatement.setString(3, university.getUniversityLanguage());
-            preparedStatement.setString(4, university.getUniversityCountry());
+            preparedStatement.setString(1, university.getUniversityName());
+            preparedStatement.setString(2, university.getUniversityLanguage());
+            preparedStatement.setString(3, university.getUniversityCountry());
+            preparedStatement.setInt(4, university.getUniversityId());
             result = preparedStatement.executeUpdate();
         } catch (SQLException updateUniversityException){
             LOG.error("ERROR: ", updateUniversityException);
@@ -126,6 +127,130 @@ public class UniversityDAO implements IUniversity{
 
         return universities;
     }
+
+    public ArrayList<University> searchUniversity(){
+        University university = new University();
+        ArrayList<University> universities = new ArrayList<>();
+        String query = "SELECT * FROM universidad";
+        DatabaseManager dbManager = new DatabaseManager();
+        try{
+            Connection connection = dbManager.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            try(ResultSet resultSet = preparedStatement.executeQuery()){
+                while(resultSet.next()){
+                    int universityId = resultSet.getInt("idUniversidad");
+                    String universityName = resultSet.getString("nombreUniversidad");
+                    String universityLanguage = resultSet.getString("idioma");
+                    String universityCountry = resultSet.getString("país");
+
+                    university = new University();
+                    university.setUniversityId(universityId);
+                    university.setUniversityName(universityName);
+                    university.setUniversityCountry(universityCountry);
+                    university.setUniversityLanguage(universityLanguage);
+
+                    universities.add(university);
+                }
+            }
+        } catch (SQLException searchUniversityException){
+            LOG.error("ERROR:", searchUniversityException);
+        }
+
+        return universities;
+    }
+
+    public ArrayList<University> searchUniversityByName(String name){
+        University university = new University();
+        ArrayList<University> universities = new ArrayList<>();
+        String query = "SELECT * FROM universidad WHERE nombreUniversidad LIKE ?";
+        DatabaseManager dbManager = new DatabaseManager();
+        try{
+            Connection connection = dbManager.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, name);
+            try(ResultSet resultSet = preparedStatement.executeQuery()){
+                while(resultSet.next()){
+                    int universityId = resultSet.getInt("idUniversidad");
+                    String universityName = resultSet.getString("nombreUniversidad");
+                    String universityLanguage = resultSet.getString("idioma");
+                    String universityCountry = resultSet.getString("país");
+
+                    university = new University();
+                    university.setUniversityId(universityId);
+                    university.setUniversityName(universityName);
+                    university.setUniversityCountry(universityCountry);
+                    university.setUniversityLanguage(universityLanguage);
+
+                    universities.add(university);
+                }
+            }
+        } catch (SQLException searchUniversityException){
+            LOG.error("ERROR:", searchUniversityException);
+        }
+
+        return universities;
+    }
+
+    public String getUniversityNameById(int universityId){
+        DatabaseManager dbManager = new DatabaseManager();
+        String query = "SELECT nombreUniversidad FROM universidad WHERE idUniversidad = ?";
+        int result = 0;
+        try{
+            Connection connection = dbManager.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setInt(1, universityId);
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                if (resultSet.next()) {
+                    return resultSet.getString("nombreUniversidad");
+                }
+            }
+
+        } catch(SQLException getUniversityNameByIdException){
+            LOG.error("ERROR: ",getUniversityNameByIdException);
+        }
+        return null;
+    }
+
+    public String getUniversityLanguageById(int universityId){
+        DatabaseManager dbManager = new DatabaseManager();
+        String query = "SELECT idioma FROM universidad WHERE idUniversidad = ?";
+        int result = 0;
+        try{
+            Connection connection = dbManager.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setInt(1, universityId);
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                if (resultSet.next()) {
+                    return resultSet.getString("idioma");
+                }
+            }
+
+        } catch(SQLException getUniversityLanguageByIdException){
+            LOG.error("ERROR: ",getUniversityLanguageByIdException);
+        }
+        return null;
+    }
+
+    public String getUniversityCountryById(int universityId){
+        DatabaseManager dbManager = new DatabaseManager();
+        String query = "SELECT país FROM universidad WHERE idUniversidad = ?";
+        int result = 0;
+        try{
+            Connection connection = dbManager.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setInt(1, universityId);
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                if (resultSet.next()) {
+                    return resultSet.getString("país");
+                }
+            }
+
+        } catch(SQLException getUniversityCountryByIdException){
+            LOG.error("ERROR: ",getUniversityCountryByIdException);
+        }
+        return null;
+    }
+
 
 
 

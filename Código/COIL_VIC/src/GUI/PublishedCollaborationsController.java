@@ -13,10 +13,12 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import log.Log;
 import logic.DAO.CollaborationDAO;
 import logic.classes.Collaboration;
 
 public class PublishedCollaborationsController {
+    private static final org.apache.log4j.Logger LOG = Log.getLogger(PublishedCollaborationsController.class);
 
     @FXML
     private TableView<Collaboration> tableViewPublishedCollaborations;
@@ -75,7 +77,7 @@ public class PublishedCollaborationsController {
                         stage.show();
 
                     }catch (IOException e){
-                        //TODO: Agregar bitácora
+                        LOG.error("ERROR:", e);
                     }
                 }
             }

@@ -94,5 +94,22 @@ public class UniversityDAOTest {
 
         assertEquals(expectedResult, universities.size());
     }
+
+    @Test
+    public void testSearchUniversitySuccess(){
+        UniversityDAO universityDAO = new UniversityDAO();
+        int expectedResult = 1;
+        int result = universityDAO.searchUniversity().size();
+        assertEquals(expectedResult, result);
+    }
+
+    @Test
+    public void testSearchUniversityByNameSuccess(){
+        UniversityDAO universityDAO = new UniversityDAO();
+        int expectedResult = 1;
+        String name = "FEI";
+        int result = universityDAO.searchUniversityByName(name).size();
+        assertEquals(expectedResult, result);
+    }
     
 }

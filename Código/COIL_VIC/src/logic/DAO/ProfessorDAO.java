@@ -24,8 +24,8 @@ public class ProfessorDAO implements IProfessor{
 
     public int addProfessor(Professor professor){
         DatabaseManager dbManager = new DatabaseManager();
-        String query = "INSERT INTO Profesor (nombreProfesor, estado, tipoProfesor, país, Universidad_idUniversidad, area_academica, correo, usuario, contraseña, telefono) " + 
-                        "VALUES (?, ?, ?, ?, ?, ?, ?, ?, SHA2(?, 256), ?)";
+        String query = "INSERT INTO Profesor (nombreProfesor, estado, tipoProfesor, país, Universidad_idUniversidad, area_academica, correo, usuario, contraseña, telefono, curso_taller) " + 
+                        "VALUES (?, ?, ?, ?, ?, ?, ?, ?, SHA2(?, 256), ?, ?)";
         int result = 0;
         try {
             Connection connection = dbManager.getConnection();
@@ -40,6 +40,7 @@ public class ProfessorDAO implements IProfessor{
             preparedStatement.setString(8, professor.getUser());
             preparedStatement.setString(9, professor.getPassword());
             preparedStatement.setString(10, professor.getPhoneNumber());
+            preparedStatement.setString(11, professor.getWorkShop());
             result = preparedStatement.executeUpdate();
         } catch (SQLException addProfessorException) {
             LOG.error(addProfessorException);
@@ -99,7 +100,7 @@ public class ProfessorDAO implements IProfessor{
                     String status = resultSet.getString("estado");
                     String type = resultSet.getString("tipoProfesor");
                     String country = resultSet.getString("país");
-                    int adminId = resultSet.getInt("Administrador_idAdministrativo");
+    
                     
                     
                     professor = new Professor();
@@ -109,7 +110,7 @@ public class ProfessorDAO implements IProfessor{
                     professor.setType(type);
                     professor.setCountry(country);
                     professor.setUniversityId(universityId);
-                    professor.setAdministratorId(adminId);
+                    
                     
                     
                     professors.add(professor);
@@ -137,9 +138,7 @@ public class ProfessorDAO implements IProfessor{
                     String name = resultSet.getString("nombreProfesor");
                     String status = resultSet.getString("estado");
                     String type = resultSet.getString("tipoProfesor");
-                    int universityId = resultSet.getInt("Universidad_idUniversidad");
-                    int adminId = resultSet.getInt("Administrador_idAdministrativo");
-                    
+                    int universityId = resultSet.getInt("Universidad_idUniversidad");                    
                     professor = new Professor();
                     professor.setProfessorId(idProfesor);
                     professor.setName(name);
@@ -147,7 +146,6 @@ public class ProfessorDAO implements IProfessor{
                     professor.setType(type);
                     professor.setCountry(country);
                     professor.setUniversityId(universityId);
-                    professor.setAdministratorId(adminId);
                     
                     professors.add(professor);
                 }
@@ -163,7 +161,7 @@ public class ProfessorDAO implements IProfessor{
     public ArrayList<Professor> searchProfessorByStatus (String status){
         Professor professor = new Professor();
         ArrayList<Professor> professors = new ArrayList<>();
-        String query = "SELECT * FROM profesor WHERE estado = ?";
+        String query = " select * from profesor where estado = ?";
         DatabaseManager dbManager = new DatabaseManager();
         try{
             Connection connection = dbManager.getConnection();
@@ -175,7 +173,6 @@ public class ProfessorDAO implements IProfessor{
                     String name = resultSet.getString("nombreProfesor");
                     String type = resultSet.getString("tipoProfesor");
                     int universityId = resultSet.getInt("Universidad_idUniversidad");
-                    int adminId = resultSet.getInt("Administrador_idAdministrativo");
                     String country = resultSet.getString("país");
                     professor = new Professor();
                     professor.setProfessorId(idProfesor);
@@ -184,7 +181,6 @@ public class ProfessorDAO implements IProfessor{
                     professor.setType(type);
                     professor.setCountry(country);
                     professor.setUniversityId(universityId);
-                    professor.setAdministratorId(adminId);
                     
                     professors.add(professor);
                 }
@@ -225,15 +221,15 @@ public class ProfessorDAO implements IProfessor{
         return professors;  
     }
 
-    public int changeProfessorStatusById(Professor professor){
+    public int changeProfessorStatusById(String status, int professorId){
     DatabaseManager dbManager = new DatabaseManager();
     String query = "UPDATE profesor SET estado = ? WHERE idProfesor = ?";
     int result = 0;
         try{
             Connection connection = dbManager.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setString(1, professor.getStatus());
-            preparedStatement.setInt(2, professor.getProfessorId());
+            preparedStatement.setString(1, status);
+            preparedStatement.setInt(2, professorId);
             result = preparedStatement.executeUpdate();
         } catch (SQLException changeProfessorStatusException){
             LOG.error("ERROR: ", changeProfessorStatusException);

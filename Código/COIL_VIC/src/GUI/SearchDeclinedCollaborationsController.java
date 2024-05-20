@@ -11,12 +11,15 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
+import javafx.util.Callback;
 import logic.DAO.CollaborationDAO;
 import logic.classes.Collaboration;
 
@@ -61,6 +64,10 @@ public class SearchDeclinedCollaborationsController {
         tableViewDeclinedCollaborations.getItems().addAll(collaborations);
     }
 
+    
+
+
+
     @FXML
     private void initialize(){
             loadDeclinedCollaboration();
@@ -82,6 +89,7 @@ public class SearchDeclinedCollaborationsController {
             }
         }
     });
+    
 
     }
     

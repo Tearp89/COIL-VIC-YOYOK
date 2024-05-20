@@ -57,7 +57,7 @@ public class PublishedCollaborationsDetailsController {
         Button cancelButton = (Button) confirmRequest.getDialogPane().lookupButton(cancelRequest);
 
         okButton.setOnAction(eventSendRequest -> {
-            
+            //TODO: Agregar estado
             int result = professorDAO.professorRequestCollaboration(collaborationId, professorId);
             if (result == 1) {
                 Alert requestSuccessful = new Alert(AlertType.INFORMATION);
@@ -91,7 +91,7 @@ public class PublishedCollaborationsDetailsController {
 
     @FXML
     void cancelRequest(ActionEvent event){
-
+        //TODO: Agregar cancelar
     }
 
     public void initialize(int collaborationId){
