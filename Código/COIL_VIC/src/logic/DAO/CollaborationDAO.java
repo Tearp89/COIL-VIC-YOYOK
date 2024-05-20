@@ -291,6 +291,31 @@ public class CollaborationDAO implements ICollaboration {
 
     }
 
+    public String getCollaboratorNameById(int collaborationId, int professorId){
+        DatabaseManager dbManager = new DatabaseManager();
+        String query = "SELECT p.nombreProfesor " +
+                        "FROM profesor p " +  
+                        "INNER JOIN colaboraciones_registradas cr ON p.idProfesor = cr.Profesor_idProfesor " +
+                        "WHERE cr.Colaboración_idColaboración = ? AND p.idProfesor != ?";
+        try{
+            Connection connection = dbManager.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setInt(1, collaborationId);
+            preparedStatement.setInt(2, professorId);
+            try(ResultSet resultSet = preparedStatement.executeQuery()){
+                if(resultSet.next()){
+                    return resultSet.getString("nombreProfesor");
+                }
+               
+            }
+        }catch (SQLException getCollaborationNameByidException){
+            LOG.error("ERROR:", getCollaborationNameByidException);
+        }
+
+        return null;
+
+    }
+
     public int assignStudentToCollaboration(String studentEmail, int collaborationId) throws SQLException{
         DatabaseManager dbManager = new DatabaseManager();
         String query = "INSERT INTO participa(Estudiante_correoElectrónico, Colaboración_idColaboración) VALUES (?, ?)";

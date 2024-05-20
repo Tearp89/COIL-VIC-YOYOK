@@ -308,7 +308,7 @@ public class CollaborationDAOTest {
     public void changeCollaborationStatusSuccess(){
         System.out.println("changeStateProfessor");
             Collaboration collaboration = new Collaboration();
-            int collaborationId = 22; 
+            int collaborationId = 37; 
             String status = "Activa";
             
             CollaborationDAO instance = new CollaborationDAO();
@@ -344,7 +344,7 @@ public class CollaborationDAOTest {
         public void assignProfessorToCollaborationSuccess() throws SQLException{
             CollaborationDAO instance = new CollaborationDAO();
             int expectedResult = 1;
-            int professorId = 24;
+            int professorId = 25;
             int collaborationId = 37;
             int actualResult = instance.assignProfessorToCollaboration(professorId, collaborationId);
             assertEquals(expectedResult, actualResult);
@@ -397,6 +397,14 @@ public class CollaborationDAOTest {
             assertEquals(expectedResult, result);
 
 
+        }
+
+        @Test
+        public void getCollaboratorNameByIdTestSuccess(){
+            CollaborationDAO collaborationDAO = new CollaborationDAO();
+            String expectedResult = "Jorge Alberto";
+            String result = collaborationDAO.getCollaboratorNameById(37, 24);
+            assertEquals(expectedResult, result);
         }
 
 

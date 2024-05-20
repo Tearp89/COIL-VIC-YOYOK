@@ -1,0 +1,105 @@
+20-05-2024 00:00:13 ERROR MainCloseCollaboration:23: ERROR:
+javafx.fxml.LoadException: Error resolving onAction='#goToHomepage', either the event handler is not in the Namespace or there is an error in the script.
+/C:/Users/marla/AppData/Roaming/Code/User/workspaceStorage/6e4c0302b08d3cef2b2ea5685d26a2df/redhat.java/jdt_ws/COIL_VIC_7f2e775a/bin/GUI/closeCollaboration.fxml:71
+
+	at javafx.fxml@21.0.2/javafx.fxml.FXMLLoader.constructLoadException(FXMLLoader.java:2718)
+	at javafx.fxml@21.0.2/javafx.fxml.FXMLLoader$Element.processEventHandlerAttributes(FXMLLoader.java:623)
+	at javafx.fxml@21.0.2/javafx.fxml.FXMLLoader$ValueElement.processEndElement(FXMLLoader.java:783)
+	at javafx.fxml@21.0.2/javafx.fxml.FXMLLoader.processEndElement(FXMLLoader.java:2969)
+	at javafx.fxml@21.0.2/javafx.fxml.FXMLLoader.loadImpl(FXMLLoader.java:2654)
+	at javafx.fxml@21.0.2/javafx.fxml.FXMLLoader.loadImpl(FXMLLoader.java:2563)
+	at javafx.fxml@21.0.2/javafx.fxml.FXMLLoader.load(FXMLLoader.java:2531)
+	at GUI.MainCloseCollaboration.start(MainCloseCollaboration.java:18)
+	at javafx.graphics@21.0.2/com.sun.javafx.application.LauncherImpl.lambda$launchApplication1$9(LauncherImpl.java:839)
+	at javafx.graphics@21.0.2/com.sun.javafx.application.PlatformImpl.lambda$runAndWait$12(PlatformImpl.java:483)
+	at javafx.graphics@21.0.2/com.sun.javafx.application.PlatformImpl.lambda$runLater$10(PlatformImpl.java:456)
+	at java.base/java.security.AccessController.doPrivileged(AccessController.java:399)
+	at javafx.graphics@21.0.2/com.sun.javafx.application.PlatformImpl.lambda$runLater$11(PlatformImpl.java:455)
+	at javafx.graphics@21.0.2/com.sun.glass.ui.InvokeLaterDispatcher$Future.run(InvokeLaterDispatcher.java:95)
+	at javafx.graphics@21.0.2/com.sun.glass.ui.win.WinApplication._runLoop(Native Method)
+	at javafx.graphics@21.0.2/com.sun.glass.ui.win.WinApplication.lambda$runLoop$3(WinApplication.java:185)
+	at java.base/java.lang.Thread.run(Thread.java:840)
+20-05-2024 00:03:13 ERROR MainCloseCollaboration:23: ERROR:
+javafx.fxml.LoadException: Error resolving onAction='#goToLogout', either the event handler is not in the Namespace or there is an error in the script.
+/C:/Users/marla/AppData/Roaming/Code/User/workspaceStorage/6e4c0302b08d3cef2b2ea5685d26a2df/redhat.java/jdt_ws/COIL_VIC_7f2e775a/bin/GUI/closeCollaboration.fxml:90
+
+	at javafx.fxml@21.0.2/javafx.fxml.FXMLLoader.constructLoadException(FXMLLoader.java:2718)
+	at javafx.fxml@21.0.2/javafx.fxml.FXMLLoader$Element.processEventHandlerAttributes(FXMLLoader.java:623)
+	at javafx.fxml@21.0.2/javafx.fxml.FXMLLoader$ValueElement.processEndElement(FXMLLoader.java:783)
+	at javafx.fxml@21.0.2/javafx.fxml.FXMLLoader.processEndElement(FXMLLoader.java:2969)
+	at javafx.fxml@21.0.2/javafx.fxml.FXMLLoader.loadImpl(FXMLLoader.java:2654)
+	at javafx.fxml@21.0.2/javafx.fxml.FXMLLoader.loadImpl(FXMLLoader.java:2563)
+	at javafx.fxml@21.0.2/javafx.fxml.FXMLLoader.load(FXMLLoader.java:2531)
+	at GUI.MainCloseCollaboration.start(MainCloseCollaboration.java:18)
+	at javafx.graphics@21.0.2/com.sun.javafx.application.LauncherImpl.lambda$launchApplication1$9(LauncherImpl.java:839)
+	at javafx.graphics@21.0.2/com.sun.javafx.application.PlatformImpl.lambda$runAndWait$12(PlatformImpl.java:483)
+	at javafx.graphics@21.0.2/com.sun.javafx.application.PlatformImpl.lambda$runLater$10(PlatformImpl.java:456)
+	at java.base/java.security.AccessController.doPrivileged(AccessController.java:399)
+	at javafx.graphics@21.0.2/com.sun.javafx.application.PlatformImpl.lambda$runLater$11(PlatformImpl.java:455)
+	at javafx.graphics@21.0.2/com.sun.glass.ui.InvokeLaterDispatcher$Future.run(InvokeLaterDispatcher.java:95)
+	at javafx.graphics@21.0.2/com.sun.glass.ui.win.WinApplication._runLoop(Native Method)
+	at javafx.graphics@21.0.2/com.sun.glass.ui.win.WinApplication.lambda$runLoop$3(WinApplication.java:185)
+	at java.base/java.lang.Thread.run(Thread.java:840)
+20-05-2024 00:04:08 ERROR MainCloseCollaboration:23: ERROR:
+javafx.fxml.LoadException: Error resolving onAction='#closeCollaboration', either the event handler is not in the Namespace or there is an error in the script.
+/C:/Users/marla/AppData/Roaming/Code/User/workspaceStorage/6e4c0302b08d3cef2b2ea5685d26a2df/redhat.java/jdt_ws/COIL_VIC_7f2e775a/bin/GUI/closeCollaboration.fxml:153
+
+	at javafx.fxml@21.0.2/javafx.fxml.FXMLLoader.constructLoadException(FXMLLoader.java:2718)
+	at javafx.fxml@21.0.2/javafx.fxml.FXMLLoader$Element.processEventHandlerAttributes(FXMLLoader.java:623)
+	at javafx.fxml@21.0.2/javafx.fxml.FXMLLoader$ValueElement.processEndElement(FXMLLoader.java:783)
+	at javafx.fxml@21.0.2/javafx.fxml.FXMLLoader.processEndElement(FXMLLoader.java:2969)
+	at javafx.fxml@21.0.2/javafx.fxml.FXMLLoader.loadImpl(FXMLLoader.java:2654)
+	at javafx.fxml@21.0.2/javafx.fxml.FXMLLoader.loadImpl(FXMLLoader.java:2563)
+	at javafx.fxml@21.0.2/javafx.fxml.FXMLLoader.load(FXMLLoader.java:2531)
+	at GUI.MainCloseCollaboration.start(MainCloseCollaboration.java:18)
+	at javafx.graphics@21.0.2/com.sun.javafx.application.LauncherImpl.lambda$launchApplication1$9(LauncherImpl.java:839)
+	at javafx.graphics@21.0.2/com.sun.javafx.application.PlatformImpl.lambda$runAndWait$12(PlatformImpl.java:483)
+	at javafx.graphics@21.0.2/com.sun.javafx.application.PlatformImpl.lambda$runLater$10(PlatformImpl.java:456)
+	at java.base/java.security.AccessController.doPrivileged(AccessController.java:399)
+	at javafx.graphics@21.0.2/com.sun.javafx.application.PlatformImpl.lambda$runLater$11(PlatformImpl.java:455)
+	at javafx.graphics@21.0.2/com.sun.glass.ui.InvokeLaterDispatcher$Future.run(InvokeLaterDispatcher.java:95)
+	at javafx.graphics@21.0.2/com.sun.glass.ui.win.WinApplication._runLoop(Native Method)
+	at javafx.graphics@21.0.2/com.sun.glass.ui.win.WinApplication.lambda$runLoop$3(WinApplication.java:185)
+	at java.base/java.lang.Thread.run(Thread.java:840)
+20-05-2024 00:04:58 ERROR MainCloseCollaboration:23: ERROR:
+javafx.fxml.LoadException: Error resolving onAction='#closeCollaboration', either the event handler is not in the Namespace or there is an error in the script.
+/C:/Users/marla/AppData/Roaming/Code/User/workspaceStorage/6e4c0302b08d3cef2b2ea5685d26a2df/redhat.java/jdt_ws/COIL_VIC_7f2e775a/bin/GUI/closeCollaboration.fxml:153
+
+	at javafx.fxml@21.0.2/javafx.fxml.FXMLLoader.constructLoadException(FXMLLoader.java:2718)
+	at javafx.fxml@21.0.2/javafx.fxml.FXMLLoader$Element.processEventHandlerAttributes(FXMLLoader.java:623)
+	at javafx.fxml@21.0.2/javafx.fxml.FXMLLoader$ValueElement.processEndElement(FXMLLoader.java:783)
+	at javafx.fxml@21.0.2/javafx.fxml.FXMLLoader.processEndElement(FXMLLoader.java:2969)
+	at javafx.fxml@21.0.2/javafx.fxml.FXMLLoader.loadImpl(FXMLLoader.java:2654)
+	at javafx.fxml@21.0.2/javafx.fxml.FXMLLoader.loadImpl(FXMLLoader.java:2563)
+	at javafx.fxml@21.0.2/javafx.fxml.FXMLLoader.load(FXMLLoader.java:2531)
+	at GUI.MainCloseCollaboration.start(MainCloseCollaboration.java:18)
+	at javafx.graphics@21.0.2/com.sun.javafx.application.LauncherImpl.lambda$launchApplication1$9(LauncherImpl.java:839)
+	at javafx.graphics@21.0.2/com.sun.javafx.application.PlatformImpl.lambda$runAndWait$12(PlatformImpl.java:483)
+	at javafx.graphics@21.0.2/com.sun.javafx.application.PlatformImpl.lambda$runLater$10(PlatformImpl.java:456)
+	at java.base/java.security.AccessController.doPrivileged(AccessController.java:399)
+	at javafx.graphics@21.0.2/com.sun.javafx.application.PlatformImpl.lambda$runLater$11(PlatformImpl.java:455)
+	at javafx.graphics@21.0.2/com.sun.glass.ui.InvokeLaterDispatcher$Future.run(InvokeLaterDispatcher.java:95)
+	at javafx.graphics@21.0.2/com.sun.glass.ui.win.WinApplication._runLoop(Native Method)
+	at javafx.graphics@21.0.2/com.sun.glass.ui.win.WinApplication.lambda$runLoop$3(WinApplication.java:185)
+	at java.base/java.lang.Thread.run(Thread.java:840)
+20-05-2024 00:07:04 ERROR MainCloseCollaboration:23: ERROR:
+javafx.fxml.LoadException: Error resolving onAction='#closeCollaboration', either the event handler is not in the Namespace or there is an error in the script.
+/C:/Users/marla/AppData/Roaming/Code/User/workspaceStorage/6e4c0302b08d3cef2b2ea5685d26a2df/redhat.java/jdt_ws/COIL_VIC_7f2e775a/bin/GUI/closeCollaboration.fxml:153
+
+	at javafx.fxml@21.0.2/javafx.fxml.FXMLLoader.constructLoadException(FXMLLoader.java:2718)
+	at javafx.fxml@21.0.2/javafx.fxml.FXMLLoader$Element.processEventHandlerAttributes(FXMLLoader.java:623)
+	at javafx.fxml@21.0.2/javafx.fxml.FXMLLoader$ValueElement.processEndElement(FXMLLoader.java:783)
+	at javafx.fxml@21.0.2/javafx.fxml.FXMLLoader.processEndElement(FXMLLoader.java:2969)
+	at javafx.fxml@21.0.2/javafx.fxml.FXMLLoader.loadImpl(FXMLLoader.java:2654)
+	at javafx.fxml@21.0.2/javafx.fxml.FXMLLoader.loadImpl(FXMLLoader.java:2563)
+	at javafx.fxml@21.0.2/javafx.fxml.FXMLLoader.load(FXMLLoader.java:2531)
+	at GUI.MainCloseCollaboration.start(MainCloseCollaboration.java:18)
+	at javafx.graphics@21.0.2/com.sun.javafx.application.LauncherImpl.lambda$launchApplication1$9(LauncherImpl.java:839)
+	at javafx.graphics@21.0.2/com.sun.javafx.application.PlatformImpl.lambda$runAndWait$12(PlatformImpl.java:483)
+	at javafx.graphics@21.0.2/com.sun.javafx.application.PlatformImpl.lambda$runLater$10(PlatformImpl.java:456)
+	at java.base/java.security.AccessController.doPrivileged(AccessController.java:399)
+	at javafx.graphics@21.0.2/com.sun.javafx.application.PlatformImpl.lambda$runLater$11(PlatformImpl.java:455)
+	at javafx.graphics@21.0.2/com.sun.glass.ui.InvokeLaterDispatcher$Future.run(InvokeLaterDispatcher.java:95)
+	at javafx.graphics@21.0.2/com.sun.glass.ui.win.WinApplication._runLoop(Native Method)
+	at javafx.graphics@21.0.2/com.sun.glass.ui.win.WinApplication.lambda$runLoop$3(WinApplication.java:185)
+	at java.base/java.lang.Thread.run(Thread.java:840)
