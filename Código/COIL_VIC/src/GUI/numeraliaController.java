@@ -13,11 +13,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Menu;
 import javafx.scene.control.TableView;
-import javafx.stage.Stage;
-import javafx.stage.StageStyle;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.FileChooser;
@@ -94,16 +89,12 @@ public class NumeraliaController {
     
     @FXML
     private void minimizeWindow(ActionEvent event){
-        Node source = (Node) event.getSource();
-        Stage stage = (Stage) source.getScene().getWindow();
-        stage.setIconified(true);
+        ChangeWindowManager.minimizeWindow(event);
     }
 
     @FXML
     private void closeWindow(ActionEvent event){
-        Node source = (Node) event.getSource();
-        Stage stage = (Stage) source.getScene().getWindow();
-        stage.close();
+        ChangeWindowManager.closeWindow(event);
     }
 
     @FXML
@@ -213,36 +204,17 @@ public class NumeraliaController {
     @FXML
     private void gotoHome(ActionEvent event){
         FXMLLoader homeLoader = new FXMLLoader(getClass().getResource("/GUI/adminHome.fxml"));
-        try {
-            Parent root = homeLoader.load();
-            Scene homeScene = new Scene(root);
-            Stage homeStage = new Stage();
-            homeStage.initStyle(StageStyle.TRANSPARENT);
-            homeStage.setScene(homeScene);
-            homeStage.show();
-            Node source = (Node) event.getSource();
-            Stage stage = (Stage) source.getScene().getWindow();
-            stage.close();
-        } catch (IOException goToHomeException){
-            LOG.error(goToHomeException);
-        }
+        ChangeWindowManager.changeWindowTo(event, homeLoader);
     }
 
     @FXML
     private void logout(ActionEvent event){
         FXMLLoader loginLoader = new FXMLLoader(getClass().getResource("/GUI/login.fxml"));
         try {
+            ChangeWindowManager.logout(event, loginLoader);
             UserSessionManager.getInstance().logoutAdmin();
-            Parent root = loginLoader.load();
-            Scene loginScene = new Scene(root);
-            Stage loginStage = new Stage();
-            loginStage.setScene(loginScene);
-            loginStage.show();
-            Node source = (Node) event.getSource();
-            Stage stage = (Stage) source.getScene().getWindow();
-            stage.close();
-        } catch (IOException goToLoginException){
-            LOG.error(goToLoginException);
+        } catch (IOException ioException){
+            LOG.error(ioException);
         }
     }
 }
