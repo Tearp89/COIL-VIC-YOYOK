@@ -4,8 +4,6 @@
  */
 package logic;
 
-import java.util.regex.Pattern;
-import java.util.regex.Matcher;
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 /**
@@ -37,6 +35,14 @@ public class FieldValidator {
             internetAddress.validate();
             return true;
         } catch  (AddressException ex) {
+            return false;
+        }
+    }
+
+    public static boolean onlyTextAndNumbers(String textFieldTrim) {
+        if (!textFieldTrim.isBlank()) {
+            return textFieldTrim.matches("[a-zA-ZñÑáéíóúÁÉÍÓÚ\\d\\s]+");
+        } else {
             return false;
         }
     }
