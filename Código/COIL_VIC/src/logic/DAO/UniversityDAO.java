@@ -113,11 +113,11 @@ public class UniversityDAO implements IUniversity{
     public ObservableList<String> loadUniversities() {
         ObservableList<String> universities = FXCollections.observableArrayList();
         DatabaseManager dbManager = new DatabaseManager();
-        String query = "SELECT nombreUniversidad FROM universidad";
+        String query = "SELECT DISTINCT nombreUniversidad FROM universidad";
         try {
             Connection connection = dbManager.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(query);
-             ResultSet resultSet = preparedStatement.executeQuery(); 
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            ResultSet resultSet = preparedStatement.executeQuery(); 
             while (resultSet.next()) {
                 universities.add(resultSet.getString("nombreUniversidad"));
             }
