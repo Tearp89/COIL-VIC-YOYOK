@@ -2,6 +2,8 @@ package GUI;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.ArrayList;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -16,6 +18,8 @@ import log.Log;
 import javafx.scene.control.Alert.AlertType;
 import logic.FieldValidator;
 import logic.DAO.CollaborationDAO;
+import logic.DAO.ProfessorDAO;
+import logic.classes.Collaboration;
 import logic.classes.Professor;
 
 public class OpenCollaborationController {
@@ -50,33 +54,50 @@ public class OpenCollaborationController {
 
     @FXML
     private int collaborationId;
+    @FXML
+    private Label labelCollaborationId;
 
+    private void setValues(Collaboration collaboration){
+        Professor professorData = new Professor();
+        professorData = UserSessionManager.getInstance().getProfessorUserData();
+        labelCollaborationId.setText(String.valueOf(collaboration.getCollaborationId()));
+        textFieldName.setText(collaboration.getCollaborationName());
+        datePickerStartDate.setValue(collaboration.getStartDate());
+        datePickerFinishDate.setValue(collaboration.getFinishDate());
+        textAreaStudentProfile.setText(collaboration.getStudentProfile());
+        textFieldStudentCount.setText(String.valueOf(collaboration.getNoStudents()));
+        textFieldObjective.setText(collaboration.getCollaborationGoal());
 
+      
+
+        
+
+    }
+    
     @FXML
     private Label labelUser;
     @FXML
-    public void initialize(int collaborationIdEdit){
+    public void initialize(){
         Professor professorData = new Professor();
         professorData = UserSessionManager.getInstance().getProfessorUserData();
         labelUser.setText(professorData.getName());
-        this.collaborationId = collaborationIdEdit;
+        
+        ProfessorDAO professorDAO = new ProfessorDAO();
+        int professorId = professorDAO.getProfessorIdByUser(professorData.getUser());
+
         CollaborationDAO collaborationDAO = new CollaborationDAO();
-        String name = collaborationDAO.getCollaborationNameById(collaborationId);
-        String description = collaborationDAO.getCollaborationDescriptionById(collaborationId);
-        String startDate = collaborationDAO.getCollaborationStartDateById(collaborationId);
-        String finishDate = collaborationDAO.getCollaborationFinishDateById(collaborationId);
-        String collaborationGoal = collaborationDAO.getCollaborationGoalById(collaborationId);
-        String collaborationSubject = collaborationDAO.getCollaborationSubjectById(collaborationId);
-        int noStudents = collaborationDAO.getNumberStudentsById(collaborationId);
-        String studentProfile = collaborationDAO.getStudentProfileById(collaborationId);
-        textFieldName.setText(name);
-        textAreaDescription.setText(description);
-        datePickerStartDate.setValue(LocalDate.parse(startDate));
-        datePickerFinishDate.setValue(LocalDate.parse(finishDate));
-        textFieldObjective.setText(collaborationGoal);
-        comboBoxSubject.setValue(collaborationSubject);
-        textFieldStudentCount.setText(String.valueOf(noStudents));
-        textAreaStudentProfile.setText(studentProfile);
+        ArrayList<Collaboration> publishedCollaborations = collaborationDAO.searchCollaborationByStatusAndProfessorId("Publicada", professorId);
+       
+        
+        labelCollaborationId.setText(String.valueOf(publishedCollaborations.get(0).getCollaborationId()));
+        textFieldName.setText(publishedCollaborations.get(0).getCollaborationName());
+        datePickerStartDate.setValue(publishedCollaborations.get(0).getStartDate());
+        datePickerFinishDate.setValue(publishedCollaborations.get(0).getFinishDate());
+        textAreaStudentProfile.setText(publishedCollaborations.get(0).getStudentProfile());
+        textFieldStudentCount.setText(String.valueOf(publishedCollaborations.get(0).getNoStudents()));
+        textFieldObjective.setText(publishedCollaborations.get(0).getCollaborationGoal());
+        
+        
     }
 
    

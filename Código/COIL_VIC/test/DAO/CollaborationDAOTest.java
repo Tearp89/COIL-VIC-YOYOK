@@ -344,8 +344,8 @@ public class CollaborationDAOTest {
         public void assignProfessorToCollaborationSuccess() throws SQLException{
             CollaborationDAO instance = new CollaborationDAO();
             int expectedResult = 1;
-            int professorId = 30;
-            int collaborationId = 42;
+            int professorId = 29;
+            int collaborationId = 52;
             int actualResult = instance.assignProfessorToCollaboration(professorId, collaborationId);
             assertEquals(expectedResult, actualResult);
 

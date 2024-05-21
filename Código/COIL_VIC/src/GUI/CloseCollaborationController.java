@@ -41,13 +41,16 @@ public class CloseCollaborationController {
    /*  Professor professorData = new Professor();
     professorData = UserSessionManager.getInstance().getProfessorUserData();*/
     private void setValues(Collaboration collaboration){
+        Professor professorData = new Professor();
+        String professorUser = professorData.getUser();
+        professorData = UserSessionManager.getInstance().getProfessorUserData();
         labelCollaborationId.setText(String.valueOf(collaboration.getCollaborationId()));
         labelCollaborationName.setText(collaboration.getCollaborationName());
         datePickerStartDate.setValue(collaboration.getStartDate());
         datePickerFinishDate.setValue(collaboration.getFinishDate());
         CollaborationDAO collaborationDAO = new CollaborationDAO();
-        //int professorId = professorData.getProfessorId();
-        labelCollaboratorName.setText(collaborationDAO.getCollaboratorNameById(collaboration.getCollaborationId(), 24));
+        ProfessorDAO professorDAO = new ProfessorDAO();
+        labelCollaboratorName.setText(collaborationDAO.getCollaboratorNameById(collaboration.getCollaborationId(), professorDAO.getProfessorIdByUser(professorUser)));
 
     }
 
@@ -153,7 +156,7 @@ public class CloseCollaborationController {
     private Button buttonLogout;
 
     @FXML
-    private void logOut(ActionEvent event){
+    private void logout(ActionEvent event){
         FXMLLoader loginLoader = new FXMLLoader(getClass().getResource("/GUI/login.fxml"));
         try{
             ChangeWindowManager.logout(event, loginLoader);

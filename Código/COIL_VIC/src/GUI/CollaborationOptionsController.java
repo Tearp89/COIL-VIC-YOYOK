@@ -76,11 +76,13 @@ public class CollaborationOptionsController {
 
     @FXML
     private Button buttonOpenCollaboration;
-
+    @FXML
+    private String professorUser;
     @FXML
     private void openCollaboration(ActionEvent event){
+        
         FXMLLoader openCollaborationLoader = new FXMLLoader(getClass().getResource("/GUI/openCollaboration.fxml"));
-        ChangeWindowManager.changeWindowTo(event, openCollaborationLoader);
+         ChangeWindowManager.changeWindowTo(event, openCollaborationLoader);
 
     }
 
@@ -89,7 +91,7 @@ public class CollaborationOptionsController {
 
     @FXML
     private void closeCollaboration(ActionEvent event){
-        ProfessorDAO professorDAO = new ProfessorDAO();
+        
         FXMLLoader closeCollaboraitionLoader = new FXMLLoader(getClass().getResource("/GUI/closeCollaboration.fxml"));
         ChangeWindowManager.changeWindowTo(event, closeCollaboraitionLoader);
     }
@@ -149,11 +151,14 @@ public class CollaborationOptionsController {
 
     @FXML 
     private Label labelUser; 
+
     @FXML
     private void initialize(){
         Professor professorData = new Professor();
         professorData = UserSessionManager.getInstance().getProfessorUserData();
         labelUser.setText(professorData.getName());
+        this.professorUser = professorData.getUser();
+
 
         CollaborationDAO collaborationDAO = new CollaborationDAO();
         ProfessorDAO professorDAO = new ProfessorDAO();
