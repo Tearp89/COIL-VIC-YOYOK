@@ -119,7 +119,7 @@ public class ProfessorDAOTest {
         int expectedResult = 5;
         ProfessorDAO instance = new ProfessorDAO();
         int idUniversidad = 1;
-        ArrayList<Professor> professors = instance.searchProfessor(idUniversidad);
+        ArrayList<Professor> professors = instance.searchProfessorByUniversityId(idUniversidad);
         assertEquals(expectedResult, professors.size());
     }
         
@@ -128,7 +128,7 @@ public class ProfessorDAOTest {
             int expectedResult = 0;
             ProfessorDAO instance = new ProfessorDAO();
             int idUniversidad = 5;
-            ArrayList<Professor> professors = instance.searchProfessor(idUniversidad);
+            ArrayList<Professor> professors = instance.searchProfessorByUniversityId(idUniversidad);
             assertEquals(expectedResult, professors.size());
         }
     
