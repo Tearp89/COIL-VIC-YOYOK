@@ -24,7 +24,7 @@
                      <children>
                         <AnchorPane id="semiTopForm" layoutY="-8.0" prefHeight="35.0" prefWidth="800.0" style="-fx-border-color: black;" styleClass="semi-top-form" stylesheets="@../OneDrive%20-%20Universidad%20Veracruzana/Documentos/4to%20semestre/COIL-VIC-YOYOK/Código/COIL_VIC/src/GUI/declinedCollaborations.css" AnchorPane.bottomAnchor="8.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-8.0">
                            <children>
-                              <Button id="close" fx:id="close" layoutX="968.0" layoutY="10.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="32.0" styleClass="close" stylesheets="@../OneDrive%20-%20Universidad%20Veracruzana/Documentos/4to%20semestre/COIL-VIC-YOYOK/Código/COIL_VIC/src/GUI/declinedCollaborations.css">
+                              <Button id="close" fx:id="buttonClose" layoutX="968.0" layoutY="10.0" mnemonicParsing="false" onAction="#closeWindow" prefHeight="25.0" prefWidth="32.0" styleClass="close" stylesheets="@../OneDrive%20-%20Universidad%20Veracruzana/Documentos/4to%20semestre/COIL-VIC-YOYOK/Código/COIL_VIC/src/GUI/declinedCollaborations.css">
                                  <font>
                                     <Font name="System Bold" size="12.0" />
                                  </font>
@@ -59,33 +59,33 @@
                                     <Font name="Tahoma" size="17.0" />
                                  </font>
                               </Label>
-                              <Label id="user" alignment="CENTER" layoutX="6.0" layoutY="187.0" prefHeight="23.0" prefWidth="190.0" text="user" textFill="WHITE">
+                              <Label id="user" fx:id="labelUser" alignment="CENTER" layoutX="6.0" layoutY="187.0" prefHeight="23.0" prefWidth="190.0" text="user" textFill="WHITE">
                                  <font>
                                     <Font name="Arial Bold" size="20.0" />
                                  </font>
                               </Label>
                               <Line endX="70.0" layoutX="116.0" layoutY="221.0" startX="-100.0" />
-                              <Button id="home" layoutX="11.0" layoutY="238.0" minHeight="40.0" mnemonicParsing="false" prefWidth="180.0" styleClass="nav-btn" stylesheets="@../OneDrive%20-%20Universidad%20Veracruzana/Documentos/4to%20semestre/COIL-VIC-YOYOK/Código/COIL_VIC/src/GUI/declinedCollaborations.css" text="Inicio">
+                              <Button id="home" fx:id="buttonHome" layoutX="11.0" layoutY="238.0" minHeight="40.0" mnemonicParsing="false" onAction="#goToHomePage" prefWidth="180.0" styleClass="nav-btn" stylesheets="@../OneDrive%20-%20Universidad%20Veracruzana/Documentos/4to%20semestre/COIL-VIC-YOYOK/Código/COIL_VIC/src/GUI/declinedCollaborations.css" text="Inicio">
                                  <graphic>
                                     <FontAwesomeIcon fill="WHITE" glyphName="HOME" />
                                  </graphic>
                               </Button>
-                              <Button id="whorkshop" layoutX="11.0" layoutY="278.0" minHeight="40.0" mnemonicParsing="false" prefWidth="180.0" styleClass="nav-btn" stylesheets="@../OneDrive%20-%20Universidad%20Veracruzana/Documentos/4to%20semestre/COIL-VIC-YOYOK/Código/COIL_VIC/src/GUI/declinedCollaborations.css" text="Curso-Talleres">
+                              <Button id="whorkshop" fx:id="buttonCollaborations" layoutX="11.0" layoutY="278.0" minHeight="40.0" mnemonicParsing="false" onAction="#goToCollaborations" prefWidth="180.0" styleClass="nav-btn" stylesheets="@../OneDrive%20-%20Universidad%20Veracruzana/Documentos/4to%20semestre/COIL-VIC-YOYOK/Código/COIL_VIC/src/GUI/declinedCollaborations.css" text="Colaboraciones">
                                  <graphic>
                                     <FontAwesomeIcon fill="WHITE" glyphName="BOOK" />
                                  </graphic>
                               </Button>
-                              <Button id="colaborations" layoutX="11.0" layoutY="318.0" minHeight="40.0" mnemonicParsing="false" prefWidth="180.0" styleClass="nav-btn" stylesheets="@../OneDrive%20-%20Universidad%20Veracruzana/Documentos/4to%20semestre/COIL-VIC-YOYOK/Código/COIL_VIC/src/GUI/declinedCollaborations.css" text="Colaboraciones">
+                              <Button id="colaborations" fx:id="buttonStudents" layoutX="11.0" layoutY="318.0" minHeight="40.0" mnemonicParsing="false" onAction="#goToStudents" prefWidth="180.0" styleClass="nav-btn" stylesheets="@../OneDrive%20-%20Universidad%20Veracruzana/Documentos/4to%20semestre/COIL-VIC-YOYOK/Código/COIL_VIC/src/GUI/declinedCollaborations.css" text="Estudiantes">
                                  <graphic>
                                     <FontAwesomeIcon fill="WHITE" glyphName="GROUP" />
                                  </graphic>
                               </Button>
-                              <Button id="records" layoutX="11.0" layoutY="358.0" minHeight="40.0" mnemonicParsing="false" prefWidth="180.0" styleClass="nav-btn" stylesheets="@../OneDrive%20-%20Universidad%20Veracruzana/Documentos/4to%20semestre/COIL-VIC-YOYOK/Código/COIL_VIC/src/GUI/declinedCollaborations.css" text="Constancias">
+                              <Button id="records" fx:id="buttonSettings" layoutX="11.0" layoutY="358.0" minHeight="40.0" mnemonicParsing="false" onAction="#goToSettings" prefWidth="180.0" styleClass="nav-btn" stylesheets="@../OneDrive%20-%20Universidad%20Veracruzana/Documentos/4to%20semestre/COIL-VIC-YOYOK/Código/COIL_VIC/src/GUI/declinedCollaborations.css" text="Configuración">
                                  <graphic>
-                                    <FontAwesomeIcon fill="WHITE" glyphName="TROPHY" />
+                                    <FontAwesomeIcon fill="WHITE" glyphName="COGS" text="" />
                                  </graphic>
                               </Button>
-                              <Button id="logOutB" layoutX="12.0" layoutY="514.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="36.0" stylesheets="@../OneDrive%20-%20Universidad%20Veracruzana/Documentos/4to%20semestre/COIL-VIC-YOYOK/Código/COIL_VIC/src/GUI/declinedCollaborations.css">
+                              <Button id="logOutB" fx:id="buttonLogout" layoutX="12.0" layoutY="514.0" mnemonicParsing="false" onAction="#logOut" prefHeight="26.0" prefWidth="36.0" stylesheets="@../OneDrive%20-%20Universidad%20Veracruzana/Documentos/4to%20semestre/COIL-VIC-YOYOK/Código/COIL_VIC/src/GUI/declinedCollaborations.css">
                                  <styleClass>
                                     <String fx:value="logout" />
                                     <String fx:value="shadow" />
@@ -145,7 +145,7 @@
                                           </TableColumn>
                                       </columns>
                                     </TableView>
-                                    <Button id="discard" layoutX="701.0" layoutY="3.0" mnemonicParsing="false" styleClass="descartar" stylesheets="@../OneDrive%20-%20Universidad%20Veracruzana/Documentos/4to%20semestre/COIL-VIC-YOYOK/Código/COIL_VIC/src/GUI/declinedCollaborations.css" text="Descartar" />
+                                    <Button id="discard" fx:id="buttonCancel" layoutX="701.0" layoutY="3.0" mnemonicParsing="false" onAction="#cancel" styleClass="descartar" stylesheets="@../OneDrive%20-%20Universidad%20Veracruzana/Documentos/4to%20semestre/COIL-VIC-YOYOK/Código/COIL_VIC/src/GUI/declinedCollaborations.css" text="&lt;" />
                                     <TextField id="textFieldSearch" fx:id="textFieldSearch" layoutX="24.0" layoutY="23.0" onAction="#searchPublishedCollaborations" prefHeight="25.0" prefWidth="281.0" promptText="Buscar" styleClass="search" stylesheets="@../OneDrive%20-%20Universidad%20Veracruzana/Documentos/4to%20semestre/COIL-VIC-YOYOK/Código/COIL_VIC/src/GUI/declinedCollaborations.css" />
                                     <FontAwesomeIcon glyphName="SEARCH" layoutX="28.0" layoutY="42.0" size="1.75em" />
                                  </children>

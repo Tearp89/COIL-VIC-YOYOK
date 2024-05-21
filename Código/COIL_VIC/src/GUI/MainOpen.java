@@ -19,7 +19,7 @@ public class MainOpen extends Application{
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUI/openCollaboration.fxml"));
             Parent root = loader.load();
             OpenCollaborationController controller = loader.getController();
-            controller.initialize(29);
+            
 
             primaryStage.setScene(new Scene(root, 1000, 600));
             primaryStage.show();
