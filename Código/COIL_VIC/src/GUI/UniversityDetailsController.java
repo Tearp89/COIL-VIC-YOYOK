@@ -73,29 +73,29 @@ public class UniversityDetailsController {
         UniversityDAO updateUniversity = new UniversityDAO();
         if(universityName.isEmpty() || universityLanguage.isEmpty() 
         || universityCountry.isEmpty()){
-            Alert emptyFields = new Alert(AlertType.ERROR);
-            emptyFields.setTitle("Campos vacíos");
-            emptyFields.setHeaderText("Error edición");
-            emptyFields.setContentText("No se puede editar la universidad hay campos vacíos");
-            emptyFields.show();
+            Alert emptyFieldsAlert = new Alert(AlertType.ERROR);
+            emptyFieldsAlert.setTitle("Campos vacíos");
+            emptyFieldsAlert.setHeaderText("Error edición");
+            emptyFieldsAlert.setContentText("No se puede editar la universidad hay campos vacíos");
+            emptyFieldsAlert.show();
             
         } if (universityDAO.isUniversityRegistered(universityName) == true){
-            Alert duplicateUniversity = new Alert(AlertType.ERROR);
-            duplicateUniversity.setHeaderText("Error edición");
-            duplicateUniversity.setTitle("Universidad duplicada");
-            duplicateUniversity.setContentText("No se puede editar la universidad, ya está registrada");
-            duplicateUniversity.show();
+            Alert duplicateUniversityAlert = new Alert(AlertType.ERROR);
+            duplicateUniversityAlert.setHeaderText("Error edición");
+            duplicateUniversityAlert.setTitle("Universidad duplicada");
+            duplicateUniversityAlert.setContentText("No se puede editar la universidad, ya está registrada");
+            duplicateUniversityAlert.show();
         }else{
-            Alert confirmEdition = new Alert(AlertType.CONFIRMATION);
-            confirmEdition.setHeaderText("Confirmación edición");
-            confirmEdition.setTitle("Confirmar edición");
-            confirmEdition.setContentText("¿Está seguro de que desea editar la universidad?");
+            Alert confirmEditionAlert = new Alert(AlertType.CONFIRMATION);
+            confirmEditionAlert.setHeaderText("Confirmación edición");
+            confirmEditionAlert.setTitle("Confirmar edición");
+            confirmEditionAlert.setContentText("¿Está seguro de que desea editar la universidad?");
             ButtonType acceptEdition = new ButtonType("Confirmar");
             ButtonType cancelEdition = new ButtonType("Cancelar");
-            confirmEdition.getButtonTypes().setAll(acceptEdition, cancelEdition);
-            confirmEdition.show();
-            Button okButton = (Button) confirmEdition.getDialogPane().lookupButton(acceptEdition);
-            Button cancelButton = (Button) confirmEdition.getDialogPane().lookupButton(cancelEdition);
+            confirmEditionAlert.getButtonTypes().setAll(acceptEdition, cancelEdition);
+            confirmEditionAlert.show();
+            Button okButton = (Button) confirmEditionAlert.getDialogPane().lookupButton(acceptEdition);
+            Button cancelButton = (Button) confirmEditionAlert.getDialogPane().lookupButton(cancelEdition);
             okButton.setOnAction(eventSaveEdition -> {
                 int result = universityDAO.updateUniversity(universityUpdated);
                 if(result == 1){
@@ -106,11 +106,11 @@ public class UniversityDetailsController {
                     universityUpdatedAlert.show();
     
                 } else{
-                    Alert editionError = new Alert(AlertType.ERROR);
-                    editionError.setTitle("Error edición");
-                    editionError.setHeaderText("Error edición");
-                    editionError.setContentText("Ocurrió un error intentelo nuevamente");
-                    editionError.show();
+                    Alert editionErrorAlert = new Alert(AlertType.ERROR);
+                    editionErrorAlert.setTitle("Error edición");
+                    editionErrorAlert.setHeaderText("Error edición");
+                    editionErrorAlert.setContentText("Ocurrió un error intentelo nuevamente");
+                    editionErrorAlert.show();
                 }
             });
            cancelButton.setOnAction(eventCancelEdition -> {
