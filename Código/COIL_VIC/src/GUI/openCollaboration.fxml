@@ -66,22 +66,22 @@
                                  </font>
                               </Label>
                               <Line endX="70.0" layoutX="116.0" layoutY="221.0" startX="-100.0" />
-                              <Button id="home" fx:id="buttonHome" layoutX="11.0" layoutY="238.0" minHeight="40.0" mnemonicParsing="false" prefWidth="180.0" styleClass="nav-btn" stylesheets="@inicio.css" text="Inicio">
+                              <Button id="home" fx:id="buttonHome" layoutX="11.0" layoutY="238.0" minHeight="40.0" mnemonicParsing="false" onAction="#goToHomePage" prefWidth="180.0" styleClass="nav-btn" stylesheets="@inicio.css" text="Inicio">
                                  <graphic>
                                     <FontAwesomeIcon fill="WHITE" glyphName="HOME" />
                                  </graphic>
                               </Button>
-                              <Button id="colaborations" fx:id="buttonCollaborations" layoutX="11.0" layoutY="277.0" minHeight="40.0" mnemonicParsing="false" prefWidth="180.0" styleClass="nav-btn" stylesheets="@inicio.css" text="Colaboraciones">
+                              <Button id="colaborations" fx:id="buttonCollaborations" layoutX="11.0" layoutY="277.0" minHeight="40.0" mnemonicParsing="false" onAction="#goToCollaborations" prefWidth="180.0" styleClass="nav-btn" stylesheets="@inicio.css" text="Colaboraciones">
                                  <graphic>
                                     <FontAwesomeIcon fill="WHITE" glyphName="GROUP" />
                                  </graphic>
                               </Button>
-                              <Button id="records" layoutX="16.0" layoutY="317.0" minHeight="40.0" mnemonicParsing="false" prefWidth="180.0" styleClass="nav-btn" stylesheets="@inicio.css" text="Estudiantes">
+                              <Button id="records" fx:id="buttonStudents" layoutX="11.0" layoutY="317.0" minHeight="40.0" mnemonicParsing="false" onAction="#goToStudents" prefWidth="180.0" styleClass="nav-btn" stylesheets="@inicio.css" text="Estudiantes">
                                  <graphic>
                                     <FontAwesomeIcon fill="WHITE" glyphName="MALE" />
                                  </graphic>
                               </Button>
-                              <Button id="logOutB" fx:id="buttonLogout" layoutX="12.0" layoutY="514.0" mnemonicParsing="false" onAction="#logout" prefHeight="26.0" prefWidth="36.0" stylesheets="@inicio.css">
+                              <Button id="logOutB" fx:id="buttonLogout" layoutX="12.0" layoutY="514.0" mnemonicParsing="false" onAction="#logOut" prefHeight="26.0" prefWidth="36.0" stylesheets="@inicio.css">
                                  <styleClass>
                                     <String fx:value="logout" />
                                     <String fx:value="shadow" />
@@ -96,7 +96,7 @@
                                  </font>
                               </Label>
                               <FontAwesomeIcon fill="WHITE" glyphName="USER" layoutX="54.0" layoutY="141.0" size="10em" />
-                              <Button id="configuration" layoutX="10.0" layoutY="357.0" minHeight="40.0" mnemonicParsing="false" prefWidth="180.0" styleClass="nav-btn" stylesheets="@inicio.css" text="Configuración">
+                              <Button id="configuration" fx:id="buttonSettings" layoutX="10.0" layoutY="357.0" minHeight="40.0" mnemonicParsing="false" onAction="#goToSettings" prefWidth="180.0" styleClass="nav-btn" stylesheets="@inicio.css" text="Configuración">
                                  <graphic>
                                     <FontAwesomeIcon fill="WHITE" glyphName="COGS" />
                                  </graphic>

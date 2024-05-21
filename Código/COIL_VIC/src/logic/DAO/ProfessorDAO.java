@@ -271,6 +271,27 @@ public class ProfessorDAO implements IProfessor{
         }
         return 0;
     }
+
+    public String getProfessorNameByUser(String user){
+        DatabaseManager dbManager = new DatabaseManager();
+        String query = "SELECT nombreProfesor FROM Profesor WHERE usuario = ?";
+        try{
+            Connection connection = dbManager.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, user);
+            try(ResultSet resultSet = preparedStatement.executeQuery()){
+                if(resultSet.next()){
+                    return resultSet.getString("nombreProfesor");
+                }
+            }
+
+        } catch(SQLException getProfessorNameByUserException){
+            LOG.error("ERROR:", getProfessorNameByUserException);
+        }
+        return null;
+    }
+    //TODO: Hacer test de este método
+    
 }
 
 
