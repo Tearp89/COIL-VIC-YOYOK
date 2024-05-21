@@ -96,7 +96,6 @@ public class CloseCollaborationController {
         });
         
 
-       // int professorId =  professorData.getProfessorId();
 
 
 
