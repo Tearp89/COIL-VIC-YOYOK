@@ -4,14 +4,9 @@ package logic.DAO;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 import dataAccess.DatabaseManager;
 import logic.interfaces.IProfessor;
 import logic.classes.Professor;
-
-import com.mysql.cj.jdbc.PreparedStatementWrapper;
 import java.util.ArrayList;
 import java.sql.ResultSet;
 import log.Log;
@@ -273,25 +268,88 @@ public class ProfessorDAO implements IProfessor{
     }
 
     public String getProfessorNameByUser(String user){
+        String name = null;
         DatabaseManager dbManager = new DatabaseManager();
-        String query = "SELECT nombreProfesor FROM Profesor WHERE usuario = ?";
-        try{
+        String query = "SELECT nombreProfesor FROM profesor WHERE usuario = ? ";
+        try {
             Connection connection = dbManager.getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setString(1, user);
-            try(ResultSet resultSet = preparedStatement.executeQuery()){
-                if(resultSet.next()){
-                    return resultSet.getString("nombreProfesor");
-                }
-            }
+            try(PreparedStatement preparedStatement = connection.prepareStatement(query)){
+                preparedStatement.setString(1, user);
+                ResultSet resultSet = preparedStatement.executeQuery();
 
-        } catch(SQLException getProfessorNameByUserException){
-            LOG.error("ERROR:", getProfessorNameByUserException);
-        }
-        return null;
+                if(resultSet.next()){
+                    name = resultSet.getString("nombreProfesor");
+                }
+                
+            }
+        } catch (SQLException getProfesorNameByUserException) {
+            LOG.error(getProfesorNameByUserException);
+        }   
+        return name;
     }
-    //TODO: Hacer test de este método
-    
+
+    public String getProfessorPhoneByUser(String user){
+        String phoneNumber = null;
+        DatabaseManager dbManager = new DatabaseManager();
+        String query = "SELECT telefono FROM profesor WHERE usuario = ? ";
+        try {
+            Connection connection = dbManager.getConnection();
+            try(PreparedStatement preparedStatement = connection.prepareStatement(query)){
+                preparedStatement.setString(1, user);
+                ResultSet resultSet = preparedStatement.executeQuery();
+
+                if(resultSet.next()){
+                    phoneNumber = resultSet.getString("telefono");
+                }
+                
+            }
+        } catch (SQLException getProfesorPhoneByUserException) {
+            LOG.error(getProfesorPhoneByUserException);
+        }   
+        return phoneNumber;
+    }
+
+    public String getProfessorAreaByUser(String user){
+        String name = null;
+        DatabaseManager dbManager = new DatabaseManager();
+        String query = "SELECT area_academica FROM profesor WHERE usuario = ? ";
+        try {
+            Connection connection = dbManager.getConnection();
+            try(PreparedStatement preparedStatement = connection.prepareStatement(query)){
+                preparedStatement.setString(1, user);
+                ResultSet resultSet = preparedStatement.executeQuery();
+
+                if(resultSet.next()){
+                    name = resultSet.getString("area_academica");
+                }
+                
+            }
+        } catch (SQLException getProfesorAreaByUserException) {
+            LOG.error(getProfesorAreaByUserException);
+        }   
+        return name;
+    }
+
+    public String getProfessorEmailByUser(String user){
+        String name = null;
+        DatabaseManager dbManager = new DatabaseManager();
+        String query = "SELECT correo FROM profesor WHERE usuario = ? ";
+        try {
+            Connection connection = dbManager.getConnection();
+            try(PreparedStatement preparedStatement = connection.prepareStatement(query)){
+                preparedStatement.setString(1, user);
+                ResultSet resultSet = preparedStatement.executeQuery();
+
+                if(resultSet.next()){
+                    name = resultSet.getString("correo");
+                }
+                
+            }
+        } catch (SQLException getProfesorEmailByUserException) {
+            LOG.error(getProfesorEmailByUserException);
+        }   
+        return name;
+    }
 }
 
 
