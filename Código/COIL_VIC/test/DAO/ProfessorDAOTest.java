@@ -232,5 +232,17 @@ public class ProfessorDAOTest {
             int result = professorDAO.professorRequestCollaboration(idColaboración, idProfesor);
             assertEquals(0, result);
         }
+
+        @Test
+public void changeRequestStatusTestSuccess(){
+    String status = "Aceptada";
+    int idColaboración = 33;
+    int idProfessor = 24;
+    ProfessorDAO professorDAO = new ProfessorDAO();
+    int expectedResult = 1;
+    int result = professorDAO.changeRequestStatus(status, idColaboración, idProfessor);
+    assertEquals(expectedResult, result);
+}
 }       
+
 

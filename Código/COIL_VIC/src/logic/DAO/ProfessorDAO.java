@@ -234,7 +234,7 @@ public class ProfessorDAO implements IProfessor{
 
     public int professorRequestCollaboration(int idColaboración, int idProfesor){
         DatabaseManager dbManager = new DatabaseManager();
-        String query = "INSERT INTO solicitud_Colaboración (idColaboración, idProfesor) VALUES (?,?)";
+        String query = "INSERT INTO solicitud_Colaboración (idColaboración, idProfesor, estado) VALUES (?,?, Pendiente)";
         int result = 0;
         try {
             Connection connection = dbManager.getConnection();
@@ -244,6 +244,23 @@ public class ProfessorDAO implements IProfessor{
             result = preparedStatement.executeUpdate();
         } catch (SQLException professorRequestCollaboratioException){
             LOG.error("ERROR: ", professorRequestCollaboratioException);
+        }
+        return result;
+    }
+
+    public int changeRequestStatus(String status, int collaborationId, int professorId){
+        DatabaseManager dbManager = new DatabaseManager();
+        String query = "UPDATE  solicitud_colaboración set estado = ? WHERE idColaboración = ? AND idProfesor = ?";
+        int result = 0;
+        try{
+            Connection connection = dbManager.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, status);
+            preparedStatement.setInt(2, collaborationId);
+            preparedStatement.setInt(3, professorId);
+            result = preparedStatement.executeUpdate();
+        } catch (SQLException changeRequestStatusException){
+            LOG.error("ERROR: ", changeRequestStatusException);
         }
         return result;
     }
