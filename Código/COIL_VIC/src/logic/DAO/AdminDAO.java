@@ -88,7 +88,6 @@ public class AdminDAO implements IAdmin {
             }
         } catch (SQLException getAdminNameByUserException) {
             LOG.error(getAdminNameByUserException);
-            getAdminNameByUserException.printStackTrace();
         }   
 
         return name;
