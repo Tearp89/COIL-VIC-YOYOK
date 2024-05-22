@@ -19,7 +19,7 @@
             "request": "launch",
             "mainClass": "GUI.MainCloseCollaboration",
             "projectName": "COIL_VIC_7f2e775a",
-            "vmArgs": "--module-path \"C:/Users/marla/OneDrive - Universidad Veracruzana/Documentos/4to semestre/Principios de construcción/javafx-sdk-21.0.2/lib\" --add-modules javafx.controls,javafx.fxml"
+            "vmArgs": "--module-path \"C:/Users/isabe/Desktop/uni 4/Construcción/javafx-sdk-21.0.2/lib\" --add-modules javafx.controls,javafx.fxml"
         },
         {
             "type": "java",
@@ -27,7 +27,7 @@
             "request": "launch",
             "mainClass": "GUI.MainRequests",
             "projectName": "COIL_VIC_7f2e775a",
-            "vmArgs": "--module-path \"C:/Users/marla/OneDrive - Universidad Veracruzana/Documentos/4to semestre/Principios de construcción/javafx-sdk-21.0.2/lib\" --add-modules javafx.controls,javafx.fxml"
+            "vmArgs": "--module-path \"C:/Users/isabe/Desktop/uni 4/Construcción/javafx-sdk-21.0.2/lib\" --add-modules javafx.controls,javafx.fxml"
         },
         {
             "type": "java",
@@ -35,7 +35,7 @@
             "request": "launch",
             "mainClass": "GUI.MainSearchUniversity",
             "projectName": "COIL_VIC_7f2e775a",
-            "vmArgs": "--module-path \"C:/Users/marla/OneDrive - Universidad Veracruzana/Documentos/4to semestre/Principios de construcción/javafx-sdk-21.0.2/lib\" --add-modules javafx.controls,javafx.fxml"
+            "vmArgs": "--module-path \"C:/Users/isabe/Desktop/uni 4/Construcción/javafx-sdk-21.0.2/lib\" --add-modules javafx.controls,javafx.fxml"
         },
         {
             "type": "java",
@@ -43,7 +43,7 @@
             "request": "launch",
             "mainClass": "GUI.MainPublishedCollaborations",
             "projectName": "COIL_VIC_7f2e775a",
-            "vmArgs": "--module-path \"C:/Users/marla/OneDrive - Universidad Veracruzana/Documentos/4to semestre/Principios de construcción/javafx-sdk-21.0.2/lib\" --add-modules javafx.controls,javafx.fxml"
+            "vmArgs": "--module-path \"C:/Users/isabe/Desktop/uni 4/Construcción/javafx-sdk-21.0.2/lib\" --add-modules javafx.controls,javafx.fxml"
         },
         {
             "type": "java",
@@ -51,7 +51,7 @@
             "request": "launch",
             "mainClass": "GUI.MainSearchAcceptedCollaborations",
             "projectName": "COIL_VIC_7f2e775a",
-            "vmArgs": "--module-path \"C:/Users/marla/OneDrive - Universidad Veracruzana/Documentos/4to semestre/Principios de construcción/javafx-sdk-21.0.2/lib\" --add-modules javafx.controls,javafx.fxml"
+            "vmArgs": "--module-path \"C:/Users/isabe/Desktop/uni 4/Construcción/javafx-sdk-21.0.2/lib\" --add-modules javafx.controls,javafx.fxml"
         },
         {
             "type": "java",
@@ -59,7 +59,7 @@
             "request": "launch",
             "mainClass": "GUI.MainDeclinedCollaborationDetails",
             "projectName": "COIL_VIC_7f2e775a",
-            "vmArgs": "--module-path \"C:/Users/marla/OneDrive - Universidad Veracruzana/Documentos/4to semestre/Principios de construcción/javafx-sdk-21.0.2/lib\" --add-modules javafx.controls,javafx.fxml"
+            "vmArgs": "--module-path \"C:/Users/isabe/Desktop/uni 4/Construcción/javafx-sdk-21.0.2/lib\" --add-modules javafx.controls,javafx.fxml"
         },
         {
             "type": "java",
@@ -67,7 +67,7 @@
             "request": "launch",
             "mainClass": "GUI.MainSearchActiveCollaborations",
             "projectName": "COIL_VIC_7f2e775a",
-            "vmArgs": "--module-path \"C:/Users/marla/OneDrive - Universidad Veracruzana/Documentos/4to semestre/Principios de construcción/javafx-sdk-21.0.2/lib\" --add-modules javafx.controls,javafx.fxml"
+            "vmArgs": "--module-path \"C:/Users/isabe/Desktop/uni 4/Construcción/javafx-sdk-21.0.2/lib\" --add-modules javafx.controls,javafx.fxml"
         },
         {
             "type": "java",
@@ -75,7 +75,7 @@
             "request": "launch",
             "mainClass": "GUI.MainSearchDeclinedCollaborations",
             "projectName": "COIL_VIC_7f2e775a",
-            "vmArgs": "--module-path \"C:/Users/marla/OneDrive - Universidad Veracruzana/Documentos/4to semestre/Principios de construcción/javafx-sdk-21.0.2/lib\" --add-modules javafx.controls,javafx.fxml"
+            "vmArgs": "--module-path \"C:/Users/isabe/Desktop/uni 4/Construcción/javafx-sdk-21.0.2/lib\" --add-modules javafx.controls,javafx.fxml"
         },
         {
             "type": "java",
@@ -83,7 +83,7 @@
             "request": "launch",
             "mainClass": "GUI.MainAddProfessor",
             "projectName": "COIL_VIC_7f2e775a",
-            "vmArgs": "--module-path \"C:/Users/marla/OneDrive - Universidad Veracruzana/Documentos/4to semestre/Principios de construcción/javafx-sdk-21.0.2/lib\" --add-modules javafx.controls,javafx.fxml"
+            "vmArgs": "--module-path \"C:/Users/isabe/Desktop/uni 4/Construcción/javafx-sdk-21.0.2/lib\" --add-modules javafx.controls,javafx.fxml"
         },
         {
             "type": "java",
@@ -91,7 +91,7 @@
             "request": "launch",
             "mainClass": "GUI.MainAddWorkshop",
             "projectName": "COIL_VIC_7f2e775a",
-            "vmArgs": "--module-path \"C:/Users/marla/OneDrive - Universidad Veracruzana/Documentos/4to semestre/Principios de construcción/javafx-sdk-21.0.2/lib\" --add-modules javafx.controls,javafx.fxml"
+            "vmArgs": "--module-path \"C:/Users/isabe/Desktop/uni 4/Construcción/javafx-sdk-21.0.2/lib\" --add-modules javafx.controls,javafx.fxml"
         },
         {
             "type": "java",
@@ -105,7 +105,7 @@
             "request": "launch",
             "mainClass": "GUI.MainAddCollaboration",
             "projectName": "COIL_VIC_7f2e775a",
-            "vmArgs": "--module-path \"C:/Users/marla/OneDrive - Universidad Veracruzana/Documentos/4to semestre/Principios de construcción/javafx-sdk-21.0.2/lib\" --add-modules javafx.controls,javafx.fxml"
+            "vmArgs": "--module-path \"C:/Users/isabe/Desktop/uni 4/Construcción/javafx-sdk-21.0.2/lib\" --add-modules javafx.controls,javafx.fxml"
         },
         {
             "type": "java",
@@ -113,7 +113,7 @@
             "request": "launch",
             "mainClass": "GUI.MainLogin",
             "projectName": "COIL_VIC_7f2e775a",
-            "vmArgs": "--module-path \"C:/Users/marla/OneDrive - Universidad Veracruzana/Documentos/4to semestre/Principios de construcción/javafx-sdk-21.0.2/lib\" --add-modules javafx.controls,javafx.fxml"
+            "vmArgs": "--module-path \"C:/Users/isabe/Desktop/uni 4/Construcción/javafx-sdk-21.0.2/lib\" --add-modules javafx.controls,javafx.fxml"
         },
         {
             "type": "java",
@@ -121,7 +121,7 @@
             "request": "launch",
             "mainClass": "GUI.MainNumeralia",
             "projectName": "COIL_VIC_7f2e775a",
-            "vmArgs": "--module-path \"C:/Users/marla/OneDrive - Universidad Veracruzana/Documentos/4to semestre/Principios de construcción/javafx-sdk-21.0.2/lib\" --add-modules javafx.controls,javafx.fxml"
+            "vmArgs": "--module-path \"C:/Users/isabe/Desktop/uni 4/Construcción/javafx-sdk-21.0.2/lib\" --add-modules javafx.controls,javafx.fxml"
         }
     ]
 }

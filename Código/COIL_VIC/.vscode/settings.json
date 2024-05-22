@@ -3,14 +3,15 @@
     "testExplorer.useNativeTesting": true,
     "java.project.referencedLibraries": [
         "lib/**/*.jar",
-        "c:\\Users\\marla\\OneDrive - Universidad Veracruzana\\Documentos\\4to semestre\\Principios de construcción\\javafx-sdk-21.0.2\\lib\\javafx.base.jar",
-        "c:\\Users\\marla\\OneDrive - Universidad Veracruzana\\Documentos\\4to semestre\\Principios de construcción\\javafx-sdk-21.0.2\\lib\\javafx.controls.jar",
-        "c:\\Users\\marla\\OneDrive - Universidad Veracruzana\\Documentos\\4to semestre\\Principios de construcción\\javafx-sdk-21.0.2\\lib\\javafx.fxml.jar",
-        "c:\\Users\\marla\\OneDrive - Universidad Veracruzana\\Documentos\\4to semestre\\Principios de construcción\\javafx-sdk-21.0.2\\lib\\javafx.graphics.jar",
-        "c:\\Users\\marla\\OneDrive - Universidad Veracruzana\\Documentos\\4to semestre\\Principios de construcción\\javafx-sdk-21.0.2\\lib\\javafx.media.jar",
-        "c:\\Users\\marla\\OneDrive - Universidad Veracruzana\\Documentos\\4to semestre\\Principios de construcción\\javafx-sdk-21.0.2\\lib\\javafx.swing.jar",
-        "c:\\Users\\marla\\OneDrive - Universidad Veracruzana\\Documentos\\4to semestre\\Principios de construcción\\javafx-sdk-21.0.2\\lib\\javafx.web.jar",
-        "c:\\Users\\marla\\OneDrive - Universidad Veracruzana\\Documentos\\4to semestre\\Principios de construcción\\javafx-sdk-21.0.2\\lib\\javafx-swt.jar",
-        "C:\\Users\\marla\\OneDrive - Universidad Veracruzana\\Documentos\\4to semestre\\Principios de construcción\\fontawesomefx-8.2.jar"
+        "C:\\Users\\isabe\\Desktop\\uni 4\\Construcción\\javafx-sdk-21.0.2\\lib\\javafx.base.jar",
+        "C:\\Users\\isabe\\Desktop\\uni 4\\Construcción\\javafx-sdk-21.0.2\\lib\\javafx.controls.jar",
+        "C:\\Users\\isabe\\Desktop\\uni 4\\Construcción\\javafx-sdk-21.0.2\\lib\\javafx.fxml.jar",
+        "C:\\Users\\isabe\\Desktop\\uni 4\\Construcción\\javafx-sdk-21.0.2\\lib\\javafx.graphics.jar",
+        "C:\\Users\\isabe\\Desktop\\uni 4\\Construcción\\javafx-sdk-21.0.2\\lib\\javafx.media.jar",
+        "C:\\Users\\isabe\\Desktop\\uni 4\\Construcción\\javafx-sdk-21.0.2\\lib\\javafx.swing.jar",
+        "C:\\Users\\isabe\\Desktop\\uni 4\\Construcción\\javafx-sdk-21.0.2\\lib\\javafx.web.jar",
+        "C:\\Users\\isabe\\Desktop\\uni 4\\Construcción\\javafx-sdk-21.0.2\\lib\\javafx-swt.jar",
+        "C:\\Users\\isabe\\Desktop\\uni 4\\Construcción\\jar\\fontawesomefx-8.2.jar"
+
     ]
 }
