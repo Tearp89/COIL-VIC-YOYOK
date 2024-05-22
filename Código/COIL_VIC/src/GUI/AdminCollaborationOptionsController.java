@@ -1,6 +1,7 @@
 package GUI;
 
 import java.io.IOException;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -9,8 +10,8 @@ import javafx.scene.control.Label;
 import log.Log;
 import logic.classes.Admin;
 
-public class AdminHomeController {
-    private static final org.apache.log4j.Logger LOG = Log.getLogger(AdminHomeController.class);
+public class AdminCollaborationOptionsController {
+    private static final org.apache.log4j.Logger LOG = Log.getLogger(AdminCollaborationOptionsController.class);
     
     @FXML
     private Label labelName;
@@ -70,7 +71,7 @@ public class AdminHomeController {
     private Button buttonProfessors;
     @FXML
     private void goToProfessors(ActionEvent event){
-        FXMLLoader professorOptionsLoader = new FXMLLoader(getClass().getResource("/GUI/adminProfessorOptions.fxml"));
+        FXMLLoader professorOptionsLoader = new FXMLLoader(getClass().getResource("/GUI/adminProfessorsOptions.fxml"));
         ChangeWindowManager.changeWindowTo(event, professorOptionsLoader);
     }
 
@@ -89,4 +90,5 @@ public class AdminHomeController {
         FXMLLoader homePageLoader = new FXMLLoader(getClass().getResource("/GUI/adminHome.fxml"));
         ChangeWindowManager.changeWindowTo(event, homePageLoader);
     }
+
 }

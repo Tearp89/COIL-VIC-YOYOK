@@ -66,12 +66,12 @@
                                  </font>
                               </Label>
                               <Line endX="70.0" layoutX="116.0" layoutY="221.0" startX="-100.0" />
-                              <Button id="home" fx:id="buttonHome" layoutX="11.0" layoutY="238.0" minHeight="40.0" mnemonicParsing="false" onAction="#goToHome" prefWidth="180.0" styleClass="nav-btn" stylesheets="@windowsStyle.css" text="Inicio">
+                              <Button id="home" fx:id="buttonHome" layoutX="11.0" layoutY="238.0" minHeight="40.0" mnemonicParsing="false" onAction="#goToHomePage" prefWidth="180.0" styleClass="nav-btn" stylesheets="@windowsStyle.css" text="Inicio">
                                  <graphic>
                                     <FontAwesomeIcon fill="WHITE" glyphName="HOME" />
                                  </graphic>
                               </Button>
-                              <Button id="logOutB" fx:id="buttonLogout" layoutX="12.0" layoutY="514.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="36.0" stylesheets="@windowsStyle.css">
+                              <Button id="logOutB" fx:id="buttonLogout" layoutX="12.0" layoutY="514.0" mnemonicParsing="false" onAction="#logout" prefHeight="26.0" prefWidth="36.0" stylesheets="@windowsStyle.css">
                                  <styleClass>
                                     <String fx:value="logout" />
                                     <String fx:value="shadow" />
@@ -86,12 +86,12 @@
                                  </font>
                               </Label>
                               <FontAwesomeIcon fill="WHITE" glyphName="USER" layoutX="54.0" layoutY="141.0" size="10em" />
-                              <Button id="colaborations" fx:id="buttonCollaborations" layoutX="10.0" layoutY="278.0" minHeight="40.0" mnemonicParsing="false" prefWidth="180.0" styleClass="nav-btn" stylesheets="@windowsStyle.css" text="Colaboraciones">
+                              <Button id="colaborations" fx:id="buttonCollaborations" layoutX="10.0" layoutY="278.0" minHeight="40.0" mnemonicParsing="false" onAction="#goToCollaborations" prefWidth="180.0" styleClass="nav-btn" stylesheets="@windowsStyle.css" text="Colaboraciones">
                                  <graphic>
                                     <FontAwesomeIcon fill="WHITE" glyphName="GROUP" />
                                  </graphic>
                               </Button>
-                              <Button id="records" fx:id="buttonProfessors" layoutX="10.0" layoutY="318.0" minHeight="40.0" mnemonicParsing="false" prefWidth="180.0" styleClass="nav-btn" stylesheets="@windowsStyle.css" text="Profesores">
+                              <Button id="records" fx:id="buttonProfessors" layoutX="10.0" layoutY="318.0" minHeight="40.0" mnemonicParsing="false" onAction="#goToProfessors" prefWidth="180.0" styleClass="nav-btn" stylesheets="@windowsStyle.css" text="Profesores">
                                  <graphic>
                                     <FontAwesomeIcon fill="WHITE" glyphName="PENCIL" />
                                  </graphic>
@@ -101,7 +101,7 @@
                                     <FontAwesomeIcon fill="WHITE" glyphName="TH" />
                                  </graphic>
                               </Button>
-                              <Button id="records" fx:id="buttonUniversities" layoutX="10.0" layoutY="398.0" minHeight="40.0" mnemonicParsing="false" prefWidth="180.0" styleClass="nav-btn" stylesheets="@windowsStyle.css" text="Universidades">
+                              <Button id="records" fx:id="buttonUniversities" layoutX="10.0" layoutY="398.0" minHeight="40.0" mnemonicParsing="false" onAction="#goToUniversities" prefWidth="180.0" styleClass="nav-btn" stylesheets="@windowsStyle.css" text="Universidades">
                                  <graphic>
                                     <FontAwesomeIcon fill="WHITE" glyphName="BUILDING" />
                                  </graphic>
@@ -161,7 +161,7 @@
                                     <FontAwesomeIcon glyphName="FILTER" layoutX="64.0" layoutY="36.0" size="1.5em" />
                                     <ComboBox fx:id="comboBoxConsultFilter" layoutX="283.0" layoutY="17.0" prefHeight="26.0" prefWidth="190.0" promptText="Consultar..." styleClass="search" stylesheets="@windowsStyle.css" />
                                     <FontAwesomeIcon glyphName="FILTER" layoutX="292.0" layoutY="36.0" size="1.5em" />
-                                    <Button id="discard" fx:id="buttonBack" layoutX="6.0" layoutY="1.0" mnemonicParsing="false" styleClass="white-buttom" stylesheets="@windowsStyle.css">
+                                    <Button id="discard" fx:id="buttonBack" layoutX="6.0" layoutY="1.0" mnemonicParsing="false" onAction="#goBack" styleClass="white-buttom" stylesheets="@windowsStyle.css">
                                        <graphic>
                                           <FontAwesomeIcon glyphName="ARROW_LEFT" />
                                        </graphic>

@@ -60,26 +60,7 @@ public class NumeraliaController {
     @FXML
     private Button buttonDownload;
 
-    @FXML
-    private Button buttonHome;
-
-    @FXML
-    private Button buttonCollaborations;
-
-    @FXML
-    private Button buttonProfessors;
     
-    @FXML
-    private Button buttonLogout;
-
-    @FXML
-    private Button buttonMinimize;
-
-    @FXML
-    private Button buttonClose;
-
-    @FXML
-    private Button buttonConfiguration;
 
     @FXML
     private Label labelName;
@@ -87,15 +68,7 @@ public class NumeraliaController {
     private ObservableList<RegionData> regionDataList = FXCollections.observableArrayList();
     private ObservableList<AcademicAreaData> academicAreaDataList = FXCollections.observableArrayList();
     
-    @FXML
-    private void minimizeWindow(ActionEvent event){
-        ChangeWindowManager.minimizeWindow(event);
-    }
-
-    @FXML
-    private void closeWindow(ActionEvent event){
-        ChangeWindowManager.closeWindow(event);
-    }
+  
 
     @FXML
     private void handleYear2017(ActionEvent event) {
@@ -202,11 +175,29 @@ public class NumeraliaController {
     }
 
     @FXML
-    private void gotoHome(ActionEvent event){
-        FXMLLoader homeLoader = new FXMLLoader(getClass().getResource("/GUI/adminHome.fxml"));
-        ChangeWindowManager.changeWindowTo(event, homeLoader);
+    private Button buttonMinimize;
+    @FXML
+    private void minimizeWindow(ActionEvent event){
+        ChangeWindowManager.minimizeWindow(event);
     }
 
+    @FXML
+    private Button buttonClose;
+    @FXML
+    private void closeWindow(ActionEvent event){
+        ChangeWindowManager.closeWindow(event);
+    }
+
+
+    @FXML
+    private Button buttonNumeralia;
+    @FXML
+    private void goToNumeralia(ActionEvent event){
+        FXMLLoader numeraliaLoader = new FXMLLoader(getClass().getResource("/GUI/numeralia.fxml"));
+        ChangeWindowManager.changeWindowTo(event, numeraliaLoader);
+    }
+    @FXML
+    private Button buttonLogout;
     @FXML
     private void logout(ActionEvent event){
         FXMLLoader loginLoader = new FXMLLoader(getClass().getResource("/GUI/login.fxml"));
@@ -217,4 +208,38 @@ public class NumeraliaController {
             LOG.error(ioException);
         }
     }
+
+    @FXML
+    private Button buttonCollaborations;
+    @FXML
+    private void goToCollaborations(ActionEvent event){
+        FXMLLoader collaborationOptionsLoader = new FXMLLoader(getClass().getResource("/GUI/adminCollaborations.fxml"));
+        ChangeWindowManager.changeWindowTo(event, collaborationOptionsLoader);
+    }
+
+    @FXML
+    private Button buttonProfessors;
+    @FXML
+    private void goToProfessors(ActionEvent event){
+        FXMLLoader professorOptionsLoader = new FXMLLoader(getClass().getResource("/GUI/adminProfessorOptions.fxml"));
+        ChangeWindowManager.changeWindowTo(event, professorOptionsLoader);
+    }
+
+    @FXML
+    private Button buttonUniversities;
+    @FXML
+    private void goToUniversities(ActionEvent event){
+        FXMLLoader universitiesOptionsLoader = new FXMLLoader(getClass().getResource("/GUI/adminUniversityOptions.fxml"));
+        ChangeWindowManager.changeWindowTo(event, universitiesOptionsLoader);
+    }
+
+    @FXML
+    private Button buttonHome;
+    @FXML
+    private void goToHomePage(ActionEvent event){
+        FXMLLoader homePageLoader = new FXMLLoader(getClass().getResource("/GUI/adminHome.fxml"));
+        ChangeWindowManager.changeWindowTo(event, homePageLoader);
+    }
+
+    
 }

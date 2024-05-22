@@ -68,7 +68,7 @@
                                  </font>
                               </Label>
                               <Line endX="70.0" layoutX="116.0" layoutY="221.0" startX="-100.0" />
-                              <Button id="home" fx:id="buttonHome" layoutX="11.0" layoutY="238.0" minHeight="40.0" mnemonicParsing="false" onAction="#gotoHome" prefWidth="180.0" styleClass="nav-btn" text="Inicio">
+                              <Button id="home" fx:id="buttonHome" layoutX="11.0" layoutY="238.0" minHeight="40.0" mnemonicParsing="false" onAction="#goToHomePage" prefWidth="180.0" styleClass="nav-btn" text="Inicio">
                                  <graphic>
                                     <FontAwesomeIcon fill="WHITE" glyphName="HOME" />
                                  </graphic>
@@ -77,12 +77,12 @@
                                     <URL value="@windowsStyle.css" />
                                  </stylesheets>
                               </Button>
-                              <Button id="colaborations" fx:id="buttonCollaborations" layoutX="11.0" layoutY="278.0" minHeight="40.0" mnemonicParsing="false" prefWidth="180.0" styleClass="nav-btn" stylesheets="@windowsStyle.css" text="Colaboraciones">
+                              <Button id="colaborations" fx:id="buttonCollaborations" layoutX="11.0" layoutY="278.0" minHeight="40.0" mnemonicParsing="false" onAction="#goToCollaborations" prefWidth="180.0" styleClass="nav-btn" stylesheets="@windowsStyle.css" text="Colaboraciones">
                                  <graphic>
                                     <FontAwesomeIcon fill="WHITE" glyphName="GROUP" />
                                  </graphic>
                               </Button>
-                              <Button id="records" fx:id="buttonProfessors" layoutX="11.0" layoutY="318.0" minHeight="40.0" mnemonicParsing="false" prefWidth="180.0" styleClass="nav-btn" stylesheets="@windowsStyle.css" text="Profesores">
+                              <Button id="records" fx:id="buttonProfessors" layoutX="11.0" layoutY="318.0" minHeight="40.0" mnemonicParsing="false" onAction="#goToProfessors" prefWidth="180.0" styleClass="nav-btn" stylesheets="@windowsStyle.css" text="Profesores">
                                  <graphic>
                                     <FontAwesomeIcon fill="WHITE" glyphName="PENCIL" />
                                  </graphic>
@@ -101,17 +101,22 @@
                                     <Font name="Arial" size="14.0" />
                                  </font>
                               </Label>
-                              <Button id="records" layoutX="11.0" layoutY="358.0" minHeight="40.0" mnemonicParsing="false" prefWidth="180.0" styleClass="nav-btn-select" stylesheets="@windowsStyle.css" text="Numeralia">
+                              <Button id="records" fx:id="buttonNumeralia" layoutX="11.0" layoutY="358.0" minHeight="40.0" mnemonicParsing="false" onAction="#goToNumeralia" prefWidth="180.0" styleClass="nav-btn-select" stylesheets="@windowsStyle.css" text="Numeralia">
                                  <graphic>
                                     <FontAwesomeIcon fill="WHITE" glyphName="TH" />
                                  </graphic>
                               </Button>
                               <FontAwesomeIcon fill="WHITE" glyphName="USER" layoutX="54.0" layoutY="141.0" size="10em" />
-                              <Button id="records" fx:id="buttonConfiguration" layoutX="10.0" layoutY="398.0" minHeight="40.0" mnemonicParsing="false" prefWidth="180.0" styleClass="nav-btn" stylesheets="@windowsStyle.css" text="Configuración">
+                              <Button id="records" fx:id="buttonUniversities" layoutX="10.0" layoutY="398.0" minHeight="40.0" mnemonicParsing="false" onAction="#goToUniversities" prefWidth="180.0" styleClass="nav-btn" stylesheets="@windowsStyle.css" text="Universidad">
                                  <graphic>
-                                    <FontAwesomeIcon fill="WHITE" glyphName="COGS" />
+                                    <FontAwesomeIcon fill="WHITE" glyphName="BUILDING" />
                                  </graphic>
                               </Button>
+                              <Label id="user" fx:id="labelName" alignment="CENTER" layoutX="16.0" layoutY="197.0" prefHeight="23.0" prefWidth="190.0" text="user" textFill="WHITE">
+                                 <font>
+                                    <Font name="Arial Bold" size="20.0" />
+                                 </font>
+                              </Label>
                            </children>
                         </AnchorPane>
                      </children>

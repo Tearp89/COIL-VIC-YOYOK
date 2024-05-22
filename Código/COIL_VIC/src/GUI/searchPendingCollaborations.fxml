@@ -99,7 +99,7 @@
                                  </font>
                               </Label>
                               <FontAwesomeIcon fill="WHITE" glyphName="USER" layoutX="54.0" layoutY="141.0" size="10em" />
-                              <Button id="records" fx:id="buttonSettings" layoutX="11.0" layoutY="398.0" minHeight="40.0" mnemonicParsing="false" onAction="#goToSettings" prefWidth="180.0" styleClass="nav-btn" stylesheets="@windowsStyle.css" text="Configuración">
+                              <Button id="records" fx:id="buttonUniversities" layoutX="11.0" layoutY="398.0" minHeight="40.0" mnemonicParsing="false" onAction="#goToUniversities" prefWidth="180.0" styleClass="nav-btn" stylesheets="@windowsStyle.css" text="Universidades">
                                  <graphic>
                                     <FontAwesomeIcon fill="WHITE" glyphName="GEAR" />
                                  </graphic>
