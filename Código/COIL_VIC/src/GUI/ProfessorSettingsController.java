@@ -9,6 +9,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import log.Log;
+import logic.DAO.ProfessorDAO;
 import logic.classes.Professor;
 
 public class ProfessorSettingsController {
@@ -35,52 +36,94 @@ public class ProfessorSettingsController {
     @FXML
     private Button buttonChangePassword;
 
+    
     @FXML
-    private Button buttonMinimize;
+    public void initialize(){
+        Professor professorData = new Professor();
+        professorData = UserSessionManager.getInstance().getProfessorUserData();
+        String user = professorData.getUser();
+        ProfessorDAO professorDAO = new ProfessorDAO();
+        String email = professorDAO.getProfessorEmailByUser(user);
+        String phoneNumber = professorDAO.getProfessorPhoneByUser(user);
+        String academicArea = professorDAO.getProfessorAreaByUser(user);
 
-    @FXML 
-    private Button buttonClose;
+        labelName.setText(professorData.getName());
+        labelPhone.setText(phoneNumber);
+        labelEmail.setText(email);
+        labelAcademicArea.setText(academicArea);
+    }
 
     @FXML
     private Button buttonHome;
 
     @FXML
-    private Button buttonCollaboration;
+    private void goToHomePage(ActionEvent event){
+        FXMLLoader homePageLoader = new FXMLLoader(getClass().getResource("/GUI/professorHome.fxml"));
+        ChangeWindowManager.changeWindowTo(event, homePageLoader);
+    }
+
+    @FXML
+    private Button buttonCollaborations;
+
+    @FXML
+    private void goToCollaborations(ActionEvent event){
+        FXMLLoader collaborationsOptionsLoader = new FXMLLoader(getClass().getResource("/GUI/collaborationOptions.fxml"));
+        ChangeWindowManager.changeWindowTo(event, collaborationsOptionsLoader);
+
+
+    }
 
     @FXML
     private Button buttonStudents;
 
     @FXML
-    private Button buttonLogout;
+    private void goToStudents(ActionEvent event){
+        FXMLLoader studentsLoader = new FXMLLoader(getClass().getResource("/GUI/studentOptions.fxml"));
+        ChangeWindowManager.changeWindowTo(event, studentsLoader);
 
-    @FXML
-    public void initialize(){
-        Professor professorData = new Professor();
-        professorData = UserSessionManager.getInstance().getProfessorUserData();
-        labelName.setText(professorData.getName());
-        labelPhone.setText(professorData.getPhoneNumber());
-        labelEmail.setText(professorData.getEmail());
-        labelAcademicArea.setText(professorData.getAcademicArea());
     }
 
     @FXML
-    public void minimizeWindow(ActionEvent event){
+    private Button buttonSettings;
+
+    @FXML
+    private void goToSettings(ActionEvent event){
+        FXMLLoader settingsLoader = new FXMLLoader(getClass().getResource("/GUI/professorSettings.fxml"));
+        ChangeWindowManager.changeWindowTo(event, settingsLoader);
+
+    }
+    @FXML
+    private Button buttonMinimize;
+    @FXML
+    private void minimizeWindow(ActionEvent event){
         ChangeWindowManager.minimizeWindow(event);
     }
-
     @FXML
-    public void closeWindow(ActionEvent event){
+    private Button buttonClose;
+    @FXML
+    private void closeWindow(ActionEvent event){
         ChangeWindowManager.closeWindow(event);
     }
 
+     @FXML
+    private Button buttonLogout;
+
     @FXML
-    public void logout(ActionEvent event){
+    private void logOut(ActionEvent event){
         FXMLLoader loginLoader = new FXMLLoader(getClass().getResource("/GUI/login.fxml"));
-        try {
+        try{
             ChangeWindowManager.logout(event, loginLoader);
-            UserSessionManager.getInstance().logoutProfessor();
-        } catch (IOException ioException){
-            LOG.error(ioException);
+        } catch (IOException logoutException){
+            LOG.error("ERROR:", logoutException);
         }
+    }
+
+    @FXML
+    private Button buttonCancel;
+    @FXML
+    private void cancel(ActionEvent event){
+        FXMLLoader homePageLoader = new FXMLLoader(getClass().getResource("/GUI/collaborationOptions.fxml"));
+        ChangeWindowManager.changeWindowTo(event, homePageLoader);
+
     }
 }

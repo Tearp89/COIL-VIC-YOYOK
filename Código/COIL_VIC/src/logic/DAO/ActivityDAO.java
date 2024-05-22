@@ -17,6 +17,7 @@ import javafx.scene.chart.PieChart.Data;
 import log.Log;
 import logic.classes.Activity;
 import logic.interfaces.IActivity;
+import java.sql.Statement;
 
 /**
  *
@@ -25,34 +26,35 @@ import logic.interfaces.IActivity;
 public class ActivityDAO implements IActivity {
     private static final org.apache.log4j.Logger LOG = Log.getLogger(ActivityDAO.class);
     
-    public int addActivity (Activity activity) {
+    public int addActivity(Activity activity) {
         DatabaseManager dbManager = new DatabaseManager();
         String query = "INSERT INTO actividad (título, descripcion, tipo, semana) VALUES (?, ?, ?, ?)";
         int result = 0;
         try {
             Connection connection = dbManager.getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            PreparedStatement preparedStatement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             preparedStatement.setString(1, activity.getTitle());
             preparedStatement.setString(2, activity.getDescription());
             preparedStatement.setString(3, activity.getType());
             preparedStatement.setString(4, activity.getWeek());
             result = preparedStatement.executeUpdate();
+            
             ResultSet resultSet = preparedStatement.getGeneratedKeys();
             if (resultSet.next()) {
                 int activityId = resultSet.getInt(1);
                 activity.setActivityId(activityId);
             }
 
-
             resultSet.close();
             preparedStatement.close();
             connection.close();
             
-        } catch (SQLException addSyllabusException) {
-            LOG.error("ERROR: ", addSyllabusException);
+        } catch (SQLException addActivityException) {
+            LOG.error("ERROR: ", addActivityException);
         }
         return result;       
     }
+
 
         public int deleteActivity (Activity activity) {
             DatabaseManager dbManager = new DatabaseManager();
@@ -71,7 +73,7 @@ public class ActivityDAO implements IActivity {
 
         public int updateActivity (Activity activity) { 
             DatabaseManager dbManager = new DatabaseManager();
-            String query = "UPDATE actividad set título = ?, descripcion = ?, tipo = ?, semana = ?,  WHERE idActividad = ?";
+            String query = "UPDATE actividad set título = ?, descripcion = ?, tipo = ?, semana = ?  WHERE idActividad = ?";
             int result = 0;
             try{
                 Connection connection = dbManager.getConnection();
@@ -144,6 +146,84 @@ public class ActivityDAO implements IActivity {
             }
             return activities;
     }
+    //TODO: Test
+    public boolean isActivityAssignedInWeek(int collaborationId, String week) {
+        DatabaseManager dbManager = new DatabaseManager();
+        String query = "SELECT COUNT(*) FROM actividad a " +
+                       "JOIN cronograma_actividades ca ON a.idActividad = ca.idActividad " +
+                       "WHERE ca.idColaboración = ? AND a.semana = ?";
+        try (Connection connection = dbManager.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setInt(1, collaborationId);
+            preparedStatement.setString(2, week);
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                if (resultSet.next()) {
+                    return resultSet.getInt(1) > 0;
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace(); // Basic error handling, you can enhance exception handling as needed
+        }
+        return false;
+    }
+
+    
+    public boolean isActivityTypeAssigned(int collaborationId, String type) {
+        DatabaseManager dbManager = new DatabaseManager();
+        String query = "SELECT COUNT(*) FROM actividad a " +
+                       "JOIN cronograma_actividades ca ON a.idActividad = ca.idActividad " +
+                       "WHERE ca.idColaboración = ? AND a.tipo = ?";
+        try (Connection connection = dbManager.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setInt(1, collaborationId);
+            preparedStatement.setString(2, type);
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                if (resultSet.next()) {
+                    return resultSet.getInt(1) > 0;
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace(); // Basic error handling, you can enhance exception handling as needed
+        }
+        return false;
+    }
+
+    public String getActivityTypeById(int activityId) {
+        DatabaseManager dbManager = new DatabaseManager();
+        String query = "SELECT tipo FROM actividad WHERE idActividad = ?";
+        String type = null;
+        try (Connection connection = dbManager.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setInt(1, activityId);
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                if (resultSet.next()) {
+                    type = resultSet.getString("tipo");
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace(); // Basic error handling, you can enhance exception handling as needed
+        }
+        return type;
+    }
+
+    public String getActivityWeekById(int activityId) {
+        DatabaseManager dbManager = new DatabaseManager();
+        String query = "SELECT semana FROM actividad WHERE idActividad = ?";
+        String week = null;
+        try (Connection connection = dbManager.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setInt(1, activityId);
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                if (resultSet.next()) {
+                    week = resultSet.getString("semana");
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace(); // Basic error handling, you can enhance exception handling as needed
+        }
+        return week;
+    }
+    
 
 
 

@@ -41,7 +41,7 @@ public class CollaborationDAOTest {
         collaboration.setDescription("TestDescripcion");
         collaboration.setFinishDate(dateFinishTest);
         collaboration.setStartDate(dateStartTest);
-        collaboration.setCollaborationStatus("Aceptada");
+        collaboration.setCollaborationStatus("Publicada");
         collaboration.setCollaborationGoal("Unir estudiantes");
         collaboration.setNoStudents(25);
         collaboration.setStudentProfile("Inglés, ");
@@ -344,8 +344,8 @@ public class CollaborationDAOTest {
         public void assignProfessorToCollaborationSuccess() throws SQLException{
             CollaborationDAO instance = new CollaborationDAO();
             int expectedResult = 1;
-            int professorId = 29;
-            int collaborationId = 52;
+            int professorId = 30;
+            int collaborationId = 42;
             int actualResult = instance.assignProfessorToCollaboration(professorId, collaborationId);
             assertEquals(expectedResult, actualResult);
 
@@ -406,6 +406,9 @@ public class CollaborationDAOTest {
             String result = collaborationDAO.getCollaboratorNameById(37, 24);
             assertEquals(expectedResult, result);
         }
+
+        
+
 
 
 

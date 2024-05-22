@@ -144,6 +144,7 @@
                                           </TableColumn>
                                       </columns>
                                     </TableView>
+                                    <Button fx:id="buttonBack" layoutX="43.0" layoutY="14.0" mnemonicParsing="false" onAction="#goBack" text="&lt;" />
                                  </children>
                               </AnchorPane>
                            </children></AnchorPane>

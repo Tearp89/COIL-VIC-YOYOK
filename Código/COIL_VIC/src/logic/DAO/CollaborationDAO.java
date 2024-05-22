@@ -528,5 +528,44 @@ public class CollaborationDAO implements ICollaboration {
     }
 
 
+    //TODO:Test
+    public int changeRequestStatus(int professorId, int collaborationId, String status){
+        DatabaseManager dbManager = new DatabaseManager();
+        String query = "UPDATE solicitud_colaboración SET estado = ? WHERE idColaboración = ? AND idProfesor = ?";
+        int result = 0;
+        try{
+            Connection connection = dbManager.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, status);
+            preparedStatement.setInt(2, collaborationId);
+            preparedStatement.setInt(3, professorId);
+            result = preparedStatement.executeUpdate();
+        } catch (SQLException changeRequestStatusException){
+            LOG.error("ERROR: ", changeRequestStatusException);
+        }
+        return result;
+    }
+    
+
+    
+    public int changeRequestStatusByNotChosen(int professorId, int collaborationId, String status){
+        DatabaseManager dbManager = new DatabaseManager();
+        String updateQuery = "UPDATE solicitud_colaboración SET estado = ? WHERE idColaboración = ? AND idProfesor != ?";
+        int result = 0;
+        try{
+            Connection connection = dbManager.getConnection();
+            PreparedStatement updateStatement = connection.prepareStatement(updateQuery);
+            updateStatement.setString(1, "No seleccionado");
+            updateStatement.setInt(2, collaborationId);
+            updateStatement.setInt(3, professorId);
+            result = updateStatement.executeUpdate();
+        } catch (SQLException changeRequestStatusException){
+            LOG.error("ERROR: ", changeRequestStatusException);
+        }
+        return result;
+    }
+    
+
+
 
 }

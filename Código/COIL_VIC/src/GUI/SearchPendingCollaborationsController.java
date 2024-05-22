@@ -221,6 +221,14 @@ public class SearchPendingCollaborationsController {
         ChangeWindowManager.changeWindowTo(event, homePageLoader);
     }
 
+    @FXML
+    private Button buttonBack;
+    @FXML
+    private void goBack(ActionEvent event){
+        FXMLLoader goBackLoader = new FXMLLoader();
+        ChangeWindowManager.changeWindowTo(event, goBackLoader);
+    }
+
 
     @FXML
     private Label labelUser;

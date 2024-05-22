@@ -13,7 +13,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.SearchAcceptedCollaborationsController">
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.AddActivityController">
    <children>
       <AnchorPane prefHeight="200.0" prefWidth="200.0">
          <children>
@@ -23,7 +23,7 @@
                      <children>
                         <AnchorPane id="semiTopForm" layoutY="-8.0" prefHeight="35.0" prefWidth="800.0" style="-fx-border-color: black;" styleClass="semi-top-form" stylesheets="@windowsStyle.css" AnchorPane.bottomAnchor="8.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-8.0">
                            <children>
-                              <Button id="close" fx:id="close" layoutX="968.0" layoutY="10.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="32.0" styleClass="close" stylesheets="@windowsStyle.css">
+                              <Button id="close" fx:id="buttonClose" layoutX="968.0" layoutY="10.0" mnemonicParsing="false" onAction="#closeWindow" prefHeight="25.0" prefWidth="32.0" styleClass="close" stylesheets="@windowsStyle.css">
                                  <font>
                                     <Font name="System Bold" size="12.0" />
                                  </font>
@@ -31,7 +31,7 @@
                                     <FontAwesomeIcon glyphName="CLOSE" />
                                  </graphic>
                               </Button>
-                              <Button id="minimize" fx:id="minimize" layoutX="930.0" layoutY="10.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="32.0" styleClass="minimize" stylesheets="@windowsStyle.css">
+                              <Button id="minimize" fx:id="buttonMinimize" layoutX="930.0" layoutY="10.0" mnemonicParsing="false" onAction="#minimizeWindow" prefHeight="25.0" prefWidth="32.0" styleClass="minimize" stylesheets="@windowsStyle.css">
                                  <font>
                                     <Font name="System Bold" size="12.0" />
                                  </font>
@@ -65,12 +65,12 @@
                                  </font>
                               </Label>
                               <Line endX="70.0" layoutX="116.0" layoutY="221.0" startX="-100.0" />
-                              <Button id="home" fx:id="buttonHome" layoutX="11.0" layoutY="238.0" minHeight="40.0" mnemonicParsing="false" onAction="#goToHome" prefWidth="180.0" styleClass="nav-btn" stylesheets="@windowsStyle.css" text="Inicio">
+                              <Button id="home" fx:id="buttonHome" layoutX="11.0" layoutY="238.0" minHeight="40.0" mnemonicParsing="false" onAction="#goToHomePage" prefWidth="180.0" styleClass="nav-btn" stylesheets="@windowsStyle.css" text="Inicio">
                                  <graphic>
                                     <FontAwesomeIcon fill="WHITE" glyphName="HOME" />
                                  </graphic>
                               </Button>
-                              <Button id="logOutB" fx:id="buttonLogOut" layoutX="12.0" layoutY="514.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="36.0" stylesheets="@windowsStyle.css">
+                              <Button id="logOutB" fx:id="buttonLogout" layoutX="12.0" layoutY="514.0" mnemonicParsing="false" onAction="#logOut" prefHeight="26.0" prefWidth="36.0" stylesheets="@windowsStyle.css">
                                  <styleClass>
                                     <String fx:value="logout" />
                                     <String fx:value="shadow" />
@@ -116,7 +116,7 @@
                                     <String fx:value="shadow" />
                                  </styleClass>
                                  <children>
-                                    <Button id="discard" fx:id="buttonBack" layoutX="6.0" layoutY="1.0" mnemonicParsing="false" styleClass="white-buttom" stylesheets="@windowsStyle.css">
+                                    <Button id="discard" fx:id="buttonBack" layoutX="6.0" layoutY="1.0" mnemonicParsing="false" onAction="#goBack" styleClass="white-buttom" stylesheets="@windowsStyle.css">
                                        <graphic>
                                           <FontAwesomeIcon glyphName="ARROW_LEFT" />
                                        </graphic>
@@ -143,12 +143,18 @@
                                     </Label>
                                     <TextField fx:id="textFieldTitle" layoutX="197.0" layoutY="136.0" prefHeight="25.0" prefWidth="451.0" styleClass="textfield" stylesheets="@windowsStyle.css" />
                                     <TextArea fx:id="textAreaDescription" layoutX="197.0" layoutY="253.0" prefHeight="200.0" prefWidth="451.0" styleClass="textfield" stylesheets="@windowsStyle.css" />
-                                    <Button layoutX="699.0" layoutY="483.0" mnemonicParsing="false" styleClass="white-buttom" stylesheets="@windowsStyle.css" text="Asignar" />
-                                    <Button layoutX="625.0" layoutY="483.0" mnemonicParsing="false" styleClass="white-buttom" stylesheets="@windowsStyle.css" text="Cancelar" />
-                                    <Button layoutX="697.0" layoutY="14.0" mnemonicParsing="false" styleClass="white-buttom" stylesheets="@windowsStyle.css" text="Guardar" />
+                                    <Button fx:id="buttonAssign" layoutX="699.0" layoutY="483.0" mnemonicParsing="false" onAction="#assignActivity" styleClass="white-buttom" stylesheets="@windowsStyle.css" text="Asignar" />
+                                    <Button fx:id="buttonCancel" layoutX="625.0" layoutY="483.0" mnemonicParsing="false" onAction="#cancel" styleClass="white-buttom" stylesheets="@windowsStyle.css" text="Cancelar" />
+                                    <Button fx:id="buttonSave" layoutX="697.0" layoutY="14.0" mnemonicParsing="false" onAction="#saveActivity" styleClass="white-buttom" stylesheets="@windowsStyle.css" text="Guardar" />
                                     <Label layoutX="513.0" layoutY="19.0" text="Debe guardar para poder asignar" textFill="#797979" />
                                     <ComboBox fx:id="comboBoxWeek" layoutX="197.0" layoutY="76.0" prefHeight="25.0" prefWidth="210.0" styleClass="textfield" stylesheets="@windowsStyle.css" />
                                     <ComboBox fx:id="comboBoxType" layoutX="205.0" layoutY="196.0" prefHeight="25.0" prefWidth="299.0" styleClass="textfield" stylesheets="@windowsStyle.css" />
+                                    <Label fx:id="labelCollaborationName" layoutX="191.0" layoutY="33.0" prefHeight="32.0" prefWidth="358.0">
+                                       <font>
+                                          <Font name="Tahoma Bold" size="20.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="labelCollaborationId" layoutX="34.0" layoutY="33.0" text="Label" visible="false" />
                                  </children>
                               </AnchorPane>
                            </children>
