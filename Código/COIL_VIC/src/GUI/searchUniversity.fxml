@@ -147,6 +147,7 @@
                                     </TableView>
                                     <TextField id="search" fx:id="textFieldSearch" layoutX="24.0" layoutY="23.0" onAction="#searchUniversities" prefHeight="25.0" prefWidth="281.0" promptText="Buscar" styleClass="search" stylesheets="@windowsStyle.css" />
                                     <FontAwesomeIcon glyphName="SEARCH" layoutX="4.0" layoutY="43.0" size="1.75em" />
+                                    <Button fx:id="buttonBack" layoutX="22.0" layoutY="481.0" mnemonicParsing="false" onAction="#goBack" text="&lt;" />
                                  </children>
                               </AnchorPane>
                            </children></AnchorPane>

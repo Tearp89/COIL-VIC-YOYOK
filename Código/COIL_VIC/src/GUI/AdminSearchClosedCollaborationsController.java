@@ -1,29 +1,44 @@
 package GUI;
 
 import java.io.IOException;
-
-import javax.swing.Action;
+import java.util.ArrayList;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import log.Log;
+import logic.DAO.CollaborationDAO;
 import logic.classes.Admin;
+import logic.classes.Collaboration;
 
-public class AdminProfessorOptionsController {
-    private static final org.apache.log4j.Logger LOG = Log.getLogger(AdminProfessorOptionsController.class);
-    
+public class AdminSearchClosedCollaborationsController {
+    private static final org.apache.log4j.Logger LOG = Log.getLogger(AdminSearchClosedCollaborationsController.class);
     @FXML
-    private Label labelUser;
-
-
+    private TableView<Collaboration> tableViewClosedCollaborations;
     @FXML
-    private void initialize(){
-        Admin adminData = new Admin();
-        adminData = UserSessionManager.getInstance().getAdminUserData();
-        labelUser.setText(adminData.getAdminName());
+    private TableColumn<Collaboration, String> tableColumnCollaborationId;
+    @FXML
+    private TableColumn<Collaboration, String> tableColumnCollaborationName;
+    @FXML
+    private TableColumn<Collaboration, String> tableColumnStartDate;
+    @FXML
+    private TableColumn<Collaboration, String> tableColumnFinishDate;
+    @FXML
+    private Label labelCollaborationNotFound = new Label("No se encontraron colaboraciones cerradas");
+
+    public void loadClosedCollaborations(){
+        CollaborationDAO collaborationDAO = new CollaborationDAO();
+        ArrayList<Collaboration> closedCollaborations = new ArrayList<>();
+        closedCollaborations = collaborationDAO.searchCollaborationByStatus("Activa");
+        tableViewClosedCollaborations.getItems().addAll(closedCollaborations);
+        if (closedCollaborations.size() == 0){
+            tableViewClosedCollaborations.setPlaceholder(labelCollaborationNotFound);
+        }
+
     }
 
     @FXML
@@ -65,7 +80,7 @@ public class AdminProfessorOptionsController {
     private Button buttonCollaborations;
     @FXML
     private void goToCollaborations(ActionEvent event){
-        FXMLLoader collaborationOptionsLoader = new FXMLLoader(getClass().getResource("/GUI/adminCollaborationOption.fxml"));
+        FXMLLoader collaborationOptionsLoader = new FXMLLoader(getClass().getResource("/GUI/adminCollaborartionOptions.fxml"));
         ChangeWindowManager.changeWindowTo(event, collaborationOptionsLoader);
     }
 
@@ -73,7 +88,7 @@ public class AdminProfessorOptionsController {
     private Button buttonProfessors;
     @FXML
     private void goToProfessors(ActionEvent event){
-        FXMLLoader professorOptionsLoader = new FXMLLoader(getClass().getResource("/GUI/adminProfessorOptions.fxml"));
+        FXMLLoader professorOptionsLoader = new FXMLLoader(getClass().getResource("/GUI/adminProfessorsOptions.fxml"));
         ChangeWindowManager.changeWindowTo(event, professorOptionsLoader);
     }
 
@@ -88,25 +103,29 @@ public class AdminProfessorOptionsController {
     @FXML
     private Button buttonHome;
     @FXML
-    private void goToHomePage(ActionEvent event){
+    private void goToHomepage(ActionEvent event){
         FXMLLoader homePageLoader = new FXMLLoader(getClass().getResource("/GUI/adminHome.fxml"));
         ChangeWindowManager.changeWindowTo(event, homePageLoader);
     }
 
     @FXML
-    private Button buttonSearchProfessors;
+    private Button buttonBack;
     @FXML
-    private void searchProfessors(ActionEvent event){
-        FXMLLoader searchProfessorsController = new FXMLLoader(getClass().getResource("/GUI/consultProfessors.fxml"));
-        ChangeWindowManager.changeWindowTo(event, searchProfessorsController);
+    private void goBack(ActionEvent event){
+        FXMLLoader goBackLoader = new FXMLLoader(getClass().getResource("/GUI/adminCollaborationOptions.fxml"));
+        ChangeWindowManager.changeWindowTo(event, goBackLoader);
     }
 
+
     @FXML
-    private Button buttonAnswerRequest;
+    private Label labelUser;
     @FXML
-    private void answerRequest(ActionEvent event){
-        FXMLLoader requestLaoder = new FXMLLoader(getClass().getResource("/GUI/requests.fxml"));
-        ChangeWindowManager.changeWindowTo(event, requestLaoder);
+    private void initialize(){
+        Admin adminData = new Admin();
+        adminData = UserSessionManager.getInstance().getAdminUserData();
+        loadClosedCollaborations();
+        labelUser.setText(adminData.getAdminName());
     }
+
 
 }

@@ -120,7 +120,8 @@ public class CollaborationOptionsController {
 
     @FXML
     private void answerRequest(ActionEvent event){
-
+        FXMLLoader answerRequestLoader = new FXMLLoader(getClass().getResource("/GUI/searchRequestToCollaborate.fxml"));
+        ChangeWindowManager.changeWindowTo(event, answerRequestLoader);
     }
 
     @FXML
@@ -195,6 +196,7 @@ public class CollaborationOptionsController {
         int validatePublishedCollaborations = collaborationDAO.searchCollaborationByStatusAndProfessorId("Publicada", professorId).size();
         if(validatePublishedCollaborations == 1){
             buttonPublishCollaboration.setDisable(true);
+            buttonSendRequest.setDisable(true);
         }
 
         int validateDeclinedCollaborations = collaborationDAO.searchCollaborationByStatusAndProfessorId("Rechazada", professorId).size();

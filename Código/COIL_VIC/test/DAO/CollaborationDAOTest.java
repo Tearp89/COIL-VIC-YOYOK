@@ -344,8 +344,8 @@ public class CollaborationDAOTest {
         public void assignProfessorToCollaborationSuccess() throws SQLException{
             CollaborationDAO instance = new CollaborationDAO();
             int expectedResult = 1;
-            int professorId = 30;
-            int collaborationId = 42;
+            int professorId = 24;
+            int collaborationId = 29;
             int actualResult = instance.assignProfessorToCollaboration(professorId, collaborationId);
             assertEquals(expectedResult, actualResult);
 
@@ -405,6 +405,34 @@ public class CollaborationDAOTest {
             String expectedResult = "Jorge Alberto";
             String result = collaborationDAO.getCollaboratorNameById(37, 24);
             assertEquals(expectedResult, result);
+        }
+
+        @Test
+        public void isStudentAssignedTestSuccess(){
+            int collaborationId = 42;
+            String email = "marla@gmail.com";
+            CollaborationDAO collaborationDAO = new CollaborationDAO();
+            boolean expectedResult = true;
+            boolean result = collaborationDAO.isStudentAssignedToCollaboration(email, collaborationId);
+            assertEquals(expectedResult, result);
+        }
+
+        @Test
+        public void validateCollaborationProfessorsLimitTestSuccess(){
+            boolean expectedResult = false;
+            CollaborationDAO collaborationDAO = new CollaborationDAO();
+            boolean result = collaborationDAO.validateCollaborationProfessorsLimit(42);
+            assertEquals(expectedResult, result);
+        }
+
+        @Test
+        public void isProfessorInCollaborationTestSuccess(){
+            int professorId = 24;
+            boolean expectedResult = true;
+            CollaborationDAO collaborationDAO = new CollaborationDAO();
+            boolean result = collaborationDAO.isProfessorInCollaboration(professorId);
+            assertEquals(expectedResult, result);
+            
         }
 
         

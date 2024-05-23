@@ -169,6 +169,7 @@ public class ProfessorDAO implements IProfessor{
                     int idProfesor = resultSet.getInt("idProfesor");
                     String name = resultSet.getString("nombreProfesor");
                     String type = resultSet.getString("tipoProfesor");
+                    String phoneNumer = resultSet.getString("telefono");
                     int universityId = resultSet.getInt("Universidad_idUniversidad");
                     String country = resultSet.getString("país");
                     professor = new Professor();
@@ -178,6 +179,7 @@ public class ProfessorDAO implements IProfessor{
                     professor.setType(type);
                     professor.setCountry(country);
                     professor.setUniversityId(universityId);
+                    professor.setPhoneNumber(phoneNumer);
                     
                     professors.add(professor);
                 }
@@ -236,7 +238,7 @@ public class ProfessorDAO implements IProfessor{
 
     public int professorRequestCollaboration(int idColaboración, int idProfesor){
         DatabaseManager dbManager = new DatabaseManager();
-        String query = "INSERT INTO solicitud_Colaboración (idColaboración, idProfesor, estado) VALUES (?,?, Pendiente)";
+        String query = "INSERT INTO solicitud_Colaboración (idColaboración, idProfesor, estado) VALUES (?,?, 'Pendiente')";
         int result = 0;
         try {
             Connection connection = dbManager.getConnection();

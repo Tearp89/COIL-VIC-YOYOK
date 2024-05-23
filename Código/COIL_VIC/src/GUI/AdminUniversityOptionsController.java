@@ -72,7 +72,7 @@ public class AdminUniversityOptionsController {
     private Button buttonProfessors;
     @FXML
     private void goToProfessors(ActionEvent event){
-        FXMLLoader professorOptionsLoader = new FXMLLoader(getClass().getResource("/GUI/adminProfessorsOptions.fxml"));
+        FXMLLoader professorOptionsLoader = new FXMLLoader(getClass().getResource("/GUI/adminProfessorOptions.fxml"));
         ChangeWindowManager.changeWindowTo(event, professorOptionsLoader);
     }
 
@@ -98,6 +98,14 @@ public class AdminUniversityOptionsController {
     private void searchUniversities(ActionEvent event){
         FXMLLoader searchUniversitiesLoader = new FXMLLoader(getClass().getResource("/GUI/searchUniversity.fxml"));
         ChangeWindowManager.changeWindowTo(event, searchUniversitiesLoader);
+    }
+
+    @FXML
+    private Button buttonBack;
+    @FXML
+    private void goBack(ActionEvent event){
+        FXMLLoader goBackLoader = new FXMLLoader(getClass().getResource("/GUI/adminCollaborationOptions.fxml"));
+        ChangeWindowManager.changeWindowTo(event, goBackLoader);
     }
 
 }

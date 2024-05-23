@@ -125,6 +125,8 @@ public class SearchUniversityController {
         ChangeWindowManager.changeWindowTo(event, homePageLoader);
     }
 
+    
+
     @FXML
     private Label labelUser;
     @FXML

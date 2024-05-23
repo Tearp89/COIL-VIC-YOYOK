@@ -76,6 +76,14 @@ public class StudentOptionsController {
         }
     }
 
+    @FXML
+    private Button buttonAddStudent;
+    @FXML
+    private void addStudent(ActionEvent event){
+        FXMLLoader addStudentLoader = new FXMLLoader(getClass().getResource("/GUI/addStudent.fxml"));
+        ChangeWindowManager.changeWindowTo(event, addStudentLoader);
+    }
+
 
     @FXML
     private Label labelUser;

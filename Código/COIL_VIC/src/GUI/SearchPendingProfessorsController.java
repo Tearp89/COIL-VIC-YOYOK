@@ -241,7 +241,7 @@ public class SearchPendingProfessorsController {
     private Button buttonBack;
     @FXML
     private void goBack(ActionEvent event){
-        FXMLLoader goBackLoader = new FXMLLoader();
+        FXMLLoader goBackLoader = new FXMLLoader(getClass().getResource("/GUI/adminProfessorOptions.fxml"));
         ChangeWindowManager.changeWindowTo(event, goBackLoader);
     }
 

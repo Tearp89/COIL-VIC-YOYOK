@@ -3,14 +3,16 @@
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon?>
 <?import java.lang.String?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.AdminUniversityOptionsController">
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.AdminProfessorOptionsController">
    <children>
       <AnchorPane prefHeight="200.0" prefWidth="200.0">
          <children>
@@ -90,7 +92,7 @@
                                  </font>
                               </Label>
                               <FontAwesomeIcon fill="WHITE" glyphName="USER" layoutX="54.0" layoutY="141.0" size="10em" />
-                              <Button id="records" fx:id="buttonProfessors" layoutX="11.0" layoutY="318.0" minHeight="40.0" mnemonicParsing="false" onAction="#goToProfessors" prefWidth="180.0" styleClass="nav-btn" stylesheets="@windowsStyle.css" text="Profesores">
+                              <Button id="records" fx:id="buttonProfessors" layoutX="11.0" layoutY="318.0" minHeight="40.0" mnemonicParsing="false" onAction="#goToProfessors" prefWidth="180.0" styleClass="nav-btn-select" stylesheets="@windowsStyle.css" text="Profesores">
                                  <graphic>
                                     <FontAwesomeIcon fill="WHITE" glyphName="PENCIL" />
                                  </graphic>
@@ -100,9 +102,9 @@
                                     <FontAwesomeIcon fill="WHITE" glyphName="TH" />
                                  </graphic>
                               </Button>
-                              <Button id="records" fx:id="buttonUniversities" layoutX="11.0" layoutY="398.0" minHeight="40.0" mnemonicParsing="false" onAction="#goToUniversities" prefWidth="180.0" styleClass="nav-btn-select" stylesheets="@windowsStyle.css" text="Universidades">
+                              <Button id="records" fx:id="buttonUniversities" layoutX="11.0" layoutY="398.0" minHeight="40.0" mnemonicParsing="false" onAction="#goToUniversities" prefWidth="180.0" styleClass="nav-btn" stylesheets="@windowsStyle.css" text="Universidad">
                                  <graphic>
-                                    <FontAwesomeIcon fill="WHITE" glyphName="BUILDING" />
+                                    <FontAwesomeIcon fill="WHITE" glyphName="COGS" />
                                  </graphic>
                               </Button>
                            </children>
@@ -122,21 +124,27 @@
                                  </styleClass>
                                  <children>
                                     <AnchorPane layoutX="9.0" layoutY="192.0" prefHeight="141.0" prefWidth="753.0" stylesheets="@windowsStyle.css">
-                                       <children>
-                                          <Button fx:id="buttonSearchUniversities" alignment="CENTER_RIGHT" layoutX="262.0" layoutY="19.0" mnemonicParsing="false" onAction="#searchUniversities" prefHeight="104.0" prefWidth="229.0" style="card: transparent;" styleClass="card" stylesheets="@../uni%204/Construcción/COIL-VIC-YOYOK/Código/COIL_VIC/src/GUI/inicio.css" text="     Consultar&#10;     Universidades" textFill="WHITE">
-                                             <font>
-                                                <Font name="Tahoma" size="17.0" />
-                                             </font>
-                                             <graphic>
-                                                <FontAwesomeIcon fill="WHITE" glyphName="SEARCH_PLUS" size="4em" />
-                                             </graphic>
-                                          </Button>
-                                       </children>
                                        <styleClass>
                                           <String fx:value="white-bg" />
                                           <String fx:value="shadow" />
                                        </styleClass>
+                                       <children>
+                                          <Label layoutX="54.0" layoutY="57.0" text="Observaciones:">
+                                             <font>
+                                                <Font size="22.0" />
+                                             </font>
+                                          </Label>
+                                          <TextArea fx:id="textAreaComments" layoutX="264.0" layoutY="27.0" prefHeight="200.0" prefWidth="389.0" />
+                                       </children>
                                     </AnchorPane>
+                                    <Label layoutX="62.0" layoutY="140.0" text="Calificación:">
+                                       <font>
+                                          <Font size="22.0" />
+                                       </font>
+                                    </Label>
+                                    <ComboBox fx:id="comboBoxGrade" layoutX="300.0" layoutY="143.0" prefWidth="150.0" />
+                                    <Button layoutX="686.0" layoutY="487.0" mnemonicParsing="false" text="Enviar" />
+                                    <Button layoutX="582.0" layoutY="487.0" mnemonicParsing="false" text="Cancelar" />
                                  </children>
                               </AnchorPane>
                               <Label layoutX="21.0" layoutY="69.0" prefHeight="17.0" prefWidth="750.0" styleClass="card" stylesheets="@windowsStyle.css" />

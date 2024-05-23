@@ -14,14 +14,14 @@ public class AdminCollaborationOptionsController {
     private static final org.apache.log4j.Logger LOG = Log.getLogger(AdminCollaborationOptionsController.class);
     
     @FXML
-    private Label labelName;
+    private Label labelUser;
 
 
     @FXML
     private void initialize(){
         Admin adminData = new Admin();
         adminData = UserSessionManager.getInstance().getAdminUserData();
-        labelName.setText(adminData.getAdminName());
+        labelUser.setText(adminData.getAdminName());
     }
 
     @FXML
@@ -81,6 +81,23 @@ public class AdminCollaborationOptionsController {
     private void goToUniversities(ActionEvent event){
         FXMLLoader universitiesOptionsLoader = new FXMLLoader(getClass().getResource("/GUI/adminUniversityOptions.fxml"));
         ChangeWindowManager.changeWindowTo(event, universitiesOptionsLoader);
+    }
+
+    @FXML
+    private Button buttonGradeCollaboration;
+    @FXML
+    private void gradeCollaborations(ActionEvent event){
+        FXMLLoader gradeCollaborationsLoader = new FXMLLoader(getClass().getResource("/GUI/searchClosedCollaborations.fxml"));
+        ChangeWindowManager.changeWindowTo(event, gradeCollaborationsLoader);
+
+    }
+
+    @FXML
+    private Button buttonSearchCollaborations;
+    @FXML
+    private void searchCollaborations(ActionEvent event){
+        FXMLLoader searchCollaborationsLoader = new FXMLLoader(getClass().getResource("/GUI/adminSearchCollaborations.fxml"));
+        ChangeWindowManager.changeWindowTo(event, searchCollaborationsLoader);
     }
 
     @FXML

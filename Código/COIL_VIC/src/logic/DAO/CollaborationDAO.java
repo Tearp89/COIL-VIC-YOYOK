@@ -9,6 +9,7 @@ import java.util.logging.Logger;
 import dataAccess.DatabaseManager;
 import logic.interfaces.ICollaboration;
 import logic.classes.Collaboration;
+import logic.classes.Professor;
 
 import java.util.ArrayList;
 import java.sql.ResultSet;
@@ -273,18 +274,22 @@ public class CollaborationDAO implements ICollaboration {
     } 
 
 
-    public int assignProfessorToCollaboration(int professorID, int collaborationId) throws SQLException{
+    public int assignProfessorToCollaboration(int professorID, int collaborationId){
         DatabaseManager dbManager = new DatabaseManager();
         String query = "INSERT INTO Colaboraciones_Registradas (Profesor_idProfesor, Colaboración_idColaboración) VALUES (?, ?)";
         int result = 0;
 
-        try (Connection connection = dbManager.getConnection();
-        PreparedStatement preparedStatement = connection.prepareStatement(query)){
+        try{
+
+         Connection connection = dbManager.getConnection();
+        PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setInt(1, professorID);
             preparedStatement.setInt(2, collaborationId);
             result = preparedStatement.executeUpdate();
 
             dbManager.closeConnection();
+        } catch (SQLException assignProfessorToCollaborationException){
+            LOG.error("ERROR:", assignProfessorToCollaborationException);
         }
 
         return result;
@@ -316,17 +321,20 @@ public class CollaborationDAO implements ICollaboration {
 
     }
 
-    public int assignStudentToCollaboration(String studentEmail, int collaborationId) throws SQLException{
+    public int assignStudentToCollaboration(String studentEmail, int collaborationId){
         DatabaseManager dbManager = new DatabaseManager();
         String query = "INSERT INTO participa(Estudiante_correoElectrónico, Colaboración_idColaboración) VALUES (?, ?)";
         int result = 0;
-        try (Connection connection = dbManager.getConnection();
-                PreparedStatement preparedStatement = connection.prepareStatement(query)){
+        try{ Connection connection = dbManager.getConnection();
+                PreparedStatement preparedStatement = connection.prepareStatement(query);
+                
                     preparedStatement.setString(1, studentEmail);
                     preparedStatement.setInt(2, collaborationId);
                     result = preparedStatement.executeUpdate();
 
                     dbManager.closeConnection();
+                } catch (SQLException assignStudentToCollaboraException){
+                    LOG.error("ERROR:", assignStudentToCollaboraException);
                 }
 
                 return result;
@@ -335,7 +343,6 @@ public class CollaborationDAO implements ICollaboration {
     public String getCollaborationNameById(int id){
         DatabaseManager dbManager = new DatabaseManager();
         String query = "SELECT nombreColaboración from Colaboración WHERE idColaboración = ?";
-        String result = "";
         try{
             Connection connection = dbManager.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(query);
@@ -354,7 +361,6 @@ public class CollaborationDAO implements ICollaboration {
     public String getCollaborationDescriptionById (int id){
         DatabaseManager dbManager = new DatabaseManager();
         String query = "SELECT descripción FROM Colaboración WHERE idColaboración = ?";
-        String result = "";
         try{
             Connection connection = dbManager.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(query);
@@ -373,7 +379,6 @@ public class CollaborationDAO implements ICollaboration {
     public String getCollaborationStartDateById (int id){
         DatabaseManager dbManager = new DatabaseManager();
         String query = "SELECT fechaInicio FROM Colaboración WHERE idColaboración = ?";
-        String result = "";
         try{
             Connection connection = dbManager.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(query);
@@ -393,7 +398,6 @@ public class CollaborationDAO implements ICollaboration {
     public String getCollaborationFinishDateById(int id){
         DatabaseManager dbManager = new DatabaseManager();
         String query = "SELECT fechaFin FROM Colaboración WHERE idColaboración = ?";
-        String result = "";
         try{
             Connection connection = dbManager.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(query);
@@ -413,7 +417,6 @@ public class CollaborationDAO implements ICollaboration {
     public String getCollaborationGoalById(int id){
         DatabaseManager dbManager = new DatabaseManager();
         String query = "SELECT objetivo FROM Colaboración WHERE idColaboración = ?";
-        String result = "";
         try{
             Connection connection = dbManager.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(query);
@@ -434,7 +437,6 @@ public class CollaborationDAO implements ICollaboration {
     public String  getCollaborationSubjectById(int id){
         DatabaseManager dbManager = new DatabaseManager();
         String query = "SELECT temaInterés FROM Colaboración WHERE idColaboración = ?";
-        String result = "";
         try{
             Connection connection = dbManager.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(query);
@@ -454,7 +456,6 @@ public class CollaborationDAO implements ICollaboration {
     public int getNumberStudentsById(int id){
         DatabaseManager dbManager = new DatabaseManager();
         String query = "SELECT noEstudiantes FROM Colaboración WHERE idColaboración = ?";
-        int result = 0;
         try{
             Connection connection = dbManager.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(query);
@@ -474,7 +475,6 @@ public class CollaborationDAO implements ICollaboration {
     public String getStudentProfileById(int id){
         DatabaseManager dbManager = new DatabaseManager();
         String query = "SELECT perfilEstudiante FROM Colaboración WHERE idColaboración = ?";
-        String result = "";
         try{
             Connection connection = dbManager.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(query);
@@ -564,6 +564,121 @@ public class CollaborationDAO implements ICollaboration {
         }
         return result;
     }
+
+    public boolean isStudentAssignedToCollaboration(String studentEmail, int collaborationId) {
+        String query = "SELECT COUNT(*) FROM participa WHERE Estudiante_correoElectrónico = ? AND Colaboración_idColaboración = ?";
+        boolean isAssigned = false;
+        DatabaseManager dbManager = new DatabaseManager();
+        try (Connection connection = dbManager.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setString(1, studentEmail);
+            preparedStatement.setInt(2, collaborationId);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                isAssigned = resultSet.getInt(1) > 0;
+            }
+        } catch (SQLException studentValidationException) {
+            LOG.error("ERROR:", studentValidationException);
+        }
+
+        return isAssigned;
+    }
+
+    public ArrayList<Professor> getProfessorsWithCollaborationRequests(int collaborationId) {
+    ArrayList<Professor> professors = new ArrayList<>();
+    String query = "SELECT p.* FROM profesor p JOIN solicitud_colaboración sc ON p.idProfesor = sc.idProfesor WHERE sc.idColaboración = ?";
+    DatabaseManager dbManager = new DatabaseManager();
+    try (Connection connection = dbManager.getConnection();
+         PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+        preparedStatement.setInt(1, collaborationId);
+
+        ResultSet resultSet = preparedStatement.executeQuery();
+        while (resultSet.next()) {
+            Professor professor = new Professor();
+            professor.setProfessorId(resultSet.getInt("idProfesor"));
+            professor.setName(resultSet.getString("nombreProfesor"));
+            professor.setPhoneNumber(resultSet.getString("telefono"));
+            professor.setCountry(resultSet.getString("país"));
+            
+            professors.add(professor);
+        }
+    } catch (SQLException collaboratorsRequestException) {
+        LOG.error("ERROR:", collaboratorsRequestException);
+    }
+
+    return professors;
+}
+
+    public boolean validateCollaborationProfessorsLimit(int collaborationId) {
+        boolean isValid = false;
+        String query = "SELECT COUNT(Profesor_idProfesor) FROM colaboraciones_registradas WHERE Colaboración_idColaboración = ?";
+        DatabaseManager dbManager = new DatabaseManager();
+        try (Connection connection = dbManager.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setInt(1, collaborationId);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                int professorsCount = resultSet.getInt(1);
+                isValid = professorsCount < 2; 
+            }
+        } catch (SQLException validateLimitException) {
+            LOG.error("ERROR:", validateLimitException);
+        }
+
+        return isValid;
+    }
+
+    public boolean isProfessorInCollaboration(int professorId) {
+        DatabaseManager dbManager = new DatabaseManager();
+        String query = "SELECT COUNT(Profesor_idProfesor) FROM colaboraciones_registradas WHERE Profesor_idProfesor = ?";
+        boolean isInCollaboration = false;
+        try{
+
+            Connection connection = dbManager.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setInt(1, professorId);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                int count = resultSet.getInt(1);
+                isInCollaboration = count > 0;
+            }
+        } catch (SQLException isProfessorInCollaborationException) {
+            LOG.error("ERROR:", isProfessorInCollaborationException);
+            
+        }
+        return isInCollaboration;
+    }
+
+    public ArrayList<Collaboration> getCollaborationsByStudentEmail(String studentEmail) {
+        DatabaseManager dbManager = new DatabaseManager();
+        ArrayList<Collaboration> collaborations = new ArrayList<>();
+        String query = "SELECT c.idColaboración, c.nombre " +
+                       "FROM colaboraciones_registradas cr " +
+                       "JOIN Colaboración c ON cr.Colaboración_idColaboración = c.idColaboración " +
+                       "WHERE cr.Estudiante_correoElectrónico = ?";
+
+        try{
+             Connection connection = dbManager.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, studentEmail);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                int collaborationId = resultSet.getInt("idColaboración");
+                String name = resultSet.getString("nombreColaboración");
+                Collaboration collaboration = new Collaboration();
+                collaborations.add(collaboration);
+            }
+        } catch (SQLException getCollaborationsByStudentEmailException) {
+            LOG.error("ERROR:", getCollaborationsByStudentEmailException);
+        }
+
+        return collaborations;
+    }
+
+
     
 
 

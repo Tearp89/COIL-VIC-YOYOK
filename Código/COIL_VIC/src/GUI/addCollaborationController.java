@@ -1,6 +1,6 @@
 package GUI;
 
-import java.awt.event.MouseEvent;
+
 import java.io.IOException;
 import java.sql.SQLException;
 import java.time.LocalDate;
@@ -77,12 +77,8 @@ public class AddCollaborationController {
                 System.out.println(professorId);
                 int collaborationId = instance.getCollaborationIdbyName(collaborationName);
                 System.out.println(collaborationId);
-                try{
                     instance.assignProfessorToCollaboration(professorId, collaborationId);
-
-                } catch (SQLException assignProfessorException){
-                    LOG.error("ERROR:", assignProfessorException);
-                }
+                
             });
             collaborationAddedAlert.show();
 
