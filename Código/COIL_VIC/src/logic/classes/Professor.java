@@ -28,6 +28,7 @@ public class Professor {
     private String phoneNumber;
     private String discipline;
     private String workShop;
+    private String universityName;
     
 
 
@@ -187,4 +188,13 @@ public class Professor {
     public void setWorkShop(String workShop) {
         this.workShop = workShop;
     }
+
+    public String getUniversityName() {
+        return universityName;
+    }
+    
+    public void setUniversityName(String universityName) {
+        this.universityName = universityName;
+    }
+    
 }

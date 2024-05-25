@@ -8,22 +8,20 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import log.Log;
-import logic.DAO.CollaborationDAO;
 
-public class MainOpen extends Application{
-    private static final org.apache.log4j.Logger LOG = Log.getLogger(CollaborationDAO.class);
+public class MainConsulProfessors extends Application{
+    private static final org.apache.log4j.Logger LOG = Log.getLogger(MainConsulProfessors.class);
 
     @Override
     public void start(Stage primaryStage){
         try{
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUI/openCollaboration.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUI/consultProfessors.fxml"));
             Parent root = loader.load();
-            OpenCollaborationController controller = loader.getController();
-            
 
             primaryStage.setScene(new Scene(root, 1000, 600));
             primaryStage.show();
-        }catch(IOException loaderException){
+
+        }catch (IOException loaderException){
             LOG.error("ERROR:", loaderException);
         }
     }
@@ -33,4 +31,3 @@ public class MainOpen extends Application{
     }
 
 }
-

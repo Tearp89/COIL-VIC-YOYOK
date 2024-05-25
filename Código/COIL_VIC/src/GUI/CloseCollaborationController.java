@@ -21,6 +21,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import log.Log;
 import logic.DAO.CollaborationDAO;
+import logic.DAO.ProfessorDAO;
 import logic.classes.Collaboration;
 import logic.classes.Professor;
 
@@ -40,13 +41,16 @@ public class CloseCollaborationController {
    /*  Professor professorData = new Professor();
     professorData = UserSessionManager.getInstance().getProfessorUserData();*/
     private void setValues(Collaboration collaboration){
+        Professor professorData = new Professor();
+        String professorUser = professorData.getUser();
+        professorData = UserSessionManager.getInstance().getProfessorUserData();
         labelCollaborationId.setText(String.valueOf(collaboration.getCollaborationId()));
         labelCollaborationName.setText(collaboration.getCollaborationName());
         datePickerStartDate.setValue(collaboration.getStartDate());
         datePickerFinishDate.setValue(collaboration.getFinishDate());
         CollaborationDAO collaborationDAO = new CollaborationDAO();
-        //int professorId = professorData.getProfessorId();
-        labelCollaboratorName.setText(collaborationDAO.getCollaboratorNameById(collaboration.getCollaborationId(), 24));
+        ProfessorDAO professorDAO = new ProfessorDAO();
+        labelCollaboratorName.setText(collaborationDAO.getCollaboratorNameById(collaboration.getCollaborationId(), professorDAO.getProfessorIdByUser(professorUser)));
 
     }
 
@@ -92,95 +96,80 @@ public class CloseCollaborationController {
         });
         
 
-       // int professorId =  professorData.getProfessorId();
 
 
 
+    }
+
+    @FXML
+    private Button buttonHome;
+
+    @FXML
+    private void goToHomePage(ActionEvent event){
+        FXMLLoader homePageLoader = new FXMLLoader(getClass().getResource("/GUI/professorHome.fxml"));
+        ChangeWindowManager.changeWindowTo(event, homePageLoader);
     }
 
     @FXML
     private Button buttonCollaborations;
+
     @FXML
     private void goToCollaborations(ActionEvent event){
+        FXMLLoader collaborationsOptionsLoader = new FXMLLoader(getClass().getResource("/GUI/collaborationOptions.fxml"));
+        ChangeWindowManager.changeWindowTo(event, collaborationsOptionsLoader);
 
-    }
 
-    @FXML
-    private Button buttonProfessors;
-    @FXML
-    private void goToProfessors(ActionEvent event){
-
-    }
-    @FXML
-    private Button buttonLogout;
-    @FXML
-    private void logout(ActionEvent event){
-        FXMLLoader loginLoader = new FXMLLoader(getClass().getResource("/GUI/login.fxml"));
-        try {
-            UserSessionManager.getInstance().logoutAdmin();
-            Parent root = loginLoader.load();
-            Scene loginScene = new Scene(root);
-            Stage loginStage = new Stage();
-            loginStage.setScene(loginScene);
-            loginStage.show();
-            Node source = (Node) event.getSource();
-            Stage stage = (Stage) source.getScene().getWindow();
-            stage.close();
-        } catch (IOException goToLoginException){
-            LOG.error(goToLoginException);
-        }
-    }
-
-    @FXML
-    private Button buttonMinimize;
-    @FXML
-    private void minimizeWindow(ActionEvent event){
-        Node source = (Node) event.getSource();
-        Stage stage = (Stage) source.getScene().getWindow();
-        stage.setIconified(true);
-    }
-
-    @FXML
-    private Button buttonClose;
-    @FXML
-    private void closeWindow(ActionEvent event){
-        Node source = (Node) event.getSource();
-        Stage stage = (Stage) source.getScene().getWindow();
-        stage.close();
     }
 
     @FXML
     private Button buttonStudents;
+
     @FXML
     private void goToStudents(ActionEvent event){
+        FXMLLoader studentsLoader = new FXMLLoader(getClass().getResource("/GUI/studentOptions.fxml"));
+        ChangeWindowManager.changeWindowTo(event, studentsLoader);
 
     }
 
     @FXML
-    private Button buttonConfiguration;
+    private Button buttonSettings;
+
     @FXML
     private void goToSettings(ActionEvent event){
 
     }
+    @FXML
+    private Button buttonMinimize;
+    @FXML
+    private void minimizeWindow(ActionEvent event){
+        ChangeWindowManager.minimizeWindow(event);
+    }
+    @FXML
+    private Button buttonClose;
+    @FXML
+    private void closeWindow(ActionEvent event){
+        ChangeWindowManager.closeWindow(event);
+    }
+
+     @FXML
+    private Button buttonLogout;
 
     @FXML
-    Button buttonHome;
-    @FXML
-    private void goToHomePage(ActionEvent event){
-        FXMLLoader homeLoader = new FXMLLoader(getClass().getResource("/GUI/adminHome.fxml"));
-        try {
-            Parent root = homeLoader.load();
-            Scene homeScene = new Scene(root);
-            Stage homeStage = new Stage();
-            homeStage.initStyle(StageStyle.TRANSPARENT);
-            homeStage.setScene(homeScene);
-            homeStage.show();
-            Node source = (Node) event.getSource();
-            Stage stage = (Stage) source.getScene().getWindow();
-            stage.close();
-        } catch (IOException goToHomeException){
-            LOG.error("ERROR", goToHomeException);
+    private void logout(ActionEvent event){
+        FXMLLoader loginLoader = new FXMLLoader(getClass().getResource("/GUI/login.fxml"));
+        try{
+            ChangeWindowManager.logout(event, loginLoader);
+        } catch (IOException logoutException){
+            LOG.error("ERROR:", logoutException);
         }
+    }
+
+    @FXML
+    private Button buttonCancel;
+    @FXML
+    private void cancel(ActionEvent event){
+        FXMLLoader homePageLoader = new FXMLLoader(getClass().getResource("/GUI/collaborationOptions.fxml"));
+        ChangeWindowManager.changeWindowTo(event, homePageLoader);
 
     }
 
@@ -192,15 +181,19 @@ public class CloseCollaborationController {
     private Label labelUser;
     @FXML
     private void initialize(){
-        /*TODO: Professor professorData = new Professor();
+        Professor professorData = new Professor();
         professorData = UserSessionManager.getInstance().getProfessorUserData();
-        labelUser.setText(professorData.getName());*/
+        labelUser.setText(professorData.getName());
+        
+        ProfessorDAO professorDAO = new ProfessorDAO();
+        int professorId = professorDAO.getProfessorIdByUser(professorData.getUser());
 
         CollaborationDAO collaborationDAO = new CollaborationDAO();
-        ArrayList<Collaboration> activeCollaboration = collaborationDAO.searchCollaborationByStatusAndProfessorId("Activa", 24);
+        ArrayList<Collaboration> activeCollaboration = collaborationDAO.searchCollaborationByStatusAndProfessorId("Activa", professorId);
         setValues(activeCollaboration.get(0));
         int collaborationId = activeCollaboration.get(0).getCollaborationId();
-        labelCollaboratorName.setText(collaborationDAO.getCollaboratorNameById(collaborationId, 24));
+        
+        labelCollaboratorName.setText(collaborationDAO.getCollaboratorNameById(collaborationId, professorId));
     }
 
 
