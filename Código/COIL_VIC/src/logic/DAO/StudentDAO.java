@@ -74,24 +74,12 @@ public class StudentDAO implements IStudent {
             
             if (resultSet.next()) {
                 exists = resultSet.getInt(1) > 0;
+                connection.close();
             }
-        } catch (SQLException validationException) {
-            LOG.error("ERROR: ", validationException);
-        } finally {
-            try {
-                if (resultSet != null) {
-                    resultSet.close();
-                }
-                if (preparedStatement != null) {
-                    preparedStatement.close();
-                }
-                if (connection != null) {
-                    connection.close();
-                }
-            } catch (SQLException isStudentAssignedException) {
+        } catch (SQLException isStudentAssignedException) {
                 LOG.error("ERROR:", isStudentAssignedException);
             }
-        }
+        
         return exists;
     }
 
@@ -111,30 +99,18 @@ public class StudentDAO implements IStudent {
             
             if (resultSet.next()) {
                 exists = resultSet.getInt(1) > 0;
+                connection.close();
             }
-        } catch (SQLException validationException) {
-            LOG.error("ERROR: ", validationException);
-        } finally {
-            try {
-                if (resultSet != null) {
-                    resultSet.close();
-                }
-                if (preparedStatement != null) {
-                    preparedStatement.close();
-                }
-                if (connection != null) {
-                    connection.close();
-                }
-            } catch (SQLException isStudentRegisteredException) {
+        } catch (SQLException isStudentRegisteredException) {
                 LOG.error("ERROR: ", isStudentRegisteredException);
             }
-        }
+        
         return exists;
     }
 
     public int changeProfessorAssigned(int professorId, String correo){
         DatabaseManager dbManager = new DatabaseManager();
-        String query = "UPDATE estudiante SET Professor_idProfessor = ? WHERE correoElectrónico = ?";
+        String query = "UPDATE estudiante SET Profesor_idProfesor = ? WHERE correoElectrónico = ?";
         int result = 0;
         try{
             Connection connection = dbManager.getConnection();
@@ -165,6 +141,7 @@ public class StudentDAO implements IStudent {
                 Student student = new Student();
                 student.setEmail(email);
                 students.add(student);
+                connection.close();
             }
         } catch (SQLException getStudentsByProfessorIdException) {
             LOG.error("ERROR:", getStudentsByProfessorIdException);
@@ -172,6 +149,25 @@ public class StudentDAO implements IStudent {
         }
 
         return students;
+    }
+
+
+    public int changeStudentPassword(String password, String email){
+        DatabaseManager dbManager = new DatabaseManager();
+        String query = "UPDATE estudiante SET contraseña = ? WHERE correoElectrónico = ?";
+        int result = 0;
+        try{
+            Connection connection = dbManager.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, password);
+            preparedStatement.setString(2, email);
+            result = preparedStatement.executeUpdate();
+            connection.close();
+        } catch (SQLException changeStudentPasswordException){
+            LOG.error("ERROR:", changeStudentPasswordException);
+        }
+        return result;
+
     }
 
     

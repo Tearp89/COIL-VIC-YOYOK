@@ -191,7 +191,7 @@ public class SearchRequestToCollaborateController {
     private Button buttonBack;
     @FXML
     private void goBack(ActionEvent event){
-        FXMLLoader studentOptionsLoader = new FXMLLoader(getClass().getResource("/GUI/studentOptions.fxml"));
+        FXMLLoader studentOptionsLoader = new FXMLLoader(getClass().getResource("/GUI/collaborationOptions.fxml"));
         ChangeWindowManager.changeWindowTo(event, studentOptionsLoader);
     }
 

@@ -87,7 +87,7 @@ public class AdminCollaborationOptionsController {
     private Button buttonGradeCollaboration;
     @FXML
     private void gradeCollaborations(ActionEvent event){
-        FXMLLoader gradeCollaborationsLoader = new FXMLLoader(getClass().getResource("/GUI/searchClosedCollaborations.fxml"));
+        FXMLLoader gradeCollaborationsLoader = new FXMLLoader(getClass().getResource("/GUI/adminFeedbackCollaboration.fxml"));
         ChangeWindowManager.changeWindowTo(event, gradeCollaborationsLoader);
 
     }

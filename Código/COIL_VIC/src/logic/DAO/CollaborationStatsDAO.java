@@ -7,6 +7,8 @@ package logic.DAO;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.ArrayList;
+
 import dataAccess.DatabaseManager;
 import java.sql.ResultSet;
 import log.Log;
@@ -202,5 +204,8 @@ public class CollaborationStatsDAO {
         }
         return result;
     }
+
+
+    
 
 }

@@ -57,7 +57,7 @@ public class ProfessorSettingsController {
     private Button buttonHome;
 
     @FXML
-    private void goToHomePage(ActionEvent event){
+    private void goToHomepage(ActionEvent event){
         FXMLLoader homePageLoader = new FXMLLoader(getClass().getResource("/GUI/professorHome.fxml"));
         ChangeWindowManager.changeWindowTo(event, homePageLoader);
     }

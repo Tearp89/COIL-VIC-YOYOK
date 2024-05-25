@@ -103,6 +103,8 @@ public class CollaborationOptionsController {
 
     @FXML
     private void gradeCollaboration(ActionEvent event){
+        FXMLLoader gradeCollaborationLoader = new FXMLLoader(getClass().getResource("/GUI/professorFeedbackCollaboration.fxml"));
+        ChangeWindowManager.changeWindowTo(event, gradeCollaborationLoader);
 
     }
 

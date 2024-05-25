@@ -7,6 +7,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import dataAccess.DatabaseManager;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import logic.interfaces.ICollaboration;
 import logic.classes.Collaboration;
 import logic.classes.Professor;
@@ -155,12 +157,13 @@ public class CollaborationDAO implements ICollaboration {
         DatabaseManager dbManager = new DatabaseManager();
         Collaboration collaboration = new Collaboration();
         ArrayList<Collaboration> collaborations = new ArrayList<>();
-        String query = "SELECT * FROM colaboración WHERE estado = ? AND nombreColaboración LIKE ?";
+        String query = "SELECT * FROM colaboración WHERE estado = ? AND (nombreColaboración  LIKE ? OR temaInterés LIKE ?)";
         try{
             Connection connection = dbManager.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1, status);
             preparedStatement.setString(2, name);
+            preparedStatement.setString(3, name);
             try(ResultSet resultSet = preparedStatement.executeQuery()){
                 while(resultSet.next()){
                     int idCollaboration = resultSet.getInt("idColaboración");
@@ -669,10 +672,137 @@ public class CollaborationDAO implements ICollaboration {
                 int collaborationId = resultSet.getInt("idColaboración");
                 String name = resultSet.getString("nombreColaboración");
                 Collaboration collaboration = new Collaboration();
+                collaboration.setCollaborationId(collaborationId);
+                collaboration.setCollaborationName(name);
                 collaborations.add(collaboration);
             }
         } catch (SQLException getCollaborationsByStudentEmailException) {
             LOG.error("ERROR:", getCollaborationsByStudentEmailException);
+        }
+
+        return collaborations;
+    }
+
+
+    public ObservableList<String> loadSubjects(){
+        ObservableList<String> subjects = FXCollections.observableArrayList();
+        DatabaseManager dbManager = new DatabaseManager();
+        String query = "SELECT DISTINCT temaInterés FROM Colaboración";
+        try{
+            Connection connection = dbManager.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while(resultSet.next()) {
+                subjects.add(resultSet.getString("temaInterés"));
+            }
+        } catch (SQLException loadSubjectsExceptions) {
+            LOG.error("ERROR:", loadSubjectsExceptions);
+        }
+
+        return subjects;
+    }
+
+    public ArrayList<Collaboration> getUnreviewedCollaborationsByProfessor(int professorId){
+        DatabaseManager dbManager = new DatabaseManager();
+        ArrayList<Collaboration> collaborations = new ArrayList<>();
+        String query = "SELECT c.* " +
+                        "FROM colaboración c " +
+                        "JOIN colaboraciones_registradas cr ON c.idColaboración = cr.Colaboración_idColaboración " +
+                        "LEFT JOIN retroalimentación_académicos r " +
+                        "ON c.idColaboración = r.idColaboración AND r.idProfesor = ? " +
+                        "WHERE r.idColaboración IS NULL AND cr.Profesor_idProfesor = ? AND c.estado = 'Cerrada' ";
+        try{
+            Connection connection = dbManager.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setInt(1, professorId);
+            preparedStatement.setInt(2, professorId);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                int collaborationId = resultSet.getInt("idColaboración");
+                String collaborationName = resultSet.getString("nombreColaboración");
+                LocalDate startDate = resultSet.getObject("fechaInicio", LocalDate.class);
+                LocalDate finsihDate = resultSet.getObject("fechaFin", LocalDate.class);
+                Collaboration collaboration = new Collaboration();
+                collaboration.setCollaborationId(collaborationId);
+                collaboration.setCollaborationName(collaborationName);
+                collaboration.setStartDate(startDate);
+                collaboration.setFinishDate(finsihDate);
+                collaborations.add(collaboration);
+                
+            }
+        } catch(SQLException getUnreviewedCollaborationsByProfessorException){
+            LOG.error("ERROR:", getUnreviewedCollaborationsByProfessorException);
+        }
+
+        return collaborations;
+    }
+
+    public ArrayList<Collaboration> getUnreviewedCollaborationsByAdmin(int adminId){
+        DatabaseManager dbManager = new DatabaseManager();
+        ArrayList<Collaboration> collaborations = new ArrayList<>();
+        String query = "Select c.*" +
+                        "FROM colaboración c " +
+                        "LEFT JOIN retroalimentación_administrativos r " +
+                        "ON c.idColaboración = r.idColaboración AND r.idAdministrativo = ? " +
+                        "WHERE r.idColaboración IS NULL AND c.estado = 'Cerrada' ";
+        try{
+            Connection connection = dbManager.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setInt(1, adminId);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                int collaborationId = resultSet.getInt("idColaboración");
+                String collaborationName = resultSet.getString("nombreColaboración");
+                LocalDate startDate = resultSet.getObject("fechaInicio", LocalDate.class);
+                LocalDate finsihDate = resultSet.getObject("fechaFin", LocalDate.class);
+                Collaboration collaboration = new Collaboration();
+                collaboration.setCollaborationId(collaborationId);
+                collaboration.setCollaborationName(collaborationName);
+                collaboration.setStartDate(startDate);
+                collaboration.setFinishDate(finsihDate);
+                collaborations.add(collaboration);
+                
+            }
+        } catch(SQLException getUnreviewedCollaborationsByProfessorException){
+            LOG.error("ERROR:", getUnreviewedCollaborationsByProfessorException);
+        }
+
+        return collaborations;
+    }
+
+    public ArrayList<Collaboration> getUnreviewedCollaborationsByStudent(String email){
+        DatabaseManager dbManager = new DatabaseManager();
+        ArrayList<Collaboration> collaborations = new ArrayList<>();
+        String query = "SELECT c.* " +
+                        "FROM colaboración c " +
+                        "JOIN participa p ON c.idColaboración = p.Colaboración_idColaboración " +
+                        "LEFT JOIN retroalimentación_estudiantes r " +
+                        "ON c.idColaboración = r.idColaboración AND r.correoElectrónico = ? " +
+                        "WHERE r.idColaboración IS NULL AND p.Estudiante_correoElectrónico = ? AND c.estado = 'Cerrada' ";
+        try{
+            Connection connection = dbManager.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, email);
+            preparedStatement.setString(2, email);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                int collaborationId = resultSet.getInt("idColaboración");
+                String collaborationName = resultSet.getString("nombreColaboración");
+                LocalDate startDate = resultSet.getObject("fechaInicio", LocalDate.class);
+                LocalDate finsihDate = resultSet.getObject("fechaFin", LocalDate.class);
+                Collaboration collaboration = new Collaboration();
+                collaboration.setCollaborationId(collaborationId);
+                collaboration.setCollaborationName(collaborationName);
+                collaboration.setStartDate(startDate);
+                collaboration.setFinishDate(finsihDate);
+                collaborations.add(collaboration);
+                
+            }
+        } catch(SQLException getUnreviewedCollaborationsByProfessorException){
+            LOG.error("ERROR:", getUnreviewedCollaborationsByProfessorException);
         }
 
         return collaborations;

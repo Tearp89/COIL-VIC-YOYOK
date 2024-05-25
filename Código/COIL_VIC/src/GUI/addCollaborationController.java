@@ -4,6 +4,9 @@ package GUI;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.time.LocalDate;
+
+import javafx.beans.Observable;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -170,7 +173,7 @@ public class AddCollaborationController {
     private Button buttonLogout;
 
     @FXML
-    private void logout(ActionEvent event){
+    private void logOut(ActionEvent event){
         FXMLLoader loginLoader = new FXMLLoader(getClass().getResource("/GUI/login.fxml"));
         try{
             ChangeWindowManager.logout(event, loginLoader);
@@ -189,6 +192,9 @@ public class AddCollaborationController {
         Professor professorData = new Professor();
         professorData = UserSessionManager.getInstance().getProfessorUserData();
         labelUser.setText(professorData.getName());
+        CollaborationDAO collaborationDAO = new CollaborationDAO();
+        ObservableList<String> subjects = collaborationDAO.loadSubjects();
+        comboBoxCollaborationSubject.getItems().setAll(subjects);
         
 
     }

@@ -6,6 +6,8 @@ public class Feedback {
     String email;
     String comments;
     int grade;
+    public int collaborationId;
+
     public int getProfessorId() {
         return professorId;
     }
@@ -35,6 +37,12 @@ public class Feedback {
     }
     public void setGrade(int grade) {
         this.grade = grade;
+    }
+    public int getCollaborationId() {
+        return collaborationId;
+    }
+    public void setCollaborationId(int collaborationId) {
+        this.collaborationId = collaborationId;
     }
     
 
