@@ -31,7 +31,6 @@ public class StudentDAO implements IStudent {
             preparedStatement.setInt(2, student.getProfessorId());
             preparedStatement.setString(3, student.getPassword());
             result = preparedStatement.executeUpdate();
-            connection.close();
         } catch (SQLException addStudentException) {
             LOG.error("ERROR: ", addStudentException);
         }
@@ -48,7 +47,7 @@ public class StudentDAO implements IStudent {
             preparedStatement.setString(1, password);
             preparedStatement.setString(2, email);
             result = preparedStatement.executeUpdate();
-            connection.close();
+            
         } catch (SQLException updateStudentPasswordException){
             LOG.error("ERROR:", updateStudentPasswordException);
         }
@@ -74,7 +73,7 @@ public class StudentDAO implements IStudent {
             
             if (resultSet.next()) {
                 exists = resultSet.getInt(1) > 0;
-                connection.close();
+                
             }
         } catch (SQLException isStudentAssignedException) {
                 LOG.error("ERROR:", isStudentAssignedException);
@@ -99,7 +98,7 @@ public class StudentDAO implements IStudent {
             
             if (resultSet.next()) {
                 exists = resultSet.getInt(1) > 0;
-                connection.close();
+                
             }
         } catch (SQLException isStudentRegisteredException) {
                 LOG.error("ERROR: ", isStudentRegisteredException);
@@ -118,7 +117,7 @@ public class StudentDAO implements IStudent {
             preparedStatement.setInt(1, professorId);
             preparedStatement.setString(2, correo);
             result = preparedStatement.executeUpdate();
-            connection.close();
+            
         } catch (SQLException changeProfessorAssignedExceptiom){
             LOG.error("ERROR:", changeProfessorAssignedExceptiom);
         }
@@ -141,8 +140,9 @@ public class StudentDAO implements IStudent {
                 Student student = new Student();
                 student.setEmail(email);
                 students.add(student);
-                connection.close();
+                
             }
+            
         } catch (SQLException getStudentsByProfessorIdException) {
             LOG.error("ERROR:", getStudentsByProfessorIdException);
          

@@ -71,7 +71,7 @@ public class AdminCollaborationOptionsController {
     private Button buttonProfessors;
     @FXML
     private void goToProfessors(ActionEvent event){
-        FXMLLoader professorOptionsLoader = new FXMLLoader(getClass().getResource("/GUI/adminProfessorsOptions.fxml"));
+        FXMLLoader professorOptionsLoader = new FXMLLoader(getClass().getResource("/GUI/adminProfessorOptions.fxml"));
         ChangeWindowManager.changeWindowTo(event, professorOptionsLoader);
     }
 

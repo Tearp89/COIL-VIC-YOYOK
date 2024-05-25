@@ -72,7 +72,7 @@
                                     <FontAwesomeIcon fill="WHITE" glyphName="HOME" />
                                  </graphic>
                               </Button>
-                              <Button id="logOutB" layoutX="12.0" layoutY="514.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="36.0" stylesheets="@windowsStyle.css">
+                              <Button id="logOutB" fx:id="buttonLogout" layoutX="12.0" layoutY="514.0" mnemonicParsing="false" onAction="#logOut" prefHeight="26.0" prefWidth="36.0" stylesheets="@windowsStyle.css">
                                  <styleClass>
                                     <String fx:value="logout" />
                                     <String fx:value="shadow" />
@@ -120,7 +120,7 @@
                                  <children>
                                     <BorderPane layoutX="77.0" layoutY="89.0" prefHeight="525.3333333333334" prefWidth="772.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                        <right>
-                                          <AnchorPane prefHeight="525.0" prefWidth="387.0" styleClass="nav-form" stylesheets="@../uni%204/Construcción/COIL-VIC-YOYOK/Código/COIL_VIC/src/GUI/inicio.css" BorderPane.alignment="CENTER" />
+                                          <AnchorPane prefHeight="525.0" prefWidth="387.0" styleClass="nav-form" stylesheets="@windowsStyle.css" BorderPane.alignment="CENTER" />
                                        </right>
                                     </BorderPane>
                                     <ImageView fitHeight="347.0" fitWidth="423.0" layoutX="223.0" layoutY="89.0" pickOnBounds="true" preserveRatio="true">

@@ -125,6 +125,14 @@ public class SearchUniversityController {
         ChangeWindowManager.changeWindowTo(event, homePageLoader);
     }
 
+    @FXML
+    private Button buttonBack;
+    @FXML
+    private void goBack(ActionEvent event){
+        FXMLLoader goBackLoader = new FXMLLoader(getClass().getResource("/GUI/adminUniversityOptions.fxml"));
+        ChangeWindowManager.changeWindowTo(event, goBackLoader);
+    }
+
     
 
     @FXML

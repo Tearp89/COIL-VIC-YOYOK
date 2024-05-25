@@ -109,7 +109,7 @@ public class ProfessorSettingsController {
     private Button buttonLogout;
 
     @FXML
-    private void logOut(ActionEvent event){
+    private void logout(ActionEvent event){
         FXMLLoader loginLoader = new FXMLLoader(getClass().getResource("/GUI/login.fxml"));
         try{
             ChangeWindowManager.logout(event, loginLoader);

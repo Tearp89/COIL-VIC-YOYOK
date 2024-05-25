@@ -26,31 +26,20 @@ public class RequestsController {
     private Button buttonAnswerRequest;
 
     @FXML
-    private void answerRequest(){
+    private void answerRequest(ActionEvent event){
         if(comboBoxRequestType.getSelectionModel().getSelectedItem() == "Académico"){
-            try{
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUI/searchPendingProfessor.fxml"));
-                Parent root = loader.load();
-                Stage stage = new Stage();
-                stage.setScene(new Scene(root));
-                stage.show();
-            }catch (IOException answerRequestException){
-                LOG.error("ERROR:", answerRequestException);
-            }
+                ChangeWindowManager.changeWindowTo(event, loader);;
+           
             
             
 
         }else{
-            try{
+           
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUI/searchPendingCollaborations.fxml"));
-                Parent root = loader.load();
-                Stage stage = new Stage();
-                stage.setScene(new Scene(root));
-                stage.show();
-            }catch (IOException answerRequestException){
+                ChangeWindowManager.changeWindowTo(event, loader);
                 
 
-        }
     }
 }
 
