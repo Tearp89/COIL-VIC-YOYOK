@@ -114,6 +114,23 @@ public class ProfessorDAOTest {
         int result = instance.updateProfessor(professor);
         assertEquals(expResult, result);
     }
+        @Test
+        public void testSearchProfessorSuccess(){
+        int expectedResult = 5;
+        ProfessorDAO instance = new ProfessorDAO();
+        int idUniversidad = 1;
+        ArrayList<Professor> professors = instance.searchProfessorByUniversityId(idUniversidad);
+        assertEquals(expectedResult, professors.size());
+    }
+        
+        @Test
+        public void testSearchProfessorFailed(){
+            int expectedResult = 0;
+            ProfessorDAO instance = new ProfessorDAO();
+            int idUniversidad = 5;
+            ArrayList<Professor> professors = instance.searchProfessorByUniversityId(idUniversidad);
+            assertEquals(expectedResult, professors.size());
+        }
     
         @Test
         public void testSearchProfessorByCountrySuccess(){
