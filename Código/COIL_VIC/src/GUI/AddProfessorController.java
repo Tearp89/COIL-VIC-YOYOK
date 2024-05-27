@@ -116,7 +116,7 @@ public class AddProfessorController {
         Professor professor = new Professor();
         
         
-            if(universityName == "Universidad Veracruzana"){
+            if(universityName.equals("Universidad Veracruzana")){
                 if (professorName.isEmpty() || professorPhoneNumber.isEmpty() || email.isEmpty() || country.isEmpty() || universityName.isEmpty() || language.isEmpty() || workShop.isEmpty() || academicArea.isEmpty() || textFieldPersonalNumber.getText().isEmpty() || region.isEmpty() || contractType.isEmpty() || contractCategory.isEmpty()) {
                     Alert emptyFieldsAlertUV = new Alert(AlertType.ERROR);
                     emptyFieldsAlertUV.setTitle("Campos vacíos");
@@ -351,7 +351,7 @@ public class AddProfessorController {
 
         ObservableList<String> workShop = comboBoxWorkShop.getItems();
         workShop.setAll("Sí", "No");
-        comboBoxAcademicArea.setItems(workShop);
+        comboBoxWorkShop.setItems(workShop);
 
         comboBoxUniversity.setItems(universities);
         

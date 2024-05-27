@@ -30,8 +30,8 @@ public class ProfessorDAO implements IProfessor{
     public int addProfessorUV(Professor professor){
         DatabaseManager dbManager = new DatabaseManager();
         String query = "INSERT INTO profesor(nombreProfesor, usuario, telefono, estado,"+ 
-        "tipoProfesor, país, Universidad_idUniversidad, area_academica, correo, contraseña, No.Personal," +
-        "region, tipoContratación, categoriaContratacion, disciplina) VALUES (?,?,?,?,?,?,?,?,?,?,SHA2(?,256),?,?,?,?)";
+        "tipoProfesor, país, Universidad_idUniversidad, area_academica, correo, contraseña, NoPersonal," +
+        "region, tipoContratación, categoríaContratación, curso_taller) VALUES (?,?,?,?,?,?,?,?,?, SHA2(?,256),?,?,?,?,?)";
         int result = 0;
         try {
             Connection connection = dbManager.getConnection();
@@ -50,7 +50,8 @@ public class ProfessorDAO implements IProfessor{
             preparedStatement.setString(12, professor.getRegion());
             preparedStatement.setString(13, professor.getContractType());
             preparedStatement.setString(14, professor.getContractCategory());
-            preparedStatement.setString(15, professor.getDiscipline());
+            preparedStatement.setString(15, professor.getWorkShop());
+            
             result = preparedStatement.executeUpdate();
         } catch (SQLException addProfessorUVException) {
             LOG.error("ERROR: ", addProfessorUVException);
@@ -85,7 +86,7 @@ public class ProfessorDAO implements IProfessor{
 
     public boolean isProfessorRegistered(String email) {
         DatabaseManager dbManager = new DatabaseManager();
-        String query = "SELECT COUNT(*) FROM profesor WHERE correoElectrónico = ?";
+        String query = "SELECT COUNT(*) FROM profesor WHERE correo = ?";
         boolean exists = false;
         Connection connection = null;
         PreparedStatement preparedStatement = null;
@@ -103,6 +104,20 @@ public class ProfessorDAO implements IProfessor{
             }
         } catch (SQLException isProfessorRegisteredException) {
                 LOG.error("ERROR: ", isProfessorRegisteredException);
+            } finally {
+                try {
+                    if (resultSet != null) {
+                        resultSet.close();
+                    }
+                    if (preparedStatement != null) {
+                        preparedStatement.close();
+                    }
+                    if (connection != null) {
+                        connection.close();
+                    }
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
             }
         
         return exists;
@@ -248,8 +263,8 @@ public class ProfessorDAO implements IProfessor{
     public int updateProfessorUV(Professor professor){
         DatabaseManager dbManager = new DatabaseManager();
         String query = "UPDATE profesor SET nombreProfesor = ?, telefono = ?, estado = ?, tipoProfesor = ?," + 
-        "país = ?, Universidad_idUniversidad = ?, area_academica = ?, correo, contraseña = ?, No.Personal = ?," +
-        "region = ?, tipoContratación = ?, categoriaContratacion = ?, disciplina = ?  WHERE idProfesor = ?";
+        "país = ?, Universidad_idUniversidad = ?, area_academica = ?, correo, contraseña = ?, NoPersonal = ?," +
+        "region = ?, tipoContratación = ?, categoríaContratación = ?, curso_taller = ?  WHERE idProfesor = ?";
         int result = 0;
         try{
             Connection connection = dbManager.getConnection();
@@ -267,7 +282,7 @@ public class ProfessorDAO implements IProfessor{
             preparedStatement.setString(12, professor.getRegion());
             preparedStatement.setString(13, professor.getContractType());
             preparedStatement.setString(14, professor.getContractCategory());
-            preparedStatement.setString(15, professor.getDiscipline());
+            preparedStatement.setString(15, professor.getWorkShop());
             result = preparedStatement.executeUpdate();
         } catch (SQLException updateProfessorUVException){
             LOG.error("ERROR: ", updateProfessorUVException);
