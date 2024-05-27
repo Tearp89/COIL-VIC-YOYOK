@@ -48,6 +48,8 @@ public class StudentOptionsController {
 
     @FXML
     private void goToSettings(ActionEvent event){
+        FXMLLoader settingsLoader = new FXMLLoader(getClass().getResource("/GUI/professorSettings.fxml"));
+        ChangeWindowManager.changeWindowTo(event, settingsLoader);
 
     }
     @FXML
@@ -74,6 +76,14 @@ public class StudentOptionsController {
         } catch (IOException logoutException){
             LOG.error("ERROR:", logoutException);
         }
+    }
+
+    @FXML
+    private Button buttonAddStudent;
+    @FXML
+    private void addStudent(ActionEvent event){
+        FXMLLoader addStudentLoader = new FXMLLoader(getClass().getResource("/GUI/addStudent.fxml"));
+        ChangeWindowManager.changeWindowTo(event, addStudentLoader);
     }
 
 

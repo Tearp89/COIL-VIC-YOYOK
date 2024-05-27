@@ -10,6 +10,9 @@ import javafx.collections.ObservableList;
 import logic.interfaces.IProfessor;
 import logic.classes.Professor;
 import java.util.ArrayList;
+
+import com.mysql.cj.x.protobuf.MysqlxDatatypes.Array;
+
 import java.sql.ResultSet;
 import log.Log;
 
@@ -169,6 +172,7 @@ public class ProfessorDAO implements IProfessor{
                     int idProfesor = resultSet.getInt("idProfesor");
                     String name = resultSet.getString("nombreProfesor");
                     String type = resultSet.getString("tipoProfesor");
+                    String phoneNumer = resultSet.getString("telefono");
                     int universityId = resultSet.getInt("Universidad_idUniversidad");
                     String country = resultSet.getString("país");
                     professor = new Professor();
@@ -178,6 +182,7 @@ public class ProfessorDAO implements IProfessor{
                     professor.setType(type);
                     professor.setCountry(country);
                     professor.setUniversityId(universityId);
+                    professor.setPhoneNumber(phoneNumer);
                     
                     professors.add(professor);
                 }
@@ -236,7 +241,7 @@ public class ProfessorDAO implements IProfessor{
 
     public int professorRequestCollaboration(int idColaboración, int idProfesor){
         DatabaseManager dbManager = new DatabaseManager();
-        String query = "INSERT INTO solicitud_Colaboración (idColaboración, idProfesor) VALUES (?,?)";
+        String query = "INSERT INTO solicitud_Colaboración (idColaboración, idProfesor, estado) VALUES (?,?, 'Pendiente')";
         int result = 0;
         try {
             Connection connection = dbManager.getConnection();
@@ -246,6 +251,23 @@ public class ProfessorDAO implements IProfessor{
             result = preparedStatement.executeUpdate();
         } catch (SQLException professorRequestCollaboratioException){
             LOG.error("ERROR: ", professorRequestCollaboratioException);
+        }
+        return result;
+    }
+
+    public int changeRequestStatus(String status, int collaborationId, int professorId){
+        DatabaseManager dbManager = new DatabaseManager();
+        String query = "UPDATE  solicitud_colaboración set estado = ? WHERE idColaboración = ? AND idProfesor = ?";
+        int result = 0;
+        try{
+            Connection connection = dbManager.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, status);
+            preparedStatement.setInt(2, collaborationId);
+            preparedStatement.setInt(3, professorId);
+            result = preparedStatement.executeUpdate();
+        } catch (SQLException changeRequestStatusException){
+            LOG.error("ERROR: ", changeRequestStatusException);
         }
         return result;
     }
@@ -400,6 +422,67 @@ public class ProfessorDAO implements IProfessor{
         }
         return countries;  
     }
+
+    public int changeProfessorPassword(String password, int profesorId){
+        DatabaseManager dbManager = new DatabaseManager();
+        String query = "UPDATE profesor SET contraseña = ? WHERE idProfesor = ?";
+        int result = 0;
+        try{
+            Connection connection = dbManager.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, password);
+            preparedStatement.setInt(2, profesorId);
+            result = preparedStatement.executeUpdate();
+        } catch (SQLException changeStudentPasswordException){
+            LOG.error("ERROR:", changeStudentPasswordException);
+        }
+        return result;
+
+    }
+
+    public ArrayList<Integer> getProfessorIdsByCollaborationId(int collaborationId) {
+        DatabaseManager dbManager = new DatabaseManager();
+        String query = "SELECT idProfesor FROM colaboración WHERE idColaboración = ?";
+        ArrayList<Integer> professorIds = new ArrayList<>();
+
+        try (Connection connection = dbManager.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            
+            preparedStatement.setInt(1, collaborationId);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                int professorId = resultSet.getInt("idProfesor");
+                professorIds.add(professorId);
+            }
+        } catch (SQLException getProfessorsByCollaborationsIdException) {
+            LOG.error("ERROR:", getProfessorsByCollaborationsIdException);
+        }
+
+        return professorIds;
+    }
+
+    public String getEmailById(int professorId) {
+        DatabaseManager dbManager = new DatabaseManager();
+        String query = "SELECT correo FROM profesor WHERE idProfesor = ?";
+        String email = null;
+
+        try (Connection connection = dbManager.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+
+            preparedStatement.setInt(1, professorId);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            if (resultSet.next()) {
+                email = resultSet.getString("correo");
+            }
+        } catch (SQLException getEmailByIdException) {
+            LOG.error("ERROR:", getEmailByIdException);
+        }
+
+        return email;
+    }
+
 }
 
 

@@ -27,14 +27,14 @@ public class ProfessorDAOTest {
         Professor professor = new Professor();
         ProfessorDAO instance = new ProfessorDAO();
         int expResult = 1;
-        professor.setName("Pedro Jimenez");
+        professor.setName("Juan día<");
         professor.setStatus("Pendiente");
         professor.setType("UV");
         professor.setCountry("México");
         professor.setUniversityId(1);
         professor.setAcademicArea("Económico");
-        professor.setEmail("pppimenz@gmail.com");
-        professor.setUser("jPedro");
+        professor.setEmail("ppjimenez@gmail.com");
+        professor.setUser("p_pedro");
         professor.setPassword("testtest");
         professor.setPhoneNumber("2220000000");
         professor.setWorkShop("Sí");
@@ -216,8 +216,8 @@ public class ProfessorDAOTest {
         public void professorRequestCollaborationSuccess(){
             
             ProfessorDAO professorDAO = new ProfessorDAO();
-           int idProfesor = 24;
-           int idColaboración = 33;
+           int idProfesor = 28;
+           int idColaboración = 42;
 
             int result = professorDAO.professorRequestCollaboration(idColaboración, idProfesor);
             assertEquals(1, result);
@@ -232,5 +232,17 @@ public class ProfessorDAOTest {
             int result = professorDAO.professorRequestCollaboration(idColaboración, idProfesor);
             assertEquals(0, result);
         }
+
+        @Test
+public void changeRequestStatusTestSuccess(){
+    String status = "Aceptada";
+    int idColaboración = 33;
+    int idProfessor = 24;
+    ProfessorDAO professorDAO = new ProfessorDAO();
+    int expectedResult = 1;
+    int result = professorDAO.changeRequestStatus(status, idColaboración, idProfessor);
+    assertEquals(expectedResult, result);
+}
 }       
+
 

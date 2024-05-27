@@ -12,9 +12,11 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import log.Log;
+import logic.classes.Admin;
 
 public class RequestsController {
     private static final org.apache.log4j.Logger LOG = Log.getLogger(RequestsController.class);
@@ -22,50 +24,56 @@ public class RequestsController {
     private ComboBox<String> comboBoxRequestType;
     @FXML
     private Button buttonAnswerRequest;
-    @FXML
-    private Button buttonCancel;
 
     @FXML
-    private void answerRequest(){
+    private void answerRequest(ActionEvent event){
         if(comboBoxRequestType.getSelectionModel().getSelectedItem() == "Académico"){
-            try{
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUI/searchPendingProfessor.fxml"));
-                Parent root = loader.load();
-                Stage stage = new Stage();
-                stage.setScene(new Scene(root));
-                stage.show();
-            }catch (IOException answerRequestException){
-                LOG.error("ERROR:", answerRequestException);
-            }
+                ChangeWindowManager.changeWindowTo(event, loader);;
+           
             
             
 
         }else{
-            try{
+           
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUI/searchPendingCollaborations.fxml"));
-                Parent root = loader.load();
-                Stage stage = new Stage();
-                stage.setScene(new Scene(root));
-                stage.show();
-            }catch (IOException answerRequestException){
+                ChangeWindowManager.changeWindowTo(event, loader);
                 
 
-        }
     }
 }
 
 @FXML
-    private Button buttonCollaborations;
+private Button buttonCancel;
     @FXML
-    private void goToCollaborations(ActionEvent event){
+    private void cancelAnswer(ActionEvent event){
+        FXMLLoader requestsLoader = new FXMLLoader(getClass().getResource("/GUI/requests.fxml"));
+        ChangeWindowManager.changeWindowTo(event, requestsLoader);
 
     }
 
-    @FXML
-    private Button buttonProfessors;
-    @FXML
-    private void goToProfessors(ActionEvent event){
 
+    @FXML
+    private Button buttonMinimize;
+    @FXML
+    private void minimizeWindow(ActionEvent event){
+        ChangeWindowManager.minimizeWindow(event);
+    }
+
+    @FXML
+    private Button buttonClose;
+    @FXML
+    private void closeWindow(ActionEvent event){
+        ChangeWindowManager.closeWindow(event);
+    }
+
+
+    @FXML
+    private Button buttonNumeralia;
+    @FXML
+    private void goToNumeralia(ActionEvent event){
+        FXMLLoader numeraliaLoader = new FXMLLoader(getClass().getResource("/GUI/numeralia.fxml"));
+        ChangeWindowManager.changeWindowTo(event, numeraliaLoader);
     }
     @FXML
     private Button buttonLogout;
@@ -73,101 +81,58 @@ public class RequestsController {
     private void logout(ActionEvent event){
         FXMLLoader loginLoader = new FXMLLoader(getClass().getResource("/GUI/login.fxml"));
         try {
+            ChangeWindowManager.logout(event, loginLoader);
             UserSessionManager.getInstance().logoutAdmin();
-            Parent root = loginLoader.load();
-            Scene loginScene = new Scene(root);
-            Stage loginStage = new Stage();
-            loginStage.setScene(loginScene);
-            loginStage.show();
-            Node source = (Node) event.getSource();
-            Stage stage = (Stage) source.getScene().getWindow();
-            stage.close();
-        } catch (IOException goToLoginException){
-            LOG.error(goToLoginException);
+        } catch (IOException ioException){
+            LOG.error(ioException);
         }
     }
 
     @FXML
-    private Button buttonMinimize;
+    private Button buttonCollaborations;
     @FXML
-    private void minimizeWindow(ActionEvent event){
-        Node source = (Node) event.getSource();
-        Stage stage = (Stage) source.getScene().getWindow();
-        stage.setIconified(true);
+    private void goToCollaborations(ActionEvent event){
+        FXMLLoader collaborationOptionsLoader = new FXMLLoader(getClass().getResource("/GUI/adminCollaborationOptions.fxml"));
+        ChangeWindowManager.changeWindowTo(event, collaborationOptionsLoader);
     }
 
     @FXML
-    private Button buttonClose;
+    private Button buttonProfessors;
     @FXML
-    private void closeWindow(ActionEvent event){
-        Node source = (Node) event.getSource();
-        Stage stage = (Stage) source.getScene().getWindow();
-        stage.close();
+    private void goToProfessors(ActionEvent event){
+        FXMLLoader professorOptionsLoader = new FXMLLoader(getClass().getResource("/GUI/adminProfessorsOptions.fxml"));
+        ChangeWindowManager.changeWindowTo(event, professorOptionsLoader);
     }
 
     @FXML
-    private Button buttonNumeralia;
-
+    private Button buttonUniversities;
     @FXML
-    public void goToNumeralia(ActionEvent event){
-        
-
-        FXMLLoader numeraliaLoader = new FXMLLoader(getClass().getResource("numeralia.fxml"));
-        try {
-            Parent root = numeraliaLoader.load();
-            Scene numeraliaScene = new Scene(root);
-            Stage numeraliaStage = new Stage();
-            numeraliaStage.initStyle(StageStyle.TRANSPARENT);
-            numeraliaStage.setScene(numeraliaScene);
-            numeraliaStage.show();
-
-            Node source = (Node) event.getSource();
-            Stage stage = (Stage) source.getScene().getWindow();
-            stage.close();
-        } catch (IOException goToNumeraliaException){
-            LOG.error("ERROR:", goToNumeraliaException);
-        }
+    private void goToUniversities(ActionEvent event){
+        FXMLLoader universitiesOptionsLoader = new FXMLLoader(getClass().getResource("/GUI/adminUniversityOptions.fxml"));
+        ChangeWindowManager.changeWindowTo(event, universitiesOptionsLoader);
     }
 
     @FXML
-    private Button buttonConfiguration;
-    @FXML
-    private void goToSettings(ActionEvent event){
-
-    }
-    @FXML
-    Button buttonHome;
+    private Button buttonHome;
     @FXML
     private void goToHomepage(ActionEvent event){
-        FXMLLoader homeLoader = new FXMLLoader(getClass().getResource("/GUI/adminHome.fxml"));
-        try {
-            Parent root = homeLoader.load();
-            Scene homeScene = new Scene(root);
-            Stage homeStage = new Stage();
-            homeStage.initStyle(StageStyle.TRANSPARENT);
-            homeStage.setScene(homeScene);
-            homeStage.show();
-            Node source = (Node) event.getSource();
-            Stage stage = (Stage) source.getScene().getWindow();
-            stage.close();
-        } catch (IOException goToHomeException){
-            LOG.error("ERROR", goToHomeException);
-        }
-
+        FXMLLoader homePageLoader = new FXMLLoader(getClass().getResource("/GUI/adminHome.fxml"));
+        ChangeWindowManager.changeWindowTo(event, homePageLoader);
     }
+
+
+
+
+
+
 
     @FXML
-    private void cancelAnswer(){
-
-    }
-
-
-
-
-
-
+    private Label labelUser;
     @FXML
     private void initialize(){
+        Admin adminData = new Admin();
+        adminData = UserSessionManager.getInstance().getAdminUserData();
+        labelUser.setText(adminData.getAdminName());
         ObservableList<String> requestTypes = comboBoxRequestType.getItems();
         requestTypes.setAll("Académico", "Colaboración");
         comboBoxRequestType.setItems(requestTypes);

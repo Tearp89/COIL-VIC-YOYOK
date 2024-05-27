@@ -218,6 +218,7 @@ DROP TABLE IF EXISTS `solicitud_colaboración`;
 CREATE TABLE `solicitud_colaboración` (
   `idColaboración` int DEFAULT NULL,
   `idProfesor` int DEFAULT NULL,
+  `estado` char(255) DEFAULT NULL,
   KEY `idColaboración` (`idColaboración`),
   KEY `idProfesor` (`idProfesor`),
   CONSTRAINT `solicitud_colaboración_ibfk_1` FOREIGN KEY (`idColaboración`) REFERENCES `colaboración` (`idColaboración`),
@@ -231,7 +232,7 @@ CREATE TABLE `solicitud_colaboración` (
 
 LOCK TABLES `solicitud_colaboración` WRITE;
 /*!40000 ALTER TABLE `solicitud_colaboración` DISABLE KEYS */;
-INSERT INTO `solicitud_colaboración` VALUES (33,24),(36,24),(36,25),(36,25),(37,25),(36,25);
+INSERT INTO `solicitud_colaboración` VALUES (33,24, "Pendiente"),(36,24, "Pendiente"),(36,25, "Pendiente"),(36,25, "Pendiente"),(37,25, "Pendiente"),(36,25, "Pendiente");
 /*!40000 ALTER TABLE `solicitud_colaboración` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -239,28 +240,26 @@ UNLOCK TABLES;
 -- Table structure for table `syllabus`
 --
 
-DROP TABLE IF EXISTS `syllabus`;
+DROP TABLE IF EXISTS `actividad`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `syllabus` (
-  `idSyllabus` int NOT NULL AUTO_INCREMENT,
-  `actividad` varchar(30) NOT NULL,
+CREATE TABLE `actividad` (
+  `idActividad` int NOT NULL AUTO_INCREMENT,
+  `título` varchar(30) NOT NULL,
   `descripcion` varchar(200) NOT NULL,
-  `responsable` varchar(45) NOT NULL,
-  `colaboración_idColaboración` int NOT NULL,
-  PRIMARY KEY (`idSyllabus`),
-  KEY `fk_syllabus_colaboración1_idx` (`colaboración_idColaboración`),
-  CONSTRAINT `fk_syllabus_colaboración1` FOREIGN KEY (`colaboración_idColaboración`) REFERENCES `colaboración` (`idColaboración`)
+  `tipo` varchar(45) NOT NULL,
+  `semana` varchar(45) NOT NULL, 
+  PRIMARY KEY (`idActividad`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `syllabus`
+-- Dumping data for table `Actividad`
 --
 
-LOCK TABLES `syllabus` WRITE;
-/*!40000 ALTER TABLE `syllabus` DISABLE KEYS */;
-/*!40000 ALTER TABLE `syllabus` ENABLE KEYS */;
+LOCK TABLES `Actividad` WRITE;
+/*!40000 ALTER TABLE `Actividad` DISABLE KEYS */;
+/*!40000 ALTER TABLE `Actividad` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -299,3 +298,54 @@ UNLOCK TABLES;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
 -- Dump completed on 2024-05-19 18:29:03
+DROP TABLE IF EXISTS `retroalimentación_estudiantes`;
+CREATE TABLE retroalimentación_estudiantes (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    calificación FLOAT,
+    observaciones TEXT,
+    idColaboración INT,
+    idAdministrativo INT,
+    correoElectrónico VARCHAR(255),
+    FOREIGN KEY (correoElectrónico) REFERENCES estudiante (correoElectrónico),
+    FOREIGN KEY (idColaboración) REFERENCES colaboración (idColaboración),
+    FOREIGN KEY (idAdministrativo) REFERENCES administrador (idAdministrativo)
+);
+
+DROP TABLE IF EXISTS `retroalimentación_académicos`;
+CREATE TABLE retroalimentación_académicos (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    calificación FLOAT,
+    observaciones TEXT,
+    idColaboración INT,
+    idAdministrativo INT,
+    correoElectrónico VARCHAR(255),
+    FOREIGN KEY (correoElectrónico) REFERENCES profesor (correo),
+    FOREIGN KEY (idColaboración) REFERENCES colaboración (idColaboración),
+    FOREIGN KEY (idAdministrativo) REFERENCES administrador (idAdministrativo)
+);
+
+DROP TABLE IF EXISTS `retroalimentación_administrativos`;
+CREATE TABLE retroalimentación_administrativos (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    calificación FLOAT,
+    observaciones TEXT,
+    idColaboración INT,
+    idAdministrativo INT,
+    correoElectrónico VARCHAR(255),
+    FOREIGN KEY (idColaboración) REFERENCES colaboración (idColaboración),
+    FOREIGN KEY (idAdministrativo) REFERENCES administrador (idAdministrativo)
+);
+
+DROP TABLE IF EXISTS `cronograma_actividades`;
+CREATE TABLE cronograma_actividades (
+    idColaboración INT,
+    idActividad INT,
+    FOREIGN KEY (idColaboración) REFERENCES colaboración (idColaboración),
+    FOREIGN KEY (idActividad) REFERENCES actividad (idActividad)
+);
+
+
+
+
+
+ 

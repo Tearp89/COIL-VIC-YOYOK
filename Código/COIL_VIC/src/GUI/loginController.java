@@ -21,8 +21,10 @@ import javafx.stage.StageStyle;
 import logic.DAO.AdminDAO;
 import logic.DAO.LoginDAO;
 import logic.DAO.ProfessorDAO;
+import logic.DAO.StudentDAO;
 import logic.classes.Admin;
 import logic.classes.Professor;
+import logic.classes.Student;
 import log.Log;
 
 public class LoginController {
@@ -95,6 +97,30 @@ public class LoginController {
             } catch (IOException loaderException){
                 LOG.error("ERROR:", loaderException);
             }
+
+        } else if (instance.validateStudent(user, password)){
+            Student studentData = new Student();
+            StudentDAO studentDAO = new StudentDAO();
+            studentData.setEmail(user);
+            studentData.setPassword(password);
+            UserSessionManager.getInstance().loginStudent(studentData);
+            Node source = (Node) e.getSource();
+            stage = (Stage) source.getScene().getWindow();
+            stage.close();
+            try{
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUI/studentsHome.fxml"));
+                Parent root = loader.load();
+
+                Scene scene = new Scene(root);
+
+                Stage newStage = new Stage();
+                newStage.initStyle(StageStyle.TRANSPARENT);
+                newStage.setScene(scene);
+                newStage.show();
+            } catch (IOException loaderException){
+                LOG.error("ERROR:", loaderException);
+            }
+
 
         }
     }

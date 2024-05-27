@@ -57,18 +57,28 @@ public class SearchUniversityController {
             tableViewUniversities.setPlaceholder(labelCollaborationNotFound);
         }
     }
-    @FXML
-    private Button buttonCollaborations;
-    @FXML
-    private void goToCollaborations(ActionEvent event){
 
+    @FXML
+    private Button buttonMinimize;
+    @FXML
+    private void minimizeWindow(ActionEvent event){
+        ChangeWindowManager.minimizeWindow(event);
     }
 
     @FXML
-    private Button buttonProfessors;
+    private Button buttonClose;
     @FXML
-    private void goToProfessors(ActionEvent event){
+    private void closeWindow(ActionEvent event){
+        ChangeWindowManager.closeWindow(event);
+    }
 
+
+    @FXML
+    private Button buttonNumeralia;
+    @FXML
+    private void goToNumeralia(ActionEvent event){
+        FXMLLoader numeraliaLoader = new FXMLLoader(getClass().getResource("/GUI/numeralia.fxml"));
+        ChangeWindowManager.changeWindowTo(event, numeraliaLoader);
     }
     @FXML
     private Button buttonLogout;
@@ -76,96 +86,62 @@ public class SearchUniversityController {
     private void logout(ActionEvent event){
         FXMLLoader loginLoader = new FXMLLoader(getClass().getResource("/GUI/login.fxml"));
         try {
+            ChangeWindowManager.logout(event, loginLoader);
             UserSessionManager.getInstance().logoutAdmin();
-            Parent root = loginLoader.load();
-            Scene loginScene = new Scene(root);
-            Stage loginStage = new Stage();
-            loginStage.setScene(loginScene);
-            loginStage.show();
-            Node source = (Node) event.getSource();
-            Stage stage = (Stage) source.getScene().getWindow();
-            stage.close();
-        } catch (IOException goToLoginException){
-            LOG.error(goToLoginException);
+        } catch (IOException ioException){
+            LOG.error(ioException);
         }
     }
 
     @FXML
-    private Button buttonMinimize;
+    private Button buttonCollaborations;
     @FXML
-    private void minimizeWindow(ActionEvent event){
-        Node source = (Node) event.getSource();
-        Stage stage = (Stage) source.getScene().getWindow();
-        stage.setIconified(true);
+    private void goToCollaborations(ActionEvent event){
+        FXMLLoader collaborationOptionsLoader = new FXMLLoader(getClass().getResource("/GUI/adminUniversityOptions.fxml"));
+        ChangeWindowManager.changeWindowTo(event, collaborationOptionsLoader);
     }
 
     @FXML
-    private Button buttonClose;
+    private Button buttonProfessors;
     @FXML
-    private void closeWindow(ActionEvent event){
-        Node source = (Node) event.getSource();
-        Stage stage = (Stage) source.getScene().getWindow();
-        stage.close();
+    private void goToProfessors(ActionEvent event){
+        FXMLLoader professorOptionsLoader = new FXMLLoader(getClass().getResource("/GUI/adminProfessorsOptions.fxml"));
+        ChangeWindowManager.changeWindowTo(event, professorOptionsLoader);
     }
 
     @FXML
-    private Button buttonNumeralia;
-
+    private Button buttonUniversities;
     @FXML
-    public void goToNumeralia(ActionEvent event){
-        
-
-        FXMLLoader numeraliaLoader = new FXMLLoader(getClass().getResource("numeralia.fxml"));
-        try {
-            Parent root = numeraliaLoader.load();
-            Scene numeraliaScene = new Scene(root);
-            Stage numeraliaStage = new Stage();
-            numeraliaStage.initStyle(StageStyle.TRANSPARENT);
-            numeraliaStage.setScene(numeraliaScene);
-            numeraliaStage.show();
-
-            Node source = (Node) event.getSource();
-            Stage stage = (Stage) source.getScene().getWindow();
-            stage.close();
-        } catch (IOException goToNumeraliaException){
-            LOG.error("ERROR:", goToNumeraliaException);
-        }
+    private void goToUniversities(ActionEvent event){
+        FXMLLoader universitiesOptionsLoader = new FXMLLoader(getClass().getResource("/GUI/adminUniversityOptions.fxml"));
+        ChangeWindowManager.changeWindowTo(event, universitiesOptionsLoader);
     }
 
     @FXML
-    private Button buttonConfiguration;
-    @FXML
-    private void goToSettings(ActionEvent event){
-
-    }
-    @FXML
-    Button buttonHome;
+    private Button buttonHome;
     @FXML
     private void goToHomepage(ActionEvent event){
-        FXMLLoader homeLoader = new FXMLLoader(getClass().getResource("/GUI/adminHome.fxml"));
-        try {
-            Parent root = homeLoader.load();
-            Scene homeScene = new Scene(root);
-            Stage homeStage = new Stage();
-            homeStage.initStyle(StageStyle.TRANSPARENT);
-            homeStage.setScene(homeScene);
-            homeStage.show();
-            Node source = (Node) event.getSource();
-            Stage stage = (Stage) source.getScene().getWindow();
-            stage.close();
-        } catch (IOException goToHomeException){
-            LOG.error("ERROR", goToHomeException);
-        }
-
+        FXMLLoader homePageLoader = new FXMLLoader(getClass().getResource("/GUI/adminHome.fxml"));
+        ChangeWindowManager.changeWindowTo(event, homePageLoader);
     }
 
     @FXML
-    private Label labelAdminName;
+    private Button buttonBack;
+    @FXML
+    private void goBack(ActionEvent event){
+        FXMLLoader goBackLoader = new FXMLLoader(getClass().getResource("/GUI/adminUniversityOptions.fxml"));
+        ChangeWindowManager.changeWindowTo(event, goBackLoader);
+    }
+
+    
+
+    @FXML
+    private Label labelUser;
     @FXML
     public void initialize(){
         Admin adminData = new Admin();
-        //adminData = UserSessionManager.getInstance().getAdminUserData();
-        //labelAdminName.setText(adminData.getAdminName());
+        adminData = UserSessionManager.getInstance().getAdminUserData();
+        labelUser.setText(adminData.getAdminName());
         loadUniversities();
         tableViewUniversities.setOnMouseClicked(event -> {
             University university = tableViewUniversities.getSelectionModel().getSelectedItem();

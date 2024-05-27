@@ -13,7 +13,7 @@ public class LoginDAO {
 
     public boolean validateAdmin(String username, String password) {
         DatabaseManager dbManager = new DatabaseManager();
-        String query = "SELECT COUNT(*) AS count FROM administrador WHERE usuario = ? AND contraseña = SHA2(?, 256)";
+        String query = "SELECT COUNT(*) AS count FROM administrador WHERE BINARY usuario = BINARY ? AND contraseña = SHA2(?, 256)";
         try (Connection connection = dbManager.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setString(1, username);
@@ -32,7 +32,7 @@ public class LoginDAO {
 
     public boolean validateProfessor(String username, String password){
         DatabaseManager dbManager = new DatabaseManager();
-        String query = "SELECT COUNT(*) AS count FROM profesor WHERE usuario = ? AND contraseña = SHA2(?, 256)";
+        String query = "SELECT COUNT(*) AS count FROM profesor WHERE BINARY usuario = BINARY ? AND contraseña = SHA2(?, 256)";
         try (Connection connection = dbManager.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setString(1, username);
@@ -51,7 +51,7 @@ public class LoginDAO {
 
     public boolean validateStudent(String username, String password){
         DatabaseManager dbManager = new DatabaseManager();
-        String query = "SELECT COUNT(*) AS count FROM estudiante WHERE correo = ? AND contraseña = SHA2(?, 256)";
+        String query = "SELECT COUNT(*) AS count FROM estudiante WHERE BINARY correoElectrónico = BINARY ? AND contraseña = SHA2(?, 256)";
         try (Connection connection = dbManager.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setString(1, username);

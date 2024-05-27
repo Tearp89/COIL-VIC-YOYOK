@@ -3,6 +3,8 @@ package GUI;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import org.apache.xmlbeans.impl.xb.xsdschema.Attribute.Use;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -22,6 +24,7 @@ import javafx.util.Callback;
 import log.Log;
 import logic.DAO.CollaborationDAO;
 import logic.DAO.ProfessorDAO;
+import logic.classes.Admin;
 import logic.classes.Collaboration;
 import logic.classes.Professor;
 
@@ -111,73 +114,83 @@ public class SearchPendingProfessorsController {
     tableColumnAcceptButton.setCellFactory(cellFactory);
 
     tableViewPendingProfessors.getColumns().add(tableColumnAcceptButton);
-}
+    }   
 
-private void addDeclineButtonToTable() {
-    TableColumn<Professor, Void> tableColumnDeclineButtom = new TableColumn("Rechazar");
+    private void addDeclineButtonToTable() {
+        TableColumn<Professor, Void> tableColumnDeclineButtom = new TableColumn("Rechazar");
 
-    Callback<TableColumn<Professor, Void>, TableCell<Professor, Void>> cellFactory = new Callback<TableColumn<Professor, Void>, TableCell<Professor, Void>>() {
-        @Override
-        public TableCell<Professor, Void> call(final TableColumn<Professor, Void> param) {
-            final TableCell<Professor, Void> cell = new TableCell<Professor, Void>() {
-                private final Button declineButton = new Button("Rechazar");
+        Callback<TableColumn<Professor, Void>, TableCell<Professor, Void>> cellFactory = new Callback<TableColumn<Professor, Void>, TableCell<Professor, Void>>() {
+            @Override
+            public TableCell<Professor, Void> call(final TableColumn<Professor, Void> param) {
+                final TableCell<Professor, Void> cell = new TableCell<Professor, Void>() {
+                    private final Button declineButton = new Button("Rechazar");
 
-                {
-                    declineButton.setOnAction((ActionEvent event) -> {
-                        Professor professor = getTableView().getItems().get(getIndex());
-                        int professorId = professor.getProfessorId();
-                        ProfessorDAO professorDAO = new ProfessorDAO();
-                        int result = professorDAO.changeProfessorStatusById("Rechazado", professorId);
-                        if(result == 1){
-                            Alert acceptanceSuccessfulAlert = new Alert(AlertType.INFORMATION);
-                            acceptanceSuccessfulAlert.setTitle("Solicitud rechazada");
-                            acceptanceSuccessfulAlert.setHeaderText("Solicitud rechazada");
-                            acceptanceSuccessfulAlert.setContentText("Solicitud rechazada exitosamente");
-                            acceptanceSuccessfulAlert.show();
-                        } else{
-                            Alert acceptanceErrorAlert = new Alert(AlertType.ERROR);
-                            acceptanceErrorAlert.setTitle("Error conexión");
-                            acceptanceErrorAlert.setHeaderText("Error conexión");
-                            acceptanceErrorAlert.setContentText("No se pudo conectar a la base de datos, por favor inténtelo de nuevo más tarde");
-                            acceptanceErrorAlert.show();
-                        }
-                        
-                    });
-                }
-
-                @Override
-                public void updateItem(Void item, boolean empty) {
-                    super.updateItem(item, empty);
-                    if (empty) {
-                        setGraphic(null);
-                    } else {
-                        setGraphic(declineButton);
+                    {
+                        declineButton.setOnAction((ActionEvent event) -> {
+                            Professor professor = getTableView().getItems().get(getIndex());
+                            int professorId = professor.getProfessorId();
+                            ProfessorDAO professorDAO = new ProfessorDAO();
+                            int result = professorDAO.changeProfessorStatusById("Rechazado", professorId);
+                            if(result == 1){
+                                Alert acceptanceSuccessfulAlert = new Alert(AlertType.INFORMATION);
+                                acceptanceSuccessfulAlert.setTitle("Solicitud rechazada");
+                                acceptanceSuccessfulAlert.setHeaderText("Solicitud rechazada");
+                                acceptanceSuccessfulAlert.setContentText("Solicitud rechazada exitosamente");
+                                acceptanceSuccessfulAlert.show();
+                            } else{
+                                Alert acceptanceErrorAlert = new Alert(AlertType.ERROR);
+                                acceptanceErrorAlert.setTitle("Error conexión");
+                                acceptanceErrorAlert.setHeaderText("Error conexión");
+                                acceptanceErrorAlert.setContentText("No se pudo conectar a la base de datos, por favor inténtelo de nuevo más tarde");
+                                acceptanceErrorAlert.show();
+                            }
+                            
+                        });
                     }
-                }
-            };
-            return cell;
-        }
-    };
 
-    tableColumnDeclineButtom.setCellFactory(cellFactory);
+                    @Override
+                    public void updateItem(Void item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if (empty) {
+                            setGraphic(null);
+                        } else {
+                            setGraphic(declineButton);
+                        }
+                    }
+                };
+                return cell;
+            }
+        };
 
-    tableViewPendingProfessors.getColumns().add(tableColumnDeclineButtom);
-}
+        tableColumnDeclineButtom.setCellFactory(cellFactory);
+
+        tableViewPendingProfessors.getColumns().add(tableColumnDeclineButtom);
+    }
 
 
 
+    
     @FXML
-    private Button buttonCollaborations;
+    private Button buttonMinimize;
     @FXML
-    private void goToCollaborations(ActionEvent event){
-
+    private void minimizeWindow(ActionEvent event){
+        ChangeWindowManager.minimizeWindow(event);
     }
 
     @FXML
-    private Button buttonProfessors;
+    private Button buttonClose;
     @FXML
-    private void goToProfessors(ActionEvent event){
+    private void closeWindow(ActionEvent event){
+        ChangeWindowManager.closeWindow(event);
+    }
 
+
+    @FXML
+    private Button buttonNumeralia;
+    @FXML
+    private void goToNumeralia(ActionEvent event){
+        FXMLLoader numeraliaLoader = new FXMLLoader(getClass().getResource("/GUI/numeralia.fxml"));
+        ChangeWindowManager.changeWindowTo(event, numeraliaLoader);
     }
     @FXML
     private Button buttonLogout;
@@ -185,91 +198,61 @@ private void addDeclineButtonToTable() {
     private void logout(ActionEvent event){
         FXMLLoader loginLoader = new FXMLLoader(getClass().getResource("/GUI/login.fxml"));
         try {
+            ChangeWindowManager.logout(event, loginLoader);
             UserSessionManager.getInstance().logoutAdmin();
-            Parent root = loginLoader.load();
-            Scene loginScene = new Scene(root);
-            Stage loginStage = new Stage();
-            loginStage.setScene(loginScene);
-            loginStage.show();
-            Node source = (Node) event.getSource();
-            Stage stage = (Stage) source.getScene().getWindow();
-            stage.close();
-        } catch (IOException goToLoginException){
-            LOG.error(goToLoginException);
+        } catch (IOException ioException){
+            LOG.error(ioException);
         }
     }
 
     @FXML
-    private Button buttonMinimize;
+    private Button buttonCollaborations;
     @FXML
-    private void minimizeWindow(ActionEvent event){
-        Node source = (Node) event.getSource();
-        Stage stage = (Stage) source.getScene().getWindow();
-        stage.setIconified(true);
+    private void goToCollaborations(ActionEvent event){
+        FXMLLoader collaborationOptionsLoader = new FXMLLoader(getClass().getResource("/GUI/adminCollaborationsOptions.fxml"));
+        ChangeWindowManager.changeWindowTo(event, collaborationOptionsLoader);
     }
 
     @FXML
-    private Button buttonClose;
+    private Button buttonProfessors;
     @FXML
-    private void closeWindow(ActionEvent event){
-        Node source = (Node) event.getSource();
-        Stage stage = (Stage) source.getScene().getWindow();
-        stage.close();
+    private void goToProfessors(ActionEvent event){
+        FXMLLoader professorOptionsLoader = new FXMLLoader(getClass().getResource("/GUI/adminProfessorsOptions.fxml"));
+        ChangeWindowManager.changeWindowTo(event, professorOptionsLoader);
     }
 
     @FXML
-    private Button buttonNumeralia;
-
+    private Button buttonUniversities;
     @FXML
-    public void goToNumeralia(ActionEvent event){
-        
-
-        FXMLLoader numeraliaLoader = new FXMLLoader(getClass().getResource("numeralia.fxml"));
-        try {
-            Parent root = numeraliaLoader.load();
-            Scene numeraliaScene = new Scene(root);
-            Stage numeraliaStage = new Stage();
-            numeraliaStage.initStyle(StageStyle.TRANSPARENT);
-            numeraliaStage.setScene(numeraliaScene);
-            numeraliaStage.show();
-
-            Node source = (Node) event.getSource();
-            Stage stage = (Stage) source.getScene().getWindow();
-            stage.close();
-        } catch (IOException goToNumeraliaException){
-            LOG.error("ERROR:", goToNumeraliaException);
-        }
+    private void goToUniversities(ActionEvent event){
+        FXMLLoader universitiesOptionsLoader = new FXMLLoader(getClass().getResource("/GUI/adminUniversityOptions.fxml"));
+        ChangeWindowManager.changeWindowTo(event, universitiesOptionsLoader);
     }
 
     @FXML
-    private Button buttonConfiguration;
-    @FXML
-    private void goToSettings(ActionEvent event){
-
-    }
-    @FXML
-    Button buttonHome;
+    private Button buttonHome;
     @FXML
     private void goToHomepage(ActionEvent event){
-        FXMLLoader homeLoader = new FXMLLoader(getClass().getResource("/GUI/adminHome.fxml"));
-        try {
-            Parent root = homeLoader.load();
-            Scene homeScene = new Scene(root);
-            Stage homeStage = new Stage();
-            homeStage.initStyle(StageStyle.TRANSPARENT);
-            homeStage.setScene(homeScene);
-            homeStage.show();
-            Node source = (Node) event.getSource();
-            Stage stage = (Stage) source.getScene().getWindow();
-            stage.close();
-        } catch (IOException goToHomeException){
-            LOG.error("ERROR", goToHomeException);
-        }
-
+        FXMLLoader homePageLoader = new FXMLLoader(getClass().getResource("/GUI/adminHome.fxml"));
+        ChangeWindowManager.changeWindowTo(event, homePageLoader);
     }
+
+    @FXML
+    private Button buttonBack;
+    @FXML
+    private void goBack(ActionEvent event){
+        FXMLLoader goBackLoader = new FXMLLoader(getClass().getResource("/GUI/adminProfessorOptions.fxml"));
+        ChangeWindowManager.changeWindowTo(event, goBackLoader);
+    }
+
+    @FXML
+    private Label labelUser;
 
     @FXML
     private void initialize(){
+        Admin adminData = new Admin();
+        adminData = UserSessionManager.getInstance().getAdminUserData();
+        labelUser.setText(adminData.getAdminName());
         loadPendingProfessors();
         addAcceptButtonToTable();
         addDeclineButtonToTable();
