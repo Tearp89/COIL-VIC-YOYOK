@@ -96,7 +96,7 @@ public class ProfessorDAOTest {
         professor.setUniversityId(2);{
         professor.setProfessorId(7);
     }
-        int result = instance.updateProfessor(professor);
+        int result = instance.updateProfessorForeign(professor);
         assertEquals(expResult, result);
     }
     
@@ -111,7 +111,7 @@ public class ProfessorDAOTest {
         professor.setCountry("Alemania");
         professor.setUniversityId(5);
         professor.setProfessorId(7);
-        int result = instance.updateProfessor(professor);
+        int result = instance.updateProfessorForeign(professor);
         assertEquals(expResult, result);
     }
         @Test

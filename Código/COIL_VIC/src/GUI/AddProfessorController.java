@@ -144,16 +144,16 @@ public class AddProfessorController {
                     professor.setWorkShop(workShop);
                     professor.setUser(user);
                     professor.setPassword(password);
-                    professor.setStatus("Pendientes");
+                    professor.setStatus("Pendiente");
                     professor.setType("UV");
                     professor.setAcademicArea(academicArea);
                     professor.setPersonalNumber(personalNumber);
                     professor.setRegion(region);
                     professor.setContractType(contractType);
                     professor.setContractCategory(contractCategory);
-                    int resultAddProfessorUV = professorDAO.addProfessorUV(professor);
                     
-                        if(resultAddProfessorUV == 1) {
+                    
+                       
                             Alert professorAddedAlert = new Alert(AlertType.CONFIRMATION);
                             professorAddedAlert.setTitle("Confirmación de registro");
                             professorAddedAlert.setHeaderText("Confirmación de registro");
@@ -182,15 +182,7 @@ public class AddProfessorController {
                             });
                     
                             professorAddedAlert.show();
-                        } else {
-                            
-                            Alert addProfessorFailedAlert = new Alert(AlertType.ERROR);
-                            addProfessorFailedAlert.setTitle("Error en el registro");
-                            addProfessorFailedAlert.setHeaderText("Error al registrar el profesor");
-                            addProfessorFailedAlert.setContentText("Hubo un problema al registrar el profesor. Por favor, intente nuevamente.");
-                            addProfessorFailedAlert.show();
-                        }
-                    
+                        
                     
                 } 
                     
@@ -220,7 +212,7 @@ public class AddProfessorController {
                     professor.setWorkShop(workShop);
                     professor.setUser(user);
                     professor.setPassword(password);
-                    professor.setStatus("Pendientes");
+                    professor.setStatus("Pendiente");
                     professor.setType("Externo");
                     
                     Alert professorAddedAlert = new Alert(AlertType.CONFIRMATION);

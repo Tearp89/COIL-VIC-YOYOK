@@ -103,7 +103,7 @@ public class LoginController {
                 } catch (IOException loaderException){
                     LOG.error("ERROR:", loaderException);
                 }
-            } else if(status.equals("En espera")){
+            } else if(status.equals("Pendiente")){
                 Alert professorNotAccepted = new Alert(AlertType.INFORMATION);
                 professorNotAccepted.setHeaderText("Aún no ha sido aceptado");
                 professorNotAccepted.setTitle("No disponible");
