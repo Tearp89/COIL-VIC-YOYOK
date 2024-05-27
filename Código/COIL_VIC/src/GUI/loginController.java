@@ -86,7 +86,8 @@ public class LoginController {
             professorData.setPassword(password);
             professorData.setName(professorDAO.getProfessorNameByUser(user));
             String status = professorDAO.getProfessorStatusByUser(user);
-            if(status == "Aceptado"){
+            System.out.println(status);
+            if(status.equals("Aceptado")){
                 UserSessionManager.getInstance().loginProfessor(professorData);
                 Node source = (Node) e.getSource();
                 stage = (Stage) source.getScene().getWindow();
@@ -102,7 +103,7 @@ public class LoginController {
                 } catch (IOException loaderException){
                     LOG.error("ERROR:", loaderException);
                 }
-            } else if(status == "En espera"){
+            } else if(status.equals("En espera")){
                 Alert professorNotAccepted = new Alert(AlertType.INFORMATION);
                 professorNotAccepted.setHeaderText("Aún no ha sido aceptado");
                 professorNotAccepted.setTitle("No disponible");
