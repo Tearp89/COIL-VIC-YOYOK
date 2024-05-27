@@ -170,7 +170,7 @@ public class SearchDeclinedCollaborationsController {
                     stage.setScene(new Scene(root));
                     stage.show();
                 } catch (IOException e) {
-                    e.printStackTrace();
+                    LOG.error("ERROR:", e);
                 }
             }
         }

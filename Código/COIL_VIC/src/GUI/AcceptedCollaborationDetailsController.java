@@ -49,6 +49,7 @@ public class AcceptedCollaborationDetailsController {
             publishSucessAlert.setTitle("Oferta publicada");
             publishSucessAlert.setHeaderText("Oferta publicada");
             publishSucessAlert.setContentText("Colaboración ofertada con éxito");
+            publishSucessAlert.show();
         } else{
             Alert publishErrorAlert = new Alert(AlertType.ERROR);
                     publishErrorAlert.setTitle("Error conexión");

@@ -59,7 +59,7 @@ public class AddCollaborationController {
         collaboration.setDescription(collaborationDescription);
         collaboration.setStartDate(startDate);
         collaboration.setFinishDate(finishDate);
-        collaboration.setCollaborationStatus("En espera");
+        collaboration.setCollaborationStatus("Pendiente");
         collaboration.setCollaborationGoal(collaborationGoal);
         collaboration.setSubject(collaborationSubject);
 
@@ -77,9 +77,7 @@ public class AddCollaborationController {
                 ProfessorDAO professorDAO = new ProfessorDAO();
                 Professor professorData = UserSessionManager.getInstance().getProfessorUserData();
                 int professorId = professorDAO.getProfessorIdByUser(professorData.getUser());
-                System.out.println(professorId);
                 int collaborationId = instance.getCollaborationIdbyName(collaborationName);
-                System.out.println(collaborationId);
                     instance.assignProfessorToCollaboration(professorId, collaborationId);
                 
             });
