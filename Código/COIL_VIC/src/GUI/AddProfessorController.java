@@ -151,40 +151,35 @@ public class AddProfessorController {
                     professor.setRegion(region);
                     professor.setContractType(contractType);
                     professor.setContractCategory(contractCategory);
-                    
-                    
-                       
-                            Alert professorAddedAlert = new Alert(AlertType.CONFIRMATION);
-                            professorAddedAlert.setTitle("Confirmación de registro");
-                            professorAddedAlert.setHeaderText("Confirmación de registro");
-                            professorAddedAlert.setContentText("¿Deseas enviar la solicitud de registro?");
-                            ButtonType accept = new ButtonType("Aceptar");
-                            professorAddedAlert.getButtonTypes().setAll(accept);
-                            Button okButton = (Button) professorAddedAlert.getDialogPane().lookupButton(accept);
+
+                    Alert professorAddedAlert = new Alert(AlertType.CONFIRMATION);
+                    professorAddedAlert.setTitle("Confirmación de registro");
+                    professorAddedAlert.setHeaderText("Confirmación de registro");
+                    professorAddedAlert.setContentText("¿Deseas enviar la solicitud de registro?");
+                    ButtonType accept = new ButtonType("Aceptar");
+                    professorAddedAlert.getButtonTypes().setAll(accept);
+                    Button okButton = (Button) professorAddedAlert.getDialogPane().lookupButton(accept);
                             
-                            
-                            okButton.setOnAction(eventAddProfessorUV -> {
+                    okButton.setOnAction(eventAddProfessorUV -> {
                                 
-                                int professorRequestResult = professorDAO.addProfessorUV(professor);
-                                if(professorRequestResult == 1) {
-                                    Alert registrationRequestAlert = new Alert(AlertType.INFORMATION);
-                                    registrationRequestAlert.setTitle("Solicitud de registro");
-                                    registrationRequestAlert.setHeaderText("Solicitud enviada");
-                                    registrationRequestAlert.setContentText("Solicitud de registro enviada exitosamente.");
-                                    registrationRequestAlert.show();
-                                } else {
-                                    Alert registrationRequestFailedAlert = new Alert(AlertType.ERROR);
-                                    registrationRequestFailedAlert.setTitle("Error en la solicitud");
-                                    registrationRequestFailedAlert.setHeaderText("Error al enviar la solicitud");
-                                    registrationRequestFailedAlert.setContentText("Hubo un problema al enviar la solicitud de registro. Por favor, intente nuevamente.");
-                                    registrationRequestFailedAlert.show();
-                                }
-                            });
+                    int professorRequestResult = professorDAO.addProfessorUV(professor);
+                    if(professorRequestResult == 1) {
+                        Alert registrationRequestAlert = new Alert(AlertType.INFORMATION);
+                        registrationRequestAlert.setTitle("Solicitud de registro");
+                        registrationRequestAlert.setHeaderText("Solicitud enviada");
+                        registrationRequestAlert.setContentText("Solicitud de registro enviada exitosamente.");
+                        registrationRequestAlert.show();
+                    } else {
+                        Alert registrationRequestFailedAlert = new Alert(AlertType.ERROR);
+                        registrationRequestFailedAlert.setTitle("Error en la solicitud");
+                        registrationRequestFailedAlert.setHeaderText("Error al enviar la solicitud");
+                        registrationRequestFailedAlert.setContentText("Hubo un problema al enviar la solicitud de registro. Por favor, intente nuevamente.");
+                        registrationRequestFailedAlert.show();
+                    }
+                });
                     
-                            professorAddedAlert.show();
-                        
-                    
-                } 
+                professorAddedAlert.show();    
+            } 
                     
             }else{
                 if (professorName.isEmpty() || professorPhoneNumber.isEmpty() || email.isEmpty() || country.isEmpty() || universityName.isEmpty() || language.isEmpty() || workShop.isEmpty()) {
@@ -223,26 +218,24 @@ public class AddProfessorController {
                     professorAddedAlert.getButtonTypes().setAll(accept);
                     Button okButton = (Button) professorAddedAlert.getDialogPane().lookupButton(accept);    
                             
-                            okButton.setOnAction(eventAddProfessorForeign -> {
-                                
-                                int professorRequestResult = professorDAO.addProfessorForeign(professor);
-                                if(professorRequestResult == 1) {
-                                    Alert registrationRequestAlert = new Alert(AlertType.INFORMATION);
-                                    registrationRequestAlert.setTitle("Solicitud de registro");
-                                    registrationRequestAlert.setHeaderText("Solicitud enviada");
-                                    registrationRequestAlert.setContentText("Solicitud de registro enviada exitosamente.");
-                                    registrationRequestAlert.show();
-                                } else {
-                                    Alert registrationRequestFailedAlert = new Alert(AlertType.ERROR);
-                                    registrationRequestFailedAlert.setTitle("Error en la solicitud");
-                                    registrationRequestFailedAlert.setHeaderText("Error al enviar la solicitud");
-                                    registrationRequestFailedAlert.setContentText("Hubo un problema al enviar la solicitud de registro. Por favor, intente nuevamente.");
-                                    registrationRequestFailedAlert.show();
-                                }
-                            });
+                    okButton.setOnAction(eventAddProfessorForeign -> {                              
+                        int professorRequestResult = professorDAO.addProfessorForeign(professor);
+                        if(professorRequestResult == 1) {
+                            Alert registrationRequestAlert = new Alert(AlertType.INFORMATION);
+                            registrationRequestAlert.setTitle("Solicitud de registro");
+                            registrationRequestAlert.setHeaderText("Solicitud enviada");
+                            registrationRequestAlert.setContentText("Solicitud de registro enviada exitosamente.");
+                            registrationRequestAlert.show();
+                        } else {
+                            Alert registrationRequestFailedAlert = new Alert(AlertType.ERROR);
+                            registrationRequestFailedAlert.setTitle("Error en la solicitud");
+                            registrationRequestFailedAlert.setHeaderText("Error al enviar la solicitud");
+                            registrationRequestFailedAlert.setContentText("Hubo un problema al enviar la solicitud de registro. Por favor, intente nuevamente.");
+                            registrationRequestFailedAlert.show();
+                        }   
+                    });
                     
-                            professorAddedAlert.show();
-                        
+                professorAddedAlert.show();                      
                 }
             }
             
