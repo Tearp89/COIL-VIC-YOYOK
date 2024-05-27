@@ -2,9 +2,6 @@ package GUI;
 
 import java.io.IOException;
 import java.util.ArrayList;
-
-import org.apache.xmlbeans.StringEnumAbstractBase.Table;
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -13,7 +10,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
@@ -27,10 +23,6 @@ public class SearchUniversityController {
     private static final org.apache.log4j.Logger LOG = Log.getLogger(SearchUniversityController.class);
     @FXML
     private TableView<University> tableViewUniversities;
-    private TableColumn<University, String> tableColumnUniversityId;
-    private TableColumn<University, String> tableColumnUniversityName;
-    private TableColumn<University, String> tableColumnUniversityCountry;
-    private TableColumn<University, String> tableColumnUnivesityLanguage;
     @FXML
     Label labelCollaborationNotFound = new Label("No se encontraron universidades");
 
@@ -152,8 +144,12 @@ public class SearchUniversityController {
                     UniversityDetailsController controller = loader.getController();
                     controller.initialize(university.getUniversityId());
                     Stage stage = new Stage();
+                    stage.initStyle(StageStyle.TRANSPARENT);
                     stage.setScene(new Scene(root));
                     stage.show();
+                    Node source = (Node) event.getSource();
+                    Stage currenStage = (Stage) source.getScene().getWindow();
+                    currenStage.close();
                 } catch (IOException universityDetailsException){
                     LOG.error("ERROR:", universityDetailsException);
                 }
@@ -161,6 +157,5 @@ public class SearchUniversityController {
         });
 
     }
-     
 
 }

@@ -65,8 +65,8 @@ public class UniversityDetailsController {
         Button okButton = (Button) confirmCancelAlert.getDialogPane().lookupButton(acceptCancel);
         Button cancelButton = (Button) confirmCancelAlert.getDialogPane().lookupButton(cancelCancel);
         okButton.setOnAction(eventAcceptCancel -> {
-            FXMLLoader collaborationOptionLoader = new FXMLLoader(getClass().getResource("/GUI/AdminCollaborationOptions.fxml"));
-            ChangeWindowManager.changeWindowTo(event, collaborationOptionLoader);
+            FXMLLoader universityOptionLoader = new FXMLLoader(getClass().getResource("/GUI/AdminUniversityOptions.fxml"));
+            ChangeWindowManager.changeWindowTo(event, universityOptionLoader);
         });
 
         cancelButton.setOnAction(eventCancelCancel -> {
@@ -78,8 +78,8 @@ public class UniversityDetailsController {
     private Button buttonBack;
     @FXML
     private void cancel(ActionEvent event){
-        FXMLLoader collaborationOptionsLoader = new FXMLLoader(getClass().getResource("/GUI/adminUniversityOptions.fxml"));
-        ChangeWindowManager.changeWindowTo(event, collaborationOptionsLoader);
+        FXMLLoader universityOptionsLoader = new FXMLLoader(getClass().getResource("/GUI/adminUniversityOptions.fxml"));
+        ChangeWindowManager.changeWindowTo(event, universityOptionsLoader);
 
     }
 

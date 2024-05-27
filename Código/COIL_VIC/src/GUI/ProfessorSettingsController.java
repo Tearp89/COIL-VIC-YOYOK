@@ -5,7 +5,10 @@ import java.io.IOException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import log.Log;
@@ -45,12 +48,10 @@ public class ProfessorSettingsController {
         ProfessorDAO professorDAO = new ProfessorDAO();
         String email = professorDAO.getProfessorEmailByUser(user);
         String phoneNumber = professorDAO.getProfessorPhoneByUser(user);
-        String academicArea = professorDAO.getProfessorAreaByUser(user);
 
         labelName.setText(professorData.getName());
         labelPhone.setText(phoneNumber);
         labelEmail.setText(email);
-        labelAcademicArea.setText(academicArea);
     }
 
     @FXML
@@ -105,7 +106,7 @@ public class ProfessorSettingsController {
         ChangeWindowManager.closeWindow(event);
     }
 
-     @FXML
+    @FXML
     private Button buttonLogout;
 
     @FXML
@@ -125,5 +126,56 @@ public class ProfessorSettingsController {
         FXMLLoader homePageLoader = new FXMLLoader(getClass().getResource("/GUI/collaborationOptions.fxml"));
         ChangeWindowManager.changeWindowTo(event, homePageLoader);
 
+    }
+
+    @FXML
+    private void changePassword(ActionEvent event){
+        ProfessorDAO professorDAO = new ProfessorDAO();
+        String user = UserSessionManager.getInstance().getProfessorUserData().getUser();
+        int profesirId = professorDAO.getProfessorIdByUser(user);
+        String oldPassword = textFieldOldPassword.getText();
+        String newPassword = textFieldNewPassword.getText();
+        boolean passwordExist = professorDAO.compareProfessorPassword(oldPassword, profesirId);
+        if(passwordExist){
+            if (oldPassword == newPassword){
+                Alert samePasswordAlert = new Alert(AlertType.ERROR);
+                samePasswordAlert.setHeaderText("La contraseña antigua y la nueva son la misma");
+                samePasswordAlert.setTitle("Contraseña duplicada");
+                samePasswordAlert.setContentText("Favor de ingresar una nueva constraseña");
+                samePasswordAlert.show();
+            } else {
+                Alert confirmEditionAlert = new Alert(AlertType.CONFIRMATION);
+                confirmEditionAlert.setHeaderText("Confirmación cambio");
+                confirmEditionAlert.setTitle("Confirmar edición");
+                confirmEditionAlert.setContentText("¿Está seguro de que desea cambiar la contraseña?");
+                ButtonType acceptEdition = new ButtonType("Confirmar");
+                confirmEditionAlert.getButtonTypes().setAll(acceptEdition);
+                confirmEditionAlert.show();
+                Button okButton = (Button) confirmEditionAlert.getDialogPane().lookupButton(acceptEdition);
+                okButton.setOnAction(eventSaveEdition -> {
+                int result = professorDAO.changeProfessorPassword(newPassword, profesirId);
+                    if(result == 1){
+                        Alert universityUpdatedAlert = new Alert(AlertType.INFORMATION);
+                        universityUpdatedAlert.setHeaderText("Confirmación edición");
+                        universityUpdatedAlert.setTitle("Edición exitosa");
+                        universityUpdatedAlert.setContentText("Se ha actualizado la contraseña");
+                        universityUpdatedAlert.show();
+        
+                    } else{
+                        Alert editionErrorAlert = new Alert(AlertType.ERROR);
+                        editionErrorAlert.setTitle("Error edición");
+                        editionErrorAlert.setHeaderText("Error edición");
+                        editionErrorAlert.setContentText("Ocurrió un error intentelo nuevamente");
+                        editionErrorAlert.show();
+                    }
+                });
+            }
+        } else {
+            Alert professorOldPasswordAlert = new Alert(AlertType.ERROR);
+            professorOldPasswordAlert.setHeaderText("Contraseña antigua incorrecta");
+            professorOldPasswordAlert.setTitle("Contraseña incorrecta");
+            professorOldPasswordAlert.setContentText("La contraseña antigua que ingreso es incorrecta");
+            professorOldPasswordAlert.show();
+        }
     }
 }

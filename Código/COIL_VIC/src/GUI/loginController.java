@@ -14,6 +14,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
@@ -21,7 +24,6 @@ import javafx.stage.StageStyle;
 import logic.DAO.AdminDAO;
 import logic.DAO.LoginDAO;
 import logic.DAO.ProfessorDAO;
-import logic.DAO.StudentDAO;
 import logic.classes.Admin;
 import logic.classes.Professor;
 import logic.classes.Student;
@@ -40,6 +42,9 @@ public class LoginController {
     
     @FXML
     private PasswordField textFieldPassword;
+
+    @FXML
+    private Button buttonAddProfessor;
 
     @FXML
     void login( ActionEvent e) {
@@ -80,27 +85,34 @@ public class LoginController {
             professorData.setUser(user);
             professorData.setPassword(password);
             professorData.setName(professorDAO.getProfessorNameByUser(user));
-            UserSessionManager.getInstance().loginProfessor(professorData);
-            Node source = (Node) e.getSource();
-            stage = (Stage) source.getScene().getWindow();
-            stage.close();
-            try{
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUI/professorHome.fxml"));
-                Parent root = loader.load();
-
-                Scene scene = new Scene(root);
-
-                Stage newStage = new Stage();
-                newStage.initStyle(StageStyle.TRANSPARENT);
-                newStage.setScene(scene);
-                newStage.show();
-            } catch (IOException loaderException){
-                LOG.error("ERROR:", loaderException);
-            }
+            String status = professorDAO.getProfessorStatusByUser(user);
+            if(status == "Aceptado"){
+                UserSessionManager.getInstance().loginProfessor(professorData);
+                Node source = (Node) e.getSource();
+                stage = (Stage) source.getScene().getWindow();
+                stage.close();
+                try{
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUI/professorHome.fxml"));
+                    Parent root = loader.load();
+                    Scene scene = new Scene(root);
+                    Stage newStage = new Stage();
+                    newStage.initStyle(StageStyle.TRANSPARENT);
+                    newStage.setScene(scene);
+                    newStage.show();
+                } catch (IOException loaderException){
+                    LOG.error("ERROR:", loaderException);
+                }
+            } else if(status == "En espera"){
+                Alert professorNotAccepted = new Alert(AlertType.INFORMATION);
+                professorNotAccepted.setHeaderText("Aún no ha sido aceptado");
+                professorNotAccepted.setTitle("No disponible");
+                professorNotAccepted.setContentText("Por el momento no ha sido aceptado en el sistema");
+                professorNotAccepted.show();
+            } 
+            
 
         } else if (instance.validateStudent(user, password)){
             Student studentData = new Student();
-            StudentDAO studentDAO = new StudentDAO();
             studentData.setEmail(user);
             studentData.setPassword(password);
             UserSessionManager.getInstance().loginStudent(studentData);
@@ -122,6 +134,18 @@ public class LoginController {
             }
 
 
+        } else {
+            Alert userNotInDatabase = new Alert(AlertType.INFORMATION);
+            userNotInDatabase.setHeaderText("No existe en el sistema");
+            userNotInDatabase.setTitle("No hay existencia del usuario");
+            userNotInDatabase.setContentText("No hay un registro de su cuenta en el sistema");
+            userNotInDatabase.show();
         }
+    }
+
+    @FXML
+    void addProfessor(ActionEvent event){
+        FXMLLoader addProfessorLoader = new FXMLLoader(getClass().getResource("/GUI/addProfessor.fxml"));
+        ChangeWindowManager.changeWindowTo(event, addProfessorLoader);
     }
 }

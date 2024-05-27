@@ -79,7 +79,7 @@ public class NumeraliaController {
     private Button buttonClose;
 
     @FXML
-    private Button buttonConfiguration;
+    private Button buttonUniversities;
 
     @FXML
     private Label labelName;
@@ -216,5 +216,23 @@ public class NumeraliaController {
         } catch (IOException ioException){
             LOG.error(ioException);
         }
+    }
+
+    @FXML
+    private void goToUniversities(ActionEvent event){
+        FXMLLoader universitiesOptionsLoader = new FXMLLoader(getClass().getResource("/GUI/adminUniversityOptions.fxml"));
+        ChangeWindowManager.changeWindowTo(event, universitiesOptionsLoader);
+    }
+
+    @FXML
+    private void goToProfessors(ActionEvent event){
+        FXMLLoader professorOptionsLoader = new FXMLLoader(getClass().getResource("/GUI/adminProfessorOptions.fxml"));
+        ChangeWindowManager.changeWindowTo(event, professorOptionsLoader);
+    }
+
+    @FXML
+    private void goToCollaborations(ActionEvent event){
+        FXMLLoader collaborationOptionsLoader = new FXMLLoader(getClass().getResource("/GUI/adminCollaborationOptions.fxml"));
+        ChangeWindowManager.changeWindowTo(event, collaborationOptionsLoader);
     }
 }
