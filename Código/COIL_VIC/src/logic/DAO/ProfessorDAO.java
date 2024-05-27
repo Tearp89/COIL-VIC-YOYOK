@@ -10,9 +10,6 @@ import javafx.collections.ObservableList;
 import logic.interfaces.IProfessor;
 import logic.classes.Professor;
 import java.util.ArrayList;
-
-import com.mysql.cj.x.protobuf.MysqlxDatatypes.Array;
-
 import java.sql.ResultSet;
 import log.Log;
 
@@ -34,7 +31,7 @@ public class ProfessorDAO implements IProfessor{
         DatabaseManager dbManager = new DatabaseManager();
         String query = "INSERT INTO profesor(nombreProfesor, usuario, telefono, estado,"+ 
         "tipoProfesor, país, Universidad_idUniversidad, area_academica, correo, contraseña, No.Personal," +
-        "region, tipoContratación, categoriaContratacion, disciplina) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+        "region, tipoContratación, categoriaContratacion, disciplina) VALUES (?,?,?,?,?,?,?,?,?,?,SHA2(?,256),?,?,?,?)";
         int result = 0;
         try {
             Connection connection = dbManager.getConnection();
@@ -64,7 +61,7 @@ public class ProfessorDAO implements IProfessor{
     public int addProfessorForeign(Professor professor){
         DatabaseManager dbManager = new DatabaseManager();
         String query = "INSERT INTO profesor(nombreProfesor, usuario, telefono," + 
-        "estado, país, Universidad_idUniversidad, correo, contraseña, tipoProfesor) VALUES (?,?,?,?,?,?,?,?,?)";
+        "estado, país, Universidad_idUniversidad, correo, contraseña, tipoProfesor) VALUES (?,?,?,?,?,?,?,SHA2(?,256),?)";
         int result = 0;
         try {
             Connection connection = dbManager.getConnection();
@@ -643,7 +640,7 @@ public class ProfessorDAO implements IProfessor{
 
     public int changeProfessorPassword(String password, int profesorId){
         DatabaseManager dbManager = new DatabaseManager();
-        String query = "UPDATE profesor SET contraseña = ? WHERE idProfesor = ?";
+        String query = "UPDATE profesor SET contraseña = SHA2(?,256) WHERE idProfesor = ?";
         int result = 0;
         try{
             Connection connection = dbManager.getConnection();
@@ -651,11 +648,53 @@ public class ProfessorDAO implements IProfessor{
             preparedStatement.setString(1, password);
             preparedStatement.setInt(2, profesorId);
             result = preparedStatement.executeUpdate();
-        } catch (SQLException changeStudentPasswordException){
-            LOG.error("ERROR:", changeStudentPasswordException);
+        } catch (SQLException changeProfessorPasswordException){
+            LOG.error("ERROR:", changeProfessorPasswordException);
         }
         return result;
 
+    }
+
+    public boolean compareProfessorPassword(String password, int profesorId){
+        DatabaseManager dbManager = new DatabaseManager();
+        String query = "SELECT COUNT(*) as count FROM profesor WHERE contraseña = SHA2(?,256) AND idProfesor = ?";
+        try{
+            Connection connection = dbManager.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, password);
+            preparedStatement.setInt(2, profesorId);
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                if (resultSet.next()) {
+                    int count = resultSet.getInt("count");
+                    return count == 1; 
+                }
+            }
+            
+        } catch (SQLException compareProfessorPasswordException){
+            LOG.error("ERROR:", compareProfessorPasswordException);
+        }
+        return false;
+    }
+
+    public String getProfessorStatusByUser(String user){
+        String name = null;
+        DatabaseManager dbManager = new DatabaseManager();
+        String query = "SELECT estado FROM profesor WHERE usuario = ? ";
+        try {
+            Connection connection = dbManager.getConnection();
+            try(PreparedStatement preparedStatement = connection.prepareStatement(query)){
+                preparedStatement.setString(1, user);
+                ResultSet resultSet = preparedStatement.executeQuery();
+
+                if(resultSet.next()){
+                    name = resultSet.getString("estado");
+                }
+                
+            }
+        } catch (SQLException getProfessorStatusByUserException) {
+            LOG.error(getProfessorStatusByUserException);
+        }   
+        return name;
     }
 
     public ArrayList<Integer> getProfessorIdsByCollaborationId(int collaborationId) {
@@ -664,7 +703,7 @@ public class ProfessorDAO implements IProfessor{
         ArrayList<Integer> professorIds = new ArrayList<>();
 
         try (Connection connection = dbManager.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             
             preparedStatement.setInt(1, collaborationId);
             ResultSet resultSet = preparedStatement.executeQuery();

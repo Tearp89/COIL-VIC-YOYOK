@@ -127,7 +127,7 @@
                                                    <children>
                                                       <TextField fx:id="textFieldOldPassword" accessibleRole="PASSWORD_FIELD" layoutX="73.0" layoutY="68.0" prefHeight="26.0" prefWidth="219.0" styleClass="textfield" stylesheets="@windowsStyle.css" />
                                                       <TextField fx:id="textFieldNewPassword" accessibleRole="PASSWORD_FIELD" layoutX="402.0" layoutY="68.0" prefHeight="26.0" prefWidth="219.0" styleClass="textfield" stylesheets="@windowsStyle.css" />
-                                                      <Button fx:id="buttonChangePassword" layoutX="266.0" layoutY="118.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="153.0" styleClass="white-buttom" stylesheets="@windowsStyle.css" text="Cambiar" />
+                                                      <Button fx:id="buttonChangePassword" layoutX="266.0" layoutY="118.0" mnemonicParsing="false" onAction="#changePassword" prefHeight="26.0" prefWidth="153.0" styleClass="white-buttom" stylesheets="@windowsStyle.css" text="Cambiar" />
                                                       <Label layoutX="27.0" layoutY="-15.0" prefHeight="24.0" prefWidth="156.0" stylesheets="@windowsStyle.css" text="   Cambiar contraseña" textAlignment="CENTER">
                                                          <styleClass>
                                                             <String fx:value="white-bg" />

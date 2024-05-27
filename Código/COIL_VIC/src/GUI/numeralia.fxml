@@ -77,12 +77,12 @@
                                     <URL value="@windowsStyle.css" />
                                  </stylesheets>
                               </Button>
-                              <Button id="colaborations" fx:id="buttonCollaborations" layoutX="11.0" layoutY="278.0" minHeight="40.0" mnemonicParsing="false" prefWidth="180.0" styleClass="nav-btn" stylesheets="@windowsStyle.css" text="Colaboraciones">
+                              <Button id="colaborations" fx:id="buttonCollaborations" layoutX="11.0" layoutY="278.0" minHeight="40.0" mnemonicParsing="false" onAction="#goToCollaborations" prefWidth="180.0" styleClass="nav-btn" stylesheets="@windowsStyle.css" text="Colaboraciones">
                                  <graphic>
                                     <FontAwesomeIcon fill="WHITE" glyphName="GROUP" />
                                  </graphic>
                               </Button>
-                              <Button id="records" fx:id="buttonProfessors" layoutX="11.0" layoutY="318.0" minHeight="40.0" mnemonicParsing="false" prefWidth="180.0" styleClass="nav-btn" stylesheets="@windowsStyle.css" text="Profesores">
+                              <Button id="records" fx:id="buttonProfessors" layoutX="11.0" layoutY="318.0" minHeight="40.0" mnemonicParsing="false" onAction="#goToProfessors" prefWidth="180.0" styleClass="nav-btn" stylesheets="@windowsStyle.css" text="Profesores">
                                  <graphic>
                                     <FontAwesomeIcon fill="WHITE" glyphName="PENCIL" />
                                  </graphic>
@@ -107,9 +107,9 @@
                                  </graphic>
                               </Button>
                               <FontAwesomeIcon fill="WHITE" glyphName="USER" layoutX="54.0" layoutY="141.0" size="10em" />
-                              <Button id="records" fx:id="buttonConfiguration" layoutX="10.0" layoutY="398.0" minHeight="40.0" mnemonicParsing="false" prefWidth="180.0" styleClass="nav-btn" stylesheets="@windowsStyle.css" text="Configuración">
+                              <Button id="records" fx:id="buttonUniversities" layoutX="10.0" layoutY="398.0" minHeight="40.0" mnemonicParsing="false" onAction="#goToUniversities" prefWidth="180.0" styleClass="nav-btn" stylesheets="@windowsStyle.css" text="Universidades">
                                  <graphic>
-                                    <FontAwesomeIcon fill="WHITE" glyphName="COGS" />
+                                    <FontAwesomeIcon fill="WHITE" glyphName="BUILDING" />
                                  </graphic>
                               </Button>
                            </children>

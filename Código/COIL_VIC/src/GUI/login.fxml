@@ -102,5 +102,10 @@
             <Font name="Tahoma" size="8.0" />
          </font>
       </Label>
+      <Button fx:id="buttonAddProfessor" layoutX="419.0" layoutY="316.0" mnemonicParsing="false" onAction="#addProfessor" prefHeight="8.0" prefWidth="135.0" styleClass="close" stylesheets="@windowsStyle.css" text="¿No tienes cuenta? Registrate aquí" textFill="#ff3a58">
+         <font>
+            <Font name="Tahoma" size="8.0" />
+         </font>
+      </Button>
    </children>
 </Pane>
