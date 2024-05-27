@@ -46,6 +46,8 @@ public class CollaborationOptionsController {
 
     @FXML
     private void goToSettings(ActionEvent event){
+        FXMLLoader settingsLoader = new FXMLLoader(getClass().getResource("/GUI/professorSettings.fxml"));
+        ChangeWindowManager.changeWindowTo(event, settingsLoader);
 
     }
 
@@ -101,6 +103,8 @@ public class CollaborationOptionsController {
 
     @FXML
     private void gradeCollaboration(ActionEvent event){
+        FXMLLoader gradeCollaborationLoader = new FXMLLoader(getClass().getResource("/GUI/professorFeedbackCollaboration.fxml"));
+        ChangeWindowManager.changeWindowTo(event, gradeCollaborationLoader);
 
     }
 
@@ -118,7 +122,8 @@ public class CollaborationOptionsController {
 
     @FXML
     private void answerRequest(ActionEvent event){
-
+        FXMLLoader answerRequestLoader = new FXMLLoader(getClass().getResource("/GUI/searchRequestToCollaborate.fxml"));
+        ChangeWindowManager.changeWindowTo(event, answerRequestLoader);
     }
 
     @FXML
@@ -149,6 +154,23 @@ public class CollaborationOptionsController {
         ChangeWindowManager.closeWindow(event);
     }
 
+    @FXML
+    private Button buttonSearchActivity;
+    @FXML
+    private void searchActivity(ActionEvent event){
+        FXMLLoader searchActivityLoader = new FXMLLoader(getClass().getResource("/GUI/searchActivities.fxml"));
+        ChangeWindowManager.changeWindowTo(event, searchActivityLoader);
+
+    }
+
+    @FXML
+    private Button buttonAddActivity;
+    @FXML
+    private void addActivity(ActionEvent event){
+        FXMLLoader addActivityLoader = new FXMLLoader(getClass().getResource("/GUI/addActivity.fxml"));
+        ChangeWindowManager.changeWindowTo(event, addActivityLoader);
+    }
+
     @FXML 
     private Label labelUser; 
 
@@ -171,6 +193,20 @@ public class CollaborationOptionsController {
         int validateClosedCollaborations = collaborationDAO.searchCollaborationByStatusAndProfessorId("Cerrada", professorId).size();
         if(validateClosedCollaborations == 0){
             buttonGradeCollaboration.setDisable(true);
+        }
+
+        int validatePublishedCollaborations = collaborationDAO.searchCollaborationByStatusAndProfessorId("Publicada", professorId).size();
+        if(validatePublishedCollaborations == 1){
+            buttonPublishCollaboration.setDisable(true);
+            buttonSendRequest.setDisable(true);
+        } else if (validateActiveCollaborations == 0){
+            buttonAddActivity.setDisable(true);
+            buttonSearchActivity.setDisable(true);;
+        }
+
+        int validateDeclinedCollaborations = collaborationDAO.searchCollaborationByStatusAndProfessorId("Rechazada", professorId).size();
+        if(validateDeclinedCollaborations == 0){
+            buttonEditCollaboration.setDisable(true);
         }
 
     }

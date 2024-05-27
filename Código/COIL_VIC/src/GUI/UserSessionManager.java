@@ -5,6 +5,7 @@ public class UserSessionManager {
     private static UserSessionManager instance;
     private Professor professorUser;
     private Admin adminUser;
+    private Student studentUser;
 
     private UserSessionManager(){
 
@@ -25,12 +26,20 @@ public class UserSessionManager {
         this.adminUser = admin;
     }
 
+    public void loginStudent(Student student){
+        this.studentUser = student;
+    }
+
     public void logoutProfessor(){
         this.professorUser = null;
     }
 
     public void logoutAdmin(){
         this.adminUser = null;
+    }
+
+    public void logoutStudent(){
+        this.studentUser = null;
     }
 
     public boolean isProfessorLogIn(){
@@ -40,6 +49,10 @@ public class UserSessionManager {
     public boolean isAdminLogIn(){
         return adminUser != null;
     }
+    
+    public boolean isStudentLogin(){
+        return studentUser != null;
+    }
 
     public Professor getProfessorUserData(){
         return professorUser;
@@ -47,5 +60,9 @@ public class UserSessionManager {
 
     public Admin getAdminUserData(){
         return adminUser;
+    }
+
+    public Student getStudentUserData(){
+        return studentUser;
     }
 }

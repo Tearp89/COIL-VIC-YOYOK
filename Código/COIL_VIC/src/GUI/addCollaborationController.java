@@ -1,9 +1,12 @@
 package GUI;
 
-import java.awt.event.MouseEvent;
+
 import java.io.IOException;
 import java.sql.SQLException;
 import java.time.LocalDate;
+
+import javafx.beans.Observable;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -77,12 +80,8 @@ public class AddCollaborationController {
                 System.out.println(professorId);
                 int collaborationId = instance.getCollaborationIdbyName(collaborationName);
                 System.out.println(collaborationId);
-                try{
                     instance.assignProfessorToCollaboration(professorId, collaborationId);
-
-                } catch (SQLException assignProfessorException){
-                    LOG.error("ERROR:", assignProfessorException);
-                }
+                
             });
             collaborationAddedAlert.show();
 
@@ -141,6 +140,9 @@ public class AddCollaborationController {
 
     @FXML
     private void goToSettings(ActionEvent event){
+        FXMLLoader settingsLoader = new FXMLLoader(getClass().getResource("/GUI/professorSettings.fxml"));
+        ChangeWindowManager.changeWindowTo(event, settingsLoader);
+
 
     }
 
@@ -190,6 +192,9 @@ public class AddCollaborationController {
         Professor professorData = new Professor();
         professorData = UserSessionManager.getInstance().getProfessorUserData();
         labelUser.setText(professorData.getName());
+        CollaborationDAO collaborationDAO = new CollaborationDAO();
+        ObservableList<String> subjects = collaborationDAO.loadSubjects();
+        comboBoxCollaborationSubject.getItems().setAll(subjects);
         
 
     }

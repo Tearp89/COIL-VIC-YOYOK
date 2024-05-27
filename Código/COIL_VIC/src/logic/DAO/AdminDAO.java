@@ -92,4 +92,26 @@ public class AdminDAO implements IAdmin {
 
         return name;
     }
+
+    public int getAdminIdByUser(String user){
+        int adminId = 0;
+        DatabaseManager dbManager = new DatabaseManager();
+        String query = "SELECT idAdministrativo FROM administrador WHERE usuario = ? ";
+        try {
+            Connection connection = dbManager.getConnection();
+            try(PreparedStatement preparedStatement = connection.prepareStatement(query)){
+                preparedStatement.setString(1, user);
+                ResultSet resultSet = preparedStatement.executeQuery();
+
+                if(resultSet.next()){
+                    adminId = resultSet.getInt("idAdministrativo");
+                }
+                
+            }
+        } catch (SQLException getAdminIdByUserException) {
+            LOG.error(getAdminIdByUserException);
+        }   
+
+        return adminId;
+    }
 }

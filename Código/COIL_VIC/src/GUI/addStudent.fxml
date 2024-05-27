@@ -12,8 +12,9 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.control.cell.PropertyValueFactory?>
 
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.SearchAcceptedCollaborationsController">
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.AddStudentController">
    <children>
       <AnchorPane prefHeight="200.0" prefWidth="200.0">
          <children>
@@ -23,7 +24,7 @@
                      <children>
                         <AnchorPane id="semiTopForm" layoutY="-8.0" prefHeight="35.0" prefWidth="800.0" style="-fx-border-color: black;" styleClass="semi-top-form" stylesheets="@windowsStyle.css" AnchorPane.bottomAnchor="8.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-8.0">
                            <children>
-                              <Button id="close" fx:id="close" layoutX="968.0" layoutY="10.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="32.0" styleClass="close" stylesheets="@windowsStyle.css">
+                              <Button id="close" fx:id="buttonClose" layoutX="968.0" layoutY="10.0" mnemonicParsing="false" onAction="#closeWindow" prefHeight="25.0" prefWidth="32.0" styleClass="close" stylesheets="@windowsStyle.css">
                                  <font>
                                     <Font name="System Bold" size="12.0" />
                                  </font>
@@ -31,7 +32,7 @@
                                     <FontAwesomeIcon glyphName="CLOSE" />
                                  </graphic>
                               </Button>
-                              <Button id="minimize" fx:id="minimize" layoutX="930.0" layoutY="10.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="32.0" styleClass="minimize" stylesheets="@windowsStyle.css">
+                              <Button id="minimize" fx:id="buttonMinimize" layoutX="930.0" layoutY="10.0" mnemonicParsing="false" onAction="#minimizeWindow" prefHeight="25.0" prefWidth="32.0" styleClass="minimize" stylesheets="@windowsStyle.css">
                                  <font>
                                     <Font name="System Bold" size="12.0" />
                                  </font>
@@ -62,7 +63,7 @@
                                     <Font name="Tahoma" size="17.0" />
                                  </font>
                               </Label>
-                              <Label id="user" fx:id="labelUser" alignment="CENTER" layoutX="6.0" layoutY="187.0" prefHeight="23.0" prefWidth="190.0" text="user" textFill="WHITE" visible="false">
+                              <Label id="user" fx:id="labelUser" alignment="CENTER" layoutX="6.0" layoutY="187.0" prefHeight="23.0" prefWidth="190.0" text="user" textFill="WHITE">
                                  <font>
                                     <Font name="Arial Bold" size="20.0" />
                                  </font>
@@ -73,7 +74,7 @@
                                     <FontAwesomeIcon fill="WHITE" glyphName="HOME" />
                                  </graphic>
                               </Button>
-                              <Button id="logOutB" fx:id="buttonLogOut" layoutX="12.0" layoutY="514.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="36.0" stylesheets="@windowsStyle.css">
+                              <Button id="logOutB" fx:id="buttonLogOut" layoutX="12.0" layoutY="514.0" mnemonicParsing="false" onAction="#logout" prefHeight="26.0" prefWidth="36.0" stylesheets="@windowsStyle.css">
                                  <styleClass>
                                     <String fx:value="logout" />
                                     <String fx:value="shadow" />
@@ -119,7 +120,7 @@
                                     <String fx:value="shadow" />
                                  </styleClass>
                                  <children>
-                                    <Button id="discard" fx:id="buttonBack" layoutX="6.0" layoutY="1.0" mnemonicParsing="false" styleClass="white-buttom" stylesheets="@windowsStyle.css">
+                                    <Button id="discard" fx:id="buttonBack" layoutX="6.0" layoutY="1.0" mnemonicParsing="false" onAction="#goBack" styleClass="white-buttom" stylesheets="@windowsStyle.css">
                                        <graphic>
                                           <FontAwesomeIcon glyphName="ARROW_LEFT" />
                                        </graphic>
@@ -130,15 +131,22 @@
                                        </font>
                                     </Label>
                                     <TextField fx:id="textFieldEmailStudent" layoutX="133.0" layoutY="76.0" prefHeight="25.0" prefWidth="481.0" styleClass="textfield" stylesheets="@windowsStyle.css" />
-                                    <Button fx:id="buttonAddStudent" layoutX="634.0" layoutY="76.0" mnemonicParsing="false" styleClass="white-buttom" stylesheets="@windowsStyle.css" text="Añadir" />
-                                    <TableView layoutX="53.0" layoutY="163.0" prefHeight="298.0" prefWidth="666.0">
+                                    <Button fx:id="buttonAddStudent" layoutX="634.0" layoutY="76.0" mnemonicParsing="false" onAction="#addStudent" styleClass="white-buttom" stylesheets="@windowsStyle.css" text="Añadir" />
+                                    <TableView fx:id="tableViewStudents" layoutX="72.0" layoutY="165.0" prefHeight="298.0" prefWidth="602.0">
                                       <columns>
-                                        <TableColumn prefWidth="65.0" />
-                                        <TableColumn prefWidth="78.0" text="ID" />
-                                          <TableColumn prefWidth="522.0" text="Correo" />
+                                        <TableColumn fx:id="tableColumnId" prefWidth="78.0" text="ID" >
+                                        <cellValueFactory>
+                                        <PropertyValueFactory property="professorId"/>
+                                        </cellValueFactory>
+                                        </TableColumn>
+                                          <TableColumn fx:id="tableColumnEmail" prefWidth="522.0" text="Correo" >
+                                          <cellValueFactory>
+                                          <PropertyValueFactory property="email"/>
+                                          </cellValueFactory>
+                                          </TableColumn>
                                       </columns>
                                     </TableView>
-                                    <Button fx:id="buttonAssign" layoutX="705.0" layoutY="478.0" mnemonicParsing="false" styleClass="white-buttom" stylesheets="@windowsStyle.css" text="Asignar" />
+                                    <Button fx:id="buttonAssign" layoutX="705.0" layoutY="478.0" mnemonicParsing="false" onAction="#assignStudent" styleClass="white-buttom" stylesheets="@windowsStyle.css" text="Asignar" />
                                  </children>
                               </AnchorPane>
                            </children>

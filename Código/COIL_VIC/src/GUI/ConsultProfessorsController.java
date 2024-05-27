@@ -21,35 +21,10 @@ import logic.classes.Professor;
 public class ConsultProfessorsController {
     private static final org.apache.log4j.Logger LOG = Log.getLogger(ConsultProfessorsController.class);
 
-    @FXML
-    private Button buttonHome;
-
-    @FXML
-    private Button buttonCollaborations;
-
-    @FXML
-    private Button buttonProfessors;
-
-    @FXML
-    private Button buttonNumeralia;
-
-    @FXML
-    private Button buttonUniversities;
-    
-    @FXML
-    private Button buttonLogout;
-
-    @FXML
-    private Button buttonMinimize;
-
-    @FXML
-    private Button buttonClose;
 
     @FXML
     private Button buttonConsult;
 
-    @FXML
-    private Button buttonBack;
 
     @FXML
     private Button buttonClearFilters;
@@ -72,36 +47,38 @@ public class ConsultProfessorsController {
     public void initialize() {
         ObservableList<String> options = FXCollections.observableArrayList("Universidades","Paises");
         comboBoxFilterBy.setItems(options);
-        //Admin adminData = new Admin();
-        //adminData = UserSessionManager.getInstance().getAdminUserData();
-        //labelName.setText(adminData.getAdminName());
+        Admin adminData = new Admin();
+        adminData = UserSessionManager.getInstance().getAdminUserData();
+        labelName.setText(adminData.getAdminName());
         showProfessorList();
     }
 
     @FXML
-    public void minimizeWindow(ActionEvent event){
+    private Button buttonMinimize;
+    @FXML
+    private void minimizeWindow(ActionEvent event){
         ChangeWindowManager.minimizeWindow(event);
     }
 
     @FXML
-    public void closeWindow(ActionEvent event){
+    private Button buttonClose;
+    @FXML
+    private void closeWindow(ActionEvent event){
         ChangeWindowManager.closeWindow(event);
     }
 
-    @FXML
-    public void goToHome(ActionEvent event){
-        FXMLLoader homeLoader = new FXMLLoader(getClass().getResource("/GUI/adminHome.fxml"));
-        ChangeWindowManager.changeWindowTo(event, homeLoader);
-    }
-    
-    @FXML
-    public void goToNumeralia(ActionEvent event){
-        FXMLLoader homeLoader = new FXMLLoader(getClass().getResource("/GUI/numeralia.fxml"));
-        ChangeWindowManager.changeWindowTo(event, homeLoader);
-    }
 
     @FXML
-    public void logout(ActionEvent event){
+    private Button buttonNumeralia;
+    @FXML
+    private void goToNumeralia(ActionEvent event){
+        FXMLLoader numeraliaLoader = new FXMLLoader(getClass().getResource("/GUI/numeralia.fxml"));
+        ChangeWindowManager.changeWindowTo(event, numeraliaLoader);
+    }
+    @FXML
+    private Button buttonLogout;
+    @FXML
+    private void logout(ActionEvent event){
         FXMLLoader loginLoader = new FXMLLoader(getClass().getResource("/GUI/login.fxml"));
         try {
             ChangeWindowManager.logout(event, loginLoader);
@@ -109,6 +86,46 @@ public class ConsultProfessorsController {
         } catch (IOException ioException){
             LOG.error(ioException);
         }
+    }
+
+    @FXML
+    private Button buttonCollaborations;
+    @FXML
+    private void goToCollaborations(ActionEvent event){
+        FXMLLoader collaborationOptionsLoader = new FXMLLoader(getClass().getResource("/GUI/adminUniversityOptions.fxml"));
+        ChangeWindowManager.changeWindowTo(event, collaborationOptionsLoader);
+    }
+
+    @FXML
+    private Button buttonProfessors;
+    @FXML
+    private void goToProfessors(ActionEvent event){
+        FXMLLoader professorOptionsLoader = new FXMLLoader(getClass().getResource("/GUI/adminProfessorsOptions.fxml"));
+        ChangeWindowManager.changeWindowTo(event, professorOptionsLoader);
+    }
+
+    @FXML
+    private Button buttonUniversities;
+    @FXML
+    private void goToUniversities(ActionEvent event){
+        FXMLLoader universitiesOptionsLoader = new FXMLLoader(getClass().getResource("/GUI/adminUniversityOptions.fxml"));
+        ChangeWindowManager.changeWindowTo(event, universitiesOptionsLoader);
+    }
+
+    @FXML
+    private Button buttonHome;
+    @FXML
+    private void goToHomePage(ActionEvent event){
+        FXMLLoader homePageLoader = new FXMLLoader(getClass().getResource("/GUI/adminHome.fxml"));
+        ChangeWindowManager.changeWindowTo(event, homePageLoader);
+    }
+
+    @FXML
+    private Button buttonBack;
+    @FXML
+    private void goBack(ActionEvent event){
+        FXMLLoader goBackLoader = new FXMLLoader(getClass().getResource("/GUI/adminProfessorOptions.fxml"));
+        ChangeWindowManager.changeWindowTo(event, goBackLoader);
     }
 
     @FXML

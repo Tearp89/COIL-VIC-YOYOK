@@ -3,6 +3,7 @@ package logic.classes;
 public class Student {
     private String email;
     private String password;
+    private int professorId;
 
     public Student() {
       
@@ -22,6 +23,14 @@ public class Student {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public int getProfessorId() {
+        return professorId;
+    }
+
+    public void setProfessorId(int professorId) {
+        this.professorId = professorId;
     }
 
 }

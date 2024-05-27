@@ -37,7 +37,7 @@
                                     <FontAwesomeIcon glyphName="MINUS" />
                                  </graphic>
                               </Button>
-                              <Label layoutX="14.0" layoutY="14.0" text="Consulta universidad" textFill="WHITE">
+                              <Label layoutX="14.0" layoutY="14.0" text="Consultar universidad" textFill="WHITE">
                                  <font>
                                     <Font name="Tahoma Bold" size="17.0" />
                                  </font>
@@ -57,7 +57,7 @@
                                     <Font name="Tahoma" size="17.0" />
                                  </font>
                               </Label>
-                              <Label id="user" alignment="CENTER" layoutX="6.0" layoutY="187.0" prefHeight="23.0" prefWidth="190.0" text="user" textFill="WHITE">
+                              <Label id="user" fx:id="labelUser" alignment="CENTER" layoutX="6.0" layoutY="187.0" prefHeight="23.0" prefWidth="190.0" text="user" textFill="WHITE">
                                  <font>
                                     <Font name="Arial Bold" size="20.0" />
                                  </font>
@@ -95,12 +95,12 @@
                               <FontAwesomeIcon fill="WHITE" glyphName="USER" layoutX="54.0" layoutY="141.0" size="10em" />
                               <Button id="configuration" fx:id="buttonNumeralia" layoutX="10.0" layoutY="357.0" minHeight="40.0" mnemonicParsing="false" onAction="#goToNumeralia" prefWidth="180.0" styleClass="nav-btn" stylesheets="@windowsStyle.css" text="Numeralia">
                                  <graphic>
-                                    <FontAwesomeIcon fill="WHITE" glyphName="COGS" />
+                                    <FontAwesomeIcon fill="WHITE" glyphName="TH" />
                                  </graphic>
                               </Button>
-                              <Button id="configuration" fx:id="buttonSettings" layoutX="11.0" layoutY="397.0" minHeight="40.0" mnemonicParsing="false" onAction="#goToSettings" prefWidth="180.0" styleClass="nav-btn" stylesheets="@windowsStyle.css" text="Configuración">
+                              <Button id="configuration" fx:id="buttonUniversities" layoutX="11.0" layoutY="397.0" minHeight="40.0" mnemonicParsing="false" onAction="#goToUniversities" prefWidth="180.0" styleClass="nav-btn" stylesheets="@windowsStyle.css" text="Universidades">
                                  <graphic>
-                                    <FontAwesomeIcon fill="WHITE" glyphName="COGS" />
+                                    <FontAwesomeIcon fill="WHITE" glyphName="BUILDING" />
                                  </graphic>
                               </Button>
                            </children>
@@ -124,7 +124,7 @@
                                           <FontAwesomeIcon id="editButton" glyphName="EDIT" size="1.5em" />
                                        </graphic>
                                     </Button>
-                                    <Button layoutX="7.0" layoutY="8.0" mnemonicParsing="false" onAction="#buttonCancel" styleClass="descartar" stylesheets="@windowsStyle.css" text="&lt;">
+                                    <Button fx:id="buttonBack" layoutX="7.0" layoutY="8.0" mnemonicParsing="false" onAction="#cancel" styleClass="descartar" stylesheets="@windowsStyle.css" text="&lt;">
                                        <font>
                                           <Font name="Tahoma Bold" size="12.0" />
                                        </font>
@@ -161,7 +161,11 @@
                                           <Font name="Tahoma" size="20.0" />
                                        </font>
                                     </Label>
-                                    <TextField fx:id="textFieldUniversityCountry" layoutX="180.0" layoutY="248.0" prefHeight="26.0" prefWidth="512.0" />
+                                    <TextField fx:id="textFieldUniversityCountry" layoutX="180.0" layoutY="248.0" prefHeight="26.0" prefWidth="512.0" stylesheets="@windowsStyle.css">
+                                       <styleClass>
+                                          <String fx:value="textfield" />
+                                          <String fx:value="shadow" />
+                                       </styleClass></TextField>
                                  </children>
                               </AnchorPane>
                               <Button id="sendButton" fx:id="buttonSaveUniversity" layoutX="716.0" layoutY="499.0" mnemonicParsing="false" onAction="#saveChanges" styleClass="descartar" stylesheets="@windowsStyle.css" text="Guardar" visible="false" />

@@ -83,19 +83,17 @@ public class OpenCollaborationController {
         labelUser.setText(professorData.getName());
         
         ProfessorDAO professorDAO = new ProfessorDAO();
-        int professorId = professorDAO.getProfessorIdByUser(professorData.getUser());
+        String user = professorData.getUser();
+        int professorId = professorDAO.getProfessorIdByUser(user);
 
         CollaborationDAO collaborationDAO = new CollaborationDAO();
         ArrayList<Collaboration> publishedCollaborations = collaborationDAO.searchCollaborationByStatusAndProfessorId("Publicada", professorId);
-       
+       collaborationId = publishedCollaborations.get(0).getCollaborationId();
         
         labelCollaborationId.setText(String.valueOf(publishedCollaborations.get(0).getCollaborationId()));
         textFieldName.setText(publishedCollaborations.get(0).getCollaborationName());
         datePickerStartDate.setValue(publishedCollaborations.get(0).getStartDate());
         datePickerFinishDate.setValue(publishedCollaborations.get(0).getFinishDate());
-        textAreaStudentProfile.setText(publishedCollaborations.get(0).getStudentProfile());
-        textFieldStudentCount.setText(String.valueOf(publishedCollaborations.get(0).getNoStudents()));
-        textFieldObjective.setText(publishedCollaborations.get(0).getCollaborationGoal());
         
         
     }
@@ -155,7 +153,7 @@ public class OpenCollaborationController {
     private Button buttonLogout;
 
     @FXML
-    private void logOut(ActionEvent event){
+    private void logout(ActionEvent event){
         FXMLLoader loginLoader = new FXMLLoader(getClass().getResource("/GUI/login.fxml"));
         try{
             ChangeWindowManager.logout(event, loginLoader);
@@ -176,20 +174,15 @@ public class OpenCollaborationController {
     @FXML
     public void openCollaboration(ActionEvent event){
         String collaborationName = textFieldName.getText();
-        String collaborationDescription = textAreaDescription.getText();
-        String collaborationGoal = textFieldObjective.getText();
-        String studentCount = textFieldStudentCount.getText();
-        String studentProfile = textAreaStudentProfile.getText();
-        String subject = comboBoxSubject.getValue();
+        CollaborationDAO instance = new CollaborationDAO();
 
-        if (!collaborationName.isBlank() && !collaborationDescription.isBlank() && !collaborationGoal.isBlank() &&
-        FieldValidator.onlyNumber(studentCount) && !studentProfile.isBlank() && !subject.isBlank()){
-            int noStudents = Integer.parseInt(studentCount);
-            if(noStudents > 0) {
-                CollaborationDAO instance = new CollaborationDAO();
+        if (!instance.validateCollaborationProfessorsLimit(collaborationId)){
+            
+            
+                
                 int result = instance.changeCollaborationStatus("Activa",collaborationId);
                 if (result == 1){
-                    Alert collaborationUpdatedAlert = new Alert(AlertType.CONFIRMATION);
+                    Alert collaborationUpdatedAlert = new Alert(AlertType.INFORMATION);
                     collaborationUpdatedAlert.setTitle("Confirmación registro");
                     collaborationUpdatedAlert.setHeaderText("Confirmación colaboración");
                     collaborationUpdatedAlert.setContentText("Se abrio de manera exitosa la colaboración");
@@ -201,20 +194,14 @@ public class OpenCollaborationController {
                     emptyFieldsAlert.setHeaderText("Ocurrio un error");
                     emptyFieldsAlert.show();
                 }
-            } else {
-                Alert emptyFieldsAlert = new Alert(AlertType.ERROR);
-                emptyFieldsAlert.setTitle("Cantidad de alumnos invalida");
-                emptyFieldsAlert.setContentText("Se requieren más alumnos para activar una colaboración");
-                emptyFieldsAlert.setHeaderText("Cantidad alumnos invalida");
-                emptyFieldsAlert.show();
+            } else{
+                Alert noCollaboratorAlert = new Alert(AlertType.ERROR);
+                noCollaboratorAlert.setTitle("No hay colaborador");
+                noCollaboratorAlert.setHeaderText("No hay colaborador");
+                noCollaboratorAlert.setContentText("No se puede abrir la colaboración, no hay un colaborador asignado");
+                noCollaboratorAlert.show();
             }
-        } else {
-            Alert emptyFieldsAlert = new Alert(AlertType.ERROR);
-            emptyFieldsAlert.setTitle("Campos erroneos");
-            emptyFieldsAlert.setContentText("No se pudo abrir la colaboración, revise los campos");
-            emptyFieldsAlert.setHeaderText("Campos erroneos");
-            emptyFieldsAlert.show();
-        }
+            
         
     }
 }

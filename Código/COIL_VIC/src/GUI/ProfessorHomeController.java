@@ -1,5 +1,7 @@
 package GUI;
 
+import java.io.IOException;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -12,8 +14,6 @@ public class ProfessorHomeController {
     private static final org.apache.log4j.Logger LOG = Log.getLogger(ProfessorHomeController.class);
     
     
-    
-    
     @FXML
     private Button buttonHome;
 
@@ -21,8 +21,6 @@ public class ProfessorHomeController {
     private void goToHomePage(ActionEvent event){
         FXMLLoader homePageLoader = new FXMLLoader(getClass().getResource("/GUI/professorHome.fxml"));
         ChangeWindowManager.changeWindowTo(event, homePageLoader);
-
-        
     }
 
     @FXML
@@ -51,17 +49,34 @@ public class ProfessorHomeController {
 
     @FXML
     private void goToSettings(ActionEvent event){
+        FXMLLoader settingsLoader = new FXMLLoader(getClass().getResource("/GUI/professorSettings.fxml"));
+        ChangeWindowManager.changeWindowTo(event, settingsLoader);
 
     }
-
+    @FXML
+    private Button buttonMinimize;
     @FXML
     private void minimizeWindow(ActionEvent event){
         ChangeWindowManager.minimizeWindow(event);
     }
-
+    @FXML
+    private Button buttonClose;
     @FXML
     private void closeWindow(ActionEvent event){
         ChangeWindowManager.closeWindow(event);
+    }
+
+     @FXML
+    private Button buttonLogout;
+
+    @FXML
+    private void logOut(ActionEvent event){
+        FXMLLoader loginLoader = new FXMLLoader(getClass().getResource("/GUI/login.fxml"));
+        try{
+            ChangeWindowManager.logout(event, loginLoader);
+        } catch (IOException logoutException){
+            LOG.error("ERROR:", logoutException);
+        }
     }
 
     @FXML

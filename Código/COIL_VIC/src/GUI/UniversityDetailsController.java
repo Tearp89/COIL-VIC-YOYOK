@@ -10,9 +10,12 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.Label;
 import javafx.scene.control.Alert.AlertType;
 import logic.DAO.UniversityDAO;
+import logic.classes.Admin;
 import logic.classes.University;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
@@ -49,13 +52,34 @@ public class UniversityDetailsController {
 
     @FXML
     void cancelEdition(ActionEvent event){
-        Alert confirmCancel = new Alert(AlertType.CONFIRMATION);
-        //TODO: Agregar interacción entre ventanas para salir.
+        Alert confirmCancelAlert = new Alert(AlertType.CONFIRMATION);
+        confirmCancelAlert.setTitle("Confirmar cancelación");
+        confirmCancelAlert.setHeaderText("Confirmar cancelación");
+        confirmCancelAlert.setContentText("¿Está seguro de que desea salir? Se perderán todos sus cambios");
+        confirmCancelAlert.show();
+        ButtonType acceptCancel = new ButtonType("Aceptar");
+        ButtonType cancelCancel = new ButtonType("Cancelar", ButtonBar.ButtonData.CANCEL_CLOSE);
+
+        confirmCancelAlert.getButtonTypes().setAll(acceptCancel, cancelCancel);
+        confirmCancelAlert.show();
+        Button okButton = (Button) confirmCancelAlert.getDialogPane().lookupButton(acceptCancel);
+        Button cancelButton = (Button) confirmCancelAlert.getDialogPane().lookupButton(cancelCancel);
+        okButton.setOnAction(eventAcceptCancel -> {
+            FXMLLoader collaborationOptionLoader = new FXMLLoader(getClass().getResource("/GUI/AdminCollaborationOptions.fxml"));
+            ChangeWindowManager.changeWindowTo(event, collaborationOptionLoader);
+        });
+
+        cancelButton.setOnAction(eventCancelCancel -> {
+            confirmCancelAlert.close();
+        });
 
     }
-
     @FXML
-    void buttonCancel(ActionEvent event){
+    private Button buttonBack;
+    @FXML
+    private void cancel(ActionEvent event){
+        FXMLLoader collaborationOptionsLoader = new FXMLLoader(getClass().getResource("/GUI/adminUniversityOptions.fxml"));
+        ChangeWindowManager.changeWindowTo(event, collaborationOptionsLoader);
 
     }
 
@@ -114,29 +138,56 @@ public class UniversityDetailsController {
                 }
             });
            cancelButton.setOnAction(eventCancelEdition -> {
-            Alert confirmCancel = new Alert(AlertType.CONFIRMATION);
-            confirmCancel.setTitle("Confirmar cancelación");
-            confirmCancel.setHeaderText("Confirmar cancelación");
-            confirmCancel.setContentText("¿Está seguro de que desea salir?");
-            confirmCancel.show();
-            //TODO: Agregar interacción entre ventanas para cancelar y agregar los botones aceptar y cancelar.
+            Alert confirmCancelAlert = new Alert(AlertType.CONFIRMATION);
+            confirmCancelAlert.setTitle("Confirmar cancelación");
+            confirmCancelAlert.setHeaderText("Confirmar cancelación");
+            confirmCancelAlert.setContentText("¿Está seguro de que desea salir?");
+            ButtonType accept = new ButtonType("Confirmar");
+            ButtonType cancel = new ButtonType("Cancelar");
+            confirmCancelAlert.getButtonTypes().setAll(accept, cancel);
+            confirmEditionAlert.show();
+            Button acceptButton = (Button) confirmEditionAlert.getDialogPane().lookupButton(accept);
+            Button cancelCancelButton = (Button) confirmEditionAlert.getDialogPane().lookupButton(cancel);
+            acceptButton.setOnAction(eventGoBack -> {
+                FXMLLoader universitiesLoader = new FXMLLoader(getClass().getResource("/GUI/adminCollaborationOptions.fxml"));
+                ChangeWindowManager.changeWindowTo(event, universitiesLoader);
+            });
+            
+
+            cancelCancelButton.setOnAction(cancelEvent -> {
+                confirmCancelAlert.close();
+            });
+            
+            confirmCancelAlert.show();
            });
         }
 
     }
 
-    @FXML
-    private Button buttonCollaborations;
-    @FXML
-    private void goToCollaborations(ActionEvent event){
+    
+    
 
+    @FXML
+    private Button buttonMinimize;
+    @FXML
+    private void minimizeWindow(ActionEvent event){
+        ChangeWindowManager.minimizeWindow(event);
     }
 
     @FXML
-    private Button buttonProfessors;
+    private Button buttonClose;
     @FXML
-    private void goToProfessors(ActionEvent event){
+    private void closeWindow(ActionEvent event){
+        ChangeWindowManager.closeWindow(event);
+    }
 
+
+    @FXML
+    private Button buttonNumeralia;
+    @FXML
+    private void goToNumeralia(ActionEvent event){
+        FXMLLoader numeraliaLoader = new FXMLLoader(getClass().getResource("/GUI/numeralia.fxml"));
+        ChangeWindowManager.changeWindowTo(event, numeraliaLoader);
     }
     @FXML
     private Button buttonLogout;
@@ -144,93 +195,52 @@ public class UniversityDetailsController {
     private void logout(ActionEvent event){
         FXMLLoader loginLoader = new FXMLLoader(getClass().getResource("/GUI/login.fxml"));
         try {
+            ChangeWindowManager.logout(event, loginLoader);
             UserSessionManager.getInstance().logoutAdmin();
-            Parent root = loginLoader.load();
-            Scene loginScene = new Scene(root);
-            Stage loginStage = new Stage();
-            loginStage.setScene(loginScene);
-            loginStage.show();
-            Node source = (Node) event.getSource();
-            Stage stage = (Stage) source.getScene().getWindow();
-            stage.close();
-        } catch (IOException goToLoginException){
-            LOG.error(goToLoginException);
+        } catch (IOException ioException){
+            LOG.error(ioException);
         }
     }
 
     @FXML
-    private Button buttonMinimize;
+    private Button buttonCollaborations;
     @FXML
-    private void minimizeWindow(ActionEvent event){
-        Node source = (Node) event.getSource();
-        Stage stage = (Stage) source.getScene().getWindow();
-        stage.setIconified(true);
+    private void goToCollaborations(ActionEvent event){
+        FXMLLoader collaborationOptionsLoader = new FXMLLoader(getClass().getResource("/GUI/adminUniversityOptions.fxml"));
+        ChangeWindowManager.changeWindowTo(event, collaborationOptionsLoader);
     }
 
     @FXML
-    private Button buttonClose;
+    private Button buttonProfessors;
     @FXML
-    private void closeWindow(ActionEvent event){
-        Node source = (Node) event.getSource();
-        Stage stage = (Stage) source.getScene().getWindow();
-        stage.close();
+    private void goToProfessors(ActionEvent event){
+        FXMLLoader professorOptionsLoader = new FXMLLoader(getClass().getResource("/GUI/adminProfessorsOptions.fxml"));
+        ChangeWindowManager.changeWindowTo(event, professorOptionsLoader);
     }
 
     @FXML
-    private Button buttonNumeralia;
-
+    private Button buttonUniversities;
     @FXML
-    public void goToNumeralia(ActionEvent event){
-        
-
-        FXMLLoader numeraliaLoader = new FXMLLoader(getClass().getResource("numeralia.fxml"));
-        try {
-            Parent root = numeraliaLoader.load();
-            Scene numeraliaScene = new Scene(root);
-            Stage numeraliaStage = new Stage();
-            numeraliaStage.initStyle(StageStyle.TRANSPARENT);
-            numeraliaStage.setScene(numeraliaScene);
-            numeraliaStage.show();
-
-            Node source = (Node) event.getSource();
-            Stage stage = (Stage) source.getScene().getWindow();
-            stage.close();
-        } catch (IOException goToNumeraliaException){
-            LOG.error("ERROR:", goToNumeraliaException);
-        }
+    private void goToUniversities(ActionEvent event){
+        FXMLLoader universitiesOptionsLoader = new FXMLLoader(getClass().getResource("/GUI/adminUniversityOptions.fxml"));
+        ChangeWindowManager.changeWindowTo(event, universitiesOptionsLoader);
     }
 
     @FXML
-    private Button buttonConfiguration;
-    @FXML
-    private void goToSettings(ActionEvent event){
-
-    }
-
-    @FXML
-    Button buttonHome;
+    private Button buttonHome;
     @FXML
     private void goToHomePage(ActionEvent event){
-        FXMLLoader homeLoader = new FXMLLoader(getClass().getResource("/GUI/adminHome.fxml"));
-        try {
-            Parent root = homeLoader.load();
-            Scene homeScene = new Scene(root);
-            Stage homeStage = new Stage();
-            homeStage.initStyle(StageStyle.TRANSPARENT);
-            homeStage.setScene(homeScene);
-            homeStage.show();
-            Node source = (Node) event.getSource();
-            Stage stage = (Stage) source.getScene().getWindow();
-            stage.close();
-        } catch (IOException goToHomeException){
-            LOG.error("ERROR", goToHomeException);
-        }
-
+        FXMLLoader homePageLoader = new FXMLLoader(getClass().getResource("/GUI/adminHome.fxml"));
+        ChangeWindowManager.changeWindowTo(event, homePageLoader);
     }
-
+    @FXML
+    private Label labelUser;
     @FXML
     int universityId;
     public void initialize(int universityId){
+        Admin adminData = new Admin();
+        adminData = UserSessionManager.getInstance().getAdminUserData();
+        labelUser.setText(adminData.getAdminName());
         this.universityId = universityId;
         UniversityDAO universityDAO = new UniversityDAO();
         String universityName = universityDAO.getUniversityNameById(universityId);

@@ -97,6 +97,8 @@ public class PublishedCollaborationsController {
 
     @FXML
     private void goToSettings(ActionEvent event){
+        FXMLLoader settingsLoader = new FXMLLoader(getClass().getResource("/GUI/professorSettings.fxml"));
+        ChangeWindowManager.changeWindowTo(event, settingsLoader);
 
     }
     @FXML

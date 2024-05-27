@@ -100,9 +100,9 @@
                                  </font>
                               </Label>
                               <FontAwesomeIcon fill="WHITE" glyphName="USER" layoutX="54.0" layoutY="141.0" size="10em" />
-                              <Button id="records" fx:id="buttonSettings" layoutX="11.0" layoutY="398.0" minHeight="40.0" mnemonicParsing="false" onAction="#goToSettings" prefWidth="180.0" styleClass="nav-btn" stylesheets="@windowsStyle.css" text="Configuración">
+                              <Button id="records" fx:id="buttonUniversities" layoutX="11.0" layoutY="398.0" minHeight="40.0" mnemonicParsing="false" onAction="#goToUniversities" prefWidth="180.0" styleClass="nav-btn" stylesheets="@windowsStyle.css" text="Universidades">
                                  <graphic>
-                                    <FontAwesomeIcon fill="WHITE" glyphName="GEAR" />
+                                    <FontAwesomeIcon fill="WHITE" glyphName="BUILDING" text="" />
                                  </graphic>
                               </Button>
                            </children>
@@ -147,6 +147,7 @@
                                     </TableView>
                                     <TextField id="search" fx:id="textFieldSearch" layoutX="24.0" layoutY="23.0" onAction="#searchUniversities" prefHeight="25.0" prefWidth="281.0" promptText="Buscar" styleClass="search" stylesheets="@windowsStyle.css" />
                                     <FontAwesomeIcon glyphName="SEARCH" layoutX="4.0" layoutY="43.0" size="1.75em" />
+                                    <Button fx:id="buttonBack" layoutX="22.0" layoutY="481.0" mnemonicParsing="false" onAction="#goBack" text="&lt;" />
                                  </children>
                               </AnchorPane>
                            </children></AnchorPane>
