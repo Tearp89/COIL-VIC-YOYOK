@@ -143,7 +143,7 @@
                                           <Font name="Tahoma" size="20.0" />
                                        </font>
                                     </Label>
-                                    <Label fx:id="labelDiscipline" layoutX="507.0" layoutY="210.0" text="Disciplina:" visible="false">
+                                    <Label fx:id="labelDiscipline" layoutX="12.0" layoutY="249.0" text="Curso-Taller:">
                                        <font>
                                           <Font name="Tahoma" size="20.0" />
                                        </font>
@@ -154,7 +154,7 @@
                                     <ComboBox fx:id="comboBoxRegion" layoutX="589.0" layoutY="90.0" prefWidth="150.0" styleClass="textfield" stylesheets="@windowsStyle.css" visible="false" />
                                     <ComboBox fx:id="comboBoxContractType" layoutX="683.0" layoutY="130.0" prefWidth="150.0" styleClass="textfield" stylesheets="@windowsStyle.css" visible="false" />
                                     <ComboBox fx:id="comboBoxContractCategory" layoutX="728.0" layoutY="170.0" prefWidth="150.0" styleClass="textfield" stylesheets="@windowsStyle.css" visible="false" />
-                                    <ComboBox fx:id="comboBoxDiscipline" layoutX="632.0" layoutY="210.0" prefWidth="150.0" styleClass="textfield" stylesheets="@windowsStyle.css" visible="false" />
+                                    <ComboBox fx:id="comboBoxWorkShop" layoutX="144.0" layoutY="250.0" prefWidth="150.0" styleClass="textfield" stylesheets="@windowsStyle.css" />
                                     <TextField fx:id="textFieldPersonalNumber" layoutX="638.0" layoutY="50.0" prefHeight="25.0" prefWidth="157.0" promptText="Escriba aquí..." stylesheets="@windowsStyle.css" visible="false">
                                        <styleClass>
                                           <String fx:value="textfield" />
@@ -166,7 +166,7 @@
                                           <Font name="Tahoma" size="20.0" />
                                        </font>
                                     </Label>
-                                    <ComboBox fx:id="comboBoxLanguage" editable="true" layoutX="124.0" layoutY="215.0" prefHeight="25.0" prefWidth="210.0" promptText="Busca o agrega tu universidad..." styleClass="textfield" stylesheets="@windowsStyle.css" />
+                                    <ComboBox fx:id="comboBoxLanguage" editable="true" layoutX="124.0" layoutY="210.0" prefHeight="25.0" prefWidth="210.0" promptText="Busca o agrega tu universidad..." styleClass="textfield" stylesheets="@windowsStyle.css" />
                                  </children>
                               </AnchorPane>
                            </children>

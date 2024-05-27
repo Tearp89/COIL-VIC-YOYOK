@@ -38,6 +38,8 @@ public class AddProfessorController {
     @FXML
     private ComboBox<String> comboBoxLanguage;
     @FXML
+    private ComboBox<String> comboBoxWorkShop;
+    @FXML
     private ComboBox<String> comboBoxAcademicArea;
     @FXML
     private TextField textFieldPersonalNumber;
@@ -47,8 +49,6 @@ public class AddProfessorController {
     private ComboBox<String> comboBoxContractType;
     @FXML
     private ComboBox<String> comboBoxContractCategory;
-    @FXML
-    private ComboBox<String> comboBoxDiscipline;
     @FXML
     private Button buttonConfirmation = new Button("Aceptar");
     @FXML
@@ -65,8 +65,7 @@ public class AddProfessorController {
     private Label labelContractType;
     @FXML
     private Label labelcontractCategory;
-    @FXML
-    private Label labelDiscipline;
+
 
 
 
@@ -96,6 +95,8 @@ public class AddProfessorController {
         String universityName = selectedUniversity != null ? selectedUniversity.toString() : null;
         Object selectedLanguage = comboBoxLanguage.getSelectionModel().getSelectedItem();
         String language = selectedLanguage != null ? selectedLanguage.toString() : null;
+        Object selectedWorkShop = comboBoxWorkShop.getSelectionModel().getSelectedItem();
+        String workShop = selectedWorkShop != null ? selectedWorkShop.toString() : null;
         String user = access.userGenerator(professorName);
         String password = access.passwordGenerator(8);
 
@@ -108,8 +109,7 @@ public class AddProfessorController {
         String contractType = selectedContractType != null ? selectedContractType.toString() :null;
         Object selectedContractCategory = comboBoxContractCategory.getSelectionModel().getSelectedItem();
         String contractCategory = selectedContractCategory != null ? selectedContractCategory.toString() :null;
-        Object selectedDiscipline = comboBoxDiscipline.getSelectionModel().getSelectedItem();
-        String discipline = selectedDiscipline != null ? selectedDiscipline.toString() :null;
+
         
         
         University university = new University();
@@ -117,7 +117,7 @@ public class AddProfessorController {
         
         
             if(universityName == "Universidad Veracruzana"){
-                if (professorName.isEmpty() || professorPhoneNumber.isEmpty() || email.isEmpty() || country.isEmpty() || universityName.isEmpty() || language.isEmpty() || academicArea.isEmpty() || textFieldPersonalNumber.getText().isEmpty() || region.isEmpty() || contractType.isEmpty() || contractCategory.isEmpty() || discipline.isEmpty()) {
+                if (professorName.isEmpty() || professorPhoneNumber.isEmpty() || email.isEmpty() || country.isEmpty() || universityName.isEmpty() || language.isEmpty() || workShop.isEmpty() || academicArea.isEmpty() || textFieldPersonalNumber.getText().isEmpty() || region.isEmpty() || contractType.isEmpty() || contractCategory.isEmpty()) {
                     Alert emptyFieldsAlertUV = new Alert(AlertType.ERROR);
                     emptyFieldsAlertUV.setTitle("Campos vacíos");
                     emptyFieldsAlertUV.setHeaderText("Campos vacíos");
@@ -141,16 +141,16 @@ public class AddProfessorController {
                     professor.setCountry(country);
                     professor.setUniversityId(universityId);
                     university.setUniversityLanguage(language);
+                    professor.setWorkShop(workShop);
                     professor.setUser(user);
                     professor.setPassword(password);
-                    professor.setStatus("En espera");
+                    professor.setStatus("Pendientes");
                     professor.setType("UV");
                     professor.setAcademicArea(academicArea);
                     professor.setPersonalNumber(personalNumber);
                     professor.setRegion(region);
                     professor.setContractType(contractType);
                     professor.setContractCategory(contractCategory);
-                    professor.setDiscipline(discipline);
                     int resultAddProfessorUV = professorDAO.addProfessorUV(professor);
                     
                         if(resultAddProfessorUV == 1) {
@@ -195,7 +195,7 @@ public class AddProfessorController {
                 } 
                     
             }else{
-                if (professorName.isEmpty() || professorPhoneNumber.isEmpty() || email.isEmpty() || country.isEmpty() || universityName.isEmpty() || language.isEmpty()) {
+                if (professorName.isEmpty() || professorPhoneNumber.isEmpty() || email.isEmpty() || country.isEmpty() || universityName.isEmpty() || language.isEmpty() || workShop.isEmpty()) {
                     Alert emptyFieldsAlert = new Alert(AlertType.ERROR);
                     emptyFieldsAlert.setTitle("Campos vacíos");
                     emptyFieldsAlert.setHeaderText("Campos vacíos");
@@ -217,9 +217,10 @@ public class AddProfessorController {
                     professor.setEmail(email);
                     professor.setCountry(country);
                     professor.setUniversityId(universityIdInteger);
+                    professor.setWorkShop(workShop);
                     professor.setUser(user);
                     professor.setPassword(password);
-                    professor.setStatus("En espera");
+                    professor.setStatus("Pendientes");
                     professor.setType("Externo");
                     
                     Alert professorAddedAlert = new Alert(AlertType.CONFIRMATION);
@@ -348,6 +349,10 @@ public class AddProfessorController {
         loadCountry();
         loadLanguage();
 
+        ObservableList<String> workShop = comboBoxWorkShop.getItems();
+        workShop.setAll("Sí", "No");
+        comboBoxAcademicArea.setItems(workShop);
+
         comboBoxUniversity.setItems(universities);
         
 
@@ -363,26 +368,23 @@ public class AddProfessorController {
                 loadContractTypeData();
                 comboBoxContractCategory.setVisible(true);
                 loadContractCategoryData();
-                comboBoxDiscipline.setVisible(true);
                 labelAcademicArea.setVisible(true);
                 labelPersonalNumber.setVisible(true);
                 labelaRegion.setVisible(true);
                 labelContractType.setVisible(true);
                 labelcontractCategory.setVisible(true);
-                labelDiscipline.setVisible(true);
+
             } else {
                 comboBoxAcademicArea.setVisible(false);
                 textFieldPersonalNumber.setVisible(false);
                 comboBoxRegion.setVisible(false);
                 comboBoxContractType.setVisible(false);
                 comboBoxContractCategory.setVisible(false);
-                comboBoxDiscipline.setVisible(false);
                 labelAcademicArea.setVisible(false);
                 labelPersonalNumber.setVisible(false);
                 labelaRegion.setVisible(false);
                 labelContractType.setVisible(false);
                 labelcontractCategory.setVisible(false);
-                labelDiscipline.setVisible(false);
             }
         });
 
