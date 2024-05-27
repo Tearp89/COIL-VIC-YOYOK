@@ -12724,3 +12724,145 @@ java.sql.SQLSyntaxErrorException: Table 'coil_vic.colaboraciones registradas' do
 2024-05-14 15:52:24 ERROR AdminDAO:86 - [Ljava.lang.StackTraceElement;@5eff5858
 2024-05-14 15:53:45 ERROR AdminDAO:86 - java.sql.SQLSyntaxErrorException: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '?' at line 1
 2024-05-14 15:59:08 ERROR AdminDAO:86 - java.sql.SQLException: Before start of result set
+2024-05-21 14:34:58 ERROR MainRequests:25 - ERROR:
+javafx.fxml.LoadException: Error resolving onAction='#goToHome', either the event handler is not in the Namespace or there is an error in the script.
+/C:/Users/daur0/OneDrive/Documentos/Universidad/4to%20Semestre/Principios%20de%20Construcci%c3%b3n/Proyecto%20COIL-VIC/COIL-VIC-YOYOK/C%c3%b3digo/COIL_VIC/build/classes/GUI/consultProfessors.fxml:73
+
+	at javafx.fxml@21.0.2/javafx.fxml.FXMLLoader.constructLoadException(FXMLLoader.java:2718)
+	at javafx.fxml@21.0.2/javafx.fxml.FXMLLoader$Element.processEventHandlerAttributes(FXMLLoader.java:623)
+	at javafx.fxml@21.0.2/javafx.fxml.FXMLLoader$ValueElement.processEndElement(FXMLLoader.java:783)
+	at javafx.fxml@21.0.2/javafx.fxml.FXMLLoader.processEndElement(FXMLLoader.java:2969)
+	at javafx.fxml@21.0.2/javafx.fxml.FXMLLoader.loadImpl(FXMLLoader.java:2654)
+	at javafx.fxml@21.0.2/javafx.fxml.FXMLLoader.loadImpl(FXMLLoader.java:2563)
+	at javafx.fxml@21.0.2/javafx.fxml.FXMLLoader.load(FXMLLoader.java:2531)
+	at GUI.MainRequests.start(MainRequests.java:19)
+	at javafx.graphics@21.0.2/com.sun.javafx.application.LauncherImpl.lambda$launchApplication1$9(LauncherImpl.java:839)
+	at javafx.graphics@21.0.2/com.sun.javafx.application.PlatformImpl.lambda$runAndWait$12(PlatformImpl.java:483)
+	at javafx.graphics@21.0.2/com.sun.javafx.application.PlatformImpl.lambda$runLater$10(PlatformImpl.java:456)
+	at java.base/java.security.AccessController.doPrivileged(AccessController.java:400)
+	at javafx.graphics@21.0.2/com.sun.javafx.application.PlatformImpl.lambda$runLater$11(PlatformImpl.java:455)
+	at javafx.graphics@21.0.2/com.sun.glass.ui.InvokeLaterDispatcher$Future.run(InvokeLaterDispatcher.java:95)
+	at javafx.graphics@21.0.2/com.sun.glass.ui.win.WinApplication._runLoop(Native Method)
+	at javafx.graphics@21.0.2/com.sun.glass.ui.win.WinApplication.lambda$runLoop$3(WinApplication.java:185)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2024-05-21 14:37:17 ERROR MainRequests:25 - ERROR:
+javafx.fxml.LoadException: Error resolving onAction='#goToProfessors', either the event handler is not in the Namespace or there is an error in the script.
+/C:/Users/daur0/OneDrive/Documentos/Universidad/4to%20Semestre/Principios%20de%20Construcci%c3%b3n/Proyecto%20COIL-VIC/COIL-VIC-YOYOK/C%c3%b3digo/COIL_VIC/build/classes/GUI/consultProfessors.fxml:98
+
+	at javafx.fxml@21.0.2/javafx.fxml.FXMLLoader.constructLoadException(FXMLLoader.java:2718)
+	at javafx.fxml@21.0.2/javafx.fxml.FXMLLoader$Element.processEventHandlerAttributes(FXMLLoader.java:623)
+	at javafx.fxml@21.0.2/javafx.fxml.FXMLLoader$ValueElement.processEndElement(FXMLLoader.java:783)
+	at javafx.fxml@21.0.2/javafx.fxml.FXMLLoader.processEndElement(FXMLLoader.java:2969)
+	at javafx.fxml@21.0.2/javafx.fxml.FXMLLoader.loadImpl(FXMLLoader.java:2654)
+	at javafx.fxml@21.0.2/javafx.fxml.FXMLLoader.loadImpl(FXMLLoader.java:2563)
+	at javafx.fxml@21.0.2/javafx.fxml.FXMLLoader.load(FXMLLoader.java:2531)
+	at GUI.MainRequests.start(MainRequests.java:19)
+	at javafx.graphics@21.0.2/com.sun.javafx.application.LauncherImpl.lambda$launchApplication1$9(LauncherImpl.java:839)
+	at javafx.graphics@21.0.2/com.sun.javafx.application.PlatformImpl.lambda$runAndWait$12(PlatformImpl.java:483)
+	at javafx.graphics@21.0.2/com.sun.javafx.application.PlatformImpl.lambda$runLater$10(PlatformImpl.java:456)
+	at java.base/java.security.AccessController.doPrivileged(AccessController.java:400)
+	at javafx.graphics@21.0.2/com.sun.javafx.application.PlatformImpl.lambda$runLater$11(PlatformImpl.java:455)
+	at javafx.graphics@21.0.2/com.sun.glass.ui.InvokeLaterDispatcher$Future.run(InvokeLaterDispatcher.java:95)
+	at javafx.graphics@21.0.2/com.sun.glass.ui.win.WinApplication._runLoop(Native Method)
+	at javafx.graphics@21.0.2/com.sun.glass.ui.win.WinApplication.lambda$runLoop$3(WinApplication.java:185)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2024-05-21 14:38:38 ERROR MainRequests:25 - ERROR:
+javafx.fxml.LoadException: 
+/C:/Users/daur0/OneDrive/Documentos/Universidad/4to%20Semestre/Principios%20de%20Construcci%c3%b3n/Proyecto%20COIL-VIC/COIL-VIC-YOYOK/C%c3%b3digo/COIL_VIC/build/classes/GUI/consultProfessors.fxml
+
+	at javafx.fxml@21.0.2/javafx.fxml.FXMLLoader.constructLoadException(FXMLLoader.java:2722)
+	at javafx.fxml@21.0.2/javafx.fxml.FXMLLoader.loadImpl(FXMLLoader.java:2692)
+	at javafx.fxml@21.0.2/javafx.fxml.FXMLLoader.loadImpl(FXMLLoader.java:2563)
+	at javafx.fxml@21.0.2/javafx.fxml.FXMLLoader.load(FXMLLoader.java:2531)
+	at GUI.MainRequests.start(MainRequests.java:19)
+	at javafx.graphics@21.0.2/com.sun.javafx.application.LauncherImpl.lambda$launchApplication1$9(LauncherImpl.java:839)
+	at javafx.graphics@21.0.2/com.sun.javafx.application.PlatformImpl.lambda$runAndWait$12(PlatformImpl.java:483)
+	at javafx.graphics@21.0.2/com.sun.javafx.application.PlatformImpl.lambda$runLater$10(PlatformImpl.java:456)
+	at java.base/java.security.AccessController.doPrivileged(AccessController.java:400)
+	at javafx.graphics@21.0.2/com.sun.javafx.application.PlatformImpl.lambda$runLater$11(PlatformImpl.java:455)
+	at javafx.graphics@21.0.2/com.sun.glass.ui.InvokeLaterDispatcher$Future.run(InvokeLaterDispatcher.java:95)
+	at javafx.graphics@21.0.2/com.sun.glass.ui.win.WinApplication._runLoop(Native Method)
+	at javafx.graphics@21.0.2/com.sun.glass.ui.win.WinApplication.lambda$runLoop$3(WinApplication.java:185)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+Caused by: java.lang.reflect.InvocationTargetException
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:115)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at com.sun.javafx.reflect.Trampoline.invoke(MethodUtil.java:72)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at javafx.base@21.0.2/com.sun.javafx.reflect.MethodUtil.invoke(MethodUtil.java:270)
+	at javafx.fxml@21.0.2/com.sun.javafx.fxml.MethodHelper.invoke(MethodHelper.java:84)
+	at javafx.fxml@21.0.2/javafx.fxml.FXMLLoader.loadImpl(FXMLLoader.java:2688)
+	... 12 more
+Caused by: java.lang.NullPointerException: Cannot invoke "logic.classes.Admin.getAdminName()" because "adminData" is null
+	at GUI.ConsultProfessorsController.initialize(ConsultProfessorsController.java:58)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	... 19 more
+2024-05-21 14:39:20 ERROR ProfessorDAO:378 - ERROR: 
+java.sql.SQLException: Column 'estado' not found.
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:129)
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:97)
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:89)
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:63)
+	at com.mysql.cj.jdbc.result.ResultSetImpl.findColumn(ResultSetImpl.java:575)
+	at com.mysql.cj.jdbc.result.ResultSetImpl.getString(ResultSetImpl.java:882)
+	at logic.DAO.ProfessorDAO.searchProfessor(ProfessorDAO.java:366)
+	at GUI.ConsultProfessorsController.showProfessorList(ConsultProfessorsController.java:100)
+	at GUI.ConsultProfessorsController.initialize(ConsultProfessorsController.java:59)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at com.sun.javafx.reflect.Trampoline.invoke(MethodUtil.java:72)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at javafx.base@21.0.2/com.sun.javafx.reflect.MethodUtil.invoke(MethodUtil.java:270)
+	at javafx.fxml@21.0.2/com.sun.javafx.fxml.MethodHelper.invoke(MethodHelper.java:84)
+	at javafx.fxml@21.0.2/javafx.fxml.FXMLLoader.loadImpl(FXMLLoader.java:2688)
+	at javafx.fxml@21.0.2/javafx.fxml.FXMLLoader.loadImpl(FXMLLoader.java:2563)
+	at javafx.fxml@21.0.2/javafx.fxml.FXMLLoader.load(FXMLLoader.java:2531)
+	at GUI.MainRequests.start(MainRequests.java:19)
+	at javafx.graphics@21.0.2/com.sun.javafx.application.LauncherImpl.lambda$launchApplication1$9(LauncherImpl.java:839)
+	at javafx.graphics@21.0.2/com.sun.javafx.application.PlatformImpl.lambda$runAndWait$12(PlatformImpl.java:483)
+	at javafx.graphics@21.0.2/com.sun.javafx.application.PlatformImpl.lambda$runLater$10(PlatformImpl.java:456)
+	at java.base/java.security.AccessController.doPrivileged(AccessController.java:400)
+	at javafx.graphics@21.0.2/com.sun.javafx.application.PlatformImpl.lambda$runLater$11(PlatformImpl.java:455)
+	at javafx.graphics@21.0.2/com.sun.glass.ui.InvokeLaterDispatcher$Future.run(InvokeLaterDispatcher.java:95)
+	at javafx.graphics@21.0.2/com.sun.glass.ui.win.WinApplication._runLoop(Native Method)
+	at javafx.graphics@21.0.2/com.sun.glass.ui.win.WinApplication.lambda$runLoop$3(WinApplication.java:185)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2024-05-21 15:33:21 ERROR ProfessorDAO:380 - ERROR: 
+java.sql.SQLException: Column 'Universidad_idUniversidad' not found.
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:129)
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:97)
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:89)
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:63)
+	at com.mysql.cj.jdbc.result.ResultSetImpl.findColumn(ResultSetImpl.java:575)
+	at com.mysql.cj.jdbc.result.ResultSetImpl.getInt(ResultSetImpl.java:837)
+	at logic.DAO.ProfessorDAO.searchProfessor(ProfessorDAO.java:368)
+	at GUI.ConsultProfessorsController.showProfessorList(ConsultProfessorsController.java:101)
+	at GUI.ConsultProfessorsController.initialize(ConsultProfessorsController.java:60)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at com.sun.javafx.reflect.Trampoline.invoke(MethodUtil.java:72)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at javafx.base@21.0.2/com.sun.javafx.reflect.MethodUtil.invoke(MethodUtil.java:270)
+	at javafx.fxml@21.0.2/com.sun.javafx.fxml.MethodHelper.invoke(MethodHelper.java:84)
+	at javafx.fxml@21.0.2/javafx.fxml.FXMLLoader.loadImpl(FXMLLoader.java:2688)
+	at javafx.fxml@21.0.2/javafx.fxml.FXMLLoader.loadImpl(FXMLLoader.java:2563)
+	at javafx.fxml@21.0.2/javafx.fxml.FXMLLoader.load(FXMLLoader.java:2531)
+	at GUI.MainRequests.start(MainRequests.java:19)
+	at javafx.graphics@21.0.2/com.sun.javafx.application.LauncherImpl.lambda$launchApplication1$9(LauncherImpl.java:839)
+	at javafx.graphics@21.0.2/com.sun.javafx.application.PlatformImpl.lambda$runAndWait$12(PlatformImpl.java:483)
+	at javafx.graphics@21.0.2/com.sun.javafx.application.PlatformImpl.lambda$runLater$10(PlatformImpl.java:456)
+	at java.base/java.security.AccessController.doPrivileged(AccessController.java:400)
+	at javafx.graphics@21.0.2/com.sun.javafx.application.PlatformImpl.lambda$runLater$11(PlatformImpl.java:455)
+	at javafx.graphics@21.0.2/com.sun.glass.ui.InvokeLaterDispatcher$Future.run(InvokeLaterDispatcher.java:95)
+	at javafx.graphics@21.0.2/com.sun.glass.ui.win.WinApplication._runLoop(Native Method)
+	at javafx.graphics@21.0.2/com.sun.glass.ui.win.WinApplication.lambda$runLoop$3(WinApplication.java:185)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2024-05-21 17:01:52 ERROR ChangeWindowManager:41 - javafx.fxml.LoadException: 
+/C:/Users/daur0/OneDrive/Documentos/Universidad/4to%20Semestre/Principios%20de%20Construcci%c3%b3n/Proyecto%20COIL-VIC/COIL-VIC-YOYOK/C%c3%b3digo/COIL_VIC/build/classes/GUI/numeralia.fxml
+
+2024-05-21 17:02:13 ERROR ChangeWindowManager:41 - javafx.fxml.LoadException: 
+/C:/Users/daur0/OneDrive/Documentos/Universidad/4to%20Semestre/Principios%20de%20Construcci%c3%b3n/Proyecto%20COIL-VIC/COIL-VIC-YOYOK/C%c3%b3digo/COIL_VIC/build/classes/GUI/adminHome.fxml
+

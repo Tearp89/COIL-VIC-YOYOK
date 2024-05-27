@@ -37,11 +37,11 @@ public class CollaborationDAOTest {
         LocalDate dateStartTest =  LocalDate.of(2022, 1, 1); 
         LocalDate dateFinishTest =  LocalDate.of(2026, 2, 1);
         
-        collaboration.setCollaborationName("Innovación tecnológica responsable");
+        collaboration.setCollaborationName("Innovación digital");
         collaboration.setDescription("TestDescripcion");
         collaboration.setFinishDate(dateFinishTest);
         collaboration.setStartDate(dateStartTest);
-        collaboration.setCollaborationStatus("Pendiente");
+        collaboration.setCollaborationStatus("Aceptada");
         collaboration.setCollaborationGoal("Unir estudiantes");
         collaboration.setNoStudents(25);
         collaboration.setStudentProfile("Inglés, ");
@@ -308,8 +308,8 @@ public class CollaborationDAOTest {
     public void changeCollaborationStatusSuccess(){
         System.out.println("changeStateProfessor");
             Collaboration collaboration = new Collaboration();
-            int collaborationId = 37; 
-            String status = "Activa";
+            int collaborationId = 52; 
+            String status = "Publicada";
             
             CollaborationDAO instance = new CollaborationDAO();
             int expectedResult = 1;
@@ -344,8 +344,8 @@ public class CollaborationDAOTest {
         public void assignProfessorToCollaborationSuccess() throws SQLException{
             CollaborationDAO instance = new CollaborationDAO();
             int expectedResult = 1;
-            int professorId = 25;
-            int collaborationId = 37;
+            int professorId = 29;
+            int collaborationId = 52;
             int actualResult = instance.assignProfessorToCollaboration(professorId, collaborationId);
             assertEquals(expectedResult, actualResult);
 

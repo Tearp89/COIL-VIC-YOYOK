@@ -4,17 +4,15 @@
 <?import java.lang.String?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.control.cell.PropertyValueFactory?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.SearchAcceptedCollaborationsController">
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.ProfessorHomeController">
    <children>
       <AnchorPane prefHeight="200.0" prefWidth="200.0">
          <children>
@@ -38,11 +36,15 @@
                                  </font>
                                  <graphic>
                                     <FontAwesomeIcon glyphName="MINUS" />
-                                 </graphic></Button>
-                              <Label layoutX="14.0" layoutY="14.0" text="Consultar Colaboraciones Aceptadas " textFill="WHITE">
+                                 </graphic>
+                              </Button>
+                              <Label layoutX="14.0" layoutY="14.0" text="COIL-VIC" textFill="WHITE">
                                  <font>
                                     <Font name="Tahoma Bold" size="17.0" />
                                  </font>
+                                 <graphic>
+                                    <FontAwesomeIcon fill="WHITE" glyphName="GROUP" text="" />
+                                 </graphic>
                               </Label>
                            </children>
                         </AnchorPane>
@@ -65,24 +67,9 @@
                                  </font>
                               </Label>
                               <Line endX="70.0" layoutX="116.0" layoutY="221.0" startX="-100.0" />
-                              <Button id="home" fx:id="bottonHome" layoutX="11.0" layoutY="238.0" minHeight="40.0" mnemonicParsing="false" onAction="#goToHomePage" prefWidth="180.0" styleClass="nav-btn" stylesheets="@../uni%204/Construcción/gui%20construccion/src/gui/construccion/inicio.css" text="Inicio">
+                              <Button id="home" fx:id="buttonHome" layoutX="11.0" layoutY="238.0" minHeight="40.0" mnemonicParsing="false" onAction="#goToHomePage" prefWidth="180.0" styleClass="nav-btn-select" stylesheets="@../uni%204/Construcción/gui%20construccion/src/gui/construccion/inicio.css" text="Inicio">
                                  <graphic>
                                     <FontAwesomeIcon fill="WHITE" glyphName="HOME" />
-                                 </graphic>
-                              </Button>
-                              <Button id="whorkshop" fx:id="buttonCollaborations" layoutX="11.0" layoutY="278.0" minHeight="40.0" mnemonicParsing="false" onAction="#goToCollaborations" prefWidth="180.0" styleClass="nav-btn" stylesheets="@../uni%204/Construcción/gui%20construccion/src/gui/construccion/inicio.css" text="Colaboraciones">
-                                 <graphic>
-                                    <FontAwesomeIcon fill="WHITE" glyphName="GROUP" />
-                                 </graphic>
-                              </Button>
-                              <Button id="colaborations" fx:id="buttonStudents" layoutX="11.0" layoutY="318.0" minHeight="40.0" mnemonicParsing="false" onAction="#goToStudents" prefWidth="180.0" styleClass="nav-btn" stylesheets="@../uni%204/Construcción/gui%20construccion/src/gui/construccion/inicio.css" text="Estudiantes">
-                                 <graphic>
-                                    <FontAwesomeIcon fill="WHITE" glyphName="MALE" />
-                                 </graphic>
-                              </Button>
-                              <Button id="records" fx:id="buttonSettings" layoutX="11.0" layoutY="358.0" minHeight="40.0" mnemonicParsing="false" onAction="#goToSettings" prefWidth="180.0" styleClass="nav-btn" stylesheets="@../uni%204/Construcción/gui%20construccion/src/gui/construccion/inicio.css" text="Configuración">
-                                 <graphic>
-                                    <FontAwesomeIcon fill="WHITE" glyphName="COGS" />
                                  </graphic>
                               </Button>
                               <Button id="logOutB" layoutX="12.0" layoutY="514.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="36.0" stylesheets="@../uni%204/Construcción/gui%20construccion/src/gui/construccion/inicio.css">
@@ -100,6 +87,21 @@
                                  </font>
                               </Label>
                               <FontAwesomeIcon fill="WHITE" glyphName="USER" layoutX="54.0" layoutY="141.0" size="10em" />
+                              <Button id="colaborations" fx:id="buttonCollaborations" layoutX="11.0" layoutY="278.0" minHeight="40.0" mnemonicParsing="false" onAction="#goToCollaborations" prefWidth="180.0" styleClass="nav-btn" stylesheets="@../uni%204/Construcción/gui%20construccion/src/gui/construccion/inicio.css" text="Colaboraciones">
+                                 <graphic>
+                                    <FontAwesomeIcon fill="WHITE" glyphName="GROUP" />
+                                 </graphic>
+                              </Button>
+                              <Button id="records" fx:id="buttonStudents" layoutX="11.0" layoutY="318.0" minHeight="40.0" mnemonicParsing="false" onAction="#goToStudents" prefWidth="180.0" styleClass="nav-btn" stylesheets="@../uni%204/Construcción/gui%20construccion/src/gui/construccion/inicio.css" text="Estudiantes">
+                                 <graphic>
+                                    <FontAwesomeIcon fill="WHITE" glyphName="MALE" text="" />
+                                 </graphic>
+                              </Button>
+                              <Button id="records" fx:id="buttonSettings" layoutX="11.0" layoutY="358.0" minHeight="40.0" mnemonicParsing="false" onAction="#goToSettings" prefWidth="180.0" styleClass="nav-btn" stylesheets="@../uni%204/Construcción/gui%20construccion/src/gui/construccion/inicio.css" text="Configuración">
+                                 <graphic>
+                                    <FontAwesomeIcon fill="WHITE" glyphName="COGS" />
+                                 </graphic>
+                              </Button>
                            </children>
                         </AnchorPane>
                      </children>
@@ -116,41 +118,65 @@
                                     <String fx:value="shadow" />
                                  </styleClass>
                                  <children>
-                                    <TableView id="tableView" fx:id="tableViewAcceptedCollaborations" layoutX="6.0" layoutY="61.0" prefHeight="458.0" prefWidth="751.0" stylesheets="@../uni%204/Construcción/gui%20construccion/src/gui/construccion/inicio.css">
-                                   <columns>
-                                        <TableColumn fx:id="tableColumnId" prefWidth="70.0" text="ID">
-                                          <cellValueFactory>
-                                             <PropertyValueFactory property="collaborationId" />
-                                          </cellValueFactory>
-                                        </TableColumn>
-                                        <TableColumn fx:id="tableColumnCollaborationName" prefWidth="250.0" text="Nombre Colaboración">
-                                          <cellValueFactory>  
-                                             <PropertyValueFactory property="collaborationName" />
-                                          </cellValueFactory>       
-                                        </TableColumn>
-                                          <TableColumn fx:id="tableColumnStartDate" minWidth="9.0" prefWidth="150.0" text="Fecha Inicio">
-                                             <cellValueFactory>
-                                                <PropertyValueFactory property="startDate" />
-                                             </cellValueFactory>
-                                          </TableColumn>
-                                          <TableColumn fx:id="tableColumnFinisDate" minWidth="0.0" prefWidth="150.0" text="Fecha Fin">
-                                             <cellValueFactory>
-                                                <PropertyValueFactory property="finishDate" />
-                                             </cellValueFactory>
-                                          </TableColumn>
-                                          <TableColumn fx:id="tableColumnStatus" minWidth="0.0" prefWidth="129.0" text="Estado">
-                                             <cellValueFactory>
-                                                <PropertyValueFactory property="collaborationStatus" />
-                                             </cellValueFactory>
-                                          </TableColumn>
-                                      </columns>
-                                    </TableView>
-                                    <Button id="discard" fx:id="buttonCancel" layoutX="701.0" layoutY="3.0" mnemonicParsing="false" onAction="#cancel" styleClass="descartar" stylesheets="@../uni%204/Construcción/gui%20construccion/src/gui/construccion/inicio.css" text="&lt;" />
-                                    <TextField id="search" fx:id="textFieldSearch" layoutX="24.0" layoutY="23.0" prefHeight="25.0" prefWidth="281.0" promptText="Buscar" styleClass="search" stylesheets="@../uni%204/Construcción/gui%20construccion/src/gui/construccion/inicio.css" />
-                                    <FontAwesomeIcon glyphName="SEARCH" layoutX="4.0" layoutY="43.0" size="1.75em" />
+                                    <BorderPane layoutX="77.0" layoutY="89.0" prefHeight="525.3333333333334" prefWidth="772.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <right>
+                                          <AnchorPane prefHeight="525.0" prefWidth="387.0" styleClass="nav-form" stylesheets="@../uni%204/Construcción/COIL-VIC-YOYOK/Código/COIL_VIC/src/GUI/inicio.css" BorderPane.alignment="CENTER" />
+                                       </right>
+                                    </BorderPane>
+                                    <ImageView fitHeight="347.0" fitWidth="423.0" layoutX="223.0" layoutY="89.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../../../../Imagenes/descarga-removebg-preview.png" />
+                                       </image>
+                                    </ImageView>
+                                    <Label layoutX="306.0" layoutY="100.0" rotate="-30.0" text="C">
+                                       <font>
+                                          <Font name="Tahoma" size="30.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="326.0" layoutY="90.0" rotate="-20.0" text="O">
+                                       <font>
+                                          <Font name="Tahoma" size="30.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="350.0" layoutY="85.0" rotate="-11.0" text="I">
+                                       <font>
+                                          <Font name="Tahoma" size="30.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="367.0" layoutY="82.0" rotate="-5.0" text="L">
+                                       <font>
+                                          <Font name="Tahoma" size="30.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="404.0" layoutY="84.0" rotate="11.0" text="V" textFill="WHITE">
+                                       <font>
+                                          <Font name="Tahoma" size="30.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="425.0" layoutY="90.0" rotate="20.0" text="I" textFill="WHITE">
+                                       <font>
+                                          <Font name="Tahoma" size="30.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="439.0" layoutY="96.0" rotate="29.0" text="C" textFill="WHITE">
+                                       <font>
+                                          <Font name="Tahoma" size="30.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="392.0" layoutY="82.0" rotate="5.0" text="-" textFill="WHITE">
+                                       <font>
+                                          <Font name="Tahoma" size="30.0" />
+                                       </font>
+                                    </Label>
+                                    <ImageView fitHeight="61.0" fitWidth="56.0" layoutX="362.0" layoutY="408.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../../../../Imagenes/1200px-Logo_de_la_Universidad_Veracruzana.svg.png" />
+                                       </image>
+                                    </ImageView>
                                  </children>
                               </AnchorPane>
-                           </children></AnchorPane>
+                           </children>
+                        </AnchorPane>
                      </children>
                   </AnchorPane>
                </center>

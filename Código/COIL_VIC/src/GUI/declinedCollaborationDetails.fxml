@@ -24,7 +24,7 @@
                      <children>
                         <AnchorPane id="semiTopForm" layoutY="-8.0" prefHeight="35.0" prefWidth="800.0" style="-fx-border-color: black;" styleClass="semi-top-form" stylesheets="@../GUI/windowsStyle.css" AnchorPane.bottomAnchor="8.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-8.0">
                            <children>
-                              <Button id="close" fx:id="close" layoutX="968.0" layoutY="10.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="32.0" styleClass="close" stylesheets="@../GUI/windowsStyle.css">
+                              <Button id="close" fx:id="buttonClose" layoutX="968.0" layoutY="10.0" mnemonicParsing="false" onAction="#closeWindow" prefHeight="25.0" prefWidth="32.0" styleClass="close" stylesheets="@../GUI/windowsStyle.css">
                                  <font>
                                     <Font name="System Bold" size="12.0" />
                                  </font>
@@ -32,7 +32,7 @@
                                     <FontAwesomeIcon glyphName="CLOSE" />
                                  </graphic>
                               </Button>
-                              <Button id="minimize" fx:id="minimize" layoutX="930.0" layoutY="10.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="32.0" styleClass="minimize" stylesheets="@../GUI/windowsStyle.css">
+                              <Button id="minimize" fx:id="buttonMinimize" layoutX="930.0" layoutY="10.0" mnemonicParsing="false" onAction="#minimizeWindow" prefHeight="25.0" prefWidth="32.0" styleClass="minimize" stylesheets="@../GUI/windowsStyle.css">
                                  <font>
                                     <Font name="System Bold" size="12.0" />
                                  </font>
@@ -60,28 +60,28 @@
                                     <Font name="Tahoma" size="17.0" />
                                  </font>
                               </Label>
-                              <Label id="user" alignment="CENTER" layoutX="6.0" layoutY="187.0" prefHeight="23.0" prefWidth="190.0" text="user" textFill="WHITE">
+                              <Label id="user" fx:id="labelUser" alignment="CENTER" layoutX="6.0" layoutY="187.0" prefHeight="23.0" prefWidth="190.0" text="user" textFill="WHITE">
                                  <font>
                                     <Font name="Arial Bold" size="20.0" />
                                  </font>
                               </Label>
                               <Line endX="70.0" layoutX="116.0" layoutY="221.0" startX="-100.0" />
-                              <Button id="home" layoutX="11.0" layoutY="238.0" minHeight="40.0" mnemonicParsing="false" prefWidth="180.0" styleClass="nav-btn" stylesheets="@../GUI/windowsStyle.css" text="Inicio">
+                              <Button id="home" fx:id="buttonHome" layoutX="11.0" layoutY="238.0" minHeight="40.0" mnemonicParsing="false" onAction="#goToHomePage" prefWidth="180.0" styleClass="nav-btn" stylesheets="@../GUI/windowsStyle.css" text="Inicio">
                                  <graphic>
                                     <FontAwesomeIcon fill="WHITE" glyphName="HOME" />
                                  </graphic>
                               </Button>
-                              <Button id="colaborations" layoutX="11.0" layoutY="277.0" minHeight="40.0" mnemonicParsing="false" prefWidth="180.0" styleClass="nav-btn" stylesheets="@../GUI/windowsStyle.css" text="Colaboraciones">
+                              <Button id="colaborations" fx:id="buttonCollaborations" layoutX="11.0" layoutY="277.0" minHeight="40.0" mnemonicParsing="false" onAction="#goToCollaborations" prefWidth="180.0" styleClass="nav-btn" stylesheets="@../GUI/windowsStyle.css" text="Colaboraciones">
                                  <graphic>
                                     <FontAwesomeIcon fill="WHITE" glyphName="GROUP" />
                                  </graphic>
                               </Button>
-                              <Button id="records" layoutX="11.0" layoutY="317.0" minHeight="40.0" mnemonicParsing="false" prefWidth="180.0" styleClass="nav-btn" stylesheets="@../GUI/windowsStyle.css" text="Constancias">
+                              <Button id="records" fx:id="buttonStudents" layoutX="11.0" layoutY="317.0" minHeight="40.0" mnemonicParsing="false" onAction="#goToStudents" prefWidth="180.0" styleClass="nav-btn" stylesheets="@../GUI/windowsStyle.css" text="Estudiantes">
                                  <graphic>
-                                    <FontAwesomeIcon fill="WHITE" glyphName="TROPHY" />
+                                    <FontAwesomeIcon fill="WHITE" glyphName="MALE" />
                                  </graphic>
                               </Button>
-                              <Button id="logOutB" layoutX="12.0" layoutY="514.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="36.0" stylesheets="@../GUI/windowsStyle.css">
+                              <Button id="logOutB" fx:id="buttonLogout" layoutX="12.0" layoutY="514.0" mnemonicParsing="false" onAction="#logOut" prefHeight="26.0" prefWidth="36.0" stylesheets="@../GUI/windowsStyle.css">
                                  <styleClass>
                                     <String fx:value="logout" />
                                     <String fx:value="shadow" />
@@ -96,7 +96,7 @@
                                  </font>
                               </Label>
                               <FontAwesomeIcon fill="WHITE" glyphName="USER" layoutX="54.0" layoutY="141.0" size="10em" />
-                              <Button id="configuration" layoutX="10.0" layoutY="357.0" minHeight="40.0" mnemonicParsing="false" prefWidth="180.0" styleClass="nav-btn" stylesheets="@../GUI/windowsStyle.css" text="Configuración">
+                              <Button id="configuration" fx:id="buttonSettings" layoutX="10.0" layoutY="357.0" minHeight="40.0" mnemonicParsing="false" onAction="#goToSettings" prefWidth="180.0" styleClass="nav-btn" stylesheets="@../GUI/windowsStyle.css" text="Configuración">
                                  <graphic>
                                     <FontAwesomeIcon fill="WHITE" glyphName="COGS" />
                                  </graphic>
@@ -122,7 +122,7 @@
                                           <FontAwesomeIcon id="editButton" glyphName="EDIT" size="1.5em" />
                                        </graphic>
                                     </Button>
-                                    <Button layoutX="7.0" layoutY="8.0" mnemonicParsing="false" styleClass="descartar" stylesheets="@../GUI/windowsStyle.css" text="&lt;">
+                                    <Button fx:id="buttonCancel" layoutX="7.0" layoutY="8.0" mnemonicParsing="false" onAction="#cancel" styleClass="descartar" stylesheets="@../GUI/windowsStyle.css" text="&lt;">
                                        <font>
                                           <Font name="Tahoma Bold" size="12.0" />
                                        </font>

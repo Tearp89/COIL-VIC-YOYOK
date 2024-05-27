@@ -299,7 +299,7 @@ public class ProfessorDAO implements IProfessor{
     }
     
     
-    public ArrayList<Professor> searchProfessor (int universityId){
+    public ArrayList<Professor> searchProfessorByUniversityId (int universityId){
         Professor professor = new Professor();
         ArrayList<Professor> professors = new ArrayList<>();
         String query = "SELECT * FROM profesor WHERE Universidad_idUniversidad = ?";
@@ -569,6 +569,54 @@ public class ProfessorDAO implements IProfessor{
             LOG.error(getProfesorEmailByUserException);
         }   
         return name;
+    }
+
+    public ArrayList<Professor> searchProfessor(){
+        DatabaseManager dbManager = new DatabaseManager();
+        String query = "SELECT idProfesor, nombreProfesor, correo, país, Universidad_idUniversidad FROM profesor";
+        Professor professor = new Professor();
+        ArrayList<Professor> professors = new ArrayList<>();
+        try {
+            Connection connection = dbManager.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            try(ResultSet resultSet = preparedStatement.executeQuery()){
+                while(resultSet.next()){
+                    int professorId = resultSet.getInt("idProfesor");
+                    String name = resultSet.getString("nombreProfesor");
+                    String email = resultSet.getString("correo");
+                    String country = resultSet.getString("país");
+                    int universityId = resultSet.getInt("Universidad_idUniversidad");
+                    professor = new Professor();
+                    professor.setProfessorId(professorId);
+                    professor.setName(name);
+                    professor.setEmail(email);
+                    professor.setCountry(country);
+                    professor.setUniversityId(universityId);
+
+                    professors.add(professor);
+                }
+            }
+        }  catch (SQLException searchProfessor){
+            LOG.error("ERROR: ", searchProfessor);
+        }
+        return professors;  
+    }
+
+    public ObservableList<String> loadProfessorsCountries(){
+        DatabaseManager dbManager = new DatabaseManager();
+        String query = "SELECT DISTINCT país FROM profesor";
+        ObservableList<String> countries = FXCollections.observableArrayList();
+        try {
+            Connection connection = dbManager.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while(resultSet.next()){
+                countries.add(resultSet.getString("país"));
+            }
+        }  catch (SQLException loadProfessorsCountries){
+            LOG.error("ERROR: ", loadProfessorsCountries);
+        }
+        return countries;  
     }
 }
 

@@ -491,4 +491,42 @@ public class CollaborationDAO implements ICollaboration {
         return null;
     }
 
+    public int getCollaborationIdbyName(String collaborationName) {
+        DatabaseManager dbManager = new DatabaseManager();
+        String query = "SELECT idColaboración FROM Colaboración WHERE nombreColaboración = ?";
+        try (Connection connection = dbManager.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setString(1, collaborationName);
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                if (resultSet.next()) {
+                    return resultSet.getInt("idColaboración");
+                }
+            }
+        } catch (SQLException getCollaborationIdException) {
+            LOG.error("ERROR:", getCollaborationIdException);
+        }
+        return 0;
+    }
+    
+
+    public boolean validateCollaborationName(String collaborationName){
+        DatabaseManager dbManager = new DatabaseManager();
+        String query = "SELECT COUNT(*) AS count FROM colaboración WHERE nombreColaboración = ?";
+        try (Connection connection = dbManager.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setString(1, collaborationName);
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                if (resultSet.next()) {
+                    int count = resultSet.getInt("count");
+                    return count == 1; 
+                }
+            }
+        } catch (SQLException validateCollaborationNameException) {
+            LOG.error("ERROR: ", validateCollaborationNameException);
+        }
+        return false; 
+    }
+
+
+
 }

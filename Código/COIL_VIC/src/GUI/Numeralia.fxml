@@ -16,17 +16,17 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" stylesheets="@inicio.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.NumeraliaController">
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" stylesheets="@windowsStyle.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.NumeraliaController">
    <children>
       <AnchorPane prefHeight="200.0" prefWidth="200.0">
          <children>
             <BorderPane layoutX="148.0" layoutY="171.0" prefHeight="600.0" prefWidth="800.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <top>
-                  <AnchorPane id="topForm" prefHeight="45.0" prefWidth="200.0" style="-fx-border-color: black;" styleClass="top-form" stylesheets="@inicio.css" BorderPane.alignment="CENTER">
+                  <AnchorPane id="topForm" prefHeight="45.0" prefWidth="200.0" style="-fx-border-color: black;" styleClass="top-form" stylesheets="@windowsStyle.css" BorderPane.alignment="CENTER">
                      <children>
-                        <AnchorPane id="semiTopForm" layoutY="-8.0" prefHeight="35.0" prefWidth="800.0" style="-fx-border-color: black;" styleClass="semi-top-form" stylesheets="@inicio.css" AnchorPane.bottomAnchor="8.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-8.0">
+                        <AnchorPane id="semiTopForm" layoutY="-8.0" prefHeight="35.0" prefWidth="800.0" style="-fx-border-color: black;" styleClass="semi-top-form" stylesheets="@windowsStyle.css" AnchorPane.bottomAnchor="8.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-8.0">
                            <children>
-                              <Button id="close" fx:id="buttonClose" layoutX="968.0" layoutY="10.0" mnemonicParsing="false" onAction="#closeWindow" prefHeight="25.0" prefWidth="32.0" styleClass="close" stylesheets="@inicio.css">
+                              <Button id="close" fx:id="buttonClose" layoutX="968.0" layoutY="10.0" mnemonicParsing="false" onAction="#closeWindow" prefHeight="25.0" prefWidth="32.0" styleClass="close" stylesheets="@windowsStyle.css">
                                  <font>
                                     <Font name="System Bold" size="12.0" />
                                  </font>
@@ -34,7 +34,7 @@
                                     <FontAwesomeIcon glyphName="CLOSE" />
                                  </graphic>
                               </Button>
-                              <Button id="minimize" fx:id="buttonMinimize" layoutX="930.0" layoutY="10.0" mnemonicParsing="false" onAction="#minimizeWindow" prefHeight="25.0" prefWidth="32.0" styleClass="minimize" stylesheets="@inicio.css">
+                              <Button id="minimize" fx:id="buttonMinimize" layoutX="930.0" layoutY="10.0" mnemonicParsing="false" onAction="#minimizeWindow" prefHeight="25.0" prefWidth="32.0" styleClass="minimize" stylesheets="@windowsStyle.css">
                                  <font>
                                     <Font name="System Bold" size="12.0" />
                                  </font>
@@ -55,7 +55,7 @@
                <left>
                   <AnchorPane prefHeight="555.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                      <children>
-                        <AnchorPane id="navForm" layoutY="103.0" prefHeight="555.0" prefWidth="200.0" styleClass="nav-form" stylesheets="@inicio.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <AnchorPane id="navForm" layoutY="103.0" prefHeight="555.0" prefWidth="200.0" styleClass="nav-form" stylesheets="@windowsStyle.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <children>
                               <Label id="welcome" layoutX="57.0" layoutY="166.0" text="Bienvenido(a)" textFill="WHITE">
                                  <font>
@@ -73,21 +73,21 @@
                                     <FontAwesomeIcon fill="WHITE" glyphName="HOME" />
                                  </graphic>
                                  <stylesheets>
-                                    <URL value="@inicio.css" />
-                                    <URL value="@inicio.css" />
+                                    <URL value="@windowsStyle.css" />
+                                    <URL value="@windowsStyle.css" />
                                  </stylesheets>
                               </Button>
-                              <Button id="colaborations" fx:id="buttonCollaborations" layoutX="11.0" layoutY="278.0" minHeight="40.0" mnemonicParsing="false" prefWidth="180.0" styleClass="nav-btn" stylesheets="@inicio.css" text="Colaboraciones">
+                              <Button id="colaborations" fx:id="buttonCollaborations" layoutX="11.0" layoutY="278.0" minHeight="40.0" mnemonicParsing="false" prefWidth="180.0" styleClass="nav-btn" stylesheets="@windowsStyle.css" text="Colaboraciones">
                                  <graphic>
                                     <FontAwesomeIcon fill="WHITE" glyphName="GROUP" />
                                  </graphic>
                               </Button>
-                              <Button id="records" fx:id="buttonProfessors" layoutX="11.0" layoutY="318.0" minHeight="40.0" mnemonicParsing="false" prefWidth="180.0" styleClass="nav-btn" stylesheets="@inicio.css" text="Profesores">
+                              <Button id="records" fx:id="buttonProfessors" layoutX="11.0" layoutY="318.0" minHeight="40.0" mnemonicParsing="false" prefWidth="180.0" styleClass="nav-btn" stylesheets="@windowsStyle.css" text="Profesores">
                                  <graphic>
                                     <FontAwesomeIcon fill="WHITE" glyphName="PENCIL" />
                                  </graphic>
                               </Button>
-                              <Button id="logOutB" fx:id="buttonLogout" layoutX="12.0" layoutY="514.0" mnemonicParsing="false" onAction="#logout" prefHeight="26.0" prefWidth="36.0" stylesheets="@inicio.css">
+                              <Button id="logOutB" fx:id="buttonLogout" layoutX="12.0" layoutY="514.0" mnemonicParsing="false" onAction="#logout" prefHeight="26.0" prefWidth="36.0" stylesheets="@windowsStyle.css">
                                  <styleClass>
                                     <String fx:value="logout" />
                                     <String fx:value="shadow" />
@@ -101,13 +101,13 @@
                                     <Font name="Arial" size="14.0" />
                                  </font>
                               </Label>
-                              <Button id="records" layoutX="11.0" layoutY="358.0" minHeight="40.0" mnemonicParsing="false" prefWidth="180.0" styleClass="nav-btn-select" stylesheets="@inicio.css" text="Numeralia">
+                              <Button id="records" layoutX="11.0" layoutY="358.0" minHeight="40.0" mnemonicParsing="false" prefWidth="180.0" styleClass="nav-btn-select" stylesheets="@windowsStyle.css" text="Numeralia">
                                  <graphic>
                                     <FontAwesomeIcon fill="WHITE" glyphName="TH" />
                                  </graphic>
                               </Button>
                               <FontAwesomeIcon fill="WHITE" glyphName="USER" layoutX="54.0" layoutY="141.0" size="10em" />
-                              <Button id="records" fx:id="buttonConfiguration" layoutX="10.0" layoutY="398.0" minHeight="40.0" mnemonicParsing="false" prefWidth="180.0" styleClass="nav-btn" stylesheets="@inicio.css" text="Configuración">
+                              <Button id="records" fx:id="buttonConfiguration" layoutX="10.0" layoutY="398.0" minHeight="40.0" mnemonicParsing="false" prefWidth="180.0" styleClass="nav-btn" stylesheets="@windowsStyle.css" text="Configuración">
                                  <graphic>
                                     <FontAwesomeIcon fill="WHITE" glyphName="COGS" />
                                  </graphic>
@@ -122,17 +122,17 @@
                      <children>
                         <AnchorPane layoutX="119.0" layoutY="114.0" prefHeight="555.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <children>
-                              <AnchorPane layoutX="14.0" layoutY="15.0" prefHeight="525.0" prefWidth="772.0" stylesheets="@inicio.css">
+                              <AnchorPane layoutX="14.0" layoutY="15.0" prefHeight="525.0" prefWidth="772.0" stylesheets="@windowsStyle.css">
                                  <styleClass>
                                     <String fx:value="white-bg" />
                                     <String fx:value="shadow" />
                                  </styleClass>
                                  <children>
-                                    <Button id="discard" fx:id="buttonDownload" layoutX="715.0" layoutY="14.0" mnemonicParsing="false" styleClass="descartar" stylesheets="@inicio.css">
+                                    <Button id="discard" fx:id="buttonDownload" layoutX="715.0" layoutY="14.0" mnemonicParsing="false" styleClass="descartar" stylesheets="@windowsStyle.css">
                                        <graphic>
                                           <FontAwesomeIcon glyphName="DOWNLOAD" size="1.5em" />
                                        </graphic></Button>
-                                    <TableView fx:id="academicAreaTable" layoutX="207.0" layoutY="299.0" prefHeight="215.0" prefWidth="375.0" styleClass="table-column" stylesheets="@inicio.css">
+                                    <TableView fx:id="academicAreaTable" layoutX="207.0" layoutY="299.0" prefHeight="215.0" prefWidth="375.0" styleClass="table-column" stylesheets="@windowsStyle.css">
                                        <columns>
                                           <TableColumn prefWidth="174.0" text="Área académica">
                                              <cellValueFactory>
@@ -154,7 +154,7 @@
                                           <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                                        </columnResizePolicy>
                                     </TableView>
-                                    <TableView fx:id="regionTable" layoutX="207.0" layoutY="68.0" prefHeight="215.0" prefWidth="374.0" stylesheets="@inicio.css">
+                                    <TableView fx:id="regionTable" layoutX="207.0" layoutY="68.0" prefHeight="215.0" prefWidth="374.0" stylesheets="@windowsStyle.css">
                                        <columns>
                                           <TableColumn fx:id="regionCol" prefWidth="172.0" text="Región">
                                              <cellValueFactory>
@@ -177,35 +177,35 @@
                                           <String fx:value="table-column" />
                                        </styleClass>
                                     </TableView>
-                                    <MenuBar id="menuBar" layoutX="126.0" layoutY="13.0" opacity="0.94" prefHeight="46.0" prefWidth="562.0" style="-fx-background-radius: 10;" stylesheets="@inicio.css">
+                                    <MenuBar id="menuBar" layoutX="126.0" layoutY="13.0" opacity="0.94" prefHeight="46.0" prefWidth="562.0" style="-fx-background-radius: 10;" stylesheets="@windowsStyle.css">
                                        <menus>
                                           <Menu fx:id="menuItem2017" mnemonicParsing="false" onAction="#handleYear2017" style="-fx-cursor: HAND;">
                                              <graphic>
-                                                <Button alignment="CENTER_RIGHT" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#handleYear2017" style="-fx-cursor: HAND; -fx-background-color: NONE;" stylesheets="@inicio.css" text="2017" textAlignment="CENTER" />
+                                                <Button alignment="CENTER_RIGHT" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#handleYear2017" style="-fx-cursor: HAND; -fx-background-color: NONE;" stylesheets="@windowsStyle.css" text="2017" textAlignment="CENTER" />
                                              </graphic></Menu>
                                           <Menu fx:id="menuItem2018" mnemonicParsing="false" onAction="#handleYear2018" style="-fx-cursor: HAND;">
                                              <graphic>
-                                                <Button mnemonicParsing="false" onAction="#handleYear2018" style="-fx-cursor: HAND; -fx-background-color: NONE;" stylesheets="@inicio.css" text="2018" textAlignment="CENTER" />
+                                                <Button mnemonicParsing="false" onAction="#handleYear2018" style="-fx-cursor: HAND; -fx-background-color: NONE;" stylesheets="@windowsStyle.css" text="2018" textAlignment="CENTER" />
                                              </graphic></Menu>
                                           <Menu fx:id="menuItem2019" mnemonicParsing="false" onAction="#handleYear2019" style="-fx-cursor: HAND;">
                                              <graphic>
-                                                <Button mnemonicParsing="false" onAction="#handleYear2019" style="-fx-cursor: HAND; -fx-background-color: NONE;" stylesheets="@inicio.css" text="2019" textAlignment="CENTER" />
+                                                <Button mnemonicParsing="false" onAction="#handleYear2019" style="-fx-cursor: HAND; -fx-background-color: NONE;" stylesheets="@windowsStyle.css" text="2019" textAlignment="CENTER" />
                                              </graphic></Menu>
                                           <Menu fx:id="menuItem2020" mnemonicParsing="false" onAction="#handleYear2020" style="-fx-cursor: HAND;">
                                              <graphic>
-                                                <Button mnemonicParsing="false" onAction="#handleYear2020" style="-fx-cursor: HAND; -fx-background-color: NONE;" stylesheets="@inicio.css" text="2020" textAlignment="CENTER" />
+                                                <Button mnemonicParsing="false" onAction="#handleYear2020" style="-fx-cursor: HAND; -fx-background-color: NONE;" stylesheets="@windowsStyle.css" text="2020" textAlignment="CENTER" />
                                              </graphic></Menu>
                                           <Menu fx:id="menuItem2021" mnemonicParsing="false" onAction="#handleYear2021" style="-fx-cursor: HAND;">
                                              <graphic>
-                                                <Button mnemonicParsing="false" onAction="#handleYear2021" style="-fx-cursor: HAND; -fx-background-color: NONE;" stylesheets="@inicio.css" text="2021" textAlignment="CENTER" />
+                                                <Button mnemonicParsing="false" onAction="#handleYear2021" style="-fx-cursor: HAND; -fx-background-color: NONE;" stylesheets="@windowsStyle.css" text="2021" textAlignment="CENTER" />
                                              </graphic></Menu>
                                           <Menu fx:id="menuItem2022" mnemonicParsing="false" onAction="#handleYear2022" style="-fx-cursor: HAND;">
                                              <graphic>
-                                                <Button mnemonicParsing="false" onAction="#handleYear2022" style="-fx-cursor: HAND; -fx-background-color: NONE;" stylesheets="@inicio.css" text="2022" textAlignment="CENTER" />
+                                                <Button mnemonicParsing="false" onAction="#handleYear2022" style="-fx-cursor: HAND; -fx-background-color: NONE;" stylesheets="@windowsStyle.css" text="2022" textAlignment="CENTER" />
                                              </graphic></Menu>
                                           <Menu fx:id="menuItem2023" mnemonicParsing="false" onAction="#handleYear2023" style="-fx-cursor: HAND;">
                                              <graphic>
-                                                <Button mnemonicParsing="false" onAction="#handleYear2023" style="-fx-cursor: HAND; -fx-background-color: NONE;" stylesheets="@inicio.css" text="2023" textAlignment="CENTER" />
+                                                <Button mnemonicParsing="false" onAction="#handleYear2023" style="-fx-cursor: HAND; -fx-background-color: NONE;" stylesheets="@windowsStyle.css" text="2023" textAlignment="CENTER" />
                                              </graphic></Menu>
                                        </menus>
                                        <styleClass>

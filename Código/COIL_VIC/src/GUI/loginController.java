@@ -20,7 +20,9 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import logic.DAO.AdminDAO;
 import logic.DAO.LoginDAO;
+import logic.DAO.ProfessorDAO;
 import logic.classes.Admin;
+import logic.classes.Professor;
 import log.Log;
 
 public class LoginController {
@@ -70,6 +72,30 @@ public class LoginController {
             } catch (IOException ex) {
                 LOG.error(ex);
             }
+        } else if(instance.validateProfessor(user, password)) {
+            Professor professorData = new Professor();
+            ProfessorDAO professorDAO = new ProfessorDAO();
+            professorData.setUser(user);
+            professorData.setPassword(password);
+            professorData.setName(professorDAO.getProfessorNameByUser(user));
+            UserSessionManager.getInstance().loginProfessor(professorData);
+            Node source = (Node) e.getSource();
+            stage = (Stage) source.getScene().getWindow();
+            stage.close();
+            try{
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUI/professorHome.fxml"));
+                Parent root = loader.load();
+
+                Scene scene = new Scene(root);
+
+                Stage newStage = new Stage();
+                newStage.initStyle(StageStyle.TRANSPARENT);
+                newStage.setScene(scene);
+                newStage.show();
+            } catch (IOException loaderException){
+                LOG.error("ERROR:", loaderException);
+            }
+
         }
     }
 }
