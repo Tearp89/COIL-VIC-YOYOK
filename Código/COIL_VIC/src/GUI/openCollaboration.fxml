@@ -58,7 +58,7 @@
                                     <Font name="Tahoma" size="17.0" />
                                  </font>
                               </Label>
-                              <Label id="user" fx:id="labelUser" alignment="CENTER" layoutX="6.0" layoutY="187.0" prefHeight="23.0" prefWidth="190.0" text="user" textFill="WHITE" visible="false">
+                              <Label id="user" fx:id="labelUser" alignment="CENTER" layoutX="6.0" layoutY="187.0" prefHeight="23.0" prefWidth="190.0" text="user" textFill="WHITE">
                                  <font>
                                     <Font name="Arial Bold" size="20.0" />
                                  </font>

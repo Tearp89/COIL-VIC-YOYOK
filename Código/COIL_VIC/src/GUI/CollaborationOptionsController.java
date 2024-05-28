@@ -201,7 +201,8 @@ public class CollaborationOptionsController {
             buttonSendRequest.setDisable(true);
         } else if (validateActiveCollaborations == 0){
             buttonAddActivity.setDisable(true);
-            buttonSearchActivity.setDisable(true);;
+            buttonSearchActivity.setDisable(true);
+            buttonOpenCollaboration.setDisable(true);
         }
 
         int validateDeclinedCollaborations = collaborationDAO.searchCollaborationByStatusAndProfessorId("Rechazada", professorId).size();
