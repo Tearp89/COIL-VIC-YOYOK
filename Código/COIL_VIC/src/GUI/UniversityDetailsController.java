@@ -95,8 +95,8 @@ public class UniversityDetailsController {
         universityUpdated.setUniversityCountry(universityCountry);
         universityUpdated.setUniversityId(universityId);
         UniversityDAO updateUniversity = new UniversityDAO();
-        if(universityName.isEmpty() || universityLanguage.isEmpty() 
-        || universityCountry.isEmpty()){
+        if(universityName.trim().isEmpty() || universityLanguage.trim().isEmpty() 
+        || universityCountry.trim().isEmpty()){
             Alert emptyFieldsAlert = new Alert(AlertType.ERROR);
             emptyFieldsAlert.setTitle("Campos vacíos");
             emptyFieldsAlert.setHeaderText("Error edición");

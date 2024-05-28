@@ -122,7 +122,7 @@ public class AddActivityController {
         String week = comboBoxWeek.getValue();
         String type = comboBoxType.getValue();
         String description = textAreaDescription.getText();
-        if(title.isEmpty() || week.isEmpty() || type.isEmpty() || description.isEmpty()){
+        if(title.trim().isEmpty() || week.trim().isEmpty() || type.trim().isEmpty() || description.trim().isEmpty()){
             Alert emptyFieldsAlert = new Alert(AlertType.ERROR);
             emptyFieldsAlert.setTitle("Campos vacíos");
             emptyFieldsAlert.setHeaderText("Campos vacíos");

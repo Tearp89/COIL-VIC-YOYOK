@@ -191,9 +191,9 @@ public class DeclinedCollaborationDetailsController {
         collaborationUpdated.setCollaborationId(collaborationId);
         collaborationUpdated.setCollaborationStatus("En revisión");
         CollaborationDAO updateCollaborationDAO = new CollaborationDAO();
-        if(collaborationName.isEmpty() || collaborationDescription.isEmpty() || collaborationStartDate.toString().isEmpty() || 
-        collaborationFinishDate.toString().isEmpty() || collaborationGoal.isEmpty() || collaborationSubject.isEmpty() || 
-        textFieldNumberStudents.getText().isEmpty() || studentProfile.isEmpty()){
+        if(collaborationName.trim().isEmpty() || collaborationDescription.trim().isEmpty() || collaborationStartDate.toString().trim().isEmpty() || 
+        collaborationFinishDate.toString().trim().isEmpty() || collaborationGoal.trim().isEmpty() || collaborationSubject.trim().isEmpty() || 
+        textFieldNumberStudents.getText().trim().isEmpty() || studentProfile.trim().isEmpty()){
             Alert emptyFieldsAlert = new Alert(AlertType.ERROR);
             emptyFieldsAlert.setTitle("Campos vacíos");
             emptyFieldsAlert.setContentText("No se pudo actualizar la colaboración hay campos vacíos");

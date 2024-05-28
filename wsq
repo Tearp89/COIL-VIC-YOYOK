@@ -1,0 +1,1274 @@
+[33mcommit 166cf5bbda8d7446d2d24f1a7f00d0faf29c39c0[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mloml[m[33m, [m[1;31morigin/loml[m[33m)[m
+Merge: 0cd2c5c d097261
+Author: Marla <121531470+Tearp89@users.noreply.github.com>
+Date:   Mon May 27 18:33:06 2024 -0600
+
+    Merge remote-tracking branch 'origin/main' into loml
+
+[33mcommit 0cd2c5ccc6e0ee6e604cc791c7b95d829eb54a98[m
+Author: Marla <121531470+Tearp89@users.noreply.github.com>
+Date:   Mon May 27 18:30:19 2024 -0600
+
+    j
+
+[33mcommit 4f5e20c7f38b04e9a49a22b940f749faadd33f78[m
+Author: Marla <121531470+Tearp89@users.noreply.github.com>
+Date:   Mon May 27 18:10:23 2024 -0600
+
+    diagramas pt3?
+
+[33mcommit 759133f62306c4cb267aa1b5656e750ed9d0d7dd[m
+Author: Marla <121531470+Tearp89@users.noreply.github.com>
+Date:   Mon May 27 17:25:28 2024 -0600
+
+    Diagramas pt2?
+
+[33mcommit 253978cfe3a44c81b266465f3174b1a039de7c8c[m
+Author: Marla <121531470+Tearp89@users.noreply.github.com>
+Date:   Mon May 27 17:22:22 2024 -0600
+
+    diagramas
+
+[33mcommit d09726155747039439e9a09be3e903ca8c635671[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;31morigin/Gateway-Car[m[33m, [m[1;31morigin/Daylight[m[33m)[m
+Author: Isabella Méndez <isabella.hmdez@gmail.com>
+Date:   Mon May 27 16:50:03 2024 -0600
+
+    hace calor
+
+[33mcommit 3cf27a4128bb6242308f108375ded01d34bbc90e[m
+Author: Isabella Méndez <isabella.hmdez@gmail.com>
+Date:   Mon May 27 16:45:11 2024 -0600
+
+    odio github
+
+[33mcommit 889854c92729227a5b1390c71f002a9ae300433f[m
+Merge: 221bd54 e1f09dc
+Author: Drawiel <daur0704@outlook.com>
+Date:   Mon May 27 15:45:50 2024 -0600
+
+    Merge branch 'main' into Gateway-Car
+
+[33mcommit e1f09dcf6aed78c894009442fbc750f0436a40c3[m
+Merge: 673299e c83aea0
+Author: Drawiel <162381212+Drawiel@users.noreply.github.com>
+Date:   Mon May 27 15:45:12 2024 -0600
+
+    Merge pull request #30 from Tearp89/Daylight
+    
+    Daylight
+
+[33mcommit c83aea0ba3c5a9f7893e4c1aeef9410bb0ef3f83[m
+Author: Drawiel <daur0704@outlook.com>
+Date:   Mon May 27 15:44:50 2024 -0600
+
+    Login arreglado jeje
+
+[33mcommit 221bd54d6c7a630c5ac60023b7b850ff367b38d9[m
+Author: Isabella Méndez <isabella.hmdez@gmail.com>
+Date:   Mon May 27 15:44:20 2024 -0600
+
+    filelog
+
+[33mcommit ca2c9e693578e94eaebacb0d90f4f93e1c8b5402[m
+Author: Isabella Méndez <isabella.hmdez@gmail.com>
+Date:   Mon May 27 15:43:59 2024 -0600
+
+    addProfessor
+
+[33mcommit bde57bc9604812f6c40dbe72be376ecc77a348ac[m
+Merge: 673299e 07c1157
+Author: Drawiel <daur0704@outlook.com>
+Date:   Mon May 27 13:43:43 2024 -0600
+
+    Merge branch 'Gateway-Car' of https://github.com/Tearp89/COIL-VIC-YOYOK into Gateway-Car
+
+[33mcommit 07c1157e0edfe941acd1a44cee796d574d8ba799[m
+Merge: 683acd9 e6e3cd4
+Author: Isabella Méndez <isabella.hmdez@gmail.com>
+Date:   Mon May 27 13:40:43 2024 -0600
+
+    Merge branch 'Gateway-Car' of https://github.com/Tearp89/COIL-VIC-YOYOK into Gateway-Car
+
+[33mcommit 683acd9ad2ea55d849f33e32ae85a3a08630a6c0[m
+Author: Isabella Méndez <isabella.hmdez@gmail.com>
+Date:   Mon May 27 13:40:22 2024 -0600
+
+    g
+
+[33mcommit a915c9ff036b4255f6b26126bf1d8856c425e0a8[m
+Author: Drawiel <daur0704@outlook.com>
+Date:   Mon May 27 12:25:24 2024 -0600
+
+    Create 27-05-test.sql
+
+[33mcommit 673299eafb63b98c426e74706a5fd074b434dfa4[m
+Merge: e6e3cd4 962ebd9
+Author: Drawiel <162381212+Drawiel@users.noreply.github.com>
+Date:   Mon May 27 12:18:57 2024 -0600
+
+    Merge pull request #29 from Tearp89/Daylight
+    
+    Conexiones finales y algunas revisiones
+
+[33mcommit 962ebd933636d1c394f0eb79d2375c5acd1c4c66[m
+Author: Drawiel <daur0704@outlook.com>
+Date:   Mon May 27 12:18:24 2024 -0600
+
+    Conexiones finales y algunas revisiones
+
+[33mcommit e6e3cd47efd1f0e1376c6c8d574de21ee8cc86dc[m
+Merge: 401dd9d d698d9d
+Author: Drawiel <daur0704@outlook.com>
+Date:   Mon May 27 00:55:54 2024 -0600
+
+    Merge branch 'Gateway-Car' of https://github.com/Tearp89/COIL-VIC-YOYOK into Gateway-Car
+
+[33mcommit 401dd9d3e5d4519bd7175b39c0eff242e2fece3a[m
+Merge: 44d7e93 24f6a1e
+Author: Drawiel <daur0704@outlook.com>
+Date:   Mon May 27 00:54:39 2024 -0600
+
+    Merge branch 'main' into Gateway-Car
+
+[33mcommit d698d9d727b375d7a3dbce4d94324f626ada8516[m
+Merge: 0e443dd 44d7e93
+Author: Isabella Méndez <isabella.hmdez@gmail.com>
+Date:   Mon May 27 00:51:48 2024 -0600
+
+    Merge branch 'Gateway-Car' of https://github.com/Tearp89/COIL-VIC-YOYOK into Gateway-Car
+
+[33mcommit 0e443dd0bc933349cb2ac5bbc4d2b11d1f1337cc[m
+Author: Isabella Méndez <isabella.hmdez@gmail.com>
+Date:   Mon May 27 00:51:16 2024 -0600
+
+    addProfessor medio funcional
+
+[33mcommit 24f6a1e9b4080848313cf4982e8e9cfa3698a41b[m[33m ([m[1;32mmain[m[33m)[m
+Author: Marla <121531470+Tearp89@users.noreply.github.com>
+Date:   Sat May 25 17:15:37 2024 -0600
+
+    arreglos.
+
+[33mcommit 83340238c2dc668a077fb41b99175c6e141135a8[m
+Author: Marla <121531470+Tearp89@users.noreply.github.com>
+Date:   Sat May 25 02:40:34 2024 -0600
+
+    k
+
+[33mcommit 45376cfb9fc2ae25a7686b35eb2e81eef28fe920[m
+Author: Marla <121531470+Tearp89@users.noreply.github.com>
+Date:   Sat May 25 02:40:07 2024 -0600
+
+    a
+
+[33mcommit a074c147e68d31aa52b236046df958aa28af250a[m
+Merge: 0f52fe0 8773543
+Author: Marla <121531470+Tearp89@users.noreply.github.com>
+Date:   Sat May 25 02:38:55 2024 -0600
+
+    Merge remote-tracking branch 'origin/main' into loml
+
+[33mcommit 0f52fe099443948c03197f94733769e9b056e27e[m
+Author: Marla <121531470+Tearp89@users.noreply.github.com>
+Date:   Sat May 25 02:37:21 2024 -0600
+
+    retroalimentación, singleton de estudiantes e ingreso de estudiantes
+
+[33mcommit 44d7e93f4911aa326af3e9ceda6711052d1edefe[m
+Merge: 5be71a1 8773543
+Author: Drawiel <daur0704@outlook.com>
+Date:   Fri May 24 22:25:36 2024 -0600
+
+    Merge branch 'main' into Gateway-Car
+
+[33mcommit 6f03e6d07263ce70555f3af0cfe635c074816220[m
+Author: Marla <121531470+Tearp89@users.noreply.github.com>
+Date:   Thu May 23 01:50:37 2024 -0600
+
+    agregar estudiantes, responder solicitud de posible colaborador y consultar colaboración, css en todas las ventanas, creo
+
+[33mcommit ef0c1e599b2fb926ab49627f713677aa4eb9b23a[m
+Merge: 8c5d722 5be71a1
+Author: Marla <121531470+Tearp89@users.noreply.github.com>
+Date:   Wed May 22 15:16:22 2024 -0600
+
+    Merge remote-tracking branch 'origin/Gateway-Car' into loml
+
+[33mcommit 8c5d722613a5a026aeb783d913bc40a9a619d309[m
+Author: Marla <121531470+Tearp89@users.noreply.github.com>
+Date:   Wed May 22 15:15:15 2024 -0600
+
+    agregar actividad
+
+[33mcommit 5be71a1b57182111368f7819c958a2b8da7ff108[m
+Author: Isabella Méndez <isabella.hmdez@gmail.com>
+Date:   Tue May 21 22:55:04 2024 -0600
+
+    nueva interfaz addStudent
+
+[33mcommit ec9649ed7b8ed93a5ae0fc735090260d0fbc3f69[m
+Merge: 3e6e648 c9a8181
+Author: Marla <121531470+Tearp89@users.noreply.github.com>
+Date:   Tue May 21 22:29:54 2024 -0600
+
+    Merge remote-tracking branch 'origin/Gateway-Car' into loml
+
+[33mcommit 3e6e64822d3175d0b9f2182ca2b69da789aebec7[m
+Author: Marla <121531470+Tearp89@users.noreply.github.com>
+Date:   Tue May 21 22:27:43 2024 -0600
+
+    comunicación entre ventanas de admin
+
+[33mcommit 87735435f6ee3a466f4ef1647ce6dc16738d0fc7[m
+Merge: a121d52 33b6701
+Author: Drawiel <162381212+Drawiel@users.noreply.github.com>
+Date:   Tue May 21 17:37:17 2024 -0600
+
+    Merge pull request #28 from Tearp89/Daylight
+    
+    jeje
+
+[33mcommit 33b6701b0454d5936d05de8aafac0cd765fdff2d[m
+Author: Drawiel <daur0704@outlook.com>
+Date:   Tue May 21 17:36:59 2024 -0600
+
+    jeje
+    
+    upsi
+
+[33mcommit 9c2ca2cf68de6e5d59d29555ef21e91a6cb4d19c[m
+Merge: 75099fd a121d52
+Author: Marla <121531470+Tearp89@users.noreply.github.com>
+Date:   Tue May 21 17:20:26 2024 -0600
+
+    Merge remote-tracking branch 'origin/main' into loml
+
+[33mcommit 75099fd992e45372af5a51ab9862c52f3017d95a[m
+Merge: b44f1dd 9494fad
+Author: Marla <121531470+Tearp89@users.noreply.github.com>
+Date:   Tue May 21 17:19:24 2024 -0600
+
+    Merge branch 'loml' of https://github.com/Tearp89/COIL-VIC-YOYOK into loml
+
+[33mcommit b44f1dd4ad8e201fffdb3d4294732485091b1dc3[m
+Author: Marla <121531470+Tearp89@users.noreply.github.com>
+Date:   Tue May 21 17:18:50 2024 -0600
+
+    actividades y base nueva
+
+[33mcommit a121d52b6eeca123da4e0ed729959a4dfc0e8e4c[m
+Merge: ec08a56 188a578
+Author: Drawiel <162381212+Drawiel@users.noreply.github.com>
+Date:   Tue May 21 17:13:37 2024 -0600
+
+    Merge pull request #27 from Tearp89/Daylight
+    
+    Consultar profesor con filtros
+
+[33mcommit 188a578c995f9c4df3a1a0a093a7af6bf29586b7[m
+Merge: c59cb83 ec08a56
+Author: Drawiel <162381212+Drawiel@users.noreply.github.com>
+Date:   Tue May 21 17:13:29 2024 -0600
+
+    Merge branch 'main' into Daylight
+
+[33mcommit c59cb83bcab4ac968cbe6b3e9e598182c31b9c33[m
+Author: Drawiel <daur0704@outlook.com>
+Date:   Tue May 21 17:05:07 2024 -0600
+
+    Consultar profesor con filtros
+    
+    Tambien cambios en fxml para cargar estilo
+
+[33mcommit 9494faded9d9c46bf13fdd380acf09deebc68281[m
+Author: Isabella Méndez <isabella.hmdez@gmail.com>
+Date:   Tue May 21 16:11:59 2024 -0600
+
+    arreglo 2 de la interfaz openCollaboration y actualización del css
+
+[33mcommit 9d23baa4bc98547797f4933ee85769d6987f8971[m
+Merge: 79d7bd8 ec08a56
+Author: Isabella Méndez <isabella.hmdez@gmail.com>
+Date:   Tue May 21 15:47:45 2024 -0600
+
+    Merge branch 'loml' of https://github.com/Tearp89/COIL-VIC-YOYOK into loml
+
+[33mcommit 79d7bd86e1d4e01f634cfafa4d566925622c5e4d[m
+Author: Isabella Méndez <isabella.hmdez@gmail.com>
+Date:   Tue May 21 15:15:15 2024 -0600
+
+    Arreglo de interfaz openCollaboration y actualización del css
+
+[33mcommit ec08a560a06a28667359b2b172a548a830f6caa0[m
+Merge: d4ff53f dcc09f7
+Author: Marla <121531470+Tearp89@users.noreply.github.com>
+Date:   Tue May 21 15:09:36 2024 -0600
+
+    Merge remote-tracking branch 'origin/main' into loml
+
+[33mcommit d4ff53fe7640dc72b1d357f0e53f50d40bcbec8d[m
+Author: Marla <121531470+Tearp89@users.noreply.github.com>
+Date:   Tue May 21 15:04:44 2024 -0600
+
+    ,
+
+[33mcommit f8c36c50a658be6d6f5a7c4c0182bd3a45368184[m
+Author: Marla <121531470+Tearp89@users.noreply.github.com>
+Date:   Tue May 21 15:01:32 2024 -0600
+
+    cambio en open
+
+[33mcommit c9a8181e693b40119a96e5e98ab4e70fe7e11bf4[m
+Author: Isabella Méndez <isabella.hmdez@gmail.com>
+Date:   Tue May 21 15:01:00 2024 -0600
+
+    Interfaces agregar actividad y consultar actividades
+
+[33mcommit 6885255306a8eae398ebc9a5a4eb590b70159ae6[m
+Author: Marla <121531470+Tearp89@users.noreply.github.com>
+Date:   Tue May 21 01:58:00 2024 -0600
+
+    comunicación entre ventanas
+
+[33mcommit dcc09f7685fc7367ade914fa1782c1267940e071[m
+Author: Isabella Méndez <isabella.hmdez@gmail.com>
+Date:   Tue May 21 01:00:24 2024 -0600
+
+    Interfaz consultar profesores
+
+[33mcommit 8db4ae9e0527afa22a826831b833448930f7b5f4[m
+Merge: 1f64c17 c777624
+Author: Drawiel <162381212+Drawiel@users.noreply.github.com>
+Date:   Mon May 20 18:27:50 2024 -0600
+
+    Merge pull request #26 from Tearp89/Daylight
+    
+    Creacion ventana Professor Settings
+
+[33mcommit c777624dc0e494579659c18120e0f66b7969f23f[m[33m ([m[1;31morigin/Daylight-backup[m[33m)[m
+Author: Drawiel <daur0704@outlook.com>
+Date:   Mon May 20 18:27:26 2024 -0600
+
+    Creacion ventana Professor Settings
+
+[33mcommit 1f64c1703cc5248ab1a1f21f9e30ef2f35f356a9[m
+Merge: 3d49b87 65cd0a5
+Author: Marla <121531470+Tearp89@users.noreply.github.com>
+Date:   Mon May 20 14:34:01 2024 -0600
+
+    Merge remote-tracking branch 'origin/main' into loml
+
+[33mcommit 3d49b87596ccc3b66c95f31edb39717a5ce47d6c[m
+Author: Marla <121531470+Tearp89@users.noreply.github.com>
+Date:   Mon May 20 14:31:18 2024 -0600
+
+    cerrar colaboración
+
+[33mcommit 65cd0a5cf3e013827a49ef09488f04e803c655d7[m
+Merge: 9afb8b8 6a1ee20
+Author: Drawiel <162381212+Drawiel@users.noreply.github.com>
+Date:   Mon May 20 14:30:57 2024 -0600
+
+    Merge pull request #25 from Tearp89/Daylight
+    
+    Abrir colaboración y controlador para cambiar, miniminzar y cerrar ventanas, así como para hacer logout Singleton
+
+[33mcommit 6a1ee206b9be428a838d9114cf18a603eb446255[m
+Author: Drawiel <daur0704@outlook.com>
+Date:   Mon May 20 14:30:11 2024 -0600
+
+    Abrir colaboración
+    
+    Actualizada ya arreglada
+
+[33mcommit 38c1a8cc49424671cf0d229c14cf9441ea501a65[m
+Author: Drawiel <daur0704@outlook.com>
+Date:   Mon May 20 03:13:02 2024 -0600
+
+    Abrir colaboración
+    
+    Abrir colaboración y creación de manejador de cambio de ventanas y cierre de sesión
+
+[33mcommit cecc09acf79b1874b79e9f33f3755dea09ab216c[m
+Author: Marla <121531470+Tearp89@users.noreply.github.com>
+Date:   Sun May 19 18:42:37 2024 -0600
+
+    base actualizada
+
+[33mcommit 929b0e582157dc52b6a6e9d626bc59b8c90ba77e[m
+Author: Marla <121531470+Tearp89@users.noreply.github.com>
+Date:   Sun May 19 18:35:10 2024 -0600
+
+    Update BDCoilVic195.sql
+
+[33mcommit 4b43ce652751432fc3ad72586874fa38d3752519[m
+Author: Marla <121531470+Tearp89@users.noreply.github.com>
+Date:   Sun May 19 18:30:56 2024 -0600
+
+    Base de datos hasta el 19 de mayo de 2024
+
+[33mcommit 31eb1d0e547fcbdf17c91026134e3cd15d33a765[m
+Merge: 2f9d3f7 9afb8b8
+Author: Marla <121531470+Tearp89@users.noreply.github.com>
+Date:   Sun May 19 18:19:09 2024 -0600
+
+    Merge branch 'main' into loml
+
+[33mcommit 2f9d3f7b189a0c6109856f99cca5d77d065f9860[m
+Author: Marla <121531470+Tearp89@users.noreply.github.com>
+Date:   Sun May 19 18:17:30 2024 -0600
+
+    interfaces para consultar, modificar universidad y responder solicitudes de académicos y propuestas de colaboración
+
+[33mcommit d52e5b171653ce836575f7bb23a55ae1b50f6886[m
+Author: Marla <121531470+Tearp89@users.noreply.github.com>
+Date:   Fri May 17 22:07:47 2024 -0600
+
+    cambio en diagrama de secuencia.
+
+[33mcommit 4a785f87a8a71b0ce2e7a3c955c99f375ae0b875[m
+Author: Marla <121531470+Tearp89@users.noreply.github.com>
+Date:   Thu May 16 16:35:46 2024 -0600
+
+    Diagrama de secuencia
+
+[33mcommit 9afb8b85f2985e0525eb3162abf586079edd94c5[m
+Author: Marla <121531470+Tearp89@users.noreply.github.com>
+Date:   Tue May 14 17:20:01 2024 -0600
+
+    siu
+
+[33mcommit d7d06f7a008c625f98c36a30e3b3a6f7c572015b[m
+Merge: 6b85799 92d69cf
+Author: Marla <121531470+Tearp89@users.noreply.github.com>
+Date:   Tue May 14 17:17:01 2024 -0600
+
+    Merge remote-tracking branch 'origin/main' into loml
+
+[33mcommit 6b85799a1fb38283b03f09db12e14b4a3f7395dc[m
+Author: Marla <121531470+Tearp89@users.noreply.github.com>
+Date:   Tue May 14 17:14:55 2024 -0600
+
+    solicitar participar en colaboración
+
+[33mcommit 92d69cfc82dd69f1d9025d3c69e87f29cf319821[m
+Merge: bb4a5a8 d2e1268
+Author: Drawiel <162381212+Drawiel@users.noreply.github.com>
+Date:   Tue May 14 17:10:11 2024 -0600
+
+    Merge pull request #24 from Tearp89/Daylight
+    
+    Implementación singleton en varias clases
+
+[33mcommit d2e12684dfcb54e5a40c001c58be6d5e226d5cce[m
+Author: Drawiel <daur0704@outlook.com>
+Date:   Tue May 14 17:08:56 2024 -0600
+
+    Implementación singleton en varias clases
+    
+    Actualización AdminDAO e interoperabilidad entre ventanas de inicio a númeralia
+
+[33mcommit 1178fa6a485b17561aa4eac2d44fc82df91a2fb3[m
+Author: Marla <121531470+Tearp89@users.noreply.github.com>
+Date:   Tue May 14 14:42:40 2024 -0600
+
+    cifrado de contraseñas y cambio en acceso a la base
+
+[33mcommit 5caad2e7e1e247a7025e9c399fcaba3e51a87172[m
+Author: Marla <121531470+Tearp89@users.noreply.github.com>
+Date:   Tue May 14 13:39:06 2024 -0600
+
+    diagramas
+
+[33mcommit bb4a5a8c8251cdc0f3ce80daee3c901bc33d66cf[m
+Merge: e8986a8 3f544e3
+Author: Drawiel <162381212+Drawiel@users.noreply.github.com>
+Date:   Mon May 13 18:02:47 2024 -0600
+
+    Merge pull request #23 from Tearp89/Daylight
+    
+    Cambios multimedia
+
+[33mcommit 3f544e3a7742056044215805c783a2ef42a753c8[m
+Author: Drawiel <daur0704@outlook.com>
+Date:   Mon May 13 18:02:21 2024 -0600
+
+    Cambios multimedia
+
+[33mcommit e8986a83b4fe89fb322d26bf2d0e293a3d50f3cd[m
+Author: Marla <121531470+Tearp89@users.noreply.github.com>
+Date:   Mon May 13 17:23:14 2024 -0600
+
+    imágenes
+
+[33mcommit 01535efbd7e48e80006db9e0633811b163587bcd[m
+Author: Marla <121531470+Tearp89@users.noreply.github.com>
+Date:   Mon May 13 17:11:28 2024 -0600
+
+    sepa
+
+[33mcommit b34606100a4b39f886721098bc8b20e50b69db8d[m
+Merge: 1a2eb6d ccf5ce8
+Author: Marla <121531470+Tearp89@users.noreply.github.com>
+Date:   Mon May 13 15:55:57 2024 -0600
+
+    Merge remote-tracking branch 'origin/main' into loml
+
+[33mcommit 1a2eb6d277334237339813d2f7eff3293c344c4f[m
+Author: Marla <121531470+Tearp89@users.noreply.github.com>
+Date:   Mon May 13 12:57:20 2024 -0600
+
+    cambios en css
+
+[33mcommit ccf5ce8f41561ce09432b2735432a570c2a1e88d[m
+Merge: 57ede84 eff826a
+Author: Drawiel <162381212+Drawiel@users.noreply.github.com>
+Date:   Mon May 13 02:50:27 2024 -0600
+
+    Merge pull request #22 from Tearp89/Daylight
+    
+    Excel, singleton y mail
+
+[33mcommit eff826ae8bcba7745a4224cbd725a90ce80840ff[m
+Author: Drawiel <daur0704@outlook.com>
+Date:   Mon May 13 02:50:08 2024 -0600
+
+    Excel, singleton y mail
+    
+    Funcionamiento correcto de guardado en Excel, funcionamiento de mail y agregación de Singleton para profesor y Admin
+
+[33mcommit bd04699b0ca89b15d633c3aad5c41e5983a5d35d[m
+Author: Marla <121531470+Tearp89@users.noreply.github.com>
+Date:   Mon May 13 02:23:48 2024 -0600
+
+    consultar colaboraciones aceptadas y publicarlas
+
+[33mcommit 4c5d111c2b79dacfe1318091771d1fe7f900bd0a[m
+Author: Marla <121531470+Tearp89@users.noreply.github.com>
+Date:   Wed May 8 22:04:06 2024 -0600
+
+    alertas en modifica propuesta de colaboración
+
+[33mcommit 3b762b75c1ad5dd5944013260393993876ab2c3c[m
+Author: Marla <121531470+Tearp89@users.noreply.github.com>
+Date:   Mon May 6 13:38:29 2024 -0600
+
+    Alerta personalizada
+
+[33mcommit 57ede84b6b2ac5d5e2fdbc7a7cf612eb26ee1597[m[33m ([m[1;32mDown-Bad[m[33m)[m
+Author: Marla <121531470+Tearp89@users.noreply.github.com>
+Date:   Sat May 4 20:58:22 2024 -0600
+
+    cambios en agregar colaboración
+
+[33mcommit 749c6aba93425278998d52c604f5a8286a377bc0[m
+Merge: 4481693 d0866e7
+Author: Marla <121531470+Tearp89@users.noreply.github.com>
+Date:   Sat May 4 20:05:21 2024 -0600
+
+    Merge branch 'main' into loml
+
+[33mcommit 4481693f40f23d6c508e75fd654653abb1b35123[m
+Author: Marla <121531470+Tearp89@users.noreply.github.com>
+Date:   Sat May 4 20:04:05 2024 -0600
+
+    actualización de las clases para que queden con la base, creo
+
+[33mcommit 16351a65cd484a6a962304d837fd7e82ef383880[m
+Author: Marla <121531470+Tearp89@users.noreply.github.com>
+Date:   Sat May 4 19:23:12 2024 -0600
+
+    cambios en CollaborationStatsDAO para la new base
+
+[33mcommit d0866e78a45eb4b6e758d4499d039dc7fcece14f[m
+Merge: d67df56 c9f1d07
+Author: Drawiel <162381212+Drawiel@users.noreply.github.com>
+Date:   Fri May 3 23:00:48 2024 -0600
+
+    Merge pull request #21 from Tearp89/Daylight
+    
+    Daylight
+
+[33mcommit c9f1d0742ea35fbafa336eb6ce96e540df17b2eb[m
+Merge: 440cd69 d67df56
+Author: Drawiel <162381212+Drawiel@users.noreply.github.com>
+Date:   Fri May 3 23:00:38 2024 -0600
+
+    Merge branch 'main' into Daylight
+
+[33mcommit 440cd693267215355ce2f5042d8273bf9ce63e38[m
+Author: Drawiel <daur0704@outlook.com>
+Date:   Fri May 3 22:58:08 2024 -0600
+
+    ???
+
+[33mcommit c988a24f652d27c2f17010badc264dc1dc9fa0eb[m
+Author: Drawiel <daur0704@outlook.com>
+Date:   Fri May 3 22:47:16 2024 -0600
+
+    Funcionalidad diversos botones
+    
+    Minimizar, cerrar, cambiar
+
+[33mcommit d67df563d7c47a269099f345f85494930673e86c[m
+Author: Marla <121531470+Tearp89@users.noreply.github.com>
+Date:   Fri May 3 22:21:18 2024 -0600
+
+    numeralia controller corregido
+
+[33mcommit 7379802c06a295a6f60f508d052a9fedce2676f4[m
+Merge: 23080c0 a80f0f9
+Author: Marla <121531470+Tearp89@users.noreply.github.com>
+Date:   Fri May 3 22:06:20 2024 -0600
+
+    Merge remote-tracking branch 'origin/main' into loml
+
+[33mcommit 23080c06cc2896b4a7f9dbc59b87adabc5e66c7c[m
+Author: Marla <121531470+Tearp89@users.noreply.github.com>
+Date:   Fri May 3 21:53:10 2024 -0600
+
+    numeralia y numeralia controller
+
+[33mcommit 430883842aa8463c0479a2a0a54d0bc8e13783d7[m
+Author: Marla <121531470+Tearp89@users.noreply.github.com>
+Date:   Fri May 3 21:51:39 2024 -0600
+
+    ?
+
+[33mcommit 2502b2dd5ccda1f50e2d155d052daade653745f7[m
+Merge: cfee5a0 08d11fb
+Author: Marla <121531470+Tearp89@users.noreply.github.com>
+Date:   Fri May 3 21:48:22 2024 -0600
+
+    Merge branch 'main' into loml
+
+[33mcommit cfee5a08fae438ddbf6d40241466723c3fd72514[m
+Author: Marla <121531470+Tearp89@users.noreply.github.com>
+Date:   Fri May 3 18:25:47 2024 -0600
+
+    interfaz funcionando para colaboraciones activas
+
+[33mcommit a80f0f9c91457fed71d9733f74255f294eb95595[m
+Merge: 08d11fb 728d398
+Author: Drawiel <162381212+Drawiel@users.noreply.github.com>
+Date:   Thu May 2 21:11:12 2024 -0600
+
+    Merge pull request #20 from Tearp89/Daylight
+    
+    Cambios en ventanas, agregación de guardado y actualización de 1 interfaz
+
+[33mcommit 728d398ab0e457d9b46981df9a635efe91109a29[m
+Author: Drawiel <daur0704@outlook.com>
+Date:   Thu May 2 21:07:35 2024 -0600
+
+    Cambios en numeralia, agregación de librerias y funcionamiento correcto de
+    
+    Se logro hacer el guardar a excel
+
+[33mcommit 8234adb41543374069660863f92709736fdf1727[m
+Author: Marla <121531470+Tearp89@users.noreply.github.com>
+Date:   Thu May 2 01:28:53 2024 -0600
+
+    busqueda de colaboraciones rechazadas
+
+[33mcommit e3389ab6b9df4e9d806014dc168047b90fe80d6d[m
+Author: Drawiel <daur0704@outlook.com>
+Date:   Wed May 1 23:42:06 2024 -0600
+
+    Merge remote-tracking branch 'origin/Daylight' into loml
+
+[33mcommit ba5aca27909e39980979f2b2f525c757a46ee30e[m
+Author: Marla <121531470+Tearp89@users.noreply.github.com>
+Date:   Wed May 1 23:41:38 2024 -0600
+
+    cambios en buscar colaboraciones rechazadas
+
+[33mcommit 21186021056634344e741b0b9703266affda9e4b[m
+Merge: 6c2c328 172b368
+Author: Marla <121531470+Tearp89@users.noreply.github.com>
+Date:   Wed May 1 21:38:23 2024 -0600
+
+    Merge remote-tracking branch 'origin/Daylight' into loml
+
+[33mcommit 6c2c32801fe052eb0bed23d4f863a51db648093c[m
+Author: Marla <121531470+Tearp89@users.noreply.github.com>
+Date:   Wed May 1 21:30:35 2024 -0600
+
+    consulta de colaboraciones rechazadas
+
+[33mcommit 172b368bfbc10007300334bffbb73ad8d895220a[m
+Author: Drawiel <daur0704@outlook.com>
+Date:   Wed May 1 17:56:25 2024 -0600
+
+    Guardar tablas en excel
+    
+    Se logro
+
+[33mcommit 8b21e4c1beefc66bd452be3d85f2c77c64c528c8[m
+Author: Marla <121531470+Tearp89@users.noreply.github.com>
+Date:   Wed May 1 15:38:35 2024 -0600
+
+    métodos par obtener la información del profesor
+
+[33mcommit 9d83fb327f990db0c1e9fa7301f51fb7f5b04717[m
+Author: Marla <121531470+Tearp89@users.noreply.github.com>
+Date:   Mon Apr 29 17:45:03 2024 -0600
+
+    .
+
+[33mcommit dde5fb16230f1349e5e122b65f64fb73d4690556[m
+Author: Marla <121531470+Tearp89@users.noreply.github.com>
+Date:   Fri Apr 26 15:10:36 2024 -0600
+
+    i hate it here
+
+[33mcommit d23077008961e46fb1ac6cc2709bd85684469480[m
+Author: Marla <121531470+Tearp89@users.noreply.github.com>
+Date:   Thu Apr 25 23:28:03 2024 -0600
+
+    mateneme
+
+[33mcommit 79026139c7b125b43c4bb8ebafa25038237b142d[m
+Author: Marla <121531470+Tearp89@users.noreply.github.com>
+Date:   Thu Apr 25 23:25:54 2024 -0600
+
+    agregar Professor
+
+[33mcommit 81e57aae63e3ef1971a30e6e270908d334943fb5[m
+Author: Marla <121531470+Tearp89@users.noreply.github.com>
+Date:   Thu Apr 25 00:39:44 2024 -0600
+
+    Interfaz para agregar la colaboración funcionando e imágenes en todas las interfaces
+
+[33mcommit 08d11fb4eafcfcd0a36754c83b98543eb25c8ef7[m
+Merge: 628540e 6eb7404
+Author: Marla <121531470+Tearp89@users.noreply.github.com>
+Date:   Tue Apr 23 22:31:04 2024 -0600
+
+    Merge pull request #19 from Tearp89/loml
+    
+    clases para la interfaz numeralia
+
+[33mcommit 6eb7404a91c9ad206a0fefcf44168c8ba9466b35[m
+Author: Marla <121531470+Tearp89@users.noreply.github.com>
+Date:   Tue Apr 23 22:30:17 2024 -0600
+
+    clases para la interfaz numeralia
+    
+    numeralia
+
+[33mcommit 628540e3b0de8605b3bcbdf27245155ea3b5a2c1[m
+Merge: e2e1aad 2e1a272
+Author: Drawiel <162381212+Drawiel@users.noreply.github.com>
+Date:   Tue Apr 23 16:57:10 2024 -0600
+
+    Merge pull request #18 from Tearp89/Daylight
+    
+    Daylight
+
+[33mcommit 2e1a2728e4eca7357f5125b425ac3606dee3d0ae[m[33m ([m[1;31morigin/Down-Bad[m[33m)[m
+Author: Drawiel <daur0704@outlook.com>
+Date:   Tue Apr 23 16:52:41 2024 -0600
+
+    Agregar mandar email logs
+    
+    Se agrego la opción de mandar los logs por medio de emails
+
+[33mcommit b07be757f499ce44f3b16058e370bd0c63634fbf[m
+Author: Drawiel <daur0704@outlook.com>
+Date:   Fri Apr 19 18:28:14 2024 -0600
+
+    Clase para control de emails con test
+    
+    Se agregó una libreria nueva y se realizó la creación de la clase emailControl con el respectivo test
+
+[33mcommit e2e1aadd0df29fc4fb841fccdebc62f414acd10c[m
+Merge: ed599d2 de88317
+Author: Drawiel <162381212+Drawiel@users.noreply.github.com>
+Date:   Fri Apr 19 01:34:18 2024 -0600
+
+    Merge pull request #17 from Tearp89/Daylight
+    
+    Implementación de log4j
+
+[33mcommit de8831754eee11ea2de397071432da187590817c[m
+Author: Drawiel <daur0704@outlook.com>
+Date:   Fri Apr 19 01:16:16 2024 -0600
+
+    Implementación de log4j
+    
+    Implementación de Log4J y actualización de las clases para su implementación en el manejo de los errores
+
+[33mcommit ed599d207ffffc7755698e0f1ba4918be0d3571e[m
+Author: Tearp89 <marla838.aguilar@gmail.com>
+Date:   Thu Apr 18 16:50:29 2024 -0600
+
+    librerías
+
+[33mcommit f05cfa4f5310199a349348c70cad1a5394ecd472[m
+Merge: e82f869 898f5de
+Author: Tearp89 <marla838.aguilar@gmail.com>
+Date:   Thu Apr 18 14:19:05 2024 -0600
+
+    Merge branch 'evermore'
+
+[33mcommit 898f5de27c2affc78d35980356ed0400ab3c985e[m
+Author: Tearp89 <marla838.aguilar@gmail.com>
+Date:   Thu Apr 18 14:18:43 2024 -0600
+
+    diagrams
+
+[33mcommit e82f869c856a632a82b37238155123e8d479290f[m
+Author: Tearp89 <marla838.aguilar@gmail.com>
+Date:   Thu Apr 18 14:17:25 2024 -0600
+
+    diagramas de comsecuencia
+
+[33mcommit ef3ace5700c6d46358caecbd59d8406c63d14064[m
+Author: Tearp89 <marla838.aguilar@gmail.com>
+Date:   Thu Apr 18 13:43:35 2024 -0600
+
+    interfaz para agregar colaboración
+
+[33mcommit 35453b997282d4ebee37331c1be7149efd3d54cb[m
+Merge: 385f35c e7fbd7b
+Author: Tearp89 <marla838.aguilar@gmail.com>
+Date:   Wed Apr 17 23:22:00 2024 -0600
+
+    Merge branch 'main' into evermore
+
+[33mcommit e7fbd7bf04be0fbbe80d435d4185842a75620096[m
+Author: Tearp89 <marla838.aguilar@gmail.com>
+Date:   Wed Apr 17 23:20:29 2024 -0600
+
+    validación de login, helpME
+
+[33mcommit 68d2f9727be30d123ce4a5c9a046f559cfadd7a6[m
+Merge: bfe1251 0af435e
+Author: Tearp89 <marla838.aguilar@gmail.com>
+Date:   Tue Apr 16 18:04:16 2024 -0600
+
+    Merge branch 'main' of https://github.com/Tearp89/COIL-VIC-YOYOK
+
+[33mcommit bfe1251b5c6f0bdacdb624619ee8074fc645f2f1[m
+Author: Tearp89 <marla838.aguilar@gmail.com>
+Date:   Tue Apr 16 18:02:23 2024 -0600
+
+    sueltame ingsoft
+
+[33mcommit 0af435e3bf67ed03f4dc7d769cc28503b105b9ff[m
+Author: Drawiel <daur0704@outlook.com>
+Date:   Tue Apr 16 17:19:38 2024 -0600
+
+    Agregar bibliotecas jlog4 y arreglar referencias
+
+[33mcommit 4a8e58715533d01c812e065dbac84e50ab8a5f24[m
+Author: Tearp89 <marla838.aguilar@gmail.com>
+Date:   Mon Apr 15 18:49:50 2024 -0600
+
+    cambio en la clase(?)
+
+[33mcommit 385f35c767862f5de1544565d48ec1898fee0f2d[m
+Merge: 03f35af 1d6b326
+Author: Marla <121531470+Tearp89@users.noreply.github.com>
+Date:   Mon Apr 15 18:48:06 2024 -0600
+
+    Merge pull request #16 from Tearp89/main
+    
+    Merge pull request #15 from Tearp89/evermore
+
+[33mcommit 1d6b326fe7b61c9a6e77b437ab18b384acb3135a[m
+Merge: e13fc4f 03f35af
+Author: Marla <121531470+Tearp89@users.noreply.github.com>
+Date:   Mon Apr 15 18:45:37 2024 -0600
+
+    Merge pull request #15 from Tearp89/evermore
+    
+    Merge pull request #14 from Tearp89/main
+
+[33mcommit 03f35af86d47a89ded69ffc3ba7e4de67a8f9d2b[m
+Merge: cebce99 e13fc4f
+Author: Marla <121531470+Tearp89@users.noreply.github.com>
+Date:   Mon Apr 15 18:44:37 2024 -0600
+
+    Merge pull request #14 from Tearp89/main
+    
+    ya sueltame git pt.3
+
+[33mcommit e13fc4f2b98ed89ca9600f05f17370d588d8d881[m
+Merge: cebce99 414c43b
+Author: Tearp89 <marla838.aguilar@gmail.com>
+Date:   Mon Apr 15 18:41:17 2024 -0600
+
+    Merge branch 'main' of https://github.com/Tearp89/COIL-VIC-YOYOK
+
+[33mcommit cebce9968bd67a7dfff798c153d6e5b33c86c074[m
+Author: Tearp89 <marla838.aguilar@gmail.com>
+Date:   Mon Apr 15 18:36:07 2024 -0600
+
+    clases renoMbrAdas para ni TENer Más Errores
+
+[33mcommit 414c43b19bc0b13776a2167bea9ecb9a0b52cca7[m
+Merge: fbe130a 52d8cbd
+Author: Marla <121531470+Tearp89@users.noreply.github.com>
+Date:   Mon Apr 15 17:58:51 2024 -0600
+
+    Merge pull request #13 from Tearp89/evermore
+    
+    Evermore
+
+[33mcommit 52d8cbd1ead0129ca81f897e823e4819f45d45eb[m
+Author: Tearp89 <marla838.aguilar@gmail.com>
+Date:   Fri Apr 12 17:17:02 2024 -0600
+
+    Co-authored-by: Drawiel <Drawiel@users.noreply.github.com>
+    Co-authored-by: Isa <lsabella04@users.noreply.github.com>
+
+[33mcommit fcbe728b5e1df01eb603a3c6004e2b7b8f81acd8[m
+Author: Tearp89 <marla838.aguilar@gmail.com>
+Date:   Fri Apr 12 01:49:33 2024 -0600
+
+    Metedos para la numeralia
+
+[33mcommit f89eb32621428c806f26645e4c41fae37f558e4a[m
+Author: Tearp89 <marla838.aguilar@gmail.com>
+Date:   Fri Apr 12 01:44:09 2024 -0600
+
+    Co-authored-by: Drawiel <Drawiel@users.noreply.github.com>
+
+[33mcommit b09b5a69d1a8963ba37ec651b9e9760ed220a023[m
+Merge: 439dd35 fbe130a
+Author: Tearp89 <marla838.aguilar@gmail.com>
+Date:   Mon Apr 8 23:17:26 2024 -0600
+
+    Merge branch 'main' into evermore
+    "Librerías"
+
+[33mcommit 439dd350d11f2fb442fff5344e89b966f9ca3cb8[m
+Author: Tearp89 <marla838.aguilar@gmail.com>
+Date:   Mon Apr 8 23:16:52 2024 -0600
+
+    Intento de log4j
+
+[33mcommit fbe130a3936231954cd20bb504e18524839b747a[m
+Author: Marla <121531470+Tearp89@users.noreply.github.com>
+Date:   Mon Apr 8 22:16:32 2024 -0600
+
+    Librerías usadas
+
+[33mcommit 5aa31bfee5134323cc8c32ea65e8b37908bc3d3a[m
+Author: Drawiel <162381212+Drawiel@users.noreply.github.com>
+Date:   Fri Apr 5 18:37:24 2024 -0600
+
+    Update project.properties Referencia a Librerías
+
+[33mcommit 42bebae2696ba479382401e0a112dd0f52366e3d[m
+Author: Drawiel <162381212+Drawiel@users.noreply.github.com>
+Date:   Fri Apr 5 18:24:21 2024 -0600
+
+    Librerias
+    
+    Se añaden las librerías que se van a utilizar en una carpeta lib
+
+[33mcommit ac60f47aecc604c9cd8f724e70409c84b73ad441[m
+Author: Tearp89 <marla838.aguilar@gmail.com>
+Date:   Fri Apr 5 17:01:24 2024 -0600
+
+    Tests completados
+
+[33mcommit 3375f4c5f64ecf8b50c98a5ee5ae1a4700512dcc[m
+Merge: 89831d0 b517ef4
+Author: Tearp89 <marla838.aguilar@gmail.com>
+Date:   Fri Apr 5 15:45:25 2024 -0600
+
+    Merge branch 'betty' into evermore
+
+[33mcommit 89831d04fe809a0fcb26fc99588ed22469349ea5[m
+Author: Tearp89 <marla838.aguilar@gmail.com>
+Date:   Fri Apr 5 15:45:16 2024 -0600
+
+    Más test, test ppara success y failed
+
+[33mcommit b517ef41ea1ea880fbfa0d3d21de78f59fab0bd1[m[33m ([m[1;31morigin/copia-betty-05/04/2024[m[33m)[m
+Merge: 5140ece 351e8ad
+Author: Marla <121531470+Tearp89@users.noreply.github.com>
+Date:   Fri Apr 5 01:32:42 2024 -0600
+
+    Merge pull request #10 from Tearp89/august
+    
+    Merge pull request #9 from Tearp89/betty
+
+[33mcommit 351e8ada8dfda5deafb11dcaacf59606ef666a9b[m[33m ([m[1;31morigin/august[m[33m)[m
+Merge: 79d2231 5140ece
+Author: Marla <121531470+Tearp89@users.noreply.github.com>
+Date:   Fri Apr 5 01:31:55 2024 -0600
+
+    Merge pull request #9 from Tearp89/betty
+    
+    consultas y save
+
+[33mcommit 5140ecef576098f3931012f335bf9c51b1a180df[m
+Author: Tearp89 <marla838.aguilar@gmail.com>
+Date:   Fri Apr 5 01:21:35 2024 -0600
+
+    Consultas de colaboración, profesor y Curso-Taller
+
+[33mcommit b6e8d71edb4b6ef0ff08886bbdaee35fac61de88[m
+Merge: cf5a866 75895c5
+Author: Marla <121531470+Tearp89@users.noreply.github.com>
+Date:   Mon Apr 1 00:56:32 2024 -0600
+
+    Merge pull request #8 from Tearp89/maroon
+    
+    Maroon
+
+[33mcommit cf5a8666ae379f033717370dac5aa053b4df2e4d[m[33m ([m[1;31morigin/copia-betty-01-04-24[m[33m)[m
+Merge: d561380 ff1c1ff
+Author: Marla <121531470+Tearp89@users.noreply.github.com>
+Date:   Mon Apr 1 00:47:15 2024 -0600
+
+    Merge pull request #7 from Tearp89/evermore
+    
+    Evermore
+
+[33mcommit 75895c52d4a0121234c9f37567f6008bc4adc053[m
+Merge: afb204e d561380
+Author: Tearp89 <marla838.aguilar@gmail.com>
+Date:   Mon Apr 1 00:42:57 2024 -0600
+
+    Merge branch 'betty' into maroon
+    Agregar los di
+
+[33mcommit d56138020727a98f01cb137cb9053971b4235f0a[m
+Author: Marla <121531470+Tearp89@users.noreply.github.com>
+Date:   Mon Apr 1 00:38:01 2024 -0600
+
+    Diagramas separados en paquetes
+
+[33mcommit 252f791cab513c84a8e128988fb81f4a22031d74[m
+Author: Marla <121531470+Tearp89@users.noreply.github.com>
+Date:   Sun Mar 31 21:40:28 2024 -0600
+
+    Diagramas
+    
+    me voy a suicidar pt. 2
+
+[33mcommit afb204e46f3d5e89c74c7ff7cbee28680ff3798e[m
+Merge: a270c81 2158065
+Author: Tearp89 <marla838.aguilar@gmail.com>
+Date:   Fri Mar 22 11:33:30 2024 -0600
+
+    sueltame git
+
+[33mcommit ff1c1ff0f34e1db5af1d0e3d1daedf911dc6c9e2[m
+Merge: 2158065 a270c81
+Author: Tearp89 <marla838.aguilar@gmail.com>
+Date:   Fri Mar 22 11:32:19 2024 -0600
+
+    prueba
+
+[33mcommit c6fd82829088e6b92d6684ca7754cf74d8e82877[m[33m ([m[1;31morigin/copia-betty-22/03/2024[m[33m)[m
+Merge: 2158065 6858094
+Author: Drawiel <162381212+Drawiel@users.noreply.github.com>
+Date:   Fri Mar 22 03:17:40 2024 -0600
+
+    Merge pull request #6 from Tearp89/mr-perfectly-fine
+    
+    SaveDAO para guardar JTables
+
+[33mcommit 685809439b81f89205320d6517569946098e7935[m
+Merge: 84a9074 2158065
+Author: Drawiel <162381212+Drawiel@users.noreply.github.com>
+Date:   Fri Mar 22 03:17:32 2024 -0600
+
+    Merge branch 'betty' into mr-perfectly-fine
+
+[33mcommit 84a907436f8891223a9426ad2f7d0c4b93ed5dfe[m
+Author: Drawiel <daur0704@outlook.com>
+Date:   Fri Mar 22 03:14:46 2024 -0600
+
+    DAO para guardar JTables
+    
+    Creación de SaveDAO para guardar el contenido de una JTable en un archivo excel personalizado
+
+[33mcommit a270c81965ce5fb824f65eba0059ae22cbf12da1[m
+Author: Tearp89 <marla838.aguilar@gmail.com>
+Date:   Thu Mar 21 17:45:00 2024 -0600
+
+    ya sueltame Uv
+
+[33mcommit 9a4793399621d6aa8b4d8cad812eb40b022c2a6b[m
+Author: Tearp89 <marla838.aguilar@gmail.com>
+Date:   Thu Mar 21 17:43:23 2024 -0600
+
+    matenme por favor se borró todo
+
+[33mcommit 21580654c19804ec0492c9f7c9f35600e0a5259d[m
+Author: Tearp89 <marla838.aguilar@gmail.com>
+Date:   Thu Mar 21 17:34:42 2024 -0600
+
+    Cambios en DAO´s y unos test
+
+[33mcommit 48612687727e661f366607fc20b875b862739fcf[m
+Merge: 149ab3d 3c83741
+Author: Isa <162381697+lsabella04@users.noreply.github.com>
+Date:   Tue Mar 19 18:53:54 2024 -0600
+
+    Merge pull request #5 from Tearp89/maroon
+    
+    Arreglo de universityDAO
+
+[33mcommit 3c8374162edec4046ff63eb74b21b5258c3466bd[m
+Author: Isabella Méndez <isabella.hmdez@gmail.com>
+Date:   Tue Mar 19 18:52:03 2024 -0600
+
+    Arreglo de universityDAO
+
+[33mcommit 149ab3de3b67422a1f4a3a8d2c0bb260850581c7[m
+Merge: 3defc7d 9e7b609
+Author: lsabella04 <162381697+lsabella04@users.noreply.github.com>
+Date:   Mon Mar 18 01:41:14 2024 -0600
+
+    Merge pull request #4 from Tearp89/maroon
+    
+    Arreglo de interfaces de facilitador y admin, y agregación de impleme…
+
+[33mcommit 9e7b609215202098863eebdd350a77986dd06fbe[m
+Author: Isabella Méndez <isabella.hmdez@gmail.com>
+Date:   Mon Mar 18 01:25:08 2024 -0600
+
+    Arreglo de interfaces de facilitador y admin, y agregación de implements a las DAOS
+
+[33mcommit 3defc7df0f002956ee5055921673e36381e47585[m
+Merge: f65b9cf 8c4cf62
+Author: Marla <121531470+Tearp89@users.noreply.github.com>
+Date:   Mon Mar 18 01:07:50 2024 -0600
+
+    Merge pull request #3 from Tearp89/maroon
+    
+    Maroon - interfaces faltantes
+
+[33mcommit 8c4cf62ee220607a1ce404e569af52fdf5270677[m
+Author: Isabella Méndez <isabella.hmdez@gmail.com>
+Date:   Mon Mar 18 00:56:15 2024 -0600
+
+    Interfaces faltantes
+
+[33mcommit ccdc117e05401d7a4370658edd5bb17e3239ea7d[m
+Author: Isabella Méndez <isabella.hmdez@gmail.com>
+Date:   Mon Mar 18 00:52:00 2024 -0600
+
+    Interfaces faltantes, cambios en DAOS de admin y facilitador y cambios en test de admin y facilitador
+
+[33mcommit 481561ef83240cdc8b34a7936997c8533f69618a[m
+Merge: 740cffb bbfbc01
+Author: Isabella Méndez <isabella.hmdez@gmail.com>
+Date:   Mon Mar 18 00:45:10 2024 -0600
+
+    Interfaces faltantes, cambios en DAOS de admin y facilitador y cambios en test de admin y facilitador
+
+[33mcommit bbfbc01d7f250bd580d3d5ed969e5d8a0ffdf9b1[m
+Author: Isabella Méndez <isabella.hmdez@gmail.com>
+Date:   Mon Mar 18 00:34:13 2024 -0600
+
+    Interfaces faltantes, cambios en DAOS de admin y facilitador y cambios en test de admin y facilitador
+
+[33mcommit 740cffb6305661f0ccfd764d116b2fa22aa72fce[m
+Author: Isabella Méndez <isabella.hmdez@gmail.com>
+Date:   Sun Mar 17 23:56:12 2024 -0600
+
+    error
+
+[33mcommit f65b9cfab5e9b6654df0529ae3a8c9c64d5e6a3c[m
+Merge: f78285b 65d8f95
+Author: Drawiel <162381212+Drawiel@users.noreply.github.com>
+Date:   Sun Mar 17 22:32:53 2024 -0600
+
+    Merge pull request #2 from Tearp89/mr-perfectly-fine
+    
+    Test DAOs
+
+[33mcommit 65d8f951c754a6064ea9fac6b93e8eaea00de392[m
+Author: Drawiel <daur0704@outlook.com>
+Date:   Sun Mar 17 21:43:04 2024 -0600
+
+    Test DAOs
+
+[33mcommit f78285b6581a2c4db7070ddfdc7b098d8465f7da[m[33m ([m[1;31morigin/respaldo-DAO[m[33m)[m
+Merge: 474bd5f 79d2231
+Author: Isabella Méndez <isabella.hmdez@gmail.com>
+Date:   Fri Mar 15 13:11:16 2024 -0600
+
+    DAOS de universidad, facilitador y administrador
+
+[33mcommit 474bd5f371046557adae93cfd916c8c582b03d00[m
+Author: Isabella Méndez <isabella.hmdez@gmail.com>
+Date:   Fri Mar 15 00:50:09 2024 -0600
+
+    Agregué DAO de facilitador, universidad y administrador
+
+[33mcommit 79d22314ab76860e4caa617cd97b59ed15beb9e7[m
+Author: Tearp89 <marla838.aguilar@gmail.com>
+Date:   Thu Mar 14 21:38:10 2024 -0600
+
+    Actualización de clases y DAO de profesor
+
+[33mcommit 20e011f2919b576b733eb317c71c2ac7a580cb24[m
+Author: Tearp89 <marla838.aguilar@gmail.com>
+Date:   Thu Mar 14 21:35:15 2024 -0600
+
+    DAO de colaboración y curso-taller
+
+[33mcommit 977fc22f09d89a1a678d014b66345be88cc27fd6[m
+Author: Tearp89 <marla838.aguilar@gmail.com>
+Date:   Thu Mar 14 13:28:19 2024 -0600
+
+    Actualización en clases
+
+[33mcommit e31aec654f08e83325b21c22dc4f90946fb777de[m[33m ([m[1;31morigin/respaldo_clases[m[33m)[m
+Author: Tearp89 <marla838.aguilar@gmail.com>
+Date:   Fri Mar 8 21:35:09 2024 -0600
+
+    Clase Administrador, colaboración, facilitador y curso-taller
+
+[33mcommit ea09c3851f4bf2c6710f0c571e6e84652bc452e9[m
+Author: Isabella Méndez <isabella.hmdez@gmail.com>
+Date:   Fri Mar 8 18:11:45 2024 -0600
+
+    DAO universidad, interfaces de estudiantes y universidad
+
+[33mcommit f96f286b6bdde534c38520abd8fd7e34c1c8826d[m
+Author: Marla <121531470+Tearp89@users.noreply.github.com>
+Date:   Fri Mar 8 17:42:15 2024 -0600
+
+    Add files via upload
+
+[33mcommit 64acf03b2c5c1385c679dde3c844099d57947b3a[m
+Author: Drawiel <162381212+Drawiel@users.noreply.github.com>
+Date:   Tue Mar 5 17:59:10 2024 -0600
+
+    Add files via upload
+
+[33mcommit 28ad7cadbf83f270ac720bbea2c195986a34f01a[m
+Author: Marla <121531470+Tearp89@users.noreply.github.com>
+Date:   Tue Mar 5 16:06:45 2024 -0600
+
+    Add files via upload
+
+[33mcommit 452c3076e90724ba6ccea999e31edaf0569a515b[m
+Author: Marla <121531470+Tearp89@users.noreply.github.com>
+Date:   Tue Mar 5 16:05:04 2024 -0600
+
+    Create .ts
+
+[33mcommit 90f55b87ccf2474a8b369eeb1d50f7671f248b98[m
+Author: Marla <121531470+Tearp89@users.noreply.github.com>
+Date:   Tue Mar 5 16:04:42 2024 -0600
+
+    Create .ts
+
+[33mcommit bc01bf2ed3e9f418e19384a4c315a9a58fc87aad[m
+Author: Marla <121531470+Tearp89@users.noreply.github.com>
+Date:   Tue Mar 5 16:04:12 2024 -0600
+
+    Create .ts

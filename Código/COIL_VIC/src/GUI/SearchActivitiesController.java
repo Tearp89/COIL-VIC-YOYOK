@@ -142,9 +142,13 @@ public class SearchActivitiesController {
         CollaborationDAO collaborationDAO = new CollaborationDAO();
         ArrayList<Collaboration> publishedCollaborations = collaborationDAO.searchCollaborationByStatusAndProfessorId("Publicada", professorId);
         int collaborationId = publishedCollaborations.get(0).getCollaborationId();
-
         ActivityDAO activityDAO = new ActivityDAO();
-        if(activityDAO.isActivityTypeAssigned(collaborationId, type) == true){
+        if(title.trim().isEmpty() || type.trim().isEmpty() || week.trim().isEmpty()){
+            Alert emptyFieldsAlert = new Alert(AlertType.ERROR);
+            emptyFieldsAlert.setTitle("Campos vacíos");
+            emptyFieldsAlert.setHeaderText("Campos vacíos");
+            emptyFieldsAlert.setContentText("No se modificar la actividad, hay campos vacíos");
+        }else if(activityDAO.isActivityTypeAssigned(collaborationId, type) == true){
             Alert duplicatedTypeAlert = new Alert(AlertType.ERROR);
             duplicatedTypeAlert.setTitle("Tipos duplicados");
             duplicatedTypeAlert.setHeaderText("Tipos duplicados");
@@ -253,7 +257,7 @@ public class SearchActivitiesController {
                 comboBoxType.setValue(activity.getType());
                 labelActivityId.setText(String.valueOf(activity.getActivityId()));
             } else {
-                // Clear fields if no activities found
+                
                 textFieldTitle.clear();
                 textAreaDescription.clear();
                 comboBoxType.setValue(null);

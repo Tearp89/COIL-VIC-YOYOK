@@ -40,6 +40,11 @@ public class AddCollaborationController {
     private TextField textFieldCollaborationGoal;
     @FXML
     private ComboBox<String> comboBoxCollaborationSubject;
+    @FXML 
+    private TextArea textAreaStudentProfile;
+    @FXML
+    private TextField textfieldNoStudents;
+
 
     @FXML
     void addCollaboration(ActionEvent event) {
@@ -51,6 +56,12 @@ public class AddCollaborationController {
         LocalDate finishDate = datePickerFinishDate.getValue();
         String collaborationGoal = textFieldCollaborationGoal.getText();
         String collaborationSubject = comboBoxCollaborationSubject.getSelectionModel().getSelectedItem();
+        String studentProfile = textAreaStudentProfile.getText();
+        int noStudents = Integer.parseInt(textfieldNoStudents.getText());
+
+
+
+
 
 
 
@@ -62,14 +73,24 @@ public class AddCollaborationController {
         collaboration.setCollaborationStatus("Pendiente");
         collaboration.setCollaborationGoal(collaborationGoal);
         collaboration.setSubject(collaborationSubject);
-
-        if(instance.validateCollaborationName(collaborationName) == false){
+        collaboration.setNoStudents(noStudents);
+        collaboration.setStudentProfile(studentProfile);
+        
+        if(collaborationName.trim().isEmpty() || collaborationDescription.trim().isEmpty() || startDate.toString().trim().isEmpty() || finishDate.toString().trim().isEmpty() 
+        || collaborationGoal.trim().isEmpty() || collaborationSubject.trim().isEmpty() || studentProfile.trim().isEmpty() || textfieldNoStudents.getText().trim().isEmpty()){
+            Alert emptyFieldsAlert = new Alert(AlertType.ERROR);
+            emptyFieldsAlert.setTitle("Campos vacíos");
+            emptyFieldsAlert.setHeaderText("Campos vacíos");
+            emptyFieldsAlert.setContentText("No se puede agregar la colaboración, hay campos vacíos");
+            emptyFieldsAlert.show();
+        } else if(instance.validateCollaborationName(collaborationName) == false){
             int result = instance.addCollaboration(collaboration);
         if(result == 1){
             Alert collaborationAddedAlert = new Alert(AlertType.INFORMATION);
             collaborationAddedAlert.setTitle("Colaboración enviada");
             collaborationAddedAlert.setHeaderText("colaboración enviada");
             collaborationAddedAlert.setContentText("Colaboración enviada exitosamente");
+            collaborationAddedAlert.show();
             ButtonType accept = new ButtonType("Aceptar");
             collaborationAddedAlert.getButtonTypes().setAll(accept);
             Button okButton = (Button) collaborationAddedAlert.getDialogPane().lookupButton(accept);
@@ -81,7 +102,7 @@ public class AddCollaborationController {
                     instance.assignProfessorToCollaboration(professorId, collaborationId);
                 
             });
-            collaborationAddedAlert.show();
+            
 
             
         } else{
