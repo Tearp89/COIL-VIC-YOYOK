@@ -86,7 +86,6 @@ public class LoginController {
             professorData.setPassword(password);
             professorData.setName(professorDAO.getProfessorNameByUser(user));
             String status = professorDAO.getProfessorStatusByUser(user);
-            System.out.println(status);
             if(status.equals("Aceptado")){
                 UserSessionManager.getInstance().loginProfessor(professorData);
                 Node source = (Node) e.getSource();
