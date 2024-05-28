@@ -1,12 +1,15 @@
 package GUI;
 
-import java.util.Random;
+import java.io.IOException;
 
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
@@ -14,8 +17,8 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Label;
 import javafx.scene.control.Alert.AlertType;
-import javafx.scene.text.Text;
-import logic.DAO.CollaborationDAO;
+import javafx.stage.Stage;
+import log.Log;
 import logic.DAO.ProfessorDAO;
 import logic.DAO.UniversityDAO;
 import logic.classes.Professor;
@@ -24,6 +27,7 @@ import logic.Access;
 import logic.FieldValidator;
 
 public class AddProfessorController {
+private static final org.apache.log4j.Logger LOG = Log.getLogger(AddProfessorController.class);
 
 
     @FXML
@@ -300,7 +304,18 @@ public class AddProfessorController {
 
         okButton.setOnAction(eventConfirmCanel ->{
             FXMLLoader addProfessorLoader = new FXMLLoader(getClass().getResource("/GUI/login.fxml"));
-            ChangeWindowManager.changeWindowTo(event, addProfessorLoader);
+            try {
+            Parent root = addProfessorLoader.load();
+            Scene scene = new Scene(root);
+            Stage stage = new Stage();
+            stage.setScene(scene);
+            stage.show();
+            Node source = (Node) event.getSource();
+            Stage currenStage = (Stage) source.getScene().getWindow();
+            currenStage.close();
+        } catch (IOException goToHomeException){
+            LOG.error("ERROR:", goToHomeException);
+        }
         });
         cancelButon.setOnAction(eventCancelCancel ->{
             confirmCancelationAlert.close();
