@@ -15,8 +15,7 @@ public class FieldValidator {
     public static boolean onlyText(String textFieldTrim){
         if(!textFieldTrim.isBlank()){
             return textFieldTrim.matches("[a-zA-ZñÑáéíóúÁÉÍÓÚ\\s]+");
-        } else {
-            
+        } else {            
             return false;
         }
     }
@@ -46,4 +45,6 @@ public class FieldValidator {
             return false;
         }
     }
+
+
 }

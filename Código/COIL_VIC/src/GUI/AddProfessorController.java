@@ -1,12 +1,15 @@
 package GUI;
 
-import java.util.Random;
+import java.io.IOException;
 
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
@@ -14,8 +17,8 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Label;
 import javafx.scene.control.Alert.AlertType;
-import javafx.scene.text.Text;
-import logic.DAO.CollaborationDAO;
+import javafx.stage.Stage;
+import log.Log;
 import logic.DAO.ProfessorDAO;
 import logic.DAO.UniversityDAO;
 import logic.classes.Professor;
@@ -24,6 +27,7 @@ import logic.Access;
 import logic.FieldValidator;
 
 public class AddProfessorController {
+private static final org.apache.log4j.Logger LOG = Log.getLogger(AddProfessorController.class);
 
 
     @FXML
@@ -118,11 +122,11 @@ public class AddProfessorController {
         
         
             if(universityName.equals("Universidad Veracruzana")){
-                if (professorName.isEmpty() || professorPhoneNumber.isEmpty() || email.isEmpty() || country.isEmpty() || universityName.isEmpty() || language.isEmpty() || workShop.isEmpty() || academicArea.isEmpty() || textFieldPersonalNumber.getText().isEmpty() || region.isEmpty() || contractType.isEmpty() || contractCategory.isEmpty()) {
+                if (professorName.trim().isEmpty() || !FieldValidator.onlyTextAndNumbers(professorPhoneNumber) || !FieldValidator.isEmail(email) || !FieldValidator.onlyText(country) || !FieldValidator.onlyText(universityName) || !FieldValidator.onlyText(language) || !FieldValidator.onlyText(workShop) || !FieldValidator.onlyText(academicArea) || !FieldValidator.onlyNumber(textFieldPersonalNumber.getText()) || !FieldValidator.onlyText(region) || !FieldValidator.onlyText(contractType) || !FieldValidator.onlyText(contractCategory) ) {
                     Alert emptyFieldsAlertUV = new Alert(AlertType.ERROR);
-                    emptyFieldsAlertUV.setTitle("Campos vacíos");
-                    emptyFieldsAlertUV.setHeaderText("Campos vacíos");
-                    emptyFieldsAlertUV.setContentText("Por favor, complete todos los campos.");
+                    emptyFieldsAlertUV.setTitle("Campos icorrectos o vacíos");
+                    emptyFieldsAlertUV.setHeaderText("CCampos icorrectos o vacíos");
+                    emptyFieldsAlertUV.setContentText("Hay campos vacíos y/o incorrectos.");
                     emptyFieldsAlertUV.showAndWait();
                     return;
                 } else if (professorDAO.isProfessorRegistered(email) == true){
@@ -183,9 +187,9 @@ public class AddProfessorController {
             } 
                     
             }else{
-                if (FieldValidator.onlyTextAndNumbers(professorName) || FieldValidator.onlyTextAndNumbers(professorPhoneNumber) || FieldValidator.isEmail(email) || FieldValidator.onlyTextAndNumbers(country) || FieldValidator.onlyTextAndNumbers(universityName) || FieldValidator.onlyTextAndNumbers(language) || FieldValidator.onlyTextAndNumbers(workShop)) {
+                if (professorName.trim().isEmpty() || !FieldValidator.onlyTextAndNumbers(professorPhoneNumber) || !FieldValidator.isEmail(email) || !FieldValidator.onlyText(country) || !FieldValidator.onlyText(universityName) || !FieldValidator.onlyText(language) || !FieldValidator.onlyText(workShop)) {
                     Alert emptyFieldsAlert = new Alert(AlertType.ERROR);
-                    emptyFieldsAlert.setTitle("Campos vacíos");
+                    emptyFieldsAlert.setTitle("Campos icorrectos o vacíos");
                     emptyFieldsAlert.setHeaderText("Campos incorectos o vacíos");
                     emptyFieldsAlert.setContentText("Hay campos vacíos y/o incorrectos.");
                     emptyFieldsAlert.showAndWait();
@@ -300,7 +304,18 @@ public class AddProfessorController {
 
         okButton.setOnAction(eventConfirmCanel ->{
             FXMLLoader addProfessorLoader = new FXMLLoader(getClass().getResource("/GUI/login.fxml"));
-            ChangeWindowManager.changeWindowTo(event, addProfessorLoader);
+            try {
+            Parent root = addProfessorLoader.load();
+            Scene scene = new Scene(root);
+            Stage stage = new Stage();
+            stage.setScene(scene);
+            stage.show();
+            Node source = (Node) event.getSource();
+            Stage currenStage = (Stage) source.getScene().getWindow();
+            currenStage.close();
+        } catch (IOException goToHomeException){
+            LOG.error("ERROR:", goToHomeException);
+        }
         });
         cancelButon.setOnAction(eventCancelCancel ->{
             confirmCancelationAlert.close();
@@ -325,7 +340,6 @@ public class AddProfessorController {
 
     @FXML
     void initialize(){
-        ProfessorDAO professorDAO = new ProfessorDAO();
         UniversityDAO universityDAO = new UniversityDAO();
         ObservableList<String> universities = universityDAO.loadUniversities();
         loadAcademicAreaData();
