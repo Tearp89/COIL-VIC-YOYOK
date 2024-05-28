@@ -118,11 +118,11 @@ public class AddProfessorController {
         
         
             if(universityName.equals("Universidad Veracruzana")){
-                if (professorName.isEmpty() || professorPhoneNumber.isEmpty() || email.isEmpty() || country.isEmpty() || universityName.isEmpty() || language.isEmpty() || workShop.isEmpty() || academicArea.isEmpty() || textFieldPersonalNumber.getText().isEmpty() || region.isEmpty() || contractType.isEmpty() || contractCategory.isEmpty()) {
+                if (professorName.trim().isEmpty() || !FieldValidator.onlyTextAndNumbers(professorPhoneNumber) || !FieldValidator.isEmail(email) || !FieldValidator.onlyText(country) || !FieldValidator.onlyText(universityName) || !FieldValidator.onlyText(language) || !FieldValidator.onlyText(workShop) || !FieldValidator.onlyText(academicArea) || !FieldValidator.onlyNumber(textFieldPersonalNumber.getText()) || !FieldValidator.onlyText(region) || !FieldValidator.onlyText(contractType) || !FieldValidator.onlyText(contractCategory) ) {
                     Alert emptyFieldsAlertUV = new Alert(AlertType.ERROR);
-                    emptyFieldsAlertUV.setTitle("Campos vacíos");
-                    emptyFieldsAlertUV.setHeaderText("Campos vacíos");
-                    emptyFieldsAlertUV.setContentText("Por favor, complete todos los campos.");
+                    emptyFieldsAlertUV.setTitle("Campos icorrectos o vacíos");
+                    emptyFieldsAlertUV.setHeaderText("CCampos icorrectos o vacíos");
+                    emptyFieldsAlertUV.setContentText("Hay campos vacíos y/o incorrectos.");
                     emptyFieldsAlertUV.showAndWait();
                     return;
                 } else if (professorDAO.isProfessorRegistered(email) == true){
@@ -183,9 +183,9 @@ public class AddProfessorController {
             } 
                     
             }else{
-                if (FieldValidator.onlyTextAndNumbers(professorName) || FieldValidator.onlyTextAndNumbers(professorPhoneNumber) || FieldValidator.isEmail(email) || FieldValidator.onlyTextAndNumbers(country) || FieldValidator.onlyTextAndNumbers(universityName) || FieldValidator.onlyTextAndNumbers(language) || FieldValidator.onlyTextAndNumbers(workShop)) {
+                if (professorName.trim().isEmpty() || !FieldValidator.onlyTextAndNumbers(professorPhoneNumber) || !FieldValidator.isEmail(email) || !FieldValidator.onlyText(country) || !FieldValidator.onlyText(universityName) || !FieldValidator.onlyText(language) || !FieldValidator.onlyText(workShop)) {
                     Alert emptyFieldsAlert = new Alert(AlertType.ERROR);
-                    emptyFieldsAlert.setTitle("Campos vacíos");
+                    emptyFieldsAlert.setTitle("Campos icorrectos o vacíos");
                     emptyFieldsAlert.setHeaderText("Campos incorectos o vacíos");
                     emptyFieldsAlert.setContentText("Hay campos vacíos y/o incorrectos.");
                     emptyFieldsAlert.showAndWait();
@@ -325,7 +325,6 @@ public class AddProfessorController {
 
     @FXML
     void initialize(){
-        ProfessorDAO professorDAO = new ProfessorDAO();
         UniversityDAO universityDAO = new UniversityDAO();
         ObservableList<String> universities = universityDAO.loadUniversities();
         loadAcademicAreaData();
