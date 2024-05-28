@@ -8,6 +8,8 @@ package GUI;
 
 
 import java.io.IOException;
+
+import dataAccess.DatabaseConnectionChecker;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -45,6 +47,9 @@ public class LoginController {
 
     @FXML
     private Button buttonAddProfessor;
+
+    @FXML
+    private Button buttonLogin;
 
     @FXML
     void login( ActionEvent e) {
@@ -147,5 +152,14 @@ public class LoginController {
     void addProfessor(ActionEvent event){
         FXMLLoader addProfessorLoader = new FXMLLoader(getClass().getResource("/GUI/addProfessor.fxml"));
         ChangeWindowManager.changeWindowTo(event, addProfessorLoader);
+    }
+
+    @FXML
+    void initialize(){
+        if(!DatabaseConnectionChecker.isDatabaseConnected()){
+            DatabaseConnectionChecker.showNoConnectionDialog(stage);
+            buttonAddProfessor.setDisable(true);
+            buttonLogin.setDisable(true);
+        }
     }
 }
