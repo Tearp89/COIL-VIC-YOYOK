@@ -21,6 +21,7 @@ import logic.DAO.UniversityDAO;
 import logic.classes.Professor;
 import logic.classes.University;
 import logic.Access;
+import logic.FieldValidator;
 
 public class AddProfessorController {
 
@@ -182,11 +183,11 @@ public class AddProfessorController {
             } 
                     
             }else{
-                if (professorName.isEmpty() || professorPhoneNumber.isEmpty() || email.isEmpty() || country.isEmpty() || universityName.isEmpty() || language.isEmpty() || workShop.isEmpty()) {
+                if (FieldValidator.onlyTextAndNumbers(professorName) || FieldValidator.onlyTextAndNumbers(professorPhoneNumber) || FieldValidator.isEmail(email) || FieldValidator.onlyTextAndNumbers(country) || FieldValidator.onlyTextAndNumbers(universityName) || FieldValidator.onlyTextAndNumbers(language) || FieldValidator.onlyTextAndNumbers(workShop)) {
                     Alert emptyFieldsAlert = new Alert(AlertType.ERROR);
                     emptyFieldsAlert.setTitle("Campos vacíos");
-                    emptyFieldsAlert.setHeaderText("Campos vacíos");
-                    emptyFieldsAlert.setContentText("Por favor, complete todos los campos.");
+                    emptyFieldsAlert.setHeaderText("Campos incorectos o vacíos");
+                    emptyFieldsAlert.setContentText("Hay campos vacíos y/o incorrectos.");
                     emptyFieldsAlert.showAndWait();
                     return;
                 }else if (professorDAO.isProfessorRegistered(email) == true){

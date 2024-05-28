@@ -59,7 +59,7 @@ public class AddCollaborationController {
         collaboration.setDescription(collaborationDescription);
         collaboration.setStartDate(startDate);
         collaboration.setFinishDate(finishDate);
-        collaboration.setCollaborationStatus("En espera");
+        collaboration.setCollaborationStatus("Pendiente");
         collaboration.setCollaborationGoal(collaborationGoal);
         collaboration.setSubject(collaborationSubject);
 
