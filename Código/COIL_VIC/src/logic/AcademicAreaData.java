@@ -39,11 +39,11 @@ public class AcademicAreaData {
         ArrayList<AcademicAreaData> academicAreaList = new ArrayList();
         academicAreaList.add(new AcademicAreaData("Humanidades", collaborationStatsDAO.countStudentsByAcademicAreaAndYear("Humanidades", year), collaborationStatsDAO.countProfessorsByAcademicAreaAndYear("Humanidades", year)));
         academicAreaList.add(new AcademicAreaData("Técnica", collaborationStatsDAO.countStudentsByAcademicAreaAndYear("Técnica", year), collaborationStatsDAO.countProfessorsByAcademicAreaAndYear("Técnica", year)));
-        academicAreaList.add(new AcademicAreaData("Económico", collaborationStatsDAO.countStudentsByAcademicAreaAndYear("Económico", year), collaborationStatsDAO.countProfessorsByAcademicAreaAndYear("Económico", year)));
+        academicAreaList.add(new AcademicAreaData("Económico-Administrativo", collaborationStatsDAO.countStudentsByAcademicAreaAndYear("Económico-Administrativo", year), collaborationStatsDAO.countProfessorsByAcademicAreaAndYear("Económico-Administrativo", year)));
         academicAreaList.add(new AcademicAreaData("Ciencias de la salud", collaborationStatsDAO.countStudentsByAcademicAreaAndYear("Ciencias de la salud", year), collaborationStatsDAO.countProfessorsByAcademicAreaAndYear("Ciencias de la salud", year)));
-        academicAreaList.add(new AcademicAreaData("Biológico", collaborationStatsDAO.countStudentsByAcademicAreaAndYear("Biológico", year), collaborationStatsDAO.countProfessorsByAcademicAreaAndYear("Biológico", year)));
+        academicAreaList.add(new AcademicAreaData("Biológico-Agropecuarias", collaborationStatsDAO.countStudentsByAcademicAreaAndYear("Biológico-Agropecuarias", year), collaborationStatsDAO.countProfessorsByAcademicAreaAndYear("Biológico-Agropecuarias", year)));
         academicAreaList.add(new AcademicAreaData("AFBG", collaborationStatsDAO.countStudentsByAcademicAreaAndYear("AFBG", year), collaborationStatsDAO.countProfessorsByAcademicAreaAndYear("AFBG", year)));
-        academicAreaList.add(new AcademicAreaData("Coatzacoalcos", collaborationStatsDAO.countStudentsByAcademicAreaAndYear("DGRI", year), collaborationStatsDAO.countProfessorsByAcademicAreaAndYear("DGRI", year)));
+        academicAreaList.add(new AcademicAreaData("DGRI", collaborationStatsDAO.countStudentsByAcademicAreaAndYear("DGRI", year), collaborationStatsDAO.countProfessorsByAcademicAreaAndYear("DGRI", year)));
         return academicAreaList;
     }
 }

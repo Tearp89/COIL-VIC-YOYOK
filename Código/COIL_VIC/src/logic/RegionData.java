@@ -33,8 +33,8 @@ public class RegionData {
         CollaborationStatsDAO collaborationStatsDAO = new CollaborationStatsDAO();
         ArrayList<RegionData> regionDataList = new ArrayList();
         regionDataList.add(new RegionData("Xalapa", collaborationStatsDAO.countStudentsByRegionAndYear("Xalapa", year), collaborationStatsDAO.countProfessorsByRegionAndYear("Xalapa", year)));
-        regionDataList.add(new RegionData("Orizaba", collaborationStatsDAO.countStudentsByRegionAndYear("Orizaba", year), collaborationStatsDAO.countProfessorsByRegionAndYear("Orizaba", year)));
-        regionDataList.add(new RegionData("Poza Rica", collaborationStatsDAO.countStudentsByRegionAndYear("Poza Rica", year), collaborationStatsDAO.countProfessorsByRegionAndYear("Poza Rica", year)));
+        regionDataList.add(new RegionData("Orizaba-Cordoba", collaborationStatsDAO.countStudentsByRegionAndYear("Orizaba-Cordoba", year), collaborationStatsDAO.countProfessorsByRegionAndYear("Orizaba-Cordoba", year)));
+        regionDataList.add(new RegionData("Poza Rica-Tuxpan", collaborationStatsDAO.countStudentsByRegionAndYear("Poza Rica-Tuxpan", year), collaborationStatsDAO.countProfessorsByRegionAndYear("Poza Rica-Tuxpan", year)));
         regionDataList.add(new RegionData("Veracruz", collaborationStatsDAO.countStudentsByRegionAndYear("Veracruz", year), collaborationStatsDAO.countProfessorsByRegionAndYear("Veracruz", year)));
         regionDataList.add(new RegionData("Coatzacoalcos", collaborationStatsDAO.countStudentsByRegionAndYear("Coatzacoalcos", year), collaborationStatsDAO.countProfessorsByRegionAndYear("Coatzacoalcos", year)));
         return regionDataList;

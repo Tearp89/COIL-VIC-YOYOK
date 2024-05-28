@@ -10,8 +10,10 @@ import logic.classes.Professor;
  * @author marla
  */
 public interface IProfessor {
-    int addProfessor(Professor professor);
+    int addProfessorUV(Professor professor);
+    int addProfessorForeign(Professor professor);
     int deleteProfessor(Professor professor);
-    int updateProfessor(Professor professor);
+    int updateProfessorUV(Professor professor);
+    int updateProfessorForeign(Professor professor);
 }
 

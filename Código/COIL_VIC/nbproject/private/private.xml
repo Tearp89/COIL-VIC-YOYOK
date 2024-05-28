@@ -3,10 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/daur0/OneDrive/Documentos/Universidad/4to%20Semestre/Principios%20de%20Construcción/Proyecto%20COIL-VIC/COIL-VIC-YOYOK/Código/COIL_VIC/test/logic/emailControlTest.java</file>
             <file>file:/C:/Users/daur0/OneDrive/Documentos/Universidad/4to%20Semestre/Principios%20de%20Construcción/Proyecto%20COIL-VIC/COIL-VIC-YOYOK/Código/COIL_VIC/logConfig/log4j.properties</file>
             <file>file:/C:/Users/daur0/OneDrive/Documentos/Universidad/4to%20Semestre/Principios%20de%20Construcción/Proyecto%20COIL-VIC/COIL-VIC-YOYOK/Código/COIL_VIC/src/logic/DAO/StudentDAO.java</file>
-            <file>file:/C:/Users/daur0/OneDrive/Documentos/Universidad/4to%20Semestre/Principios%20de%20Construcción/Proyecto%20COIL-VIC/COIL-VIC-YOYOK/Código/COIL_VIC/src/GUI/addCollaborationController.java</file>
+            <file>file:/C:/Users/daur0/OneDrive/Documentos/Universidad/4to%20Semestre/Principios%20de%20Construcción/Proyecto%20COIL-VIC/COIL-VIC-YOYOK/Código/COIL_VIC/test/logic/EmailControlTest.java</file>
             <file>file:/C:/Users/daur0/OneDrive/Documentos/Universidad/4to%20Semestre/Principios%20de%20Construcción/Proyecto%20COIL-VIC/COIL-VIC-YOYOK/Código/COIL_VIC/src/GUI/fileChooserController.java</file>
             <file>file:/C:/Users/daur0/OneDrive/Documentos/Universidad/4to%20Semestre/Principios%20de%20Construcción/Proyecto%20COIL-VIC/COIL-VIC-YOYOK/Código/COIL_VIC/src/GUI/MainDeclinedCollaborationDetails.java</file>
             <file>file:/C:/Users/daur0/OneDrive/Documentos/Universidad/4to%20Semestre/Principios%20de%20Construcción/Proyecto%20COIL-VIC/COIL-VIC-YOYOK/Código/COIL_VIC/src/GUI/UserSessionManager.java</file>
@@ -14,10 +13,9 @@
             <file>file:/C:/Users/daur0/OneDrive/Documentos/Universidad/4to%20Semestre/Principios%20de%20Construcción/Proyecto%20COIL-VIC/COIL-VIC-YOYOK/Código/COIL_VIC/src/GUI/MainSearchDeclinedCollaborations.java</file>
             <file>file:/C:/Users/daur0/OneDrive/Documentos/Universidad/4to%20Semestre/Principios%20de%20Construcción/Proyecto%20COIL-VIC/COIL-VIC-YOYOK/Código/COIL_VIC/src/log/Log.java</file>
             <file>file:/C:/Users/daur0/OneDrive/Documentos/Universidad/4to%20Semestre/Principios%20de%20Construcción/Proyecto%20COIL-VIC/COIL-VIC-YOYOK/Código/COIL_VIC/src/logic/DAO/CollaborationStatsDAO.java</file>
-            <file>file:/C:/Users/daur0/OneDrive/Documentos/Universidad/4to%20Semestre/Principios%20de%20Construcción/Proyecto%20COIL-VIC/COIL-VIC-YOYOK/Código/COIL_VIC/src/GUI/DeclinedCollaborations.fxml</file>
             <file>file:/C:/Users/daur0/OneDrive/Documentos/Universidad/4to%20Semestre/Principios%20de%20Construcción/Proyecto%20COIL-VIC/COIL-VIC-YOYOK/Código/COIL_VIC/src/logic/FieldValidator.java</file>
             <file>file:/C:/Users/daur0/OneDrive/Documentos/Universidad/4to%20Semestre/Principios%20de%20Construcción/Proyecto%20COIL-VIC/COIL-VIC-YOYOK/Código/COIL_VIC/src/GUI/login.fxml</file>
-            <file>file:/C:/Users/daur0/OneDrive/Documentos/Universidad/4to%20Semestre/Principios%20de%20Construcción/Proyecto%20COIL-VIC/COIL-VIC-YOYOK/Código/COIL_VIC/src/GUI/addCollaboration.fxml</file>
+            <file>file:/C:/Users/daur0/OneDrive/Documentos/Universidad/4to%20Semestre/Principios%20de%20Construcción/Proyecto%20COIL-VIC/COIL-VIC-YOYOK/Código/COIL_VIC/src/GUI/windowsStyle.css</file>
             <file>file:/C:/Users/daur0/OneDrive/Documentos/Universidad/4to%20Semestre/Principios%20de%20Construcción/Proyecto%20COIL-VIC/COIL-VIC-YOYOK/Código/COIL_VIC/test/DAO/DAOSuite.java</file>
             <file>file:/C:/Users/daur0/OneDrive/Documentos/Universidad/4to%20Semestre/Principios%20de%20Construcción/Proyecto%20COIL-VIC/COIL-VIC-YOYOK/Código/COIL_VIC/src/logic/DAO/LoginDAO.java</file>
             <file>file:/C:/Users/daur0/OneDrive/Documentos/Universidad/4to%20Semestre/Principios%20de%20Construcción/Proyecto%20COIL-VIC/COIL-VIC-YOYOK/Código/COIL_VIC/src/logic/RegionData.java</file>
@@ -28,10 +26,10 @@
             <file>file:/C:/Users/daur0/OneDrive/Documentos/Universidad/4to%20Semestre/Principios%20de%20Construcción/Proyecto%20COIL-VIC/COIL-VIC-YOYOK/Código/COIL_VIC/src/GUI/MainAddCollaboration.java</file>
             <file>file:/C:/Users/daur0/OneDrive/Documentos/Universidad/4to%20Semestre/Principios%20de%20Construcción/Proyecto%20COIL-VIC/COIL-VIC-YOYOK/Código/COIL_VIC/src/GUI/adminHome.fxml</file>
             <file>file:/C:/Users/daur0/OneDrive/Documentos/Universidad/4to%20Semestre/Principios%20de%20Construcción/Proyecto%20COIL-VIC/COIL-VIC-YOYOK/Código/COIL_VIC/src/logic/EmailControl.java</file>
-            <file>file:/C:/Users/daur0/OneDrive/Documentos/Universidad/4to%20Semestre/Principios%20de%20Construcción/Proyecto%20COIL-VIC/COIL-VIC-YOYOK/Código/COIL_VIC/src/GUI/numeraliaController.java</file>
+            <file>file:/C:/Users/daur0/OneDrive/Documentos/Universidad/4to%20Semestre/Principios%20de%20Construcción/Proyecto%20COIL-VIC/COIL-VIC-YOYOK/Código/COIL_VIC/src/GUI/MainConsulProfessors.java</file>
             <file>file:/C:/Users/daur0/OneDrive/Documentos/Universidad/4to%20Semestre/Principios%20de%20Construcción/Proyecto%20COIL-VIC/COIL-VIC-YOYOK/Código/COIL_VIC/src/logic/AcademicAreaData.java</file>
             <file>file:/C:/Users/daur0/OneDrive/Documentos/Universidad/4to%20Semestre/Principios%20de%20Construcción/Proyecto%20COIL-VIC/COIL-VIC-YOYOK/Código/COIL_VIC/src/logic/DAO/WorkshopDAO.java</file>
-            <file>file:/C:/Users/daur0/OneDrive/Documentos/Universidad/4to%20Semestre/Principios%20de%20Construcción/Proyecto%20COIL-VIC/COIL-VIC-YOYOK/Código/COIL_VIC/src/GUI/loginController.java</file>
+            <file>file:/C:/Users/daur0/OneDrive/Documentos/Universidad/4to%20Semestre/Principios%20de%20Construcción/Proyecto%20COIL-VIC/COIL-VIC-YOYOK/Código/COIL_VIC/src/GUI/MainRequests.java</file>
             <file>file:/C:/Users/daur0/OneDrive/Documentos/Universidad/4to%20Semestre/Principios%20de%20Construcción/Proyecto%20COIL-VIC/COIL-VIC-YOYOK/Código/COIL_VIC/test/DAO/WorkshopDAOTest.java</file>
             <file>file:/C:/Users/daur0/OneDrive/Documentos/Universidad/4to%20Semestre/Principios%20de%20Construcción/Proyecto%20COIL-VIC/COIL-VIC-YOYOK/Código/COIL_VIC/src/GUI/MainLogin.java</file>
             <file>file:/C:/Users/daur0/OneDrive/Documentos/Universidad/4to%20Semestre/Principios%20de%20Construcción/Proyecto%20COIL-VIC/COIL-VIC-YOYOK/Código/COIL_VIC/src/logic/SaveToFile.java</file>
