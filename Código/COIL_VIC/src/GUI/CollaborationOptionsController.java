@@ -188,6 +188,8 @@ public class CollaborationOptionsController {
         int validateActiveCollaborations = collaborationDAO.searchCollaborationByStatusAndProfessorId("Activa", professorId).size();
         if(validateActiveCollaborations == 0){
             buttonCloseCollaboration.setDisable(true);
+        } else if(validateActiveCollaborations > 0){
+            buttonPublishCollaboration.setDisable(true);
         }
 
         int validateClosedCollaborations = collaborationDAO.searchCollaborationByStatusAndProfessorId("Cerrada", professorId).size();
