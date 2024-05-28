@@ -3,6 +3,8 @@ package GUI;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import javax.mail.MessagingException;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -14,6 +16,8 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import log.Log;
+import logic.Access;
+import logic.EmailControl;
 import logic.FieldValidator;
 import logic.DAO.CollaborationDAO;
 import logic.DAO.ProfessorDAO;
@@ -152,28 +156,43 @@ public class AddStudentController {
 
 
         } else{
-            Student student = new Student();
-            student.setEmail(email);
-            student.setProfessorId(professorId);
-            student.setPassword("si");
-           int result = studentDAO.addStudent(student);
-           if (result > 0){
-            Alert studentAddedAlert = new Alert(AlertType.INFORMATION);
-            studentAddedAlert.setTitle("Estudiante añadido");
-            studentAddedAlert.setHeaderText("Estudiante añadido");
-            studentAddedAlert.setContentText("Se ha añadido al estudiante exitosamente");
-            studentAddedAlert.show();
-            ArrayList<Student> students =  studentDAO.getStudentsByProfessorId(professorId);
-             tableViewStudents.getItems().addAll(students);
-        } else {
-            Alert addingStudentErrorAlert = new Alert(AlertType.ERROR);
-            addingStudentErrorAlert.setTitle("Error conexión");
-            addingStudentErrorAlert.setHeaderText("Error conexión");
-            addingStudentErrorAlert.setContentText("Se perdió la conexión a la base de datos, inténtelo de nuevo más tarde");
-            addingStudentErrorAlert.show();
-        }
-           
-            
+                Student student = new Student();
+                student.setEmail(email);
+                student.setProfessorId(professorId);
+                Access access = new Access();
+                String password = access.passwordGenerator(8);
+                student.setPassword(password);
+                int result = studentDAO.addStudent(student);
+                EmailControl emailControl = new EmailControl();
+                try {
+                    emailControl.sendEmail(email, "Agregado al sistema COIL-VIC", "Su contraseña para el sistema es: " + password);
+                    Alert studentAddedAlert = new Alert(AlertType.INFORMATION);
+                    studentAddedAlert.setTitle("Notificación correo");
+                    studentAddedAlert.setHeaderText("Se ha enviado un correo al estudiante");
+                    studentAddedAlert.setContentText("Se envió un correo al estudiante sobre su cuenta");
+                    studentAddedAlert.show();
+                } catch (MessagingException e) {
+                    Alert addingStudentErrorAlert = new Alert(AlertType.ERROR);
+                    addingStudentErrorAlert.setTitle("Error al enviar el correo");
+                    addingStudentErrorAlert.setHeaderText("Error conexión");
+                    addingStudentErrorAlert.setContentText("No se logro mandar el correo al estudiante, favor de comunicarle");
+                    addingStudentErrorAlert.show();
+                }
+            if (result > 0){
+                Alert studentAddedAlert = new Alert(AlertType.INFORMATION);
+                studentAddedAlert.setTitle("Estudiante añadido");
+                studentAddedAlert.setHeaderText("Estudiante añadido");
+                studentAddedAlert.setContentText("Se ha añadido al estudiante exitosamente");
+                studentAddedAlert.show();
+                ArrayList<Student> students =  studentDAO.getStudentsByProfessorId(professorId);
+                tableViewStudents.getItems().addAll(students);
+            } else {
+                Alert addingStudentErrorAlert = new Alert(AlertType.ERROR);
+                addingStudentErrorAlert.setTitle("Error conexión");
+                addingStudentErrorAlert.setHeaderText("Error conexión");
+                addingStudentErrorAlert.setContentText("Se perdió la conexión a la base de datos, inténtelo de nuevo más tarde");
+                addingStudentErrorAlert.show();
+            }
         }
         
     }
