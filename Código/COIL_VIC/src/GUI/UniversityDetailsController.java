@@ -14,6 +14,7 @@ import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.Alert.AlertType;
+import logic.FieldValidator;
 import logic.DAO.UniversityDAO;
 import logic.classes.Admin;
 import logic.classes.University;
@@ -95,15 +96,14 @@ public class UniversityDetailsController {
         universityUpdated.setUniversityCountry(universityCountry);
         universityUpdated.setUniversityId(universityId);
         UniversityDAO updateUniversity = new UniversityDAO();
-        if(universityName.isEmpty() || universityLanguage.isEmpty() 
-        || universityCountry.isEmpty()){
+        if(!FieldValidator.onlyTextAndNumbers(universityName) || !FieldValidator.onlyText(universityLanguage) || !FieldValidator.onlyText(universityCountry)){
             Alert emptyFieldsAlert = new Alert(AlertType.ERROR);
-            emptyFieldsAlert.setTitle("Campos vacíos");
+            emptyFieldsAlert.setTitle("Campos erroneos");
             emptyFieldsAlert.setHeaderText("Error edición");
-            emptyFieldsAlert.setContentText("No se puede editar la universidad hay campos vacíos");
+            emptyFieldsAlert.setContentText("No se puede editar la universidad hay campos vacíos o incorrectos");
             emptyFieldsAlert.show();
             
-        } if (universityDAO.isUniversityRegistered(universityName) == true){
+        } else if (universityDAO.isUniversityRegistered(universityName) == true){
             Alert duplicateUniversityAlert = new Alert(AlertType.ERROR);
             duplicateUniversityAlert.setHeaderText("Error edición");
             duplicateUniversityAlert.setTitle("Universidad duplicada");
@@ -137,29 +137,29 @@ public class UniversityDetailsController {
                     editionErrorAlert.show();
                 }
             });
-           cancelButton.setOnAction(eventCancelEdition -> {
-            Alert confirmCancelAlert = new Alert(AlertType.CONFIRMATION);
-            confirmCancelAlert.setTitle("Confirmar cancelación");
-            confirmCancelAlert.setHeaderText("Confirmar cancelación");
-            confirmCancelAlert.setContentText("¿Está seguro de que desea salir?");
-            ButtonType accept = new ButtonType("Confirmar");
-            ButtonType cancel = new ButtonType("Cancelar");
-            confirmCancelAlert.getButtonTypes().setAll(accept, cancel);
-            confirmEditionAlert.show();
-            Button acceptButton = (Button) confirmEditionAlert.getDialogPane().lookupButton(accept);
-            Button cancelCancelButton = (Button) confirmEditionAlert.getDialogPane().lookupButton(cancel);
-            acceptButton.setOnAction(eventGoBack -> {
-                FXMLLoader universitiesLoader = new FXMLLoader(getClass().getResource("/GUI/adminCollaborationOptions.fxml"));
-                ChangeWindowManager.changeWindowTo(event, universitiesLoader);
-            });
+            cancelButton.setOnAction(eventCancelEdition -> {
+                Alert confirmCancelAlert = new Alert(AlertType.CONFIRMATION);
+                confirmCancelAlert.setTitle("Confirmar cancelación");
+                confirmCancelAlert.setHeaderText("Confirmar cancelación");
+                confirmCancelAlert.setContentText("¿Está seguro de que desea salir?");
+                ButtonType accept = new ButtonType("Confirmar");
+                ButtonType cancel = new ButtonType("Cancelar");
+                confirmCancelAlert.getButtonTypes().setAll(accept, cancel);
+                confirmCancelAlert.show();
+                Button acceptButton = (Button) confirmCancelAlert.getDialogPane().lookupButton(accept);
+                Button cancelCancelButton = (Button) confirmCancelAlert.getDialogPane().lookupButton(cancel);
+                acceptButton.setOnAction(eventGoBack -> {
+                    FXMLLoader universitiesLoader = new FXMLLoader(getClass().getResource("/GUI/adminUniversityOptions.fxml"));
+                    ChangeWindowManager.changeWindowTo(event, universitiesLoader);
+                });
             
 
-            cancelCancelButton.setOnAction(cancelEvent -> {
-                confirmCancelAlert.close();
-            });
+                cancelCancelButton.setOnAction(cancelEvent -> {
+                    confirmCancelAlert.close();
+                });
             
             confirmCancelAlert.show();
-           });
+            });
         }
 
     }
