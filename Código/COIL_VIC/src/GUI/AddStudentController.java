@@ -169,7 +169,7 @@ public class AddStudentController {
                     Alert studentAddedAlert = new Alert(AlertType.INFORMATION);
                     studentAddedAlert.setTitle("Notificación correo");
                     studentAddedAlert.setHeaderText("Se ha enviado un correo al estudiante");
-                    studentAddedAlert.setContentText("Se envió un correo al estudiante sobre su cuenta");
+                    studentAddedAlert.setContentText("Se envió un correo al estudiante sobre su cuenta,  su contraseña es: " + password);
                     studentAddedAlert.show();
                 } catch (MessagingException e) {
                     Alert addingStudentErrorAlert = new Alert(AlertType.ERROR);
