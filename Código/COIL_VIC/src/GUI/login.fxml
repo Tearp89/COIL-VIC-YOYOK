@@ -92,11 +92,6 @@
          </cursor>
       </PasswordField>
       <Button fx:id="buttonLogin" layoutX="395.0" layoutY="334.0" mnemonicParsing="false" onAction="#login" prefHeight="25.0" prefWidth="98.0" style="-fx-background-radius: 12; -fx-background-color: #FF3859;" text="LOG IN" textFill="WHITE" />
-      <Label layoutX="421.0" layoutY="317.0" text="¿No tienes cuenta? Registrate aquí" textFill="#ff3a58">
-         <font>
-            <Font name="Tahoma" size="8.0" />
-         </font>
-      </Label>
       <Label layoutX="399.0" layoutY="365.0" text="¿Olvidaste tu contraseña?" textFill="#ff3a58">
          <font>
             <Font name="Tahoma" size="8.0" />
