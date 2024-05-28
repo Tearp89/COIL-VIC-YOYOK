@@ -14,6 +14,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import log.Log;
+import logic.FieldValidator;
 import logic.DAO.CollaborationDAO;
 import logic.DAO.ProfessorDAO;
 import logic.DAO.StudentDAO;
@@ -117,7 +118,7 @@ public class AddStudentController {
         int professorId = professorDAO.getProfessorIdByUser(professorData.getUser());
         StudentDAO studentDAO = new StudentDAO();
         String email = textFieldEmailStudent.getText();
-        if(email.isEmpty() ){
+        if(!FieldValidator.isEmail(email)){
             Alert emptyFieldsAlert = new Alert(AlertType.ERROR);
             emptyFieldsAlert.setTitle("Campos vacíos");
             emptyFieldsAlert.setHeaderText("Campos vacíos");
@@ -138,8 +139,8 @@ public class AddStudentController {
                     studentAddedAlert.setHeaderText("Estudiante añadido");
                     studentAddedAlert.setContentText("Se ha añadido al estudiante exitosamente");
                     studentAddedAlert.show();
-                   ArrayList<Student> students =  studentDAO.getStudentsByProfessorId(professorId);
-                   tableViewStudents.getItems().addAll(students);
+                    ArrayList<Student> students =  studentDAO.getStudentsByProfessorId(professorId);
+                    tableViewStudents.getItems().addAll(students);
                 } else {
                     Alert addingStudentErrorAlert = new Alert(AlertType.ERROR);
                     addingStudentErrorAlert.setTitle("Error conexión");
@@ -187,31 +188,38 @@ public class AddStudentController {
         ProfessorDAO professorDAO = new ProfessorDAO();
         int professorId = professorDAO.getProfessorIdByUser(professorData.getUser());
         CollaborationDAO collaborationDAO = new CollaborationDAO();
-        ArrayList<Collaboration> collaborations =  collaborationDAO.searchCollaborationByStatusAndProfessorId("Publicada", professorId);
-          int collaborationId = collaborations.get(0).getCollaborationId();
-        if(collaborationDAO.isStudentAssignedToCollaboration(email, collaborationId)){
-            Alert duplicatedStudentAlert = new Alert(AlertType.ERROR);
-            duplicatedStudentAlert.setTitle("Estudiante duplicado");
-            duplicatedStudentAlert.setHeaderText("Estudiante duplicado");
-            duplicatedStudentAlert.setContentText("El estudiante ya se encuentra asignado a esta colaboración");
-            duplicatedStudentAlert.show();
-        } else {
-          
-         int result =  collaborationDAO.assignStudentToCollaboration(email, collaborationId);
-         if (result > 0){
-            Alert studentAssignedAlert = new Alert(AlertType.INFORMATION);
-            studentAssignedAlert.setTitle("Estudiante asignado");
-            studentAssignedAlert.setHeaderText("Estudiante asignado");
-            studentAssignedAlert.setContentText("El estudiante ha sido asignado exitosamente");
-            studentAssignedAlert.show();
-         } else{
+        ArrayList<Collaboration> collaborations =  collaborationDAO.searchCollaborationByStatusAndProfessorId("Activa", professorId);
+        if(collaborations.isEmpty()){
+            buttonAssign.setDisable(true);
             Alert assignErrorAlert = new Alert(AlertType.ERROR);
-            assignErrorAlert.setTitle("Error conexión");
-            assignErrorAlert.setHeaderText("Error conexión");
-            assignErrorAlert.setContentText("Se perdió la conexión con la base de datos, inténtelo de nuevo más tarde");
-         }
-
+            assignErrorAlert.setTitle("Error colaboración");
+            assignErrorAlert.setHeaderText("Error no tiene colaboración");
+            assignErrorAlert.setContentText("No tiene una colaboración activa para asignar el estudiante");
+        } else {
+            int collaborationId = collaborations.get(0).getCollaborationId();
+            if(collaborationDAO.isStudentAssignedToCollaboration(email, collaborationId)){
+                Alert duplicatedStudentAlert = new Alert(AlertType.ERROR);
+                duplicatedStudentAlert.setTitle("Estudiante duplicado");
+                duplicatedStudentAlert.setHeaderText("Estudiante duplicado");
+                duplicatedStudentAlert.setContentText("El estudiante ya se encuentra asignado a esta colaboración");
+                duplicatedStudentAlert.show();
+            } else {
+                int result =  collaborationDAO.assignStudentToCollaboration(email, collaborationId);
+                if (result > 0){
+                    Alert studentAssignedAlert = new Alert(AlertType.INFORMATION);
+                    studentAssignedAlert.setTitle("Estudiante asignado");
+                    studentAssignedAlert.setHeaderText("Estudiante asignado");
+                    studentAssignedAlert.setContentText("El estudiante ha sido asignado exitosamente");
+                    studentAssignedAlert.show();
+                } else{
+                    Alert assignErrorAlert = new Alert(AlertType.ERROR);
+                    assignErrorAlert.setTitle("Error conexión");
+                    assignErrorAlert.setHeaderText("Error conexión");
+                    assignErrorAlert.setContentText("Se perdió la conexión con la base de datos, inténtelo de nuevo más tarde");
+                }
+            }
         }
+        
         
 
     }
@@ -223,6 +231,12 @@ public class AddStudentController {
         Professor professorData = new Professor();
         professorData = UserSessionManager.getInstance().getProfessorUserData();
         labelUser.setText(professorData.getName());
+        StudentDAO studentDAO = new StudentDAO();
+        ProfessorDAO professorDAO = new ProfessorDAO();
+        int professorId = professorDAO.getProfessorIdByUser(professorData.getUser());
+        ArrayList<Student> students =  studentDAO.getStudentsByProfessorId(professorId);
+        
+        tableViewStudents.getItems().addAll(students);
 
         tableViewStudents.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             selectedStudent = newValue;
@@ -232,6 +246,7 @@ public class AddStudentController {
 
         tableViewStudents.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             buttonAssign.setDisable(newValue == null);
+            
         });
 
     }
