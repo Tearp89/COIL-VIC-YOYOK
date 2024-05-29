@@ -113,11 +113,14 @@
                                     <String fx:value="shadow" />
                                  </styleClass>
                                  <children>
-                                    <Button id="sendButton" fx:id="buttonSendRequest" layoutX="685.0" layoutY="484.0" mnemonicParsing="false" onAction="#sendRequestToCollaborate" prefHeight="26.0" prefWidth="79.0" styleClass="descartar" stylesheets="@windowsStyle.css" text="Aplicar" />
-                                    <Button fx:id="buttonCancel" layoutX="7.0" layoutY="8.0" mnemonicParsing="false" onAction="#cancelRequest" styleClass="descartar" stylesheets="@windowsStyle.css" text="&lt;">
+                                    <Button id="sendButton" fx:id="buttonSendRequest" layoutX="685.0" layoutY="484.0" mnemonicParsing="false" onAction="#sendRequestToCollaborate" prefHeight="26.0" prefWidth="79.0" styleClass="white-buttom" stylesheets="@windowsStyle.css" text="Aplicar" />
+                                    <Button fx:id="buttonCancel" layoutX="7.0" layoutY="8.0" mnemonicParsing="false" onAction="#cancelRequest" styleClass="descartar" stylesheets="@windowsStyle.css">
                                        <font>
                                           <Font name="Tahoma Bold" size="12.0" />
                                        </font>
+                                       <graphic>
+                                          <FontAwesomeIcon glyphName="ARROW_LEFT" />
+                                       </graphic>
                                     </Button>
                                     <Label layoutX="26.0" layoutY="90.0" text="Descripción:">
                                        <font>
@@ -154,19 +157,19 @@
                                           <Font name="Tahoma" size="20.0" />
                                        </font>
                                     </Label>
-                                    <Label layoutX="24.0" layoutY="48.0" text="Nombre:">
+                                    <Label layoutX="2.0" layoutY="48.0" text="Nombre:">
                                        <font>
                                           <Font name="Tahoma" size="20.0" />
                                        </font>
                                     </Label>
-                                    <Label fx:id="labelCollaborationName" layoutX="208.0" layoutY="52.0" prefHeight="18.0" prefWidth="382.0" text="Label" />
-                                    <Label fx:id="labelCollaborationDescription" layoutX="194.0" layoutY="94.0" prefHeight="167.0" prefWidth="504.0" text="Label" textAlignment="CENTER" />
-                                    <Label fx:id="labelStartDate" layoutX="171.0" layoutY="274.0" prefHeight="26.0" prefWidth="142.0" text="Label" />
-                                    <Label fx:id="labelFinishDate" layoutX="519.0" layoutY="274.0" prefHeight="26.0" prefWidth="142.0" text="Label" />
-                                    <Label fx:id="labelCollaborationGoal" layoutX="143.0" layoutY="324.0" prefHeight="38.0" prefWidth="519.0" text="Label" />
-                                    <Label fx:id="labelNumberStudents" layoutX="179.0" layoutY="365.0" prefHeight="25.0" prefWidth="58.0" text="Label" />
-                                    <Label fx:id="labelSubject" layoutX="494.0" layoutY="362.0" prefHeight="30.0" prefWidth="166.0" text="Label" />
-                                    <Label fx:id="labelStudentProfile" layoutX="185.0" layoutY="416.0" prefHeight="38.0" prefWidth="434.0" text="Label" />
+                                    <Label fx:id="labelCollaborationName" layoutX="195.0" layoutY="46.0" prefHeight="30.0" prefWidth="504.0" styleClass="textfield" stylesheets="@windowsStyle.css" text="Label" />
+                                    <Label fx:id="labelCollaborationDescription" alignment="TOP_LEFT" layoutX="195.0" layoutY="94.0" prefHeight="167.0" prefWidth="504.0" styleClass="textfield" stylesheets="@windowsStyle.css" text="Label" textAlignment="CENTER" />
+                                    <Label fx:id="labelStartDate" layoutX="195.0" layoutY="274.0" prefHeight="26.0" prefWidth="150.0" styleClass="textfield" stylesheets="@windowsStyle.css" text="Label" />
+                                    <Label fx:id="labelFinishDate" layoutX="549.0" layoutY="272.0" prefHeight="30.0" prefWidth="150.0" styleClass="textfield" stylesheets="@windowsStyle.css" text="Label" />
+                                    <Label fx:id="labelCollaborationGoal" layoutX="195.0" layoutY="324.0" prefHeight="30.0" prefWidth="504.0" styleClass="textfield" stylesheets="@windowsStyle.css" text="Label" />
+                                    <Label fx:id="labelNumberStudents" layoutX="195.0" layoutY="365.0" prefHeight="30.0" prefWidth="58.0" styleClass="textfield" stylesheets="@windowsStyle.css" text="Label" />
+                                    <Label fx:id="labelSubject" layoutX="516.0" layoutY="363.0" prefHeight="30.0" prefWidth="183.0" styleClass="textfield" stylesheets="@windowsStyle.css" text="Label" />
+                                    <Label fx:id="labelStudentProfile" layoutX="195.0" layoutY="416.0" prefHeight="30.0" prefWidth="504.0" styleClass="textfield" stylesheets="@windowsStyle.css" text="Label" />
                                  </children>
                               </AnchorPane>
                               <Button id="sendButton" layoutX="716.0" layoutY="499.0" mnemonicParsing="false" styleClass="descartar" stylesheets="@windowsStyle.css" text="Enviar" visible="false" />
