@@ -119,7 +119,10 @@
                                           </TableColumn>
                                       </columns>
                                     </TableView>
-                                    <Button fx:id="buttonBack" layoutX="43.0" layoutY="14.0" mnemonicParsing="false" onAction="#goBack" text="&lt;" />
+                                    <Button fx:id="buttonBack" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#goBack">
+                                       <graphic>
+                                          <FontAwesomeIcon glyphName="ARROW_LEFT" />
+                                       </graphic></Button>
                                  </children>
                               </AnchorPane>
                            </children></AnchorPane>
