@@ -15,6 +15,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TextFormatter;
 import javafx.scene.control.Label;
 import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
@@ -393,6 +394,14 @@ private static final org.apache.log4j.Logger LOG = Log.getLogger(AddProfessorCon
         buttonConfirmation.setOnAction(this::addProfessor); 
         buttonCancel.setOnAction(this::cancel);
 
+        textFieldPersonalNumber.setTextFormatter(new TextFormatter<>(change -> {
+            String newText = change.getControlNewText();
+            if (newText.matches("[0-9]*")) {
+                return change;
+            } else {
+                return null;
+            }
+        }));
     }
 }
 
