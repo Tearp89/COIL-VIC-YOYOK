@@ -2,6 +2,7 @@ package GUI;
 
 import java.io.IOException;
 
+import dataAccess.DatabaseConnectionChecker;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -41,6 +42,7 @@ public class AcceptedCollaborationDetailsController {
 
     @FXML
     void uploadCollaboration(ActionEvent event){
+        checkDatabaseConnection();
         CollaborationDAO collaborationDAO = new CollaborationDAO();
         
         int result = collaborationDAO.changeCollaborationStatus("Publicada", collaborationId);
@@ -118,7 +120,7 @@ public class AcceptedCollaborationDetailsController {
         ChangeWindowManager.closeWindow(event);
     }
 
-     @FXML
+    @FXML
     private Button buttonLogout;
 
     @FXML
@@ -159,7 +161,16 @@ public class AcceptedCollaborationDetailsController {
         labelSubject.setText(collaborationSubject);
         labelNumberStudents.setText(String.valueOf(noStudents));
         labelStudentProfile.setText(studentProfile);
+        checkDatabaseConnection();
         
+
+        
+    }
+    private void checkDatabaseConnection(){
+        if(!DatabaseConnectionChecker.isDatabaseConnected()){
+            DatabaseConnectionChecker.showNoConnectionDialog();
+            buttonUploadCollaboration.setDisable(true);
+        }
     }
 
 }
