@@ -17,6 +17,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.Alert.AlertType;
 import log.Log;
 import logic.EmailControl;
+import logic.FieldValidator;
 import logic.DAO.CollaborationDAO;
 import logic.DAO.FeedbackDAO;
 import logic.DAO.ProfessorDAO;
@@ -134,6 +135,8 @@ public class ProfessorGradeCollaborationController {
                 feedbackSentAlert.setHeaderText("Retroalimentación enviada");
                 feedbackSentAlert.setContentText("Retroalimentación enviada exitosamente");
                 feedbackSentAlert.show();
+                buttonCancelFeedback.setDisable(true);
+                buttonSendFeedback.setDisable(true); 
                 
             } else {
                 Alert sendErrorAlert = new Alert(AlertType.ERROR);
@@ -198,8 +201,10 @@ public class ProfessorGradeCollaborationController {
         labelUser.setText(professorData.getName());
         this.collaborationId = collaborationId;
         CollaborationDAO collaborationDAO = new CollaborationDAO();
+        String comments = textAreaComments.getText();
+        String grade = comboBoxGrade.getSelectionModel().getSelectedItem();
         String collaborationName = collaborationDAO.getCollaborationNameById(collaborationId);
-        if(textAreaComments.getText().isEmpty() || comboBoxGrade.getSelectionModel().isEmpty()){
+        if(!FieldValidator.onlyText(comments) || !FieldValidator.onlyNumber(grade)){
             buttonSendFeedback.setDisable(true);
         } else {
             buttonSendFeedback.setDisable(false);

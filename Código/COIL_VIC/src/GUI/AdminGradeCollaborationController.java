@@ -16,6 +16,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import log.Log;
+import logic.FieldValidator;
 import logic.DAO.AdminDAO;
 import logic.DAO.CollaborationDAO;
 import logic.DAO.FeedbackDAO;
@@ -129,6 +130,8 @@ public class AdminGradeCollaborationController {
                 feedbackSentAlert.setHeaderText("Retroalimentación enviada");
                 feedbackSentAlert.setContentText("Retroalimentación enviada exitosamente");
                 feedbackSentAlert.show();
+                buttonCancelFeedback.setDisable(true);
+                buttonSendFeedback.setDisable(true);
             } else {
                 Alert sendErrorAlert = new Alert(AlertType.ERROR);
                 sendErrorAlert.setTitle("Error conexión");
@@ -191,7 +194,9 @@ public class AdminGradeCollaborationController {
         adminData = UserSessionManager.getInstance().getAdminUserData();
         labelUser.setText(adminData.getAdminName());
         this.collaborationId = collaborationId;
-        if(textAreaComments.getText().isEmpty() || comboBoxGrade.getSelectionModel().isEmpty()){
+        String comments = textAreaComments.getText();
+        String grade = comboBoxGrade.getSelectionModel().getSelectedItem();
+        if(!FieldValidator.onlyText(comments) || !FieldValidator.onlyNumber(grade)){
             buttonSendFeedback.setDisable(true);
         } else {
             buttonSendFeedback.setDisable(false);

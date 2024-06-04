@@ -21,7 +21,8 @@
     import javafx.scene.control.TextFormatter;
     import log.Log;
     import javafx.scene.control.Alert.AlertType;
-    import logic.DAO.CollaborationDAO;
+import logic.FieldValidator;
+import logic.DAO.CollaborationDAO;
     import logic.DAO.ProfessorDAO;
     import logic.classes.Collaboration;
     import logic.classes.Professor;
@@ -58,17 +59,17 @@
             String collaborationGoal = textFieldCollaborationGoal.getText();
             String collaborationSubject = comboBoxCollaborationSubject.getSelectionModel().getSelectedItem();
             String studentProfile = textAreaStudentProfile.getText();
+            String noStudentsText = textFieldNoStudents.getText();
             
-            
-            if(collaborationName.trim().isEmpty() || collaborationDescription.trim().isEmpty() || startDate.toString().trim().isEmpty() || finishDate.toString().trim().isEmpty() 
-            || collaborationGoal.trim().isEmpty() || collaborationSubject.trim().isEmpty() || studentProfile.trim().isEmpty() || textFieldNoStudents.getText().trim().isEmpty()){
+            if(!FieldValidator.onlyText(collaborationName) || !FieldValidator.onlyText(collaborationDescription) || !FieldValidator.isValidDateRange(startDate, finishDate) 
+            || !FieldValidator.onlyText(collaborationGoal) || !FieldValidator.onlyText(collaborationSubject) || !FieldValidator.onlyText(studentProfile) || !FieldValidator.onlyNumber(noStudentsText)){
                 Alert emptyFieldsAlert = new Alert(AlertType.ERROR);
-                emptyFieldsAlert.setTitle("Campos vacíos");
-                emptyFieldsAlert.setHeaderText("Campos vacíos");
-                emptyFieldsAlert.setContentText("No se puede agregar la colaboración, hay campos vacíos");
+                emptyFieldsAlert.setTitle("Campos vacíos o incorrectos");
+                emptyFieldsAlert.setHeaderText("Campos vacíos o incorrectos");
+                emptyFieldsAlert.setContentText("No se puede agregar la colaboración, hay campos vacíos o incorrectos");
                 emptyFieldsAlert.show();
             } else if(instance.validateCollaborationName(collaborationName) == false){
-                int noStudents = Integer.parseInt(textFieldNoStudents.getText());
+                int noStudents = Integer.parseInt(noStudentsText);
             
             collaboration.setCollaborationName(collaborationName);
             collaboration.setDescription(collaborationDescription);

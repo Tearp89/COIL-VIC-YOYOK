@@ -54,6 +54,7 @@ public class PublishedCollaborationsDetailsController {
         confirmRequestAlert.setHeaderText("Confirma aplicar a colaboración");
         confirmRequestAlert.setTitle("Confirmar aplicar a colaboración");
         confirmRequestAlert.setContentText("¿Está seguro de que desea aplicar a esta colaboración?");
+        confirmRequestAlert.showAndWait();
         ButtonType confirmRequestToCollaborate = new ButtonType("Aceptar");
         ButtonType cancelRequest = new ButtonType("Cancelar", ButtonData.CANCEL_CLOSE);
         confirmRequestAlert.getButtonTypes().setAll(confirmRequestToCollaborate, cancelRequest);
@@ -62,14 +63,12 @@ public class PublishedCollaborationsDetailsController {
         Button cancelButton = (Button) confirmRequestAlert.getDialogPane().lookupButton(cancelRequest);
 
         okButton.setOnAction(eventSendRequest -> {
-            //TODO: Agregar estado
             int result = professorDAO.professorRequestCollaboration(collaborationId, professorId);
             if (result == 1) {
                 Alert requestSuccessfulAlert = new Alert(AlertType.INFORMATION);
                 requestSuccessfulAlert.setHeaderText("Solicitud exitosa");
                 requestSuccessfulAlert.setTitle("Solicitud exitosa");
                 requestSuccessfulAlert.setContentText("Solicitud enviada exitosamente");
-                //ButtonType acceptAlert = new ButtonType("Aceptar");
                 
                 requestSuccessfulAlert.showAndWait();
             } 
@@ -77,17 +76,10 @@ public class PublishedCollaborationsDetailsController {
 
         cancelButton.setOnAction(eventConfirmCancel -> {
             confirmRequestAlert.close();
-            /*Alert confirmCancelAlert = new Alert(AlertType.CONFIRMATION);
-            confirmCancelAlert.setTitle("Confirmar cancelación");
-            confirmCancelAlert.setHeaderText("Confirmar cancelación");
-            confirmCancelAlert.setContentText("¿Está seguro de que desea salir?");
-            confirmCancelAlert.show();*/
-            //TODO: Agregar interacción entre ventanas para cancelar
         });
 
         
     
-        confirmRequestAlert.showAndWait();
        
        
         

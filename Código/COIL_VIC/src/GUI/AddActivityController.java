@@ -18,6 +18,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import log.Log;
+import logic.FieldValidator;
 import logic.DAO.ActivityDAO;
 import logic.DAO.CollaborationDAO;
 import logic.DAO.ProfessorDAO;
@@ -122,11 +123,11 @@ public class AddActivityController {
         String week = comboBoxWeek.getValue();
         String type = comboBoxType.getValue();
         String description = textAreaDescription.getText();
-        if(title.trim().isEmpty() || week.trim().isEmpty() || type.trim().isEmpty() || description.trim().isEmpty()){
+        if(!FieldValidator.onlyText(title) || !FieldValidator.onlyNumber(week) || !FieldValidator.onlyNumber(type) || !FieldValidator.onlyText(description)){
             Alert emptyFieldsAlert = new Alert(AlertType.ERROR);
-            emptyFieldsAlert.setTitle("Campos vacíos");
-            emptyFieldsAlert.setHeaderText("Campos vacíos");
-            emptyFieldsAlert.setContentText("No se puede agregar la actividad hay campos vacios");
+            emptyFieldsAlert.setTitle("Campos vacíos o incorrectos");
+            emptyFieldsAlert.setHeaderText("Campos vacíos o incorrectos");
+            emptyFieldsAlert.setContentText("No se puede agregar la actividad hay campos vacios o incorrectos");
             emptyFieldsAlert.show();
         } else{
             Activity activity = new Activity();
@@ -140,6 +141,7 @@ public class AddActivityController {
             buttonAssign.setDisable(false);
             buttonCancel.setDisable(false);
             activityId = activity.getActivityId();
+            buttonSave.setDisable(true);
 
            }
         }
@@ -188,6 +190,7 @@ public class AddActivityController {
                     assignConfirmationAlert.setHeaderText("Actividad asignada");
                     assignConfirmationAlert.setContentText("Se asignó la actividad exitosamente");
                     assignConfirmationAlert.show();
+                    buttonAssign.setDisable(true);
                 } else{
                     Alert assignErrorAlert = new Alert(AlertType.ERROR);
                     assignErrorAlert.setTitle("Error conexión");
