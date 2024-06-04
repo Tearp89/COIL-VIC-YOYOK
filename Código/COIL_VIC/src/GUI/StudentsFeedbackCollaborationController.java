@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -13,6 +14,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import log.Log;
 import logic.DAO.AdminDAO;
 import logic.DAO.CollaborationDAO;
@@ -111,8 +113,12 @@ public class StudentsFeedbackCollaborationController {
                         StudentGradeCollaborationController controller = loader.getController();
                         controller.initialize(closedCollaboration.getCollaborationId());
                         Stage stage = new Stage();
+                        stage.initStyle(StageStyle.TRANSPARENT);
                         stage.setScene(new Scene(root));
                         stage.show();
+                        Node source = (Node) event.getSource();
+                        Stage currenStage = (Stage) source.getScene().getWindow();
+                        currenStage.close();
 
                     }catch (IOException e){
                         LOG.error("ERROR:", e);

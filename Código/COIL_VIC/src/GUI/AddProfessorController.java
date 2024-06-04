@@ -77,7 +77,7 @@ private static final org.apache.log4j.Logger LOG = Log.getLogger(AddProfessorCon
 
     void addUniversity(String universityName, String universityCountry, String language){
         UniversityDAO universityDAO = new UniversityDAO();
-        if (!universityDAO.isUniversityRegistered(universityName)) {
+        if (!universityDAO.isUniversityRegistered(universityName) && FieldValidator.onlyText(language) && FieldValidator.onlyText(universityCountry) && FieldValidator.onlyText(universityName)) {
             University university = new University();
             university.setUniversityName(universityName);
             university.setUniversityCountry(universityCountry);
@@ -122,10 +122,10 @@ private static final org.apache.log4j.Logger LOG = Log.getLogger(AddProfessorCon
         
         
             if(universityName.equals("Universidad Veracruzana")){
-                if (professorName.trim().isEmpty() || !FieldValidator.onlyTextAndNumbers(professorPhoneNumber) || !FieldValidator.isEmail(email) || !FieldValidator.onlyText(country) || !FieldValidator.onlyText(universityName) || !FieldValidator.onlyText(language) || !FieldValidator.onlyText(workShop) || !FieldValidator.onlyText(academicArea) || !FieldValidator.onlyNumber(textFieldPersonalNumber.getText()) || !FieldValidator.onlyText(region) || !FieldValidator.onlyText(contractType) || !FieldValidator.onlyText(contractCategory) ) {
+                if (!FieldValidator.isValidName(professorName)|| !FieldValidator.onlyTextAndNumbers(professorPhoneNumber) || !FieldValidator.isEmail(email) || !FieldValidator.onlyText(country) || !FieldValidator.onlyText(universityName) || !FieldValidator.onlyText(language) || !FieldValidator.onlyText(workShop) || !FieldValidator.onlyText(academicArea) || !FieldValidator.onlyNumber(textFieldPersonalNumber.getText()) || !FieldValidator.onlyText(region) || !FieldValidator.onlyText(contractType) || !FieldValidator.onlyText(contractCategory) ) {
                     Alert emptyFieldsAlertUV = new Alert(AlertType.ERROR);
-                    emptyFieldsAlertUV.setTitle("Campos icorrectos o vacíos");
-                    emptyFieldsAlertUV.setHeaderText("CCampos icorrectos o vacíos");
+                    emptyFieldsAlertUV.setTitle("Campos incorrectos o vacíos");
+                    emptyFieldsAlertUV.setHeaderText("Campos incorrectos o vacíos");
                     emptyFieldsAlertUV.setContentText("Hay campos vacíos y/o incorrectos.");
                     emptyFieldsAlertUV.showAndWait();
                     return;
@@ -187,7 +187,7 @@ private static final org.apache.log4j.Logger LOG = Log.getLogger(AddProfessorCon
             } 
                     
             }else{
-                if (professorName.trim().isEmpty() || !FieldValidator.onlyTextAndNumbers(professorPhoneNumber) || !FieldValidator.isEmail(email) || !FieldValidator.onlyText(country) || !FieldValidator.onlyText(universityName) || !FieldValidator.onlyText(language) || !FieldValidator.onlyText(workShop)) {
+                if (!FieldValidator.isValidName(professorName) || !FieldValidator.onlyTextAndNumbers(professorPhoneNumber) || !FieldValidator.isEmail(email) || !FieldValidator.onlyText(country) || !FieldValidator.onlyText(universityName) || !FieldValidator.onlyText(language) || !FieldValidator.onlyText(workShop)) {
                     Alert emptyFieldsAlert = new Alert(AlertType.ERROR);
                     emptyFieldsAlert.setTitle("Campos icorrectos o vacíos");
                     emptyFieldsAlert.setHeaderText("Campos incorectos o vacíos");

@@ -15,6 +15,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import log.Log;
+import logic.FieldValidator;
 import logic.DAO.AdminDAO;
 import logic.DAO.FeedbackDAO;
 import logic.classes.Admin;
@@ -152,7 +153,9 @@ public class StudentGradeCollaborationController {
         Student studentData = new Student();
         studentData = UserSessionManager.getInstance().getStudentUserData();
         this.collaborationId = collaborationId;
-        if(textAreaComments.getText().isEmpty() || comboBoxGrade.getSelectionModel().isEmpty()){
+        String comments = textAreaComments.getText();
+        String grade = comboBoxGrade.getSelectionModel().getSelectedItem();
+        if(!FieldValidator.onlyText(comments) || !FieldValidator.onlyNumber(grade)){
             buttonSendFeedback.setDisable(true);
         } else {
             buttonSendFeedback.setDisable(false);
