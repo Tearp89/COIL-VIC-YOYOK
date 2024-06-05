@@ -115,7 +115,7 @@ public class LoginController {
             } else if(status.equals("Pendiente")){
                 Alert professorNotAccepted = new Alert(AlertType.INFORMATION);
                 professorNotAccepted.setHeaderText("Aún no ha sido aceptado");
-                professorNotAccepted.setTitle("No disponible");
+                professorNotAccepted.setTitle(null);
                 professorNotAccepted.setContentText("Por el momento no ha sido aceptado en el sistema");
                 professorNotAccepted.show();
             } 
