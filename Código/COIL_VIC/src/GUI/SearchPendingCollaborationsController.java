@@ -240,6 +240,6 @@ public class SearchPendingCollaborationsController {
         loadPendingCollaborations();
         addAcceptButtonToTable();
         addDeclineButtonToTable();
-        }
-
     }
+
+}
