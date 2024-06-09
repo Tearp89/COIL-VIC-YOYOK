@@ -1,0 +1,113 @@
+{
+    // Use IntelliSense para saber los atributos posibles.
+    // Mantenga el puntero para ver las descripciones de los existentes atributos.
+    // Para más información, visite: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Current File",
+            "request": "launch",
+            "mainClass": "${file}"
+        },
+        {
+            "type": "java",
+            "name": "MainAddCollaboration",
+            "request": "launch",
+            "mainClass": "GUI.MainAddCollaboration",
+            "projectName": "COIL-VIC-YOYOK_f5509d3c"
+        },
+        {
+            "type": "java",
+            "name": "MainAddProfessor",
+            "request": "launch",
+            "mainClass": "GUI.MainAddProfessor",
+            "projectName": "COIL-VIC-YOYOK_f5509d3c"
+        },
+        {
+            "type": "java",
+            "name": "MainAddWorkshop",
+            "request": "launch",
+            "mainClass": "GUI.MainAddWorkshop",
+            "projectName": "COIL-VIC-YOYOK_f5509d3c"
+        },
+        {
+            "type": "java",
+            "name": "MainCloseCollaboration",
+            "request": "launch",
+            "mainClass": "GUI.MainCloseCollaboration",
+            "projectName": "COIL-VIC-YOYOK_f5509d3c"
+        },
+        {
+            "type": "java",
+            "name": "MainConsulProfessors",
+            "request": "launch",
+            "mainClass": "GUI.MainConsulProfessors",
+            "projectName": "COIL-VIC-YOYOK_f5509d3c"
+        },
+        {
+            "type": "java",
+            "name": "MainDeclinedCollaborationDetails",
+            "request": "launch",
+            "mainClass": "GUI.MainDeclinedCollaborationDetails",
+            "projectName": "COIL-VIC-YOYOK_f5509d3c"
+        },
+        {
+            "type": "java",
+            "name": "MainLogin",
+            "request": "launch",
+            "mainClass": "GUI.MainLogin",
+            "projectName": "COIL-VIC-YOYOK_f5509d3c",
+            "vmArgs": "--module-path \"C:/Users/daur0/OneDrive/Documentos/Universidad/4to Semestre/Principios de Construcción/Proyecto COIL-VIC/COIL-VIC-YOYOK/javafx-sdk-21.0.2/lib\" --add-modules javafx.controls,javafx.fxml"
+        },
+        {
+            "type": "java",
+            "name": "MainOpen",
+            "request": "launch",
+            "mainClass": "GUI.MainOpen",
+            "projectName": "COIL-VIC-YOYOK_f5509d3c"
+        },
+        {
+            "type": "java",
+            "name": "MainPublishedCollaborations",
+            "request": "launch",
+            "mainClass": "GUI.MainPublishedCollaborations",
+            "projectName": "COIL-VIC-YOYOK_f5509d3c"
+        },
+        {
+            "type": "java",
+            "name": "MainRequests",
+            "request": "launch",
+            "mainClass": "GUI.MainRequests",
+            "projectName": "COIL-VIC-YOYOK_f5509d3c"
+        },
+        {
+            "type": "java",
+            "name": "MainSearchAcceptedCollaborations",
+            "request": "launch",
+            "mainClass": "GUI.MainSearchAcceptedCollaborations",
+            "projectName": "COIL-VIC-YOYOK_f5509d3c"
+        },
+        {
+            "type": "java",
+            "name": "MainSearchActiveCollaborations",
+            "request": "launch",
+            "mainClass": "GUI.MainSearchActiveCollaborations",
+            "projectName": "COIL-VIC-YOYOK_f5509d3c"
+        },
+        {
+            "type": "java",
+            "name": "MainSearchDeclinedCollaborations",
+            "request": "launch",
+            "mainClass": "GUI.MainSearchDeclinedCollaborations",
+            "projectName": "COIL-VIC-YOYOK_f5509d3c"
+        },
+        {
+            "type": "java",
+            "name": "MainSearchUniversity",
+            "request": "launch",
+            "mainClass": "GUI.MainSearchUniversity",
+            "projectName": "COIL-VIC-YOYOK_f5509d3c"
+        }
+    ]
+}

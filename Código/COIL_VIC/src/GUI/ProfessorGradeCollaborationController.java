@@ -21,7 +21,6 @@ import logic.FieldValidator;
 import logic.DAO.CollaborationDAO;
 import logic.DAO.FeedbackDAO;
 import logic.DAO.ProfessorDAO;
-import logic.DAO.UniversityDAO;
 import logic.classes.Feedback;
 import logic.classes.Professor;
 
@@ -79,7 +78,7 @@ public class ProfessorGradeCollaborationController {
         ChangeWindowManager.closeWindow(event);
     }
 
-     @FXML
+    @FXML
     private Button buttonLogout;
 
     @FXML
@@ -118,7 +117,6 @@ public class ProfessorGradeCollaborationController {
         Button okButton = (Button) confirmFeedbackAlert.getDialogPane().lookupButton(acceptFeedback);
         Button cancelButton = (Button) confirmFeedbackAlert.getDialogPane().lookupButton(cancelFeedback);
         okButton.setOnAction( eventSendFeedback -> {
-            CollaborationDAO collaborationDAO = new CollaborationDAO();
             Feedback feedback = new Feedback();
             Professor professorData = new Professor();
             professorData = UserSessionManager.getInstance().getProfessorUserData();
@@ -212,7 +210,7 @@ public class ProfessorGradeCollaborationController {
             buttonSendFeedback.setDisable(false);
         }
 
-       ObservableList<String> grades = FXCollections.observableArrayList();
+        ObservableList<String> grades = FXCollections.observableArrayList();
 
         for (int i = 1; i <= 10; i++) {
             grades.add(String.valueOf(i));

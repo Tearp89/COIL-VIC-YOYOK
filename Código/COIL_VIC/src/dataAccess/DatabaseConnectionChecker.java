@@ -2,7 +2,6 @@ package dataAccess;
 
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
-import javafx.stage.Stage;
 import log.Log;
 import java.sql.SQLException;
 
@@ -20,7 +19,7 @@ public class DatabaseConnectionChecker {
         }
     }
 
-    public static void showNoConnectionDialog(Stage ownerStage) {
+    public static void showNoConnectionDialog() {
         Alert alert = new Alert(Alert.AlertType.ERROR, "No hay conexión con la base de datos. La aplicación no puede continuar.", ButtonType.OK);
         alert.setTitle("Error de Conexión");
         alert.setHeaderText(null);

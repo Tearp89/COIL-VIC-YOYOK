@@ -3,6 +3,7 @@ package GUI;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import dataAccess.DatabaseConnectionChecker;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -112,7 +113,21 @@ public class SearchAcceptedCollaborationsController {
 
     @FXML
     private void goToSettings(ActionEvent event){
+        FXMLLoader settingsLoader = new FXMLLoader(getClass().getResource("/GUI/professorSettings.fxml"));
+        ChangeWindowManager.changeWindowTo(event, settingsLoader);
+    }
 
+    @FXML
+    private Button buttonLogout;
+    @FXML
+    private void logout(ActionEvent event){
+        FXMLLoader loginLoader = new FXMLLoader(getClass().getResource("/GUI/login.fxml"));
+        try {
+            ChangeWindowManager.logout(event, loginLoader);
+            UserSessionManager.getInstance().logoutAdmin();
+        } catch (IOException ioException){
+            LOG.error(ioException);
+        }
     }
 
     @FXML
@@ -143,11 +158,16 @@ public class SearchAcceptedCollaborationsController {
     private Label labelUser;
     @FXML
     private void initialize(){
+        
         Professor professorData = new Professor();
         professorData = UserSessionManager.getInstance().getProfessorUserData();
         labelUser.setText(professorData.getName());
         loadAcceptedCollaborations();
         tableViewAcceptedCollaborations.setOnMouseClicked(event -> {
+            if(!DatabaseConnectionChecker.isDatabaseConnected()){
+                DatabaseConnectionChecker.showNoConnectionDialog();
+                tableViewAcceptedCollaborations.setDisable(true);
+            }
             if(event.getClickCount() == 1){
                 Collaboration acceptedCollaboration = tableViewAcceptedCollaborations.getSelectionModel().getSelectedItem();
                 if(acceptedCollaboration != null){

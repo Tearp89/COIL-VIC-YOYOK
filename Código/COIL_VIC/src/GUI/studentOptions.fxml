@@ -122,7 +122,7 @@
                                           <String fx:value="shadow" />
                                        </styleClass>
                                        <children>
-                                          <Button fx:id="buttonAddStudent" alignment="CENTER_RIGHT" layoutX="262.0" layoutY="19.0" mnemonicParsing="false" onAction="#addStudent" prefHeight="104.0" prefWidth="229.0" style="card: transparent;" styleClass="card" stylesheets="@../uni%204/Construcción/COIL-VIC-YOYOK/Código/COIL_VIC/src/GUI/inicio.css" text="   Agregar&#10;   Estudiantes" textFill="WHITE">
+                                          <Button fx:id="buttonAddStudent" alignment="CENTER_RIGHT" layoutX="262.0" layoutY="19.0" mnemonicParsing="false" onAction="#addStudent" prefHeight="104.0" prefWidth="229.0" style="card: transparent;" styleClass="card" stylesheets="@windowsStyle.css" text="   Agregar&#10;   Estudiantes" textFill="WHITE">
                                              <font>
                                                 <Font name="Tahoma" size="17.0" />
                                              </font>

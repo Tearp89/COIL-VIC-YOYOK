@@ -2,6 +2,8 @@ package GUI;
 
 import java.io.IOException;
 
+import javax.mail.MessagingException;
+
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -15,6 +17,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TextFormatter;
 import javafx.scene.control.Label;
 import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
@@ -24,6 +27,7 @@ import logic.DAO.UniversityDAO;
 import logic.classes.Professor;
 import logic.classes.University;
 import logic.Access;
+import logic.EmailControl;
 import logic.FieldValidator;
 
 public class AddProfessorController {
@@ -162,18 +166,47 @@ private static final org.apache.log4j.Logger LOG = Log.getLogger(AddProfessorCon
                     professorAddedAlert.setHeaderText("Confirmación de registro");
                     professorAddedAlert.setContentText("¿Deseas enviar la solicitud de registro?");
                     ButtonType accept = new ButtonType("Aceptar");
-                    professorAddedAlert.getButtonTypes().setAll(accept);
+                    ButtonType cancel = new ButtonType("Cancelar");
+                    professorAddedAlert.getButtonTypes().setAll(cancel, accept);
                     Button okButton = (Button) professorAddedAlert.getDialogPane().lookupButton(accept);
+                    Button cancelButton = (Button) professorAddedAlert.getDialogPane().lookupButton(cancel);
                             
                     okButton.setOnAction(eventAddProfessorUV -> {
                                 
                     int professorRequestResult = professorDAO.addProfessorUV(professor);
                     if(professorRequestResult == 1) {
-                        Alert registrationRequestAlert = new Alert(AlertType.INFORMATION);
-                        registrationRequestAlert.setTitle("Solicitud de registro");
-                        registrationRequestAlert.setHeaderText("Solicitud enviada");
-                        registrationRequestAlert.setContentText("Solicitud de registro enviada exitosamente.");
-                        registrationRequestAlert.show();
+                        EmailControl emailControl = new EmailControl();
+                        try {
+                            emailControl.sendEmail(email, "Datos de entrada al sistema", "Sus credenciales para el sistema son: \n-Usuario: " + user + "\n-Contraseña: " + password + "\n\nUna vez sea aceptado en el sistema podra ingresar.");
+                            Alert registrationRequestAlert = new Alert(AlertType.INFORMATION);
+                            registrationRequestAlert.setTitle("Solicitud de registro");
+                            registrationRequestAlert.setHeaderText("Solicitud enviada");
+                            registrationRequestAlert.setContentText("Solicitud de registro enviada exitosamente. \nSus credenciales se han enviado por correo");
+                            registrationRequestAlert.showAndWait();
+                            LOG.info("Se envió un correo con las credenciales a: " + email);
+
+                            FXMLLoader addProfessorLoader = new FXMLLoader(getClass().getResource("/GUI/login.fxml"));
+                            try {
+                                Parent root = addProfessorLoader.load();
+                                Scene scene = new Scene(root);
+                                Stage stage = new Stage();
+                                stage.setScene(scene);
+                                stage.show();
+                                Node source = (Node) event.getSource();
+                                Stage currenStage = (Stage) source.getScene().getWindow();
+                                currenStage.close();
+                            } catch (IOException goToHomeException){
+                                LOG.error("ERROR:", goToHomeException);
+                            }
+                    
+                        } catch (MessagingException e) {
+                            Alert errorSendingOfEmail = new Alert(AlertType.ERROR);
+                            errorSendingOfEmail.setTitle("Error en el envío del correo");
+                            errorSendingOfEmail.setHeaderText(null);
+                            errorSendingOfEmail.setContentText("Sus credenciales son las siguientes: \n-Usuario:" + user + "\n-Contraseña: " + password);
+                            errorSendingOfEmail.show();
+                            LOG.error(e);
+                        }
                     } else {
                         Alert registrationRequestFailedAlert = new Alert(AlertType.ERROR);
                         registrationRequestFailedAlert.setTitle("Error en la solicitud");
@@ -181,6 +214,10 @@ private static final org.apache.log4j.Logger LOG = Log.getLogger(AddProfessorCon
                         registrationRequestFailedAlert.setContentText("Hubo un problema al enviar la solicitud de registro. Por favor, intente nuevamente.");
                         registrationRequestFailedAlert.show();
                     }
+                    
+                });
+                cancelButton.setOnAction(eventCancelAdding -> {
+                    professorAddedAlert.close();
                 });
                     
                 professorAddedAlert.show();    
@@ -220,17 +257,47 @@ private static final org.apache.log4j.Logger LOG = Log.getLogger(AddProfessorCon
                     professorAddedAlert.setHeaderText("Confirmación de registro");
                     professorAddedAlert.setContentText("¿Deseas enviar la solicitud de registro?");
                     ButtonType accept = new ButtonType("Aceptar");
-                    professorAddedAlert.getButtonTypes().setAll(accept);
-                    Button okButton = (Button) professorAddedAlert.getDialogPane().lookupButton(accept);    
+                    ButtonType cancel = new ButtonType("Cancelar");
+                    professorAddedAlert.getButtonTypes().setAll(cancel, accept);
+                    professorAddedAlert.show();
+                    Button okButton = (Button) professorAddedAlert.getDialogPane().lookupButton(accept); 
+                    Button cancelButton = (Button) professorAddedAlert.getDialogPane().lookupButton(cancel);   
                             
                     okButton.setOnAction(eventAddProfessorForeign -> {                              
                         int professorRequestResult = professorDAO.addProfessorForeign(professor);
                         if(professorRequestResult == 1) {
-                            Alert registrationRequestAlert = new Alert(AlertType.INFORMATION);
-                            registrationRequestAlert.setTitle("Solicitud de registro");
-                            registrationRequestAlert.setHeaderText("Solicitud enviada");
-                            registrationRequestAlert.setContentText("Solicitud de registro enviada exitosamente.");
-                            registrationRequestAlert.show();
+                            EmailControl emailControl = new EmailControl();
+                            try {
+                                emailControl.sendEmail(email, "Datos de entrada al sistema", "Sus credenciales para el sistema son: \n-Usuario: " + user + "\n-Contraseña: " + password + "\n\nUna vez sea aceptado en el sistema podra ingresar.");
+                                Alert registrationRequestAlert = new Alert(AlertType.INFORMATION);
+                                registrationRequestAlert.setTitle("Solicitud de registro");
+                                registrationRequestAlert.setHeaderText("Solicitud enviada");
+                                registrationRequestAlert.setContentText("Solicitud de registro enviada exitosamente. \nSus credenciales se han enviado por correo. \nEl correo puede tardar unos minutos en llegar.");
+                                registrationRequestAlert.showAndWait();
+                                LOG.info("Se envió un correo con las credenciales a: " + email);
+
+                                FXMLLoader addProfessorLoader = new FXMLLoader(getClass().getResource("/GUI/login.fxml"));
+                                try {
+                                    Parent root = addProfessorLoader.load();
+                                    Scene scene = new Scene(root);
+                                    Stage stage = new Stage();
+                                    stage.setScene(scene);
+                                    stage.show();
+                                    Node source = (Node) event.getSource();
+                                    Stage currenStage = (Stage) source.getScene().getWindow();
+                                    currenStage.close();
+                                } catch (IOException goToHomeException){
+                                    LOG.error("ERROR:", goToHomeException);
+                                }
+
+                            } catch (MessagingException e) {
+                                Alert errorSendingOfEmail = new Alert(AlertType.ERROR);
+                                errorSendingOfEmail.setTitle("Error en el envío del correo");
+                                errorSendingOfEmail.setHeaderText(null);
+                                errorSendingOfEmail.setContentText("Sus credenciales son las siguientes: \n-Usuario: " + user + "\n-Contraseña: " + password + "\n\nAsegurese de no perderlas");
+                                errorSendingOfEmail.show();
+                                LOG.error(e);
+                            }
                         } else {
                             Alert registrationRequestFailedAlert = new Alert(AlertType.ERROR);
                             registrationRequestFailedAlert.setTitle("Error en la solicitud");
@@ -239,12 +306,13 @@ private static final org.apache.log4j.Logger LOG = Log.getLogger(AddProfessorCon
                             registrationRequestFailedAlert.show();
                         }   
                     });
-                    
-                professorAddedAlert.show();                      
+                    cancelButton.setOnAction(eventCancelAdding -> {
+                        professorAddedAlert.close();
+                    });
                 }
             }
             
-        }
+    }
         
     private void loadAcademicAreaData(){
         comboBoxAcademicArea.getItems().clear();
@@ -393,6 +461,14 @@ private static final org.apache.log4j.Logger LOG = Log.getLogger(AddProfessorCon
         buttonConfirmation.setOnAction(this::addProfessor); 
         buttonCancel.setOnAction(this::cancel);
 
+        textFieldPersonalNumber.setTextFormatter(new TextFormatter<>(change -> {
+            String newText = change.getControlNewText();
+            if (newText.matches("[0-9]*")) {
+                return change;
+            } else {
+                return null;
+            }
+        }));
     }
 }
 

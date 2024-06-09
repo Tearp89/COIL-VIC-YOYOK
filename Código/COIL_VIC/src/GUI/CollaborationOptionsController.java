@@ -2,6 +2,7 @@ package GUI;
 
 import java.io.IOException;
 
+import dataAccess.DatabaseConnectionChecker;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -56,6 +57,7 @@ public class CollaborationOptionsController {
 
     @FXML
     private void addCollaboration(ActionEvent event){
+        checkDatabaseConnection();
         FXMLLoader addCollaborationLoader = new FXMLLoader(getClass().getResource("/GUI/addCollaboration.fxml"));
         ChangeWindowManager.changeWindowTo(event, addCollaborationLoader);
     }
@@ -64,6 +66,7 @@ public class CollaborationOptionsController {
     private Button buttonPublishCollaboration;
     @FXML
     private void publishCollaboration(ActionEvent event){
+        checkDatabaseConnection();
         FXMLLoader publishCollaborationLoader = new FXMLLoader(getClass().getResource("/GUI/acceptedCollaborations.fxml"));
         ChangeWindowManager.changeWindowTo(event, publishCollaborationLoader);
     }
@@ -72,6 +75,7 @@ public class CollaborationOptionsController {
     private Button buttonEditCollaboration;
     @FXML
     private void editCollaboration(ActionEvent event){
+        checkDatabaseConnection();
         FXMLLoader editCollaborationLoader = new FXMLLoader(getClass().getResource("/GUI/DeclinedCollaborations.fxml"));
         ChangeWindowManager.changeWindowTo(event, editCollaborationLoader);
     }
@@ -82,9 +86,9 @@ public class CollaborationOptionsController {
     private String professorUser;
     @FXML
     private void openCollaboration(ActionEvent event){
-        
+        checkDatabaseConnection();
         FXMLLoader openCollaborationLoader = new FXMLLoader(getClass().getResource("/GUI/openCollaboration.fxml"));
-         ChangeWindowManager.changeWindowTo(event, openCollaborationLoader);
+        ChangeWindowManager.changeWindowTo(event, openCollaborationLoader);
 
     }
 
@@ -93,7 +97,7 @@ public class CollaborationOptionsController {
 
     @FXML
     private void closeCollaboration(ActionEvent event){
-        
+        checkDatabaseConnection();
         FXMLLoader closeCollaboraitionLoader = new FXMLLoader(getClass().getResource("/GUI/closeCollaboration.fxml"));
         ChangeWindowManager.changeWindowTo(event, closeCollaboraitionLoader);
     }
@@ -103,6 +107,7 @@ public class CollaborationOptionsController {
 
     @FXML
     private void gradeCollaboration(ActionEvent event){
+        checkDatabaseConnection();
         FXMLLoader gradeCollaborationLoader = new FXMLLoader(getClass().getResource("/GUI/professorFeedbackCollaboration.fxml"));
         ChangeWindowManager.changeWindowTo(event, gradeCollaborationLoader);
 
@@ -113,6 +118,7 @@ public class CollaborationOptionsController {
 
     @FXML
     private void sendRequest(ActionEvent event){
+        checkDatabaseConnection();
         FXMLLoader sendRequestLoader = new FXMLLoader(getClass().getResource("/GUI/publishedCollaborations.fxml"));
         ChangeWindowManager.changeWindowTo(event, sendRequestLoader);
     }
@@ -122,6 +128,7 @@ public class CollaborationOptionsController {
 
     @FXML
     private void answerRequest(ActionEvent event){
+        checkDatabaseConnection();
         FXMLLoader answerRequestLoader = new FXMLLoader(getClass().getResource("/GUI/searchRequestToCollaborate.fxml"));
         ChangeWindowManager.changeWindowTo(event, answerRequestLoader);
     }
@@ -137,7 +144,6 @@ public class CollaborationOptionsController {
         } catch (IOException logoutException){
             LOG.error("ERROR:", logoutException);
         }
-       
     }
 
     @FXML
@@ -158,6 +164,7 @@ public class CollaborationOptionsController {
     private Button buttonSearchActivity;
     @FXML
     private void searchActivity(ActionEvent event){
+        checkDatabaseConnection();
         FXMLLoader searchActivityLoader = new FXMLLoader(getClass().getResource("/GUI/searchActivities.fxml"));
         ChangeWindowManager.changeWindowTo(event, searchActivityLoader);
 
@@ -167,6 +174,7 @@ public class CollaborationOptionsController {
     private Button buttonAddActivity;
     @FXML
     private void addActivity(ActionEvent event){
+        checkDatabaseConnection();
         FXMLLoader addActivityLoader = new FXMLLoader(getClass().getResource("/GUI/addActivity.fxml"));
         ChangeWindowManager.changeWindowTo(event, addActivityLoader);
     }
@@ -180,7 +188,7 @@ public class CollaborationOptionsController {
         professorData = UserSessionManager.getInstance().getProfessorUserData();
         labelUser.setText(professorData.getName());
         this.professorUser = professorData.getUser();
-
+        checkDatabaseConnection();
 
         CollaborationDAO collaborationDAO = new CollaborationDAO();
         ProfessorDAO professorDAO = new ProfessorDAO();
@@ -215,6 +223,21 @@ public class CollaborationOptionsController {
     }
 
 
-    
+    private void checkDatabaseConnection(){
+        if(!DatabaseConnectionChecker.isDatabaseConnected()){
+            DatabaseConnectionChecker.showNoConnectionDialog();
+            buttonAddActivity.setDisable(true);
+            buttonAddCollaboration.setDisable(true);
+            buttonAnswerRequest.setDisable(true);
+            buttonCloseCollaboration.setDisable(true);
+            buttonCollaboration.setDisable(true);
+            buttonEditCollaboration.setDisable(true);
+            buttonGradeCollaboration.setDisable(true);
+            buttonOpenCollaboration.setDisable(true);
+            buttonPublishCollaboration.setDisable(true);
+            buttonSearchActivity.setDisable(true);
+            buttonSendRequest.setDisable(true);
+        }
+    }
 
 }

@@ -37,8 +37,8 @@ public class ChangeWindowManager {
             Node source = (Node) event.getSource();
             Stage currenStage = (Stage) source.getScene().getWindow();
             currenStage.close();
-        } catch (IOException goToHomeException){
-            LOG.error("ERROR:", goToHomeException);
+        } catch (IOException changeWindowException){
+            LOG.error("ERROR:", changeWindowException);
         }
     }
 

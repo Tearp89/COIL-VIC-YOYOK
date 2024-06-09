@@ -53,6 +53,11 @@ public class LoginController {
 
     @FXML
     void login( ActionEvent e) {
+        if(!DatabaseConnectionChecker.isDatabaseConnected()){
+            DatabaseConnectionChecker.showNoConnectionDialog();
+            buttonAddProfessor.setDisable(true);
+            buttonLogin.setDisable(true);
+        }
         LoginDAO instance = new LoginDAO();
         String user = textFieldUser.getText();
         String password = textFieldPassword.getText();
@@ -110,7 +115,7 @@ public class LoginController {
             } else if(status.equals("Pendiente")){
                 Alert professorNotAccepted = new Alert(AlertType.INFORMATION);
                 professorNotAccepted.setHeaderText("Aún no ha sido aceptado");
-                professorNotAccepted.setTitle("No disponible");
+                professorNotAccepted.setTitle(null);
                 professorNotAccepted.setContentText("Por el momento no ha sido aceptado en el sistema");
                 professorNotAccepted.show();
             } 
@@ -150,6 +155,11 @@ public class LoginController {
 
     @FXML
     void addProfessor(ActionEvent event){
+        if(!DatabaseConnectionChecker.isDatabaseConnected()){
+            DatabaseConnectionChecker.showNoConnectionDialog();
+            buttonAddProfessor.setDisable(true);
+            buttonLogin.setDisable(true);
+        }
         FXMLLoader addProfessorLoader = new FXMLLoader(getClass().getResource("/GUI/addProfessor.fxml"));
         ChangeWindowManager.changeWindowTo(event, addProfessorLoader);
     }
@@ -157,7 +167,7 @@ public class LoginController {
     @FXML
     void initialize(){
         if(!DatabaseConnectionChecker.isDatabaseConnected()){
-            DatabaseConnectionChecker.showNoConnectionDialog(stage);
+            DatabaseConnectionChecker.showNoConnectionDialog();
             buttonAddProfessor.setDisable(true);
             buttonLogin.setDisable(true);
         }

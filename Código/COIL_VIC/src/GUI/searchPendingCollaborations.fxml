@@ -81,7 +81,7 @@
                               </Button>
                               <Button id="records" fx:id="buttonNumeralia" layoutX="11.0" layoutY="358.0" minHeight="40.0" mnemonicParsing="false" onAction="#goToNumeralia" prefWidth="180.0" styleClass="nav-btn" stylesheets="@windowsStyle.css" text="Numeralia">
                                  <graphic>
-                                    <FontAwesomeIcon fill="WHITE" glyphName="TROPHY" />
+                                    <FontAwesomeIcon fill="WHITE" glyphName="TH" />
                                  </graphic>
                               </Button>
                               <Button id="logOutB" fx:id="buttonLogout" layoutX="12.0" layoutY="514.0" mnemonicParsing="false" onAction="#logout" prefHeight="26.0" prefWidth="36.0" stylesheets="@windowsStyle.css">
@@ -101,7 +101,7 @@
                               <FontAwesomeIcon fill="WHITE" glyphName="USER" layoutX="54.0" layoutY="141.0" size="10em" />
                               <Button id="records" fx:id="buttonUniversities" layoutX="11.0" layoutY="398.0" minHeight="40.0" mnemonicParsing="false" onAction="#goToUniversities" prefWidth="180.0" styleClass="nav-btn" stylesheets="@windowsStyle.css" text="Universidades">
                                  <graphic>
-                                    <FontAwesomeIcon fill="WHITE" glyphName="GEAR" />
+                                    <FontAwesomeIcon fill="WHITE" glyphName="BUILDING" />
                                  </graphic>
                               </Button>
                            </children>
@@ -144,7 +144,10 @@
                                           </TableColumn>
                                       </columns>
                                     </TableView>
-                                    <Button fx:id="buttonBack" layoutX="43.0" layoutY="14.0" mnemonicParsing="false" onAction="#goBack" text="&lt;" />
+                                    <Button fx:id="buttonBack" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#goBack" styleClass="white-buttom" stylesheets="@windowsStyle.css">
+                                       <graphic>
+                                          <FontAwesomeIcon glyphName="ARROW_LEFT" />
+                                       </graphic></Button>
                                  </children>
                               </AnchorPane>
                            </children></AnchorPane>

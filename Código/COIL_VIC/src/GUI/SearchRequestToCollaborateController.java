@@ -3,6 +3,7 @@ package GUI;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import dataAccess.DatabaseConnectionChecker;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -63,9 +64,7 @@ public class SearchRequestToCollaborateController {
         @Override
         public TableCell<Professor, Void> call(final TableColumn<Professor, Void> param) {
             final TableCell<Professor, Void> cell = new TableCell<Professor, Void>() {
-                private final Button acceptButton = new Button("Aceptar");
-
-                {
+                private final Button acceptButton = new Button("Aceptar"); {
                     acceptButton.setOnAction((ActionEvent event) -> {
                         ProfessorDAO professorDAO = new ProfessorDAO();
                         Professor professorData = new Professor();
@@ -212,6 +211,9 @@ public class SearchRequestToCollaborateController {
     private Label labelUser;
     @FXML
     private void initialize(){
+        if(!DatabaseConnectionChecker.isDatabaseConnected()){
+            DatabaseConnectionChecker.showNoConnectionDialog();
+        }
         Professor professorData = new Professor();
         professorData = UserSessionManager.getInstance().getProfessorUserData();
         labelUser.setText(professorData.getName());
