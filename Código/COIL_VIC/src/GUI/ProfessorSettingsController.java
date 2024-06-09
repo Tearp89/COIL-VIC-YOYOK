@@ -1,7 +1,10 @@
 package GUI;
 
 import java.io.IOException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
+import dataAccess.DatabaseConnectionChecker;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -48,7 +51,10 @@ public class ProfessorSettingsController {
         ProfessorDAO professorDAO = new ProfessorDAO();
         String email = professorDAO.getProfessorEmailByUser(user);
         String phoneNumber = professorDAO.getProfessorPhoneByUser(user);
-
+        if(!DatabaseConnectionChecker.isDatabaseConnected()){
+            DatabaseConnectionChecker.showNoConnectionDialog();
+            buttonChangePassword.setDisable(true);
+        }
         labelName.setText(professorData.getName());
         labelPhone.setText(phoneNumber);
         labelEmail.setText(email);
@@ -133,49 +139,84 @@ public class ProfessorSettingsController {
         ProfessorDAO professorDAO = new ProfessorDAO();
         String user = UserSessionManager.getInstance().getProfessorUserData().getUser();
         int profesirId = professorDAO.getProfessorIdByUser(user);
-        String oldPassword = textFieldOldPassword.getText();
-        String newPassword = textFieldNewPassword.getText();
-        boolean passwordExist = professorDAO.compareProfessorPassword(oldPassword, profesirId);
-        if(passwordExist){
-            if (oldPassword == newPassword){
-                Alert samePasswordAlert = new Alert(AlertType.ERROR);
-                samePasswordAlert.setHeaderText("La contraseña antigua y la nueva son la misma");
-                samePasswordAlert.setTitle("Contraseña duplicada");
-                samePasswordAlert.setContentText("Favor de ingresar una nueva constraseña");
-                samePasswordAlert.show();
-            } else {
-                Alert confirmEditionAlert = new Alert(AlertType.CONFIRMATION);
-                confirmEditionAlert.setHeaderText("Confirmación cambio");
-                confirmEditionAlert.setTitle("Confirmar edición");
-                confirmEditionAlert.setContentText("¿Está seguro de que desea cambiar la contraseña?");
-                ButtonType acceptEdition = new ButtonType("Confirmar");
-                confirmEditionAlert.getButtonTypes().setAll(acceptEdition);
-                confirmEditionAlert.show();
-                Button okButton = (Button) confirmEditionAlert.getDialogPane().lookupButton(acceptEdition);
-                okButton.setOnAction(eventSaveEdition -> {
-                int result = professorDAO.changeProfessorPassword(newPassword, profesirId);
-                    if(result == 1){
-                        Alert universityUpdatedAlert = new Alert(AlertType.INFORMATION);
-                        universityUpdatedAlert.setHeaderText("Confirmación edición");
-                        universityUpdatedAlert.setTitle("Edición exitosa");
-                        universityUpdatedAlert.setContentText("Se ha actualizado la contraseña");
-                        universityUpdatedAlert.show();
-        
-                    } else{
-                        Alert editionErrorAlert = new Alert(AlertType.ERROR);
-                        editionErrorAlert.setTitle("Error edición");
-                        editionErrorAlert.setHeaderText("Error edición");
-                        editionErrorAlert.setContentText("Ocurrió un error intentelo nuevamente");
-                        editionErrorAlert.show();
-                    }
-                });
-            }
+        if(!DatabaseConnectionChecker.isDatabaseConnected()){
+            DatabaseConnectionChecker.showNoConnectionDialog();
+            buttonChangePassword.setDisable(true);
         } else {
-            Alert professorOldPasswordAlert = new Alert(AlertType.ERROR);
-            professorOldPasswordAlert.setHeaderText("Contraseña antigua incorrecta");
-            professorOldPasswordAlert.setTitle("Contraseña incorrecta");
-            professorOldPasswordAlert.setContentText("La contraseña antigua que ingreso es incorrecta");
-            professorOldPasswordAlert.show();
+            String oldPassword = textFieldOldPassword.getText();
+            String newPassword = textFieldNewPassword.getText();
+            boolean passwordExist = professorDAO.compareProfessorPassword(oldPassword, profesirId);
+            if (!validatePassword(newPassword)) {
+                showAlert("La contraseña debe tener al menos 8 caracteres, incluir una letra mayúscula, una letra minúscula, un número y un carácter especial.");
+                return;
+            }
+            if(passwordExist){
+                if (oldPassword == newPassword){
+                    Alert samePasswordAlert = new Alert(AlertType.ERROR);
+                    samePasswordAlert.setHeaderText("La contraseña antigua y la nueva son la misma");
+                    samePasswordAlert.setTitle("Contraseña duplicada");
+                    samePasswordAlert.setContentText("Favor de ingresar una nueva constraseña");
+                    samePasswordAlert.show();
+                } else {
+                    Alert confirmEditionAlert = new Alert(AlertType.CONFIRMATION);
+                    confirmEditionAlert.setHeaderText("Confirmación cambio");
+                    confirmEditionAlert.setTitle("Confirmar edición");
+                    confirmEditionAlert.setContentText("¿Está seguro de que desea cambiar la contraseña?");
+                    ButtonType acceptEdition = new ButtonType("Confirmar");
+                    confirmEditionAlert.getButtonTypes().setAll(acceptEdition);
+                    confirmEditionAlert.show();
+                    Button okButton = (Button) confirmEditionAlert.getDialogPane().lookupButton(acceptEdition);
+                    okButton.setOnAction(eventSaveEdition -> {
+                    int result = professorDAO.changeProfessorPassword(newPassword, profesirId);
+                        if(result == 1){
+                            Alert universityUpdatedAlert = new Alert(AlertType.INFORMATION);
+                            universityUpdatedAlert.setHeaderText("Confirmación edición");
+                            universityUpdatedAlert.setTitle("Edición exitosa");
+                            universityUpdatedAlert.setContentText("Se ha actualizado la contraseña");
+                            universityUpdatedAlert.show();
+                            textFieldNewPassword.setText(null);
+                            textFieldOldPassword.setText(null);
+                        } else{
+                            Alert editionErrorAlert = new Alert(AlertType.ERROR);
+                            editionErrorAlert.setTitle("Error edición");
+                            editionErrorAlert.setHeaderText("Error edición");
+                            editionErrorAlert.setContentText("Ocurrió un error intentelo nuevamente");
+                            editionErrorAlert.show();
+                        }
+                    });
+                }
+            } else {
+                Alert professorOldPasswordAlert = new Alert(AlertType.ERROR);
+                professorOldPasswordAlert.setHeaderText("Contraseña antigua incorrecta");
+                professorOldPasswordAlert.setTitle("Contraseña incorrecta");
+                professorOldPasswordAlert.setContentText("La contraseña antigua que ingreso es incorrecta");
+                professorOldPasswordAlert.show();
+            }
         }
+        
+    }
+
+    private boolean validatePassword(String password) {
+        if (password.length() < 8) {
+            return false;
+        }
+        Pattern upperCasePattern = Pattern.compile("[A-Z]");
+        Pattern lowerCasePattern = Pattern.compile("[a-z]");
+        Pattern digitPattern = Pattern.compile("[0-9]");
+        Pattern specialCharacterPattern = Pattern.compile("[^a-zA-Z0-9]");
+        Matcher upperCaseMatcher = upperCasePattern.matcher(password);
+        Matcher lowerCaseMatcher = lowerCasePattern.matcher(password);
+        Matcher digitMatcher = digitPattern.matcher(password);
+        Matcher specialCharacterMatcher = specialCharacterPattern.matcher(password);
+
+        return upperCaseMatcher.find() && lowerCaseMatcher.find() && digitMatcher.find() && specialCharacterMatcher.find();
+    }
+
+    private void showAlert(String message) {
+        Alert alert = new Alert(AlertType.ERROR);
+        alert.setTitle("Error de validación");
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
     }
 }
