@@ -109,7 +109,7 @@ public class ProfessorFeedbackCollaborationController {
         ChangeWindowManager.closeWindow(event);
     }
 
-     @FXML
+    @FXML
     private Button buttonLogout;
 
     @FXML

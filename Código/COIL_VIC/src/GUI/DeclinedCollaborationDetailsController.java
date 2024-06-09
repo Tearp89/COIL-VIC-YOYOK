@@ -17,6 +17,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import log.Log;
 import javafx.scene.control.Alert.AlertType;
+import logic.FieldValidator;
 import logic.DAO.CollaborationDAO;
 import logic.classes.Collaboration;
 import logic.classes.Professor;
@@ -177,6 +178,7 @@ public class DeclinedCollaborationDetailsController {
         LocalDate collaborationFinishDate = datePickerFinishDate.getValue();
         String collaborationGoal = textFieldCollaborationGoal.getText();
         String collaborationSubject = comboBoxSubject.getValue().toString();
+        String numberStudentsText = textFieldNumberStudents.getText();
         int numberStudents = Integer.parseInt(textFieldNumberStudents.getText());
         String studentProfile = textAreaStudentProfile.getText();
         Collaboration collaborationUpdated = new Collaboration();
@@ -191,13 +193,12 @@ public class DeclinedCollaborationDetailsController {
         collaborationUpdated.setCollaborationId(collaborationId);
         collaborationUpdated.setCollaborationStatus("En revisión");
         CollaborationDAO updateCollaborationDAO = new CollaborationDAO();
-        if(collaborationName.trim().isEmpty() || collaborationDescription.trim().isEmpty() || collaborationStartDate.toString().trim().isEmpty() || 
-        collaborationFinishDate.toString().trim().isEmpty() || collaborationGoal.trim().isEmpty() || collaborationSubject.trim().isEmpty() || 
-        textFieldNumberStudents.getText().trim().isEmpty() || studentProfile.trim().isEmpty()){
+        if(!FieldValidator.onlyTextAndNumbers(collaborationName) || !FieldValidator.onlyText(collaborationDescription) || !FieldValidator.isValidDateRange(collaborationStartDate, collaborationFinishDate) || !FieldValidator.onlyText(collaborationGoal) || !FieldValidator.onlyText(collaborationSubject) || 
+        !FieldValidator.onlyNumber(numberStudentsText) || !FieldValidator.onlyText(studentProfile)){
             Alert emptyFieldsAlert = new Alert(AlertType.ERROR);
-            emptyFieldsAlert.setTitle("Campos vacíos");
-            emptyFieldsAlert.setContentText("No se pudo actualizar la colaboración hay campos vacíos");
-            emptyFieldsAlert.setHeaderText("Campos vacíos");
+            emptyFieldsAlert.setTitle("Campos vacíos o inválidos");
+            emptyFieldsAlert.setContentText("No se pudo actualizar la colaboración hay campos vacíos o inválidos");
+            emptyFieldsAlert.setHeaderText("Campos vacíos o inválidos");
             emptyFieldsAlert.show();
 
 

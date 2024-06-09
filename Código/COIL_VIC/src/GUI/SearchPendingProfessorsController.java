@@ -14,6 +14,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
@@ -76,25 +77,37 @@ public class SearchPendingProfessorsController {
                             noWorkShopAlert.setContentText("No se puede aceptar el académico, Curso-Taller no cursado");
                             noWorkShopAlert.show();
                         }else{
-                            int result = professorDAO.changeProfessorStatusById("Aceptado", professorId);
-                        if(result == 1){
-                            Alert acceptanceSuccessfulAlert = new Alert(AlertType.INFORMATION);
-                            acceptanceSuccessfulAlert.setTitle("Académico aceptado");
-                            acceptanceSuccessfulAlert.setHeaderText("Académico aceptado");
-                            acceptanceSuccessfulAlert.setContentText("Académico aceptado exitosamente");
-                            acceptanceSuccessfulAlert.show();
+                            Alert confirmDeclineAlert = new Alert(AlertType.CONFIRMATION);
+                            confirmDeclineAlert.setTitle("Confirmar aceptación");
+                            confirmDeclineAlert.setHeaderText("Confirmar aceptación");
+                            confirmDeclineAlert.setContentText("¿Está seguro de que desea aceptar al académico?");
+                            confirmDeclineAlert.show();
+                            ButtonType accept = new ButtonType("Aceptar");
+                            confirmDeclineAlert.getButtonTypes().setAll(accept);
+                            Button okButton = (Button) confirmDeclineAlert.getDialogPane().lookupButton(accept); 
+                            okButton.setOnAction(eventAddProfessorForeign -> {
+                                int result = professorDAO.changeProfessorStatusById("Aceptado", professorId);
+                                if(result == 1){
+                                    Alert acceptanceSuccessfulAlert = new Alert(AlertType.INFORMATION);
+                                    acceptanceSuccessfulAlert.setTitle("Académico aceptado");
+                                    acceptanceSuccessfulAlert.setHeaderText("Académico aceptado");
+                                    acceptanceSuccessfulAlert.setContentText("Académico aceptado exitosamente");
+                                    acceptanceSuccessfulAlert.show();
 
-                        }else{
-                            Alert acceptanceErrorAlert = new Alert(AlertType.ERROR);
-                            acceptanceErrorAlert.setTitle("Error conexión");
-                            acceptanceErrorAlert.setHeaderText("Error conexión");
-                            acceptanceErrorAlert.setContentText("No se pudo conectar a la base de datos, por favor inténtelo de nuevo más tarde");
-                            acceptanceErrorAlert.show();
+                                }else{
+                                    Alert acceptanceErrorAlert = new Alert(AlertType.ERROR);
+                                    acceptanceErrorAlert.setTitle("Error conexión");
+                                    acceptanceErrorAlert.setHeaderText("Error conexión");
+                                    acceptanceErrorAlert.setContentText("No se pudo conectar a la base de datos, por favor inténtelo de nuevo más tarde");
+                                    acceptanceErrorAlert.show();
+                                }
+                                tableViewPendingProfessors.getItems().clear();
+                                loadPendingProfessors();
+                            
+                            });
                         }
-                    }
-                        
-                        
                     });
+                    
                 }
 
                 @Override
@@ -130,23 +143,36 @@ public class SearchPendingProfessorsController {
                             Professor professor = getTableView().getItems().get(getIndex());
                             int professorId = professor.getProfessorId();
                             ProfessorDAO professorDAO = new ProfessorDAO();
-                            int result = professorDAO.changeProfessorStatusById("Rechazado", professorId);
-                            if(result == 1){
-                                Alert acceptanceSuccessfulAlert = new Alert(AlertType.INFORMATION);
-                                acceptanceSuccessfulAlert.setTitle("Solicitud rechazada");
-                                acceptanceSuccessfulAlert.setHeaderText("Solicitud rechazada");
-                                acceptanceSuccessfulAlert.setContentText("Solicitud rechazada exitosamente");
-                                acceptanceSuccessfulAlert.show();
-                            } else{
-                                Alert acceptanceErrorAlert = new Alert(AlertType.ERROR);
-                                acceptanceErrorAlert.setTitle("Error conexión");
-                                acceptanceErrorAlert.setHeaderText("Error conexión");
-                                acceptanceErrorAlert.setContentText("No se pudo conectar a la base de datos, por favor inténtelo de nuevo más tarde");
-                                acceptanceErrorAlert.show();
-                            }
                             
+                            Alert confirmDeclineAlert = new Alert(AlertType.CONFIRMATION);
+                            confirmDeclineAlert.setTitle("Confirmar rechazo");
+                            confirmDeclineAlert.setHeaderText("Confirmar rechazo");
+                            confirmDeclineAlert.setContentText("¿Está seguro de que desea rechazar al académico?");
+                            confirmDeclineAlert.show();
+                            ButtonType accept = new ButtonType("Aceptar");
+                            confirmDeclineAlert.getButtonTypes().setAll(accept);
+                            Button okButton = (Button) confirmDeclineAlert.getDialogPane().lookupButton(accept); 
+                            okButton.setOnAction(eventAddProfessorForeign -> {
+                                int result = professorDAO.changeProfessorStatusById("Rechazado", professorId);
+                                if(result == 1){
+                                    Alert acceptanceSuccessfulAlert = new Alert(AlertType.INFORMATION);
+                                    acceptanceSuccessfulAlert.setTitle("Solicitud rechazada");
+                                    acceptanceSuccessfulAlert.setHeaderText("Solicitud rechazada");
+                                    acceptanceSuccessfulAlert.setContentText("Solicitud rechazada exitosamente");
+                                    acceptanceSuccessfulAlert.show();
+                                } else{
+                                    Alert acceptanceErrorAlert = new Alert(AlertType.ERROR);
+                                    acceptanceErrorAlert.setTitle("Error conexión");
+                                    acceptanceErrorAlert.setHeaderText("Error conexión");
+                                    acceptanceErrorAlert.setContentText("No se pudo conectar a la base de datos, por favor inténtelo de nuevo más tarde");
+                                    acceptanceErrorAlert.show();
+                                }
+                                tableViewPendingProfessors.getItems().clear();
+                                loadPendingProfessors();
+                                
+                            });
                         });
-                    }
+                    }   
 
                     @Override
                     public void updateItem(Void item, boolean empty) {

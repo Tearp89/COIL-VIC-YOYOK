@@ -6,6 +6,8 @@ import java.util.List;
 
 import javax.swing.event.ChangeListener;
 
+import com.mysql.cj.result.Field;
+
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -21,6 +23,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import log.Log;
+import logic.FieldValidator;
 import logic.DAO.ActivityDAO;
 import logic.DAO.CollaborationDAO;
 import logic.DAO.ProfessorDAO;
@@ -143,11 +146,11 @@ public class SearchActivitiesController {
         ArrayList<Collaboration> publishedCollaborations = collaborationDAO.searchCollaborationByStatusAndProfessorId("Publicada", professorId);
         int collaborationId = publishedCollaborations.get(0).getCollaborationId();
         ActivityDAO activityDAO = new ActivityDAO();
-        if(title.trim().isEmpty() || type.trim().isEmpty() || week.trim().isEmpty()){
+        if(!FieldValidator.onlyTextAndNumbers(title) || !FieldValidator.onlyText(type) || !FieldValidator.onlyNumber(week)){
             Alert emptyFieldsAlert = new Alert(AlertType.ERROR);
-            emptyFieldsAlert.setTitle("Campos vacíos");
-            emptyFieldsAlert.setHeaderText("Campos vacíos");
-            emptyFieldsAlert.setContentText("No se modificar la actividad, hay campos vacíos");
+            emptyFieldsAlert.setTitle("Campos vacíos o inválidos");
+            emptyFieldsAlert.setHeaderText("Campos vacíos o inválidos");
+            emptyFieldsAlert.setContentText("No se modificar la actividad, hay campos vacíos o inválidos");
         }else if(activityDAO.isActivityTypeAssigned(collaborationId, type) == true){
             Alert duplicatedTypeAlert = new Alert(AlertType.ERROR);
             duplicatedTypeAlert.setTitle("Tipos duplicados");

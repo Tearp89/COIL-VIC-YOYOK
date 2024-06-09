@@ -16,6 +16,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import log.Log;
+import logic.FieldValidator;
 import logic.DAO.AdminDAO;
 import logic.DAO.CollaborationDAO;
 import logic.DAO.FeedbackDAO;
@@ -100,48 +101,57 @@ public class AdminGradeCollaborationController {
     private void sendFeedback(ActionEvent event){
         int grade = Integer.parseInt(comboBoxGrade.getSelectionModel().getSelectedItem().toString()) ;
         String comments = textAreaComments.getText();
-        Alert confirmFeedbackAlert = new Alert(AlertType.CONFIRMATION);
-        confirmFeedbackAlert.setTitle("Confirmar retroalimentación");
-        confirmFeedbackAlert.setHeaderText("Confirmar retroalimentación");
-        confirmFeedbackAlert.setContentText("¿Está seguro de que desea enviar la retroalimentación?");
-        ButtonType acceptFeedback = new ButtonType("Aceptar");
-        ButtonType cancelFeedback = new ButtonType("Cancelar");
-        confirmFeedbackAlert.getButtonTypes().setAll(acceptFeedback, cancelFeedback);
-        confirmFeedbackAlert.show();
-        Button okButton = (Button) confirmFeedbackAlert.getDialogPane().lookupButton(acceptFeedback);
-        Button cancelButton = (Button) confirmFeedbackAlert.getDialogPane().lookupButton(cancelFeedback);
-        okButton.setOnAction( eventSendFeedback -> {
-            Feedback feedback = new Feedback();
-            Admin adminData = new Admin();
-            adminData = UserSessionManager.getInstance().getAdminUserData();
-            String user = adminData.getAdminUser();
-            AdminDAO adminDAO = new AdminDAO();
-            int adminId = adminDAO.getAdminIdByUser(user);
-            feedback.setGrade(grade);
-            feedback.setComments(comments);
-            feedback.setAdminId(adminId);
-            feedback.setCollaborationId(collaborationId);
-            FeedbackDAO feedbackDAO = new FeedbackDAO();
-            int result = feedbackDAO.addAdminReview(feedback);
-            if(result > 0){
-                Alert feedbackSentAlert = new Alert(AlertType.INFORMATION);
-                feedbackSentAlert.setTitle("Retroalimentación enviada");
-                feedbackSentAlert.setHeaderText("Retroalimentación enviada");
-                feedbackSentAlert.setContentText("Retroalimentación enviada exitosamente");
-                feedbackSentAlert.show();
-            } else {
-                Alert sendErrorAlert = new Alert(AlertType.ERROR);
-                sendErrorAlert.setTitle("Error conexión");
-                sendErrorAlert.setHeaderText("Error conexión");
-                sendErrorAlert.setContentText("Se perdió la conexión a la base de datos, inténtelo de nuevo más tarde");
-                sendErrorAlert.show();
-            }
-        });
+        if(FieldValidator.onlyTextAndNumbers(comments.trim())){
+            Alert confirmFeedbackAlert = new Alert(AlertType.CONFIRMATION);
+            confirmFeedbackAlert.setTitle("Confirmar retroalimentación");
+            confirmFeedbackAlert.setHeaderText("Confirmar retroalimentación");
+            confirmFeedbackAlert.setContentText("¿Está seguro de que desea enviar la retroalimentación?");
+            ButtonType acceptFeedback = new ButtonType("Aceptar");
+            ButtonType cancelFeedback = new ButtonType("Cancelar");
+            confirmFeedbackAlert.getButtonTypes().setAll(acceptFeedback, cancelFeedback);
+            confirmFeedbackAlert.show();
+            Button okButton = (Button) confirmFeedbackAlert.getDialogPane().lookupButton(acceptFeedback);
+            Button cancelButton = (Button) confirmFeedbackAlert.getDialogPane().lookupButton(cancelFeedback);
+            okButton.setOnAction( eventSendFeedback -> {
+                Feedback feedback = new Feedback();
+                Admin adminData = new Admin();
+                adminData = UserSessionManager.getInstance().getAdminUserData();
+                String user = adminData.getAdminUser();
+                AdminDAO adminDAO = new AdminDAO();
+                int adminId = adminDAO.getAdminIdByUser(user);
+                feedback.setGrade(grade);
+                feedback.setComments(comments);
+                feedback.setAdminId(adminId);
+                feedback.setCollaborationId(collaborationId);
+                FeedbackDAO feedbackDAO = new FeedbackDAO();
+                int result = feedbackDAO.addAdminReview(feedback);
+                if(result > 0){
+                    Alert feedbackSentAlert = new Alert(AlertType.INFORMATION);
+                    feedbackSentAlert.setTitle("Retroalimentación enviada");
+                    feedbackSentAlert.setHeaderText("Retroalimentación enviada");
+                    feedbackSentAlert.setContentText("Retroalimentación enviada exitosamente");
+                    feedbackSentAlert.show();
+                    buttonCancelFeedback.setDisable(true);
+                    buttonSendFeedback.setDisable(true);
+                } else {
+                    Alert sendErrorAlert = new Alert(AlertType.ERROR);
+                    sendErrorAlert.setTitle("Error conexión");
+                    sendErrorAlert.setHeaderText("Error conexión");
+                    sendErrorAlert.setContentText("Se perdió la conexión a la base de datos, inténtelo de nuevo más tarde");
+                    sendErrorAlert.show();
+                }
+            });
 
-        cancelButton.setOnAction(eventCancelFeedBack -> {
-            confirmFeedbackAlert.close();
-        });
-
+            cancelButton.setOnAction(eventCancelFeedBack -> {
+                confirmFeedbackAlert.close();
+            });
+        } else {
+            Alert sendErrorAlert = new Alert(AlertType.ERROR);
+            sendErrorAlert.setTitle("Datos no validos");
+            sendErrorAlert.setHeaderText(null);
+            sendErrorAlert.setContentText("Existen datos vacios o no validos para la retroalimentación");
+            sendErrorAlert.show();
+        }
     }
 
     @FXML
@@ -191,13 +201,15 @@ public class AdminGradeCollaborationController {
         adminData = UserSessionManager.getInstance().getAdminUserData();
         labelUser.setText(adminData.getAdminName());
         this.collaborationId = collaborationId;
-        if(textAreaComments.getText().isEmpty() || comboBoxGrade.getSelectionModel().isEmpty()){
+        String comments = textAreaComments.getText();
+        String grade = comboBoxGrade.getSelectionModel().getSelectedItem();
+        if(!FieldValidator.onlyText(comments) || !FieldValidator.onlyNumber(grade)){
             buttonSendFeedback.setDisable(true);
         } else {
             buttonSendFeedback.setDisable(false);
         }
 
-       ObservableList<String> grades = FXCollections.observableArrayList();
+        ObservableList<String> grades = FXCollections.observableArrayList();
 
         for (int i = 1; i <= 10; i++) {
             grades.add(String.valueOf(i));

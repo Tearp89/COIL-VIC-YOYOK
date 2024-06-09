@@ -9,6 +9,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -20,6 +21,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.util.Callback;
 import log.Log;
 import logic.DAO.CollaborationDAO;
@@ -167,8 +169,12 @@ public class SearchDeclinedCollaborationsController {
                     DeclinedCollaborationDetailsController controller = loader.getController();
                     controller.initialize(declinedCollaboration.getCollaborationId());
                     Stage stage = new Stage();
+                    stage.initStyle(StageStyle.TRANSPARENT);
                     stage.setScene(new Scene(root));
                     stage.show();
+                    Node source = (Node) event.getSource();
+                    Stage currenStage = (Stage) source.getScene().getWindow();
+                    currenStage.close();
                 } catch (IOException e) {
                     LOG.error("ERROR:", e);
                 }
