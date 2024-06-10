@@ -2,7 +2,6 @@
 
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
@@ -92,11 +91,6 @@
          </cursor>
       </PasswordField>
       <Button fx:id="buttonLogin" layoutX="395.0" layoutY="334.0" mnemonicParsing="false" onAction="#login" prefHeight="25.0" prefWidth="98.0" style="-fx-background-radius: 12; -fx-background-color: #FF3859;" text="LOG IN" textFill="WHITE" />
-      <Label layoutX="399.0" layoutY="365.0" text="¿Olvidaste tu contraseña?" textFill="#ff3a58">
-         <font>
-            <Font name="Tahoma" size="8.0" />
-         </font>
-      </Label>
       <Button fx:id="buttonAddProfessor" layoutX="419.0" layoutY="316.0" mnemonicParsing="false" onAction="#addProfessor" prefHeight="8.0" prefWidth="135.0" styleClass="close" stylesheets="@windowsStyle.css" text="¿No tienes cuenta? Registrate aquí" textFill="#ff3a58">
          <font>
             <Font name="Tahoma" size="8.0" />
