@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "MainDeclinedCollaborationDetails",
+            "request": "launch",
+            "mainClass": "GUI.MainDeclinedCollaborationDetails",
+            "projectName": "COIL_VIC_7f2e775a"
+        },
+        {
+            "type": "java",
             "name": "MainLogin",
             "request": "launch",
             "mainClass": "GUI.MainLogin",

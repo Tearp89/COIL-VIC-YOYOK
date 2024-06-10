@@ -19,7 +19,8 @@
     import javafx.scene.control.TextArea;
     import javafx.scene.control.TextField;
     import javafx.scene.control.TextFormatter;
-    import log.Log;
+import javafx.scene.input.KeyEvent;
+import log.Log;
     import javafx.scene.control.Alert.AlertType;
 import logic.FieldValidator;
 import logic.DAO.CollaborationDAO;
@@ -224,6 +225,15 @@ import logic.DAO.CollaborationDAO;
                 return null;
             }
         }));
+
+        datePickerStartDate.getEditor().addEventFilter(KeyEvent.KEY_TYPED, event -> event.consume());
+        datePickerStartDate.getEditor().addEventFilter(KeyEvent.KEY_PRESSED, event -> event.consume());
+        datePickerStartDate.getEditor().addEventFilter(KeyEvent.KEY_RELEASED, event -> event.consume());
+
+        datePickerFinishDate.getEditor().addEventFilter(KeyEvent.KEY_TYPED, event -> event.consume());
+        datePickerFinishDate.getEditor().addEventFilter(KeyEvent.KEY_PRESSED, event -> event.consume());
+        datePickerFinishDate.getEditor().addEventFilter(KeyEvent.KEY_RELEASED, event -> event.consume());
+
         
 
     }
