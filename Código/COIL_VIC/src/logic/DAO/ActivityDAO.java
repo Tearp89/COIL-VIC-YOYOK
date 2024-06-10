@@ -65,6 +65,7 @@ public class ActivityDAO implements IActivity {
                 PreparedStatement preparedStatement = connection.prepareStatement(query);
                 preparedStatement.setInt(1,activity.getActivityId());
                 result = preparedStatement.executeUpdate();  
+                connection.close();
             } catch (SQLException deleteActivityException){
                 LOG.error("ERROR: ", deleteActivityException);
             }
@@ -113,47 +114,46 @@ public class ActivityDAO implements IActivity {
         }
 
 
-        public List<Activity> getActivitiesByCollaborationAndWeek(int collaborationId, String week) {
-            DatabaseManager dbManager = new DatabaseManager();
-            List<Activity> activities = new ArrayList<>();
-            String query = "SELECT a.* " +
+    public List<Activity> getActivitiesByCollaborationAndWeek(int collaborationId, String week) {
+        DatabaseManager dbManager = new DatabaseManager();
+        List<Activity> activities = new ArrayList<>();
+        String query = "SELECT a.* " +
                         "FROM actividad a " +
                         "JOIN cronograma_actividades sa ON a.idActividad = sa.idActividad " +
                         "WHERE sa.idColaboración = ? AND a.semana = ?";
-            try {
-                Connection connection = dbManager.getConnection();
-                PreparedStatement preparedStatement = connection.prepareStatement(query); 
-                preparedStatement.setInt(1, collaborationId);
-                preparedStatement.setString(2, week);
-                try (ResultSet resultSet = preparedStatement.executeQuery()) {
-                    while (resultSet.next()) {
-                        int activityId = resultSet.getInt("idActividad");
-                        String title = resultSet.getString("título");
-                        String description = resultSet.getString("descripcion");
-                        String type = resultSet.getString("tipo");
-                        String activityWeek = resultSet.getString("semana");
-                        Activity activity = new Activity();
-                        activity.setActivityId(activityId);
-                        activity.setTitle(title);
-                        activity.setDescription(description);
-                        activity.setType(type);
-                        activity.setWeek(activityWeek);
-                        activities.add(activity);
-                    }
+        try (Connection connection = dbManager.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setInt(1, collaborationId);
+            preparedStatement.setString(2, week);
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                while (resultSet.next()) {
+                    int activityId = resultSet.getInt("idActividad");
+                    String title = resultSet.getString("título");
+                    String description = resultSet.getString("descripcion");
+                    String type = resultSet.getString("tipo");
+                    String activityWeek = resultSet.getString("semana");
+                    Activity activity = new Activity();
+                    activity.setActivityId(activityId);
+                    activity.setTitle(title);
+                    activity.setDescription(description);
+                    activity.setType(type);
+                    activity.setWeek(activityWeek);
+                    activities.add(activity);
                 }
-            } catch (SQLException getActivitiesByCollaborationAndWeekException) {
-                LOG.error("ERROR:",getActivitiesByCollaborationAndWeekException); // Basic error handling, you can enhance exception handling as needed
             }
-            return activities;
+        } catch (SQLException getActivitiesByCollaborationAndWeekException) {
+            LOG.error("ERROR:", getActivitiesByCollaborationAndWeekException);
+        }
+        return activities;
     }
     //TODO: Test
     public boolean isActivityAssignedInWeek(int collaborationId, String week) {
         DatabaseManager dbManager = new DatabaseManager();
         String query = "SELECT COUNT(*) FROM actividad a " +
-                       "JOIN cronograma_actividades ca ON a.idActividad = ca.idActividad " +
-                       "WHERE ca.idColaboración = ? AND a.semana = ?";
+                        "JOIN cronograma_actividades ca ON a.idActividad = ca.idActividad " +
+                        "WHERE ca.idColaboración = ? AND a.semana = ?";
         try (Connection connection = dbManager.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setInt(1, collaborationId);
             preparedStatement.setString(2, week);
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
@@ -162,7 +162,7 @@ public class ActivityDAO implements IActivity {
                 }
             }
         } catch (SQLException e) {
-            e.printStackTrace(); // Basic error handling, you can enhance exception handling as needed
+            e.printStackTrace(); 
         }
         return false;
     }
@@ -171,10 +171,10 @@ public class ActivityDAO implements IActivity {
     public boolean isActivityTypeAssigned(int collaborationId, String type) {
         DatabaseManager dbManager = new DatabaseManager();
         String query = "SELECT COUNT(*) FROM actividad a " +
-                       "JOIN cronograma_actividades ca ON a.idActividad = ca.idActividad " +
-                       "WHERE ca.idColaboración = ? AND a.tipo = ?";
+                        "JOIN cronograma_actividades ca ON a.idActividad = ca.idActividad " +
+                        "WHERE ca.idColaboración = ? AND a.tipo = ?";
         try (Connection connection = dbManager.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setInt(1, collaborationId);
             preparedStatement.setString(2, type);
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
@@ -183,7 +183,7 @@ public class ActivityDAO implements IActivity {
                 }
             }
         } catch (SQLException e) {
-            e.printStackTrace(); // Basic error handling, you can enhance exception handling as needed
+            e.printStackTrace(); 
         }
         return false;
     }
@@ -201,7 +201,7 @@ public class ActivityDAO implements IActivity {
                 }
             }
         } catch (SQLException e) {
-            e.printStackTrace(); // Basic error handling, you can enhance exception handling as needed
+            e.printStackTrace(); 
         }
         return type;
     }
@@ -219,7 +219,7 @@ public class ActivityDAO implements IActivity {
                 }
             }
         } catch (SQLException e) {
-            e.printStackTrace(); // Basic error handling, you can enhance exception handling as needed
+            e.printStackTrace(); 
         }
         return week;
     }

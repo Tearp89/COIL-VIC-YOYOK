@@ -23,9 +23,8 @@ public class AdminDAO implements IAdmin {
         DatabaseManager dbManager = new DatabaseManager();
         String query = "INSERT INTO administrador (contraseña, nombreAdministrador, rol, usuario) VALUES (SHA2(?, 256),?,?,?)";
         int result = 0;
-        try{
-            Connection connection = dbManager.getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement(query);
+        try(Connection connection = dbManager.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setString(1, admin.getPassword());
             preparedStatement.setString(2, admin.getAdminName());
             preparedStatement.setString(3, admin.getAdminRol());
@@ -33,7 +32,6 @@ public class AdminDAO implements IAdmin {
             result = preparedStatement.executeUpdate();
         } catch (SQLException addAdminException) {
             LOG.error("ERROR: ", addAdminException);
-            LOG.warn(addAdminException.getMessage());
         }
         return result;
     }
@@ -42,9 +40,8 @@ public class AdminDAO implements IAdmin {
         DatabaseManager dbManager = new DatabaseManager();
         String query = "DELETE FROM administrador where nombreAdministrador = ?";
         int result = 0;
-        try{
-            Connection connection = dbManager.getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement(query);
+        try(Connection connection = dbManager.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setString(1,admin.getAdminName());
             result = preparedStatement.executeUpdate();
         } catch (SQLException deleteAdminException){
@@ -57,9 +54,8 @@ public class AdminDAO implements IAdmin {
         DatabaseManager dbManager = new DatabaseManager();
         String query = "UPDATE administrador set contraseña = ?, nombreAdministrador = ?, rol = ?, usuario = ? WHERE idAdministrativo = ? ";
         int result = 0;
-        try{
-            Connection connection = dbManager.getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement(query);
+        try(Connection connection = dbManager.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setString(1, admin.getPassword());
             preparedStatement.setString(2, admin.getAdminName());
             preparedStatement.setString(3, admin.getAdminRol());
@@ -75,21 +71,17 @@ public class AdminDAO implements IAdmin {
         String name = null;
         DatabaseManager dbManager = new DatabaseManager();
         String query = "SELECT nombreAdministrador FROM administrador WHERE usuario = ? ";
-        try {
-            Connection connection = dbManager.getConnection();
-            try(PreparedStatement preparedStatement = connection.prepareStatement(query)){
-                preparedStatement.setString(1, user);
-                ResultSet resultSet = preparedStatement.executeQuery();
-
-                if(resultSet.next()){
-                    name = resultSet.getString("nombreAdministrador");
-                }
-                
+        try (Connection connection = dbManager.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setString(1, user);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if(resultSet.next()){
+                name = resultSet.getString("nombreAdministrador");
             }
+            resultSet.close();
         } catch (SQLException getAdminNameByUserException) {
             LOG.error(getAdminNameByUserException);
-        }   
-
+        }
         return name;
     }
 
@@ -97,21 +89,17 @@ public class AdminDAO implements IAdmin {
         int adminId = 0;
         DatabaseManager dbManager = new DatabaseManager();
         String query = "SELECT idAdministrativo FROM administrador WHERE usuario = ? ";
-        try {
-            Connection connection = dbManager.getConnection();
-            try(PreparedStatement preparedStatement = connection.prepareStatement(query)){
-                preparedStatement.setString(1, user);
-                ResultSet resultSet = preparedStatement.executeQuery();
-
-                if(resultSet.next()){
-                    adminId = resultSet.getInt("idAdministrativo");
-                }
-                
+        try (Connection connection = dbManager.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setString(1, user);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if(resultSet.next()){
+                adminId = resultSet.getInt("idAdministrativo");
             }
+            resultSet.close();
         } catch (SQLException getAdminIdByUserException) {
             LOG.error(getAdminIdByUserException);
-        }   
-
+        }
         return adminId;
     }
 }

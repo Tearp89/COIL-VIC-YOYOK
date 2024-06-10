@@ -10,21 +10,19 @@ import java.util.ArrayList;
 import dataAccess.DatabaseManager;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.scene.chart.PieChart.Data;
 import log.Log;
 import logic.interfaces.IUniversity;
 import logic.classes.University;
 
 public class UniversityDAO implements IUniversity{
     private static final org.apache.log4j.Logger LOG = Log.getLogger(UniversityDAO.class);
-   
+
     public int addUniversity(University university){
         DatabaseManager dbManager = new DatabaseManager();
         String query = "INSERT INTO universidad(nombreUniversidad, país, idioma) VALUES (?,?,?)";
         int result = 0;
-        try {
-            Connection connection = dbManager.getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement(query);
+        try (Connection connection = dbManager.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setString(1, university.getUniversityName());
             preparedStatement.setString(2, university.getUniversityCountry());
             preparedStatement.setString(3, university.getUniversityLanguage());
@@ -39,9 +37,8 @@ public class UniversityDAO implements IUniversity{
         DatabaseManager dbManager = new DatabaseManager();
         String query = "DELETE FROM universidad WHERE nombreUniversidad = ?";
         int result = 0;
-        try {
-            Connection connection = dbManager.getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement(query);
+        try (Connection connection = dbManager.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setString(1, university.getUniversityName());
             result = preparedStatement.executeUpdate();
         } catch (SQLException deleteUniversityException) {
@@ -56,9 +53,8 @@ public class UniversityDAO implements IUniversity{
         DatabaseManager dbManager = new DatabaseManager();
         String query = "UPDATE universidad SET nombreUniversidad = ?, idioma = ?, país = ? WHERE idUniversidad = ?";
         int result = 0;
-        try{
-            Connection connection = dbManager.getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement(query);
+        try (Connection connection = dbManager.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setString(1, university.getUniversityName());
             preparedStatement.setString(2, university.getUniversityLanguage());
             preparedStatement.setString(3, university.getUniversityCountry());
@@ -73,10 +69,8 @@ public class UniversityDAO implements IUniversity{
     public Integer getUniversityId(String university){
         DatabaseManager dbManager = new DatabaseManager();
         String query = "SELECT idUniversidad FROM universidad WHERE nombreUniversidad = ?";
-        int result = 0;
-        try{
-            Connection connection = dbManager.getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement(query);
+        try (Connection connection = dbManager.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setString(1, university);
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 if (resultSet.next()) {
@@ -93,9 +87,8 @@ public class UniversityDAO implements IUniversity{
     public boolean isUniversityRegistered(String universityName){
         DatabaseManager dbManager = new DatabaseManager();
         String query = "SELECT COUNT(*) FROM universidad WHERE nombreUniversidad = ?";
-        try{
-            Connection connection = dbManager.getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement(query);
+        try (Connection connection = dbManager.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setString(1, universityName);
             try(ResultSet resultSet = preparedStatement.executeQuery()){
                 if(resultSet.next()){
@@ -114,9 +107,8 @@ public class UniversityDAO implements IUniversity{
         ObservableList<String> universities = FXCollections.observableArrayList();
         DatabaseManager dbManager = new DatabaseManager();
         String query = "SELECT DISTINCT nombreUniversidad FROM universidad";
-        try {
-            Connection connection = dbManager.getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement(query);
+        try (Connection connection = dbManager.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             ResultSet resultSet = preparedStatement.executeQuery(); 
             while (resultSet.next()) {
                 universities.add(resultSet.getString("nombreUniversidad"));
@@ -133,9 +125,8 @@ public class UniversityDAO implements IUniversity{
         ArrayList<University> universities = new ArrayList<>();
         String query = "SELECT * FROM universidad";
         DatabaseManager dbManager = new DatabaseManager();
-        try{
-            Connection connection = dbManager.getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement(query);
+        try (Connection connection = dbManager.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             try(ResultSet resultSet = preparedStatement.executeQuery()){
                 while(resultSet.next()){
                     int universityId = resultSet.getInt("idUniversidad");
@@ -164,9 +155,8 @@ public class UniversityDAO implements IUniversity{
         ArrayList<University> universities = new ArrayList<>();
         String query = "SELECT * FROM universidad WHERE nombreUniversidad LIKE ?";
         DatabaseManager dbManager = new DatabaseManager();
-        try{
-            Connection connection = dbManager.getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement(query);
+        try (Connection connection = dbManager.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setString(1, name);
             try(ResultSet resultSet = preparedStatement.executeQuery()){
                 while(resultSet.next()){
@@ -194,10 +184,8 @@ public class UniversityDAO implements IUniversity{
     public String getUniversityNameById(int universityId){
         DatabaseManager dbManager = new DatabaseManager();
         String query = "SELECT nombreUniversidad FROM universidad WHERE idUniversidad = ?";
-        int result = 0;
-        try{
-            Connection connection = dbManager.getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement(query);
+        try (Connection connection = dbManager.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setInt(1, universityId);
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 if (resultSet.next()) {
@@ -214,10 +202,8 @@ public class UniversityDAO implements IUniversity{
     public String getUniversityLanguageById(int universityId){
         DatabaseManager dbManager = new DatabaseManager();
         String query = "SELECT idioma FROM universidad WHERE idUniversidad = ?";
-        int result = 0;
-        try{
-            Connection connection = dbManager.getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement(query);
+        try (Connection connection = dbManager.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setInt(1, universityId);
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 if (resultSet.next()) {
@@ -234,10 +220,8 @@ public class UniversityDAO implements IUniversity{
     public String getUniversityCountryById(int universityId){
         DatabaseManager dbManager = new DatabaseManager();
         String query = "SELECT país FROM universidad WHERE idUniversidad = ?";
-        int result = 0;
-        try{
-            Connection connection = dbManager.getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement(query);
+        try (Connection connection = dbManager.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setInt(1, universityId);
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 if (resultSet.next()) {
@@ -250,8 +234,4 @@ public class UniversityDAO implements IUniversity{
         }
         return null;
     }
-
-
-
-
 }

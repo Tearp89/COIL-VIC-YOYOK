@@ -33,9 +33,8 @@ public class ProfessorDAO implements IProfessor{
         "tipoProfesor, país, Universidad_idUniversidad, area_academica, correo, contraseña, NoPersonal," +
         "region, tipoContratación, categoríaContratación, curso_taller) VALUES (?,?,?,?,?,?,?,?,?, SHA2(?,256),?,?,?,?,?)";
         int result = 0;
-        try {
-            Connection connection = dbManager.getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement(query);
+        try (Connection connection = dbManager.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setString(1, professor.getName());
             preparedStatement.setString(2, professor.getUser());
             preparedStatement.setString(3, professor.getPhoneNumber());
@@ -64,9 +63,8 @@ public class ProfessorDAO implements IProfessor{
         String query = "INSERT INTO profesor(nombreProfesor, usuario, telefono," + 
         "estado, país, Universidad_idUniversidad, correo, contraseña, tipoProfesor, curso_taller) VALUES (?,?,?,?,?,?,?,SHA2(?,256),?, ?)";
         int result = 0;
-        try {
-            Connection connection = dbManager.getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement(query);
+        try (Connection connection = dbManager.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setString(1, professor.getName());
             preparedStatement.setString(2, professor.getUser());
             preparedStatement.setString(3, professor.getPhoneNumber());
@@ -146,9 +144,8 @@ public class ProfessorDAO implements IProfessor{
         DatabaseManager dbManager = new DatabaseManager();
         String query = "SELECT DISTINCT país FROM profesor WHERE país IS NOT NULL";
         ObservableList<String> country = FXCollections.observableArrayList();
-        try {
-            Connection connection = dbManager.getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement(query);
+        try (Connection connection = dbManager.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             ResultSet resultSet = preparedStatement.executeQuery();
             while(resultSet.next()){
                 country.add(resultSet.getString("país"));
@@ -163,9 +160,8 @@ public class ProfessorDAO implements IProfessor{
         DatabaseManager dbManager = new DatabaseManager();
         String query = "SELECT DISTINCT idioma FROM universidad WHERE idioma IS NOT NULL";
         ObservableList<String> language = FXCollections.observableArrayList();
-        try {
-            Connection connection = dbManager.getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement(query);
+        try (Connection connection = dbManager.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             ResultSet resultSet = preparedStatement.executeQuery();
             while(resultSet.next()){
                 language.add(resultSet.getString("idioma"));
@@ -180,9 +176,8 @@ public class ProfessorDAO implements IProfessor{
         DatabaseManager dbManager = new DatabaseManager();
         String query = "SELECT DISTINCT area_academica FROM información_requerida WHERE area_academica IS NOT NULL";
         ObservableList<String> academicAreas = FXCollections.observableArrayList();
-        try {
-            Connection connection = dbManager.getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement(query);
+        try (Connection connection = dbManager.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             ResultSet resultSet = preparedStatement.executeQuery();
             while(resultSet.next()){
                 academicAreas.add(resultSet.getString("area_academica"));
@@ -197,9 +192,8 @@ public class ProfessorDAO implements IProfessor{
         DatabaseManager dbManager = new DatabaseManager();
         String query = "SELECT DISTINCT region FROM información_requerida WHERE region IS NOT NULL";
         ObservableList<String> regions = FXCollections.observableArrayList();
-        try {
-            Connection connection = dbManager.getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement(query);
+        try (Connection connection = dbManager.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             ResultSet resultSet = preparedStatement.executeQuery();
             while(resultSet.next()){
                 regions.add(resultSet.getString("region"));
@@ -214,9 +208,8 @@ public class ProfessorDAO implements IProfessor{
         DatabaseManager dbManager = new DatabaseManager();
         String query = "SELECT DISTINCT tipoContratación FROM información_requerida WHERE tipoContratación IS NOT NULL";
         ObservableList<String> contractTypes = FXCollections.observableArrayList();
-        try {
-            Connection connection = dbManager.getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement(query);
+        try (Connection connection = dbManager.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             ResultSet resultSet = preparedStatement.executeQuery();
             while(resultSet.next()){
                 contractTypes.add(resultSet.getString("tipoContratación"));
@@ -231,9 +224,8 @@ public class ProfessorDAO implements IProfessor{
         DatabaseManager dbManager = new DatabaseManager();
         String query = "SELECT DISTINCT categoríaContratación FROM información_requerida WHERE categoríaContratación IS NOT NULL";
         ObservableList<String> contractCategorys = FXCollections.observableArrayList();
-        try {
-            Connection connection = dbManager.getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement(query);
+        try (Connection connection = dbManager.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             ResultSet resultSet = preparedStatement.executeQuery();
             while(resultSet.next()){
                 contractCategorys.add(resultSet.getString("categoríaContratación"));
@@ -246,12 +238,11 @@ public class ProfessorDAO implements IProfessor{
 
 
     public int deleteProfessor(Professor professor){
-        DatabaseManager dbMananager = new DatabaseManager();
+        DatabaseManager dbManager = new DatabaseManager();
         String query = "DELETE FROM  profesor WHERE idProfesor = ?";
         int result = 0;
-        try {
-            Connection connection = dbMananager.getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement(query);
+        try (Connection connection = dbManager.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setInt(1, professor.getProfessorId());
             result = preparedStatement.executeUpdate();
         } catch (SQLException deleteProfessorException) {
@@ -267,9 +258,8 @@ public class ProfessorDAO implements IProfessor{
         "país = ?, Universidad_idUniversidad = ?, area_academica = ?, correo, contraseña = ?, NoPersonal = ?," +
         "region = ?, tipoContratación = ?, categoríaContratación = ?, curso_taller = ?  WHERE idProfesor = ?";
         int result = 0;
-        try{
-            Connection connection = dbManager.getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement(query);
+        try (Connection connection = dbManager.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setString(1, professor.getName());
             preparedStatement.setString(3, professor.getPhoneNumber());
             preparedStatement.setString(4, professor.getStatus());
@@ -296,9 +286,8 @@ public class ProfessorDAO implements IProfessor{
         String query = "UPDATE profesor SET nombreProfesor = ?, telefono = ?, estado = ?, tipoProfesor = ?," +
         "país = ?, Universidad_idUniversidad = ?, correo, contraseña = ? WHERE idProfesor = ?";
         int result = 0;
-        try{
-            Connection connection = dbManager.getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement(query);
+        try (Connection connection = dbManager.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setString(1, professor.getName());
             preparedStatement.setString(2, professor.getPhoneNumber());
             preparedStatement.setString(3, professor.getStatus());
@@ -320,9 +309,8 @@ public class ProfessorDAO implements IProfessor{
         ArrayList<Professor> professors = new ArrayList<>();
         String query = "SELECT * FROM profesor WHERE Universidad_idUniversidad = ?";
         DatabaseManager dbManager = new DatabaseManager();
-        try{
-            Connection connection = dbManager.getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement(query);
+        try (Connection connection = dbManager.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setInt(1, universityId);
             try (ResultSet resultSet = preparedStatement.executeQuery()){
                 while (resultSet.next()){
@@ -359,9 +347,8 @@ public class ProfessorDAO implements IProfessor{
         ArrayList<Professor> professors = new ArrayList<>();
         String query = "SELECT * FROM profesor WHERE país = ?";
         DatabaseManager dbManager = new DatabaseManager();
-        try{
-            Connection connection = dbManager.getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement(query);
+        try (Connection connection = dbManager.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setString(1, country);
             try(ResultSet resultSet = preparedStatement.executeQuery()){
                 while (resultSet.next()){
@@ -394,9 +381,8 @@ public class ProfessorDAO implements IProfessor{
         ArrayList<Professor> professors = new ArrayList<>();
         String query = " select * from profesor where estado = ?";
         DatabaseManager dbManager = new DatabaseManager();
-        try{
-            Connection connection = dbManager.getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement(query);
+        try (Connection connection = dbManager.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setString(1, status);
             try(ResultSet resultSet = preparedStatement.executeQuery()){
                 while(resultSet.next()){
@@ -429,9 +415,8 @@ public class ProfessorDAO implements IProfessor{
         String query = "SELECT idProfesor, nombreProfesor, estado, Universidad_idUniversidad FROM profesor WHERE idColaboración = ?";
         Professor professor = new Professor();
         ArrayList<Professor> professors = new ArrayList<>();
-        try {
-            Connection connection = dbManager.getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement(query);
+        try (Connection connection = dbManager.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setInt(1, collaborationId);
             try(ResultSet resultSet = preparedStatement.executeQuery()){
                 while(resultSet.next()){
@@ -458,9 +443,8 @@ public class ProfessorDAO implements IProfessor{
     DatabaseManager dbManager = new DatabaseManager();
     String query = "UPDATE profesor SET estado = ? WHERE idProfesor = ?";
     int result = 0;
-        try{
-            Connection connection = dbManager.getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement(query);
+    try (Connection connection = dbManager.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setString(1, status);
             preparedStatement.setInt(2, professorId);
             result = preparedStatement.executeUpdate();
@@ -474,9 +458,8 @@ public class ProfessorDAO implements IProfessor{
         DatabaseManager dbManager = new DatabaseManager();
         String query = "INSERT INTO solicitud_Colaboración (idColaboración, idProfesor, estado) VALUES (?,?, 'Pendiente')";
         int result = 0;
-        try {
-            Connection connection = dbManager.getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement(query);
+        try (Connection connection = dbManager.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setInt(1, idColaboración);
             preparedStatement.setInt(2, idProfesor);
             result = preparedStatement.executeUpdate();
@@ -490,9 +473,8 @@ public class ProfessorDAO implements IProfessor{
         DatabaseManager dbManager = new DatabaseManager();
         String query = "UPDATE  solicitud_colaboración set estado = ? WHERE idColaboración = ? AND idProfesor = ?";
         int result = 0;
-        try{
-            Connection connection = dbManager.getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement(query);
+        try (Connection connection = dbManager.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setString(1, status);
             preparedStatement.setInt(2, collaborationId);
             preparedStatement.setInt(3, professorId);
@@ -506,9 +488,8 @@ public class ProfessorDAO implements IProfessor{
     public int getProfessorIdByUser(String user){
         DatabaseManager dbManager = new DatabaseManager();
         String query = "SELECT idProfesor FROM Profesor WHERE usuario = ?";
-        try{
-            Connection connection = dbManager.getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement(query);
+        try (Connection connection = dbManager.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setString(1, user);
             try(ResultSet resultSet = preparedStatement.executeQuery()){
                 if(resultSet.next()){
@@ -525,9 +506,8 @@ public class ProfessorDAO implements IProfessor{
     public String getWorkShopByProfessorId(int professorId){
         DatabaseManager dbManager = new DatabaseManager();
         String query = "SELECT curso_taller FROM Profesor WHERE idProfesor = ?";
-        try{
-            Connection connection = dbManager.getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement(query);
+        try (Connection connection = dbManager.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setInt(1, professorId);
             try(ResultSet resultSet = preparedStatement.executeQuery()){
                 if(resultSet.next()){
@@ -545,8 +525,7 @@ public class ProfessorDAO implements IProfessor{
         String name = null;
         DatabaseManager dbManager = new DatabaseManager();
         String query = "SELECT nombreProfesor FROM profesor WHERE usuario = ? ";
-        try {
-            Connection connection = dbManager.getConnection();
+        try (Connection connection = dbManager.getConnection()) {
             try(PreparedStatement preparedStatement = connection.prepareStatement(query)){
                 preparedStatement.setString(1, user);
                 ResultSet resultSet = preparedStatement.executeQuery();
@@ -566,8 +545,7 @@ public class ProfessorDAO implements IProfessor{
         String phoneNumber = null;
         DatabaseManager dbManager = new DatabaseManager();
         String query = "SELECT telefono FROM profesor WHERE usuario = ? ";
-        try {
-            Connection connection = dbManager.getConnection();
+        try (Connection connection = dbManager.getConnection()) {
             try(PreparedStatement preparedStatement = connection.prepareStatement(query)){
                 preparedStatement.setString(1, user);
                 ResultSet resultSet = preparedStatement.executeQuery();
@@ -587,8 +565,7 @@ public class ProfessorDAO implements IProfessor{
         String name = null;
         DatabaseManager dbManager = new DatabaseManager();
         String query = "SELECT area_academica FROM profesor WHERE usuario = ? ";
-        try {
-            Connection connection = dbManager.getConnection();
+        try (Connection connection = dbManager.getConnection()) {
             try(PreparedStatement preparedStatement = connection.prepareStatement(query)){
                 preparedStatement.setString(1, user);
                 ResultSet resultSet = preparedStatement.executeQuery();
@@ -608,8 +585,7 @@ public class ProfessorDAO implements IProfessor{
         String name = null;
         DatabaseManager dbManager = new DatabaseManager();
         String query = "SELECT correo FROM profesor WHERE usuario = ? ";
-        try {
-            Connection connection = dbManager.getConnection();
+        try (Connection connection = dbManager.getConnection()) {
             try(PreparedStatement preparedStatement = connection.prepareStatement(query)){
                 preparedStatement.setString(1, user);
                 ResultSet resultSet = preparedStatement.executeQuery();
@@ -630,9 +606,8 @@ public class ProfessorDAO implements IProfessor{
         String query = "SELECT idProfesor, nombreProfesor, correo, país, Universidad_idUniversidad FROM profesor";
         Professor professor = new Professor();
         ArrayList<Professor> professors = new ArrayList<>();
-        try {
-            Connection connection = dbManager.getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement(query);
+        try (Connection connection = dbManager.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             try(ResultSet resultSet = preparedStatement.executeQuery()){
                 while(resultSet.next()){
                     int professorId = resultSet.getInt("idProfesor");
@@ -660,9 +635,8 @@ public class ProfessorDAO implements IProfessor{
         DatabaseManager dbManager = new DatabaseManager();
         String query = "SELECT DISTINCT país FROM profesor";
         ObservableList<String> countries = FXCollections.observableArrayList();
-        try {
-            Connection connection = dbManager.getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement(query);
+        try (Connection connection = dbManager.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             ResultSet resultSet = preparedStatement.executeQuery();
             while(resultSet.next()){
                 countries.add(resultSet.getString("país"));
@@ -677,9 +651,8 @@ public class ProfessorDAO implements IProfessor{
         DatabaseManager dbManager = new DatabaseManager();
         String query = "UPDATE profesor SET contraseña = SHA2(?,256) WHERE idProfesor = ?";
         int result = 0;
-        try{
-            Connection connection = dbManager.getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement(query);
+        try (Connection connection = dbManager.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setString(1, password);
             preparedStatement.setInt(2, profesorId);
             result = preparedStatement.executeUpdate();
@@ -693,9 +666,8 @@ public class ProfessorDAO implements IProfessor{
     public boolean compareProfessorPassword(String password, int profesorId){
         DatabaseManager dbManager = new DatabaseManager();
         String query = "SELECT COUNT(*) as count FROM profesor WHERE contraseña = SHA2(?,256) AND idProfesor = ?";
-        try{
-            Connection connection = dbManager.getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement(query);
+        try (Connection connection = dbManager.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setString(1, password);
             preparedStatement.setInt(2, profesorId);
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
@@ -715,8 +687,7 @@ public class ProfessorDAO implements IProfessor{
         String name = null;
         DatabaseManager dbManager = new DatabaseManager();
         String query = "SELECT estado FROM profesor WHERE usuario = ? ";
-        try {
-            Connection connection = dbManager.getConnection();
+        try (Connection connection = dbManager.getConnection()) {
             try(PreparedStatement preparedStatement = connection.prepareStatement(query)){
                 preparedStatement.setString(1, user);
                 ResultSet resultSet = preparedStatement.executeQuery();
@@ -760,7 +731,7 @@ public class ProfessorDAO implements IProfessor{
         String email = null;
 
         try (Connection connection = dbManager.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            PreparedStatement preparedStatement = connection.prepareStatement(query)) {
 
             preparedStatement.setInt(1, professorId);
             ResultSet resultSet = preparedStatement.executeQuery();

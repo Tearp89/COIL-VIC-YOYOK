@@ -190,7 +190,7 @@
                                                 <FontAwesomeIcon fill="WHITE" glyphName="SEARCH_PLUS" size="4em" />
                                              </graphic>
                                           </Button>
-                                          <Button fx:id="buttonAnswerRequests" alignment="CENTER_RIGHT" layoutX="536.0" layoutY="19.0" mnemonicParsing="false" onAction="#answerRequest" prefHeight="104.0" prefWidth="203.0" style="card: transparent;" styleClass="card" stylesheets="@windowsStyle.css" text="Solicitudes de&#10;Colaboración&#10;" textFill="WHITE">
+                                          <Button fx:id="buttonAnswerRequest" alignment="CENTER_RIGHT" layoutX="536.0" layoutY="19.0" mnemonicParsing="false" onAction="#answerRequest" prefHeight="104.0" prefWidth="203.0" style="card: transparent;" styleClass="card" stylesheets="@windowsStyle.css" text="Solicitudes de&#10;Colaboración&#10;" textFill="WHITE">
                                              <font>
                                                 <Font name="Tahoma" size="17.0" />
                                              </font>

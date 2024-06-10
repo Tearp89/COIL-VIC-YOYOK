@@ -12,9 +12,7 @@ import logic.classes.Workshop;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.sql.ResultSet;
-import java.util.logging.Level;
 import log.Log;
-import org.apache.log4j.Logger;
 
 
 public class WorkshopDAO implements IWorkshop {
@@ -24,9 +22,8 @@ public class WorkshopDAO implements IWorkshop {
         DatabaseManager dbManager = new DatabaseManager();
         String query = "INSERT INTO curso_taller (nombreCursoTaller, fechaInicio, fechaFin, requisitos) VALUES (?, ?, ?, ?)";
         int result = 0;
-        try {
-            Connection connection = dbManager.getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement(query);
+        try (Connection connection = dbManager.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setString(1, workshop.getWorkshopName());
             preparedStatement.setObject(2, workshop.getStartDate());
             preparedStatement.setObject(3, workshop.getFinishDate());
@@ -43,9 +40,8 @@ public class WorkshopDAO implements IWorkshop {
         DatabaseManager dbManager = new DatabaseManager();
         String query = "DELETE FROM curso_taller WHERE idCursoTaller = ?";
         int result = 0;
-        try {
-            Connection connection = dbManager.getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement(query);
+        try (Connection connection = dbManager.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setInt(1, workshop.getWorkshopId());
             result = preparedStatement.executeUpdate();
         } catch (SQLException deleteWorkshopException) {
@@ -58,9 +54,8 @@ public class WorkshopDAO implements IWorkshop {
         DatabaseManager dbManager = new DatabaseManager();
         String query = "UPDATE curso_taller SET nombreCursoTaller = ?, fechaInicio = ?, fechaFin = ?, requisitos = ? WHERE idCursoTaller = ?";
         int result = 0;
-        try {
-            Connection connection = dbManager.getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement(query);
+        try (Connection connection = dbManager.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setString(1, workshop.getWorkshopName());
             preparedStatement.setObject(2, workshop.getStartDate());
             preparedStatement.setObject(3, workshop.getFinishDate());
@@ -78,9 +73,8 @@ public class WorkshopDAO implements IWorkshop {
         ArrayList<Workshop> workshops = new ArrayList<>();
         DatabaseManager dbManager = new DatabaseManager();
         String query = "SELECT * FROM curso_taller WHERE idCursoTaller = ?";
-        try{
-            Connection connection = dbManager.getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement(query);
+        try (Connection connection = dbManager.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setInt(1, workshopId);
             try(ResultSet resultSet = preparedStatement.executeQuery()){
                 while(resultSet.next()){
@@ -113,9 +107,8 @@ public class WorkshopDAO implements IWorkshop {
         DatabaseManager dbManager = new DatabaseManager();
         String query = "SELECT * FROM curso_taller WHERE YEAR(fechaInicio) = ?;";
 
-        try{
-            Connection connection = dbManager.getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement(query);
+        try (Connection connection = dbManager.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setString(1, year);
             try(ResultSet resultSet = preparedStatement.executeQuery()){
                 while(resultSet.next()){
@@ -133,14 +126,13 @@ public class WorkshopDAO implements IWorkshop {
                     workshop.setFinishDate(finishDate);
                     workshop.setRequirements(requirements);
                     workshops.add(workshop);
-        } 
-    }
+                }        
+            }
 
-    } catch (SQLException searchWorkshopByYearException){
-                LOG.error("ERROR: ", searchWorkshopByYearException);
-                }
-        
+        } catch (SQLException searchWorkshopByYearException){
+            LOG.error("ERROR: ", searchWorkshopByYearException);
+        }
         return workshops;
-        
-  }
+            
+    }
 }

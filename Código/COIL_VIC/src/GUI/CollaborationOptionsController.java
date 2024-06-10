@@ -213,6 +213,7 @@ public class CollaborationOptionsController {
             buttonAddActivity.setDisable(true);
             buttonSearchActivity.setDisable(true);
             buttonOpenCollaboration.setDisable(true);
+            buttonAnswerRequest.setDisable(true);
         }
 
         int validateDeclinedCollaborations = collaborationDAO.searchCollaborationByStatusAndProfessorId("Rechazada", professorId).size();

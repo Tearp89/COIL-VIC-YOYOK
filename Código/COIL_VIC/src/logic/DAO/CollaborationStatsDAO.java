@@ -7,7 +7,6 @@ package logic.DAO;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.util.ArrayList;
 
 import dataAccess.DatabaseManager;
 import java.sql.ResultSet;
@@ -77,7 +76,7 @@ public class CollaborationStatsDAO {
                         "WHERE pr.area_academica = ?";  
         int result = 0;
         try (Connection connection = dbManager.getConnection();
-                PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setString(1, academicArea);
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 if (resultSet.next()) {
@@ -122,7 +121,7 @@ public class CollaborationStatsDAO {
                         "WHERE p.area_academica = ?";
         int result = 0;
         try (Connection connection = dbManager.getConnection();
-                PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setString(1, academicArea);
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 if (resultSet.next()) {
@@ -145,7 +144,7 @@ public class CollaborationStatsDAO {
                         "AND YEAR(c.fechaInicio) = ? ";
         int result = 0;
         try (Connection connection = dbManager.getConnection();
-                PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setString(1, academicArea);
             preparedStatement.setString(2, year);
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
@@ -168,7 +167,7 @@ public class CollaborationStatsDAO {
                         "WHERE rp.region = ?";
         int result = 0;
         try (Connection connection = dbManager.getConnection();
-                PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setString(1, state);
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 if (resultSet.next()) {
@@ -191,7 +190,7 @@ public class CollaborationStatsDAO {
                         "AND YEAR(c.fechaInicio) = ?";        
         int result = 0;
         try (Connection connection = dbManager.getConnection();
-                PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setString(1, state);
             preparedStatement.setString(2, year);
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
@@ -204,8 +203,4 @@ public class CollaborationStatsDAO {
         }
         return result;
     }
-
-
-    
-
 }

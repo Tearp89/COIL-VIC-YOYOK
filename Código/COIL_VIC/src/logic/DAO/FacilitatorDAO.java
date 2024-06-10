@@ -12,8 +12,6 @@ package logic.DAO;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import dataAccess.DatabaseManager;
 import log.Log;
@@ -27,9 +25,8 @@ public class FacilitatorDAO implements IFacilitator{
         DatabaseManager dbManager = new DatabaseManager();
         String query = "INSERT INTO facilitador (idFacilitador, nombreFacilitador, Curso-Taller_idCursoTaller) VALUES (?,?)";
         int result = 0;
-        try {
-            Connection connection = dbManager.getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement(query);
+        try (Connection connection = dbManager.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setString(1, facilitator.getFacilitatorName());
             preparedStatement.setString(2, facilitator.getWorkShopId());
             result = preparedStatement.executeUpdate();
@@ -43,9 +40,8 @@ public class FacilitatorDAO implements IFacilitator{
         DatabaseManager dbManager = new DatabaseManager();
         String query = "DELETE FROM facilitador where nombreFacilitador = ?";
         int result = 0;
-        try{
-            Connection connection = dbManager.getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement(query);
+        try (Connection connection = dbManager.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setString(1,facilitator.getFacilitatorName());
             result = preparedStatement.executeUpdate();
         } catch (SQLException deleteFacilitatorException){
@@ -58,9 +54,8 @@ public class FacilitatorDAO implements IFacilitator{
         DatabaseManager dbManager = new DatabaseManager();
         String query = "UPDATE facilitador set nombreFacilitador = ?, Curso-Taller_idCursoTaller = ? WHERE idFacilitador = ?";
         int result = 0;
-        try{
-            Connection connection = dbManager.getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement(query);
+        try (Connection connection = dbManager.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setString(2, facilitator.getFacilitatorName());
             preparedStatement.setString(3, facilitator.getWorkShopId());
             result = preparedStatement.executeUpdate();
