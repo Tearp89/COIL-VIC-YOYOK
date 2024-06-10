@@ -58,3 +58,9 @@ java.sql.SQLSyntaxErrorException: Unknown column 'NoPersonal' in 'field list'
 	at javafx.graphics@21.0.2/com.sun.glass.ui.win.WinApplication._runLoop(Native Method)
 	at javafx.graphics@21.0.2/com.sun.glass.ui.win.WinApplication.lambda$runLoop$3(WinApplication.java:185)
 	at java.base/java.lang.Thread.run(Thread.java:840)
+09-06-2024 17:01:42 ERROR AddProfessorController:295: com.sun.mail.util.MailConnectException: Couldn't connect to host, port: smtp-mail.outlook.com, 587; timeout -1;
+  nested exception is:
+	java.net.UnknownHostException: smtp-mail.outlook.com
+09-06-2024 17:02:59 ERROR AddProfessorController:295: com.sun.mail.util.MailConnectException: Couldn't connect to host, port: smtp-mail.outlook.com, 587; timeout -1;
+  nested exception is:
+	java.net.UnknownHostException: smtp-mail.outlook.com

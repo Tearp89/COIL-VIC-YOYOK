@@ -81,7 +81,7 @@ public class CloseCollaborationController {
                 Alert closeSuccessfulAlert = new Alert(AlertType.INFORMATION);
                 closeSuccessfulAlert.setTitle("Cierre exitoso");
                 closeSuccessfulAlert.setHeaderText("Cierre exitoso");
-                closeSuccessfulAlert.setContentText("La collaboración se ha cerrado exitosamente");
+                closeSuccessfulAlert.setContentText("La colaboración se ha cerrado exitosamente");
                 closeSuccessfulAlert.show();
             }else{
                 Alert closeErrorAlert = new Alert(AlertType.ERROR);
