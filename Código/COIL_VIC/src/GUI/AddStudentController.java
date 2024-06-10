@@ -124,8 +124,8 @@ public class AddStudentController {
         String email = textFieldEmailStudent.getText();
         if(!FieldValidator.isEmail(email)){
             Alert emptyFieldsAlert = new Alert(AlertType.ERROR);
-            emptyFieldsAlert.setTitle("Campos vacíos");
-            emptyFieldsAlert.setHeaderText("Campos vacíos");
+            emptyFieldsAlert.setTitle("Campos erroneos");
+            emptyFieldsAlert.setHeaderText("Correo no válido");
             emptyFieldsAlert.setContentText("No se puede puede añadir al estudiante, no ha ingresado un correo válido");
             emptyFieldsAlert.show();
         }else if (studentDAO.isStudentRegistered(email) == true){
@@ -144,6 +144,7 @@ public class AddStudentController {
                     studentAddedAlert.setContentText("Se ha añadido al estudiante exitosamente");
                     studentAddedAlert.show();
                     ArrayList<Student> students =  studentDAO.getStudentsByProfessorId(professorId);
+                    tableViewStudents.getItems().clear();
                     tableViewStudents.getItems().addAll(students);
                 } else {
                     Alert addingStudentErrorAlert = new Alert(AlertType.ERROR);
@@ -164,20 +165,6 @@ public class AddStudentController {
                 student.setPassword(password);
                 int result = studentDAO.addStudent(student);
                 EmailControl emailControl = new EmailControl();
-                try {
-                    emailControl.sendEmail(email, "Agregado al sistema COIL-VIC", "Su contraseña para el sistema es: " + password);
-                    Alert studentAddedAlert = new Alert(AlertType.INFORMATION);
-                    studentAddedAlert.setTitle("Notificación correo");
-                    studentAddedAlert.setHeaderText("Se ha enviado un correo al estudiante");
-                    studentAddedAlert.setContentText("Se envió un correo al estudiante sobre su cuenta,  su contraseña es: " + password);
-                    studentAddedAlert.show();
-                } catch (MessagingException e) {
-                    Alert addingStudentErrorAlert = new Alert(AlertType.ERROR);
-                    addingStudentErrorAlert.setTitle("Error al enviar el correo");
-                    addingStudentErrorAlert.setHeaderText("Error conexión");
-                    addingStudentErrorAlert.setContentText("No se logro mandar el correo al estudiante, favor de comunicarle");
-                    addingStudentErrorAlert.show();
-                }
             if (result > 0){
                 Alert studentAddedAlert = new Alert(AlertType.INFORMATION);
                 studentAddedAlert.setTitle("Estudiante añadido");
@@ -185,7 +172,22 @@ public class AddStudentController {
                 studentAddedAlert.setContentText("Se ha añadido al estudiante exitosamente");
                 studentAddedAlert.show();
                 ArrayList<Student> students =  studentDAO.getStudentsByProfessorId(professorId);
+                tableViewStudents.getItems().clear();
                 tableViewStudents.getItems().addAll(students);
+                try {
+                    emailControl.sendEmail(email, "Agregado al sistema COIL-VIC", "Su contraseña para el sistema es: " + password);
+                    Alert sendEmailToStudentAlert = new Alert(AlertType.INFORMATION);
+                    sendEmailToStudentAlert.setTitle("Notificación correo");
+                    sendEmailToStudentAlert.setHeaderText("Se ha enviado un correo al estudiante");
+                    sendEmailToStudentAlert.setContentText("Se envió un correo al estudiante sobre su cuenta");
+                    sendEmailToStudentAlert.show();
+                } catch (MessagingException e) {
+                    Alert sendEmailToStudenErrorAlert = new Alert(AlertType.ERROR);
+                    sendEmailToStudenErrorAlert.setTitle("Error al enviar el correo");
+                    sendEmailToStudenErrorAlert.setHeaderText("Error conexión");
+                    sendEmailToStudenErrorAlert.setContentText("No se logro mandar el correo al estudiante, favor de comunicarle sus datos de acceso \nContraseña: " + password);
+                    sendEmailToStudenErrorAlert.show();
+                }
             } else {
                 Alert addingStudentErrorAlert = new Alert(AlertType.ERROR);
                 addingStudentErrorAlert.setTitle("Error conexión");
