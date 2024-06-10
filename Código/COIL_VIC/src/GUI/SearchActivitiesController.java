@@ -151,12 +151,7 @@ public class SearchActivitiesController {
             emptyFieldsAlert.setTitle("Campos vacíos o inválidos");
             emptyFieldsAlert.setHeaderText("Campos vacíos o inválidos");
             emptyFieldsAlert.setContentText("No se modificar la actividad, hay campos vacíos o inválidos");
-        }else if(activityDAO.isActivityTypeAssigned(collaborationId, type) == true){
-            Alert duplicatedTypeAlert = new Alert(AlertType.ERROR);
-            duplicatedTypeAlert.setTitle("Tipos duplicados");
-            duplicatedTypeAlert.setHeaderText("Tipos duplicados");
-            duplicatedTypeAlert.setContentText("No se puede asignar la actividad, ya hay una actividad de ese tipo asignada");
-            duplicatedTypeAlert.show();
+            emptyFieldsAlert.show();
         } else{
             Alert confirmAssignAlert = new Alert(AlertType.CONFIRMATION);
             confirmAssignAlert.setTitle("Confirmar actividad");

@@ -123,7 +123,7 @@ public class AddActivityController {
         String week = comboBoxWeek.getValue();
         String type = comboBoxType.getValue();
         String description = textAreaDescription.getText();
-        if(!FieldValidator.onlyText(title) || !FieldValidator.onlyNumber(week) || !FieldValidator.onlyNumber(type) || !FieldValidator.onlyText(description)){
+        if(!FieldValidator.onlyText(title) || !FieldValidator.onlyNumber(week) || !FieldValidator.onlyText(type) || !FieldValidator.onlyText(description)){
             Alert emptyFieldsAlert = new Alert(AlertType.ERROR);
             emptyFieldsAlert.setTitle("Campos vacíos o incorrectos");
             emptyFieldsAlert.setHeaderText("Campos vacíos o incorrectos");
@@ -161,13 +161,6 @@ public class AddActivityController {
             duplicatedWeekAlert.setHeaderText("Semana duplicada");
             duplicatedWeekAlert.setContentText("No se puede asignar la actividad, ya existe una actividad para esa semana");
             duplicatedWeekAlert.show();
-        } else if (activityDAO.isActivityTypeAssigned(collaborationId, type)){
-            Alert duplicatedTypeAlert = new Alert(AlertType.ERROR);
-            duplicatedTypeAlert.setTitle("Tipos duplicados");
-            duplicatedTypeAlert.setHeaderText("Tipos duplicados");
-            duplicatedTypeAlert.setContentText("No se puede asignar la actividad, ya hay una actividad de ese tipo asignada");
-            duplicatedTypeAlert.show();
-
         } else{
             Alert confirmAssignAlert = new Alert(AlertType.CONFIRMATION);
             confirmAssignAlert.setTitle("Confirmar actividad");
