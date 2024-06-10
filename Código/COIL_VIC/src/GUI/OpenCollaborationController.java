@@ -9,6 +9,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
@@ -88,7 +89,7 @@ public class OpenCollaborationController {
 
         CollaborationDAO collaborationDAO = new CollaborationDAO();
         ArrayList<Collaboration> publishedCollaborations = collaborationDAO.searchCollaborationByStatusAndProfessorId("Publicada", professorId);
-       collaborationId = publishedCollaborations.get(0).getCollaborationId();
+        collaborationId = publishedCollaborations.get(0).getCollaborationId();
         
         labelCollaborationId.setText(String.valueOf(publishedCollaborations.get(0).getCollaborationId()));
         textFieldName.setText(publishedCollaborations.get(0).getCollaborationName());
@@ -98,7 +99,6 @@ public class OpenCollaborationController {
         
     }
 
-   
     @FXML
     private Button buttonHome;
 
@@ -177,9 +177,18 @@ public class OpenCollaborationController {
         CollaborationDAO instance = new CollaborationDAO();
 
         if (!instance.validateCollaborationProfessorsLimit(collaborationId)){
+            Alert collaborationOpenAlert = new Alert(AlertType.CONFIRMATION);
+            collaborationOpenAlert.setTitle("Confirmación inicio colaboración");
+            collaborationOpenAlert.setHeaderText("Confirmación inicio colaboración");
+            collaborationOpenAlert.setContentText("¿Está seguro de que desea iniciar la colaboración?");
+            collaborationOpenAlert.show();
+            ButtonType accept = new ButtonType("Aceptar");
+            ButtonType cancel = new ButtonType("Cancelar");
+            collaborationOpenAlert.getButtonTypes().setAll(cancel, accept);
+            Button okButton = (Button) collaborationOpenAlert.getDialogPane().lookupButton(accept);
+            Button cancelButton = (Button) collaborationOpenAlert.getDialogPane().lookupButton(cancel);
             
-            
-                
+            okButton.setOnAction(eventAddProfessorUV -> {
                 int result = instance.changeCollaborationStatus("Activa",collaborationId);
                 if (result == 1){
                     Alert collaborationUpdatedAlert = new Alert(AlertType.INFORMATION);
@@ -188,20 +197,25 @@ public class OpenCollaborationController {
                     collaborationUpdatedAlert.setContentText("Se abrio de manera exitosa la colaboración");
                     collaborationUpdatedAlert.show();
                 } else {
-                    Alert emptyFieldsAlert = new Alert(AlertType.ERROR);
-                    emptyFieldsAlert.setTitle("Ocurrio un error");
-                    emptyFieldsAlert.setContentText("Hubo un error al activar la colaboración");
-                    emptyFieldsAlert.setHeaderText("Ocurrio un error");
-                    emptyFieldsAlert.show();
+                    Alert errorCollaborationAlert = new Alert(AlertType.ERROR);
+                    errorCollaborationAlert.setTitle("Ocurrio un error");
+                    errorCollaborationAlert.setContentText("Hubo un error al activar la colaboración");
+                    errorCollaborationAlert.setHeaderText("Ocurrio un error");
+                    errorCollaborationAlert.show();
+                } 
+            });
+            cancelButton.setOnAction(eventCancelAdding -> {
+                collaborationOpenAlert.close();
+            });
+        }else{
+            Alert noCollaboratorAlert = new Alert(AlertType.ERROR);
+            noCollaboratorAlert.setTitle("No hay colaborador");
+            noCollaboratorAlert.setHeaderText("No hay colaborador");
+            noCollaboratorAlert.setContentText("No se puede abrir la colaboración, no hay un colaborador asignado");
+            noCollaboratorAlert.show();
                 }
-            } else{
-                Alert noCollaboratorAlert = new Alert(AlertType.ERROR);
-                noCollaboratorAlert.setTitle("No hay colaborador");
-                noCollaboratorAlert.setHeaderText("No hay colaborador");
-                noCollaboratorAlert.setContentText("No se puede abrir la colaboración, no hay un colaborador asignado");
-                noCollaboratorAlert.show();
-            }
             
+        
         
     }
 }

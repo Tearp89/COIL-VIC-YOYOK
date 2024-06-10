@@ -106,50 +106,59 @@ public class ProfessorGradeCollaborationController {
     private void sendFeedback(ActionEvent event){
         int grade = Integer.parseInt(comboBoxGrade.getSelectionModel().getSelectedItem().toString()) ;
         String comments = textAreaComments.getText();
-        Alert confirmFeedbackAlert = new Alert(AlertType.CONFIRMATION);
-        confirmFeedbackAlert.setTitle("Confirmar retroalimentación");
-        confirmFeedbackAlert.setHeaderText("Confirmar retroalimentación");
-        confirmFeedbackAlert.setContentText("¿Está seguro de que desea enviar la retroalimentación?");
-        ButtonType acceptFeedback = new ButtonType("Aceptar");
-        ButtonType cancelFeedback = new ButtonType("Cancelar");
-        confirmFeedbackAlert.getButtonTypes().setAll(acceptFeedback, cancelFeedback);
-        confirmFeedbackAlert.show();
-        Button okButton = (Button) confirmFeedbackAlert.getDialogPane().lookupButton(acceptFeedback);
-        Button cancelButton = (Button) confirmFeedbackAlert.getDialogPane().lookupButton(cancelFeedback);
-        okButton.setOnAction( eventSendFeedback -> {
-            Feedback feedback = new Feedback();
-            Professor professorData = new Professor();
-            professorData = UserSessionManager.getInstance().getProfessorUserData();
-            String user = professorData.getUser();
-            ProfessorDAO professorDAO = new ProfessorDAO();
-            int professorId = professorDAO.getProfessorIdByUser(user);
-            feedback.setGrade(grade);
-            feedback.setComments(comments);
-            feedback.setProfessorId(professorId);
-            feedback.setCollaborationId(collaborationId);
-            FeedbackDAO feedbackDAO = new FeedbackDAO();
-            int result = feedbackDAO.addProfessorReview(feedback);
-            if(result > 0){
-                Alert feedbackSentAlert = new Alert(AlertType.INFORMATION);
-                feedbackSentAlert.setTitle("Retroalimentación enviada");
-                feedbackSentAlert.setHeaderText("Retroalimentación enviada");
-                feedbackSentAlert.setContentText("Retroalimentación enviada exitosamente");
-                feedbackSentAlert.show();
-                buttonCancelFeedback.setDisable(true);
-                buttonSendFeedback.setDisable(true); 
-                
-            } else {
-                Alert sendErrorAlert = new Alert(AlertType.ERROR);
-                sendErrorAlert.setTitle("Error conexión");
-                sendErrorAlert.setHeaderText("Error conexión");
-                sendErrorAlert.setContentText("Se perdió la conexión a la base de datos, inténtelo de nuevo más tarde");
-                sendErrorAlert.show();
-            }
-        });
+        if(FieldValidator.onlyTextAndNumbers(comments.trim())){
+            Alert confirmFeedbackAlert = new Alert(AlertType.CONFIRMATION);
+            confirmFeedbackAlert.setTitle("Confirmar retroalimentación");
+            confirmFeedbackAlert.setHeaderText("Confirmar retroalimentación");
+            confirmFeedbackAlert.setContentText("¿Está seguro de que desea enviar la retroalimentación?");
+            ButtonType acceptFeedback = new ButtonType("Aceptar");
+            ButtonType cancelFeedback = new ButtonType("Cancelar");
+            confirmFeedbackAlert.getButtonTypes().setAll(acceptFeedback, cancelFeedback);
+            confirmFeedbackAlert.show();
+            Button okButton = (Button) confirmFeedbackAlert.getDialogPane().lookupButton(acceptFeedback);
+            Button cancelButton = (Button) confirmFeedbackAlert.getDialogPane().lookupButton(cancelFeedback);
+            okButton.setOnAction( eventSendFeedback -> {
+                Feedback feedback = new Feedback();
+                Professor professorData = new Professor();
+                professorData = UserSessionManager.getInstance().getProfessorUserData();
+                String user = professorData.getUser();
+                ProfessorDAO professorDAO = new ProfessorDAO();
+                int professorId = professorDAO.getProfessorIdByUser(user);
+                feedback.setGrade(grade);
+                feedback.setComments(comments);
+                feedback.setProfessorId(professorId);
+                feedback.setCollaborationId(collaborationId);
+                FeedbackDAO feedbackDAO = new FeedbackDAO();
+                int result = feedbackDAO.addProfessorReview(feedback);
+                if(result > 0){
+                    Alert feedbackSentAlert = new Alert(AlertType.INFORMATION);
+                    feedbackSentAlert.setTitle("Retroalimentación enviada");
+                    feedbackSentAlert.setHeaderText("Retroalimentación enviada");
+                    feedbackSentAlert.setContentText("Retroalimentación enviada exitosamente");
+                    feedbackSentAlert.show();
+                    buttonCancelFeedback.setDisable(true);
+                    buttonSendFeedback.setDisable(true); 
+                    
+                } else {
+                    Alert sendErrorAlert = new Alert(AlertType.ERROR);
+                    sendErrorAlert.setTitle("Error conexión");
+                    sendErrorAlert.setHeaderText("Error conexión");
+                    sendErrorAlert.setContentText("Se perdió la conexión a la base de datos, inténtelo de nuevo más tarde");
+                    sendErrorAlert.show();
+                }
+            });
 
-        cancelButton.setOnAction(eventCancelFeedBack -> {
-            confirmFeedbackAlert.close();
-        });
+            cancelButton.setOnAction(eventCancelFeedBack -> {
+                confirmFeedbackAlert.close();
+            });
+        } else {
+            Alert sendErrorAlert = new Alert(AlertType.ERROR);
+            sendErrorAlert.setTitle("Datos no validos");
+            sendErrorAlert.setHeaderText(null);
+            sendErrorAlert.setContentText("Existen datos vacios o no validos para la retroalimentación");
+            sendErrorAlert.show();
+        }
+        
 
     }
 
@@ -157,7 +166,7 @@ public class ProfessorGradeCollaborationController {
     private Button buttonCancelFeedback;
     @FXML
     private void cancelFeedback(ActionEvent event){
-        Alert cancelFeedbackAlert = new Alert(AlertType.ERROR);
+        Alert cancelFeedbackAlert = new Alert(AlertType.INFORMATION);
         cancelFeedbackAlert.setTitle("Confirmar cancelación");
         cancelFeedbackAlert.setHeaderText("Confirmar cancelación");
         cancelFeedbackAlert.setContentText("¿Está seguro de que desea salir? se perderán todos sus cambios");
