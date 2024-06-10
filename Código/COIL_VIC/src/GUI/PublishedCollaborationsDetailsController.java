@@ -57,7 +57,7 @@ public class PublishedCollaborationsDetailsController {
         confirmRequestAlert.showAndWait();
         ButtonType confirmRequestToCollaborate = new ButtonType("Aceptar");
         ButtonType cancelRequest = new ButtonType("Cancelar", ButtonData.CANCEL_CLOSE);
-        confirmRequestAlert.getButtonTypes().setAll(confirmRequestToCollaborate, cancelRequest);
+        confirmRequestAlert.getButtonTypes().setAll(cancelRequest,confirmRequestToCollaborate);
 
         Button okButton = (Button) confirmRequestAlert.getDialogPane().lookupButton(confirmRequestToCollaborate);
         Button cancelButton = (Button) confirmRequestAlert.getDialogPane().lookupButton(cancelRequest);
@@ -65,6 +65,7 @@ public class PublishedCollaborationsDetailsController {
         okButton.setOnAction(eventSendRequest -> {
             int result = professorDAO.professorRequestCollaboration(collaborationId, professorId);
             if (result == 1) {
+                
                 Alert requestSuccessfulAlert = new Alert(AlertType.INFORMATION);
                 requestSuccessfulAlert.setHeaderText("Solicitud exitosa");
                 requestSuccessfulAlert.setTitle("Solicitud exitosa");
@@ -80,12 +81,12 @@ public class PublishedCollaborationsDetailsController {
 
         
     
-       
-       
+    
+    
         
     }
 
-     @FXML
+    @FXML
     private Button buttonHome;
 
     @FXML
