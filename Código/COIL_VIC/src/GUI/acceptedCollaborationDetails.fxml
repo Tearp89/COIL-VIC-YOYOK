@@ -118,7 +118,7 @@
                                           <FontAwesomeIcon id="editButton" glyphName="UPLOAD" size="1.5em" />
                                        </graphic>
                                     </Button>
-                                    <Button fx:id="buttonCancel" layoutX="7.0" layoutY="8.0" mnemonicParsing="false" onAction="#cancelUpload" styleClass="descartar" stylesheets="@../GUI/declinedCollaborations.css" text="&lt;">
+                                    <Button fx:id="buttonCancel" layoutX="7.0" layoutY="8.0" mnemonicParsing="false" onAction="#cancelUpload" styleClass="descartar" stylesheets="@windowsStyle.css" text="&lt;">
                                        <font>
                                           <Font name="Tahoma Bold" size="12.0" />
                                        </font>
@@ -163,38 +163,70 @@
                                           <Font name="Tahoma" size="20.0" />
                                        </font>
                                     </Label>
-                                    <Label fx:id="labelCollaborationName" layoutX="208.0" layoutY="52.0" prefHeight="18.0" prefWidth="382.0" text="Label">
+                                    <Label fx:id="labelCollaborationName" layoutX="208.0" layoutY="52.0" prefHeight="18.0" prefWidth="382.0" stylesheets="@windowsStyle.css" text="Label">
                                        <font>
                                           <Font size="14.0" />
-                                       </font></Label>
-                                    <Label fx:id="labelCollaborationDescription" layoutX="194.0" layoutY="94.0" prefHeight="167.0" prefWidth="504.0" text="Label">
+                                       </font>
+                                       <styleClass>
+                                          <String fx:value="textfield" />
+                                          <String fx:value="shadow" />
+                                       </styleClass></Label>
+                                    <Label fx:id="labelCollaborationDescription" layoutX="194.0" layoutY="94.0" prefHeight="167.0" prefWidth="504.0" stylesheets="@windowsStyle.css" text="Label">
                                        <font>
                                           <Font size="14.0" />
-                                       </font></Label>
-                                    <Label fx:id="labelStartDate" layoutX="171.0" layoutY="274.0" prefHeight="26.0" prefWidth="142.0" text="Label">
+                                       </font>
+                                       <styleClass>
+                                          <String fx:value="textfield" />
+                                          <String fx:value="shadow" />
+                                       </styleClass></Label>
+                                    <Label fx:id="labelStartDate" layoutX="171.0" layoutY="274.0" prefHeight="26.0" prefWidth="142.0" stylesheets="@windowsStyle.css" text="Label">
                                        <font>
                                           <Font size="14.0" />
-                                       </font></Label>
-                                    <Label fx:id="labelFinishDate" layoutX="519.0" layoutY="274.0" prefHeight="26.0" prefWidth="142.0" text="Label">
+                                       </font>
+                                       <styleClass>
+                                          <String fx:value="textfield" />
+                                          <String fx:value="shadow" />
+                                       </styleClass></Label>
+                                    <Label fx:id="labelFinishDate" layoutX="519.0" layoutY="274.0" prefHeight="26.0" prefWidth="142.0" stylesheets="@windowsStyle.css" text="Label">
                                        <font>
                                           <Font size="14.0" />
-                                       </font></Label>
-                                    <Label fx:id="labelCollaborationGoal" layoutX="143.0" layoutY="324.0" prefHeight="38.0" prefWidth="519.0" text="Label">
+                                       </font>
+                                       <styleClass>
+                                          <String fx:value="textfield" />
+                                          <String fx:value="shadow" />
+                                       </styleClass></Label>
+                                    <Label fx:id="labelCollaborationGoal" layoutX="143.0" layoutY="324.0" prefHeight="38.0" prefWidth="519.0" stylesheets="@windowsStyle.css" text="Label">
                                        <font>
                                           <Font size="14.0" />
-                                       </font></Label>
-                                    <Label fx:id="labelNumberStudents" layoutX="179.0" layoutY="365.0" prefHeight="25.0" prefWidth="58.0" text="Label">
+                                       </font>
+                                       <styleClass>
+                                          <String fx:value="textfield" />
+                                          <String fx:value="shadow" />
+                                       </styleClass></Label>
+                                    <Label fx:id="labelNumberStudents" layoutX="179.0" layoutY="365.0" prefHeight="25.0" prefWidth="58.0" stylesheets="@windowsStyle.css" text="Label">
                                        <font>
                                           <Font size="14.0" />
-                                       </font></Label>
-                                    <Label fx:id="labelSubject" layoutX="494.0" layoutY="362.0" prefHeight="30.0" prefWidth="166.0" text="Label">
+                                       </font>
+                                       <styleClass>
+                                          <String fx:value="textfield" />
+                                          <String fx:value="shadow" />
+                                       </styleClass></Label>
+                                    <Label fx:id="labelSubject" layoutX="494.0" layoutY="362.0" prefHeight="30.0" prefWidth="166.0" stylesheets="@windowsStyle.css" text="Label">
                                        <font>
                                           <Font size="14.0" />
-                                       </font></Label>
-                                    <Label fx:id="labelStudentProfile" layoutX="185.0" layoutY="416.0" prefHeight="38.0" prefWidth="434.0" text="Label">
+                                       </font>
+                                       <styleClass>
+                                          <String fx:value="textfield" />
+                                          <String fx:value="shadow" />
+                                       </styleClass></Label>
+                                    <Label fx:id="labelStudentProfile" layoutX="185.0" layoutY="416.0" prefHeight="38.0" prefWidth="434.0" stylesheets="@windowsStyle.css" text="Label">
                                        <font>
                                           <Font size="14.0" />
-                                       </font></Label>
+                                       </font>
+                                       <styleClass>
+                                          <String fx:value="textfield" />
+                                          <String fx:value="shadow" />
+                                       </styleClass></Label>
                                  </children>
                               </AnchorPane>
                               <Button id="sendButton" layoutX="716.0" layoutY="499.0" mnemonicParsing="false" styleClass="descartar" stylesheets="@../GUI/declinedCollaborations.css" text="Enviar" visible="false" />

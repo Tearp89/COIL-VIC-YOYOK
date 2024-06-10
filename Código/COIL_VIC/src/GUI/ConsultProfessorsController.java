@@ -51,6 +51,7 @@ public class ConsultProfessorsController {
         adminData = UserSessionManager.getInstance().getAdminUserData();
         labelName.setText(adminData.getAdminName());
         showProfessorList();
+        comboBoxConsultFilter.setEditable(true);
     }
 
     @FXML
@@ -140,6 +141,8 @@ public class ConsultProfessorsController {
         }
         tableViewProfessor.setItems(professorList);
         tableViewProfessor.requestLayout();
+        Label labelProfessorsNotFound = new Label("No se encontraron profesores");
+        tableViewProfessor.setPlaceholder(labelProfessorsNotFound);
     }
 
     @FXML

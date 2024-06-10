@@ -57,18 +57,23 @@ import logic.DAO.CollaborationDAO;
             LocalDate startDate = datePickerStartDate.getValue();
             LocalDate finishDate = datePickerFinishDate.getValue();
             String collaborationGoal = textFieldCollaborationGoal.getText();
-            String collaborationSubject = comboBoxCollaborationSubject.getSelectionModel().getSelectedItem();
+            String collaborationSubject = comboBoxCollaborationSubject.getEditor().getText();
             String studentProfile = textAreaStudentProfile.getText();
             String noStudentsText = textFieldNoStudents.getText();
             
-            if(!FieldValidator.onlyText(collaborationName) || !FieldValidator.onlyText(collaborationDescription) || !FieldValidator.isValidDateRange(startDate, finishDate) 
-            || !FieldValidator.onlyText(collaborationGoal) || !FieldValidator.onlyText(collaborationSubject) || !FieldValidator.onlyText(studentProfile) || !FieldValidator.onlyNumber(noStudentsText)){
+            if(!FieldValidator.onlyText(collaborationName) ||
+            !FieldValidator.onlyText(collaborationDescription) ||
+            !FieldValidator.isValidDateRange(startDate, finishDate) ||
+            !FieldValidator.onlyText(collaborationGoal) ||
+            !FieldValidator.onlyText(collaborationSubject) ||
+            !FieldValidator.onlyText(studentProfile) ||
+            !FieldValidator.onlyNumber(noStudentsText)){
                 Alert emptyFieldsAlert = new Alert(AlertType.ERROR);
                 emptyFieldsAlert.setTitle("Campos vacíos o incorrectos");
                 emptyFieldsAlert.setHeaderText("Campos vacíos o incorrectos");
                 emptyFieldsAlert.setContentText("No se puede agregar la colaboración, hay campos vacíos o incorrectos");
                 emptyFieldsAlert.show();
-            } else if(instance.validateCollaborationName(collaborationName) == false){
+            } else if(!instance.validateCollaborationName(collaborationName)){
                 int noStudents = Integer.parseInt(noStudentsText);
             
             collaboration.setCollaborationName(collaborationName);

@@ -144,7 +144,8 @@
                                           </TableColumn>
                                       </columns>
                                     </TableView>
-                                    <Button fx:id="buttonBack" layoutX="43.0" layoutY="14.0" mnemonicParsing="false" onAction="#goBack" text="&lt;" />
+                                    <Button fx:id="buttonBack" layoutX="43.0" layoutY="14.0" mnemonicParsing="false" onAction="#goBack" styleClass="descartar" stylesheets="@windowsStyle.css" text="&lt;" />
+                                    <FontAwesomeIcon glyphName="ARROW_LEFT" layoutX="49.0" layoutY="31.0" />
                                  </children>
                               </AnchorPane>
                            </children></AnchorPane>
