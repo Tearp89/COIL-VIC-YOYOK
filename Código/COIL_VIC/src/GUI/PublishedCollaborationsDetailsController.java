@@ -1,12 +1,14 @@
 package GUI;
 
 import java.io.IOException;
+import java.util.Optional;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
@@ -44,46 +46,39 @@ public class PublishedCollaborationsDetailsController {
 
     @FXML
     Button buttonSendRequest;
-    @FXML
-    void sendRequestToCollaborate(ActionEvent event){
+  @FXML
+    void sendRequestToCollaborate(ActionEvent event) {
         ProfessorDAO professorDAO = new ProfessorDAO();
         Professor professorData = UserSessionManager.getInstance().getProfessorUserData();
-        
-        professorId = professorDAO.getProfessorIdByUser(professorData.getUser());
+        int professorId = professorDAO.getProfessorIdByUser(professorData.getUser());
+
         Alert confirmRequestAlert = new Alert(AlertType.CONFIRMATION);
         confirmRequestAlert.setHeaderText("Confirma aplicar a colaboración");
         confirmRequestAlert.setTitle("Confirmar aplicar a colaboración");
         confirmRequestAlert.setContentText("¿Está seguro de que desea aplicar a esta colaboración?");
-        confirmRequestAlert.showAndWait();
         ButtonType confirmRequestToCollaborate = new ButtonType("Aceptar");
-        ButtonType cancelRequest = new ButtonType("Cancelar", ButtonData.CANCEL_CLOSE);
+        ButtonType cancelRequest = new ButtonType("Cancelar", ButtonBar.ButtonData.CANCEL_CLOSE);
         confirmRequestAlert.getButtonTypes().setAll(confirmRequestToCollaborate, cancelRequest);
 
-        Button okButton = (Button) confirmRequestAlert.getDialogPane().lookupButton(confirmRequestToCollaborate);
-        Button cancelButton = (Button) confirmRequestAlert.getDialogPane().lookupButton(cancelRequest);
-
-        okButton.setOnAction(eventSendRequest -> {
-            int result = professorDAO.professorRequestCollaboration(collaborationId, professorId);
-            if (result == 1) {
+        Optional<ButtonType> result = confirmRequestAlert.showAndWait();
+        if (result.isPresent() && result.get() == confirmRequestToCollaborate) {
+            int resultCode = professorDAO.professorRequestCollaboration(collaborationId, professorId);
+            if (resultCode == 1) {
                 Alert requestSuccessfulAlert = new Alert(AlertType.INFORMATION);
                 requestSuccessfulAlert.setHeaderText("Solicitud exitosa");
                 requestSuccessfulAlert.setTitle("Solicitud exitosa");
                 requestSuccessfulAlert.setContentText("Solicitud enviada exitosamente");
-                
                 requestSuccessfulAlert.showAndWait();
-            } 
-        });
-
-        cancelButton.setOnAction(eventConfirmCancel -> {
-            confirmRequestAlert.close();
-        });
-
-        
-    
-       
-       
-        
+            } else {
+                Alert requestFailedAlert = new Alert(AlertType.ERROR);
+                requestFailedAlert.setHeaderText("Solicitud fallida");
+                requestFailedAlert.setTitle("Error");
+                requestFailedAlert.setContentText("No se pudo enviar la solicitud. Inténtelo de nuevo.");
+                requestFailedAlert.showAndWait();
+            }
+        }
     }
+
 
      @FXML
     private Button buttonHome;
