@@ -46,7 +46,7 @@ public class PublishedCollaborationsDetailsController {
 
     @FXML
     Button buttonSendRequest;
-  @FXML
+@FXML
     void sendRequestToCollaborate(ActionEvent event) {
         ProfessorDAO professorDAO = new ProfessorDAO();
         Professor professorData = UserSessionManager.getInstance().getProfessorUserData();
@@ -57,18 +57,6 @@ public class PublishedCollaborationsDetailsController {
         confirmRequestAlert.setTitle("Confirmar aplicar a colaboración");
         confirmRequestAlert.setContentText("¿Está seguro de que desea aplicar a esta colaboración?");
         ButtonType confirmRequestToCollaborate = new ButtonType("Aceptar");
-<<<<<<< HEAD
-        ButtonType cancelRequest = new ButtonType("Cancelar", ButtonData.CANCEL_CLOSE);
-        confirmRequestAlert.getButtonTypes().setAll(cancelRequest,confirmRequestToCollaborate);
-
-        Button okButton = (Button) confirmRequestAlert.getDialogPane().lookupButton(confirmRequestToCollaborate);
-        Button cancelButton = (Button) confirmRequestAlert.getDialogPane().lookupButton(cancelRequest);
-
-        okButton.setOnAction(eventSendRequest -> {
-            int result = professorDAO.professorRequestCollaboration(collaborationId, professorId);
-            if (result == 1) {
-                
-=======
         ButtonType cancelRequest = new ButtonType("Cancelar", ButtonBar.ButtonData.CANCEL_CLOSE);
         confirmRequestAlert.getButtonTypes().setAll(confirmRequestToCollaborate, cancelRequest);
 
@@ -76,29 +64,11 @@ public class PublishedCollaborationsDetailsController {
         if (result.isPresent() && result.get() == confirmRequestToCollaborate) {
             int resultCode = professorDAO.professorRequestCollaboration(collaborationId, professorId);
             if (resultCode == 1) {
->>>>>>> 071098dd459164f9ded9b741189cab7c9fe37786
                 Alert requestSuccessfulAlert = new Alert(AlertType.INFORMATION);
                 requestSuccessfulAlert.setHeaderText("Solicitud exitosa");
                 requestSuccessfulAlert.setTitle("Solicitud exitosa");
                 requestSuccessfulAlert.setContentText("Solicitud enviada exitosamente");
                 requestSuccessfulAlert.showAndWait();
-<<<<<<< HEAD
-            } 
-        });
-
-        cancelButton.setOnAction(eventConfirmCancel -> {
-            confirmRequestAlert.close();
-        });
-
-        
-    
-    
-    
-        
-    }
-
-    @FXML
-=======
             } else {
                 Alert requestFailedAlert = new Alert(AlertType.ERROR);
                 requestFailedAlert.setHeaderText("Solicitud fallida");
@@ -110,8 +80,7 @@ public class PublishedCollaborationsDetailsController {
     }
 
 
-     @FXML
->>>>>>> 071098dd459164f9ded9b741189cab7c9fe37786
+    @FXML
     private Button buttonHome;
 
     @FXML
@@ -163,7 +132,7 @@ public class PublishedCollaborationsDetailsController {
         ChangeWindowManager.closeWindow(event);
     }
 
-     @FXML
+    @FXML
     private Button buttonLogout;
 
     @FXML
