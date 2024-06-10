@@ -15,6 +15,8 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TextFormatter;
+import javafx.scene.input.KeyEvent;
 import log.Log;
 import javafx.scene.control.Alert.AlertType;
 import logic.FieldValidator;
@@ -192,7 +194,7 @@ public class DeclinedCollaborationDetailsController {
         collaborationUpdated.setNoStudents(numberStudents);
         collaborationUpdated.setStudentProfile(studentProfile);
         collaborationUpdated.setCollaborationId(collaborationId);
-        collaborationUpdated.setCollaborationStatus("En revisión");
+        collaborationUpdated.setCollaborationStatus("Pendiente");
         CollaborationDAO updateCollaborationDAO = new CollaborationDAO();
         if(!FieldValidator.onlyTextAndNumbers(collaborationName) || !FieldValidator.onlyText(collaborationDescription) || !FieldValidator.isValidDateRange(collaborationStartDate, collaborationFinishDate) || !FieldValidator.onlyText(collaborationGoal) || !FieldValidator.onlyText(collaborationSubject) || 
         !FieldValidator.onlyNumber(numberStudentsText) || !FieldValidator.onlyText(studentProfile)){
@@ -260,6 +262,24 @@ public class DeclinedCollaborationDetailsController {
         comboBoxSubject.setValue(collaborationSubject);
         textFieldNumberStudents.setText(String.valueOf(noStudents));
         textAreaStudentProfile.setText(studentProfile);
+
+
+        datePickerStartDate.getEditor().addEventFilter(KeyEvent.KEY_TYPED, event -> event.consume());
+        datePickerStartDate.getEditor().addEventFilter(KeyEvent.KEY_PRESSED, event -> event.consume());
+        datePickerStartDate.getEditor().addEventFilter(KeyEvent.KEY_RELEASED, event -> event.consume());
+
+        datePickerFinishDate.getEditor().addEventFilter(KeyEvent.KEY_TYPED, event -> event.consume());
+        datePickerFinishDate.getEditor().addEventFilter(KeyEvent.KEY_PRESSED, event -> event.consume());
+        datePickerFinishDate.getEditor().addEventFilter(KeyEvent.KEY_RELEASED, event -> event.consume());
+
+        textFieldNumberStudents.setTextFormatter(new TextFormatter<>(change -> {
+            String newText = change.getControlNewText();
+            if (newText.matches("[0-9]*")) {
+                return change;
+            } else {
+                return null;
+            }
+        }));
 
 
 

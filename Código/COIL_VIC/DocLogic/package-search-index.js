@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"logic"},{"l":"logic.classes"},{"l":"logic.DAO"},{"l":"logic.interfaces"}];updateSearchResults();

@@ -531,7 +531,6 @@ public class CollaborationDAO implements ICollaboration {
     }
 
 
-    //TODO:Test
     public int changeRequestStatus(int professorId, int collaborationId, String status){
         DatabaseManager dbManager = new DatabaseManager();
         String query = "UPDATE solicitud_colaboración SET estado = ? WHERE idColaboración = ? AND idProfesor = ?";

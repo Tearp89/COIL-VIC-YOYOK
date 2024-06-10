@@ -1,3 +1,4 @@
+
 package logic.interfaces;
 import logic.classes.Activity;
 
@@ -6,3 +7,4 @@ public interface IActivity {
     int deleteActivity (Activity activity);
     int updateActivity (Activity activity);
 }
+

@@ -140,6 +140,7 @@ private static final org.apache.log4j.Logger LOG = Log.getLogger(AddProfessorCon
             
             }else{
                 UniversityDAO universityDAO = new UniversityDAO();
+                addUniversity(universityName, country, language);
                 int universityId = universityDAO.getUniversityId(universityName);
                 int personalNumber = Integer.parseInt(textFieldPersonalNumber.getText());
                 professor.setName(professorName);
@@ -223,7 +224,7 @@ private static final org.apache.log4j.Logger LOG = Log.getLogger(AddProfessorCon
         }else{
             if (!FieldValidator.isValidName(professorName) || !FieldValidator.onlyTextAndNumbers(professorPhoneNumber) || !FieldValidator.isEmail(email) || !FieldValidator.onlyText(country) || !FieldValidator.onlyText(universityName) || !FieldValidator.onlyText(language) || !FieldValidator.onlyText(workShop)) {
                 Alert emptyFieldsAlert = new Alert(AlertType.ERROR);
-                emptyFieldsAlert.setTitle("Campos icorrectos o vacíos");
+                emptyFieldsAlert.setTitle("Campos incorrectos o vacíos");
                 emptyFieldsAlert.setHeaderText("Campos incorectos o vacíos");
                 emptyFieldsAlert.setContentText("Hay campos vacíos y/o incorrectos.");
                 emptyFieldsAlert.showAndWait();
@@ -426,6 +427,7 @@ private static final org.apache.log4j.Logger LOG = Log.getLogger(AddProfessorCon
             
 
             comboBoxUniversity.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+                
                 if ("Universidad Veracruzana".equals(newValue)) {
                     
                     comboBoxAcademicArea.setVisible(true);

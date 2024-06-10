@@ -19,7 +19,7 @@ public class FieldValidator {
     public static boolean onlyText(String textFieldTrim){
         textFieldTrim = textFieldTrim.trim();
         if(!textFieldTrim.isBlank()){
-            return textFieldTrim.replaceAll("[.,]", "") 
+            return textFieldTrim.replaceAll("[.,-]", "") 
                                .matches("[a-zA-ZñÑáéíóúÁÉÍÓÚ\\s]+");
         } else {            
             return false;

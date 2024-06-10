@@ -37,11 +37,11 @@ public class CollaborationDAOTest {
         LocalDate dateStartTest =  LocalDate.of(2022, 1, 1); 
         LocalDate dateFinishTest =  LocalDate.of(2026, 2, 1);
         
-        collaboration.setCollaborationName("Innovación digital");
+        collaboration.setCollaborationName("colaboración si");
         collaboration.setDescription("TestDescripcion");
         collaboration.setFinishDate(dateFinishTest);
         collaboration.setStartDate(dateStartTest);
-        collaboration.setCollaborationStatus("Publicada");
+        collaboration.setCollaborationStatus("Rechazada");
         collaboration.setCollaborationGoal("Unir estudiantes");
         collaboration.setNoStudents(25);
         collaboration.setStudentProfile("Inglés, ");
@@ -94,9 +94,7 @@ public class CollaborationDAOTest {
         assertEquals(0, rowsAffected);
     }
 
-    /**
-     * Test of updateCollaboration method, of class CollaborationDAO.
-     */
+    
     @org.junit.Test
     public void testUpdateCollaborationSuccess() {
         Collaboration collaboration = new Collaboration();
@@ -312,8 +310,8 @@ public class CollaborationDAOTest {
     public void changeCollaborationStatusSuccess(){
         System.out.println("changeStateProfessor");
             Collaboration collaboration = new Collaboration();
-            int collaborationId = 50; 
-            String status = "Rechazada";
+            int collaborationId = 30; 
+            String status = "Activa";
             
             CollaborationDAO instance = new CollaborationDAO();
             int expectedResult = 1;
