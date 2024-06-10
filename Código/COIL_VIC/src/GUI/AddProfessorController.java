@@ -124,7 +124,7 @@ private static final org.apache.log4j.Logger LOG = Log.getLogger(AddProfessorCon
         Professor professor = new Professor();
         
         if(universityName.equals("Universidad Veracruzana")){
-            if (!FieldValidator.isValidName(professorName)|| !FieldValidator.onlyTextAndNumbers(professorPhoneNumber) || !FieldValidator.isEmail(email) || !FieldValidator.onlyText(country) || !FieldValidator.onlyText(universityName) || !FieldValidator.onlyText(language) || !FieldValidator.onlyText(workShop) || !FieldValidator.onlyText(academicArea) || !FieldValidator.onlyNumber(textFieldPersonalNumber.getText()) || !FieldValidator.onlyText(region) || !FieldValidator.onlyText(contractType) || !FieldValidator.onlyText(contractCategory) ) {
+            if (!FieldValidator.isValidName(professorName)|| !FieldValidator.onlyTextAndNumbers(professorPhoneNumber) || !FieldValidator.isEmail(email) || !FieldValidator.onlyText(country) || !FieldValidator.onlyText(universityName) || !FieldValidator.onlyText(language) || !FieldValidator.onlyText(workShop) || academicArea.trim().isBlank() || !FieldValidator.onlyNumber(textFieldPersonalNumber.getText()) || region.trim().isBlank() || !FieldValidator.onlyText(contractType) || !FieldValidator.onlyText(contractCategory) ) {
                 Alert emptyFieldsAlertUV = new Alert(AlertType.ERROR);
                 emptyFieldsAlertUV.setTitle("Campos incorrectos o vacíos");
                 emptyFieldsAlertUV.setHeaderText("Campos incorrectos o vacíos");
@@ -132,11 +132,11 @@ private static final org.apache.log4j.Logger LOG = Log.getLogger(AddProfessorCon
                 emptyFieldsAlertUV.showAndWait();
                 return;
             } else if (professorDAO.isProfessorRegistered(email) == true){
-                    Alert professorDuplicatedAlert = new Alert(AlertType.INFORMATION);
-                    professorDuplicatedAlert.setTitle("Profesor duplicado");
-                    professorDuplicatedAlert.setHeaderText("Profesor duplicado");
-                    professorDuplicatedAlert.setContentText("Este correo ya está asociado a una cuenta");
-                    professorDuplicatedAlert.show();
+                Alert professorDuplicatedAlert = new Alert(AlertType.INFORMATION);
+                professorDuplicatedAlert.setTitle("Profesor duplicado");
+                professorDuplicatedAlert.setHeaderText("Profesor duplicado");
+                professorDuplicatedAlert.setContentText("Este correo ya está asociado a una cuenta");
+                professorDuplicatedAlert.show();
             
             }else{
                 UniversityDAO universityDAO = new UniversityDAO();
