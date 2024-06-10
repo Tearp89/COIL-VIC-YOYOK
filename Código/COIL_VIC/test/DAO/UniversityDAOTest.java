@@ -30,8 +30,8 @@ public class UniversityDAOTest {
         UniversityDAO universityDAO = new UniversityDAO();
         University university = new University();
         university.setUniversityCountry("PaisTest");
-        university.setUniversityName("TestNombre");
-        university.setUniversityLanguage("IdiomaTest");
+        university.setUniversityName("UV");
+        university.setUniversityLanguage("Español");
         
         int rowsAffected = universityDAO.addUniversity(university);
         assertEquals(1, rowsAffected);
