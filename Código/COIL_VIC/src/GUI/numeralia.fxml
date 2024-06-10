@@ -179,33 +179,33 @@
                                     </TableView>
                                     <MenuBar id="menuBar" layoutX="126.0" layoutY="13.0" opacity="0.94" prefHeight="46.0" prefWidth="562.0" style="-fx-background-radius: 10;" stylesheets="@windowsStyle.css">
                                        <menus>
-                                          <Menu fx:id="menuItem2018" mnemonicParsing="false" style="-fx-cursor: HAND;">
+                                          <Menu fx:id="menuItem2017" mnemonicParsing="false" onAction="#handleYear2017" style="-fx-cursor: HAND;">
                                              <graphic>
-                                                <Button alignment="CENTER_RIGHT" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#handleYear2018" style="-fx-cursor: HAND; -fx-background-color: NONE;" stylesheets="@windowsStyle.css" text="2018" textAlignment="CENTER" />
+                                                <Button alignment="CENTER_RIGHT" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#handleYear2017" style="-fx-cursor: HAND; -fx-background-color: NONE;" stylesheets="@windowsStyle.css" text="2017" textAlignment="CENTER" />
                                              </graphic></Menu>
-                                          <Menu fx:id="menuItem2018" mnemonicParsing="false" style="-fx-cursor: HAND;">
+                                          <Menu fx:id="menuItem2018" mnemonicParsing="false" onAction="#handleYear2018" style="-fx-cursor: HAND;">
+                                             <graphic>
+                                                <Button mnemonicParsing="false" onAction="#handleYear2018" style="-fx-cursor: HAND; -fx-background-color: NONE;" stylesheets="@windowsStyle.css" text="2018" textAlignment="CENTER" />
+                                             </graphic></Menu>
+                                          <Menu fx:id="menuItem2019" mnemonicParsing="false" onAction="#handleYear2019" style="-fx-cursor: HAND;">
                                              <graphic>
                                                 <Button mnemonicParsing="false" onAction="#handleYear2019" style="-fx-cursor: HAND; -fx-background-color: NONE;" stylesheets="@windowsStyle.css" text="2019" textAlignment="CENTER" />
                                              </graphic></Menu>
-                                          <Menu fx:id="menuItem2020" mnemonicParsing="false" style="-fx-cursor: HAND;">
+                                          <Menu fx:id="menuItem2020" mnemonicParsing="false" onAction="#handleYear2020" style="-fx-cursor: HAND;">
                                              <graphic>
                                                 <Button mnemonicParsing="false" onAction="#handleYear2020" style="-fx-cursor: HAND; -fx-background-color: NONE;" stylesheets="@windowsStyle.css" text="2020" textAlignment="CENTER" />
                                              </graphic></Menu>
-                                          <Menu fx:id="menuItem2021" mnemonicParsing="false" style="-fx-cursor: HAND;">
+                                          <Menu fx:id="menuItem2021" mnemonicParsing="false" onAction="#handleYear2021" style="-fx-cursor: HAND;">
                                              <graphic>
                                                 <Button mnemonicParsing="false" onAction="#handleYear2021" style="-fx-cursor: HAND; -fx-background-color: NONE;" stylesheets="@windowsStyle.css" text="2021" textAlignment="CENTER" />
                                              </graphic></Menu>
-                                          <Menu fx:id="menuItem2022" mnemonicParsing="false" style="-fx-cursor: HAND;">
+                                          <Menu fx:id="menuItem2022" mnemonicParsing="false" onAction="#handleYear2022" style="-fx-cursor: HAND;">
                                              <graphic>
                                                 <Button mnemonicParsing="false" onAction="#handleYear2022" style="-fx-cursor: HAND; -fx-background-color: NONE;" stylesheets="@windowsStyle.css" text="2022" textAlignment="CENTER" />
                                              </graphic></Menu>
-                                          <Menu fx:id="menuItem2023" mnemonicParsing="false" style="-fx-cursor: HAND;">
+                                          <Menu fx:id="menuItem2023" mnemonicParsing="false" onAction="#handleYear2023" style="-fx-cursor: HAND;">
                                              <graphic>
                                                 <Button mnemonicParsing="false" onAction="#handleYear2023" style="-fx-cursor: HAND; -fx-background-color: NONE;" stylesheets="@windowsStyle.css" text="2023" textAlignment="CENTER" />
-                                             </graphic></Menu>
-                                          <Menu fx:id="menuItem2024" mnemonicParsing="false" style="-fx-cursor: HAND;">
-                                             <graphic>
-                                                <Button mnemonicParsing="false" onAction="#handleYear2024" style="-fx-cursor: HAND; -fx-background-color: NONE;" stylesheets="@windowsStyle.css" text="2024" textAlignment="CENTER" />
                                              </graphic></Menu>
                                        </menus>
                                        <styleClass>

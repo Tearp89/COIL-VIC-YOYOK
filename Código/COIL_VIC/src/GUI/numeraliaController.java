@@ -6,8 +6,6 @@ package GUI;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-
-import dataAccess.DatabaseConnectionChecker;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -32,7 +30,7 @@ public class NumeraliaController {
     
 
     @FXML
-    private Menu menuItem2024;
+    private Menu menuItem2017;
     
     @FXML
     private Menu menuItem2018;
@@ -86,9 +84,6 @@ public class NumeraliaController {
     @FXML
     private Label labelName;
 
-    @FXML
-    private Label labelNotConnection = new Label("No hay conexión con la base para recuperar la numeralia");
-
     private ObservableList<RegionData> regionDataList = FXCollections.observableArrayList();
     private ObservableList<AcademicAreaData> academicAreaDataList = FXCollections.observableArrayList();
     
@@ -100,6 +95,13 @@ public class NumeraliaController {
     @FXML
     private void closeWindow(ActionEvent event){
         ChangeWindowManager.closeWindow(event);
+    }
+
+    @FXML
+    private void handleYear2017(ActionEvent event) {
+        loadDataByYear("2017");
+        menuItem2017.setVisible(false);
+        menuItem2017.setVisible(true);
     }
 
     @FXML
@@ -143,28 +145,15 @@ public class NumeraliaController {
         menuItem2023.setVisible(false);
         menuItem2023.setVisible(true);
     }
-
-    @FXML
-    private void handleYear2024(ActionEvent event) {
-        loadDataByYear("2024");
-        menuItem2024.setVisible(false);
-        menuItem2024.setVisible(true);
-    }
     
     @FXML
     public void initialize() {
-        if(!DatabaseConnectionChecker.isDatabaseConnected()){
-            DatabaseConnectionChecker.showNoConnectionDialog();
-            buttonDownload.setDisable(true);
-            academicAreaTable.setPlaceholder(labelNotConnection);
-            regionTable.setPlaceholder(labelNotConnection);
-        } else {
-            loadDataByYear("2022");
-            buttonDownload.setOnAction(this::handleDownloadButton);
-            Admin adminData = new Admin();
-            adminData = UserSessionManager.getInstance().getAdminUserData();
-            labelName.setText(adminData.getAdminName());
-        }
+        loadDataByYear("2022");
+
+        buttonDownload.setOnAction(this::handleDownloadButton);
+        Admin adminData = new Admin();
+        adminData = UserSessionManager.getInstance().getAdminUserData();
+        labelName.setText(adminData.getAdminName());
     }
     
     private void loadDataByYear(String year) {
