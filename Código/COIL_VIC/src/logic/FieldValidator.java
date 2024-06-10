@@ -19,11 +19,13 @@ public class FieldValidator {
     public static boolean onlyText(String textFieldTrim){
         textFieldTrim = textFieldTrim.trim();
         if(!textFieldTrim.isBlank()){
-            return textFieldTrim.matches("[a-zA-ZñÑáéíóúÁÉÍÓÚ\\s]+");
+            return textFieldTrim.replaceAll("[.,]", "") 
+                               .matches("[a-zA-ZñÑáéíóúÁÉÍÓÚ\\s]+");
         } else {            
             return false;
         }
     }
+    
     
     public static boolean onlyNumber(String textFieldTrim){
         textFieldTrim = textFieldTrim.trim();
@@ -65,11 +67,26 @@ public class FieldValidator {
     }
 
     public static boolean isValidDateRange(LocalDate startDate, LocalDate finishDate) {
+
         if (startDate == null || finishDate == null) {
             return false;
         }
+        
 
         return !startDate.isAfter(finishDate);
+    }
+
+    public static String convertDateFormat(String dateStr, String fromFormat, String toFormat) {
+        DateTimeFormatter fromFormatter = DateTimeFormatter.ofPattern(fromFormat);
+        DateTimeFormatter toFormatter = DateTimeFormatter.ofPattern(toFormat);
+        
+        try {
+            LocalDate date = LocalDate.parse(dateStr, fromFormatter);
+            return date.format(toFormatter);
+        } catch (DateTimeParseException e) {
+            System.out.println("Invalid date format: " + dateStr);
+            return null;
+        }
     }
     
 

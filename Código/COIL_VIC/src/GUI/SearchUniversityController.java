@@ -2,6 +2,8 @@ package GUI;
 
 import java.io.IOException;
 import java.util.ArrayList;
+
+import dataAccess.DatabaseConnectionChecker;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -27,26 +29,35 @@ public class SearchUniversityController {
     Label labelCollaborationNotFound = new Label("No se encontraron universidades");
 
     public void loadUniversities(){
-        UniversityDAO universitiyDAO = new UniversityDAO();
-        ArrayList<University> universities = new ArrayList<>();
-        universities = universitiyDAO.searchUniversity();
-        tableViewUniversities.getItems().addAll(universities);
-        if(universities.size() == 0){
-            tableViewUniversities.setPlaceholder(labelCollaborationNotFound);
+        if(!DatabaseConnectionChecker.isDatabaseConnected()){
+            DatabaseConnectionChecker.showNoConnectionDialog();
+        } else {
+            UniversityDAO universitiyDAO = new UniversityDAO();
+            ArrayList<University> universities = new ArrayList<>();
+            universities = universitiyDAO.searchUniversity();
+            tableViewUniversities.getItems().addAll(universities);
+            if(universities.size() == 0){
+                tableViewUniversities.setPlaceholder(labelCollaborationNotFound);
+            }
         }
+        
     }
 
     @FXML
     private TextField textFieldSearch;
     public void searchUniversities(ActionEvent e){
-        UniversityDAO universityDAO = new UniversityDAO();
-        ArrayList<University> universities = new ArrayList<>();
-        String universityName = "%" + textFieldSearch.getText() + "%";
-        universities = universityDAO.searchUniversityByName(universityName);
-        tableViewUniversities.getItems().clear();
-        tableViewUniversities.getItems().addAll(universities);
-        if(universities.size() == 0){
-            tableViewUniversities.setPlaceholder(labelCollaborationNotFound);
+        if(!DatabaseConnectionChecker.isDatabaseConnected()){
+            DatabaseConnectionChecker.showNoConnectionDialog();
+        } else {
+            UniversityDAO universityDAO = new UniversityDAO();
+            ArrayList<University> universities = new ArrayList<>();
+            String universityName = "%" + textFieldSearch.getText() + "%";
+            universities = universityDAO.searchUniversityByName(universityName);
+            tableViewUniversities.getItems().clear();
+            tableViewUniversities.getItems().addAll(universities);
+            if(universities.size() == 0){
+                tableViewUniversities.setPlaceholder(labelCollaborationNotFound);
+            }
         }
     }
 

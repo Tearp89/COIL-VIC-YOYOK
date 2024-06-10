@@ -158,7 +158,7 @@ public class AdminGradeCollaborationController {
     private Button buttonCancelFeedback;
     @FXML
     private void cancelFeedback(ActionEvent event){
-        Alert cancelFeedbackAlert = new Alert(AlertType.ERROR);
+        Alert cancelFeedbackAlert = new Alert(AlertType.WARNING);
         cancelFeedbackAlert.setTitle("Confirmar cancelación");
         cancelFeedbackAlert.setHeaderText("Confirmar cancelación");
         cancelFeedbackAlert.setContentText("¿Está seguro de que desea salir? se perderán todos sus cambios");

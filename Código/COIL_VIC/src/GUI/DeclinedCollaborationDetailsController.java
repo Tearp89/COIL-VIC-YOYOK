@@ -61,6 +61,7 @@ public class DeclinedCollaborationDetailsController {
         buttonEditCollaboration.setVisible(false);
         buttonCancel.setVisible(true);
         buttonSendCollaboration.setVisible(true);
+        comboBoxSubject.setEditable(true);
 
 
     }
@@ -171,13 +172,13 @@ public class DeclinedCollaborationDetailsController {
     Button buttonSendCollaboration;
     @FXML
     void sendCollaboration(ActionEvent event){
-        
+        CollaborationDAO collaborationDAO = new CollaborationDAO();
         String collaborationName = textFieldCollaborationName.getText();
         String collaborationDescription = textAreaCollaborationDescription.getText();
         LocalDate collaborationStartDate = datePickerStartDate.getValue();
         LocalDate collaborationFinishDate = datePickerFinishDate.getValue();
         String collaborationGoal = textFieldCollaborationGoal.getText();
-        String collaborationSubject = comboBoxSubject.getValue().toString();
+        String collaborationSubject = comboBoxSubject.getEditor().getText();
         String numberStudentsText = textFieldNumberStudents.getText();
         int numberStudents = Integer.parseInt(textFieldNumberStudents.getText());
         String studentProfile = textAreaStudentProfile.getText();
@@ -202,16 +203,29 @@ public class DeclinedCollaborationDetailsController {
             emptyFieldsAlert.show();
 
 
-        }else{
+        }else if(!collaborationDAO.validateCollaborationName(collaborationName)){
             int result = updateCollaborationDAO.updateCollaboration(collaborationUpdated);
             if (result == 1){
-                Alert collaborationUpdatedAlert = new Alert(AlertType.CONFIRMATION);
+                Alert collaborationUpdatedAlert = new Alert(AlertType.INFORMATION);
                 collaborationUpdatedAlert.setTitle("Confirmación registro");
                 collaborationUpdatedAlert.setHeaderText("Confirmación actualización");
                 collaborationUpdatedAlert.setContentText("Se actualizó la información de la convocatoria de manera exitosa");
                 collaborationUpdatedAlert.show();
+                ButtonType accept = new ButtonType("Aceptar");
+                collaborationUpdatedAlert.getButtonTypes().setAll(accept);
+                Button okButton = (Button) collaborationUpdatedAlert.getDialogPane().lookupButton(accept);
+                okButton.setOnAction(eventAcceptEditionConfirmation -> {
+                    FXMLLoader collaborationOptionsLoader = new FXMLLoader(getClass().getResource("/GUI/collaborationOptions.fxml"));
+                    ChangeWindowManager.changeWindowTo(event, collaborationOptionsLoader); 
+                });
             }
 
+        } else{
+            Alert duplicatedNameAlert = new Alert(AlertType.ERROR);
+            duplicatedNameAlert.setHeaderText("Nombre duplicado");
+            duplicatedNameAlert.setTitle("Nombre duplicado");
+            duplicatedNameAlert.setContentText("No se puede actualizar la colaboración el nombre está duplicado");
+            duplicatedNameAlert.show();
         }
       
         
