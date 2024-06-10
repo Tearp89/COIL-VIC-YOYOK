@@ -5,16 +5,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
-import com.mysql.cj.x.protobuf.MysqlxDatatypes.Array;
 
 import dataAccess.DatabaseManager;
-import javafx.scene.chart.PieChart.Data;
 import log.Log;
 import logic.interfaces.IStudent;
-import logic.classes.Collaboration;
 import logic.classes.Student;
 
 public class StudentDAO implements IStudent {
@@ -24,9 +18,8 @@ public class StudentDAO implements IStudent {
         DatabaseManager dbManager = new DatabaseManager();
         String query = "INSERT INTO estudiante(correoElectrónico, Profesor_idProfesor, contraseña) VALUES (?, ?, SHA2(?, 256))";
         int result = 0;
-        try {
-            Connection connection = dbManager.getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement(query);
+        try (Connection connection = dbManager.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setString(1, student.getEmail());
             preparedStatement.setInt(2, student.getProfessorId());
             preparedStatement.setString(3, student.getPassword());
@@ -41,9 +34,8 @@ public class StudentDAO implements IStudent {
         DatabaseManager dbManager = new DatabaseManager();
         String query = "UPDATE estudiante SET contraseña = SHA2(?, 256) WHERE correoElectrónico = ?";
         int result = 0;
-        try{
-            Connection connection = dbManager.getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement(query);
+        try (Connection connection = dbManager.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setString(1, password);
             preparedStatement.setString(2, email);
             result = preparedStatement.executeUpdate();
@@ -111,9 +103,8 @@ public class StudentDAO implements IStudent {
         DatabaseManager dbManager = new DatabaseManager();
         String query = "UPDATE estudiante SET Profesor_idProfesor = ? WHERE correoElectrónico = ?";
         int result = 0;
-        try{
-            Connection connection = dbManager.getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement(query);
+        try (Connection connection = dbManager.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setInt(1, professorId);
             preparedStatement.setString(2, correo);
             result = preparedStatement.executeUpdate();
@@ -130,9 +121,8 @@ public class StudentDAO implements IStudent {
         String query = "SELECT correoElectrónico FROM estudiante WHERE Profesor_idProfesor = ?";
         ArrayList<Student> students = new ArrayList<>();
 
-        try {
-            Connection connection = dbManager.getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement(query);
+        try (Connection connection = dbManager.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setInt(1, professorId);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
@@ -145,7 +135,6 @@ public class StudentDAO implements IStudent {
             
         } catch (SQLException getStudentsByProfessorIdException) {
             LOG.error("ERROR:", getStudentsByProfessorIdException);
-         
         }
 
         return students;
@@ -156,9 +145,8 @@ public class StudentDAO implements IStudent {
         DatabaseManager dbManager = new DatabaseManager();
         String query = "UPDATE estudiante SET contraseña = ? WHERE correoElectrónico = ?";
         int result = 0;
-        try{
-            Connection connection = dbManager.getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement(query);
+        try (Connection connection = dbManager.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setString(1, password);
             preparedStatement.setString(2, email);
             result = preparedStatement.executeUpdate();
