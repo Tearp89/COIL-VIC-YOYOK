@@ -9,6 +9,17 @@
             "name": "MainLogin",
             "request": "launch",
             "mainClass": "GUI.MainLogin",
+            "projectName": "COIL_VIC_7f2e775a",
+            "vmArgs": "--module-path \"C:/Users/marla/OneDrive - Universidad Veracruzana/Documentos/4to semestre/Principios de construcción/javafx-sdk-21.0.2/lib\" --add-modules javafx.controls,javafx.fxml"
+        },
+        {
+            "type": "java",
+            "name": "MainOpen",
+            "request": "launch",
+            "mainClass": "GUI.MainOpen",
+            "projectName": "COIL_VIC_7f2e775a",
+            "vmArgs": "--module-path \"C:/Users/marla/OneDrive - Universidad Veracruzana/Documentos/4to semestre/Principios de construcción/javafx-sdk-21.0.2/lib\" --add-modules javafx.controls,javafx.fxml"
+        }
             //Laptop Dani
             "projectName": "COIL_VIC_21618bff",            
             "vmArgs": "--module-path \"C:/Users/daur0/OneDrive/Documentos/Universidad/4to Semestre/Principios de Construcción/Proyecto COIL-VIC/COIL-VIC-YOYOK/javafx-sdk-21.0.2/lib\" --add-modules javafx.controls,javafx.fxml"            //Computadora Escritorio Dani

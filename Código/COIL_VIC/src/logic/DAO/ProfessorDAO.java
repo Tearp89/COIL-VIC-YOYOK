@@ -62,7 +62,7 @@ public class ProfessorDAO implements IProfessor{
     public int addProfessorForeign(Professor professor){
         DatabaseManager dbManager = new DatabaseManager();
         String query = "INSERT INTO profesor(nombreProfesor, usuario, telefono," + 
-        "estado, país, Universidad_idUniversidad, correo, contraseña, tipoProfesor) VALUES (?,?,?,?,?,?,?,SHA2(?,256),?)";
+        "estado, país, Universidad_idUniversidad, correo, contraseña, tipoProfesor, curso_taller) VALUES (?,?,?,?,?,?,?,SHA2(?,256),?, ?)";
         int result = 0;
         try {
             Connection connection = dbManager.getConnection();
@@ -76,6 +76,7 @@ public class ProfessorDAO implements IProfessor{
             preparedStatement.setString(7, professor.getEmail());
             preparedStatement.setString(8, professor.getPassword());
             preparedStatement.setString(9, professor.getType());
+            preparedStatement.setString(10, professor.getWorkShop());
             
             result = preparedStatement.executeUpdate();
         } catch (SQLException addProfessorForeignException) {
@@ -519,6 +520,25 @@ public class ProfessorDAO implements IProfessor{
             LOG.error("ERROR:", getProfessorIdByUserException);
         }
         return 0;
+    }
+
+    public String getWorkShopByProfessorId(int professorId){
+        DatabaseManager dbManager = new DatabaseManager();
+        String query = "SELECT curso_taller FROM Profesor WHERE idProfesor = ?";
+        try{
+            Connection connection = dbManager.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setInt(1, professorId);
+            try(ResultSet resultSet = preparedStatement.executeQuery()){
+                if(resultSet.next()){
+                    return resultSet.getString("curso_taller");
+                }
+            }
+
+        } catch(SQLException getProfessorWorkShopByIdException){
+            LOG.error("ERROR:", getProfessorWorkShopByIdException);
+        }
+        return null;
     }
 
     public String getProfessorNameByUser(String user){

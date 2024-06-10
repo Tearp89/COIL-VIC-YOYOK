@@ -68,7 +68,7 @@ public class CollaborationDAOTest {
         collaboration.setDescription("TestDescripcion");
         collaboration.setFinishDate(dateFinishtTest);
         collaboration.setStartDate(dateStartTest);
-        collaboration.setCollaborationId(20);
+        collaboration.setCollaborationId(50);
         
         
         int rowsAffected = instance.deleteCollaboration(collaboration);
@@ -109,8 +109,12 @@ public class CollaborationDAOTest {
         collaboration.setDescription("NuevoTestDescripcion");
         collaboration.setFinishDate(dateFinishtTest);
         collaboration.setStartDate(dateStartTest);
-        collaboration.setCollaborationId(1);
-        
+        collaboration.setCollaborationId(50);
+        collaboration.setCollaborationGoal("Conviviri");
+        collaboration.setNoStudents(20);
+        collaboration.setStudentProfile("Ganas de trabajar");
+        collaboration.setSubject("Orueba");
+        collaboration.setCollaborationGoal("otra prueba");
         int rowsAffected = instance.updateCollaboration(collaboration);
         assertEquals(1, rowsAffected);
     }
@@ -308,8 +312,8 @@ public class CollaborationDAOTest {
     public void changeCollaborationStatusSuccess(){
         System.out.println("changeStateProfessor");
             Collaboration collaboration = new Collaboration();
-            int collaborationId = 42; 
-            String status = "Cerrada";
+            int collaborationId = 50; 
+            String status = "Rechazada";
             
             CollaborationDAO instance = new CollaborationDAO();
             int expectedResult = 1;

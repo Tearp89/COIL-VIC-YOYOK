@@ -70,7 +70,7 @@ public class SearchPendingProfessorsController {
                         Professor professor = getTableView().getItems().get(getIndex());
                         int professorId = professor.getProfessorId();
                         ProfessorDAO professorDAO = new ProfessorDAO();
-                        if(professor.getWorkShop() == "No"){
+                        if(professorDAO.getWorkShopByProfessorId(professorId).equals("No")){
                             Alert noWorkShopAlert = new Alert(AlertType.ERROR);
                             noWorkShopAlert.setHeaderText("Curso-Taller no cursado");
                             noWorkShopAlert.setTitle("No Curso-Taller");
@@ -83,8 +83,10 @@ public class SearchPendingProfessorsController {
                             confirmDeclineAlert.setContentText("¿Está seguro de que desea aceptar al académico?");
                             confirmDeclineAlert.show();
                             ButtonType accept = new ButtonType("Aceptar");
-                            confirmDeclineAlert.getButtonTypes().setAll(accept);
+                            ButtonType cancel = new ButtonType("Cancelar");
+                            confirmDeclineAlert.getButtonTypes().setAll(accept, cancel);
                             Button okButton = (Button) confirmDeclineAlert.getDialogPane().lookupButton(accept); 
+                            Button cancelButton = (Button) confirmDeclineAlert.getDialogPane().lookupButton(cancel);
                             okButton.setOnAction(eventAddProfessorForeign -> {
                                 int result = professorDAO.changeProfessorStatusById("Aceptado", professorId);
                                 if(result == 1){
@@ -104,6 +106,10 @@ public class SearchPendingProfessorsController {
                                 tableViewPendingProfessors.getItems().clear();
                                 loadPendingProfessors();
                             
+                            });
+                            
+                            cancelButton.setOnAction(eventCancelAddProfessor -> {
+                                confirmDeclineAlert.close();
                             });
                         }
                     });
@@ -150,8 +156,10 @@ public class SearchPendingProfessorsController {
                             confirmDeclineAlert.setContentText("¿Está seguro de que desea rechazar al académico?");
                             confirmDeclineAlert.show();
                             ButtonType accept = new ButtonType("Aceptar");
-                            confirmDeclineAlert.getButtonTypes().setAll(accept);
+                            ButtonType cancel = new ButtonType("Cancelar");
+                            confirmDeclineAlert.getButtonTypes().setAll(accept, cancel);
                             Button okButton = (Button) confirmDeclineAlert.getDialogPane().lookupButton(accept); 
+                            Button cancelButton = (Button) confirmDeclineAlert.getDialogPane().lookupButton(cancel);
                             okButton.setOnAction(eventAddProfessorForeign -> {
                                 int result = professorDAO.changeProfessorStatusById("Rechazado", professorId);
                                 if(result == 1){
@@ -170,6 +178,10 @@ public class SearchPendingProfessorsController {
                                 tableViewPendingProfessors.getItems().clear();
                                 loadPendingProfessors();
                                 
+                            });
+
+                            cancelButton.setOnAction(eventCancelDeclineProfessor -> {
+                                confirmDeclineAlert.close();
                             });
                         });
                     }   
@@ -243,7 +255,7 @@ public class SearchPendingProfessorsController {
     private Button buttonProfessors;
     @FXML
     private void goToProfessors(ActionEvent event){
-        FXMLLoader professorOptionsLoader = new FXMLLoader(getClass().getResource("/GUI/adminProfessorsOptions.fxml"));
+        FXMLLoader professorOptionsLoader = new FXMLLoader(getClass().getResource("/GUI/adminProfessorOptions.fxml"));
         ChangeWindowManager.changeWindowTo(event, professorOptionsLoader);
     }
 

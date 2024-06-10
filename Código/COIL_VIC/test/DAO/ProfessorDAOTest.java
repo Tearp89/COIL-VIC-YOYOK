@@ -190,8 +190,8 @@ public class ProfessorDAOTest {
         @Test
         public void changeProfessorStatusByIdSuccess(){
             System.out.println("changeStateProfessor");
-            int professorId = 10;
-            String status = "Aceptado";
+            int professorId = 32;
+            String status = "Pendiente";
             ProfessorDAO instance = new ProfessorDAO();
             int expectedResult = 1;
             int result = instance.changeProfessorStatusById(status, professorId);
