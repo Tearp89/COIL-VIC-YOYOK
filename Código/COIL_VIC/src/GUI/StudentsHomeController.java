@@ -17,7 +17,7 @@ public class StudentsHomeController {
     private Button buttonHome;
     @FXML
     private void goToHomepage(ActionEvent event){
-        FXMLLoader homePagLoader = new FXMLLoader(getClass().getResource("/GUI/studentsHome.fxml"));
+        FXMLLoader homePagLoader = new FXMLLoader(getClass().getResource("/GUI/StudentsHomeWindow.fxml"));
         ChangeWindowManager.changeWindowTo(event, homePagLoader);
     }
 
@@ -39,7 +39,7 @@ public class StudentsHomeController {
     private Button buttonLogout;
     @FXML
     private void logout(ActionEvent event){
-        FXMLLoader loginLoader = new FXMLLoader(getClass().getResource("/GUI/login.fxml"));
+        FXMLLoader loginLoader = new FXMLLoader(getClass().getResource("/GUI/LoginWindow.fxml"));
         try {
             ChangeWindowManager.logout(event, loginLoader);
             UserSessionManager.getInstance().logoutAdmin();
@@ -52,7 +52,7 @@ public class StudentsHomeController {
     private Button buttonGradeCollaboration;
     @FXML
     private void gradeCollaborations(ActionEvent event){
-        FXMLLoader gradeCollaborationsLoader = new FXMLLoader(getClass().getResource("/GUI/studentsFeedbackCollaboration.fxml"));
+        FXMLLoader gradeCollaborationsLoader = new FXMLLoader(getClass().getResource("/GUI/StudentsFeedbackCollaborationWindow.fxml"));
         ChangeWindowManager.changeWindowTo(event, gradeCollaborationsLoader);
 
     }

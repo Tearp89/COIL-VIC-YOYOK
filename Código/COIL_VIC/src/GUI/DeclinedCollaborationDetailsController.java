@@ -23,7 +23,6 @@ import logic.FieldValidator;
 import logic.DAO.CollaborationDAO;
 import logic.classes.Collaboration;
 import logic.classes.Professor;
-import logic.classes.ProfessorAcceptedAlert;
 
 public class DeclinedCollaborationDetailsController {
     private static final org.apache.log4j.Logger LOG = Log.getLogger(DeclinedCollaborationDetailsController.class);
@@ -73,7 +72,7 @@ public class DeclinedCollaborationDetailsController {
 
     @FXML
     private void goToHomePage(ActionEvent event){
-        FXMLLoader homePageLoader = new FXMLLoader(getClass().getResource("/GUI/professorHome.fxml"));
+        FXMLLoader homePageLoader = new FXMLLoader(getClass().getResource("/GUI/ProfessorHomeWindow.fxml"));
         ChangeWindowManager.changeWindowTo(event, homePageLoader);
     }
 
@@ -82,7 +81,7 @@ public class DeclinedCollaborationDetailsController {
 
     @FXML
     private void goToCollaborations(ActionEvent event){
-        FXMLLoader collaborationsOptionsLoader = new FXMLLoader(getClass().getResource("/GUI/collaborationOptions.fxml"));
+        FXMLLoader collaborationsOptionsLoader = new FXMLLoader(getClass().getResource("/GUI/CollaborationOptionsWindow.fxml"));
         ChangeWindowManager.changeWindowTo(event, collaborationsOptionsLoader);
 
 
@@ -93,7 +92,7 @@ public class DeclinedCollaborationDetailsController {
 
     @FXML
     private void goToStudents(ActionEvent event){
-        FXMLLoader studentsLoader = new FXMLLoader(getClass().getResource("/GUI/studentOptions.fxml"));
+        FXMLLoader studentsLoader = new FXMLLoader(getClass().getResource("/GUI/StudentOptionsWindow.fxml"));
         ChangeWindowManager.changeWindowTo(event, studentsLoader);
 
     }
@@ -123,7 +122,7 @@ public class DeclinedCollaborationDetailsController {
 
     @FXML
     private void logOut(ActionEvent event){
-        FXMLLoader loginLoader = new FXMLLoader(getClass().getResource("/GUI/login.fxml"));
+        FXMLLoader loginLoader = new FXMLLoader(getClass().getResource("/GUI/LoginWindow.fxml"));
         try{
             ChangeWindowManager.logout(event, loginLoader);
         } catch (IOException logoutException){
@@ -135,7 +134,7 @@ public class DeclinedCollaborationDetailsController {
     private Button buttonCancel;
     @FXML
     private void cancel(ActionEvent event){
-        FXMLLoader homePageLoader = new FXMLLoader(getClass().getResource("/GUI/collaborationOptions.fxml"));
+        FXMLLoader homePageLoader = new FXMLLoader(getClass().getResource("/GUI/CollaborationOptionsWindow.fxml"));
         ChangeWindowManager.changeWindowTo(event, homePageLoader);
 
     }
@@ -158,7 +157,7 @@ public class DeclinedCollaborationDetailsController {
         Button okButton = (Button) confirmCancelAlert.getDialogPane().lookupButton(acceptCancel);
         Button cancelButton = (Button) confirmCancelAlert.getDialogPane().lookupButton(cancelCancel);
         okButton.setOnAction(eventAcceptCancel -> {
-            FXMLLoader collaborationOptionLoader = new FXMLLoader(getClass().getResource("/GUI/collaborationOptions.fxml"));
+            FXMLLoader collaborationOptionLoader = new FXMLLoader(getClass().getResource("/GUI/CollaborationOptionsWindow.fxml"));
             ChangeWindowManager.changeWindowTo(event, collaborationOptionLoader);
         });
 
@@ -217,7 +216,7 @@ public class DeclinedCollaborationDetailsController {
                 collaborationUpdatedAlert.getButtonTypes().setAll(accept);
                 Button okButton = (Button) collaborationUpdatedAlert.getDialogPane().lookupButton(accept);
                 okButton.setOnAction(eventAcceptEditionConfirmation -> {
-                    FXMLLoader collaborationOptionsLoader = new FXMLLoader(getClass().getResource("/GUI/collaborationOptions.fxml"));
+                    FXMLLoader collaborationOptionsLoader = new FXMLLoader(getClass().getResource("/GUI/CollaborationOptionsWindow.fxml"));
                     ChangeWindowManager.changeWindowTo(event, collaborationOptionsLoader); 
                 });
             }

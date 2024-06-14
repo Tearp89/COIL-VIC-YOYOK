@@ -1,8 +1,6 @@
 package GUI;
 
 import java.io.IOException;
-
-import dataAccess.DatabaseManager;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -18,12 +16,9 @@ import javafx.scene.control.TextArea;
 import log.Log;
 import logic.FieldValidator;
 import logic.DAO.AdminDAO;
-import logic.DAO.CollaborationDAO;
 import logic.DAO.FeedbackDAO;
-import logic.DAO.ProfessorDAO;
 import logic.classes.Admin;
 import logic.classes.Feedback;
-import logic.classes.Professor;
 
 public class AdminGradeCollaborationController {
     private static final org.apache.log4j.Logger LOG = Log.getLogger(AdminGradeCollaborationController.class);
@@ -47,14 +42,14 @@ public class AdminGradeCollaborationController {
     private Button buttonNumeralia;
     @FXML
     private void goToNumeralia(ActionEvent event){
-        FXMLLoader numeraliaLoader = new FXMLLoader(getClass().getResource("/GUI/numeralia.fxml"));
+        FXMLLoader numeraliaLoader = new FXMLLoader(getClass().getResource("/GUI/NumeraliaWindow.fxml"));
         ChangeWindowManager.changeWindowTo(event, numeraliaLoader);
     }
     @FXML
     private Button buttonLogout;
     @FXML
     private void logout(ActionEvent event){
-        FXMLLoader loginLoader = new FXMLLoader(getClass().getResource("/GUI/login.fxml"));
+        FXMLLoader loginLoader = new FXMLLoader(getClass().getResource("/GUI/LoginWindow.fxml"));
         try {
             ChangeWindowManager.logout(event, loginLoader);
             UserSessionManager.getInstance().logoutAdmin();
@@ -67,7 +62,7 @@ public class AdminGradeCollaborationController {
     private Button buttonCollaborations;
     @FXML
     private void goToCollaborations(ActionEvent event){
-        FXMLLoader collaborationOptionsLoader = new FXMLLoader(getClass().getResource("/GUI/adminCollaborationOptions.fxml"));
+        FXMLLoader collaborationOptionsLoader = new FXMLLoader(getClass().getResource("/GUI/AdminCollaborationOptionsWindow.fxml"));
         ChangeWindowManager.changeWindowTo(event, collaborationOptionsLoader);
     }
 
@@ -75,7 +70,7 @@ public class AdminGradeCollaborationController {
     private Button buttonProfessors;
     @FXML
     private void goToProfessors(ActionEvent event){
-        FXMLLoader professorOptionsLoader = new FXMLLoader(getClass().getResource("/GUI/adminProfessorOptions.fxml"));
+        FXMLLoader professorOptionsLoader = new FXMLLoader(getClass().getResource("/GUI/AdminProfessorOptionsWindow.fxml"));
         ChangeWindowManager.changeWindowTo(event, professorOptionsLoader);
     }
 
@@ -83,7 +78,7 @@ public class AdminGradeCollaborationController {
     private Button buttonUniversities;
     @FXML
     private void goToUniversities(ActionEvent event){
-        FXMLLoader universitiesOptionsLoader = new FXMLLoader(getClass().getResource("/GUI/adminUniversityOptions.fxml"));
+        FXMLLoader universitiesOptionsLoader = new FXMLLoader(getClass().getResource("/GUI/AdminUniversityOptionsWindow.fxml"));
         ChangeWindowManager.changeWindowTo(event, universitiesOptionsLoader);
     }
 
@@ -91,7 +86,7 @@ public class AdminGradeCollaborationController {
     private Button buttonHome;
     @FXML
     private void goToHomePage(ActionEvent event){
-        FXMLLoader homePageLoader = new FXMLLoader(getClass().getResource("/GUI/adminHome.fxml"));
+        FXMLLoader homePageLoader = new FXMLLoader(getClass().getResource("/GUI/AdminHomeWindow.fxml"));
         ChangeWindowManager.changeWindowTo(event, homePageLoader);
     }
 
@@ -171,7 +166,7 @@ public class AdminGradeCollaborationController {
         Button okButton = (Button) cancelFeedbackAlert.getDialogPane().lookupButton(acceptCancel);
         Button cancelButton = (Button) cancelFeedbackAlert.getDialogPane().lookupButton(cancelCancel);
         okButton.setOnAction(acceptCancelEvent -> {
-            FXMLLoader collaborationOptionsLoader = new FXMLLoader(getClass().getResource("/GUI/adminCollaborationOptions.fxml"));
+            FXMLLoader collaborationOptionsLoader = new FXMLLoader(getClass().getResource("/GUI/AdminCollaborationOptionsWindow.fxml"));
             ChangeWindowManager.changeWindowTo(event, collaborationOptionsLoader);
         });
 

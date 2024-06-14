@@ -20,7 +20,7 @@ public class MainLogin extends Application{
     @Override
     public void start(Stage primaryStage) throws Exception{
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUI/login.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUI/LoginWindow.fxml"));
         Parent root = loader.load();
 
         LoginController loginController = loader.getController();

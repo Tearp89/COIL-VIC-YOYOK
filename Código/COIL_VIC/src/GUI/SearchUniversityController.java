@@ -80,14 +80,14 @@ public class SearchUniversityController {
     private Button buttonNumeralia;
     @FXML
     private void goToNumeralia(ActionEvent event){
-        FXMLLoader numeraliaLoader = new FXMLLoader(getClass().getResource("/GUI/numeralia.fxml"));
+        FXMLLoader numeraliaLoader = new FXMLLoader(getClass().getResource("/GUI/NumeraliaWindow.fxml"));
         ChangeWindowManager.changeWindowTo(event, numeraliaLoader);
     }
     @FXML
     private Button buttonLogout;
     @FXML
     private void logout(ActionEvent event){
-        FXMLLoader loginLoader = new FXMLLoader(getClass().getResource("/GUI/login.fxml"));
+        FXMLLoader loginLoader = new FXMLLoader(getClass().getResource("/GUI/LoginWindow.fxml"));
         try {
             ChangeWindowManager.logout(event, loginLoader);
             UserSessionManager.getInstance().logoutAdmin();
@@ -100,7 +100,7 @@ public class SearchUniversityController {
     private Button buttonCollaborations;
     @FXML
     private void goToCollaborations(ActionEvent event){
-        FXMLLoader collaborationOptionsLoader = new FXMLLoader(getClass().getResource("/GUI/adminUniversityOptions.fxml"));
+        FXMLLoader collaborationOptionsLoader = new FXMLLoader(getClass().getResource("/GUI/AdminUniversityOptionsWindow.fxml"));
         ChangeWindowManager.changeWindowTo(event, collaborationOptionsLoader);
     }
 
@@ -108,7 +108,7 @@ public class SearchUniversityController {
     private Button buttonProfessors;
     @FXML
     private void goToProfessors(ActionEvent event){
-        FXMLLoader professorOptionsLoader = new FXMLLoader(getClass().getResource("/GUI/adminProfessorsOptions.fxml"));
+        FXMLLoader professorOptionsLoader = new FXMLLoader(getClass().getResource("/GUI/AdminProfessorsOptionsWindow.fxml"));
         ChangeWindowManager.changeWindowTo(event, professorOptionsLoader);
     }
 
@@ -116,7 +116,7 @@ public class SearchUniversityController {
     private Button buttonUniversities;
     @FXML
     private void goToUniversities(ActionEvent event){
-        FXMLLoader universitiesOptionsLoader = new FXMLLoader(getClass().getResource("/GUI/adminUniversityOptions.fxml"));
+        FXMLLoader universitiesOptionsLoader = new FXMLLoader(getClass().getResource("/GUI/AdminUniversityOptionsWindow.fxml"));
         ChangeWindowManager.changeWindowTo(event, universitiesOptionsLoader);
     }
 
@@ -124,7 +124,7 @@ public class SearchUniversityController {
     private Button buttonHome;
     @FXML
     private void goToHomepage(ActionEvent event){
-        FXMLLoader homePageLoader = new FXMLLoader(getClass().getResource("/GUI/adminHome.fxml"));
+        FXMLLoader homePageLoader = new FXMLLoader(getClass().getResource("/GUI/AdminHomeWindow.fxml"));
         ChangeWindowManager.changeWindowTo(event, homePageLoader);
     }
 
@@ -132,7 +132,7 @@ public class SearchUniversityController {
     private Button buttonBack;
     @FXML
     private void goBack(ActionEvent event){
-        FXMLLoader goBackLoader = new FXMLLoader(getClass().getResource("/GUI/adminUniversityOptions.fxml"));
+        FXMLLoader goBackLoader = new FXMLLoader(getClass().getResource("/GUI/AdminUniversityOptionsWindow.fxml"));
         ChangeWindowManager.changeWindowTo(event, goBackLoader);
     }
 
@@ -150,7 +150,7 @@ public class SearchUniversityController {
             University university = tableViewUniversities.getSelectionModel().getSelectedItem();
             if(event.getClickCount() == 1){
                 try{
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUI/universityDetails.fxml"));
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUI/UniversityDetailsWindow.fxml"));
                     Parent root = loader.load();
                     UniversityDetailsController controller = loader.getController();
                     controller.initialize(university.getUniversityId());

@@ -183,7 +183,7 @@ private static final org.apache.log4j.Logger LOG = Log.getLogger(AddProfessorCon
                             registrationRequestAlert.showAndWait();
                             LOG.info("Se envió un correo con las credenciales a: " + email);
 
-                            FXMLLoader addProfessorLoader = new FXMLLoader(getClass().getResource("/GUI/login.fxml"));
+                            FXMLLoader addProfessorLoader = new FXMLLoader(getClass().getResource("/GUI/LoginWindow.fxml"));
                             try {
                                 Parent root = addProfessorLoader.load();
                                 Scene scene = new Scene(root);
@@ -273,7 +273,7 @@ private static final org.apache.log4j.Logger LOG = Log.getLogger(AddProfessorCon
                             registrationRequestAlert.setContentText("Solicitud de registro enviada exitosamente. \nSus credenciales se han enviado por correo. \nEl correo puede tardar unos minutos en llegar.");
                             registrationRequestAlert.showAndWait();
                             LOG.info("Se envió un correo con las credenciales a: " + email);
-                            FXMLLoader addProfessorLoader = new FXMLLoader(getClass().getResource("/GUI/login.fxml"));
+                            FXMLLoader addProfessorLoader = new FXMLLoader(getClass().getResource("/GUI/LoginWindow.fxml"));
                             try {
                                 Parent root = addProfessorLoader.load();
                                 Scene scene = new Scene(root);
@@ -369,7 +369,7 @@ private static final org.apache.log4j.Logger LOG = Log.getLogger(AddProfessorCon
         Button cancelButon = (Button) confirmCancelationAlert.getDialogPane().lookupButton(cancel);
 
         okButton.setOnAction(eventConfirmCanel ->{
-            FXMLLoader addProfessorLoader = new FXMLLoader(getClass().getResource("/GUI/login.fxml"));
+            FXMLLoader addProfessorLoader = new FXMLLoader(getClass().getResource("/GUI/LoginWindow.fxml"));
             try {
             Parent root = addProfessorLoader.load();
             Scene scene = new Scene(root);
