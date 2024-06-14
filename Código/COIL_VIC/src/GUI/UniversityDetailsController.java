@@ -5,9 +5,6 @@ import java.io.IOException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonBar;
@@ -19,8 +16,6 @@ import logic.DAO.UniversityDAO;
 import logic.classes.Admin;
 import logic.classes.University;
 import javafx.scene.control.TextField;
-import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 import log.Log;
 
 public class UniversityDetailsController {
@@ -66,7 +61,7 @@ public class UniversityDetailsController {
         Button okButton = (Button) confirmCancelAlert.getDialogPane().lookupButton(acceptCancel);
         Button cancelButton = (Button) confirmCancelAlert.getDialogPane().lookupButton(cancelCancel);
         okButton.setOnAction(eventAcceptCancel -> {
-            FXMLLoader universityOptionLoader = new FXMLLoader(getClass().getResource("/GUI/AdminUniversityOptions.fxml"));
+            FXMLLoader universityOptionLoader = new FXMLLoader(getClass().getResource("/GUI/AdminUniversityOptionsWindow.fxml"));
             ChangeWindowManager.changeWindowTo(event, universityOptionLoader);
         });
 
@@ -79,7 +74,7 @@ public class UniversityDetailsController {
     private Button buttonBack;
     @FXML
     private void cancel(ActionEvent event){
-        FXMLLoader universityOptionsLoader = new FXMLLoader(getClass().getResource("/GUI/adminUniversityOptions.fxml"));
+        FXMLLoader universityOptionsLoader = new FXMLLoader(getClass().getResource("/GUI/AdminUniversityOptionsWindow.fxml"));
         ChangeWindowManager.changeWindowTo(event, universityOptionsLoader);
 
     }
@@ -95,7 +90,6 @@ public class UniversityDetailsController {
         universityUpdated.setUniversityLanguage(universityLanguage);
         universityUpdated.setUniversityCountry(universityCountry);
         universityUpdated.setUniversityId(universityId);
-        UniversityDAO updateUniversity = new UniversityDAO();
         if(!FieldValidator.onlyTextAndNumbers(universityName) || !FieldValidator.onlyText(universityLanguage) || !FieldValidator.onlyText(universityCountry)){
             Alert emptyFieldsAlert = new Alert(AlertType.ERROR);
             emptyFieldsAlert.setTitle("Campos erroneos");
@@ -149,7 +143,7 @@ public class UniversityDetailsController {
                 Button acceptButton = (Button) confirmCancelAlert.getDialogPane().lookupButton(accept);
                 Button cancelCancelButton = (Button) confirmCancelAlert.getDialogPane().lookupButton(cancel);
                 acceptButton.setOnAction(eventGoBack -> {
-                    FXMLLoader universitiesLoader = new FXMLLoader(getClass().getResource("/GUI/adminUniversityOptions.fxml"));
+                    FXMLLoader universitiesLoader = new FXMLLoader(getClass().getResource("/GUI/AdminUniversityOptionsWindow.fxml"));
                     ChangeWindowManager.changeWindowTo(event, universitiesLoader);
                 });
             
@@ -186,14 +180,14 @@ public class UniversityDetailsController {
     private Button buttonNumeralia;
     @FXML
     private void goToNumeralia(ActionEvent event){
-        FXMLLoader numeraliaLoader = new FXMLLoader(getClass().getResource("/GUI/numeralia.fxml"));
+        FXMLLoader numeraliaLoader = new FXMLLoader(getClass().getResource("/GUI/NumeraliaWindow.fxml"));
         ChangeWindowManager.changeWindowTo(event, numeraliaLoader);
     }
     @FXML
     private Button buttonLogout;
     @FXML
     private void logout(ActionEvent event){
-        FXMLLoader loginLoader = new FXMLLoader(getClass().getResource("/GUI/login.fxml"));
+        FXMLLoader loginLoader = new FXMLLoader(getClass().getResource("/GUI/LoginWindow.fxml"));
         try {
             ChangeWindowManager.logout(event, loginLoader);
             UserSessionManager.getInstance().logoutAdmin();
@@ -206,7 +200,7 @@ public class UniversityDetailsController {
     private Button buttonCollaborations;
     @FXML
     private void goToCollaborations(ActionEvent event){
-        FXMLLoader collaborationOptionsLoader = new FXMLLoader(getClass().getResource("/GUI/adminUniversityOptions.fxml"));
+        FXMLLoader collaborationOptionsLoader = new FXMLLoader(getClass().getResource("/GUI/AdminUniversityOptionsWindow.fxml"));
         ChangeWindowManager.changeWindowTo(event, collaborationOptionsLoader);
     }
 
@@ -214,7 +208,7 @@ public class UniversityDetailsController {
     private Button buttonProfessors;
     @FXML
     private void goToProfessors(ActionEvent event){
-        FXMLLoader professorOptionsLoader = new FXMLLoader(getClass().getResource("/GUI/adminProfessorsOptions.fxml"));
+        FXMLLoader professorOptionsLoader = new FXMLLoader(getClass().getResource("/GUI/AdminProfessorsOptionsWindow.fxml"));
         ChangeWindowManager.changeWindowTo(event, professorOptionsLoader);
     }
 
@@ -222,7 +216,7 @@ public class UniversityDetailsController {
     private Button buttonUniversities;
     @FXML
     private void goToUniversities(ActionEvent event){
-        FXMLLoader universitiesOptionsLoader = new FXMLLoader(getClass().getResource("/GUI/adminUniversityOptions.fxml"));
+        FXMLLoader universitiesOptionsLoader = new FXMLLoader(getClass().getResource("/GUI/AdminUniversityOptionsWindow.fxml"));
         ChangeWindowManager.changeWindowTo(event, universitiesOptionsLoader);
     }
 
@@ -230,7 +224,7 @@ public class UniversityDetailsController {
     private Button buttonHome;
     @FXML
     private void goToHomePage(ActionEvent event){
-        FXMLLoader homePageLoader = new FXMLLoader(getClass().getResource("/GUI/adminHome.fxml"));
+        FXMLLoader homePageLoader = new FXMLLoader(getClass().getResource("/GUI/AdminHomeWindow.fxml"));
         ChangeWindowManager.changeWindowTo(event, homePageLoader);
     }
     @FXML

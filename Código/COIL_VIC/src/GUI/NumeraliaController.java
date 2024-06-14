@@ -206,21 +206,21 @@ public class NumeraliaController {
         if (file != null) {
             try {
                 SaveToFile.exportTwoTablesToExcel(regionTable, "Tabla de Región", academicAreaTable, "Tabla por Área Academica", file.getAbsolutePath());
-            } catch (IOException notsavedException){
-                LOG.error(notsavedException);
+            } catch (IOException fileNotSavedException){
+                LOG.error(fileNotSavedException);
             }
         }
     }
 
     @FXML
     private void gotoHome(ActionEvent event){
-        FXMLLoader homeLoader = new FXMLLoader(getClass().getResource("/GUI/adminHome.fxml"));
+        FXMLLoader homeLoader = new FXMLLoader(getClass().getResource("/GUI/AdminHomeWindow.fxml"));
         ChangeWindowManager.changeWindowTo(event, homeLoader);
     }
 
     @FXML
     private void logout(ActionEvent event){
-        FXMLLoader loginLoader = new FXMLLoader(getClass().getResource("/GUI/login.fxml"));
+        FXMLLoader loginLoader = new FXMLLoader(getClass().getResource("/GUI/LoginWindow.fxml"));
         try {
             ChangeWindowManager.logout(event, loginLoader);
             UserSessionManager.getInstance().logoutAdmin();
@@ -231,19 +231,19 @@ public class NumeraliaController {
 
     @FXML
     private void goToUniversities(ActionEvent event){
-        FXMLLoader universitiesOptionsLoader = new FXMLLoader(getClass().getResource("/GUI/adminUniversityOptions.fxml"));
+        FXMLLoader universitiesOptionsLoader = new FXMLLoader(getClass().getResource("/GUI/AdminUniversityOptionsWindow.fxml"));
         ChangeWindowManager.changeWindowTo(event, universitiesOptionsLoader);
     }
 
     @FXML
     private void goToProfessors(ActionEvent event){
-        FXMLLoader professorOptionsLoader = new FXMLLoader(getClass().getResource("/GUI/adminProfessorOptions.fxml"));
+        FXMLLoader professorOptionsLoader = new FXMLLoader(getClass().getResource("/GUI/AdminProfessorOptionsWindow.fxml"));
         ChangeWindowManager.changeWindowTo(event, professorOptionsLoader);
     }
 
     @FXML
     private void goToCollaborations(ActionEvent event){
-        FXMLLoader collaborationOptionsLoader = new FXMLLoader(getClass().getResource("/GUI/adminCollaborationOptions.fxml"));
+        FXMLLoader collaborationOptionsLoader = new FXMLLoader(getClass().getResource("/GUI/AdminCollaborationOptionsWindow.fxml"));
         ChangeWindowManager.changeWindowTo(event, collaborationOptionsLoader);
     }
 }

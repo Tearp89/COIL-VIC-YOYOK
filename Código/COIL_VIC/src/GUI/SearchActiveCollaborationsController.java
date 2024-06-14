@@ -60,10 +60,7 @@ public class SearchActiveCollaborationsController {
 
     @FXML
     private void initialize(){
-        loadActiveCollaborations();
-        
-
-        
+        loadActiveCollaborations();  
     }
 
 }

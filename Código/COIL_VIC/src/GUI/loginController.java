@@ -57,6 +57,7 @@ public class LoginController {
             DatabaseConnectionChecker.showNoConnectionDialog();
             buttonAddProfessor.setDisable(true);
             buttonLogin.setDisable(true);
+            return;
         }
         LoginDAO instance = new LoginDAO();
         String user = textFieldUser.getText();
@@ -76,7 +77,7 @@ public class LoginController {
             
 
             try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUI/adminHome.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUI/AdminHomeWindow.fxml"));
                 Parent root = loader.load();
 
                 Scene scene = new Scene(root);
@@ -102,7 +103,7 @@ public class LoginController {
                 stage = (Stage) source.getScene().getWindow();
                 stage.close();
                 try{
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUI/professorHome.fxml"));
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUI/ProfessorHomeWindow.fxml"));
                     Parent root = loader.load();
                     Scene scene = new Scene(root);
                     Stage newStage = new Stage();
@@ -130,7 +131,7 @@ public class LoginController {
             stage = (Stage) source.getScene().getWindow();
             stage.close();
             try{
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUI/studentsHome.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUI/StudentsHomeWindow.fxml"));
                 Parent root = loader.load();
 
                 Scene scene = new Scene(root);
@@ -160,7 +161,7 @@ public class LoginController {
             buttonAddProfessor.setDisable(true);
             buttonLogin.setDisable(true);
         }
-        FXMLLoader addProfessorLoader = new FXMLLoader(getClass().getResource("/GUI/addProfessor.fxml"));
+        FXMLLoader addProfessorLoader = new FXMLLoader(getClass().getResource("/GUI/AddProfessorWindow.fxml"));
         ChangeWindowManager.changeWindowTo(event, addProfessorLoader);
     }
 

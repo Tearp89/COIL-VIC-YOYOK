@@ -1,20 +1,13 @@
 package GUI;
 
 import java.io.IOException;
-
-import javafx.beans.Observable;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
-import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 import log.Log;
 import logic.classes.Admin;
 
@@ -28,26 +21,21 @@ public class RequestsController {
     @FXML
     private void answerRequest(ActionEvent event){
         if(comboBoxRequestType.getSelectionModel().getSelectedItem() == "Académico"){
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUI/searchPendingProfessor.fxml"));
-                ChangeWindowManager.changeWindowTo(event, loader);;
-           
-            
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUI/SearchPendingProfessorWindow.fxml"));
+            ChangeWindowManager.changeWindowTo(event, loader);;
             
 
-        }else{
-           
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUI/searchPendingCollaborations.fxml"));
-                ChangeWindowManager.changeWindowTo(event, loader);
-                
-
+        }else{   
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUI/SearchPendingCollaborationsWindow.fxml"));
+            ChangeWindowManager.changeWindowTo(event, loader);
+        }
     }
-}
 
-@FXML
-private Button buttonCancel;
+    @FXML
+    private Button buttonCancel;
     @FXML
     private void cancelAnswer(ActionEvent event){
-        FXMLLoader requestsLoader = new FXMLLoader(getClass().getResource("/GUI/requests.fxml"));
+        FXMLLoader requestsLoader = new FXMLLoader(getClass().getResource("/GUI/RequestsWindow.fxml"));
         ChangeWindowManager.changeWindowTo(event, requestsLoader);
 
     }
@@ -72,14 +60,15 @@ private Button buttonCancel;
     private Button buttonNumeralia;
     @FXML
     private void goToNumeralia(ActionEvent event){
-        FXMLLoader numeraliaLoader = new FXMLLoader(getClass().getResource("/GUI/numeralia.fxml"));
+        FXMLLoader numeraliaLoader = new FXMLLoader(getClass().getResource("/GUI/NumeraliaWindow.fxml"));
         ChangeWindowManager.changeWindowTo(event, numeraliaLoader);
     }
+
     @FXML
     private Button buttonLogout;
     @FXML
     private void logout(ActionEvent event){
-        FXMLLoader loginLoader = new FXMLLoader(getClass().getResource("/GUI/login.fxml"));
+        FXMLLoader loginLoader = new FXMLLoader(getClass().getResource("/GUI/LoginWindow.fxml"));
         try {
             ChangeWindowManager.logout(event, loginLoader);
             UserSessionManager.getInstance().logoutAdmin();
@@ -92,7 +81,7 @@ private Button buttonCancel;
     private Button buttonCollaborations;
     @FXML
     private void goToCollaborations(ActionEvent event){
-        FXMLLoader collaborationOptionsLoader = new FXMLLoader(getClass().getResource("/GUI/adminCollaborationOptions.fxml"));
+        FXMLLoader collaborationOptionsLoader = new FXMLLoader(getClass().getResource("/GUI/AdminCollaborationOptionsWindow.fxml"));
         ChangeWindowManager.changeWindowTo(event, collaborationOptionsLoader);
     }
 
@@ -100,7 +89,7 @@ private Button buttonCancel;
     private Button buttonProfessors;
     @FXML
     private void goToProfessors(ActionEvent event){
-        FXMLLoader professorOptionsLoader = new FXMLLoader(getClass().getResource("/GUI/adminProfessorOptions.fxml"));
+        FXMLLoader professorOptionsLoader = new FXMLLoader(getClass().getResource("/GUI/AdminProfessorOptionsWindow.fxml"));
         ChangeWindowManager.changeWindowTo(event, professorOptionsLoader);
     }
 
@@ -108,7 +97,7 @@ private Button buttonCancel;
     private Button buttonUniversities;
     @FXML
     private void goToUniversities(ActionEvent event){
-        FXMLLoader universitiesOptionsLoader = new FXMLLoader(getClass().getResource("/GUI/adminUniversityOptions.fxml"));
+        FXMLLoader universitiesOptionsLoader = new FXMLLoader(getClass().getResource("/GUI/AdminUniversityOptionsWindow.fxml"));
         ChangeWindowManager.changeWindowTo(event, universitiesOptionsLoader);
     }
 
@@ -116,15 +105,9 @@ private Button buttonCancel;
     private Button buttonHome;
     @FXML
     private void goToHomepage(ActionEvent event){
-        FXMLLoader homePageLoader = new FXMLLoader(getClass().getResource("/GUI/adminHome.fxml"));
+        FXMLLoader homePageLoader = new FXMLLoader(getClass().getResource("/GUI/AdminHomeWindow.fxml"));
         ChangeWindowManager.changeWindowTo(event, homePageLoader);
     }
-
-
-
-
-
-
 
     @FXML
     private Label labelUser;

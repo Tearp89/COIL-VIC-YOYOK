@@ -2,10 +2,7 @@
 
 
     import java.io.IOException;
-    import java.sql.SQLException;
     import java.time.LocalDate;
-
-    import javafx.beans.Observable;
     import javafx.collections.ObservableList;
     import javafx.event.ActionEvent;
     import javafx.fxml.FXML;
@@ -19,11 +16,11 @@
     import javafx.scene.control.TextArea;
     import javafx.scene.control.TextField;
     import javafx.scene.control.TextFormatter;
-import javafx.scene.input.KeyEvent;
-import log.Log;
+    import javafx.scene.input.KeyEvent;
+    import log.Log;
     import javafx.scene.control.Alert.AlertType;
-import logic.FieldValidator;
-import logic.DAO.CollaborationDAO;
+    import logic.FieldValidator;
+    import logic.DAO.CollaborationDAO;
     import logic.DAO.ProfessorDAO;
     import logic.classes.Collaboration;
     import logic.classes.Professor;
@@ -131,7 +128,7 @@ import logic.DAO.CollaborationDAO;
 
     @FXML
     private void goToHomePage(ActionEvent event){
-        FXMLLoader homePageLoader = new FXMLLoader(getClass().getResource("/GUI/professorHome.fxml"));
+        FXMLLoader homePageLoader = new FXMLLoader(getClass().getResource("/GUI/ProfessorHomeWindow.fxml"));
         ChangeWindowManager.changeWindowTo(event, homePageLoader);
     }
 
@@ -140,7 +137,7 @@ import logic.DAO.CollaborationDAO;
 
     @FXML
     private void goToCollaborations(ActionEvent event){
-        FXMLLoader collaborationsOptionsLoader = new FXMLLoader(getClass().getResource("/GUI/collaborationOptions.fxml"));
+        FXMLLoader collaborationsOptionsLoader = new FXMLLoader(getClass().getResource("/GUI/CollaborationOptionsWindow.fxml"));
         ChangeWindowManager.changeWindowTo(event, collaborationsOptionsLoader);
 
 
@@ -151,7 +148,7 @@ import logic.DAO.CollaborationDAO;
 
     @FXML
     private void goToStudents(ActionEvent event){
-        FXMLLoader studentsLoader = new FXMLLoader(getClass().getResource("/GUI/studentOptions.fxml"));
+        FXMLLoader studentsLoader = new FXMLLoader(getClass().getResource("/GUI/StudentOptionsWindow.fxml"));
         ChangeWindowManager.changeWindowTo(event, studentsLoader);
 
     }
@@ -161,7 +158,7 @@ import logic.DAO.CollaborationDAO;
 
     @FXML
     private void goToSettings(ActionEvent event){
-        FXMLLoader settingsLoader = new FXMLLoader(getClass().getResource("/GUI/professorSettings.fxml"));
+        FXMLLoader settingsLoader = new FXMLLoader(getClass().getResource("/GUI/ProfessorSettingsWindow.fxml"));
         ChangeWindowManager.changeWindowTo(event, settingsLoader);
 
 
@@ -186,7 +183,7 @@ import logic.DAO.CollaborationDAO;
 
     @FXML
     private void cancel(ActionEvent  event){
-        FXMLLoader collaborationsSectionLoader = new FXMLLoader(getClass().getResource("/GUI/collaborationOptions.fxml"));
+        FXMLLoader collaborationsSectionLoader = new FXMLLoader(getClass().getResource("/GUI/CollaborationOptionsWindow.fxml"));
         ChangeWindowManager.changeWindowTo(event, collaborationsSectionLoader);
     }
 
@@ -195,7 +192,7 @@ import logic.DAO.CollaborationDAO;
 
     @FXML
     private void logOut(ActionEvent event){
-        FXMLLoader loginLoader = new FXMLLoader(getClass().getResource("/GUI/login.fxml"));
+        FXMLLoader loginLoader = new FXMLLoader(getClass().getResource("/GUI/LoginWindow.fxml"));
         try{
             ChangeWindowManager.logout(event, loginLoader);
         } catch (IOException logoutException){
