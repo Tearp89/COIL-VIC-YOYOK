@@ -81,6 +81,7 @@ private static final org.apache.log4j.Logger LOG = Log.getLogger(AddProfessorCon
 
 
     void addUniversity(String universityName, String universityCountry, String language){
+        
         UniversityDAO universityDAO = new UniversityDAO();
         if (!universityDAO.isUniversityRegistered(universityName) && FieldValidator.onlyText(language) && FieldValidator.onlyText(universityCountry) && FieldValidator.onlyText(universityName)) {
             University university = new University();

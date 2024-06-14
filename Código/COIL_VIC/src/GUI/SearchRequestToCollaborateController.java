@@ -66,6 +66,9 @@ public class SearchRequestToCollaborateController {
             final TableCell<Professor, Void> cell = new TableCell<Professor, Void>() {
                 private final Button acceptButton = new Button("Aceptar"); {
                     acceptButton.setOnAction((ActionEvent event) -> {
+                        if(!DatabaseConnectionChecker.isDatabaseConnected()){
+                            DatabaseConnectionChecker.showNoConnectionDialog();
+                        }
                         ProfessorDAO professorDAO = new ProfessorDAO();
                         Professor professorData = new Professor();
                         professorData = UserSessionManager.getInstance().getProfessorUserData();

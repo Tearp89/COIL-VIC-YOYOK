@@ -146,7 +146,7 @@ public class ActivityDAO implements IActivity {
         }
         return activities;
     }
-    //TODO: Test
+    
     public boolean isActivityAssignedInWeek(int collaborationId, String week) {
         DatabaseManager dbManager = new DatabaseManager();
         String query = "SELECT COUNT(*) FROM actividad a " +
@@ -162,7 +162,7 @@ public class ActivityDAO implements IActivity {
                 }
             }
         } catch (SQLException e) {
-            e.printStackTrace(); 
+            LOG.error("ERROR:", e); 
         }
         return false;
     }
@@ -183,7 +183,7 @@ public class ActivityDAO implements IActivity {
                 }
             }
         } catch (SQLException e) {
-            e.printStackTrace(); 
+            LOG.error("ERROR:", e); 
         }
         return false;
     }
@@ -201,7 +201,7 @@ public class ActivityDAO implements IActivity {
                 }
             }
         } catch (SQLException e) {
-            e.printStackTrace(); 
+            LOG.error("ERROR:", e); 
         }
         return type;
     }
@@ -219,7 +219,7 @@ public class ActivityDAO implements IActivity {
                 }
             }
         } catch (SQLException e) {
-            e.printStackTrace(); 
+            LOG.error("ERROR:", e); 
         }
         return week;
     }
