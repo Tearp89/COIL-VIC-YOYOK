@@ -141,7 +141,7 @@ public class SearchRequestToCollaborateController {
 
     @FXML
     private void goToHomepage(ActionEvent event){
-        FXMLLoader homePageLoader = new FXMLLoader(getClass().getResource("/GUI/professorHome.fxml"));
+        FXMLLoader homePageLoader = new FXMLLoader(getClass().getResource("/GUI/ProfessorHomeWindow.fxml"));
         ChangeWindowManager.changeWindowTo(event, homePageLoader);
     }
 
@@ -150,7 +150,7 @@ public class SearchRequestToCollaborateController {
 
     @FXML
     private void goToCollaborations(ActionEvent event){
-        FXMLLoader collaborationsLoader = new FXMLLoader(getClass().getResource("/GUI/collaborationOptions.fxml"));
+        FXMLLoader collaborationsLoader = new FXMLLoader(getClass().getResource("/GUI/CollaborationOptionsWindow.fxml"));
         ChangeWindowManager.changeWindowTo(event, collaborationsLoader);
 
     }
@@ -159,7 +159,7 @@ public class SearchRequestToCollaborateController {
     
     @FXML
     private void goToStudents(ActionEvent event){
-        FXMLLoader goToStudentsLoader = new FXMLLoader(getClass().getResource("/GUI/studentOptions.fxml"));
+        FXMLLoader goToStudentsLoader = new FXMLLoader(getClass().getResource("/GUI/StudentOptionsWindow.fxml"));
         ChangeWindowManager.changeWindowTo(event, goToStudentsLoader);
 
     }
@@ -168,7 +168,7 @@ public class SearchRequestToCollaborateController {
 
     @FXML
     private void goToSettings(ActionEvent event){
-        FXMLLoader settingsLoader = new FXMLLoader(getClass().getResource("/GUI/professorSettings.fxml"));
+        FXMLLoader settingsLoader = new FXMLLoader(getClass().getResource("/GUI/ProfessorSettingsWindow.fxml"));
         ChangeWindowManager.changeWindowTo(event, settingsLoader);
 
     }
@@ -187,13 +187,11 @@ public class SearchRequestToCollaborateController {
         ChangeWindowManager.closeWindow(event);
     }
 
-   
-
     @FXML
     private Button buttonBack;
     @FXML
     private void goBack(ActionEvent event){
-        FXMLLoader studentOptionsLoader = new FXMLLoader(getClass().getResource("/GUI/collaborationOptions.fxml"));
+        FXMLLoader studentOptionsLoader = new FXMLLoader(getClass().getResource("/GUI/CollaborationOptionsWindow.fxml"));
         ChangeWindowManager.changeWindowTo(event, studentOptionsLoader);
     }
 
@@ -201,7 +199,7 @@ public class SearchRequestToCollaborateController {
     private Button buttonLogout;
     @FXML
     private void logout(ActionEvent event){
-        FXMLLoader loginLoader = new FXMLLoader(getClass().getResource("/GUI/login.fxml"));
+        FXMLLoader loginLoader = new FXMLLoader(getClass().getResource("/GUI/LoginWindow.fxml"));
         try {
             ChangeWindowManager.logout(event, loginLoader);
             UserSessionManager.getInstance().logoutAdmin();

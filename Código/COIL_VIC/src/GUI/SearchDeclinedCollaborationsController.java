@@ -1,11 +1,7 @@
 package GUI;
 
 import java.io.IOException;
-import java.sql.SQLDataException;
 import java.util.ArrayList;
-
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -14,15 +10,11 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
-import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import javafx.util.Callback;
 import log.Log;
 import logic.DAO.CollaborationDAO;
 import logic.DAO.ProfessorDAO;
@@ -47,7 +39,7 @@ public class SearchDeclinedCollaborationsController {
     @FXML
     private TextField textFieldSearch; 
 
-  
+
 
     public void loadDeclinedCollaboration(){
         CollaborationDAO declinedCollaborations = new CollaborationDAO();
@@ -82,7 +74,7 @@ public class SearchDeclinedCollaborationsController {
 
     @FXML
     private void goToHomePage(ActionEvent event){
-        FXMLLoader homePageLoader = new FXMLLoader(getClass().getResource("/GUI/professorHome.fxml"));
+        FXMLLoader homePageLoader = new FXMLLoader(getClass().getResource("/GUI/ProfessorHomeWindow.fxml"));
         ChangeWindowManager.changeWindowTo(event, homePageLoader);
     }
 
@@ -91,7 +83,7 @@ public class SearchDeclinedCollaborationsController {
 
     @FXML
     private void goToCollaborations(ActionEvent event){
-        FXMLLoader collaborationsOptionsLoader = new FXMLLoader(getClass().getResource("/GUI/collaborationOptions.fxml"));
+        FXMLLoader collaborationsOptionsLoader = new FXMLLoader(getClass().getResource("/GUI/CollaborationOptionsWindow.fxml"));
         ChangeWindowManager.changeWindowTo(event, collaborationsOptionsLoader);
 
 
@@ -102,7 +94,7 @@ public class SearchDeclinedCollaborationsController {
 
     @FXML
     private void goToStudents(ActionEvent event){
-        FXMLLoader studentsLoader = new FXMLLoader(getClass().getResource("/GUI/studentOptions.fxml"));
+        FXMLLoader studentsLoader = new FXMLLoader(getClass().getResource("/GUI/StudentOptionsWindow.fxml"));
         ChangeWindowManager.changeWindowTo(event, studentsLoader);
 
     }
@@ -127,12 +119,12 @@ public class SearchDeclinedCollaborationsController {
         ChangeWindowManager.closeWindow(event);
     }
 
-     @FXML
+    @FXML
     private Button buttonLogout;
 
     @FXML
     private void logOut(ActionEvent event){
-        FXMLLoader loginLoader = new FXMLLoader(getClass().getResource("/GUI/login.fxml"));
+        FXMLLoader loginLoader = new FXMLLoader(getClass().getResource("/GUI/LoginWindow.fxml"));
         try{
             ChangeWindowManager.logout(event, loginLoader);
         } catch (IOException logoutException){
@@ -144,7 +136,7 @@ public class SearchDeclinedCollaborationsController {
     private Button buttonCancel;
     @FXML
     private void cancel(ActionEvent event){
-        FXMLLoader homePageLoader = new FXMLLoader(getClass().getResource("/GUI/collaborationOptions.fxml"));
+        FXMLLoader homePageLoader = new FXMLLoader(getClass().getResource("/GUI/CollaborationOptionsWindow.fxml"));
         ChangeWindowManager.changeWindowTo(event, homePageLoader);
 
     }
@@ -164,7 +156,7 @@ public class SearchDeclinedCollaborationsController {
             Collaboration declinedCollaboration = tableViewDeclinedCollaborations.getSelectionModel().getSelectedItem();
             if(declinedCollaboration != null){
                 try {
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("DeclinedCollaborationDetails.fxml"));
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("DeclinedCollaborationDetailsWindow.fxml"));
                     Parent root = loader.load();
                     DeclinedCollaborationDetailsController controller = loader.getController();
                     controller.initialize(declinedCollaboration.getCollaborationId());

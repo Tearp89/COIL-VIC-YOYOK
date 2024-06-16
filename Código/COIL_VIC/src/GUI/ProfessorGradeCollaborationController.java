@@ -1,8 +1,6 @@
 package GUI;
 
 import java.io.IOException;
-
-import javafx.beans.Observable;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -16,9 +14,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.Alert.AlertType;
 import log.Log;
-import logic.EmailControl;
 import logic.FieldValidator;
-import logic.DAO.CollaborationDAO;
 import logic.DAO.FeedbackDAO;
 import logic.DAO.ProfessorDAO;
 import logic.classes.Feedback;
@@ -31,7 +27,7 @@ public class ProfessorGradeCollaborationController {
 
     @FXML
     private void goToHomePage(ActionEvent event){
-        FXMLLoader homePageLoader = new FXMLLoader(getClass().getResource("/GUI/professorHome.fxml"));
+        FXMLLoader homePageLoader = new FXMLLoader(getClass().getResource("/GUI/ProfessorHomeWindow.fxml"));
         ChangeWindowManager.changeWindowTo(event, homePageLoader);
     }
 
@@ -40,7 +36,7 @@ public class ProfessorGradeCollaborationController {
 
     @FXML
     private void goToCollaborations(ActionEvent event){
-        FXMLLoader collaborationsOptionsLoader = new FXMLLoader(getClass().getResource("/GUI/collaborationOptions.fxml"));
+        FXMLLoader collaborationsOptionsLoader = new FXMLLoader(getClass().getResource("/GUI/CollaborationOptionsWindow.fxml"));
         ChangeWindowManager.changeWindowTo(event, collaborationsOptionsLoader);
 
 
@@ -51,7 +47,7 @@ public class ProfessorGradeCollaborationController {
 
     @FXML
     private void goToStudents(ActionEvent event){
-        FXMLLoader studentsLoader = new FXMLLoader(getClass().getResource("/GUI/studentOptions.fxml"));
+        FXMLLoader studentsLoader = new FXMLLoader(getClass().getResource("/GUI/StudentOptionsWindow.fxml"));
         ChangeWindowManager.changeWindowTo(event, studentsLoader);
 
     }
@@ -61,7 +57,7 @@ public class ProfessorGradeCollaborationController {
 
     @FXML
     private void goToSettings(ActionEvent event){
-        FXMLLoader settingsLoader = new FXMLLoader(getClass().getResource("/GUI/professorSettings.fxml"));
+        FXMLLoader settingsLoader = new FXMLLoader(getClass().getResource("/GUI/ProfessorSettingsWindow.fxml"));
         ChangeWindowManager.changeWindowTo(event, settingsLoader);
 
     }
@@ -83,7 +79,7 @@ public class ProfessorGradeCollaborationController {
 
     @FXML
     private void logout(ActionEvent event){
-        FXMLLoader loginLoader = new FXMLLoader(getClass().getResource("/GUI/login.fxml"));
+        FXMLLoader loginLoader = new FXMLLoader(getClass().getResource("/GUI/LoginWindow.fxml"));
         try{
             ChangeWindowManager.logout(event, loginLoader);
         } catch (IOException logoutException){
@@ -95,7 +91,7 @@ public class ProfessorGradeCollaborationController {
     private Button buttonCancel;
     @FXML
     private void cancel(ActionEvent event){
-        FXMLLoader homePageLoader = new FXMLLoader(getClass().getResource("/GUI/collaborationOptions.fxml"));
+        FXMLLoader homePageLoader = new FXMLLoader(getClass().getResource("/GUI/CollaborationOptionsWindow.fxml"));
         ChangeWindowManager.changeWindowTo(event, homePageLoader);
 
     }
@@ -179,7 +175,7 @@ public class ProfessorGradeCollaborationController {
         Button okButton = (Button) cancelFeedbackAlert.getDialogPane().lookupButton(acceptCancel);
         Button cancelButton = (Button) cancelFeedbackAlert.getDialogPane().lookupButton(cancelCancel);
         okButton.setOnAction(acceptCancelEvent -> {
-            FXMLLoader collaborationOptionsLoader = new FXMLLoader(getClass().getResource("/GUI/collaborationOptions.fxml"));
+            FXMLLoader collaborationOptionsLoader = new FXMLLoader(getClass().getResource("/GUI/CollaborationOptionsWindow.fxml"));
             ChangeWindowManager.changeWindowTo(event, collaborationOptionsLoader);
         });
 
@@ -209,10 +205,8 @@ public class ProfessorGradeCollaborationController {
         professorData = UserSessionManager.getInstance().getProfessorUserData();
         labelUser.setText(professorData.getName());
         this.collaborationId = collaborationId;
-        CollaborationDAO collaborationDAO = new CollaborationDAO();
         String comments = textAreaComments.getText();
         String grade = comboBoxGrade.getSelectionModel().getSelectedItem();
-        String collaborationName = collaborationDAO.getCollaborationNameById(collaborationId);
         if(!FieldValidator.onlyText(comments) || !FieldValidator.onlyNumber(grade)){
             buttonSendFeedback.setDisable(true);
         } else {

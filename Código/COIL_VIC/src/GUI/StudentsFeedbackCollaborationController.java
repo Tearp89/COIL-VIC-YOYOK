@@ -16,9 +16,7 @@ import javafx.scene.control.TableView;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import log.Log;
-import logic.DAO.AdminDAO;
 import logic.DAO.CollaborationDAO;
-import logic.classes.Admin;
 import logic.classes.Collaboration;
 import logic.classes.Student;
 
@@ -71,7 +69,7 @@ public class StudentsFeedbackCollaborationController {
     private Button buttonLogout;
     @FXML
     private void logout(ActionEvent event){
-        FXMLLoader loginLoader = new FXMLLoader(getClass().getResource("/GUI/login.fxml"));
+        FXMLLoader loginLoader = new FXMLLoader(getClass().getResource("/GUI/LoginWindow.fxml"));
         try {
             ChangeWindowManager.logout(event, loginLoader);
             UserSessionManager.getInstance().logoutAdmin();
@@ -84,7 +82,7 @@ public class StudentsFeedbackCollaborationController {
     private Button buttonHome;
     @FXML
     private void goToHomepage(ActionEvent event){
-        FXMLLoader homePageLoader = new FXMLLoader(getClass().getResource("/GUI/studentsHome.fxml"));
+        FXMLLoader homePageLoader = new FXMLLoader(getClass().getResource("/GUI/StudentsHomeWindow.fxml"));
         ChangeWindowManager.changeWindowTo(event, homePageLoader);
     }
 
@@ -92,7 +90,7 @@ public class StudentsFeedbackCollaborationController {
     private Button buttonBack;
     @FXML
     private void goBack(ActionEvent event){
-        FXMLLoader goBackLoader = new FXMLLoader(getClass().getResource("/GUI/studentsHome.fxml"));
+        FXMLLoader goBackLoader = new FXMLLoader(getClass().getResource("/GUI/StudentsHomeWindow.fxml"));
         ChangeWindowManager.changeWindowTo(event, goBackLoader);
     }
 
@@ -108,7 +106,7 @@ public class StudentsFeedbackCollaborationController {
                 Collaboration closedCollaboration = tableViewClosedCollaborations.getSelectionModel().getSelectedItem();
                 if(closedCollaboration != null){
                     try{
-                        FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUI/studentGradeCollaboration.fxml"));
+                        FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUI/StudentGradeCollaborationWindow.fxml"));
                         Parent root = loader.load();
                         StudentGradeCollaborationController controller = loader.getController();
                         controller.initialize(closedCollaboration.getCollaborationId());

@@ -12,13 +12,10 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import log.Log;
 import logic.FieldValidator;
-import logic.DAO.AdminDAO;
 import logic.DAO.FeedbackDAO;
-import logic.classes.Admin;
 import logic.classes.Feedback;
 import logic.classes.Student;
 
@@ -43,7 +40,7 @@ public class StudentGradeCollaborationController {
     private Button buttonLogout;
     @FXML
     private void logout(ActionEvent event){
-        FXMLLoader loginLoader = new FXMLLoader(getClass().getResource("/GUI/login.fxml"));
+        FXMLLoader loginLoader = new FXMLLoader(getClass().getResource("/GUI/LoginWindow.fxml"));
         try {
             ChangeWindowManager.logout(event, loginLoader);
             UserSessionManager.getInstance().logoutAdmin();
@@ -57,7 +54,7 @@ public class StudentGradeCollaborationController {
     private Button buttonHome;
     @FXML
     private void goToHomePage(ActionEvent event){
-        FXMLLoader homePageLoader = new FXMLLoader(getClass().getResource("/GUI/studentsHome.fxml"));
+        FXMLLoader homePageLoader = new FXMLLoader(getClass().getResource("/GUI/StudentsHomeWindow.fxml"));
         ChangeWindowManager.changeWindowTo(event, homePageLoader);
     }
 
@@ -133,7 +130,7 @@ public class StudentGradeCollaborationController {
         Button okButton = (Button) cancelFeedbackAlert.getDialogPane().lookupButton(acceptCancel);
         Button cancelButton = (Button) cancelFeedbackAlert.getDialogPane().lookupButton(cancelCancel);
         okButton.setOnAction(acceptCancelEvent -> {
-            FXMLLoader collaborationOptionsLoader = new FXMLLoader(getClass().getResource("/GUI/adminCollaborationOptions.fxml"));
+            FXMLLoader collaborationOptionsLoader = new FXMLLoader(getClass().getResource("/GUI/AdminCollaborationOptionsWindow.fxml"));
             ChangeWindowManager.changeWindowTo(event, collaborationOptionsLoader);
         });
 

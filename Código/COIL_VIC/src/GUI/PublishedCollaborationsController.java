@@ -7,7 +7,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -16,7 +15,6 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 import javafx.stage.StageStyle;
 import log.Log;
 import logic.DAO.CollaborationDAO;
@@ -71,7 +69,7 @@ public class PublishedCollaborationsController {
 
     @FXML
     private void goToHomePage(ActionEvent event){
-        FXMLLoader homePageLoader = new FXMLLoader(getClass().getResource("/GUI/professorHome.fxml"));
+        FXMLLoader homePageLoader = new FXMLLoader(getClass().getResource("/GUI/ProfessorHomeWindow.fxml"));
         ChangeWindowManager.changeWindowTo(event, homePageLoader);
     }
 
@@ -80,7 +78,7 @@ public class PublishedCollaborationsController {
 
     @FXML
     private void goToCollaborations(ActionEvent event){
-        FXMLLoader collaborationsOptionsLoader = new FXMLLoader(getClass().getResource("/GUI/collaborationOptions.fxml"));
+        FXMLLoader collaborationsOptionsLoader = new FXMLLoader(getClass().getResource("/GUI/CollaborationOptionsWindow.fxml"));
         ChangeWindowManager.changeWindowTo(event, collaborationsOptionsLoader);
 
 
@@ -91,7 +89,7 @@ public class PublishedCollaborationsController {
 
     @FXML
     private void goToStudents(ActionEvent event){
-        FXMLLoader studentsLoader = new FXMLLoader(getClass().getResource("/GUI/studentOptions.fxml"));
+        FXMLLoader studentsLoader = new FXMLLoader(getClass().getResource("/GUI/StudentOptionsWindow.fxml"));
         ChangeWindowManager.changeWindowTo(event, studentsLoader);
 
     }
@@ -101,7 +99,7 @@ public class PublishedCollaborationsController {
 
     @FXML
     private void goToSettings(ActionEvent event){
-        FXMLLoader settingsLoader = new FXMLLoader(getClass().getResource("/GUI/professorSettings.fxml"));
+        FXMLLoader settingsLoader = new FXMLLoader(getClass().getResource("/GUI/ProfessorSettingsWindow.fxml"));
         ChangeWindowManager.changeWindowTo(event, settingsLoader);
 
     }
@@ -123,7 +121,7 @@ public class PublishedCollaborationsController {
 
     @FXML
     private void logOut(ActionEvent event){
-        FXMLLoader loginLoader = new FXMLLoader(getClass().getResource("/GUI/login.fxml"));
+        FXMLLoader loginLoader = new FXMLLoader(getClass().getResource("/GUI/LoginWindow.fxml"));
         try{
             ChangeWindowManager.logout(event, loginLoader);
         } catch (IOException logoutException){
@@ -135,7 +133,7 @@ public class PublishedCollaborationsController {
     private Button buttonCancel;
     @FXML
     private void cancel(ActionEvent event){
-        FXMLLoader homePageLoader = new FXMLLoader(getClass().getResource("/GUI/collaborationOptions.fxml"));
+        FXMLLoader homePageLoader = new FXMLLoader(getClass().getResource("/GUI/CollaborationOptionsWindow.fxml"));
         ChangeWindowManager.changeWindowTo(event, homePageLoader);
 
     }
@@ -153,7 +151,7 @@ public class PublishedCollaborationsController {
                 Collaboration publishedCollaboration = tableViewPublishedCollaborations.getSelectionModel().getSelectedItem();
                 if(publishedCollaboration != null){
                     try{
-                        FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUI/PublishedCollaborationsDetails.fxml"));
+                        FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUI/PublishedCollaborationsDetailsWindow.fxml"));
                         Parent root = loader.load();
                         PublishedCollaborationsDetailsController controller = loader.getController();
                         controller.initialize(publishedCollaboration.getCollaborationId());

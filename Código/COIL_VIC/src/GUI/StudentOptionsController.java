@@ -13,12 +13,12 @@ import logic.classes.Professor;
 public class StudentOptionsController {
     private static final org.apache.log4j.Logger LOG = Log.getLogger(StudentOptionsController.class);
 
-   @FXML
+    @FXML
     private Button buttonHome;
 
     @FXML
     private void goToHomePage(ActionEvent event){
-        FXMLLoader homePageLoader = new FXMLLoader(getClass().getResource("/GUI/professorHome.fxml"));
+        FXMLLoader homePageLoader = new FXMLLoader(getClass().getResource("/GUI/ProfessorHomeWindow.fxml"));
         ChangeWindowManager.changeWindowTo(event, homePageLoader);
     }
 
@@ -27,7 +27,7 @@ public class StudentOptionsController {
 
     @FXML
     private void goToCollaborations(ActionEvent event){
-        FXMLLoader collaborationsOptionsLoader = new FXMLLoader(getClass().getResource("/GUI/collaborationOptions.fxml"));
+        FXMLLoader collaborationsOptionsLoader = new FXMLLoader(getClass().getResource("/GUI/CollaborationOptionsWindow.fxml"));
         ChangeWindowManager.changeWindowTo(event, collaborationsOptionsLoader);
 
 
@@ -38,7 +38,7 @@ public class StudentOptionsController {
 
     @FXML
     private void goToStudents(ActionEvent event){
-        FXMLLoader studentsLoader = new FXMLLoader(getClass().getResource("/GUI/studentOptions.fxml"));
+        FXMLLoader studentsLoader = new FXMLLoader(getClass().getResource("/GUI/StudentOptionsWindow.fxml"));
         ChangeWindowManager.changeWindowTo(event, studentsLoader);
 
     }
@@ -48,7 +48,7 @@ public class StudentOptionsController {
 
     @FXML
     private void goToSettings(ActionEvent event){
-        FXMLLoader settingsLoader = new FXMLLoader(getClass().getResource("/GUI/professorSettings.fxml"));
+        FXMLLoader settingsLoader = new FXMLLoader(getClass().getResource("/GUI/ProfessorSettingsWindow.fxml"));
         ChangeWindowManager.changeWindowTo(event, settingsLoader);
 
     }
@@ -65,12 +65,12 @@ public class StudentOptionsController {
         ChangeWindowManager.closeWindow(event);
     }
 
-     @FXML
+    @FXML
     private Button buttonLogout;
 
     @FXML
     private void logOut(ActionEvent event){
-        FXMLLoader loginLoader = new FXMLLoader(getClass().getResource("/GUI/login.fxml"));
+        FXMLLoader loginLoader = new FXMLLoader(getClass().getResource("/GUI/LoginWindow.fxml"));
         try{
             ChangeWindowManager.logout(event, loginLoader);
         } catch (IOException logoutException){
@@ -82,7 +82,7 @@ public class StudentOptionsController {
     private Button buttonAddStudent;
     @FXML
     private void addStudent(ActionEvent event){
-        FXMLLoader addStudentLoader = new FXMLLoader(getClass().getResource("/GUI/addStudent.fxml"));
+        FXMLLoader addStudentLoader = new FXMLLoader(getClass().getResource("/GUI/AddStudentWindow.fxml"));
         ChangeWindowManager.changeWindowTo(event, addStudentLoader);
     }
 
