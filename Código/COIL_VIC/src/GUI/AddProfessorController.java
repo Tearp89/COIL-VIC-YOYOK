@@ -81,7 +81,10 @@ private static final org.apache.log4j.Logger LOG = Log.getLogger(AddProfessorCon
 
 
     void addUniversity(String universityName, String universityCountry, String language){
-        
+        if(!DatabaseConnectionChecker.isDatabaseConnected()){
+            DatabaseConnectionChecker.showNoConnectionDialog();
+            return;
+        }
         UniversityDAO universityDAO = new UniversityDAO();
         if (!universityDAO.isUniversityRegistered(universityName) && FieldValidator.onlyText(language) && FieldValidator.onlyText(universityCountry) && FieldValidator.onlyText(universityName)) {
             University university = new University();
@@ -94,6 +97,10 @@ private static final org.apache.log4j.Logger LOG = Log.getLogger(AddProfessorCon
 
     @FXML
     void addProfessor(ActionEvent event){
+        if(!DatabaseConnectionChecker.isDatabaseConnected()){
+            DatabaseConnectionChecker.showNoConnectionDialog();
+            return;
+        }
         ProfessorDAO professorDAO = new ProfessorDAO();
         
         Access access = new Access();
@@ -407,6 +414,10 @@ private static final org.apache.log4j.Logger LOG = Log.getLogger(AddProfessorCon
 
     @FXML
     void initialize(){
+        if(!DatabaseConnectionChecker.isDatabaseConnected()){
+            DatabaseConnectionChecker.showNoConnectionDialog();
+            return;
+        }
         UniversityDAO universityDAO = new UniversityDAO();
         ObservableList<String> universities = universityDAO.loadUniversities();
         if(!DatabaseConnectionChecker.isDatabaseConnected()){

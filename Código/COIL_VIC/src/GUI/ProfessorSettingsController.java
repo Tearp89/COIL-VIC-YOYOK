@@ -136,6 +136,10 @@ public class ProfessorSettingsController {
 
     @FXML
     private void changePassword(ActionEvent event){
+        if(!DatabaseConnectionChecker.isDatabaseConnected()){
+            DatabaseConnectionChecker.showNoConnectionDialog();
+            return;
+        }
         ProfessorDAO professorDAO = new ProfessorDAO();
         String user = UserSessionManager.getInstance().getProfessorUserData().getUser();
         int profesirId = professorDAO.getProfessorIdByUser(user);
@@ -167,7 +171,11 @@ public class ProfessorSettingsController {
                     confirmEditionAlert.show();
                     Button okButton = (Button) confirmEditionAlert.getDialogPane().lookupButton(acceptEdition);
                     okButton.setOnAction(eventSaveEdition -> {
-                    int result = professorDAO.changeProfessorPassword(newPassword, profesirId);
+                        if(!DatabaseConnectionChecker.isDatabaseConnected()){
+                            DatabaseConnectionChecker.showNoConnectionDialog();
+                            return;
+                        }
+                        int result = professorDAO.changeProfessorPassword(newPassword, profesirId);
                         if(result == 1){
                             Alert universityUpdatedAlert = new Alert(AlertType.INFORMATION);
                             universityUpdatedAlert.setHeaderText("Confirmación edición");
