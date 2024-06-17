@@ -3,6 +3,7 @@ package GUI;
 import java.io.IOException;
 import java.util.Optional;
 
+import dataAccess.DatabaseConnectionChecker;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -45,8 +46,12 @@ public class PublishedCollaborationsDetailsController {
 
     @FXML
     Button buttonSendRequest;
-  @FXML
+    @FXML
     void sendRequestToCollaborate(ActionEvent event) {
+        if(!DatabaseConnectionChecker.isDatabaseConnected()){
+            DatabaseConnectionChecker.showNoConnectionDialog();
+            return;
+        }
         ProfessorDAO professorDAO = new ProfessorDAO();
         Professor professorData = UserSessionManager.getInstance().getProfessorUserData();
         int professorId = professorDAO.getProfessorIdByUser(professorData.getUser());
@@ -79,7 +84,7 @@ public class PublishedCollaborationsDetailsController {
     }
 
 
-     @FXML
+    @FXML
     private Button buttonHome;
 
     @FXML
@@ -160,6 +165,10 @@ public class PublishedCollaborationsDetailsController {
         Professor professorData = new Professor();
         professorData = UserSessionManager.getInstance().getProfessorUserData();
         labelUser.setText(professorData.getName());
+        if(!DatabaseConnectionChecker.isDatabaseConnected()){
+            DatabaseConnectionChecker.showNoConnectionDialog();
+            return;
+        }
         this.collaborationId = collaborationId;
         CollaborationDAO collaborationDAO = new CollaborationDAO();
         String name = collaborationDAO.getCollaborationNameById(collaborationId);

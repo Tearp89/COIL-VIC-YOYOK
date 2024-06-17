@@ -3,6 +3,7 @@ package GUI;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import dataAccess.DatabaseConnectionChecker;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -57,6 +58,10 @@ public class OpenCollaborationController {
     private Label labelCollaborationId;
 
     private void setValues(Collaboration collaboration){
+        if(!DatabaseConnectionChecker.isDatabaseConnected()){
+            DatabaseConnectionChecker.showNoConnectionDialog();
+            return;
+        }
         Professor professorData = new Professor();
         professorData = UserSessionManager.getInstance().getProfessorUserData();
         labelCollaborationId.setText(String.valueOf(collaboration.getCollaborationId()));
@@ -75,7 +80,10 @@ public class OpenCollaborationController {
         Professor professorData = new Professor();
         professorData = UserSessionManager.getInstance().getProfessorUserData();
         labelUser.setText(professorData.getName());
-        
+        if(!DatabaseConnectionChecker.isDatabaseConnected()){
+            DatabaseConnectionChecker.showNoConnectionDialog();
+            return;
+        }
         ProfessorDAO professorDAO = new ProfessorDAO();
         String user = professorData.getUser();
         int professorId = professorDAO.getProfessorIdByUser(user);
@@ -166,6 +174,10 @@ public class OpenCollaborationController {
 
     @FXML
     public void openCollaboration(ActionEvent event){
+        if(!DatabaseConnectionChecker.isDatabaseConnected()){
+            DatabaseConnectionChecker.showNoConnectionDialog();
+            return;
+        }
         String collaborationName = textFieldName.getText();
         CollaborationDAO instance = new CollaborationDAO();
 
@@ -206,9 +218,6 @@ public class OpenCollaborationController {
             noCollaboratorAlert.setHeaderText("No hay colaborador");
             noCollaboratorAlert.setContentText("No se puede abrir la colaboración, no hay un colaborador asignado");
             noCollaboratorAlert.show();
-                }
-            
-        
-        
+        }
     }
 }

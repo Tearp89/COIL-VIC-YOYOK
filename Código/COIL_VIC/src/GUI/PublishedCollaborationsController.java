@@ -3,6 +3,7 @@ package GUI;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import dataAccess.DatabaseConnectionChecker;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -40,6 +41,10 @@ public class PublishedCollaborationsController {
     Label labelCollaborationNotFound = new Label("No se encontraron colaboraciones");
 
     public void loadPublishedCollaborations(){
+        if(!DatabaseConnectionChecker.isDatabaseConnected()){
+            DatabaseConnectionChecker.showNoConnectionDialog();
+            return;
+        }
         CollaborationDAO collaborationDAO = new CollaborationDAO();
         ArrayList<Collaboration> publishedCollaborations = new ArrayList<>();
         publishedCollaborations = collaborationDAO.searchCollaborationByStatus("Publicada");
@@ -52,6 +57,10 @@ public class PublishedCollaborationsController {
     @FXML
     private TextField textFieldSearch;
     public void searchPublishedCollaborations(ActionEvent event){
+        if(!DatabaseConnectionChecker.isDatabaseConnected()){
+            DatabaseConnectionChecker.showNoConnectionDialog();
+            return;
+        }
         CollaborationDAO collaborationDAO = new CollaborationDAO();
         ArrayList<Collaboration> publishedCollaborations = new ArrayList<>();
         String collaborationName = "%" + textFieldSearch.getText() + "%";
@@ -116,7 +125,7 @@ public class PublishedCollaborationsController {
         ChangeWindowManager.closeWindow(event);
     }
 
-     @FXML
+    @FXML
     private Button buttonLogout;
 
     @FXML
@@ -145,6 +154,10 @@ public class PublishedCollaborationsController {
         Professor professorData = new Professor();
         professorData = UserSessionManager.getInstance().getProfessorUserData();
         labelUser.setText(professorData.getName());
+        if(!DatabaseConnectionChecker.isDatabaseConnected()){
+            DatabaseConnectionChecker.showNoConnectionDialog();
+            return;
+        }
         loadPublishedCollaborations();
         tableViewPublishedCollaborations.setOnMouseClicked(event ->{
             if(event.getClickCount() == 1){

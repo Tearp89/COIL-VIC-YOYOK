@@ -160,6 +160,7 @@ public class LoginController {
             DatabaseConnectionChecker.showNoConnectionDialog();
             buttonAddProfessor.setDisable(true);
             buttonLogin.setDisable(true);
+            return;
         }
         FXMLLoader addProfessorLoader = new FXMLLoader(getClass().getResource("/GUI/AddProfessorWindow.fxml"));
         ChangeWindowManager.changeWindowTo(event, addProfessorLoader);

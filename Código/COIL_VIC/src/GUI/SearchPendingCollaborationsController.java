@@ -3,6 +3,7 @@ package GUI;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import dataAccess.DatabaseConnectionChecker;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -35,6 +36,10 @@ public class SearchPendingCollaborationsController {
     private Label labelCollaborationNotFound = new Label("No se encontraron colaboraciones pendientes");
 
     public void loadPendingCollaborations(){
+        if(!DatabaseConnectionChecker.isDatabaseConnected()){
+            DatabaseConnectionChecker.showNoConnectionDialog();
+            return;
+        }
         CollaborationDAO collaborationDAO = new CollaborationDAO();
         ArrayList<Collaboration> pendingCollaborations = new ArrayList<>();
         pendingCollaborations = collaborationDAO.searchCollaborationByStatus("Pendiente");
@@ -48,54 +53,54 @@ public class SearchPendingCollaborationsController {
     private void addAcceptButtonToTable() {
     TableColumn<Collaboration, Void> tableColumnAcceptButton = new TableColumn("Aceptar");
 
-    Callback<TableColumn<Collaboration, Void>, TableCell<Collaboration, Void>> cellFactory = new Callback<TableColumn<Collaboration, Void>, TableCell<Collaboration, Void>>() {
-        @Override
-        public TableCell<Collaboration, Void> call(final TableColumn<Collaboration, Void> param) {
-            final TableCell<Collaboration, Void> cell = new TableCell<Collaboration, Void>() {
-                private final Button acceptButton = new Button("Aceptar");
-
-                {
-                    acceptButton.setOnAction((ActionEvent event) -> {
-                        Collaboration collaboration = getTableView().getItems().get(getIndex());
-                        int collaborationId = collaboration.getCollaborationId();
-                        CollaborationDAO collaborationDAO = new CollaborationDAO();
-                        int result = collaborationDAO.changeCollaborationStatus("Aceptada", collaborationId);
-                        if(result == 1){
-                            Alert acceptanceSuccessfulAlert = new Alert(AlertType.INFORMATION);
-                            acceptanceSuccessfulAlert.setTitle("Colaboración aceptada");
-                            acceptanceSuccessfulAlert.setHeaderText("Colaboración aceptada");
-                            acceptanceSuccessfulAlert.setContentText("Propuesta de colaboración aceptada exitosamente");
-                            acceptanceSuccessfulAlert.show();
-                        } else{
-                            Alert acceptanceErrorAlert = new Alert(AlertType.ERROR);
-                            acceptanceErrorAlert.setTitle("Error conexión");
-                            acceptanceErrorAlert.setHeaderText("Error conexión");
-                            acceptanceErrorAlert.setContentText("No se pudo conectar a la base de datos, por favor inténtelo de nuevo más tarde");
-                            acceptanceErrorAlert.show();
-                        }
-                        
-                        
-                    });
-                }
-
-                @Override
-                public void updateItem(Void item, boolean empty) {
-                    super.updateItem(item, empty);
-                    if (empty) {
-                        setGraphic(null);
-                    } else {
-                        setGraphic(acceptButton);
+        Callback<TableColumn<Collaboration, Void>, TableCell<Collaboration, Void>> cellFactory = new Callback<TableColumn<Collaboration, Void>, TableCell<Collaboration, Void>>() {
+            @Override
+            public TableCell<Collaboration, Void> call(final TableColumn<Collaboration, Void> param) {
+                final TableCell<Collaboration, Void> cell = new TableCell<Collaboration, Void>() {
+                    private final Button acceptButton = new Button("Aceptar"); {
+                        acceptButton.setOnAction((ActionEvent event) -> {
+                            if(!DatabaseConnectionChecker.isDatabaseConnected()){
+                                DatabaseConnectionChecker.showNoConnectionDialog();
+                                return;
+                            }
+                            Collaboration collaboration = getTableView().getItems().get(getIndex());
+                            int collaborationId = collaboration.getCollaborationId();
+                            CollaborationDAO collaborationDAO = new CollaborationDAO();
+                            int result = collaborationDAO.changeCollaborationStatus("Aceptada", collaborationId);
+                            if(result == 1){
+                                Alert acceptanceSuccessfulAlert = new Alert(AlertType.INFORMATION);
+                                acceptanceSuccessfulAlert.setTitle("Colaboración aceptada");
+                                acceptanceSuccessfulAlert.setHeaderText("Colaboración aceptada");
+                                acceptanceSuccessfulAlert.setContentText("Propuesta de colaboración aceptada exitosamente");
+                                acceptanceSuccessfulAlert.show();
+                            } else{
+                                Alert acceptanceErrorAlert = new Alert(AlertType.ERROR);
+                                acceptanceErrorAlert.setTitle("Error conexión");
+                                acceptanceErrorAlert.setHeaderText("Error conexión");
+                                acceptanceErrorAlert.setContentText("No se pudo conectar a la base de datos, por favor inténtelo de nuevo más tarde");
+                                acceptanceErrorAlert.show();
+                            }
+                        });
                     }
-                }
-            };
+
+                    @Override
+                    public void updateItem(Void item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if (empty) {
+                            setGraphic(null);
+                        } else {
+                            setGraphic(acceptButton);
+                        }
+                    }
+                };
             return cell;
-        }
-    };
+            }
+        };
 
-    tableColumnAcceptButton.setCellFactory(cellFactory);
+        tableColumnAcceptButton.setCellFactory(cellFactory);
 
-    tableViewPendingCollaborations.getColumns().add(tableColumnAcceptButton);
-}
+        tableViewPendingCollaborations.getColumns().add(tableColumnAcceptButton);
+    }
 
     private void addDeclineButtonToTable() {
         TableColumn<Collaboration, Void> tableColumnDeclineButtom = new TableColumn("Rechazar");
@@ -104,10 +109,12 @@ public class SearchPendingCollaborationsController {
             @Override
             public TableCell<Collaboration, Void> call(final TableColumn<Collaboration, Void> param) {
                 final TableCell<Collaboration, Void> cell = new TableCell<Collaboration, Void>() {
-                    private final Button declineButton = new Button("Rechazar");
-
-                    {
+                    private final Button declineButton = new Button("Rechazar");{
                         declineButton.setOnAction((ActionEvent event) -> {
+                            if(!DatabaseConnectionChecker.isDatabaseConnected()){
+                                DatabaseConnectionChecker.showNoConnectionDialog();
+                                return;
+                            }
                             Collaboration collaboration = getTableView().getItems().get(getIndex());
                             int collaborationId = collaboration.getCollaborationId();
                             CollaborationDAO collaborationDAO = new CollaborationDAO();
@@ -232,6 +239,10 @@ public class SearchPendingCollaborationsController {
         Admin adminData = new Admin();
         adminData = UserSessionManager.getInstance().getAdminUserData();
         labelUser.setText(adminData.getAdminUser());
+        if(!DatabaseConnectionChecker.isDatabaseConnected()){
+            DatabaseConnectionChecker.showNoConnectionDialog();
+            return;
+        }
         loadPendingCollaborations();
         addAcceptButtonToTable();
         addDeclineButtonToTable();
