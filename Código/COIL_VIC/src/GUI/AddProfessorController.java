@@ -85,7 +85,10 @@ private static final org.apache.log4j.Logger LOG = Log.getLogger(AddProfessorCon
 
 
     void addUniversity(String universityName, String universityCountry, String language){
-        checkDatabaseConnection();
+        if(!DatabaseConnectionChecker.isDatabaseConnected()){
+            DatabaseConnectionChecker.showNoConnectionDialog();
+            return;
+        }
         UniversityDAO universityDAO = new UniversityDAO();
         if (!universityDAO.isUniversityRegistered(universityName) && FieldValidator.onlyText(language) && FieldValidator.onlyText(universityCountry) && FieldValidator.onlyText(universityName)) {
             University university = new University();
@@ -98,9 +101,10 @@ private static final org.apache.log4j.Logger LOG = Log.getLogger(AddProfessorCon
 
     @FXML
     void addProfessor(ActionEvent event){
-        checkDatabaseConnection();
-        ProfessorDAO professorDAO = new ProfessorDAO();
-        
+        if(!DatabaseConnectionChecker.isDatabaseConnected()){
+            DatabaseConnectionChecker.showNoConnectionDialog();
+            return;
+        }
         Access access = new Access();
         String professorName = textFieldProfessorName != null ? textFieldProfessorName.getText() : "";
         String email = textFieldEmail != null ? textFieldEmail.getText() : "";
@@ -297,13 +301,6 @@ private static final org.apache.log4j.Logger LOG = Log.getLogger(AddProfessorCon
         CharLimitValidator.setCharLimitComboBox(comboBoxUniversity, 245);
     }
 
-    private void checkDatabaseConnection(){
-        if(!DatabaseConnectionChecker.isDatabaseConnected()){
-            DatabaseConnectionChecker.showNoConnectionDialog();
-            return;
-        }
-    }
-
     public Professor assignDataToForeignProfessor(String user, String password){
         Professor foreignProfessor = new Professor();
         String professorName = textFieldProfessorName != null ? textFieldProfessorName.getText() : "";
@@ -423,19 +420,26 @@ private static final org.apache.log4j.Logger LOG = Log.getLogger(AddProfessorCon
     }
 
     private void registerProfessor(ActionEvent event, Professor professor, String email, String user, String password, boolean isUV) {
+        if(!DatabaseConnectionChecker.isDatabaseConnected()){
+            DatabaseConnectionChecker.showNoConnectionDialog();
+            return;
+        }
         ProfessorDAO professorDAO = new ProfessorDAO();
         int professorRequestResult = isUV ? professorDAO.addProfessorUV(professor) : professorDAO.addProfessorForeign(professor);
 
         if (professorRequestResult == 1) {
             sendEmailAndShowAlert(email, user, password);
-            FXMLLoader loginLoader = new FXMLLoader(getClass().getResource("/GUI/LoginWindow.fxml"));
-            ChangeWindowManager.changeWindowTo(event, loginLoader);
+            redirectToLogin(event);
         } else {
             showAlert(AlertType.ERROR, "Error en la solicitud", "Hubo un problema al enviar la solicitud de registro. Por favor, intente nuevamente.");
         }
     }
 
     private boolean isValidProfessor(Professor professor, boolean isUV) {
+        if(!DatabaseConnectionChecker.isDatabaseConnected()){
+            DatabaseConnectionChecker.showNoConnectionDialog();
+            return false;
+        }
         if (isUV) {
             return ProfessorValidator.validateUvProfessorFields(professor);
         } else {
@@ -444,11 +448,15 @@ private static final org.apache.log4j.Logger LOG = Log.getLogger(AddProfessorCon
     }
 
     private void handleProfessorRegistration(ActionEvent event, Professor professor, String email, String user, String password, boolean isUV) {
-    if (!isValidProfessor(professor, isUV)) {
-        return;
-    }
+        if(!DatabaseConnectionChecker.isDatabaseConnected()){
+            DatabaseConnectionChecker.showNoConnectionDialog();
+            return;
+        }
+        if (!isValidProfessor(professor, isUV)) {
+            return;
+        }
 
-    Alert professorAddedAlert = createConfirmationAlert("Confirmación de registro", "¿Deseas enviar la solicitud de registro?");
+        Alert professorAddedAlert = createConfirmationAlert("Confirmación de registro", "¿Deseas enviar la solicitud de registro?");
         professorAddedAlert.showAndWait().ifPresent(response -> {
             if (response == ButtonType.OK) {
                 registerProfessor(event, professor, email, user, password, isUV);
@@ -462,6 +470,22 @@ private static final org.apache.log4j.Logger LOG = Log.getLogger(AddProfessorCon
         alert.setHeaderText(title);
         alert.setContentText(content);
         return alert;
+    }
+
+    private void redirectToLogin(ActionEvent event) {
+        try {
+            FXMLLoader addProfessorLoader = new FXMLLoader(getClass().getResource("/GUI/LoginWindow.fxml"));
+            Parent root = addProfessorLoader.load();
+            Scene scene = new Scene(root);
+            Stage stage = new Stage();
+            stage.setScene(scene);
+            stage.show();
+            Node source = (Node) event.getSource();
+            Stage currentStage = (Stage) source.getScene().getWindow();
+            currentStage.close();
+        } catch (IOException e) {
+            LOG.error("ERROR:", e);
+        }
     }
 }
 

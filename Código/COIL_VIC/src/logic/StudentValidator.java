@@ -38,12 +38,11 @@ public class StudentValidator {
                     addingStudentErrorAlert.setContentText("Se perdió la conexión a la base de datos, inténtelo de nuevo más tarde");
                     addingStudentErrorAlert.show();
                 }
+            }
+            return true;
+        } else {
+            return false;
         }
-        
-    }
-
-    return false;
-
 }
 
 }

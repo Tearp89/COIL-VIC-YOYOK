@@ -18,10 +18,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import log.Log;
 import logic.Access;
-import logic.CharLimitValidator;
 import logic.EmailControl;
 import logic.FieldValidator;
-import logic.StudentValidator;
 import logic.DAO.CollaborationDAO;
 import logic.DAO.ProfessorDAO;
 import logic.DAO.StudentDAO;
@@ -117,7 +115,10 @@ public class AddStudentController {
     private TableColumn<Student, String> tableColumnEmail;
     @FXML
     private void addStudent(){
-        checkDatabaseConnection();
+        if(!DatabaseConnectionChecker.isDatabaseConnected()){
+            DatabaseConnectionChecker.showNoConnectionDialog();
+            return;
+        }
         Professor professorData = new Professor();
         professorData = UserSessionManager.getInstance().getProfessorUserData();
         ProfessorDAO professorDAO = new ProfessorDAO();
@@ -130,9 +131,35 @@ public class AddStudentController {
             emptyFieldsAlert.setHeaderText("Correo no válido");
             emptyFieldsAlert.setContentText("No se puede puede añadir al estudiante, no ha ingresado un correo válido");
             emptyFieldsAlert.show();
-        }else if (!StudentValidator.validateStudentRegister(studentDAO, selectedStudent, tableViewStudents)){
-            
-        }else{
+        }else if (studentDAO.isStudentRegistered(email) == true){
+            if(studentDAO.isStudentAssignedToProfessor(email, professorId)){
+                Alert studentDuplicatedAlert = new Alert(AlertType.INFORMATION);
+                studentDuplicatedAlert.setTitle("Estudiante duplicado");
+                studentDuplicatedAlert.setHeaderText("Estudiante duplicado");
+                studentDuplicatedAlert.setContentText("No se puede añadir al estudiante, ya se encuentra agregado");
+                studentDuplicatedAlert.show();
+            } else{
+                int result = studentDAO.changeProfessorAssigned(professorId, email);
+                if (result > 0){
+                    Alert studentAddedAlert = new Alert(AlertType.INFORMATION);
+                    studentAddedAlert.setTitle("Estudiante añadido");
+                    studentAddedAlert.setHeaderText("Estudiante añadido");
+                    studentAddedAlert.setContentText("Se ha añadido al estudiante exitosamente");
+                    studentAddedAlert.show();
+                    ArrayList<Student> students =  studentDAO.getStudentsByProfessorId(professorId);
+                    tableViewStudents.getItems().clear();
+                    tableViewStudents.getItems().addAll(students);
+                } else {
+                    Alert addingStudentErrorAlert = new Alert(AlertType.ERROR);
+                    addingStudentErrorAlert.setTitle("Error conexión");
+                    addingStudentErrorAlert.setHeaderText("Error conexión");
+                    addingStudentErrorAlert.setContentText("Se perdió la conexión a la base de datos, inténtelo de nuevo más tarde");
+                    addingStudentErrorAlert.show();
+                }
+            }
+
+
+        } else{
                 Student student = new Student();
                 student.setEmail(email);
                 student.setProfessorId(professorId);
@@ -179,20 +206,23 @@ public class AddStudentController {
     private Button buttonAssign;
     @FXML
     private void assignStudent(ActionEvent event){
-        checkDatabaseConnection();
+        if(!DatabaseConnectionChecker.isDatabaseConnected()){
+            DatabaseConnectionChecker.showNoConnectionDialog();
+            return;
+        }
         String email = selectedStudent.getEmail();
         Professor professorData = new Professor();
         professorData = UserSessionManager.getInstance().getProfessorUserData();
         ProfessorDAO professorDAO = new ProfessorDAO();
         int professorId = professorDAO.getProfessorIdByUser(professorData.getUser());
         CollaborationDAO collaborationDAO = new CollaborationDAO();
-        ArrayList<Collaboration> collaborations =  collaborationDAO.searchCollaborationByStatusAndProfessorId("Publicada", professorId);
+        ArrayList<Collaboration> collaborations =  collaborationDAO.searchCollaborationByStatusAndProfessorId("Activa", professorId);
         if(collaborations.isEmpty()){
             buttonAssign.setDisable(true);
             Alert assignErrorAlert = new Alert(AlertType.ERROR);
             assignErrorAlert.setTitle("Error colaboración");
             assignErrorAlert.setHeaderText("Error no tiene colaboración");
-            assignErrorAlert.setContentText("No tiene una colaboración publicada para asignar el estudiante");
+            assignErrorAlert.setContentText("No tiene una colaboración activa para asignar el estudiante");
         } else {
             int collaborationId = collaborations.get(0).getCollaborationId();
             if(collaborationDAO.isStudentAssignedToCollaboration(email, collaborationId)){
@@ -229,7 +259,10 @@ public class AddStudentController {
         Professor professorData = new Professor();
         professorData = UserSessionManager.getInstance().getProfessorUserData();
         labelUser.setText(professorData.getName());
-        checkDatabaseConnection();
+        if(!DatabaseConnectionChecker.isDatabaseConnected()){
+            DatabaseConnectionChecker.showNoConnectionDialog();
+            return;
+        }
         StudentDAO studentDAO = new StudentDAO();
         ProfessorDAO professorDAO = new ProfessorDAO();
         int professorId = professorDAO.getProfessorIdByUser(professorData.getUser());
@@ -248,15 +281,6 @@ public class AddStudentController {
             
         });
 
-        CharLimitValidator.setCharLimitTextField(textFieldEmailStudent, 255);
-
-    }
-
-    private void checkDatabaseConnection(){
-        if(!DatabaseConnectionChecker.isDatabaseConnected()){
-            DatabaseConnectionChecker.showNoConnectionDialog();
-            return;
-        }
     }
 
     

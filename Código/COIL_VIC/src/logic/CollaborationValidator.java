@@ -40,9 +40,6 @@ public class CollaborationValidator {
             return false;
 
         } else if(!collaborationDAO.validateCollaborationName(collaborationName)){
-           
-            
-            
             int result = collaborationDAO.addCollaboration(collaboration);
             if(result == 1){
                 Alert collaborationAddedAlert = new Alert(AlertType.INFORMATION);
