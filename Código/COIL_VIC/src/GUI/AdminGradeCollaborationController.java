@@ -114,6 +114,7 @@ public class AdminGradeCollaborationController {
             Button okButton = (Button) confirmFeedbackAlert.getDialogPane().lookupButton(acceptFeedback);
             Button cancelButton = (Button) confirmFeedbackAlert.getDialogPane().lookupButton(cancelFeedback);
             okButton.setOnAction( eventSendFeedback -> {
+                checkDatabaseConnection();
                 Feedback feedback = new Feedback();
                 Admin adminData = new Admin();
                 adminData = UserSessionManager.getInstance().getAdminUserData();
@@ -234,6 +235,13 @@ public class AdminGradeCollaborationController {
 
         
 
+    }
+
+    private void checkDatabaseConnection(){
+        if(!DatabaseConnectionChecker.isDatabaseConnected()){
+            DatabaseConnectionChecker.showNoConnectionDialog();
+            return;
+        }
     }
 
     

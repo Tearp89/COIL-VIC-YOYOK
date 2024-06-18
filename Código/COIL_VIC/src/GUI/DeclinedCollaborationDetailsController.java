@@ -20,6 +20,7 @@ import javafx.scene.control.TextFormatter;
 import javafx.scene.input.KeyEvent;
 import log.Log;
 import javafx.scene.control.Alert.AlertType;
+import logic.CharLimitValidator;
 import logic.FieldValidator;
 import logic.DAO.CollaborationDAO;
 import logic.classes.Collaboration;
@@ -29,25 +30,25 @@ public class DeclinedCollaborationDetailsController {
     private static final org.apache.log4j.Logger LOG = Log.getLogger(DeclinedCollaborationDetailsController.class);
 
     @FXML
-    TextField textFieldCollaborationName;
+    private TextField textFieldCollaborationName;
     @FXML
-    TextArea textAreaCollaborationDescription;
+    private TextArea textAreaCollaborationDescription;
     @FXML
-    DatePicker datePickerStartDate;
+    private DatePicker datePickerStartDate;
     @FXML
-    DatePicker datePickerFinishDate;
+    private DatePicker datePickerFinishDate;
     @FXML
-    TextField textFieldCollaborationGoal;
+    private TextField textFieldCollaborationGoal;
     @FXML
-    TextField textFieldNumberStudents;
+    private TextField textFieldNumberStudents;
     @FXML
-    ComboBox comboBoxSubject;
+    private ComboBox comboBoxSubject;
     @FXML
-    TextArea textAreaStudentProfile;
+    private TextArea textAreaStudentProfile;
     
     
     @FXML
-    int collaborationId;
+    private int collaborationId;
 
     @FXML
     Button buttonEditCollaboration;
@@ -209,7 +210,7 @@ public class DeclinedCollaborationDetailsController {
             emptyFieldsAlert.show();
 
 
-        }else if(!collaborationDAO.validateCollaborationName(collaborationName)){
+        }else if(!collaborationDAO.validateCollaborationNameExceptActual(collaborationName, collaborationId)){
             int result = updateCollaborationDAO.updateCollaboration(collaborationUpdated);
             if (result == 1){
                 Alert collaborationUpdatedAlert = new Alert(AlertType.INFORMATION);
@@ -286,5 +287,10 @@ public class DeclinedCollaborationDetailsController {
                 return null;
             }
         }));
+
+        CharLimitValidator.setCharLimitTextField(textFieldCollaborationName, 245);
+        CharLimitValidator.setCharLimitTextField(textFieldNumberStudents, 3);
+        CharLimitValidator.setCharLimitComboBox(comboBoxSubject, 245);
+        
     }
 }

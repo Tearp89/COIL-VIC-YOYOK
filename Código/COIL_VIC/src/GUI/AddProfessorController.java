@@ -30,6 +30,7 @@ import logic.classes.University;
 import logic.Access;
 import logic.EmailControl;
 import logic.FieldValidator;
+import logic.ProfessorValidator;
 
 public class AddProfessorController {
 private static final org.apache.log4j.Logger LOG = Log.getLogger(AddProfessorController.class);
@@ -37,6 +38,8 @@ private static final org.apache.log4j.Logger LOG = Log.getLogger(AddProfessorCon
 
     @FXML
     private TextField textFieldProfessorName;
+    @FXML 
+    private TextField textFieldProfessorLastName;
     @FXML
     private TextField textFieldProfessorPhoneNumber;
     @FXML 
@@ -81,10 +84,7 @@ private static final org.apache.log4j.Logger LOG = Log.getLogger(AddProfessorCon
 
 
     void addUniversity(String universityName, String universityCountry, String language){
-        if(!DatabaseConnectionChecker.isDatabaseConnected()){
-            DatabaseConnectionChecker.showNoConnectionDialog();
-            return;
-        }
+        checkDatabaseConnection();
         UniversityDAO universityDAO = new UniversityDAO();
         if (!universityDAO.isUniversityRegistered(universityName) && FieldValidator.onlyText(language) && FieldValidator.onlyText(universityCountry) && FieldValidator.onlyText(universityName)) {
             University university = new University();
@@ -104,9 +104,12 @@ private static final org.apache.log4j.Logger LOG = Log.getLogger(AddProfessorCon
         ProfessorDAO professorDAO = new ProfessorDAO();
         
         Access access = new Access();
-        String professorName = textFieldProfessorName.getText();
-        String professorPhoneNumber = textFieldProfessorPhoneNumber.getText();
-        String email = textFieldEmail.getText();
+        String professorName = textFieldProfessorName != null ? textFieldProfessorName.getText() : "";
+        String professorLastName = textFieldProfessorLastName != null ? textFieldProfessorLastName.getText() : "";
+        String professorFullName = "" + professorName + "" + professorLastName;
+        String professorPhoneNumber = textFieldProfessorPhoneNumber != null ? textFieldProfessorPhoneNumber.getText() : "";
+        String email = textFieldEmail != null ? textFieldEmail.getText() : "";
+
         Object selectedCountry = comboBoxCountry.getSelectionModel().getSelectedItem();
         String country = selectedCountry != null ? selectedCountry.toString() : null;
         Object selectedUniversity = comboBoxUniversity.getSelectionModel().getSelectedItem();
@@ -120,65 +123,77 @@ private static final org.apache.log4j.Logger LOG = Log.getLogger(AddProfessorCon
 
         Object selectedAcademicArea = comboBoxAcademicArea.getSelectionModel().getSelectedItem();
         String academicArea = selectedAcademicArea != null ? selectedAcademicArea.toString() : null;
-        
-        Object selectedRegion = comboBoxRegion.getSelectionModel().getSelectedItem();
-        String region = selectedRegion != null ? selectedRegion.toString() :null;
-        Object selectedContractType = comboBoxContractType.getSelectionModel().getSelectedItem();
-        String contractType = selectedContractType != null ? selectedContractType.toString() :null;
-        Object selectedContractCategory = comboBoxContractCategory.getSelectionModel().getSelectedItem();
-        String contractCategory = selectedContractCategory != null ? selectedContractCategory.toString() :null;
 
-        University university = new University();
-        Professor professor = new Professor();
+        Object selectedRegion = comboBoxRegion.getSelectionModel().getSelectedItem();
+        String region = selectedRegion != null ? selectedRegion.toString() : null;
+        Object selectedContractType = comboBoxContractType.getSelectionModel().getSelectedItem();
+        String contractType = selectedContractType != null ? selectedContractType.toString() : null;
+        Object selectedContractCategory = comboBoxContractCategory.getSelectionModel().getSelectedItem();
+        String contractCategory = selectedContractCategory != null ? selectedContractCategory.toString() : null;
+
+
+
+        
+        
+        if (universityName == null) {
+            Alert invalidPersonalNumberAlert = new Alert(AlertType.ERROR);
+            invalidPersonalNumberAlert.setTitle("Campos inválidos");
+            invalidPersonalNumberAlert.setHeaderText("Campos inválidos");
+            invalidPersonalNumberAlert.setContentText("No se puede agregar al profesor hay campos vacíos o inválidos");
+            invalidPersonalNumberAlert.showAndWait();
+            return;
+        }
+        
         
         if(universityName.equals("Universidad Veracruzana")){
-            if (!FieldValidator.isValidName(professorName)|| !FieldValidator.onlyTextAndNumbers(professorPhoneNumber) || !FieldValidator.isEmail(email) || !FieldValidator.onlyText(country) || !FieldValidator.onlyText(universityName) || !FieldValidator.onlyText(language) || !FieldValidator.onlyText(workShop) || academicArea.trim().isBlank() || !FieldValidator.onlyNumber(textFieldPersonalNumber.getText()) || region.trim().isBlank() || !FieldValidator.onlyText(contractType) || !FieldValidator.onlyText(contractCategory) ) {
-                Alert emptyFieldsAlertUV = new Alert(AlertType.ERROR);
-                emptyFieldsAlertUV.setTitle("Campos incorrectos o vacíos");
-                emptyFieldsAlertUV.setHeaderText("Campos incorrectos o vacíos");
-                emptyFieldsAlertUV.setContentText("Hay campos vacíos y/o incorrectos.");
-                emptyFieldsAlertUV.showAndWait();
+            University university = new University();
+            Professor professor = new Professor();
+            UniversityDAO universityDAO = new UniversityDAO();
+            int universityId = universityDAO.getUniversityId(universityName);
+            addUniversity(universityName, country, language); 
+            if(textFieldPersonalNumber.getText() == null || !FieldValidator.onlyNumber(textFieldPersonalNumber.getText())){
+                Alert invalidPersonalNumberAlert = new Alert(AlertType.ERROR);
+                invalidPersonalNumberAlert.setTitle("Campos inválidos");
+                invalidPersonalNumberAlert.setHeaderText("Campos inválidos");
+                invalidPersonalNumberAlert.setContentText("No se puede agregar al profesor hay campos vacíos o inválidos");
+                invalidPersonalNumberAlert.showAndWait();
                 return;
-            } else if (professorDAO.isProfessorRegistered(email) == true){
-                Alert professorDuplicatedAlert = new Alert(AlertType.INFORMATION);
-                professorDuplicatedAlert.setTitle("Profesor duplicado");
-                professorDuplicatedAlert.setHeaderText("Profesor duplicado");
-                professorDuplicatedAlert.setContentText("Este correo ya está asociado a una cuenta");
-                professorDuplicatedAlert.show();
-            
-            }else{
-                UniversityDAO universityDAO = new UniversityDAO();
-                addUniversity(universityName, country, language);
-                int universityId = universityDAO.getUniversityId(universityName);
-                int personalNumber = Integer.parseInt(textFieldPersonalNumber.getText());
-                professor.setName(professorName);
-                professor.setPhoneNumber(professorPhoneNumber);
-                professor.setEmail(email);
-                professor.setCountry(country);
-                professor.setUniversityId(universityId);
-                university.setUniversityLanguage(language);
-                professor.setWorkShop(workShop);
-                professor.setUser(user);
-                professor.setPassword(password);
-                professor.setStatus("Pendiente");
-                professor.setType("UV");
-                professor.setAcademicArea(academicArea);
-                professor.setPersonalNumber(personalNumber);
-                professor.setRegion(region);
-                professor.setContractType(contractType);
-                professor.setContractCategory(contractCategory);
-
+            }
+            int personalNumber = Integer.parseInt(textFieldPersonalNumber.getText());
+            professor.setName(professorFullName);
+            professor.setPhoneNumber(professorPhoneNumber);
+            professor.setEmail(email);
+            professor.setCountry(country);
+            professor.setUniversityName(universityName);
+            professor.setUniversityId(universityId);
+            university.setUniversityLanguage(language);
+            professor.setWorkShop(workShop);
+            professor.setUser(user);
+            professor.setPassword(password);
+            professor.setStatus("Pendiente");
+            professor.setType("UV");
+            professor.setAcademicArea(academicArea);
+            professor.setPersonalNumber(personalNumber);
+            professor.setRegion(region);
+            professor.setContractType(contractType);
+            professor.setContractCategory(contractCategory);
+            professor.setLanguage(language);
+            if(!ProfessorValidator.validateUvProfessorFields(professor)){
+                return;
+            }
                 Alert professorAddedAlert = new Alert(AlertType.CONFIRMATION);
                 professorAddedAlert.setTitle("Confirmación de registro");
                 professorAddedAlert.setHeaderText("Confirmación de registro");
                 professorAddedAlert.setContentText("¿Deseas enviar la solicitud de registro?");
+                professorAddedAlert.show();
                 ButtonType accept = new ButtonType("Aceptar");
                 ButtonType cancel = new ButtonType("Cancelar");
                 professorAddedAlert.getButtonTypes().setAll(cancel, accept);
                 Button okButton = (Button) professorAddedAlert.getDialogPane().lookupButton(accept);
                 Button cancelButton = (Button) professorAddedAlert.getDialogPane().lookupButton(cancel);
                             
-                okButton.setOnAction(eventAddProfessorUV -> {            
+                okButton.setOnAction(eventAddProfessorUV -> {   
+                    checkDatabaseConnection();         
                     int professorRequestResult = professorDAO.addProfessorUV(professor);
                     if(professorRequestResult == 1) {
                         EmailControl emailControl = new EmailControl();
@@ -226,37 +241,27 @@ private static final org.apache.log4j.Logger LOG = Log.getLogger(AddProfessorCon
                     professorAddedAlert.close();
                 });
                     
-                professorAddedAlert.show();    
-            } 
                     
-        }else{
-            if (!FieldValidator.isValidName(professorName) || !FieldValidator.onlyTextAndNumbers(professorPhoneNumber) || !FieldValidator.isEmail(email) || !FieldValidator.onlyText(country) || !FieldValidator.onlyText(universityName) || !FieldValidator.onlyText(language) || !FieldValidator.onlyText(workShop)) {
-                Alert emptyFieldsAlert = new Alert(AlertType.ERROR);
-                emptyFieldsAlert.setTitle("Campos incorrectos o vacíos");
-                emptyFieldsAlert.setHeaderText("Campos incorectos o vacíos");
-                emptyFieldsAlert.setContentText("Hay campos vacíos y/o incorrectos.");
-                emptyFieldsAlert.showAndWait();
-                return;
-            }else if (professorDAO.isProfessorRegistered(email) == true){
-                Alert professorDuplicatedAlert = new Alert(AlertType.INFORMATION);
-                professorDuplicatedAlert.setTitle("Profesor duplicado");
-                professorDuplicatedAlert.setHeaderText("Profesor duplicado");
-                professorDuplicatedAlert.setContentText("Este correo ya está asociado a una cuenta");
-                professorDuplicatedAlert.show();
             }else{
+                Professor professor = new Professor();
                 UniversityDAO universityDAO = new UniversityDAO();
                 addUniversity(universityName, country, language);
                 Integer universityIdInteger = universityDAO.getUniversityId(universityName);
-                professor.setName(professorName);
+                professor.setName(professorFullName);
                 professor.setPhoneNumber(professorPhoneNumber);
                 professor.setEmail(email);
                 professor.setCountry(country);
                 professor.setUniversityId(universityIdInteger);
+                professor.setUniversityName(universityName);
                 professor.setWorkShop(workShop);
                 professor.setUser(user);
                 professor.setPassword(password);
                 professor.setStatus("Pendiente");
                 professor.setType("Externo");
+                professor.setLanguage(language);
+            if (!ProfessorValidator.validateForeignProfessorFields(professor)){
+                return;
+            }else{
                     
                 Alert professorAddedAlert = new Alert(AlertType.CONFIRMATION);
                 professorAddedAlert.setTitle("Confirmación de registro");
@@ -269,7 +274,8 @@ private static final org.apache.log4j.Logger LOG = Log.getLogger(AddProfessorCon
                 Button okButton = (Button) professorAddedAlert.getDialogPane().lookupButton(accept); 
                 Button cancelButton = (Button) professorAddedAlert.getDialogPane().lookupButton(cancel);   
                             
-                okButton.setOnAction(eventAddProfessorForeign -> {                              
+                okButton.setOnAction(eventAddProfessorForeign -> {     
+                    checkDatabaseConnection();                         
                     int professorRequestResult = professorDAO.addProfessorForeign(professor);
                     if(professorRequestResult == 1) {
                         EmailControl emailControl = new EmailControl();
@@ -414,10 +420,7 @@ private static final org.apache.log4j.Logger LOG = Log.getLogger(AddProfessorCon
 
     @FXML
     void initialize(){
-        if(!DatabaseConnectionChecker.isDatabaseConnected()){
-            DatabaseConnectionChecker.showNoConnectionDialog();
-            return;
-        }
+       checkDatabaseConnection();
         UniversityDAO universityDAO = new UniversityDAO();
         ObservableList<String> universities = universityDAO.loadUniversities();
         if(!DatabaseConnectionChecker.isDatabaseConnected()){
@@ -484,6 +487,13 @@ private static final org.apache.log4j.Logger LOG = Log.getLogger(AddProfessorCon
                     return null;
                 }
             }));
+        }
+    }
+
+    private void checkDatabaseConnection(){
+        if(!DatabaseConnectionChecker.isDatabaseConnected()){
+            DatabaseConnectionChecker.showNoConnectionDialog();
+            return;
         }
     }
         

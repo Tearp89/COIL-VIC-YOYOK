@@ -3,6 +3,8 @@ package GUI;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+import dataAccess.DatabaseConnectionChecker;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -17,6 +19,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import log.Log;
+import logic.CharLimitValidator;
 import logic.FieldValidator;
 import logic.DAO.ActivityDAO;
 import logic.DAO.CollaborationDAO;
@@ -161,6 +164,7 @@ public class SearchActivitiesController {
             Button cancelButon = (Button) confirmAssignAlert.getDialogPane().lookupButton(cancel);
 
             okButton.setOnAction(eventAssignActivity -> {
+                checkDatabaseConnection();
                 
                 int result = activityDAO.updateActivity(activity);
                 if (result > 0){
@@ -230,6 +234,7 @@ public class SearchActivitiesController {
     private Label labelActivityId;
     
     private void loadActivitiesForSelectedWeek(String week) {
+        checkDatabaseConnection();
         Professor professorData = UserSessionManager.getInstance().getProfessorUserData();
         ProfessorDAO professorDAO = new ProfessorDAO();
         String user = professorData.getUser();
@@ -260,6 +265,7 @@ public class SearchActivitiesController {
 
     @FXML
     private void initialize(){
+        checkDatabaseConnection();
         Professor professorData = new Professor();
         professorData = UserSessionManager.getInstance().getProfessorUserData();
         labelUser.setText(professorData.getName());
@@ -277,6 +283,16 @@ public class SearchActivitiesController {
 
         buttonSave.setVisible(false);
 
+        CharLimitValidator.setCharLimitTextField(textFieldTitle, 245);
+        
+
+    }
+
+    private void checkDatabaseConnection(){
+        if(!DatabaseConnectionChecker.isDatabaseConnected()){
+            DatabaseConnectionChecker.showNoConnectionDialog();
+            return;
+        }
     }
 
 

@@ -4,6 +4,9 @@
     import java.io.IOException;
     import java.time.LocalDate;
     import dataAccess.DatabaseConnectionChecker;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
     import javafx.collections.ObservableList;
     import javafx.event.ActionEvent;
     import javafx.fxml.FXML;
@@ -20,7 +23,8 @@
     import javafx.scene.input.KeyEvent;
     import log.Log;
     import javafx.scene.control.Alert.AlertType;
-    import logic.FieldValidator;
+import logic.CharLimitValidator;
+import logic.FieldValidator;
     import logic.DAO.CollaborationDAO;
     import logic.DAO.ProfessorDAO;
     import logic.classes.Collaboration;
@@ -47,7 +51,7 @@ public class AddCollaborationController {
         private TextField textFieldNoStudents;
         //TODO: IMPLEMENTAR EN BASE Y DAO
         @FXML 
-        private ComboBox comboBoxCollaborationType;
+        private ComboBox<String> comboBoxCollaborationType;
 
 
     @FXML
@@ -66,7 +70,7 @@ public class AddCollaborationController {
         String collaborationSubject = comboBoxCollaborationSubject.getEditor().getText();
         String studentProfile = textAreaStudentProfile.getText();
         String noStudentsText = textFieldNoStudents.getText();
-            
+        String collaborationType = comboBoxCollaborationType.getEditor().getText();    
         if(!FieldValidator.onlyText(collaborationName) ||
         !FieldValidator.onlyText(collaborationDescription) ||
         !FieldValidator.isValidDateRange(startDate, finishDate) ||
@@ -91,6 +95,7 @@ public class AddCollaborationController {
             collaboration.setSubject(collaborationSubject);
             collaboration.setNoStudents(noStudents);
             collaboration.setStudentProfile(studentProfile);
+            collaboration.setCollaborationType(collaborationType);
             int result = instance.addCollaboration(collaboration);
             if(result == 1){
                 Alert collaborationAddedAlert = new Alert(AlertType.INFORMATION);
@@ -102,6 +107,10 @@ public class AddCollaborationController {
                 collaborationAddedAlert.getButtonTypes().setAll(accept);
                 Button okButton = (Button) collaborationAddedAlert.getDialogPane().lookupButton(accept);
                 okButton.setOnAction(eventAssignProfessor -> {
+                    if(!DatabaseConnectionChecker.isDatabaseConnected()){
+                        DatabaseConnectionChecker.showNoConnectionDialog();
+                        return;
+                    }
                     ProfessorDAO professorDAO = new ProfessorDAO();
                     Professor professorData = UserSessionManager.getInstance().getProfessorUserData();
                     int professorId = professorDAO.getProfessorIdByUser(professorData.getUser());
@@ -213,8 +222,16 @@ public class AddCollaborationController {
     
     @FXML
     private Label labelUser;
+    int charLimit = 0;
+
     @FXML
     void initialize() {
+        textFieldNoStudents.textProperty().addListener((observable, oldValue, newValue) -> {
+            charLimit = 9;
+            if (newValue != null && newValue.length() >= charLimit) {
+                textFieldNoStudents.setDisable(true); 
+            }
+        });
         Professor professorData = new Professor();
         professorData = UserSessionManager.getInstance().getProfessorUserData();
         labelUser.setText(professorData.getName());
@@ -235,6 +252,9 @@ public class AddCollaborationController {
             }
         }));
 
+        ObservableList<String> collaborationTypes = FXCollections.observableArrayList();
+        collaborationTypes.setAll("COIL-VIC", "Clase espejo");
+        comboBoxCollaborationType.getItems().setAll(collaborationTypes);
         datePickerStartDate.getEditor().addEventFilter(KeyEvent.KEY_TYPED, event -> event.consume());
         datePickerStartDate.getEditor().addEventFilter(KeyEvent.KEY_PRESSED, event -> event.consume());
         datePickerStartDate.getEditor().addEventFilter(KeyEvent.KEY_RELEASED, event -> event.consume());
@@ -242,7 +262,9 @@ public class AddCollaborationController {
         datePickerFinishDate.getEditor().addEventFilter(KeyEvent.KEY_TYPED, event -> event.consume());
         datePickerFinishDate.getEditor().addEventFilter(KeyEvent.KEY_PRESSED, event -> event.consume());
         datePickerFinishDate.getEditor().addEventFilter(KeyEvent.KEY_RELEASED, event -> event.consume());
-
+        CharLimitValidator.setCharLimitTextField(textFieldCollaborationName, 245);
+        CharLimitValidator.setCharLimitComboBox(comboBoxCollaborationSubject, charLimit);
+        CharLimitValidator.setCharLimitTextField(textFieldNoStudents, 3);
         
 
     }

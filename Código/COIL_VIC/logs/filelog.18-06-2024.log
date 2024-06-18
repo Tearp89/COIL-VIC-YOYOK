@@ -1,0 +1,4 @@
+18-06-2024 00:05:22 INFO  EmailControl:52: Se envió un Email a: marla838.agular@gmail.com
+18-06-2024 00:05:40 INFO  AddProfessorController:299: Se envió un correo con las credenciales a: marla838.agular@gmail.com
+18-06-2024 00:06:29 ERROR AddProfessorController:240: com.sun.mail.smtp.SMTPSendFailedException: 554 5.2.0 STOREDRV.Submission.Exception:OutboundSpamException; Failed to process message due to a permanent exception with message [BeginDiagnosticData]WASCL UserAction verdict is not None. Actual verdict is Suspend, ShowTierUpgrade. OutboundSpamException: WASCL UserAction verdict is not None. Actual verdict is Suspend, ShowTierUpgrade.[EndDiagnosticData] [Hostname=DS0PR15MB5496.namprd15.prod.outlook.com]
+

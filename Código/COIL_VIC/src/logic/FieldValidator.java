@@ -17,7 +17,9 @@ import javax.mail.internet.InternetAddress;
 public class FieldValidator {
     
     public static boolean onlyText(String textFieldTrim){
-        textFieldTrim = textFieldTrim.trim();
+        if(textFieldTrim != null){
+            textFieldTrim = textFieldTrim.trim();
+        }
         if(!textFieldTrim.isBlank()){
             return textFieldTrim.replaceAll("[.,-]", "") 
                                .matches("[a-zA-ZñÑáéíóúÁÉÍÓÚ\\s]+");
@@ -28,7 +30,9 @@ public class FieldValidator {
     
     
     public static boolean onlyNumber(String textFieldTrim){
-        textFieldTrim = textFieldTrim.trim();
+        if(textFieldTrim != null){
+            textFieldTrim = textFieldTrim.trim();
+        }
         if(!textFieldTrim.isBlank()){
             return textFieldTrim.matches("\\d+");
         } else {
@@ -37,7 +41,9 @@ public class FieldValidator {
     }
     
     public static boolean isEmail(String email){
-        email = email.trim();
+        if(email != null){
+            email = email.trim();
+        }
         try {
             InternetAddress internetAddress = new InternetAddress(email);
             internetAddress.validate();
@@ -48,16 +54,20 @@ public class FieldValidator {
     }
 
     public static boolean onlyTextAndNumbers(String textFieldTrim) {
-        textFieldTrim = textFieldTrim.trim();
+        if(textFieldTrim != null){
+            textFieldTrim = textFieldTrim.trim();
+        }
         if (!textFieldTrim.isBlank()) {
-            return textFieldTrim.matches("[a-zA-ZñÑáéíóúÁÉÍÓÚ\\d\\s]+");
+            return textFieldTrim.replaceAll("[.,-]", "").matches("[a-zA-ZñÑáéíóúÁÉÍÓÚ\\d\\s]+");
         } else {
             return false;
         }
     }
 
     public static boolean isValidName(String textFieldTrim) {
-        textFieldTrim = textFieldTrim.trim(); 
+        if(textFieldTrim != null){
+            textFieldTrim = textFieldTrim.trim();
+        } 
         if (!textFieldTrim.isBlank()) {
             
             return textFieldTrim.matches("([A-ZÁÉÍÓÚÑ][a-záéíóúñ]*[\\s\\-']?)+");
