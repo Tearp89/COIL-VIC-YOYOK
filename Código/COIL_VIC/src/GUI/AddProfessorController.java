@@ -305,7 +305,7 @@ private static final org.apache.log4j.Logger LOG = Log.getLogger(AddProfessorCon
         Professor foreignProfessor = new Professor();
         String professorName = textFieldProfessorName != null ? textFieldProfessorName.getText() : "";
         String professorLastName = textFieldProfessorLastName != null ? textFieldProfessorLastName.getText() : "";
-        String professorFullName = "" + professorName + "" + professorLastName;
+        String professorFullName = "" + professorName + " " + professorLastName;
         String professorPhoneNumber = textFieldProfessorPhoneNumber != null ? textFieldProfessorPhoneNumber.getText() : "";
         String email = textFieldEmail != null ? textFieldEmail.getText() : "";
 
@@ -340,7 +340,7 @@ private static final org.apache.log4j.Logger LOG = Log.getLogger(AddProfessorCon
         
         String professorName = textFieldProfessorName != null ? textFieldProfessorName.getText() : "";
         String professorLastName = textFieldProfessorLastName != null ? textFieldProfessorLastName.getText() : "";
-        String professorFullName = "" + professorName + "" + professorLastName;
+        String professorFullName = "" + professorName + " " + professorLastName;
         String professorPhoneNumber = textFieldProfessorPhoneNumber != null ? textFieldProfessorPhoneNumber.getText() : "";
         String email = textFieldEmail != null ? textFieldEmail.getText() : "";
 
