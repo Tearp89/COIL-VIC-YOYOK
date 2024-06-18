@@ -13,10 +13,8 @@ public class CharLimitValidator {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
                 if (newValue != null && newValue.length() >= charLimit) {
-                    textField.setDisable(true); 
-                } else {
-                    textField.setDisable(false); 
-                }
+                    textField.setText(oldValue);
+                } 
             }
         });
     }

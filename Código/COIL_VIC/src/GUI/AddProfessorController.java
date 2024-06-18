@@ -28,6 +28,7 @@ import logic.DAO.UniversityDAO;
 import logic.classes.Professor;
 import logic.classes.University;
 import logic.Access;
+import logic.CharLimitValidator;
 import logic.EmailControl;
 import logic.FieldValidator;
 import logic.ProfessorValidator;
@@ -488,6 +489,14 @@ private static final org.apache.log4j.Logger LOG = Log.getLogger(AddProfessorCon
                 }
             }));
         }
+
+        CharLimitValidator.setCharLimitTextField(textFieldPersonalNumber, 9);
+        CharLimitValidator.setCharLimitTextField(textFieldEmail, 255);
+        CharLimitValidator.setCharLimitTextField(textFieldProfessorLastName, 125);
+        CharLimitValidator.setCharLimitTextField(textFieldProfessorName, 125);
+        CharLimitValidator.setCharLimitTextField(textFieldProfessorPhoneNumber, 13);
+        CharLimitValidator.setCharLimitComboBox(comboBoxLanguage, 45);
+        CharLimitValidator.setCharLimitComboBox(comboBoxUniversity, 245);
     }
 
     private void checkDatabaseConnection(){

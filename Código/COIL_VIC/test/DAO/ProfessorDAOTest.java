@@ -42,7 +42,7 @@ public class ProfessorDAOTest {
         professor.setDiscipline("luegochecox3");
         professor.setUser("Usuario de prueba uv1");
         professor.setPassword("testtest");
-        
+        professor.setLanguage("Inglés");
         int result = instance.addProfessorUV(professor);
         assertEquals(expResult, result);
     }

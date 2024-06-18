@@ -21,7 +21,7 @@ public class CollaborationDAO implements ICollaboration {
 
     public int addCollaboration(Collaboration collaboration) {
         DatabaseManager dbManager = new DatabaseManager();
-        String query = "INSERT INTO colaboración(nombreColaboración, descripción, tipoColaboración,fechaInicio, fechaFin, estado, objetivo, temaInterés, noEstudiantes, perfilEstudiante) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String query = "INSERT INTO colaboración(nombreColaboración, descripción, tipoColaboración,fechaInicio, fechaFin, estado, objetivo, temaInterés, noEstudiantes, perfilEstudiante) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         int result = 0;
         try (Connection connection = dbManager.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
