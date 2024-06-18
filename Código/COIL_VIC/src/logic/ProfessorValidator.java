@@ -47,12 +47,6 @@ public class ProfessorValidator {
         String language = professor.getLanguage();
         String workShop = professor.getWorkShop();
         ProfessorDAO professorDAO = new ProfessorDAO();
-        System.out.println("Professor Name: " + professorName);
-        System.out.println("Professor Phone Number: " + professorPhoneNumber);
-        System.out.println("Email: " + email);
-        System.out.println("University Name:" +universityName);
-        System.out.println("Country: "+country);
-        System.out.println("Curso-Taller: "+workShop);
 
         if (!FieldValidator.isValidName(professorName) || !FieldValidator.onlyTextAndNumbers(professorPhoneNumber) || !FieldValidator.isEmail(email) || !FieldValidator.onlyText(country) || !FieldValidator.onlyText(universityName) || !FieldValidator.onlyText(language) || !FieldValidator.onlyText(workShop)) {
             Alert emptyFieldsAlertUV = new Alert(AlertType.ERROR);

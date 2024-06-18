@@ -93,236 +93,34 @@ private static final org.apache.log4j.Logger LOG = Log.getLogger(AddProfessorCon
             university.setUniversityCountry(universityCountry);
             university.setUniversityLanguage(language);
             universityDAO.addUniversity(university);
-            }
+        }
     }
 
     @FXML
     void addProfessor(ActionEvent event){
-        if(!DatabaseConnectionChecker.isDatabaseConnected()){
-            DatabaseConnectionChecker.showNoConnectionDialog();
-            return;
-        }
+        checkDatabaseConnection();
         ProfessorDAO professorDAO = new ProfessorDAO();
         
         Access access = new Access();
         String professorName = textFieldProfessorName != null ? textFieldProfessorName.getText() : "";
-        String professorLastName = textFieldProfessorLastName != null ? textFieldProfessorLastName.getText() : "";
-        String professorFullName = "" + professorName + "" + professorLastName;
-        String professorPhoneNumber = textFieldProfessorPhoneNumber != null ? textFieldProfessorPhoneNumber.getText() : "";
         String email = textFieldEmail != null ? textFieldEmail.getText() : "";
-
-        Object selectedCountry = comboBoxCountry.getSelectionModel().getSelectedItem();
-        String country = selectedCountry != null ? selectedCountry.toString() : null;
         Object selectedUniversity = comboBoxUniversity.getSelectionModel().getSelectedItem();
         String universityName = selectedUniversity != null ? selectedUniversity.toString() : null;
-        Object selectedLanguage = comboBoxLanguage.getSelectionModel().getSelectedItem();
-        String language = selectedLanguage != null ? selectedLanguage.toString() : null;
-        Object selectedWorkShop = comboBoxWorkShop.getSelectionModel().getSelectedItem();
-        String workShop = selectedWorkShop != null ? selectedWorkShop.toString() : null;
         String user = access.userGenerator(professorName);
-        String password = access.passwordGenerator(8);
-
-        Object selectedAcademicArea = comboBoxAcademicArea.getSelectionModel().getSelectedItem();
-        String academicArea = selectedAcademicArea != null ? selectedAcademicArea.toString() : null;
-
-        Object selectedRegion = comboBoxRegion.getSelectionModel().getSelectedItem();
-        String region = selectedRegion != null ? selectedRegion.toString() : null;
-        Object selectedContractType = comboBoxContractType.getSelectionModel().getSelectedItem();
-        String contractType = selectedContractType != null ? selectedContractType.toString() : null;
-        Object selectedContractCategory = comboBoxContractCategory.getSelectionModel().getSelectedItem();
-        String contractCategory = selectedContractCategory != null ? selectedContractCategory.toString() : null;
-
-
-
+        String password = access.passwordGenerator(8);  
         
-        
-        if (universityName == null) {
-            Alert invalidPersonalNumberAlert = new Alert(AlertType.ERROR);
-            invalidPersonalNumberAlert.setTitle("Campos inválidos");
-            invalidPersonalNumberAlert.setHeaderText("Campos inválidos");
-            invalidPersonalNumberAlert.setContentText("No se puede agregar al profesor hay campos vacíos o inválidos");
-            invalidPersonalNumberAlert.showAndWait();
+        if (universityName == null){
+            showAlert(AlertType.ERROR, "Campos inválidos", "No se ha ingresado una universidad");
             return;
-        }
-        
-        
+        } 
+        Professor professor;
         if(universityName.equals("Universidad Veracruzana")){
-            University university = new University();
-            Professor professor = new Professor();
-            UniversityDAO universityDAO = new UniversityDAO();
-            int universityId = universityDAO.getUniversityId(universityName);
-            addUniversity(universityName, country, language); 
-            if(textFieldPersonalNumber.getText() == null || !FieldValidator.onlyNumber(textFieldPersonalNumber.getText())){
-                Alert invalidPersonalNumberAlert = new Alert(AlertType.ERROR);
-                invalidPersonalNumberAlert.setTitle("Campos inválidos");
-                invalidPersonalNumberAlert.setHeaderText("Campos inválidos");
-                invalidPersonalNumberAlert.setContentText("No se puede agregar al profesor hay campos vacíos o inválidos");
-                invalidPersonalNumberAlert.showAndWait();
-                return;
-            }
-            int personalNumber = Integer.parseInt(textFieldPersonalNumber.getText());
-            professor.setName(professorFullName);
-            professor.setPhoneNumber(professorPhoneNumber);
-            professor.setEmail(email);
-            professor.setCountry(country);
-            professor.setUniversityName(universityName);
-            professor.setUniversityId(universityId);
-            university.setUniversityLanguage(language);
-            professor.setWorkShop(workShop);
-            professor.setUser(user);
-            professor.setPassword(password);
-            professor.setStatus("Pendiente");
-            professor.setType("UV");
-            professor.setAcademicArea(academicArea);
-            professor.setPersonalNumber(personalNumber);
-            professor.setRegion(region);
-            professor.setContractType(contractType);
-            professor.setContractCategory(contractCategory);
-            professor.setLanguage(language);
-            if(!ProfessorValidator.validateUvProfessorFields(professor)){
-                return;
-            }
-                Alert professorAddedAlert = new Alert(AlertType.CONFIRMATION);
-                professorAddedAlert.setTitle("Confirmación de registro");
-                professorAddedAlert.setHeaderText("Confirmación de registro");
-                professorAddedAlert.setContentText("¿Deseas enviar la solicitud de registro?");
-                professorAddedAlert.show();
-                ButtonType accept = new ButtonType("Aceptar");
-                ButtonType cancel = new ButtonType("Cancelar");
-                professorAddedAlert.getButtonTypes().setAll(cancel, accept);
-                Button okButton = (Button) professorAddedAlert.getDialogPane().lookupButton(accept);
-                Button cancelButton = (Button) professorAddedAlert.getDialogPane().lookupButton(cancel);
-                            
-                okButton.setOnAction(eventAddProfessorUV -> {   
-                    checkDatabaseConnection();         
-                    int professorRequestResult = professorDAO.addProfessorUV(professor);
-                    if(professorRequestResult == 1) {
-                        EmailControl emailControl = new EmailControl();
-                        try {
-                            emailControl.sendEmail(email, "Datos de entrada al sistema", "Sus credenciales para el sistema son: \n-Usuario: " + user + "\n-Contraseña: " + password + "\n\nUna vez sea aceptado en el sistema podra ingresar.");
-                            Alert registrationRequestAlert = new Alert(AlertType.INFORMATION);
-                            registrationRequestAlert.setTitle("Solicitud de registro");
-                            registrationRequestAlert.setHeaderText("Solicitud enviada");
-                            registrationRequestAlert.setContentText("Solicitud de registro enviada exitosamente. \nSus credenciales se han enviado por correo");
-                            registrationRequestAlert.showAndWait();
-                            LOG.info("Se envió un correo con las credenciales a: " + email);
-
-                            FXMLLoader addProfessorLoader = new FXMLLoader(getClass().getResource("/GUI/LoginWindow.fxml"));
-                            try {
-                                Parent root = addProfessorLoader.load();
-                                Scene scene = new Scene(root);
-                                Stage stage = new Stage();
-                                stage.setScene(scene);
-                                stage.show();
-                                Node source = (Node) event.getSource();
-                                Stage currenStage = (Stage) source.getScene().getWindow();
-                                currenStage.close();
-                            } catch (IOException goToHomeException){
-                                LOG.error("ERROR:", goToHomeException);
-                            }
-                    
-                        } catch (MessagingException e) {
-                            Alert errorSendingOfEmail = new Alert(AlertType.ERROR);
-                            errorSendingOfEmail.setTitle("Error en el envío del correo");
-                            errorSendingOfEmail.setHeaderText(null);
-                            errorSendingOfEmail.setContentText("Sus credenciales son las siguientes: \n-Usuario:" + user + "\n-Contraseña: " + password);
-                            errorSendingOfEmail.show();
-                            LOG.error(e);
-                        }
-                    } else {
-                        Alert registrationRequestFailedAlert = new Alert(AlertType.ERROR);
-                        registrationRequestFailedAlert.setTitle("Error en la solicitud");
-                        registrationRequestFailedAlert.setHeaderText("Error al enviar la solicitud");
-                        registrationRequestFailedAlert.setContentText("Hubo un problema al enviar la solicitud de registro. Por favor, intente nuevamente.");
-                        registrationRequestFailedAlert.show();
-                    }
-                    
-                });
-                cancelButton.setOnAction(eventCancelAdding -> {
-                    professorAddedAlert.close();
-                });
-                    
-                    
-            }else{
-                Professor professor = new Professor();
-                UniversityDAO universityDAO = new UniversityDAO();
-                addUniversity(universityName, country, language);
-                Integer universityIdInteger = universityDAO.getUniversityId(universityName);
-                professor.setName(professorFullName);
-                professor.setPhoneNumber(professorPhoneNumber);
-                professor.setEmail(email);
-                professor.setCountry(country);
-                professor.setUniversityId(universityIdInteger);
-                professor.setUniversityName(universityName);
-                professor.setWorkShop(workShop);
-                professor.setUser(user);
-                professor.setPassword(password);
-                professor.setStatus("Pendiente");
-                professor.setType("Externo");
-                professor.setLanguage(language);
-            if (!ProfessorValidator.validateForeignProfessorFields(professor)){
-                return;
-            }else{
-                    
-                Alert professorAddedAlert = new Alert(AlertType.CONFIRMATION);
-                professorAddedAlert.setTitle("Confirmación de registro");
-                professorAddedAlert.setHeaderText("Confirmación de registro");
-                professorAddedAlert.setContentText("¿Deseas enviar la solicitud de registro?");
-                ButtonType accept = new ButtonType("Aceptar");
-                ButtonType cancel = new ButtonType("Cancelar");
-                professorAddedAlert.getButtonTypes().setAll(cancel, accept);
-                professorAddedAlert.show();
-                Button okButton = (Button) professorAddedAlert.getDialogPane().lookupButton(accept); 
-                Button cancelButton = (Button) professorAddedAlert.getDialogPane().lookupButton(cancel);   
-                            
-                okButton.setOnAction(eventAddProfessorForeign -> {     
-                    checkDatabaseConnection();                         
-                    int professorRequestResult = professorDAO.addProfessorForeign(professor);
-                    if(professorRequestResult == 1) {
-                        EmailControl emailControl = new EmailControl();
-                        try {
-                            emailControl.sendEmail(email, "Datos de entrada al sistema", "Sus credenciales para el sistema son: \n-Usuario: " + user + "\n-Contraseña: " + password + "\n\nUna vez sea aceptado en el sistema podra ingresar.");
-                            Alert registrationRequestAlert = new Alert(AlertType.INFORMATION);
-                            registrationRequestAlert.setTitle("Solicitud de registro");
-                            registrationRequestAlert.setHeaderText("Solicitud enviada");
-                            registrationRequestAlert.setContentText("Solicitud de registro enviada exitosamente. \nSus credenciales se han enviado por correo. \nEl correo puede tardar unos minutos en llegar.");
-                            registrationRequestAlert.showAndWait();
-                            LOG.info("Se envió un correo con las credenciales a: " + email);
-                            FXMLLoader addProfessorLoader = new FXMLLoader(getClass().getResource("/GUI/LoginWindow.fxml"));
-                            try {
-                                Parent root = addProfessorLoader.load();
-                                Scene scene = new Scene(root);
-                                Stage stage = new Stage();
-                                stage.setScene(scene);
-                                stage.show();
-                                Node source = (Node) event.getSource();
-                                Stage currenStage = (Stage) source.getScene().getWindow();
-                                currenStage.close();
-                            } catch (IOException goToHomeException){
-                                LOG.error("ERROR:", goToHomeException);
-                            }
-
-                        } catch (MessagingException e) {
-                            Alert errorSendingOfEmail = new Alert(AlertType.ERROR);
-                            errorSendingOfEmail.setTitle("Error en el envío del correo");
-                            errorSendingOfEmail.setHeaderText(null);
-                            errorSendingOfEmail.setContentText("Sus credenciales son las siguientes: \n-Usuario: " + user + "\n-Contraseña: " + password + "\n\nAsegurese de no perderlas");
-                            errorSendingOfEmail.show();
-                            LOG.error(e);
-                        }
-                    } else {
-                        Alert registrationRequestFailedAlert = new Alert(AlertType.ERROR);
-                        registrationRequestFailedAlert.setTitle("Error en la solicitud");
-                        registrationRequestFailedAlert.setHeaderText("Error al enviar la solicitud");
-                        registrationRequestFailedAlert.setContentText("Hubo un problema al enviar la solicitud de registro. Por favor, intente nuevamente.");
-                        registrationRequestFailedAlert.show();
-                    }   
-                });
-                
-                cancelButton.setOnAction(eventCancelAdding -> {
-                    professorAddedAlert.close();
-                });
-            }
+            validatePersonalNumber();
+            professor = assignDataToUvProfessor(user, password);
+            handleProfessorRegistration(event, professor, email, user, password, true);
+        } else {
+            professor = assignDataToForeignProfessor(user, password);
+            handleProfessorRegistration(event, professor, email, user, password, false);
         }
             
     }
@@ -384,9 +182,9 @@ private static final org.apache.log4j.Logger LOG = Log.getLogger(AddProfessorCon
         Button cancelButon = (Button) confirmCancelationAlert.getDialogPane().lookupButton(cancel);
 
         okButton.setOnAction(eventConfirmCanel ->{
-            FXMLLoader addProfessorLoader = new FXMLLoader(getClass().getResource("/GUI/LoginWindow.fxml"));
+            FXMLLoader loginLoader = new FXMLLoader(getClass().getResource("/GUI/LoginWindow.fxml"));
             try {
-            Parent root = addProfessorLoader.load();
+            Parent root = loginLoader.load();
             Scene scene = new Scene(root);
             Stage stage = new Stage();
             stage.setScene(scene);
@@ -421,13 +219,13 @@ private static final org.apache.log4j.Logger LOG = Log.getLogger(AddProfessorCon
 
     @FXML
     void initialize(){
-       checkDatabaseConnection();
-        UniversityDAO universityDAO = new UniversityDAO();
-        ObservableList<String> universities = universityDAO.loadUniversities();
+        
         if(!DatabaseConnectionChecker.isDatabaseConnected()){
             DatabaseConnectionChecker.showNoConnectionDialog();
             buttonConfirmation.setDisable(true);
         } else {
+            UniversityDAO universityDAO = new UniversityDAO();
+            ObservableList<String> universities = universityDAO.loadUniversities();
             loadAcademicAreaData();
             loadRegionData();
             loadContractTypeData();
@@ -505,6 +303,165 @@ private static final org.apache.log4j.Logger LOG = Log.getLogger(AddProfessorCon
             return;
         }
     }
+
+    public Professor assignDataToForeignProfessor(String user, String password){
+        Professor foreignProfessor = new Professor();
+        String professorName = textFieldProfessorName != null ? textFieldProfessorName.getText() : "";
+        String professorLastName = textFieldProfessorLastName != null ? textFieldProfessorLastName.getText() : "";
+        String professorFullName = "" + professorName + "" + professorLastName;
+        String professorPhoneNumber = textFieldProfessorPhoneNumber != null ? textFieldProfessorPhoneNumber.getText() : "";
+        String email = textFieldEmail != null ? textFieldEmail.getText() : "";
+
+        Object selectedCountry = comboBoxCountry.getSelectionModel().getSelectedItem();
+        String country = selectedCountry != null ? selectedCountry.toString() : null;
+        Object selectedUniversity = comboBoxUniversity.getSelectionModel().getSelectedItem();
+        String universityName = selectedUniversity != null ? selectedUniversity.toString() : null;
+        Object selectedLanguage = comboBoxLanguage.getSelectionModel().getSelectedItem();
+        String language = selectedLanguage != null ? selectedLanguage.toString() : null;
+        Object selectedWorkShop = comboBoxWorkShop.getSelectionModel().getSelectedItem();
+        String workShop = selectedWorkShop != null ? selectedWorkShop.toString() : null;
+        UniversityDAO universityDAO = new UniversityDAO();
+        addUniversity(universityName, country, language);
+        Integer universityIdInteger = universityDAO.getUniversityId(universityName);
+        foreignProfessor.setName(professorFullName);
+        foreignProfessor.setPhoneNumber(professorPhoneNumber);
+        foreignProfessor.setEmail(email);
+        foreignProfessor.setCountry(country);
+        foreignProfessor.setUniversityId(universityIdInteger);
+        foreignProfessor.setUniversityName(universityName);
+        foreignProfessor.setWorkShop(workShop);
+        foreignProfessor.setUser(user);
+        foreignProfessor.setPassword(password);
+        foreignProfessor.setStatus("Pendiente");
+        foreignProfessor.setType("Externo");
+        foreignProfessor.setLanguage(language);
+        return foreignProfessor;
+    }
+    
+    public Professor assignDataToUvProfessor(String user, String password){
+        Professor uvProfessor = new Professor();
         
+        String professorName = textFieldProfessorName != null ? textFieldProfessorName.getText() : "";
+        String professorLastName = textFieldProfessorLastName != null ? textFieldProfessorLastName.getText() : "";
+        String professorFullName = "" + professorName + "" + professorLastName;
+        String professorPhoneNumber = textFieldProfessorPhoneNumber != null ? textFieldProfessorPhoneNumber.getText() : "";
+        String email = textFieldEmail != null ? textFieldEmail.getText() : "";
+
+        Object selectedCountry = comboBoxCountry.getSelectionModel().getSelectedItem();
+        String country = selectedCountry != null ? selectedCountry.toString() : null;
+        Object selectedUniversity = comboBoxUniversity.getSelectionModel().getSelectedItem();
+        String universityName = selectedUniversity != null ? selectedUniversity.toString() : null;
+        Object selectedLanguage = comboBoxLanguage.getSelectionModel().getSelectedItem();
+        String language = selectedLanguage != null ? selectedLanguage.toString() : null;
+        Object selectedWorkShop = comboBoxWorkShop.getSelectionModel().getSelectedItem();
+        String workShop = selectedWorkShop != null ? selectedWorkShop.toString() : null;
+
+        Object selectedAcademicArea = comboBoxAcademicArea.getSelectionModel().getSelectedItem();
+        String academicArea = selectedAcademicArea != null ? selectedAcademicArea.toString() : null;
+
+        Object selectedRegion = comboBoxRegion.getSelectionModel().getSelectedItem();
+        String region = selectedRegion != null ? selectedRegion.toString() : null;
+        Object selectedContractType = comboBoxContractType.getSelectionModel().getSelectedItem();
+        String contractType = selectedContractType != null ? selectedContractType.toString() : null;
+        Object selectedContractCategory = comboBoxContractCategory.getSelectionModel().getSelectedItem();
+        String contractCategory = selectedContractCategory != null ? selectedContractCategory.toString() : null;
+        UniversityDAO universityDAO = new UniversityDAO();
+        int personalNumber = Integer.parseInt(textFieldPersonalNumber.getText());
+        University university = new University();
+        addUniversity(universityName, country, language); 
+        int universityId = universityDAO.getUniversityId(universityName);
+        uvProfessor.setName(professorFullName);
+        uvProfessor.setPhoneNumber(professorPhoneNumber);
+        uvProfessor.setEmail(email);
+        uvProfessor.setCountry(country);
+        uvProfessor.setUniversityName(universityName);
+        uvProfessor.setUniversityId(universityId);
+        university.setUniversityLanguage(language);
+        uvProfessor.setWorkShop(workShop);
+        uvProfessor.setUser(user);
+        uvProfessor.setPassword(password);
+        uvProfessor.setStatus("Pendiente");
+        uvProfessor.setType("UV");
+        uvProfessor.setAcademicArea(academicArea);
+        uvProfessor.setPersonalNumber(personalNumber);
+        uvProfessor.setRegion(region);
+        uvProfessor.setContractType(contractType);
+        uvProfessor.setContractCategory(contractCategory);
+        uvProfessor.setLanguage(language);
+        return uvProfessor;
+    }
+
+    private void validatePersonalNumber(){
+        if(textFieldPersonalNumber.getText() == null || !FieldValidator.onlyNumber(textFieldPersonalNumber.getText())){
+            Alert invalidPersonalNumberAlert = new Alert(AlertType.ERROR);
+            invalidPersonalNumberAlert.setTitle("Campos inválidos");
+            invalidPersonalNumberAlert.setHeaderText("Campos inválidos");
+            invalidPersonalNumberAlert.setContentText("No se puede agregar al profesor hay campos vacíos o inválidos");
+            invalidPersonalNumberAlert.showAndWait();
+            return;
+        }
+    }
+
+    private void showAlert(AlertType type, String title, String content) {
+        Alert alert = new Alert(type);
+        alert.setTitle(title);
+        alert.setHeaderText(title);
+        alert.setContentText(content);
+        alert.showAndWait();
+    }
+
+    private void sendEmailAndShowAlert(String email, String user, String password) {
+        EmailControl emailControl = new EmailControl();
+        try {
+            emailControl.sendEmail(email, "Datos de entrada al sistema", "Sus credenciales para el sistema son: \n-Usuario: " + user + "\n-Contraseña: " + password + "\n\nUna vez sea aceptado en el sistema podrá ingresar.");
+            showAlert(AlertType.INFORMATION, "Solicitud de registro", "Solicitud de registro enviada exitosamente. Sus credenciales se han enviado por correo.");
+            LOG.info("Se envió un correo con las credenciales a: " + email);
+        } catch (MessagingException e) {
+            showAlert(AlertType.ERROR, "Error en el envío del correo", "Sus credenciales son las siguientes: \n-Usuario: " + user + "\n-Contraseña: " + password);
+            LOG.error(e);
+        }
+    }
+
+    private void registerProfessor(ActionEvent event, Professor professor, String email, String user, String password, boolean isUV) {
+        ProfessorDAO professorDAO = new ProfessorDAO();
+        int professorRequestResult = isUV ? professorDAO.addProfessorUV(professor) : professorDAO.addProfessorForeign(professor);
+
+        if (professorRequestResult == 1) {
+            sendEmailAndShowAlert(email, user, password);
+            FXMLLoader loginLoader = new FXMLLoader(getClass().getResource("/GUI/LoginWindow.fxml"));
+            ChangeWindowManager.changeWindowTo(event, loginLoader);
+        } else {
+            showAlert(AlertType.ERROR, "Error en la solicitud", "Hubo un problema al enviar la solicitud de registro. Por favor, intente nuevamente.");
+        }
+    }
+
+    private boolean isValidProfessor(Professor professor, boolean isUV) {
+        if (isUV) {
+            return ProfessorValidator.validateUvProfessorFields(professor);
+        } else {
+            return ProfessorValidator.validateForeignProfessorFields(professor);
+        }
+    }
+
+    private void handleProfessorRegistration(ActionEvent event, Professor professor, String email, String user, String password, boolean isUV) {
+    if (!isValidProfessor(professor, isUV)) {
+        return;
+    }
+
+    Alert professorAddedAlert = createConfirmationAlert("Confirmación de registro", "¿Deseas enviar la solicitud de registro?");
+        professorAddedAlert.showAndWait().ifPresent(response -> {
+            if (response == ButtonType.OK) {
+                registerProfessor(event, professor, email, user, password, isUV);
+            }
+        });
+    }
+
+    private Alert createConfirmationAlert(String title, String content) {
+        Alert alert = new Alert(AlertType.CONFIRMATION);
+        alert.setTitle(title);
+        alert.setHeaderText(title);
+        alert.setContentText(content);
+        return alert;
+    }
 }
 

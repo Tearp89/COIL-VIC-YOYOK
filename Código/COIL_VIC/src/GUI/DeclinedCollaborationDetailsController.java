@@ -21,6 +21,7 @@ import javafx.scene.input.KeyEvent;
 import log.Log;
 import javafx.scene.control.Alert.AlertType;
 import logic.CharLimitValidator;
+import logic.CollaborationValidator;
 import logic.FieldValidator;
 import logic.DAO.CollaborationDAO;
 import logic.classes.Collaboration;
@@ -201,40 +202,7 @@ public class DeclinedCollaborationDetailsController {
         collaborationUpdated.setCollaborationId(collaborationId);
         collaborationUpdated.setCollaborationStatus("Pendiente");
         CollaborationDAO updateCollaborationDAO = new CollaborationDAO();
-        if(!FieldValidator.onlyTextAndNumbers(collaborationName) || !FieldValidator.onlyText(collaborationDescription) || !FieldValidator.isValidDateRange(collaborationStartDate, collaborationFinishDate) || !FieldValidator.onlyText(collaborationGoal) || !FieldValidator.onlyText(collaborationSubject) || 
-        !FieldValidator.onlyNumber(numberStudentsText) || !FieldValidator.onlyText(studentProfile)){
-            Alert emptyFieldsAlert = new Alert(AlertType.ERROR);
-            emptyFieldsAlert.setTitle("Campos vacíos o inválidos");
-            emptyFieldsAlert.setContentText("No se pudo actualizar la colaboración hay campos vacíos o inválidos");
-            emptyFieldsAlert.setHeaderText("Campos vacíos o inválidos");
-            emptyFieldsAlert.show();
-
-
-        }else if(!collaborationDAO.validateCollaborationNameExceptActual(collaborationName, collaborationId)){
-            int result = updateCollaborationDAO.updateCollaboration(collaborationUpdated);
-            if (result == 1){
-                Alert collaborationUpdatedAlert = new Alert(AlertType.INFORMATION);
-                collaborationUpdatedAlert.setTitle("Confirmación registro");
-                collaborationUpdatedAlert.setHeaderText("Confirmación actualización");
-                collaborationUpdatedAlert.setContentText("Se actualizó la información de la convocatoria de manera exitosa");
-                collaborationUpdatedAlert.show();
-                ButtonType accept = new ButtonType("Aceptar");
-                collaborationUpdatedAlert.getButtonTypes().setAll(accept);
-                Button okButton = (Button) collaborationUpdatedAlert.getDialogPane().lookupButton(accept);
-                okButton.setOnAction(eventAcceptEditionConfirmation -> {
-                    FXMLLoader collaborationOptionsLoader = new FXMLLoader(getClass().getResource("/GUI/CollaborationOptionsWindow.fxml"));
-                    ChangeWindowManager.changeWindowTo(event, collaborationOptionsLoader); 
-                });
-            }
-
-        } else{
-            Alert duplicatedNameAlert = new Alert(AlertType.ERROR);
-            duplicatedNameAlert.setHeaderText("Nombre duplicado");
-            duplicatedNameAlert.setTitle("Nombre duplicado");
-            duplicatedNameAlert.setContentText("No se puede actualizar la colaboración el nombre está duplicado");
-            duplicatedNameAlert.show();
-        }
-
+        CollaborationValidator.validateCollaborationFields(collaborationUpdated, updateCollaborationDAO);
     }
 
     @FXML

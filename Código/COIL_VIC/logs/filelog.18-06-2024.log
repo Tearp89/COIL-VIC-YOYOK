@@ -116,3 +116,9 @@ java.sql.SQLException: Parameter index out of range (10 > number of parameters, 
 18-06-2024 10:43:10 ERROR DatabaseConnectionChecker:17: No hay conexión con la base de datos Communications link failure
 
 The last packet sent successfully to the server was 0 milliseconds ago. The driver has not received any packets from the server.
+18-06-2024 12:10:57 ERROR AddProfessorController:242: com.sun.mail.util.MailConnectException: Couldn't connect to host, port: smtp-mail.outlook.com, 587; timeout -1;
+  nested exception is:
+	java.net.ConnectException: Connection timed out: connect
+18-06-2024 12:26:09 ERROR AddProfessorController:178: com.sun.mail.util.MailConnectException: Couldn't connect to host, port: smtp-mail.outlook.com, 587; timeout -1;
+  nested exception is:
+	java.net.ConnectException: Connection timed out: connect

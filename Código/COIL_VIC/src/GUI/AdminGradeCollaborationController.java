@@ -96,10 +96,7 @@ public class AdminGradeCollaborationController {
     private Button buttonSendFeedback;
     @FXML
     private void sendFeedback(ActionEvent event){
-        if(!DatabaseConnectionChecker.isDatabaseConnected()){
-            DatabaseConnectionChecker.showNoConnectionDialog();
-            return;
-        }
+        checkDatabaseConnection();
         int grade = Integer.parseInt(comboBoxGrade.getSelectionModel().getSelectedItem().toString()) ;
         String comments = textAreaComments.getText();
         if(FieldValidator.onlyTextAndNumbers(comments.trim())){
@@ -202,10 +199,7 @@ public class AdminGradeCollaborationController {
         Admin adminData = new Admin();
         adminData = UserSessionManager.getInstance().getAdminUserData();
         labelUser.setText(adminData.getAdminName());
-        if(!DatabaseConnectionChecker.isDatabaseConnected()){
-            DatabaseConnectionChecker.showNoConnectionDialog();
-            return;
-        }
+        checkDatabaseConnection();
         this.collaborationId = collaborationId;
         String comments = textAreaComments.getText();
         String grade = comboBoxGrade.getSelectionModel().getSelectedItem();

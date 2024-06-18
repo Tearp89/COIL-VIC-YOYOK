@@ -21,6 +21,7 @@ import logic.Access;
 import logic.CharLimitValidator;
 import logic.EmailControl;
 import logic.FieldValidator;
+import logic.StudentValidator;
 import logic.DAO.CollaborationDAO;
 import logic.DAO.ProfessorDAO;
 import logic.DAO.StudentDAO;
@@ -116,10 +117,7 @@ public class AddStudentController {
     private TableColumn<Student, String> tableColumnEmail;
     @FXML
     private void addStudent(){
-        if(!DatabaseConnectionChecker.isDatabaseConnected()){
-            DatabaseConnectionChecker.showNoConnectionDialog();
-            return;
-        }
+        checkDatabaseConnection();
         Professor professorData = new Professor();
         professorData = UserSessionManager.getInstance().getProfessorUserData();
         ProfessorDAO professorDAO = new ProfessorDAO();
@@ -132,35 +130,9 @@ public class AddStudentController {
             emptyFieldsAlert.setHeaderText("Correo no válido");
             emptyFieldsAlert.setContentText("No se puede puede añadir al estudiante, no ha ingresado un correo válido");
             emptyFieldsAlert.show();
-        }else if (studentDAO.isStudentRegistered(email) == true){
-            if(studentDAO.isStudentAssignedToProfessor(email, professorId)){
-                Alert studentDuplicatedAlert = new Alert(AlertType.INFORMATION);
-                studentDuplicatedAlert.setTitle("Estudiante duplicado");
-                studentDuplicatedAlert.setHeaderText("Estudiante duplicado");
-                studentDuplicatedAlert.setContentText("No se puede añadir al estudiante, ya se encuentra agregado");
-                studentDuplicatedAlert.show();
-            } else{
-                int result = studentDAO.changeProfessorAssigned(professorId, email);
-                if (result > 0){
-                    Alert studentAddedAlert = new Alert(AlertType.INFORMATION);
-                    studentAddedAlert.setTitle("Estudiante añadido");
-                    studentAddedAlert.setHeaderText("Estudiante añadido");
-                    studentAddedAlert.setContentText("Se ha añadido al estudiante exitosamente");
-                    studentAddedAlert.show();
-                    ArrayList<Student> students =  studentDAO.getStudentsByProfessorId(professorId);
-                    tableViewStudents.getItems().clear();
-                    tableViewStudents.getItems().addAll(students);
-                } else {
-                    Alert addingStudentErrorAlert = new Alert(AlertType.ERROR);
-                    addingStudentErrorAlert.setTitle("Error conexión");
-                    addingStudentErrorAlert.setHeaderText("Error conexión");
-                    addingStudentErrorAlert.setContentText("Se perdió la conexión a la base de datos, inténtelo de nuevo más tarde");
-                    addingStudentErrorAlert.show();
-                }
-            }
-
-
-        } else{
+        }else if (!StudentValidator.validateStudentRegister(studentDAO, selectedStudent, tableViewStudents)){
+            
+        }else{
                 Student student = new Student();
                 student.setEmail(email);
                 student.setProfessorId(professorId);
