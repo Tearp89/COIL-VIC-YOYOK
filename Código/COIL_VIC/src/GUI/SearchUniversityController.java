@@ -145,6 +145,10 @@ public class SearchUniversityController {
         Admin adminData = new Admin();
         adminData = UserSessionManager.getInstance().getAdminUserData();
         labelUser.setText(adminData.getAdminName());
+        if(!DatabaseConnectionChecker.isDatabaseConnected()){
+            DatabaseConnectionChecker.showNoConnectionDialog();
+            return;
+        }
         loadUniversities();
         tableViewUniversities.setOnMouseClicked(event -> {
             University university = tableViewUniversities.getSelectionModel().getSelectedItem();

@@ -46,6 +46,10 @@ public class SearchAcceptedCollaborationsController {
 
 
     public void loadAcceptedCollaborations(){
+        if(!DatabaseConnectionChecker.isDatabaseConnected()){
+            DatabaseConnectionChecker.showNoConnectionDialog();
+            return;
+        }
         Professor professorData = new Professor();
         professorData = UserSessionManager.getInstance().getProfessorUserData();
         user = professorData.getUser();
@@ -64,7 +68,11 @@ public class SearchAcceptedCollaborationsController {
 
     @FXML
     private TextField textFieldSearch;
-        public void searchAcceptedCollaborations(ActionEvent event){
+    public void searchAcceptedCollaborations(ActionEvent event){
+        if(!DatabaseConnectionChecker.isDatabaseConnected()){
+            DatabaseConnectionChecker.showNoConnectionDialog();
+            return;
+        }
         CollaborationDAO collaborationDAO = new CollaborationDAO();
         ArrayList<Collaboration> activeCollaborations = new ArrayList<>();
         String collaborationName = "%" + textFieldSearch.getText() + "%";
@@ -162,6 +170,10 @@ public class SearchAcceptedCollaborationsController {
         Professor professorData = new Professor();
         professorData = UserSessionManager.getInstance().getProfessorUserData();
         labelUser.setText(professorData.getName());
+        if(!DatabaseConnectionChecker.isDatabaseConnected()){
+            DatabaseConnectionChecker.showNoConnectionDialog();
+            return;
+        }
         loadAcceptedCollaborations();
         tableViewAcceptedCollaborations.setOnMouseClicked(event -> {
             if(!DatabaseConnectionChecker.isDatabaseConnected()){

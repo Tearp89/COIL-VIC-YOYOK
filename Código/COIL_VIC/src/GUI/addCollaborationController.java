@@ -3,6 +3,7 @@
 
     import java.io.IOException;
     import java.time.LocalDate;
+    import dataAccess.DatabaseConnectionChecker;
     import javafx.collections.ObservableList;
     import javafx.event.ActionEvent;
     import javafx.fxml.FXML;
@@ -25,8 +26,8 @@
     import logic.classes.Collaboration;
     import logic.classes.Professor;
 
-    public class AddCollaborationController {    
-        private static final org.apache.log4j.Logger LOG = Log.getLogger(AddCollaborationController.class);
+public class AddCollaborationController {    
+    private static final org.apache.log4j.Logger LOG = Log.getLogger(AddCollaborationController.class);
         
         @FXML
         private TextField textFieldCollaborationName;
@@ -49,33 +50,37 @@
         private ComboBox comboBoxCollaborationType;
 
 
-        @FXML
-        void addCollaboration(ActionEvent event) {
-            CollaborationDAO instance = new CollaborationDAO();
-            Collaboration collaboration = new Collaboration();
-            String collaborationName = textFieldCollaborationName.getText();
-            String collaborationDescription = textAreaCollaborationDescription.getText();
-            LocalDate startDate = datePickerStartDate.getValue();
-            LocalDate finishDate = datePickerFinishDate.getValue();
-            String collaborationGoal = textFieldCollaborationGoal.getText();
-            String collaborationSubject = comboBoxCollaborationSubject.getEditor().getText();
-            String studentProfile = textAreaStudentProfile.getText();
-            String noStudentsText = textFieldNoStudents.getText();
+    @FXML
+    void addCollaboration(ActionEvent event) {
+        if(!DatabaseConnectionChecker.isDatabaseConnected()){
+            DatabaseConnectionChecker.showNoConnectionDialog();
+            return;
+        }
+        CollaborationDAO instance = new CollaborationDAO();
+        Collaboration collaboration = new Collaboration();
+        String collaborationName = textFieldCollaborationName.getText();
+        String collaborationDescription = textAreaCollaborationDescription.getText();
+        LocalDate startDate = datePickerStartDate.getValue();
+        LocalDate finishDate = datePickerFinishDate.getValue();
+        String collaborationGoal = textFieldCollaborationGoal.getText();
+        String collaborationSubject = comboBoxCollaborationSubject.getEditor().getText();
+        String studentProfile = textAreaStudentProfile.getText();
+        String noStudentsText = textFieldNoStudents.getText();
             
-            if(!FieldValidator.onlyText(collaborationName) ||
-            !FieldValidator.onlyText(collaborationDescription) ||
-            !FieldValidator.isValidDateRange(startDate, finishDate) ||
-            !FieldValidator.onlyText(collaborationGoal) ||
-            !FieldValidator.onlyText(collaborationSubject) ||
-            !FieldValidator.onlyText(studentProfile) ||
-            !FieldValidator.onlyNumber(noStudentsText)){
-                Alert emptyFieldsAlert = new Alert(AlertType.ERROR);
-                emptyFieldsAlert.setTitle("Campos vacíos o incorrectos");
-                emptyFieldsAlert.setHeaderText("Campos vacíos o incorrectos");
-                emptyFieldsAlert.setContentText("No se puede agregar la colaboración, hay campos vacíos o incorrectos");
-                emptyFieldsAlert.show();
-            } else if(!instance.validateCollaborationName(collaborationName)){
-                int noStudents = Integer.parseInt(noStudentsText);
+        if(!FieldValidator.onlyText(collaborationName) ||
+        !FieldValidator.onlyText(collaborationDescription) ||
+        !FieldValidator.isValidDateRange(startDate, finishDate) ||
+        !FieldValidator.onlyText(collaborationGoal) ||
+        !FieldValidator.onlyText(collaborationSubject) ||
+        !FieldValidator.onlyText(studentProfile) ||
+        !FieldValidator.onlyNumber(noStudentsText)){
+            Alert emptyFieldsAlert = new Alert(AlertType.ERROR);
+            emptyFieldsAlert.setTitle("Campos vacíos o incorrectos");
+            emptyFieldsAlert.setHeaderText("Campos vacíos o incorrectos");
+            emptyFieldsAlert.setContentText("No se puede agregar la colaboración, hay campos vacíos o incorrectos");
+            emptyFieldsAlert.show();
+        } else if(!instance.validateCollaborationName(collaborationName)){
+            int noStudents = Integer.parseInt(noStudentsText);
             
             collaboration.setCollaborationName(collaborationName);
             collaboration.setDescription(collaborationDescription);
@@ -86,7 +91,7 @@
             collaboration.setSubject(collaborationSubject);
             collaboration.setNoStudents(noStudents);
             collaboration.setStudentProfile(studentProfile);
-                int result = instance.addCollaboration(collaboration);
+            int result = instance.addCollaboration(collaboration);
             if(result == 1){
                 Alert collaborationAddedAlert = new Alert(AlertType.INFORMATION);
                 collaborationAddedAlert.setTitle("Colaboración enviada");
@@ -115,16 +120,16 @@
                 sendCollaborationErrorAlert.show();
 
             }
-            } else {
+        } else {
                 Alert duplicateNameAlert = new Alert(AlertType.ERROR);
                 duplicateNameAlert.setTitle("Nombre duplicado");
                 duplicateNameAlert.setHeaderText("Nombre duplicado");
                 duplicateNameAlert.setContentText("No se puede agregar la colaboración el nombre no se encuentra disponible");
                 duplicateNameAlert.show();
-            }
-            
-            
         }
+            
+            
+    }
 
     @FXML
     private Button buttonHome;
@@ -213,6 +218,10 @@
         Professor professorData = new Professor();
         professorData = UserSessionManager.getInstance().getProfessorUserData();
         labelUser.setText(professorData.getName());
+        if(!DatabaseConnectionChecker.isDatabaseConnected()){
+            DatabaseConnectionChecker.showNoConnectionDialog();
+            return;
+        }
         CollaborationDAO collaborationDAO = new CollaborationDAO();
         ObservableList<String> subjects = collaborationDAO.loadSubjects();
         comboBoxCollaborationSubject.getItems().setAll(subjects);
@@ -237,5 +246,7 @@
         
 
     }
+
+    
 }
 

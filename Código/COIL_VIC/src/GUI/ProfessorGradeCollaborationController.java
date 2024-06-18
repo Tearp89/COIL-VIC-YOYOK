@@ -1,6 +1,8 @@
 package GUI;
 
 import java.io.IOException;
+
+import dataAccess.DatabaseConnectionChecker;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -100,6 +102,10 @@ public class ProfessorGradeCollaborationController {
     private Button buttonSendFeedback;
     @FXML
     private void sendFeedback(ActionEvent event){
+        if(!DatabaseConnectionChecker.isDatabaseConnected()){
+            DatabaseConnectionChecker.showNoConnectionDialog();
+            return;
+        }
         int grade = Integer.parseInt(comboBoxGrade.getSelectionModel().getSelectedItem().toString()) ;
         String comments = textAreaComments.getText();
         if(FieldValidator.onlyTextAndNumbers(comments.trim())){
@@ -114,6 +120,10 @@ public class ProfessorGradeCollaborationController {
             Button okButton = (Button) confirmFeedbackAlert.getDialogPane().lookupButton(acceptFeedback);
             Button cancelButton = (Button) confirmFeedbackAlert.getDialogPane().lookupButton(cancelFeedback);
             okButton.setOnAction( eventSendFeedback -> {
+                if(!DatabaseConnectionChecker.isDatabaseConnected()){
+                    DatabaseConnectionChecker.showNoConnectionDialog();
+                    return;
+                }
                 Feedback feedback = new Feedback();
                 Professor professorData = new Professor();
                 professorData = UserSessionManager.getInstance().getProfessorUserData();
@@ -204,6 +214,10 @@ public class ProfessorGradeCollaborationController {
         Professor professorData = new Professor();
         professorData = UserSessionManager.getInstance().getProfessorUserData();
         labelUser.setText(professorData.getName());
+        if(!DatabaseConnectionChecker.isDatabaseConnected()){
+            DatabaseConnectionChecker.showNoConnectionDialog();
+            return;
+        }
         this.collaborationId = collaborationId;
         String comments = textAreaComments.getText();
         String grade = comboBoxGrade.getSelectionModel().getSelectedItem();

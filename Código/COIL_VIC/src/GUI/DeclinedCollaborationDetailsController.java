@@ -3,6 +3,7 @@ package GUI;
 import java.io.IOException;
 import java.time.LocalDate;
 
+import dataAccess.DatabaseConnectionChecker;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -117,7 +118,7 @@ public class DeclinedCollaborationDetailsController {
         ChangeWindowManager.closeWindow(event);
     }
 
-     @FXML
+    @FXML
     private Button buttonLogout;
 
     @FXML
@@ -173,6 +174,10 @@ public class DeclinedCollaborationDetailsController {
     Button buttonSendCollaboration;
     @FXML
     void sendCollaboration(ActionEvent event){
+        if(!DatabaseConnectionChecker.isDatabaseConnected()){
+            DatabaseConnectionChecker.showNoConnectionDialog();
+            return;
+        }
         CollaborationDAO collaborationDAO = new CollaborationDAO();
         String collaborationName = textFieldCollaborationName.getText();
         String collaborationDescription = textAreaCollaborationDescription.getText();
@@ -228,8 +233,6 @@ public class DeclinedCollaborationDetailsController {
             duplicatedNameAlert.setContentText("No se puede actualizar la colaboración el nombre está duplicado");
             duplicatedNameAlert.show();
         }
-      
-        
 
     }
 
@@ -241,6 +244,10 @@ public class DeclinedCollaborationDetailsController {
         Professor professorData = new Professor();
         professorData = UserSessionManager.getInstance().getProfessorUserData();
         labelUser.setText(professorData.getName());
+        if(!DatabaseConnectionChecker.isDatabaseConnected()){
+            DatabaseConnectionChecker.showNoConnectionDialog();
+            return;
+        }
         this.collaborationId = collaborationId;
         CollaborationDAO collaborationDAO = new CollaborationDAO();
         String name = collaborationDAO.getCollaborationNameById(collaborationId);
@@ -279,12 +286,5 @@ public class DeclinedCollaborationDetailsController {
                 return null;
             }
         }));
-
-
-
-
-
     }
-
-
 }

@@ -3,6 +3,7 @@ package GUI;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import dataAccess.DatabaseConnectionChecker;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -50,6 +51,10 @@ public class ConsultProfessorsController {
         Admin adminData = new Admin();
         adminData = UserSessionManager.getInstance().getAdminUserData();
         labelName.setText(adminData.getAdminName());
+        if(!DatabaseConnectionChecker.isDatabaseConnected()){
+            DatabaseConnectionChecker.showNoConnectionDialog();
+            return;
+        }
         showProfessorList();
         comboBoxConsultFilter.setEditable(true);
     }
@@ -131,6 +136,10 @@ public class ConsultProfessorsController {
 
     @FXML
     public void showProfessorList(){
+        if(!DatabaseConnectionChecker.isDatabaseConnected()){
+            DatabaseConnectionChecker.showNoConnectionDialog();
+            return;
+        }
         professorList.clear();
         ArrayList<Professor> professorsData = new ArrayList<>();
         ProfessorDAO professorDAOInstance = new ProfessorDAO();

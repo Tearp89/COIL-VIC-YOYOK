@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
+
+import dataAccess.DatabaseConnectionChecker;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -119,6 +121,11 @@ public class AddActivityController {
     private int activityId;
     @FXML
     private void saveActivity(ActionEvent event){
+        if(!DatabaseConnectionChecker.isDatabaseConnected()){
+            DatabaseConnectionChecker.showNoConnectionDialog();
+            disableButtons();
+            return;
+        }
         String title = textFieldTitle.getText();
         String week = comboBoxWeek.getValue();
         String type = comboBoxType.getValue();
@@ -150,6 +157,11 @@ public class AddActivityController {
 
     @FXML
     private void assignActivity(ActionEvent event){
+        if(!DatabaseConnectionChecker.isDatabaseConnected()){
+            DatabaseConnectionChecker.showNoConnectionDialog();
+            disableButtons();
+            return;
+        }
         ActivityDAO activityDAO = new ActivityDAO();
         int collaborationId = Integer.parseInt(labelCollaborationId.getText()); 
         String week = activityDAO.getActivityWeekById(activityId);
@@ -234,6 +246,11 @@ public class AddActivityController {
     private Label labelCollaborationId;
     @FXML
     private void initialize(){
+        if(!DatabaseConnectionChecker.isDatabaseConnected()){
+            DatabaseConnectionChecker.showNoConnectionDialog();
+            disableButtons();
+            return;
+        }
         Professor professorData = new Professor();
         professorData = UserSessionManager.getInstance().getProfessorUserData();
         labelUser.setText(professorData.getName());
@@ -265,4 +282,8 @@ public class AddActivityController {
         return ChronoUnit.WEEKS.between(startDate, finishDate);
     }
 
+    public void disableButtons(){
+        buttonAssign.setDisable(true);
+        buttonSave.setDisable(true);
+    }
 }

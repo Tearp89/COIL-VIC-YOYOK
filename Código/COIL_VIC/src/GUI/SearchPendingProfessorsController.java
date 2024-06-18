@@ -2,6 +2,8 @@ package GUI;
 
 import java.io.IOException;
 import java.util.ArrayList;
+
+import dataAccess.DatabaseConnectionChecker;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -53,10 +55,12 @@ public class SearchPendingProfessorsController {
         @Override
         public TableCell<Professor, Void> call(final TableColumn<Professor, Void> param) {
             final TableCell<Professor, Void> cell = new TableCell<Professor, Void>() {
-                private final Button acceptButton = new Button("Aceptar");
-
-                {
+                private final Button acceptButton = new Button("Aceptar");{
                     acceptButton.setOnAction((ActionEvent event) -> {
+                        if(!DatabaseConnectionChecker.isDatabaseConnected()){
+                            DatabaseConnectionChecker.showNoConnectionDialog();
+                            return;
+                        }
                         Professor professor = getTableView().getItems().get(getIndex());
                         int professorId = professor.getProfessorId();
                         ProfessorDAO professorDAO = new ProfessorDAO();
@@ -136,6 +140,10 @@ public class SearchPendingProfessorsController {
 
                     {
                         declineButton.setOnAction((ActionEvent event) -> {
+                            if(!DatabaseConnectionChecker.isDatabaseConnected()){
+                                DatabaseConnectionChecker.showNoConnectionDialog();
+                                return;
+                            }
                             Professor professor = getTableView().getItems().get(getIndex());
                             int professorId = professor.getProfessorId();
                             ProfessorDAO professorDAO = new ProfessorDAO();
@@ -281,6 +289,10 @@ public class SearchPendingProfessorsController {
         Admin adminData = new Admin();
         adminData = UserSessionManager.getInstance().getAdminUserData();
         labelUser.setText(adminData.getAdminName());
+        if(!DatabaseConnectionChecker.isDatabaseConnected()){
+            DatabaseConnectionChecker.showNoConnectionDialog();
+            return;
+        }
         loadPendingProfessors();
         addAcceptButtonToTable();
         addDeclineButtonToTable();

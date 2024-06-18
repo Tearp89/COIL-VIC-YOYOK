@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import javax.mail.MessagingException;
 
+import dataAccess.DatabaseConnectionChecker;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -114,6 +115,10 @@ public class AddStudentController {
     private TableColumn<Student, String> tableColumnEmail;
     @FXML
     private void addStudent(){
+        if(!DatabaseConnectionChecker.isDatabaseConnected()){
+            DatabaseConnectionChecker.showNoConnectionDialog();
+            return;
+        }
         Professor professorData = new Professor();
         professorData = UserSessionManager.getInstance().getProfessorUserData();
         ProfessorDAO professorDAO = new ProfessorDAO();
@@ -201,6 +206,10 @@ public class AddStudentController {
     private Button buttonAssign;
     @FXML
     private void assignStudent(ActionEvent event){
+        if(!DatabaseConnectionChecker.isDatabaseConnected()){
+            DatabaseConnectionChecker.showNoConnectionDialog();
+            return;
+        }
         String email = selectedStudent.getEmail();
         Professor professorData = new Professor();
         professorData = UserSessionManager.getInstance().getProfessorUserData();
@@ -250,6 +259,10 @@ public class AddStudentController {
         Professor professorData = new Professor();
         professorData = UserSessionManager.getInstance().getProfessorUserData();
         labelUser.setText(professorData.getName());
+        if(!DatabaseConnectionChecker.isDatabaseConnected()){
+            DatabaseConnectionChecker.showNoConnectionDialog();
+            return;
+        }
         StudentDAO studentDAO = new StudentDAO();
         ProfessorDAO professorDAO = new ProfessorDAO();
         int professorId = professorDAO.getProfessorIdByUser(professorData.getUser());
