@@ -1,6 +1,8 @@
 package GUI;
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -245,12 +247,22 @@ public class AddActivityController {
         labelCollaborationName.setText(publishedCollaboration.get(0).getCollaborationName());
         buttonCancel.setDisable(true);
         buttonAssign.setDisable(true);
-        ObservableList<String> weeks  = FXCollections.observableArrayList("1", "2", "3", "4", "5");
+        LocalDate startDate = LocalDate.parse(collaborationDAO.getCollaborationStartDateById(publishedCollaboration.get(0).getCollaborationId()));
+        LocalDate finishDate = LocalDate.parse(collaborationDAO.getCollaborationFinishDateById(publishedCollaboration.get(0).getCollaborationId()));
+        Long totalWeeks = countWeeks(startDate, finishDate);
+        ObservableList<String> weeks  = FXCollections.observableArrayList();
+        for(int i = 1; i<= totalWeeks; i++ ){
+            weeks.add(""+i);
+        }
         comboBoxWeek.getItems().setAll(weeks);
         ObservableList<String> types = FXCollections.observableArrayList("Rompe hielo", "Reflexión", "Proyecto COIL", "Retroalimentación", "Introduccion", "Cultura" );
         comboBoxType.getItems().setAll(types);
+        
 
+    }
 
+    public static long countWeeks(LocalDate startDate, LocalDate finishDate) {
+        return ChronoUnit.WEEKS.between(startDate, finishDate);
     }
 
 }

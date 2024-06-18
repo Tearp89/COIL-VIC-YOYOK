@@ -44,6 +44,9 @@
         private TextArea textAreaStudentProfile;
         @FXML
         private TextField textFieldNoStudents;
+        //TODO: IMPLEMENTAR EN BASE Y DAO
+        @FXML 
+        private ComboBox comboBoxCollaborationType;
 
 
         @FXML
