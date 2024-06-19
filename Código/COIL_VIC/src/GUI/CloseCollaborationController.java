@@ -3,6 +3,7 @@ package GUI;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import dataAccess.DatabaseConnectionChecker;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -34,6 +35,10 @@ public class CloseCollaborationController {
     private Label labelCollaborationId;
 
     private void setValues(Collaboration collaboration){
+        if(!DatabaseConnectionChecker.isDatabaseConnected()){
+            DatabaseConnectionChecker.showNoConnectionDialog();
+            return;
+        }
         Professor professorData = new Professor();
         String professorUser = professorData.getUser();
         professorData = UserSessionManager.getInstance().getProfessorUserData();
@@ -64,6 +69,10 @@ public class CloseCollaborationController {
         confirmClose.getButtonTypes().setAll(acceptClose, cancelClose);
         Button okButton = (Button) confirmClose.getDialogPane().lookupButton(acceptClose);
         Button cancelButton = (Button) confirmClose.getDialogPane().lookupButton(cancelClose);
+        if(!DatabaseConnectionChecker.isDatabaseConnected()){
+            DatabaseConnectionChecker.showNoConnectionDialog();
+            return;
+        }
         okButton.setOnAction(eventCloseCollaboration -> {
             CollaborationDAO collaborationDAO = new CollaborationDAO();
             int collaborationId = Integer.parseInt(labelCollaborationId.getText());
@@ -177,7 +186,10 @@ public class CloseCollaborationController {
         Professor professorData = new Professor();
         professorData = UserSessionManager.getInstance().getProfessorUserData();
         labelUser.setText(professorData.getName());
-        
+        if(!DatabaseConnectionChecker.isDatabaseConnected()){
+            DatabaseConnectionChecker.showNoConnectionDialog();
+            return;
+        }
         ProfessorDAO professorDAO = new ProfessorDAO();
         int professorId = professorDAO.getProfessorIdByUser(professorData.getUser());
 

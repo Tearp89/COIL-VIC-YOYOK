@@ -20,7 +20,7 @@ public class DatabaseConnectionChecker {
     }
 
     public static void showNoConnectionDialog() {
-        Alert alert = new Alert(Alert.AlertType.ERROR, "No hay conexión con la base de datos. La aplicación no puede continuar.", ButtonType.OK);
+        Alert alert = new Alert(Alert.AlertType.ERROR, "No hay conexión con la base de datos. Vuelva a intentarlo más tarde.", ButtonType.OK);
         alert.setTitle("Error de Conexión");
         alert.setHeaderText(null);
         alert.showAndWait();

@@ -2,6 +2,7 @@ package GUI;
 
 import java.io.IOException;
 
+import dataAccess.DatabaseConnectionChecker;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -81,6 +82,10 @@ public class UniversityDetailsController {
 
     @FXML
     void saveChanges(ActionEvent event){
+        if(!DatabaseConnectionChecker.isDatabaseConnected()){
+            DatabaseConnectionChecker.showNoConnectionDialog();
+            return;
+        }
         String universityName = textFieldUniversityName.getText();
         String universityLanguage = textFieldUniversityLanguage.getText();
         String universityCountry = textFieldUniversityCountry.getText();
@@ -115,6 +120,10 @@ public class UniversityDetailsController {
             Button okButton = (Button) confirmEditionAlert.getDialogPane().lookupButton(acceptEdition);
             Button cancelButton = (Button) confirmEditionAlert.getDialogPane().lookupButton(cancelEdition);
             okButton.setOnAction(eventSaveEdition -> {
+                if(!DatabaseConnectionChecker.isDatabaseConnected()){
+                    DatabaseConnectionChecker.showNoConnectionDialog();
+                    return;
+                }
                 int result = universityDAO.updateUniversity(universityUpdated);
                 if(result == 1){
                     Alert universityUpdatedAlert = new Alert(AlertType.INFORMATION);
@@ -235,6 +244,10 @@ public class UniversityDetailsController {
         Admin adminData = new Admin();
         adminData = UserSessionManager.getInstance().getAdminUserData();
         labelUser.setText(adminData.getAdminName());
+        if(!DatabaseConnectionChecker.isDatabaseConnected()){
+            DatabaseConnectionChecker.showNoConnectionDialog();
+            return;
+        }
         this.universityId = universityId;
         UniversityDAO universityDAO = new UniversityDAO();
         String universityName = universityDAO.getUniversityNameById(universityId);

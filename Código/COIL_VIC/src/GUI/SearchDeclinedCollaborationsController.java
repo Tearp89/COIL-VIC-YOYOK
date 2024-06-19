@@ -2,6 +2,8 @@ package GUI;
 
 import java.io.IOException;
 import java.util.ArrayList;
+
+import dataAccess.DatabaseConnectionChecker;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -42,6 +44,10 @@ public class SearchDeclinedCollaborationsController {
 
 
     public void loadDeclinedCollaboration(){
+        if(!DatabaseConnectionChecker.isDatabaseConnected()){
+            DatabaseConnectionChecker.showNoConnectionDialog();
+            return;
+        }
         CollaborationDAO declinedCollaborations = new CollaborationDAO();
         ArrayList<Collaboration> collaborations = new ArrayList<>();
         try{
@@ -58,6 +64,10 @@ public class SearchDeclinedCollaborationsController {
     }
 
     public void searchDeclinedCollaborations(ActionEvent event){
+        if(!DatabaseConnectionChecker.isDatabaseConnected()){
+            DatabaseConnectionChecker.showNoConnectionDialog();
+            return;
+        }
         Professor professorData = UserSessionManager.getInstance().getProfessorUserData();
             ProfessorDAO professorDAO = new ProfessorDAO();
             int professorId = professorDAO.getProfessorIdByUser(professorData.getUser());
@@ -149,9 +159,13 @@ public class SearchDeclinedCollaborationsController {
         Professor professorData = new Professor();
         professorData = UserSessionManager.getInstance().getProfessorUserData();
         labelUser.setText(professorData.getName());
+        if(!DatabaseConnectionChecker.isDatabaseConnected()){
+            DatabaseConnectionChecker.showNoConnectionDialog();
+            return;
+        }
 
-            loadDeclinedCollaboration();
-    tableViewDeclinedCollaborations.setOnMouseClicked(event -> {
+        loadDeclinedCollaboration();
+        tableViewDeclinedCollaborations.setOnMouseClicked(event -> {
         if(event.getClickCount() == 1){
             Collaboration declinedCollaboration = tableViewDeclinedCollaborations.getSelectionModel().getSelectedItem();
             if(declinedCollaboration != null){

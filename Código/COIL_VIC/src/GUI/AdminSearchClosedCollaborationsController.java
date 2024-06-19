@@ -3,6 +3,7 @@ package GUI;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import dataAccess.DatabaseConnectionChecker;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -31,6 +32,10 @@ public class AdminSearchClosedCollaborationsController {
     private Label labelCollaborationNotFound = new Label("No se encontraron colaboraciones cerradas");
 
     public void loadClosedCollaborations(){
+        if(!DatabaseConnectionChecker.isDatabaseConnected()){
+            DatabaseConnectionChecker.showNoConnectionDialog();
+            return;
+        }
         CollaborationDAO collaborationDAO = new CollaborationDAO();
         ArrayList<Collaboration> closedCollaborations = new ArrayList<>();
         closedCollaborations = collaborationDAO.searchCollaborationByStatus("Activa");
@@ -123,8 +128,12 @@ public class AdminSearchClosedCollaborationsController {
     private void initialize(){
         Admin adminData = new Admin();
         adminData = UserSessionManager.getInstance().getAdminUserData();
-        loadClosedCollaborations();
         labelUser.setText(adminData.getAdminName());
+        if(!DatabaseConnectionChecker.isDatabaseConnected()){
+            DatabaseConnectionChecker.showNoConnectionDialog();
+            return;
+        }
+        loadClosedCollaborations();
     }
 
 

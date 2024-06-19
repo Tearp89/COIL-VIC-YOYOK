@@ -4,16 +4,17 @@ import java.sql.Date;
 import java.time.LocalDate;
 
 public class Collaboration {
-    int collaborationId;
-    String description;
-    LocalDate finishDate;
-    LocalDate startDate;
-    String collaborationName;
-    String collaborationStatus;
-    String collaborationGoal;
-    String subject;
-    int noStudents;
-    String studentProfile;
+    private int collaborationId;
+    private String description;
+    private LocalDate finishDate;
+    private LocalDate startDate;
+    private String collaborationName;
+    private String collaborationStatus;
+    private String collaborationGoal;
+    private String subject;
+    private int noStudents;
+    private String studentProfile;
+    private String collaborationType;
 
 
     public Collaboration() {
@@ -98,6 +99,14 @@ public class Collaboration {
 
     public void setStudentProfile(String studentProfile) {
         this.studentProfile = studentProfile;
+    }
+
+    public String getCollaborationType() {
+        return collaborationType;
+    }
+
+    public void setCollaborationType(String collaborationType) {
+        this.collaborationType = collaborationType;
     }
 
 }

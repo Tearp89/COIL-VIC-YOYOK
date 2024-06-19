@@ -30,8 +30,8 @@ public class ProfessorDAO implements IProfessor{
     public int addProfessorUV(Professor professor){
         DatabaseManager dbManager = new DatabaseManager();
         String query = "INSERT INTO profesor(nombreProfesor, usuario, telefono, estado,"+ 
-        "tipoProfesor, país, Universidad_idUniversidad, area_academica, correo, contraseña, NoPersonal," +
-        "region, tipoContratación, categoríaContratación, curso_taller) VALUES (?,?,?,?,?,?,?,?,?, SHA2(?,256),?,?,?,?,?)";
+        "tipoProfesor, país, idioma,Universidad_idUniversidad, area_academica, correo, contraseña, NoPersonal," +
+        "region, tipoContratación, categoríaContratación, curso_taller) VALUES (?,?,?,?,?,?,?,?,?,?, SHA2(?,256),?,?,?,?,?)";
         int result = 0;
         try (Connection connection = dbManager.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
@@ -41,15 +41,16 @@ public class ProfessorDAO implements IProfessor{
             preparedStatement.setString(4, professor.getStatus());
             preparedStatement.setString(5, professor.getType());
             preparedStatement.setString(6, professor.getCountry());
-            preparedStatement.setInt(7, professor.getUniversityId());
-            preparedStatement.setString(8, professor.getAcademicArea());
-            preparedStatement.setString(9, professor.getEmail());
-            preparedStatement.setString(10, professor.getPassword());
-            preparedStatement.setInt(11, professor.getPersonalNumber());
-            preparedStatement.setString(12, professor.getRegion());
-            preparedStatement.setString(13, professor.getContractType());
-            preparedStatement.setString(14, professor.getContractCategory());
-            preparedStatement.setString(15, professor.getWorkShop());
+            preparedStatement.setString(7, professor.getLanguage());
+            preparedStatement.setInt(8, professor.getUniversityId());
+            preparedStatement.setString(9, professor.getAcademicArea());
+            preparedStatement.setString(10, professor.getEmail());
+            preparedStatement.setString(11, professor.getPassword());
+            preparedStatement.setInt(12, professor.getPersonalNumber());
+            preparedStatement.setString(13, professor.getRegion());
+            preparedStatement.setString(14, professor.getContractType());
+            preparedStatement.setString(15, professor.getContractCategory());
+            preparedStatement.setString(16, professor.getWorkShop());
             
             result = preparedStatement.executeUpdate();
         } catch (SQLException addProfessorUVException) {
@@ -61,7 +62,7 @@ public class ProfessorDAO implements IProfessor{
     public int addProfessorForeign(Professor professor){
         DatabaseManager dbManager = new DatabaseManager();
         String query = "INSERT INTO profesor(nombreProfesor, usuario, telefono," + 
-        "estado, país, Universidad_idUniversidad, correo, contraseña, tipoProfesor, curso_taller) VALUES (?,?,?,?,?,?,?,SHA2(?,256),?, ?)";
+        "estado, país, idioma,Universidad_idUniversidad, correo, contraseña, tipoProfesor, curso_taller) VALUES (?,?,?,?,?,?,?,?,SHA2(?,256),?, ?)";
         int result = 0;
         try (Connection connection = dbManager.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
@@ -70,11 +71,12 @@ public class ProfessorDAO implements IProfessor{
             preparedStatement.setString(3, professor.getPhoneNumber());
             preparedStatement.setString(4, professor.getStatus());
             preparedStatement.setString(5, professor.getCountry());
-            preparedStatement.setInt(6, professor.getUniversityId());
-            preparedStatement.setString(7, professor.getEmail());
-            preparedStatement.setString(8, professor.getPassword());
-            preparedStatement.setString(9, professor.getType());
-            preparedStatement.setString(10, professor.getWorkShop());
+            preparedStatement.setString(6, professor.getLanguage());
+            preparedStatement.setInt(7, professor.getUniversityId());
+            preparedStatement.setString(8, professor.getEmail());
+            preparedStatement.setString(9, professor.getPassword());
+            preparedStatement.setString(10, professor.getType());
+            preparedStatement.setString(11, professor.getWorkShop());
             
             result = preparedStatement.executeUpdate();
         } catch (SQLException addProfessorForeignException) {

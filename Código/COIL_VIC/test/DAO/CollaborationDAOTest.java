@@ -46,6 +46,7 @@ public class CollaborationDAOTest {
         collaboration.setNoStudents(25);
         collaboration.setStudentProfile("Inglés, ");
         collaboration.setSubject("Trabajo colaborativo");
+        collaboration.setCollaborationType("COIL-VIC");
         
         
         int rowsAffected = instance.addCollaboration(collaboration);
@@ -435,6 +436,14 @@ public class CollaborationDAOTest {
             boolean result = collaborationDAO.isProfessorInCollaboration(professorId);
             assertEquals(expectedResult, result);
             
+        }
+
+        @Test
+        public void validateCollaborationNameExceptActualTestSuccess(){
+            boolean expectedResult = true;
+            CollaborationDAO collaborationDAO = new CollaborationDAO();
+            boolean result = collaborationDAO.validateCollaborationNameExceptActual("Lectura y redacción de textos", 29);
+            assertEquals(expectedResult, result);
         }
 
         

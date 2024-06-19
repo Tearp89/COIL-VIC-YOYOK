@@ -1,6 +1,8 @@
 package GUI;
 
 import java.io.IOException;
+
+import dataAccess.DatabaseConnectionChecker;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -94,6 +96,7 @@ public class AdminGradeCollaborationController {
     private Button buttonSendFeedback;
     @FXML
     private void sendFeedback(ActionEvent event){
+        checkDatabaseConnection();
         int grade = Integer.parseInt(comboBoxGrade.getSelectionModel().getSelectedItem().toString()) ;
         String comments = textAreaComments.getText();
         if(FieldValidator.onlyTextAndNumbers(comments.trim())){
@@ -108,6 +111,7 @@ public class AdminGradeCollaborationController {
             Button okButton = (Button) confirmFeedbackAlert.getDialogPane().lookupButton(acceptFeedback);
             Button cancelButton = (Button) confirmFeedbackAlert.getDialogPane().lookupButton(cancelFeedback);
             okButton.setOnAction( eventSendFeedback -> {
+                checkDatabaseConnection();
                 Feedback feedback = new Feedback();
                 Admin adminData = new Admin();
                 adminData = UserSessionManager.getInstance().getAdminUserData();
@@ -195,6 +199,7 @@ public class AdminGradeCollaborationController {
         Admin adminData = new Admin();
         adminData = UserSessionManager.getInstance().getAdminUserData();
         labelUser.setText(adminData.getAdminName());
+        checkDatabaseConnection();
         this.collaborationId = collaborationId;
         String comments = textAreaComments.getText();
         String grade = comboBoxGrade.getSelectionModel().getSelectedItem();
@@ -224,6 +229,13 @@ public class AdminGradeCollaborationController {
 
         
 
+    }
+
+    private void checkDatabaseConnection(){
+        if(!DatabaseConnectionChecker.isDatabaseConnected()){
+            DatabaseConnectionChecker.showNoConnectionDialog();
+            return;
+        }
     }
 
     

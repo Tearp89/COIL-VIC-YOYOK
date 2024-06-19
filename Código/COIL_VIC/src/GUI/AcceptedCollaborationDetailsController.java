@@ -42,7 +42,11 @@ public class AcceptedCollaborationDetailsController {
 
     @FXML
     void uploadCollaboration(ActionEvent event){
-        checkDatabaseConnection();
+        if(!DatabaseConnectionChecker.isDatabaseConnected()){
+            DatabaseConnectionChecker.showNoConnectionDialog();
+            buttonUploadCollaboration.setDisable(true);
+            return;
+        }
         CollaborationDAO collaborationDAO = new CollaborationDAO();
         
         int result = collaborationDAO.changeCollaborationStatus("Publicada", collaborationId);
@@ -140,6 +144,11 @@ public class AcceptedCollaborationDetailsController {
 
     @FXML
     public void initialize(int collaborationId) {
+        if(!DatabaseConnectionChecker.isDatabaseConnected()){
+            DatabaseConnectionChecker.showNoConnectionDialog();
+            buttonUploadCollaboration.setDisable(true);
+            return;
+        }
         Professor professorData = new Professor();
         professorData = UserSessionManager.getInstance().getProfessorUserData();
         labelUser.setText(professorData.getName());
@@ -161,16 +170,6 @@ public class AcceptedCollaborationDetailsController {
         labelSubject.setText(collaborationSubject);
         labelNumberStudents.setText(String.valueOf(noStudents));
         labelStudentProfile.setText(studentProfile);
-        checkDatabaseConnection();
-        
-
         
     }
-    private void checkDatabaseConnection(){
-        if(!DatabaseConnectionChecker.isDatabaseConnected()){
-            DatabaseConnectionChecker.showNoConnectionDialog();
-            buttonUploadCollaboration.setDisable(true);
-        }
-    }
-
 }

@@ -188,7 +188,21 @@ public class CollaborationOptionsController {
         professorData = UserSessionManager.getInstance().getProfessorUserData();
         labelUser.setText(professorData.getName());
         this.professorUser = professorData.getUser();
-        checkDatabaseConnection();
+        if(!DatabaseConnectionChecker.isDatabaseConnected()){
+            DatabaseConnectionChecker.showNoConnectionDialog();
+            buttonAddActivity.setDisable(true);
+            buttonAddCollaboration.setDisable(true);
+            buttonAnswerRequest.setDisable(true);
+            buttonCloseCollaboration.setDisable(true);
+            buttonCollaboration.setDisable(true);
+            buttonEditCollaboration.setDisable(true);
+            buttonGradeCollaboration.setDisable(true);
+            buttonOpenCollaboration.setDisable(true);
+            buttonPublishCollaboration.setDisable(true);
+            buttonSearchActivity.setDisable(true);
+            buttonSendRequest.setDisable(true);
+            return;
+        }
 
         CollaborationDAO collaborationDAO = new CollaborationDAO();
         ProfessorDAO professorDAO = new ProfessorDAO();

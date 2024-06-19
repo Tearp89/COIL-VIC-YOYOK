@@ -38,6 +38,10 @@ public class SearchRequestToCollaborateController {
 
 
     public void loadCollaborators(){
+        if(!DatabaseConnectionChecker.isDatabaseConnected()){
+            DatabaseConnectionChecker.showNoConnectionDialog();
+            return;
+        }
         ProfessorDAO professorDAO = new ProfessorDAO();
         Professor professorData = new Professor();
         professorData = UserSessionManager.getInstance().getProfessorUserData();
@@ -68,6 +72,7 @@ public class SearchRequestToCollaborateController {
                     acceptButton.setOnAction((ActionEvent event) -> {
                         if(!DatabaseConnectionChecker.isDatabaseConnected()){
                             DatabaseConnectionChecker.showNoConnectionDialog();
+                            return;
                         }
                         ProfessorDAO professorDAO = new ProfessorDAO();
                         Professor professorData = new Professor();
@@ -214,6 +219,7 @@ public class SearchRequestToCollaborateController {
     private void initialize(){
         if(!DatabaseConnectionChecker.isDatabaseConnected()){
             DatabaseConnectionChecker.showNoConnectionDialog();
+            return;
         }
         Professor professorData = new Professor();
         professorData = UserSessionManager.getInstance().getProfessorUserData();

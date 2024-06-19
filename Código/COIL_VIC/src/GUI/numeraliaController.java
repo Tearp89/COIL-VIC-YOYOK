@@ -170,6 +170,10 @@ public class NumeraliaController {
     private void loadDataByYear(String year) {
         regionDataList.clear();
         academicAreaDataList.clear();
+        if(!DatabaseConnectionChecker.isDatabaseConnected()){
+            DatabaseConnectionChecker.showNoConnectionDialog();
+            return;
+        }
         
         ArrayList<RegionData> regionList = new ArrayList<>();
         

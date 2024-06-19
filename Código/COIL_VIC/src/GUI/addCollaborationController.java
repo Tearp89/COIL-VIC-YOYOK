@@ -3,6 +3,10 @@
 
     import java.io.IOException;
     import java.time.LocalDate;
+    import dataAccess.DatabaseConnectionChecker;
+    import javafx.beans.value.ChangeListener;
+    import javafx.beans.value.ObservableValue;
+    import javafx.collections.FXCollections;
     import javafx.collections.ObservableList;
     import javafx.event.ActionEvent;
     import javafx.fxml.FXML;
@@ -19,14 +23,16 @@
     import javafx.scene.input.KeyEvent;
     import log.Log;
     import javafx.scene.control.Alert.AlertType;
-    import logic.FieldValidator;
+    import logic.CharLimitValidator;
+import logic.CollaborationValidator;
+import logic.FieldValidator;
     import logic.DAO.CollaborationDAO;
     import logic.DAO.ProfessorDAO;
     import logic.classes.Collaboration;
     import logic.classes.Professor;
 
-    public class AddCollaborationController {    
-        private static final org.apache.log4j.Logger LOG = Log.getLogger(AddCollaborationController.class);
+public class AddCollaborationController {    
+    private static final org.apache.log4j.Logger LOG = Log.getLogger(AddCollaborationController.class);
         
         @FXML
         private TextField textFieldCollaborationName;
@@ -44,84 +50,50 @@
         private TextArea textAreaStudentProfile;
         @FXML
         private TextField textFieldNoStudents;
+        @FXML 
+        private ComboBox<String> comboBoxCollaborationType;
 
 
-        @FXML
-        void addCollaboration(ActionEvent event) {
-            CollaborationDAO instance = new CollaborationDAO();
-            Collaboration collaboration = new Collaboration();
-            String collaborationName = textFieldCollaborationName.getText();
-            String collaborationDescription = textAreaCollaborationDescription.getText();
-            LocalDate startDate = datePickerStartDate.getValue();
-            LocalDate finishDate = datePickerFinishDate.getValue();
-            String collaborationGoal = textFieldCollaborationGoal.getText();
-            String collaborationSubject = comboBoxCollaborationSubject.getEditor().getText();
-            String studentProfile = textAreaStudentProfile.getText();
-            String noStudentsText = textFieldNoStudents.getText();
-            
-            if(!FieldValidator.onlyText(collaborationName) ||
-            !FieldValidator.onlyText(collaborationDescription) ||
-            !FieldValidator.isValidDateRange(startDate, finishDate) ||
-            !FieldValidator.onlyText(collaborationGoal) ||
-            !FieldValidator.onlyText(collaborationSubject) ||
-            !FieldValidator.onlyText(studentProfile) ||
-            !FieldValidator.onlyNumber(noStudentsText)){
-                Alert emptyFieldsAlert = new Alert(AlertType.ERROR);
-                emptyFieldsAlert.setTitle("Campos vacíos o incorrectos");
-                emptyFieldsAlert.setHeaderText("Campos vacíos o incorrectos");
-                emptyFieldsAlert.setContentText("No se puede agregar la colaboración, hay campos vacíos o incorrectos");
-                emptyFieldsAlert.show();
-            } else if(!instance.validateCollaborationName(collaborationName)){
-                int noStudents = Integer.parseInt(noStudentsText);
-            
-            collaboration.setCollaborationName(collaborationName);
-            collaboration.setDescription(collaborationDescription);
-            collaboration.setStartDate(startDate);
-            collaboration.setFinishDate(finishDate);
-            collaboration.setCollaborationStatus("Pendiente");
-            collaboration.setCollaborationGoal(collaborationGoal);
-            collaboration.setSubject(collaborationSubject);
-            collaboration.setNoStudents(noStudents);
-            collaboration.setStudentProfile(studentProfile);
-                int result = instance.addCollaboration(collaboration);
-            if(result == 1){
-                Alert collaborationAddedAlert = new Alert(AlertType.INFORMATION);
-                collaborationAddedAlert.setTitle("Colaboración enviada");
-                collaborationAddedAlert.setHeaderText("colaboración enviada");
-                collaborationAddedAlert.setContentText("Colaboración enviada exitosamente");
-                collaborationAddedAlert.show();
-                ButtonType accept = new ButtonType("Aceptar");
-                collaborationAddedAlert.getButtonTypes().setAll(accept);
-                Button okButton = (Button) collaborationAddedAlert.getDialogPane().lookupButton(accept);
-                okButton.setOnAction(eventAssignProfessor -> {
-                    ProfessorDAO professorDAO = new ProfessorDAO();
-                    Professor professorData = UserSessionManager.getInstance().getProfessorUserData();
-                    int professorId = professorDAO.getProfessorIdByUser(professorData.getUser());
-                    int collaborationId = instance.getCollaborationIdbyName(collaborationName);
-                        instance.assignProfessorToCollaboration(professorId, collaborationId);
-                    
-                });
-                
-
-                
-            } else{
-                Alert sendCollaborationErrorAlert = new Alert(AlertType.ERROR);
-                sendCollaborationErrorAlert.setTitle("Error conexión");
-                sendCollaborationErrorAlert.setHeaderText("Error conexión");
-                sendCollaborationErrorAlert.setContentText("No se pudo conectar a la base de datos, inténtelo de nuevo más tarde");
-                sendCollaborationErrorAlert.show();
-
-            }
-            } else {
-                Alert duplicateNameAlert = new Alert(AlertType.ERROR);
-                duplicateNameAlert.setTitle("Nombre duplicado");
-                duplicateNameAlert.setHeaderText("Nombre duplicado");
-                duplicateNameAlert.setContentText("No se puede agregar la colaboración el nombre no se encuentra disponible");
-                duplicateNameAlert.show();
-            }
-            
-            
+    @FXML
+    void addCollaboration(ActionEvent event) {
+        checkConnection();
+        CollaborationDAO instance = new CollaborationDAO();
+        Collaboration collaboration = new Collaboration();
+        String collaborationName = textFieldCollaborationName.getText();
+        String collaborationDescription = textAreaCollaborationDescription.getText();
+        LocalDate startDate = datePickerStartDate.getValue();
+        LocalDate finishDate = datePickerFinishDate.getValue();
+        String collaborationGoal = textFieldCollaborationGoal.getText();
+        String collaborationSubject = comboBoxCollaborationSubject.getEditor().getText();
+        String studentProfile = textAreaStudentProfile.getText();
+        String noStudentsText = textFieldNoStudents.getText();
+        String collaborationType = comboBoxCollaborationType.getEditor().getText();    
+        if(noStudentsText == null || !FieldValidator.onlyNumber(noStudentsText)){
+            Alert emptyFieldsAlert = new Alert(AlertType.ERROR);
+            emptyFieldsAlert.setTitle("Campos vacíos o incorrectos");
+            emptyFieldsAlert.setHeaderText("Campos vacíos o incorrectos");
+            emptyFieldsAlert.setContentText("No se puede agregar la colaboración, hay campos vacíos o incorrectos");
+            emptyFieldsAlert.show();
+            return;
         }
+        int noStudents = Integer.parseInt(noStudentsText);
+
+        collaboration.setCollaborationName(collaborationName);
+        collaboration.setDescription(collaborationDescription);
+        collaboration.setStartDate(startDate);
+        collaboration.setFinishDate(finishDate);
+        collaboration.setCollaborationStatus("Pendiente");
+        collaboration.setCollaborationGoal(collaborationGoal);
+        collaboration.setSubject(collaborationSubject);
+        collaboration.setNoStudents(noStudents);
+        collaboration.setStudentProfile(studentProfile);
+        collaboration.setCollaborationType(collaborationType);
+
+
+        CollaborationValidator.validateCollaborationFields(collaboration, instance);
+            
+            
+    }
 
     @FXML
     private Button buttonHome;
@@ -205,8 +177,18 @@
     
     @FXML
     private Label labelUser;
+    int charLimit = 0;
+
     @FXML
     void initialize() {
+
+        checkConnection();
+        textFieldNoStudents.textProperty().addListener((observable, oldValue, newValue) -> {
+            charLimit = 9;
+            if (newValue != null && newValue.length() >= charLimit) {
+                textFieldNoStudents.setDisable(true); 
+            }
+        });
         Professor professorData = new Professor();
         professorData = UserSessionManager.getInstance().getProfessorUserData();
         labelUser.setText(professorData.getName());
@@ -223,6 +205,9 @@
             }
         }));
 
+        ObservableList<String> collaborationTypes = FXCollections.observableArrayList();
+        collaborationTypes.setAll("COIL-VIC", "Clase espejo");
+        comboBoxCollaborationType.getItems().setAll(collaborationTypes);
         datePickerStartDate.getEditor().addEventFilter(KeyEvent.KEY_TYPED, event -> event.consume());
         datePickerStartDate.getEditor().addEventFilter(KeyEvent.KEY_PRESSED, event -> event.consume());
         datePickerStartDate.getEditor().addEventFilter(KeyEvent.KEY_RELEASED, event -> event.consume());
@@ -230,9 +215,20 @@
         datePickerFinishDate.getEditor().addEventFilter(KeyEvent.KEY_TYPED, event -> event.consume());
         datePickerFinishDate.getEditor().addEventFilter(KeyEvent.KEY_PRESSED, event -> event.consume());
         datePickerFinishDate.getEditor().addEventFilter(KeyEvent.KEY_RELEASED, event -> event.consume());
-
+        CharLimitValidator.setCharLimitTextField(textFieldCollaborationName, 245);
+        CharLimitValidator.setCharLimitComboBox(comboBoxCollaborationSubject, charLimit);
+        CharLimitValidator.setCharLimitTextField(textFieldNoStudents, 3);
         
 
     }
+
+    public void checkConnection(){
+        if(!DatabaseConnectionChecker.isDatabaseConnected()){
+            DatabaseConnectionChecker.showNoConnectionDialog();
+            return;
+        }
+    }
+
+    
 }
 

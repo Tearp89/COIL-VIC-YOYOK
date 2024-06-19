@@ -42,7 +42,7 @@ public class ProfessorDAOTest {
         professor.setDiscipline("luegochecox3");
         professor.setUser("Usuario de prueba uv1");
         professor.setPassword("testtest");
-        
+        professor.setLanguage("Inglés");
         int result = instance.addProfessorUV(professor);
         assertEquals(expResult, result);
     }
@@ -164,6 +164,7 @@ public class ProfessorDAOTest {
         professor.setCountry("Alemania");
         professor.setUniversityId(2);{
         professor.setProfessorId(7);
+        professor.setLanguage("Español");
     }
         int result = instance.updateProfessorForeign(professor);
         assertEquals(expResult, result);
@@ -180,6 +181,7 @@ public class ProfessorDAOTest {
         professor.setCountry("Alemania");
         professor.setUniversityId(5);
         professor.setProfessorId(7);
+        professor.setLanguage("Inglés");
         int result = instance.updateProfessorForeign(professor);
         assertEquals(expResult, result);
     }
