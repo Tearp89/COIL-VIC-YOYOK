@@ -24,8 +24,8 @@
     import log.Log;
     import javafx.scene.control.Alert.AlertType;
     import logic.CharLimitValidator;
-import logic.CollaborationValidator;
-import logic.FieldValidator;
+    import logic.CollaborationValidator;
+    import logic.FieldValidator;
     import logic.DAO.CollaborationDAO;
     import logic.DAO.ProfessorDAO;
     import logic.classes.Collaboration;
@@ -51,7 +51,7 @@ public class AddCollaborationController {
         @FXML
         private TextField textFieldNoStudents;
         @FXML 
-        private ComboBox<String> comboBoxCollaborationType;
+        private ComboBox<String> comboBoxCollaborationType; 
 
 
     @FXML
@@ -89,8 +89,12 @@ public class AddCollaborationController {
         collaboration.setStudentProfile(studentProfile);
         collaboration.setCollaborationType(collaborationType);
 
-
-        CollaborationValidator.validateCollaborationFields(collaboration, instance);
+        if(!CollaborationValidator.validateCollaborationFields(collaboration, instance)){
+            return;
+        } else if (CollaborationValidator.validateCollaborationName(collaboration, instance)){
+            int result = instance.addCollaboration(collaboration);
+            CollaborationValidator.showAlerts(result, instance, collaboration);
+        }
             
             
     }
