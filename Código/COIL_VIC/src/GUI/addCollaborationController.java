@@ -1,11 +1,8 @@
     package GUI;
 
-
     import java.io.IOException;
     import java.time.LocalDate;
     import dataAccess.DatabaseConnectionChecker;
-    import javafx.beans.value.ChangeListener;
-    import javafx.beans.value.ObservableValue;
     import javafx.collections.FXCollections;
     import javafx.collections.ObservableList;
     import javafx.event.ActionEvent;
@@ -13,7 +10,6 @@
     import javafx.fxml.FXMLLoader;
     import javafx.scene.control.Alert;
     import javafx.scene.control.Button;
-    import javafx.scene.control.ButtonType;
     import javafx.scene.control.ComboBox;
     import javafx.scene.control.DatePicker;
     import javafx.scene.control.Label;
@@ -24,10 +20,9 @@
     import log.Log;
     import javafx.scene.control.Alert.AlertType;
     import logic.CharLimitValidator;
-import logic.CollaborationValidator;
-import logic.FieldValidator;
+    import logic.CollaborationValidator;
+    import logic.FieldValidator;
     import logic.DAO.CollaborationDAO;
-    import logic.DAO.ProfessorDAO;
     import logic.classes.Collaboration;
     import logic.classes.Professor;
 
@@ -56,7 +51,10 @@ public class AddCollaborationController {
 
     @FXML
     void addCollaboration(ActionEvent event) {
-        checkConnection();
+        if(!DatabaseConnectionChecker.isDatabaseConnected()){
+            DatabaseConnectionChecker.showNoConnectionDialog();
+            return;
+        }
         CollaborationDAO instance = new CollaborationDAO();
         Collaboration collaboration = new Collaboration();
         String collaborationName = textFieldCollaborationName.getText();
@@ -88,11 +86,7 @@ public class AddCollaborationController {
         collaboration.setNoStudents(noStudents);
         collaboration.setStudentProfile(studentProfile);
         collaboration.setCollaborationType(collaborationType);
-
-
         CollaborationValidator.validateCollaborationFields(collaboration, instance);
-            
-            
     }
 
     @FXML
@@ -182,13 +176,18 @@ public class AddCollaborationController {
     @FXML
     void initialize() {
 
-        checkConnection();
+        if(!DatabaseConnectionChecker.isDatabaseConnected()){
+            DatabaseConnectionChecker.showNoConnectionDialog();
+            return;
+        }
+
         textFieldNoStudents.textProperty().addListener((observable, oldValue, newValue) -> {
             charLimit = 9;
             if (newValue != null && newValue.length() >= charLimit) {
                 textFieldNoStudents.setDisable(true); 
             }
         });
+
         Professor professorData = new Professor();
         professorData = UserSessionManager.getInstance().getProfessorUserData();
         labelUser.setText(professorData.getName());
@@ -221,14 +220,5 @@ public class AddCollaborationController {
         
 
     }
-
-    public void checkConnection(){
-        if(!DatabaseConnectionChecker.isDatabaseConnected()){
-            DatabaseConnectionChecker.showNoConnectionDialog();
-            return;
-        }
-    }
-
-    
 }
 

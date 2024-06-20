@@ -58,10 +58,10 @@ public class AcceptedCollaborationDetailsController {
             publishSucessAlert.show();
         } else{
             Alert publishErrorAlert = new Alert(AlertType.ERROR);
-                    publishErrorAlert.setTitle("Error conexión");
-                    publishErrorAlert.setHeaderText("Error conexión");
-                    publishErrorAlert.setContentText("No se pudo conectar a la base de datos, inténtelo de nuevo más tarde");
-                    publishErrorAlert.show();
+            publishErrorAlert.setTitle("Error conexión");
+            publishErrorAlert.setHeaderText("Error conexión");
+            publishErrorAlert.setContentText("No se pudo conectar a la base de datos, inténtelo de nuevo más tarde");
+            publishErrorAlert.show();
 
         }
 

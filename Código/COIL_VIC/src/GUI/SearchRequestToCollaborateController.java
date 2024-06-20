@@ -3,6 +3,8 @@ package GUI;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import javax.mail.MessagingException;
+
 import dataAccess.DatabaseConnectionChecker;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -16,6 +18,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.util.Callback;
 import log.Log;
+import logic.EmailControl;
 import logic.DAO.CollaborationDAO;
 import logic.DAO.ProfessorDAO;
 import logic.classes.Collaboration;
@@ -103,11 +106,21 @@ public class SearchRequestToCollaborateController {
                             int result = collaborationDAO.changeRequestStatus(requesterId, collaborationId, "Aceptado");
                             int assignResult = collaborationDAO.assignProfessorToCollaboration(requesterId, collaborationId);
                         if(result == 1 && assignResult == 1){
-                            Alert acceptanceSuccessfulAlert = new Alert(AlertType.INFORMATION);
-                            acceptanceSuccessfulAlert.setTitle("Académico aceptado");
-                            acceptanceSuccessfulAlert.setHeaderText("Académico aceptado");
-                            acceptanceSuccessfulAlert.setContentText("Académico aceptado exitosamente");
-                            acceptanceSuccessfulAlert.show();
+                            EmailControl emailControl = new EmailControl();
+                            try {
+                                emailControl.sendEmail(professorDAO.getEmailById(requesterId), "Aceptado en la colaboracion COIL-VIC", "Ha sido aceptado en la colaboración COIL del profesor "+user);
+                                Alert acceptanceSuccessfulAlert = new Alert(AlertType.INFORMATION);
+                                acceptanceSuccessfulAlert.setTitle("Académico aceptado");
+                                acceptanceSuccessfulAlert.setHeaderText("Académico aceptado");
+                                acceptanceSuccessfulAlert.setContentText("Académico aceptado exitosamente, se ha enviado un correo");
+                                acceptanceSuccessfulAlert.show();
+                            } catch (MessagingException e) {
+                                Alert acceptanceSuccessfulNoEmailAlert = new Alert(AlertType.INFORMATION);
+                                acceptanceSuccessfulNoEmailAlert.setTitle("Académico aceptado");
+                                acceptanceSuccessfulNoEmailAlert.setHeaderText("Académico aceptado, error al enviar correo");
+                                acceptanceSuccessfulNoEmailAlert.setContentText("Académico aceptado exitosamente, pero no se pudo enviar un correo al profesor, favor de avisarle");
+                                acceptanceSuccessfulNoEmailAlert.show();
+                            }        
 
                         }else{
                             Alert acceptanceErrorAlert = new Alert(AlertType.ERROR);

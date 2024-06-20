@@ -3,6 +3,8 @@ package GUI;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import javax.mail.MessagingException;
+
 import dataAccess.DatabaseConnectionChecker;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -17,6 +19,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.util.Callback;
 import log.Log;
+import logic.EmailControl;
 import logic.DAO.ProfessorDAO;
 import logic.classes.Admin;
 import logic.classes.Professor;
@@ -82,14 +85,27 @@ public class SearchPendingProfessorsController {
                             Button okButton = (Button) confirmDeclineAlert.getDialogPane().lookupButton(accept); 
                             Button cancelButton = (Button) confirmDeclineAlert.getDialogPane().lookupButton(cancel);
                             okButton.setOnAction(eventAddProfessorForeign -> {
+                                if(!DatabaseConnectionChecker.isDatabaseConnected()){
+                                    DatabaseConnectionChecker.showNoConnectionDialog();
+                                    return;
+                                }
                                 int result = professorDAO.changeProfessorStatusById("Aceptado", professorId);
                                 if(result == 1){
-                                    Alert acceptanceSuccessfulAlert = new Alert(AlertType.INFORMATION);
-                                    acceptanceSuccessfulAlert.setTitle("Académico aceptado");
-                                    acceptanceSuccessfulAlert.setHeaderText("Académico aceptado");
-                                    acceptanceSuccessfulAlert.setContentText("Académico aceptado exitosamente");
-                                    acceptanceSuccessfulAlert.show();
-
+                                    EmailControl emailControl = new EmailControl();
+                                    try {
+                                        emailControl.sendEmail(professorDAO.getEmailById(professorId), "Aceptado en COIL-VIC", "No ha sido aceptado en el sistema COIL-VIC, para más información acudir a secretaria de la entidad más cercana");
+                                        Alert acceptanceSuccessfulAlert = new Alert(AlertType.INFORMATION);
+                                        acceptanceSuccessfulAlert.setTitle("Académico aceptado");
+                                        acceptanceSuccessfulAlert.setHeaderText("Académico aceptado");
+                                        acceptanceSuccessfulAlert.setContentText("Académico aceptado exitosamente, se ha enviado por correo su confirmación");
+                                        acceptanceSuccessfulAlert.show();
+                                    } catch (MessagingException e) {
+                                        Alert acceptanceSuccessfulNoEmailAlert = new Alert(AlertType.INFORMATION);
+                                        acceptanceSuccessfulNoEmailAlert.setTitle("Académico aceptado");
+                                        acceptanceSuccessfulNoEmailAlert.setHeaderText("Académico aceptado, no se envió correo");
+                                        acceptanceSuccessfulNoEmailAlert.setContentText("Académico aceptado exitosamente, pero no se pudo enviar el correo de confirmación");
+                                        acceptanceSuccessfulNoEmailAlert.show();
+                                    }
                                 }else{
                                     Alert acceptanceErrorAlert = new Alert(AlertType.ERROR);
                                     acceptanceErrorAlert.setTitle("Error conexión");
@@ -159,19 +175,35 @@ public class SearchPendingProfessorsController {
                             Button okButton = (Button) confirmDeclineAlert.getDialogPane().lookupButton(accept); 
                             Button cancelButton = (Button) confirmDeclineAlert.getDialogPane().lookupButton(cancel);
                             okButton.setOnAction(eventAddProfessorForeign -> {
+                                if(!DatabaseConnectionChecker.isDatabaseConnected()){
+                                    DatabaseConnectionChecker.showNoConnectionDialog();
+                                    return;
+                                }
                                 int result = professorDAO.changeProfessorStatusById("Rechazado", professorId);
                                 if(result == 1){
-                                    Alert acceptanceSuccessfulAlert = new Alert(AlertType.INFORMATION);
-                                    acceptanceSuccessfulAlert.setTitle("Solicitud rechazada");
-                                    acceptanceSuccessfulAlert.setHeaderText("Solicitud rechazada");
-                                    acceptanceSuccessfulAlert.setContentText("Solicitud rechazada exitosamente");
-                                    acceptanceSuccessfulAlert.show();
+                                    EmailControl emailControl = new EmailControl();
+                                    try {
+                                        emailControl.sendEmail(professorDAO.getEmailById(professorId), "Aceptado en COIL-VIC", "Ha sido aceptado en el sistema COIL-VIC");
+                                        Alert rejectedSuccessfulAlert = new Alert(AlertType.INFORMATION);
+                                        rejectedSuccessfulAlert.setTitle("Solicitud rechazada");
+                                        rejectedSuccessfulAlert.setHeaderText("Solicitud rechazada");
+                                        rejectedSuccessfulAlert.setContentText("Solicitud rechazada exitosamente");
+                                        rejectedSuccessfulAlert.show();
+                                        rejectedSuccessfulAlert.show();
+                                    } catch (MessagingException e) {
+                                        Alert rejectedSuccessfulNoEmailAlert = new Alert(AlertType.INFORMATION);
+                                        rejectedSuccessfulNoEmailAlert.setTitle("Solicitud rechazada");
+                                        rejectedSuccessfulNoEmailAlert.setHeaderText("Solicitud rechazada, error al enviar correo");
+                                        rejectedSuccessfulNoEmailAlert.setContentText("Solicitud rechazada exitosamente, pero no se pudo enviar un correo al profesor, favor de avisarle");
+                                        rejectedSuccessfulNoEmailAlert.show();
+                                        rejectedSuccessfulNoEmailAlert.show();
+                                    }
                                 } else{
-                                    Alert acceptanceErrorAlert = new Alert(AlertType.ERROR);
-                                    acceptanceErrorAlert.setTitle("Error conexión");
-                                    acceptanceErrorAlert.setHeaderText("Error conexión");
-                                    acceptanceErrorAlert.setContentText("No se pudo conectar a la base de datos, por favor inténtelo de nuevo más tarde");
-                                    acceptanceErrorAlert.show();
+                                    Alert rejectedErrorAlert = new Alert(AlertType.ERROR);
+                                    rejectedErrorAlert.setTitle("Error conexión");
+                                    rejectedErrorAlert.setHeaderText("Error conexión");
+                                    rejectedErrorAlert.setContentText("No se pudo conectar a la base de datos, por favor inténtelo de nuevo más tarde");
+                                    rejectedErrorAlert.show();
                                 }
                                 tableViewPendingProfessors.getItems().clear();
                                 loadPendingProfessors();
