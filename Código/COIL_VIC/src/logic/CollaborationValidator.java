@@ -32,7 +32,7 @@ public class CollaborationValidator {
         !FieldValidator.onlyText(collaborationSubject) ||
         !FieldValidator.onlyText(studentProfile) ||
         !FieldValidator.onlyNumber(noStudentsText) || 
-        !collaborationType.isEmpty()){
+        collaborationType.isEmpty()){
             Alert emptyFieldsAlert = new Alert(AlertType.ERROR);
             emptyFieldsAlert.setTitle("Campos vacíos o incorrectos");
             emptyFieldsAlert.setHeaderText("Campos vacíos o incorrectos");

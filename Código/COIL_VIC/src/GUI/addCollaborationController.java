@@ -65,7 +65,7 @@ public class AddCollaborationController {
         String collaborationSubject = comboBoxCollaborationSubject.getEditor().getText();
         String studentProfile = textAreaStudentProfile.getText();
         String noStudentsText = textFieldNoStudents.getText();
-        String collaborationType = comboBoxCollaborationType.getEditor().getText();    
+        String collaborationType = comboBoxCollaborationType.getValue();    
         if(noStudentsText == null || !FieldValidator.onlyNumber(noStudentsText)){
             Alert emptyFieldsAlert = new Alert(AlertType.ERROR);
             emptyFieldsAlert.setTitle("Campos vacíos o incorrectos");
