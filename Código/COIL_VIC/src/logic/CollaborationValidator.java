@@ -31,7 +31,8 @@ public class CollaborationValidator {
         !FieldValidator.onlyText(collaborationGoal) ||
         !FieldValidator.onlyText(collaborationSubject) ||
         !FieldValidator.onlyText(studentProfile) ||
-        !FieldValidator.onlyNumber(noStudentsText) || !FieldValidator.onlyText(collaborationType)){
+        !FieldValidator.onlyNumber(noStudentsText) || 
+        collaborationType.isEmpty()){
             Alert emptyFieldsAlert = new Alert(AlertType.ERROR);
             emptyFieldsAlert.setTitle("Campos vacíos o incorrectos");
             emptyFieldsAlert.setHeaderText("Campos vacíos o incorrectos");
@@ -39,51 +40,30 @@ public class CollaborationValidator {
             emptyFieldsAlert.show();
             return false;
 
-        }
-        return true;
-         
-    }
-
-    public static boolean validateCollaborationName(Collaboration collaboration, CollaborationDAO collaborationDAO){
-        String collaborationName = collaboration.getCollaborationName();
-        if(!collaborationDAO.validateCollaborationName(collaborationName)){
-           return true;
-        } else {
-                Alert duplicateNameAlert = new Alert(AlertType.ERROR);
-                duplicateNameAlert.setTitle("Nombre duplicado");
-                duplicateNameAlert.setHeaderText("Nombre duplicado");
-                duplicateNameAlert.setContentText("No se puede agregar la colaboración el nombre no se encuentra disponible");
-                duplicateNameAlert.show();
-        }
-
-        return false;
-    }
-
-    public static void showAlerts(int result, CollaborationDAO collaborationDAO, Collaboration collaboration){
-
-        if(result == 1){
-            Alert collaborationAddedAlert = new Alert(AlertType.INFORMATION);
-            collaborationAddedAlert.setTitle("Colaboración enviada");
-            collaborationAddedAlert.setHeaderText("colaboración enviada");
-            collaborationAddedAlert.setContentText("Colaboración enviada exitosamente");
-            collaborationAddedAlert.show();
-            ButtonType accept = new ButtonType("Aceptar");
-            collaborationAddedAlert.getButtonTypes().setAll(accept);
-            Button okButton = (Button) collaborationAddedAlert.getDialogPane().lookupButton(accept);
-            okButton.setOnAction(eventAssignProfessor -> {
-                if(!DatabaseConnectionChecker.isDatabaseConnected()){
-                    DatabaseConnectionChecker.showNoConnectionDialog();
-                    return;
-                }
-                String collaborationName = collaboration.getCollaborationName();
-                ProfessorDAO professorDAO = new ProfessorDAO();
-                Professor professorData = UserSessionManager.getInstance().getProfessorUserData();
-                int professorId = professorDAO.getProfessorIdByUser(professorData.getUser());
-                int collaborationId = collaborationDAO.getCollaborationIdbyName(collaborationName);
-                collaborationDAO.assignProfessorToCollaboration(professorId, collaborationId);
+        } else if(!collaborationDAO.validateCollaborationName(collaborationName)){
+            int result = collaborationDAO.addCollaboration(collaboration);
+            if(result == 1){
+                Alert collaborationAddedAlert = new Alert(AlertType.INFORMATION);
+                collaborationAddedAlert.setTitle("Colaboración enviada");
+                collaborationAddedAlert.setHeaderText("colaboración enviada");
+                collaborationAddedAlert.setContentText("Colaboración enviada exitosamente");
+                collaborationAddedAlert.show();
+                ButtonType accept = new ButtonType("Aceptar");
+                collaborationAddedAlert.getButtonTypes().setAll(accept);
+                Button okButton = (Button) collaborationAddedAlert.getDialogPane().lookupButton(accept);
+                okButton.setOnAction(eventAssignProfessor -> {
+                    if(!DatabaseConnectionChecker.isDatabaseConnected()){
+                        DatabaseConnectionChecker.showNoConnectionDialog();
+                        return;
+                    }
+                    ProfessorDAO professorDAO = new ProfessorDAO();
+                    Professor professorData = UserSessionManager.getInstance().getProfessorUserData();
+                    int professorId = professorDAO.getProfessorIdByUser(professorData.getUser());
+                    int collaborationId = collaborationDAO.getCollaborationIdbyName(collaborationName);
+                        collaborationDAO.assignProfessorToCollaboration(professorId, collaborationId);
+                    
+                });
                 
-            });
-            
 
             
         } else{
@@ -93,8 +73,16 @@ public class CollaborationValidator {
             sendCollaborationErrorAlert.setContentText("No se pudo conectar a la base de datos, inténtelo de nuevo más tarde");
             sendCollaborationErrorAlert.show();
 
+            }
+        } else {
+                Alert duplicateNameAlert = new Alert(AlertType.ERROR);
+                duplicateNameAlert.setTitle("Nombre duplicado");
+                duplicateNameAlert.setHeaderText("Nombre duplicado");
+                duplicateNameAlert.setContentText("No se puede agregar la colaboración el nombre no se encuentra disponible");
+                duplicateNameAlert.show();
         }
 
+    return true;
     }
 
 

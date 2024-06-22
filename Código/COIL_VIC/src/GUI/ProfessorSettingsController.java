@@ -48,13 +48,14 @@ public class ProfessorSettingsController {
         Professor professorData = new Professor();
         professorData = UserSessionManager.getInstance().getProfessorUserData();
         String user = professorData.getUser();
-        ProfessorDAO professorDAO = new ProfessorDAO();
-        String email = professorDAO.getProfessorEmailByUser(user);
-        String phoneNumber = professorDAO.getProfessorPhoneByUser(user);
         if(!DatabaseConnectionChecker.isDatabaseConnected()){
             DatabaseConnectionChecker.showNoConnectionDialog();
             buttonChangePassword.setDisable(true);
         }
+        ProfessorDAO professorDAO = new ProfessorDAO();
+        String email = professorDAO.getProfessorEmailByUser(user);
+        String phoneNumber = professorDAO.getProfessorPhoneByUser(user);
+        
         labelName.setText(professorData.getName());
         labelPhone.setText(phoneNumber);
         labelEmail.setText(email);
@@ -151,7 +152,7 @@ public class ProfessorSettingsController {
             String newPassword = textFieldNewPassword.getText();
             boolean passwordExist = professorDAO.compareProfessorPassword(oldPassword, profesirId);
             if (!validatePassword(newPassword)) {
-                showAlert("La contraseña debe tener al menos 8 caracteres, incluir una letra mayúscula, una letra minúscula, un número y un carácter especial.");
+                showAlertErrorValidation("La contraseña debe tener al menos 8 caracteres, incluir una letra mayúscula, una letra minúscula, un número y un carácter especial.");
                 return;
             }
             if(passwordExist){
@@ -220,7 +221,7 @@ public class ProfessorSettingsController {
         return upperCaseMatcher.find() && lowerCaseMatcher.find() && digitMatcher.find() && specialCharacterMatcher.find();
     }
 
-    private void showAlert(String message) {
+    private void showAlertErrorValidation(String message) {
         Alert alert = new Alert(AlertType.ERROR);
         alert.setTitle("Error de validación");
         alert.setHeaderText(null);

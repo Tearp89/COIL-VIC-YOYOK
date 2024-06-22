@@ -18,10 +18,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import log.Log;
 import logic.Access;
-import logic.CharLimitValidator;
 import logic.EmailControl;
 import logic.FieldValidator;
-import logic.StudentValidator;
 import logic.DAO.CollaborationDAO;
 import logic.DAO.ProfessorDAO;
 import logic.DAO.StudentDAO;
@@ -117,60 +115,25 @@ public class AddStudentController {
     private TableColumn<Student, String> tableColumnEmail;
     @FXML
     private void addStudent(){
-        checkDatabaseConnection();
+        if(!DatabaseConnectionChecker.isDatabaseConnected()){
+            DatabaseConnectionChecker.showNoConnectionDialog();
+            return;
+        }
         Professor professorData = new Professor();
         professorData = UserSessionManager.getInstance().getProfessorUserData();
         ProfessorDAO professorDAO = new ProfessorDAO();
         int professorId = professorDAO.getProfessorIdByUser(professorData.getUser());
-        StudentDAO studentDAO = new StudentDAO();
         String email = textFieldEmailStudent.getText();
         if(!FieldValidator.isEmail(email)){
-            Alert emptyFieldsAlert = new Alert(AlertType.ERROR);
-            emptyFieldsAlert.setTitle("Campos erroneos");
-            emptyFieldsAlert.setHeaderText("Correo no válido");
-            emptyFieldsAlert.setContentText("No se puede puede añadir al estudiante, no ha ingresado un correo válido");
-            emptyFieldsAlert.show();
-        }else if (!StudentValidator.validateStudentRegister(studentDAO, selectedStudent, tableViewStudents)){
-            
+            showAlert(AlertType.ERROR, "Correo no válido", "No se puede añadir al estudiante, el correo no es válido");
+            return;
+        }
+
+        StudentDAO studentDAO = new StudentDAO();
+        if (studentDAO.isStudentRegistered(email)){
+            handleExistingStudent(studentDAO, email, professorId);
         }else{
-                Student student = new Student();
-                student.setEmail(email);
-                student.setProfessorId(professorId);
-                Access access = new Access();
-                String password = access.passwordGenerator(8);
-                student.setPassword(password);
-                int result = studentDAO.addStudent(student);
-                EmailControl emailControl = new EmailControl();
-            if (result > 0){
-                Alert studentAddedAlert = new Alert(AlertType.INFORMATION);
-                studentAddedAlert.setTitle("Estudiante añadido");
-                studentAddedAlert.setHeaderText("Estudiante añadido");
-                studentAddedAlert.setContentText("Se ha añadido al estudiante exitosamente");
-                studentAddedAlert.show();
-                ArrayList<Student> students =  studentDAO.getStudentsByProfessorId(professorId);
-                tableViewStudents.getItems().clear();
-                tableViewStudents.getItems().addAll(students);
-                try {
-                    emailControl.sendEmail(email, "Agregado al sistema COIL-VIC", "Su contraseña para el sistema es: " + password);
-                    Alert sendEmailToStudentAlert = new Alert(AlertType.INFORMATION);
-                    sendEmailToStudentAlert.setTitle("Notificación correo");
-                    sendEmailToStudentAlert.setHeaderText("Se ha enviado un correo al estudiante");
-                    sendEmailToStudentAlert.setContentText("Se envió un correo al estudiante sobre su cuenta");
-                    sendEmailToStudentAlert.show();
-                } catch (MessagingException e) {
-                    Alert sendEmailToStudenErrorAlert = new Alert(AlertType.ERROR);
-                    sendEmailToStudenErrorAlert.setTitle("Error al enviar el correo");
-                    sendEmailToStudenErrorAlert.setHeaderText("Error conexión");
-                    sendEmailToStudenErrorAlert.setContentText("No se logro mandar el correo al estudiante, favor de comunicarle sus datos de acceso \nContraseña: " + password);
-                    sendEmailToStudenErrorAlert.show();
-                }
-            } else {
-                Alert addingStudentErrorAlert = new Alert(AlertType.ERROR);
-                addingStudentErrorAlert.setTitle("Error conexión");
-                addingStudentErrorAlert.setHeaderText("Error conexión");
-                addingStudentErrorAlert.setContentText("Se perdió la conexión a la base de datos, inténtelo de nuevo más tarde");
-                addingStudentErrorAlert.show();
-            }
+            registerNewStudent(studentDAO, email, professorId);
         }
         
     }
@@ -179,41 +142,30 @@ public class AddStudentController {
     private Button buttonAssign;
     @FXML
     private void assignStudent(ActionEvent event){
-        checkDatabaseConnection();
+        if(!DatabaseConnectionChecker.isDatabaseConnected()){
+            DatabaseConnectionChecker.showNoConnectionDialog();
+            return;
+        }
         String email = selectedStudent.getEmail();
         Professor professorData = new Professor();
         professorData = UserSessionManager.getInstance().getProfessorUserData();
         ProfessorDAO professorDAO = new ProfessorDAO();
         int professorId = professorDAO.getProfessorIdByUser(professorData.getUser());
         CollaborationDAO collaborationDAO = new CollaborationDAO();
-        ArrayList<Collaboration> collaborations =  collaborationDAO.searchCollaborationByStatusAndProfessorId("Publicada", professorId);
+        ArrayList<Collaboration> collaborations =  collaborationDAO.searchCollaborationByStatusAndProfessorId("Activa", professorId);
         if(collaborations.isEmpty()){
+            showAlert(AlertType.ERROR, "Error colaboración", "No tiene una colaboración activa para asignar el estudiante");
             buttonAssign.setDisable(true);
-            Alert assignErrorAlert = new Alert(AlertType.ERROR);
-            assignErrorAlert.setTitle("Error colaboración");
-            assignErrorAlert.setHeaderText("Error no tiene colaboración");
-            assignErrorAlert.setContentText("No tiene una colaboración publicada para asignar el estudiante");
         } else {
             int collaborationId = collaborations.get(0).getCollaborationId();
             if(collaborationDAO.isStudentAssignedToCollaboration(email, collaborationId)){
-                Alert duplicatedStudentAlert = new Alert(AlertType.ERROR);
-                duplicatedStudentAlert.setTitle("Estudiante duplicado");
-                duplicatedStudentAlert.setHeaderText("Estudiante duplicado");
-                duplicatedStudentAlert.setContentText("El estudiante ya se encuentra asignado a esta colaboración");
-                duplicatedStudentAlert.show();
+                showAlert(AlertType.INFORMATION, "Estudiante duplicado", "No se puede añadir al estudiante, ya se encuentra asignado a esta colaboración");
             } else {
                 int result =  collaborationDAO.assignStudentToCollaboration(email, collaborationId);
                 if (result > 0){
-                    Alert studentAssignedAlert = new Alert(AlertType.INFORMATION);
-                    studentAssignedAlert.setTitle("Estudiante asignado");
-                    studentAssignedAlert.setHeaderText("Estudiante asignado");
-                    studentAssignedAlert.setContentText("El estudiante ha sido asignado exitosamente");
-                    studentAssignedAlert.show();
+                    showAlert(AlertType.INFORMATION, "Estudiante asignado", "El estudiante ha sido asignado exitosamente");
                 } else{
-                    Alert assignErrorAlert = new Alert(AlertType.ERROR);
-                    assignErrorAlert.setTitle("Error conexión");
-                    assignErrorAlert.setHeaderText("Error conexión");
-                    assignErrorAlert.setContentText("Se perdió la conexión con la base de datos, inténtelo de nuevo más tarde");
+                    showAlert(AlertType.ERROR, "Error conexión", "Se perdió la conexión a la base de datos, inténtelo de nuevo más tarde");
                 }
             }
         }
@@ -229,7 +181,10 @@ public class AddStudentController {
         Professor professorData = new Professor();
         professorData = UserSessionManager.getInstance().getProfessorUserData();
         labelUser.setText(professorData.getName());
-        checkDatabaseConnection();
+        if(!DatabaseConnectionChecker.isDatabaseConnected()){
+            DatabaseConnectionChecker.showNoConnectionDialog();
+            return;
+        }
         StudentDAO studentDAO = new StudentDAO();
         ProfessorDAO professorDAO = new ProfessorDAO();
         int professorId = professorDAO.getProfessorIdByUser(professorData.getUser());
@@ -248,17 +203,64 @@ public class AddStudentController {
             
         });
 
-        CharLimitValidator.setCharLimitTextField(textFieldEmailStudent, 255);
-
-    }
-
-    private void checkDatabaseConnection(){
-        if(!DatabaseConnectionChecker.isDatabaseConnected()){
-            DatabaseConnectionChecker.showNoConnectionDialog();
-            return;
-        }
     }
 
     
+    private void handleExistingStudent(StudentDAO studentDAO, String email, int professorId) {
+        if (studentDAO.isStudentAssignedToProfessor(email, professorId)) {
+            showAlert(AlertType.INFORMATION, "Estudiante duplicado", "No se puede añadir al estudiante, ya se encuentra agregado");
+        } else {
+            int result = studentDAO.changeProfessorAssigned(professorId, email);
+            if (result > 0) {
+                showAlert(AlertType.INFORMATION, "Estudiante añadido", "Se ha añadido al estudiante exitosamente");
+                updateStudentTable(professorId);
+            } else {
+                showAlert(AlertType.ERROR, "Error conexión", "Se perdió la conexión a la base de datos, inténtelo de nuevo más tarde");
+            }
+        }
+    }
 
+    private void showAlert(AlertType type, String title, String content) {
+        Alert alert = new Alert(type);
+        alert.setTitle(title);
+        alert.setHeaderText(title);
+        alert.setContentText(content);
+        alert.showAndWait();
+    }
+
+    private void updateStudentTable(int professorId) {
+        StudentDAO studentDAO = new StudentDAO();
+        ArrayList<Student> students = studentDAO.getStudentsByProfessorId(professorId);
+        tableViewStudents.getItems().clear();
+        tableViewStudents.getItems().addAll(students);
+    }
+
+    private void registerNewStudent(StudentDAO studentDAO, String email, int professorId) {
+        Student student = new Student();
+        student.setEmail(email);
+        student.setProfessorId(professorId);
+        Access access = new Access();
+        String password = access.passwordGenerator(8);
+        student.setPassword(password);
+    
+        int result = studentDAO.addStudent(student);
+        if (result > 0) {
+            showAlert(AlertType.INFORMATION, "Estudiante añadido", "Se ha añadido al estudiante exitosamente");
+            updateStudentTable(professorId);
+            sendEmailToStudent(email, student.getPassword());
+        } else {
+            showAlert(AlertType.ERROR, "Error conexión", "Se perdió la conexión a la base de datos, inténtelo de nuevo más tarde");
+        }
+    }
+
+    private void sendEmailToStudent(String email, String password) {
+        EmailControl emailControl = new EmailControl();
+        try {
+            emailControl.sendEmail(email, "Agregado al sistema COIL-VIC", "Su contraseña para el sistema es: " + password);
+            showAlert(AlertType.INFORMATION, "Notificación correo", "Se envió un correo al estudiante sobre su cuenta");
+        } catch (MessagingException e) {
+            showAlert(AlertType.ERROR, "Error al enviar el correo",  "No se logró mandar el correo al estudiante, favor de comunicarle sus datos de acceso \nContraseña: " + password);
+            LOG.error(e);
+        }
+    }
 }
