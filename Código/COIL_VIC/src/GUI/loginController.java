@@ -23,6 +23,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import logic.CharLimitValidator;
 import logic.DAO.AdminDAO;
 import logic.DAO.LoginDAO;
 import logic.DAO.ProfessorDAO;
@@ -160,6 +161,7 @@ public class LoginController {
             DatabaseConnectionChecker.showNoConnectionDialog();
             buttonAddProfessor.setDisable(true);
             buttonLogin.setDisable(true);
+            return;
         }
         FXMLLoader addProfessorLoader = new FXMLLoader(getClass().getResource("/GUI/AddProfessorWindow.fxml"));
         ChangeWindowManager.changeWindowTo(event, addProfessorLoader);
@@ -172,5 +174,7 @@ public class LoginController {
             buttonAddProfessor.setDisable(true);
             buttonLogin.setDisable(true);
         }
+        CharLimitValidator.setCharLimitTextField(textFieldPassword, 245);
+        CharLimitValidator.setCharLimitTextField(textFieldUser, 45);
     }
 }

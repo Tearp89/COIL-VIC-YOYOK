@@ -3,6 +3,7 @@ package GUI;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import dataAccess.DatabaseConnectionChecker;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -39,6 +40,10 @@ public class StudentsFeedbackCollaborationController {
     Label labelCollaborationNotFound = new Label("No se encontraron colaboraciones");
 
     public void loadClosedCollaborations(){
+        if(!DatabaseConnectionChecker.isDatabaseConnected()){
+            DatabaseConnectionChecker.showNoConnectionDialog();
+            return;
+        }
         Student studentData = new Student();
         studentData = UserSessionManager.getInstance().getStudentUserData();
         String email = studentData.getEmail();
@@ -100,6 +105,10 @@ public class StudentsFeedbackCollaborationController {
         studentData = UserSessionManager.getInstance().getStudentUserData();
         String email = studentData.getEmail();
         System.out.println(email);
+        if(!DatabaseConnectionChecker.isDatabaseConnected()){
+            DatabaseConnectionChecker.showNoConnectionDialog();
+            return;
+        }
         loadClosedCollaborations();
         tableViewClosedCollaborations.setOnMouseClicked(event ->{
             if(event.getClickCount() == 1){

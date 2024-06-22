@@ -29,6 +29,7 @@ public class Professor {
     private String discipline;
     private String workShop;
     private String universityName;
+    private String language;
     
 
 
@@ -195,6 +196,14 @@ public class Professor {
     
     public void setUniversityName(String universityName) {
         this.universityName = universityName;
+    }
+
+    public String getLanguage() {
+        return language;
+    }
+
+    public void setLanguage(String language) {
+        this.language = language;
     }
     
 }

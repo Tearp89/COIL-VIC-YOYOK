@@ -3,6 +3,7 @@ package GUI;
 
 import java.util.ArrayList;
 
+import dataAccess.DatabaseConnectionChecker;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -31,6 +32,10 @@ public class SearchActiveCollaborationsController {
 
 
     public void loadActiveCollaborations(){
+        if(!DatabaseConnectionChecker.isDatabaseConnected()){
+            DatabaseConnectionChecker.showNoConnectionDialog();
+            return;
+        }
         CollaborationDAO collaborationDAO = new CollaborationDAO();
         ArrayList<Collaboration> activeCollaborations = new ArrayList<>();
         activeCollaborations = collaborationDAO.searchCollaborationByStatus("Activa");
@@ -45,6 +50,10 @@ public class SearchActiveCollaborationsController {
     private TextField textFieldSearch;
 
     public void searchActiveCollaborations(ActionEvent event){
+        if(!DatabaseConnectionChecker.isDatabaseConnected()){
+            DatabaseConnectionChecker.showNoConnectionDialog();
+            return;
+        }
         CollaborationDAO collaborationDAO = new CollaborationDAO();
         ArrayList<Collaboration> activeCollaborations = new ArrayList<>();
         String collaborationName = "%" + textFieldSearch.getText() + "%";
@@ -60,6 +69,10 @@ public class SearchActiveCollaborationsController {
 
     @FXML
     private void initialize(){
+        if(!DatabaseConnectionChecker.isDatabaseConnected()){
+            DatabaseConnectionChecker.showNoConnectionDialog();
+            return;
+        }
         loadActiveCollaborations();  
     }
 

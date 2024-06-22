@@ -3,6 +3,7 @@ package GUI;
 import java.io.IOException;
 import java.time.LocalDate;
 
+import dataAccess.DatabaseConnectionChecker;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -19,6 +20,8 @@ import javafx.scene.control.TextFormatter;
 import javafx.scene.input.KeyEvent;
 import log.Log;
 import javafx.scene.control.Alert.AlertType;
+import logic.CharLimitValidator;
+import logic.CollaborationValidator;
 import logic.FieldValidator;
 import logic.DAO.CollaborationDAO;
 import logic.classes.Collaboration;
@@ -28,25 +31,25 @@ public class DeclinedCollaborationDetailsController {
     private static final org.apache.log4j.Logger LOG = Log.getLogger(DeclinedCollaborationDetailsController.class);
 
     @FXML
-    TextField textFieldCollaborationName;
+    private TextField textFieldCollaborationName;
     @FXML
-    TextArea textAreaCollaborationDescription;
+    private TextArea textAreaCollaborationDescription;
     @FXML
-    DatePicker datePickerStartDate;
+    private DatePicker datePickerStartDate;
     @FXML
-    DatePicker datePickerFinishDate;
+    private DatePicker datePickerFinishDate;
     @FXML
-    TextField textFieldCollaborationGoal;
+    private TextField textFieldCollaborationGoal;
     @FXML
-    TextField textFieldNumberStudents;
+    private TextField textFieldNumberStudents;
     @FXML
-    ComboBox comboBoxSubject;
+    private ComboBox comboBoxSubject;
     @FXML
-    TextArea textAreaStudentProfile;
+    private TextArea textAreaStudentProfile;
     
     
     @FXML
-    int collaborationId;
+    private int collaborationId;
 
     @FXML
     Button buttonEditCollaboration;
@@ -117,7 +120,7 @@ public class DeclinedCollaborationDetailsController {
         ChangeWindowManager.closeWindow(event);
     }
 
-     @FXML
+    @FXML
     private Button buttonLogout;
 
     @FXML
@@ -173,6 +176,10 @@ public class DeclinedCollaborationDetailsController {
     Button buttonSendCollaboration;
     @FXML
     void sendCollaboration(ActionEvent event){
+        if(!DatabaseConnectionChecker.isDatabaseConnected()){
+            DatabaseConnectionChecker.showNoConnectionDialog();
+            return;
+        }
         CollaborationDAO collaborationDAO = new CollaborationDAO();
         String collaborationName = textFieldCollaborationName.getText();
         String collaborationDescription = textAreaCollaborationDescription.getText();
@@ -195,42 +202,7 @@ public class DeclinedCollaborationDetailsController {
         collaborationUpdated.setCollaborationId(collaborationId);
         collaborationUpdated.setCollaborationStatus("Pendiente");
         CollaborationDAO updateCollaborationDAO = new CollaborationDAO();
-        if(!FieldValidator.onlyTextAndNumbers(collaborationName) || !FieldValidator.onlyText(collaborationDescription) || !FieldValidator.isValidDateRange(collaborationStartDate, collaborationFinishDate) || !FieldValidator.onlyText(collaborationGoal) || !FieldValidator.onlyText(collaborationSubject) || 
-        !FieldValidator.onlyNumber(numberStudentsText) || !FieldValidator.onlyText(studentProfile)){
-            Alert emptyFieldsAlert = new Alert(AlertType.ERROR);
-            emptyFieldsAlert.setTitle("Campos vacíos o inválidos");
-            emptyFieldsAlert.setContentText("No se pudo actualizar la colaboración hay campos vacíos o inválidos");
-            emptyFieldsAlert.setHeaderText("Campos vacíos o inválidos");
-            emptyFieldsAlert.show();
-
-
-        }else if(!collaborationDAO.validateCollaborationName(collaborationName)){
-            int result = updateCollaborationDAO.updateCollaboration(collaborationUpdated);
-            if (result == 1){
-                Alert collaborationUpdatedAlert = new Alert(AlertType.INFORMATION);
-                collaborationUpdatedAlert.setTitle("Confirmación registro");
-                collaborationUpdatedAlert.setHeaderText("Confirmación actualización");
-                collaborationUpdatedAlert.setContentText("Se actualizó la información de la convocatoria de manera exitosa");
-                collaborationUpdatedAlert.show();
-                ButtonType accept = new ButtonType("Aceptar");
-                collaborationUpdatedAlert.getButtonTypes().setAll(accept);
-                Button okButton = (Button) collaborationUpdatedAlert.getDialogPane().lookupButton(accept);
-                okButton.setOnAction(eventAcceptEditionConfirmation -> {
-                    FXMLLoader collaborationOptionsLoader = new FXMLLoader(getClass().getResource("/GUI/CollaborationOptionsWindow.fxml"));
-                    ChangeWindowManager.changeWindowTo(event, collaborationOptionsLoader); 
-                });
-            }
-
-        } else{
-            Alert duplicatedNameAlert = new Alert(AlertType.ERROR);
-            duplicatedNameAlert.setHeaderText("Nombre duplicado");
-            duplicatedNameAlert.setTitle("Nombre duplicado");
-            duplicatedNameAlert.setContentText("No se puede actualizar la colaboración el nombre está duplicado");
-            duplicatedNameAlert.show();
-        }
-      
-        
-
+        CollaborationValidator.validateCollaborationFields(collaborationUpdated, updateCollaborationDAO);
     }
 
     @FXML
@@ -241,6 +213,10 @@ public class DeclinedCollaborationDetailsController {
         Professor professorData = new Professor();
         professorData = UserSessionManager.getInstance().getProfessorUserData();
         labelUser.setText(professorData.getName());
+        if(!DatabaseConnectionChecker.isDatabaseConnected()){
+            DatabaseConnectionChecker.showNoConnectionDialog();
+            return;
+        }
         this.collaborationId = collaborationId;
         CollaborationDAO collaborationDAO = new CollaborationDAO();
         String name = collaborationDAO.getCollaborationNameById(collaborationId);
@@ -280,11 +256,9 @@ public class DeclinedCollaborationDetailsController {
             }
         }));
 
-
-
-
-
+        CharLimitValidator.setCharLimitTextField(textFieldCollaborationName, 245);
+        CharLimitValidator.setCharLimitTextField(textFieldNumberStudents, 3);
+        CharLimitValidator.setCharLimitComboBox(comboBoxSubject, 245);
+        
     }
-
-
 }

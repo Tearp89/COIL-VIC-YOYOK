@@ -29,7 +29,7 @@ public class UniversityDAOTest {
     public void testAddUniversity() {
         UniversityDAO universityDAO = new UniversityDAO();
         University university = new University();
-        university.setUniversityCountry("PaisTest");
+        university.setUniversityCountry("México");
         university.setUniversityName("UV");
         university.setUniversityLanguage("Español");
         

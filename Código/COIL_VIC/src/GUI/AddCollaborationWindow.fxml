@@ -130,7 +130,7 @@
                                           <Font name="Tahoma" size="20.0" />
                                        </font>
                                     </Label>
-                                    <TextArea id="DescriptionTextArea" fx:id="textAreaCollaborationDescription" layoutX="176.0" layoutY="89.0" prefHeight="163.0" prefWidth="508.0" promptText="Escriba aquí..." styleClass="textfield" stylesheets="@windowsStyle.css" wrapText="true" />
+                                    <TextArea id="DescriptionTextArea" fx:id="textAreaCollaborationDescription" layoutX="176.0" layoutY="89.0" prefHeight="124.0" prefWidth="508.0" promptText="Escriba aquí..." styleClass="textfield" stylesheets="@windowsStyle.css" wrapText="true" />
                                     <Label layoutX="23.0" layoutY="271.0" text="Fecha inicio:">
                                        <font>
                                           <Font name="Tahoma" size="20.0" />
@@ -182,6 +182,12 @@
                                           <Font name="Tahoma" size="20.0" />
                                        </font>
                                     </Label>
+                                    <Label layoutX="23.0" layoutY="230.0" text="Tipo:">
+                                       <font>
+                                          <Font name="Tahoma" size="20.0" />
+                                       </font>
+                                    </Label>
+                                    <ComboBox fx:id="comboBoxCollaborationType" layoutX="176.0" layoutY="230.0" prefWidth="150.0" styleClass="textfield" />
                                  </children>
                               </AnchorPane>
                            </children>
