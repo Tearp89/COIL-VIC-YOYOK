@@ -29,7 +29,7 @@ import logic.classes.Collaboration;
 import logic.classes.Professor;
 
 public class SearchActivitiesController {
-    private static final org.apache.log4j.Logger LOG = Log.getLogger(AddCollaborationController.class);
+    private static final org.apache.log4j.Logger LOG = Log.getLogger(SearchActivitiesController.class);
 
     @FXML
     private Button buttonHome;
