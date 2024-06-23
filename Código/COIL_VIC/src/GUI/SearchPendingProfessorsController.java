@@ -2,6 +2,7 @@ package GUI;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Optional;
 
 import javax.mail.MessagingException;
 
@@ -17,6 +18,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextInputDialog;
 import javafx.util.Callback;
 import log.Log;
 import logic.EmailControl;
@@ -175,6 +177,14 @@ public class SearchPendingProfessorsController {
                             Button okButton = (Button) confirmDeclineAlert.getDialogPane().lookupButton(accept); 
                             Button cancelButton = (Button) confirmDeclineAlert.getDialogPane().lookupButton(cancel);
                             okButton.setOnAction(eventAddProfessorForeign -> {
+                                TextInputDialog dialog = new TextInputDialog();
+                                dialog.setTitle("Motivo de Rechazo");
+                                dialog.setHeaderText("Ingrese el motivo del rechazo del profesor:");
+                                dialog.setContentText("Motivo:");
+
+                                Optional<String> dialogReason = dialog.showAndWait();
+                                String reason = dialogReason.orElse("No se proporcionó un motivo específico.");
+
                                 if(!DatabaseConnectionChecker.isDatabaseConnected()){
                                     DatabaseConnectionChecker.showNoConnectionDialog();
                                     return;
@@ -183,7 +193,7 @@ public class SearchPendingProfessorsController {
                                 if(result == 1){
                                     EmailControl emailControl = new EmailControl();
                                     try {
-                                        emailControl.sendEmail(professorDAO.getEmailById(professorId), "Aceptado en COIL-VIC", "Ha sido aceptado en el sistema COIL-VIC");
+                                        emailControl.sendEmail(professorDAO.getEmailById(professorId), "Rechazo en COIL-VIC", "Su solicitud ha sido rechazada. " + (reason.isEmpty() ? "No se proporcionó un motivo específico." : "Motivo: " + reason));
                                         Alert rejectedSuccessfulAlert = new Alert(AlertType.INFORMATION);
                                         rejectedSuccessfulAlert.setTitle("Solicitud rechazada");
                                         rejectedSuccessfulAlert.setHeaderText("Solicitud rechazada");
