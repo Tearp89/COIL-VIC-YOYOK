@@ -1,4 +1,5 @@
 23-06-2024 16:09:04 ERROR DatabaseConnectionChecker:17: No hay conexión con la base de datos Access denied for user 'admin'@'localhost' (using password: YES)
-23-06-2024 16:27:06 ERROR DatabaseConnectionChecker:17: No hay conexión con la base de datos Access denied for user 'admin'@'localhost' (using password: YES)
-23-06-2024 16:32:12 ERROR AddProfessorController:418: javax.mail.AuthenticationFailedException: 535 5.7.139 Authentication unsuccessful, account locked. Contact your administrator. [QR0P297CA0014.MEXP297.PROD.OUTLOOK.COM 2024-06-23T22:31:50.706Z 08DC92D9AAD7F746]
+23-06-2024 17:07:50 ERROR AddProfessorController:418: javax.mail.AuthenticationFailedException: 535 5.7.139 Authentication unsuccessful, account locked. Contact your administrator. [QR0P297CA0030.MEXP297.PROD.OUTLOOK.COM 2024-06-23T23:07:36.313Z 08DC92C60907990F]
 
+23-06-2024 17:27:35 INFO  EmailControl:52: Se envió un Email a: marla838.maa@gmail.com
+23-06-2024 17:27:39 INFO  AddProfessorController:415: Se envió un correo con las credenciales a: marla838.maa@gmail.com
