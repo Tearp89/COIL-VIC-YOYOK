@@ -84,7 +84,7 @@ public class AddActivityController {
         ChangeWindowManager.closeWindow(event);
     }
 
-     @FXML
+    @FXML
     private Button buttonLogout;
 
     @FXML
@@ -123,7 +123,11 @@ public class AddActivityController {
     private int activityId;
     @FXML
     private void saveActivity(ActionEvent event){
-        checkConnection();
+        if(!DatabaseConnectionChecker.isDatabaseConnected()){
+            DatabaseConnectionChecker.showNoConnectionDialog();
+            disableButtons();
+            return;
+        }
         String title = textFieldTitle.getText();
         String week = comboBoxWeek.getValue();
         String type = comboBoxType.getValue();
@@ -136,22 +140,23 @@ public class AddActivityController {
         if(!ActivityValidator.validateActivityFields(activity)){
             return;  
         } 
-            ActivityDAO activityDAO = new ActivityDAO();
-            int result =  activityDAO.addActivity(activity);
-            if(result > 0){
-                buttonAssign.setDisable(false);
-                buttonCancel.setDisable(false);
-                activityId = activity.getActivityId();
-                buttonSave.setDisable(true);
-            }
-        
-
-
+        ActivityDAO activityDAO = new ActivityDAO();
+        int result =  activityDAO.addActivity(activity);
+        if(result > 0){
+            buttonAssign.setDisable(false);
+            buttonCancel.setDisable(false);
+            activityId = activity.getActivityId();
+            buttonSave.setDisable(true);
+        }
     }
 
     @FXML
     private void assignActivity(ActionEvent event){
-        checkConnection();
+        if(!DatabaseConnectionChecker.isDatabaseConnected()){
+            DatabaseConnectionChecker.showNoConnectionDialog();
+            disableButtons();
+            return;
+        }
         ActivityDAO activityDAO = new ActivityDAO();
         int collaborationId = Integer.parseInt(labelCollaborationId.getText()); 
         String week = activityDAO.getActivityWeekById(activityId);
@@ -178,7 +183,11 @@ public class AddActivityController {
             Button cancelButon = (Button) confirmAssignAlert.getDialogPane().lookupButton(cancel);
 
             okButton.setOnAction(eventAssignActivity -> {
-                checkConnection();
+                if(!DatabaseConnectionChecker.isDatabaseConnected()){
+                    DatabaseConnectionChecker.showNoConnectionDialog();
+                    disableButtons();
+                    return;
+                }
                 int result = activityDAO.assignActivityToCollaboration(collaborationId, activityId);
                 ActivityValidator.showAlerts(result, buttonAssign);
             });
@@ -225,7 +234,11 @@ public class AddActivityController {
     private Label labelCollaborationId;
     @FXML
     private void initialize(){
-        checkConnection();
+        if(!DatabaseConnectionChecker.isDatabaseConnected()){
+            DatabaseConnectionChecker.showNoConnectionDialog();
+            disableButtons();
+            return;
+        }
         Professor professorData = new Professor();
         professorData = UserSessionManager.getInstance().getProfessorUserData();
         labelUser.setText(professorData.getName());
@@ -262,13 +275,5 @@ public class AddActivityController {
     public void disableButtons(){
         buttonAssign.setDisable(true);
         buttonSave.setDisable(true);
-    }
-
-    public void checkConnection(){
-        if(!DatabaseConnectionChecker.isDatabaseConnected()){
-            DatabaseConnectionChecker.showNoConnectionDialog();
-            disableButtons();
-            return;
-        }
     }
 }
