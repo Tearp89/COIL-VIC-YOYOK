@@ -1,0 +1,1 @@
+23-06-2024 16:09:04 ERROR DatabaseConnectionChecker:17: No hay conexión con la base de datos Access denied for user 'admin'@'localhost' (using password: YES)

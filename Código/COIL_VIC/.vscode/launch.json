@@ -11,7 +11,8 @@
             "mainClass": "GUI.MainLogin",
             //Laptop Marla
             //"projectName": "COIL_VIC_7f2e775a",
-            //"vmArgs": "--module-path \"C:/Users/marla/OneDrive - Universidad Veracruzana/Documentos/4to semestre/Principios de construcción/javafx-sdk-21.0.2/lib\" --add-modules javafx.controls,javafx.fxml"
+           // "vmArgs": "--module-path \"C:/Users/marla/COIL-VIC-YOYOK/javafx-sdk-21.0.2/lib\" --add-modules javafx.controls,javafx.fxml"
+
             
             //Laptop Dani
             //"projectName": "COIL_VIC_21618bff",            

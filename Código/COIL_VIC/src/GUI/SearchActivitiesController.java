@@ -66,7 +66,8 @@ public class SearchActivitiesController {
 
     @FXML
     private void goToSettings(ActionEvent event){
-
+        FXMLLoader settingsLoader = new FXMLLoader(getClass().getResource("/GUI/ProfessorSettingsWindow.fxml"));
+        ChangeWindowManager.changeWindowTo(event, settingsLoader);
     }
 
     @FXML
@@ -129,6 +130,16 @@ public class SearchActivitiesController {
         String type = comboBoxType.getValue();
         String description = textAreaDescription.getText();
         String week = comboBoxWeek.getValue();
+
+        if(labelActivityId.getText().equals("")){
+            Alert activityNotFound = new Alert(AlertType.ERROR);
+            activityNotFound.setTitle("No existe una actividad");
+            activityNotFound.setHeaderText("No existe una actividad para esta semana");
+            activityNotFound.setContentText("No se encontro una actividad para la semana indicada");
+            activityNotFound.show();
+            return;
+        }
+
         Activity activity = new Activity();
         activity.setDescription(description);
         activity.setTitle(title);
