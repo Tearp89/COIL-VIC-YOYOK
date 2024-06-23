@@ -1,0 +1,3 @@
+19-06-2024 18:23:45 ERROR DatabaseConnectionChecker:17: No hay conexión con la base de datos Communications link failure
+
+The last packet sent successfully to the server was 0 milliseconds ago. The driver has not received any packets from the server.
