@@ -29,7 +29,7 @@ public class AdminDAOTest {
         AdminDAO adminDAO = new AdminDAO();
         admin.setAdminName("AdminNombreTest");
         admin.setAdminRol("RolTest");
-        admin.setAdminUser("UsuarioTest13");
+        admin.setAdminUser("UsuarioTest113");
         admin.setPassword("ContraseñaTest");
         
         int rowsAffected = adminDAO.addAdmin(admin);
@@ -51,7 +51,7 @@ public class AdminDAOTest {
         
         admin.setAdminName("Leah Dominguez");
         admin.setAdminRol("Administrador");
-        admin.setAdminUser("lDominguez");
+        admin.setAdminUser("lDominguez2");
         admin.setPassword("ContraseñaTest");
         admin.setAdminId(6);
         
