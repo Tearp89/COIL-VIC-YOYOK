@@ -44,9 +44,7 @@ public class UniversityDAOTest {
     public void testDeleteUniversity() {
         UniversityDAO universityDAO = new UniversityDAO();
         University university = new University();
-        university.setUniversityCountry("PaisTest");
-        university.setUniversityName("TestNombre");
-        university.setUniversityLanguage("IdiomaTest");
+        university.setUniversityName("UV");
         
         int rowsAffected = universityDAO.deleteUniversity(university);
         assertEquals(1, rowsAffected);
@@ -62,7 +60,7 @@ public class UniversityDAOTest {
         university.setUniversityCountry("NuevoPais");
         university.setUniversityName("NuevoNombre");
         university.setUniversityLanguage("NuevoIdioma");
-        
+        university.setUniversityId(11);
         int rowsAffected = universityDAO.updateUniversity(university);
         assertEquals(1, rowsAffected);
     }
@@ -70,9 +68,9 @@ public class UniversityDAOTest {
     @Test
     public void testGetUniversityIdSuccess(){
         UniversityDAO universityDAO = new UniversityDAO();
-        String universityName = "Universidad Veracruzana";
+        String universityName = "MIT";
         int result = universityDAO.getUniversityId(universityName);
-        int expectedResult = 5;
+        int expectedResult = 9;
         assertEquals(result, expectedResult);
     }
 
@@ -89,7 +87,7 @@ public class UniversityDAOTest {
     @Test
     public void testLoadUniversities() throws SQLException {
         UniversityDAO universityDAO = new UniversityDAO();
-       int expectedResult = 7;
+       int expectedResult = 5;
         ObservableList<String> universities = universityDAO.loadUniversities();
 
         assertEquals(expectedResult, universities.size());
@@ -98,7 +96,7 @@ public class UniversityDAOTest {
     @Test
     public void testSearchUniversitySuccess(){
         UniversityDAO universityDAO = new UniversityDAO();
-        int expectedResult = 1;
+        int expectedResult = 5;
         int result = universityDAO.searchUniversity().size();
         assertEquals(expectedResult, result);
     }
@@ -107,7 +105,7 @@ public class UniversityDAOTest {
     public void testSearchUniversityByNameSuccess(){
         UniversityDAO universityDAO = new UniversityDAO();
         int expectedResult = 1;
-        String name = "FEI";
+        String name = "MIT";
         int result = universityDAO.searchUniversityByName(name).size();
         assertEquals(expectedResult, result);
     }

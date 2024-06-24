@@ -611,7 +611,7 @@ public class CollaborationDAO implements ICollaboration {
         DatabaseManager dbManager = new DatabaseManager();
         ArrayList<Collaboration> collaborations = new ArrayList<>();
         String query = "SELECT c.idColaboración, c.nombre " +
-                        "FROM colaboraciones_registradas cr " +
+                        "FROM participa cr " +
                         "JOIN Colaboración c ON cr.Colaboración_idColaboración = c.idColaboración " +
                         "WHERE cr.Estudiante_correoElectrónico = ?";
 

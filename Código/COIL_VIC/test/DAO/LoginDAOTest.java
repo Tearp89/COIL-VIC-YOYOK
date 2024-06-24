@@ -9,8 +9,8 @@ public class LoginDAOTest {
     @Test
     public void testValidateUserValidCredentials() {
         LoginDAO adminValidation = new LoginDAO();
-        String validUsername = "juan.admin";
-        String validPassword = "admin123";
+        String validUsername = "rPerez";
+        String validPassword = "ContraseñaTest";
         assertTrue(adminValidation.validateAdmin(validUsername, validPassword));
     }
 

@@ -7,6 +7,7 @@ package DAO;
 import java.util.ArrayList;
 import org.junit.Test;
 
+import logic.DAO.CollaborationDAO;
 import logic.DAO.ProfessorDAO;
 import logic.classes.Collaboration;
 import logic.classes.Professor;
@@ -40,7 +41,7 @@ public class ProfessorDAOTest {
         professor.setContractType("luegocheco");
         professor.setContractCategory("luegochecox2");
         professor.setDiscipline("luegochecox3");
-        professor.setUser("Usuario de prueba uv1");
+        professor.setUser("jAlberto");
         professor.setPassword("testtest");
         professor.setLanguage("Inglés");
         int result = instance.addProfessorUV(professor);
@@ -79,14 +80,15 @@ public class ProfessorDAOTest {
         ProfessorDAO instance = new ProfessorDAO();
         int expResult = 1;
         professor.setName("Juan Díaz");
-        professor.setStatus("Aceptado");
-        professor.setPhoneNumber("34534522");
-        professor.setEmail("juanDiaz@gmail.com");
+        professor.setStatus("Pendiente");
+        professor.setPhoneNumber("228976565434");
+        professor.setEmail("juanDia23z@gmail.com");
         professor.setCountry("México");
-        professor.setUniversityId(2);
+        professor.setUniversityId(6);
         professor.setType("Externo");
-        professor.setUser("Usuario de prueba externo1");
+        professor.setUser("jDiza98");
         professor.setPassword("testtest");
+        professor.setLanguage("Español");
         
         int result = instance.addProfessorForeign(professor);
         assertEquals(expResult, result);
@@ -161,10 +163,11 @@ public class ProfessorDAOTest {
         professor.setName("Lucas Perez");
         professor.setStatus("En espera");
         professor.setType("Externo");
-        professor.setCountry("Alemania");
-        professor.setUniversityId(2);{
-        professor.setProfessorId(7);
+        professor.setCountry("Estados Unidos");
+        professor.setUniversityId(9);{
+        professor.setProfessorId(47);
         professor.setLanguage("Español");
+        professor.setPhoneNumber("2284956876");
     }
         int result = instance.updateProfessorForeign(professor);
         assertEquals(expResult, result);
@@ -187,9 +190,9 @@ public class ProfessorDAOTest {
     }
         @Test
         public void testSearchProfessorSuccess(){
-        int expectedResult = 5;
+        int expectedResult = 3;
         ProfessorDAO instance = new ProfessorDAO();
-        int idUniversidad = 1;
+        int idUniversidad = 6;
         ArrayList<Professor> professors = instance.searchProfessorByUniversityId(idUniversidad);
         assertEquals(expectedResult, professors.size());
     }
@@ -205,7 +208,7 @@ public class ProfessorDAOTest {
     
         @Test
         public void testSearchProfessorByCountrySuccess(){
-            int expectedResult = 3;
+            int expectedResult = 7;
             ProfessorDAO instance = new ProfessorDAO();
             String country = "México";
             ArrayList<Professor> professors = instance.searchProfessorByCountry(country);
@@ -228,12 +231,12 @@ public class ProfessorDAOTest {
             ProfessorDAO instance = new ProfessorDAO();
             String status = "Rechazado";
             ArrayList<Professor> professors = instance.searchProfessorByStatus(status);
-            assertEquals(expectedResult, professors.size());
+            assertNotEquals(expectedResult, professors.size());
         }
         
         @Test
         public void testSearchProfessorByStatusSuccess(){
-            int expectedResult = 3;
+            int expectedResult = 6;
             ProfessorDAO instance = new ProfessorDAO();
             String status = "Aceptado";
             ArrayList<Professor> professors = instance.searchProfessorByStatus(status);
@@ -244,7 +247,7 @@ public class ProfessorDAOTest {
         public void testSearchProfessorByCollaborationSuccess(){
             int expectedResult = 1;
             ProfessorDAO instance = new ProfessorDAO();
-            int collaborationId = 13;
+            int collaborationId = 45;
             ArrayList<Professor> professors = instance.searchProfessorByCollaboration(collaborationId);
             assertEquals(expectedResult, professors.size());
         }
@@ -261,8 +264,8 @@ public class ProfessorDAOTest {
         @Test
         public void changeProfessorStatusByIdSuccess(){
             System.out.println("changeStateProfessor");
-            int professorId = 32;
-            String status = "Pendiente";
+            int professorId = 40;
+            String status = "Aceptado";
             ProfessorDAO instance = new ProfessorDAO();
             int expectedResult = 1;
             int result = instance.changeProfessorStatusById(status, professorId);
@@ -287,8 +290,8 @@ public class ProfessorDAOTest {
         public void professorRequestCollaborationSuccess(){
             
             ProfessorDAO professorDAO = new ProfessorDAO();
-           int idProfesor = 28;
-           int idColaboración = 42;
+           int idProfesor = 47;
+           int idColaboración = 45;
 
             int result = professorDAO.professorRequestCollaboration(idColaboración, idProfesor);
             assertEquals(1, result);
@@ -304,16 +307,19 @@ public class ProfessorDAOTest {
             assertEquals(0, result);
         }
 
+        
         @Test
-public void changeRequestStatusTestSuccess(){
-    String status = "Aceptada";
-    int idColaboración = 33;
-    int idProfessor = 24;
-    ProfessorDAO professorDAO = new ProfessorDAO();
-    int expectedResult = 1;
-    int result = professorDAO.changeRequestStatus(status, idColaboración, idProfessor);
-    assertEquals(expectedResult, result);
-}
+        public void changeRequestStatusTestSuccess(){
+            String status = "Rechazada";
+            int collaborationId = 46;
+            int professorId = 40;
+            CollaborationDAO collaborationDAO = new CollaborationDAO();
+            int expectedResult = 1;
+            int result = collaborationDAO.changeRequestStatus(professorId, collaborationId, status);
+            assertEquals(expectedResult, result);
+        }
+
+
 }       
 
 

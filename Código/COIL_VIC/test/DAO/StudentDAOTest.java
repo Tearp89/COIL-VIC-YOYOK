@@ -24,8 +24,8 @@ public class StudentDAOTest {
     public void testAddStudentTestSuccess() {
         StudentDAO studentDAO = new StudentDAO();
         Student student = new Student();
-        student.setEmail("torreo@ejemplo.com");
-        student.setProfessorId(30);
+        student.setEmail("torreo@ejemplos.com");
+        student.setProfessorId(40);
         student.setPassword(".");
         int result = studentDAO.addStudent(student);
         assertEquals(1, result);

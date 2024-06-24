@@ -12,6 +12,7 @@ import org.junit.Test;
 import logic.DAO.CollaborationDAO;
 import logic.DAO.CollaborationStatsDAO;
 import logic.classes.Collaboration;
+import logic.classes.Professor;
 
 import static org.junit.Assert.*;
 import java.sql.ResultSet;
@@ -458,6 +459,83 @@ public class CollaborationDAOTest {
             int result = collaborationDAO.changeRequestStatus(professorId, collaborationId, status);
             assertEquals(expectedResult, result);
         }
+
+        @Test 
+        public void changeRequestStatusByNotChosenTestSuccess(){
+            int professorId = 39;
+            int collaborationId = 46;
+            String status = "No seleccionado";
+            CollaborationDAO collaborationDAO = new CollaborationDAO();
+            int expectedResult = 1;
+            int result = collaborationDAO.changeRequestStatusByNotChosen(professorId, collaborationId, status);
+            assertEquals(expectedResult, result);
+        }
+
+        @Test
+        public void getProfessorWithCollaborationRequestTestSuccess(){
+            int collaborationId = 46;
+            ArrayList<Professor> possibleCollaborators = new ArrayList<>();
+            CollaborationDAO collaborationDAO = new CollaborationDAO();
+            possibleCollaborators = collaborationDAO.getProfessorsWithCollaborationRequests(collaborationId);
+            int expectedResult = 2;
+            int result = possibleCollaborators.size();
+            assertEquals(expectedResult, result);
+        }
+
+        @Test
+        public void validateCollaborationProfessorsLimit(){
+            int collaborationId = 46;
+            boolean expectedResult = false;
+            CollaborationDAO collaborationDAO = new CollaborationDAO();
+            boolean result = collaborationDAO.validateCollaborationProfessorsLimit(collaborationId);
+            assertEquals(expectedResult, result);
+        }
+
+       
+
+        @Test
+        public void loadSubjectsTestSuccess(){
+            int expectedResult = 5;
+            ArrayList<Collaboration> collaborationSubjects = new ArrayList<>();
+            CollaborationDAO collaborationDAO = new CollaborationDAO();
+            int result = collaborationDAO.loadSubjects().size();
+            assertEquals(expectedResult, result);
+        }
+
+        @Test
+        public void getUnreviewedCollaborationsByAdminTestSucces(){
+            int expectedResult = 1;
+            ArrayList<Collaboration> unreviewedCollaborations = new ArrayList<>();
+            CollaborationDAO collaborationDAO = new CollaborationDAO();
+            int result = collaborationDAO.getUnreviewedCollaborationsByAdmin(4).size();
+            assertEquals(expectedResult, result);
+
+        }
+
+        @Test
+        public void getUnreviewedCollaborationsByProfessorTestSucces(){
+            int expectedResult = 1;
+            ArrayList<Collaboration> unreviewedCollaborations = new ArrayList<>();
+            CollaborationDAO collaborationDAO = new CollaborationDAO();
+            int result = collaborationDAO.getUnreviewedCollaborationsByProfessor(40).size();
+            assertEquals(expectedResult, result);
+
+        }
+
+        @Test
+        public void getUnreviewedCollaborationsByStudentTestSucces(){
+            int expectedResult = 1;
+            ArrayList<Collaboration> unreviewedCollaborations = new ArrayList<>();
+            CollaborationDAO collaborationDAO = new CollaborationDAO();
+            int result = collaborationDAO.getUnreviewedCollaborationsByStudent("loromaro@estudiantes.uv.mx").size();
+            assertEquals(expectedResult, result);
+
+        }
+
+        
+
+
+
 
          
         

@@ -257,7 +257,7 @@ public class ProfessorDAO implements IProfessor{
     public int updateProfessorUV(Professor professor){
         DatabaseManager dbManager = new DatabaseManager();
         String query = "UPDATE profesor SET nombreProfesor = ?, telefono = ?, estado = ?, tipoProfesor = ?," + 
-        "país = ?, Universidad_idUniversidad = ?, area_academica = ?, correo, contraseña = ?, NoPersonal = ?," +
+        "país = ?, Universidad_idUniversidad = ?, area_academica = ?, correo = ?, contraseña = SHA2(?, 256), NoPersonal = ?," +
         "region = ?, tipoContratación = ?, categoríaContratación = ?, curso_taller = ?  WHERE idProfesor = ?";
         int result = 0;
         try (Connection connection = dbManager.getConnection();
@@ -276,6 +276,7 @@ public class ProfessorDAO implements IProfessor{
             preparedStatement.setString(13, professor.getContractType());
             preparedStatement.setString(14, professor.getContractCategory());
             preparedStatement.setString(15, professor.getWorkShop());
+            preparedStatement.setInt(16, professor.getProfessorId());
             result = preparedStatement.executeUpdate();
         } catch (SQLException updateProfessorUVException){
             LOG.error("ERROR: ", updateProfessorUVException);
@@ -286,7 +287,7 @@ public class ProfessorDAO implements IProfessor{
     public int updateProfessorForeign(Professor professor){
         DatabaseManager dbManager = new DatabaseManager();
         String query = "UPDATE profesor SET nombreProfesor = ?, telefono = ?, estado = ?, tipoProfesor = ?," +
-        "país = ?, Universidad_idUniversidad = ?, correo, contraseña = ? WHERE idProfesor = ?";
+        "país = ?, Universidad_idUniversidad = ?, correo = ?, contraseña = SHA2(?,256) WHERE idProfesor = ?";
         int result = 0;
         try (Connection connection = dbManager.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
@@ -298,6 +299,7 @@ public class ProfessorDAO implements IProfessor{
             preparedStatement.setInt(6, professor.getUniversityId());
             preparedStatement.setString(7, professor.getEmail());
             preparedStatement.setString(8, professor.getPassword());
+            preparedStatement.setInt(9, professor.getProfessorId());
             result = preparedStatement.executeUpdate();
         } catch (SQLException updateProfessorForeignException){
             LOG.error("ERROR: ", updateProfessorForeignException);
@@ -414,7 +416,10 @@ public class ProfessorDAO implements IProfessor{
 
     public ArrayList<Professor> searchProfessorByCollaboration(int collaborationId){
         DatabaseManager dbManager = new DatabaseManager();
-        String query = "SELECT idProfesor, nombreProfesor, estado, Universidad_idUniversidad FROM profesor WHERE idColaboración = ?";
+        String query = "SELECT p.idProfesor, p.nombreProfesor, p.estado, p.Universidad_idUniversidad " +
+               "FROM profesor p " +
+               "JOIN colaboraciones_registradas cr ON p.idProfesor = cr.Profesor_idProfesor " +
+               "WHERE cr.Colaboración_idColaboración = ?";
         Professor professor = new Professor();
         ArrayList<Professor> professors = new ArrayList<>();
         try (Connection connection = dbManager.getConnection();
