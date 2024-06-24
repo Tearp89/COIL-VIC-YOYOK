@@ -217,6 +217,7 @@ public class CollaborationOptionsController {
         }
         FXMLLoader addActivityLoader = new FXMLLoader(getClass().getResource("/GUI/AddActivityWindow.fxml"));
         ChangeWindowManager.changeWindowTo(event, addActivityLoader);
+
     }
 
     @FXML 
@@ -252,6 +253,7 @@ public class CollaborationOptionsController {
             buttonCloseCollaboration.setDisable(true);
         } else if(validateActiveCollaborations > 0){
             buttonPublishCollaboration.setDisable(true);
+            buttonAddActivity.setDisable(true);
         }
 
         int validateClosedCollaborations = collaborationDAO.searchCollaborationByStatusAndProfessorId("Cerrada", professorId).size();
