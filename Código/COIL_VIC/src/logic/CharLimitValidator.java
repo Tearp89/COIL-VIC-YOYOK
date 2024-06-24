@@ -3,7 +3,6 @@ package logic;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextFormatter;
 
@@ -44,17 +43,6 @@ public class CharLimitValidator {
         });
 
         comboBoxEditor.setTextFormatter(formatter);
-    }
-
-    public static void setCharLimitTextArea(TextArea textArea, int charLimit) {
-        textArea.textProperty().addListener(new ChangeListener<String>() {
-            @Override
-            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                if (newValue != null && newValue.length() >= charLimit) {
-                    textArea.setText(oldValue);
-                } 
-            }
-        });
     }
 
 }

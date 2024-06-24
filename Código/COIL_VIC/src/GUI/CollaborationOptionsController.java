@@ -217,7 +217,6 @@ public class CollaborationOptionsController {
         }
         FXMLLoader addActivityLoader = new FXMLLoader(getClass().getResource("/GUI/AddActivityWindow.fxml"));
         ChangeWindowManager.changeWindowTo(event, addActivityLoader);
-
     }
 
     @FXML 
@@ -266,11 +265,10 @@ public class CollaborationOptionsController {
             buttonPublishCollaboration.setDisable(true);
             buttonSendRequest.setDisable(true);
         } else if (validateActiveCollaborations == 0){
-            buttonAddActivity.setDisable(false);
-            buttonSearchActivity.setDisable(false);
-            buttonOpenCollaboration.setDisable(false);
+            buttonAddActivity.setDisable(true);
+            buttonSearchActivity.setDisable(true);
+            buttonOpenCollaboration.setDisable(true);
             buttonAnswerRequest.setDisable(true);
-            buttonSendRequest.setDisable(true);
         }
 
         int validateDeclinedCollaborations = collaborationDAO.searchCollaborationByStatusAndProfessorId("Rechazada", professorId).size();

@@ -314,8 +314,8 @@ public class CollaborationDAOTest {
     public void changeCollaborationStatusSuccess(){
         System.out.println("changeStateProfessor");
             Collaboration collaboration = new Collaboration();
-            int collaborationId = 48; 
-            String status = "Pendiente";
+            int collaborationId = 45; 
+            String status = "Activa";
             
             CollaborationDAO instance = new CollaborationDAO();
             int expectedResult = 1;

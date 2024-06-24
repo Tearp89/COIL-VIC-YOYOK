@@ -146,13 +146,6 @@ public class SearchActivitiesController {
         activity.setType(type);
         activity.setActivityId(Integer.parseInt(labelActivityId.getText()));
         activity.setWeek(week);
-        Professor professorData = UserSessionManager.getInstance().getProfessorUserData();
-        ProfessorDAO professorDAO = new ProfessorDAO();
-        String user = professorData.getUser();
-        int professorId = professorDAO.getProfessorIdByUser(user);
-        CollaborationDAO collaborationDAO = new CollaborationDAO();
-        ArrayList<Collaboration> publishedCollaborations = collaborationDAO.searchCollaborationByStatusAndProfessorId("Publicada", professorId);
-        //int collaborationId = publishedCollaborations.get(0).getCollaborationId();
         ActivityDAO activityDAO = new ActivityDAO();
         if(!FieldValidator.onlyTextAndNumbers(title) || !FieldValidator.onlyText(type) || !FieldValidator.onlyNumber(week)){
             Alert emptyFieldsAlert = new Alert(AlertType.ERROR);
@@ -299,7 +292,7 @@ public class SearchActivitiesController {
         Professor professorData = new Professor();
         professorData = UserSessionManager.getInstance().getProfessorUserData();
         labelUser.setText(professorData.getName());
-        ObservableList<String> weeks = FXCollections.observableArrayList("1", "2", "3", "4", "5");
+       ObservableList<String> weeks = FXCollections.observableArrayList("1", "2", "3", "4", "5");
         comboBoxWeek.setItems(weeks);
 
         ObservableList<String> types = FXCollections.observableArrayList("Rompe hielo", "Reflexión", "Proyecto COIL", "Retroalimentación", "Introducción", "Cultura");
