@@ -59,6 +59,10 @@ public class CloseCollaborationController {
     
     @FXML
     private void closeCollaboration(ActionEvent event){
+        if(!DatabaseConnectionChecker.isDatabaseConnected()){
+            DatabaseConnectionChecker.showNoConnectionDialog();
+            return;
+        }
         Alert confirmClose = new Alert(AlertType.CONFIRMATION);
         confirmClose.setHeaderText("Confirmar cierre");
         confirmClose.setTitle("Confirmar cierre");
@@ -69,11 +73,12 @@ public class CloseCollaborationController {
         confirmClose.getButtonTypes().setAll(acceptClose, cancelClose);
         Button okButton = (Button) confirmClose.getDialogPane().lookupButton(acceptClose);
         Button cancelButton = (Button) confirmClose.getDialogPane().lookupButton(cancelClose);
-        if(!DatabaseConnectionChecker.isDatabaseConnected()){
-            DatabaseConnectionChecker.showNoConnectionDialog();
-            return;
-        }
+        
         okButton.setOnAction(eventCloseCollaboration -> {
+            if(!DatabaseConnectionChecker.isDatabaseConnected()){
+                DatabaseConnectionChecker.showNoConnectionDialog();
+                return;
+            }
             CollaborationDAO collaborationDAO = new CollaborationDAO();
             int collaborationId = Integer.parseInt(labelCollaborationId.getText());
             int result = collaborationDAO.changeCollaborationStatus("Cerrada", collaborationId);
