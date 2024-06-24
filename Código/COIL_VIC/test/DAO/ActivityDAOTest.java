@@ -29,7 +29,7 @@ public class ActivityDAOTest {
     public void deleteActivityTestSuccess() {
         Activity activity = new Activity();
         ActivityDAO activityDAO = new ActivityDAO();
-        activity.setActivityId(1);
+        activity.setActivityId(18);
 
         int rowsAffected = activityDAO.deleteActivity(activity);
         assertEquals(1, rowsAffected);
@@ -42,7 +42,8 @@ public class ActivityDAOTest {
         activity.setTitle("NuevoNombreActividadTest");
         activity.setDescription("NuevaDescripcionTest");
         activity.setType("NuevoNombreResponsable");
-        activity.setActivityId(1);
+        activity.setActivityId(12);
+        activity.setWeek("2");
         
         int rowsAffected = activityDAO.updateActivity(activity);
         assertEquals(1, rowsAffected);
@@ -50,8 +51,8 @@ public class ActivityDAOTest {
 
     @Test
     public void assignActivityToCollaborationTestSuccess(){
-        int collaborationId = 41;
-        int activityId = 1;
+        int collaborationId = 46;
+        int activityId = 12;
         ActivityDAO activityDAO = new ActivityDAO();
         int expectedResult = 1;
         int result = activityDAO.assignActivityToCollaboration(collaborationId, activityId);
@@ -60,8 +61,8 @@ public class ActivityDAOTest {
     }
 
     @Test
-    public void getActivitiesByCollaborationIdAndWee(){
-        int collaborationId = 41;
+    public void getActivitiesByCollaborationIdAndWeekTestSuccess(){
+        int collaborationId = 46;
         int activityId = 1;
         int expectedResult = 1;
         ActivityDAO activityDAO = new ActivityDAO();

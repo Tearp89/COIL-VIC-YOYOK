@@ -115,17 +115,14 @@ public class CollaborationStatsDAO {
 
     public int countProfessorsByAcademicArea(String academicArea) {
         DatabaseManager dbManager = new DatabaseManager();
-        String query = "SELECT COUNT(DISTINCT cr.Profesor_idProfesor) AS total_professors " + 
-                        "FROM colaboraciones_registradas cr " + 
-                        "JOIN profesor p ON cr.Profesor_idProfesor = p.idProfesor " + 
-                        "WHERE p.area_academica = ?";
+        String query = "SELECT COUNT(DISTINCT idProfesor) AS Total_Professor FROM profesor WHERE area_academica = ?";
         int result = 0;
         try (Connection connection = dbManager.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setString(1, academicArea);
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 if (resultSet.next()) {
-                    result = resultSet.getInt("total_professors");
+                    result = resultSet.getInt("Total_Professor");
                 }
             }
         } catch (SQLException e) {
@@ -160,11 +157,7 @@ public class CollaborationStatsDAO {
 
     public int countProfessorsByRegion(String state) {
         DatabaseManager dbManager = new DatabaseManager();
-        String query = "SELECT COUNT(DISTINCT cr.Profesor_idProfesor) AS total_professors " + 
-                        "FROM colaboraciones_registradas cr " + 
-                        "JOIN profesor p ON cr.Profesor_idProfesor = p.idProfesor " + 
-                        "JOIN regiones_profesor rp ON p.idProfesor = rp.Profesor_idProfesor " + 
-                        "WHERE rp.region = ?";
+        String query = "SELECT COUNT(DISTINCT idProfesor) AS total_professors FROM profesor  WHERE region = ?";
         int result = 0;
         try (Connection connection = dbManager.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(query)) {

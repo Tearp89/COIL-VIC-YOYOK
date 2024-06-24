@@ -60,6 +60,7 @@ public class AdminDAO implements IAdmin {
             preparedStatement.setString(2, admin.getAdminName());
             preparedStatement.setString(3, admin.getAdminRol());
             preparedStatement.setString(4, admin.getAdminUser());
+            preparedStatement.setInt(5, admin.getAdminId());
             result = preparedStatement.executeUpdate();
         } catch (SQLException updateAdminException) {
             LOG.error("ERROR: ", updateAdminException);

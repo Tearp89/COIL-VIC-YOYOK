@@ -64,6 +64,7 @@ public class AdminDAOTest {
         admin.setAdminRol("NuevoRolTest");
         admin.setAdminUser("NuevoUsuarioAdminTest");
         admin.setPassword("NuevoContraseñaTest");
+        admin.setAdminId(6);
         
         int rowsAffected = adminDAO.updateAdmin(admin);
         assertEquals(1, rowsAffected);
@@ -74,9 +75,9 @@ public class AdminDAOTest {
         Admin admin = new Admin();
         AdminDAO adminDAO = new AdminDAO();
 
-        admin.setAdminUser("admin");
+        admin.setAdminUser("rPerez");
         String stringExpected = adminDAO.getAdminNameByUser(admin.getAdminUser());
-        assertEquals("Taylor", stringExpected);
+        assertEquals("Rodrigo Perez", stringExpected);
     }
 
     @Test

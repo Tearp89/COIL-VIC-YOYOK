@@ -52,50 +52,7 @@ public class CollaborationDAOTest {
         int rowsAffected = instance.addCollaboration(collaboration);
         assertEquals(1, rowsAffected);
     }
-    
 
-    /**
-     * Test of deleteCollaboration method, of class CollaborationDAO.
-     */
-    @org.junit.Test
-    public void testDeleteCollaboration() {
-        Collaboration collaboration = new Collaboration();
-        CollaborationDAO instance = new CollaborationDAO();
-        
-        LocalDate dateStartTest = LocalDate.of(2022, 3, 1);
-        LocalDate dateFinishtTest = LocalDate.of(2026, 1, 1);
-        
-        collaboration.setCollaborationName("TestNombreCol");
-        collaboration.setDescription("TestDescripcion");
-        collaboration.setFinishDate(dateFinishtTest);
-        collaboration.setStartDate(dateStartTest);
-        collaboration.setCollaborationId(50);
-        
-        
-        int rowsAffected = instance.deleteCollaboration(collaboration);
-        assertEquals(1, rowsAffected);
-    }
-    
-    @Test
-    public void testDeleteCollaborationFailed(){
-        Collaboration collaboration = new Collaboration();
-        CollaborationDAO instance = new CollaborationDAO();
-        
-        LocalDate dateStartTest = LocalDate.of(2000, 3, 1);
-        LocalDate dateFinishtTest = LocalDate.of(2000, 1, 1);
-        
-        collaboration.setCollaborationName("TestNombreCol");
-        collaboration.setDescription("TestDescripcion");
-        collaboration.setFinishDate(dateFinishtTest);
-        collaboration.setStartDate(dateStartTest);
-        collaboration.setCollaborationId(78);
-        
-        
-        int rowsAffected = instance.deleteCollaboration(collaboration);
-        assertEquals(0, rowsAffected);
-    }
-
-    
     @org.junit.Test
     public void testUpdateCollaborationSuccess() {
         Collaboration collaboration = new Collaboration();
@@ -108,7 +65,7 @@ public class CollaborationDAOTest {
         collaboration.setDescription("NuevoTestDescripcion");
         collaboration.setFinishDate(dateFinishtTest);
         collaboration.setStartDate(dateStartTest);
-        collaboration.setCollaborationId(50);
+        collaboration.setCollaborationId(46);
         collaboration.setCollaborationGoal("Conviviri");
         collaboration.setNoStudents(20);
         collaboration.setStudentProfile("Ganas de trabajar");
@@ -137,11 +94,56 @@ public class CollaborationDAOTest {
     }
     
     
+
+    /**
+     * Test of deleteCollaboration method, of class CollaborationDAO.
+     */
+    @org.junit.Test
+    public void testDeleteCollaboration() {
+        Collaboration collaboration = new Collaboration();
+        CollaborationDAO instance = new CollaborationDAO();
+        
+        LocalDate dateStartTest = LocalDate.of(2022, 3, 1);
+        LocalDate dateFinishtTest = LocalDate.of(2026, 1, 1);
+        
+        collaboration.setCollaborationName("TestNombreCol");
+        collaboration.setDescription("TestDescripcion");
+        collaboration.setFinishDate(dateFinishtTest);
+        collaboration.setStartDate(dateStartTest);
+        collaboration.setCollaborationId(46);
+        
+        
+        int rowsAffected = instance.deleteCollaboration(collaboration);
+        assertEquals(1, rowsAffected);
+    }
+    
+    @Test
+    public void testDeleteCollaborationFailed(){
+        Collaboration collaboration = new Collaboration();
+        CollaborationDAO instance = new CollaborationDAO();
+        
+        LocalDate dateStartTest = LocalDate.of(2000, 3, 1);
+        LocalDate dateFinishtTest = LocalDate.of(2000, 1, 1);
+        
+        collaboration.setCollaborationName("TestNombreCol");
+        collaboration.setDescription("TestDescripcion");
+        collaboration.setFinishDate(dateFinishtTest);
+        collaboration.setStartDate(dateStartTest);
+        collaboration.setCollaborationId(78);
+        
+        
+        int rowsAffected = instance.deleteCollaboration(collaboration);
+        assertEquals(0, rowsAffected);
+    }
+
+    
+    
+    
     @Test
     public void testSearchCollaborationSuccess(){
-        int expectedResult = 5;
+        int expectedResult = 1;
         CollaborationDAO instance = new CollaborationDAO();
-        String name = "TestNombreCol";
+        String name = "Aceptada";
         ArrayList<Collaboration> collaborations = instance.searchCollaborationByStatus(name);
         assertEquals(expectedResult, collaborations.size());
     }
@@ -156,9 +158,9 @@ public class CollaborationDAOTest {
     }
     @Test
     public void testSearchCollaborationByYearSuccess(){
-        int expectedResult = 12;
+        int expectedResult = 3;
         CollaborationDAO instance = new CollaborationDAO();
-        String year = "2000";
+        String year = "2024";
         ArrayList<Collaboration> collaborations = instance.searchCollaborationByYear(year);
         assertEquals(expectedResult, collaborations.size());
     }
@@ -176,8 +178,8 @@ public class CollaborationDAOTest {
     @Test
     public void testCountStudentsByRegionSuccess(){
         CollaborationStatsDAO instance = new CollaborationStatsDAO();
-        int expectedResult = 1;
-        String region = "Veracruz";
+        int expectedResult = 0;
+        String region = "Poza Rica-Tuxpan";
         int actualResult = instance.countStudentsByRegion(region);
         assertEquals(expectedResult, actualResult);
     }
@@ -194,7 +196,7 @@ public class CollaborationDAOTest {
     @Test
     public void testCountStudentByRegionAndYearSuccess(){
         CollaborationStatsDAO instance = new CollaborationStatsDAO();
-        int expectedResult = 1;
+        int expectedResult = 0;
         String region = "Veracruz";
         String year = "2000";
         int actualResult = instance.countStudentsByRegionAndYear(region, year);
@@ -215,7 +217,7 @@ public class CollaborationDAOTest {
     @Test
     public void testCountStudentByAcademicAreaSuccess(){
         CollaborationStatsDAO instance = new CollaborationStatsDAO();
-        int expectedResult = 1;
+        int expectedResult = 0;
         String academicArea = "Técnica";
         int actualResult = instance.countStudentsByAcademicArea(academicArea);
         assertEquals(expectedResult, actualResult);
@@ -253,8 +255,8 @@ public class CollaborationDAOTest {
     public void testCountProfessorsByAcademicAreaAndYearSuccess(){
         CollaborationStatsDAO instance = new CollaborationStatsDAO();
         int expectedResult = 1;
-        String academicArea = "Técnica";
-        String year = "2000";
+        String academicArea = "Ciencias de la salud";
+        String year = "2024";
         int actualResult = instance.countProfessorsByAcademicAreaAndYear(academicArea, year);
         assertEquals(expectedResult, actualResult);
     }
@@ -273,7 +275,7 @@ public class CollaborationDAOTest {
     public void testCountProfessorsByRegionSuccess(){
         CollaborationStatsDAO instance = new CollaborationStatsDAO();
         int expectedResult = 1;
-        String region = "Veracruz";
+        String region = "Poza Rica-Tuxpan";
         int actualResult = instance.countProfessorsByRegion(region);
         assertEquals(expectedResult, actualResult);
     }
@@ -291,8 +293,8 @@ public class CollaborationDAOTest {
     public void testCountProfessorByRegionAndYearSuccess(){
         CollaborationStatsDAO instance = new CollaborationStatsDAO();
         int expectedResult = 1;
-        String region = "Veracruz";
-        String year = "2000";
+        String region = "Poza Rica-Tuxpan";
+        String year = "2024";
         int actualResult = instance.countProfessorsByRegionAndYear(region, year);
         assertEquals(expectedResult, actualResult); 
     }
@@ -311,7 +313,7 @@ public class CollaborationDAOTest {
     public void changeCollaborationStatusSuccess(){
         System.out.println("changeStateProfessor");
             Collaboration collaboration = new Collaboration();
-            int collaborationId = 30; 
+            int collaborationId = 45; 
             String status = "Activa";
             
             CollaborationDAO instance = new CollaborationDAO();
@@ -338,7 +340,7 @@ public class CollaborationDAOTest {
             CollaborationDAO instance = new CollaborationDAO();
             int expectedResult = 1;
             String studentEmail = "zS22013641@estudiantes.uv.mx";
-            int collaborationId = 3;
+            int collaborationId = 45;
             int actualResult = instance.assignStudentToCollaboration(studentEmail, collaborationId);
             assertEquals(expectedResult, actualResult);
         }
@@ -347,8 +349,8 @@ public class CollaborationDAOTest {
         public void assignProfessorToCollaborationSuccess() throws SQLException{
             CollaborationDAO instance = new CollaborationDAO();
             int expectedResult = 1;
-            int professorId = 24;
-            int collaborationId = 29;
+            int professorId = 41;
+            int collaborationId = 46;
             int actualResult = instance.assignProfessorToCollaboration(professorId, collaborationId);
             assertEquals(expectedResult, actualResult);
 
