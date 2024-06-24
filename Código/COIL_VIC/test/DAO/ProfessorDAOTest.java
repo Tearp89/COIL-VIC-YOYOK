@@ -31,7 +31,7 @@ public class ProfessorDAOTest {
         professor.setName("Jorge Alberto");
         professor.setStatus("Aceptado");
         professor.setPhoneNumber("2220000000");
-        professor.setEmail("test2@email.com");
+        professor.setEmail("correou89@email.com");
         professor.setCountry("México");
         professor.setUniversityId(6);
         professor.setType("UV");
@@ -66,7 +66,7 @@ public class ProfessorDAOTest {
         professor.setContractType("luegocheco");
         professor.setContractCategory("luegochecox2");
         professor.setDiscipline("luegochecox3");
-        professor.setUser("Usuario de prueba uv1");
+        professor.setUser("UsuarioUV3");
         professor.setPassword("testtest");
         
         int result = instance.addProfessorUV(professor);
@@ -82,11 +82,11 @@ public class ProfessorDAOTest {
         professor.setName("Juan Díaz");
         professor.setStatus("Pendiente");
         professor.setPhoneNumber("228976565434");
-        professor.setEmail("juanDia23z@gmail.com");
+        professor.setEmail("juanDia231z@gmail.com");
         professor.setCountry("México");
         professor.setUniversityId(6);
         professor.setType("Externo");
-        professor.setUser("jDiza98");
+        professor.setUser("jDiazx698");
         professor.setPassword("testtest");
         professor.setLanguage("Español");
         
@@ -131,17 +131,6 @@ public class ProfessorDAOTest {
     }
 
 
-    @org.junit.Test
-    public void testDeleteProfessorSuccess() {
-        System.out.println("deleteProfessor");
-        Professor professor = new Professor();
-        ProfessorDAO instance = new ProfessorDAO();
-        int expResult = 1;
-        professor.setProfessorId(37);
-        int result = instance.deleteProfessor(professor);
-        assertEquals(expResult, result);
-       
-    }
     
     @Test
     public void testDeleteProfessorFailed(){

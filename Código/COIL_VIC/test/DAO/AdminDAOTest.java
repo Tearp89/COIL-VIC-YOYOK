@@ -83,7 +83,7 @@ public class AdminDAOTest {
     public void testDeleteAdmin() {
         Admin admin = new Admin();
         AdminDAO adminDAO = new AdminDAO();
-        admin.setAdminName("AdminNombreTest");
+        admin.setAdminName("Leah Dominguez");
         admin.setAdminRol("RolTest");
         admin.setAdminUser("UsuarioAdminTest");
         admin.setPassword("ContraseñaTest");
