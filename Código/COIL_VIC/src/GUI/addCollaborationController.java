@@ -195,6 +195,9 @@ public class AddCollaborationController {
         CollaborationDAO collaborationDAO = new CollaborationDAO();
         ObservableList<String> subjects = collaborationDAO.loadSubjects();
         comboBoxCollaborationSubject.getItems().setAll(subjects);
+        TextField textFieldEditor = comboBoxCollaborationSubject.getEditor();
+
+        CharLimitValidator.setCharLimitEditableComboBox(textFieldEditor, 50);
 
         textFieldNoStudents.setTextFormatter(new TextFormatter<>(change -> {
             String newText = change.getControlNewText();
@@ -216,7 +219,6 @@ public class AddCollaborationController {
         datePickerFinishDate.getEditor().addEventFilter(KeyEvent.KEY_PRESSED, event -> event.consume());
         datePickerFinishDate.getEditor().addEventFilter(KeyEvent.KEY_RELEASED, event -> event.consume());
         CharLimitValidator.setCharLimitTextField(textFieldCollaborationName, 245);
-        CharLimitValidator.setCharLimitComboBox(comboBoxCollaborationSubject, charLimit);
         CharLimitValidator.setCharLimitTextField(textFieldNoStudents, 3);
         
 

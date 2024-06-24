@@ -4,6 +4,7 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TextFormatter;
 
 public class CharLimitValidator {
 
@@ -19,7 +20,7 @@ public class CharLimitValidator {
         });
     }
 
-     public static <T> void setCharLimitComboBox(ComboBox<T> comboBox, int itemsLimit) {
+    public static <T> void setCharLimitComboBox(ComboBox<T> comboBox, int itemsLimit) {
         comboBox.showingProperty().addListener(new ChangeListener<Boolean>() {
             @Override
             public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
@@ -28,6 +29,20 @@ public class CharLimitValidator {
                 }
             }
         });
+    }
+
+    public static void setCharLimitEditableComboBox(TextField comboBoxEditor, int charLimit){
+        TextFormatter<String> formatter = new TextFormatter<>(change -> {
+            String newText = change.getControlNewText();
+            if (newText.length() > charLimit) {
+                change.setText(newText.substring(0, charLimit));
+                int oldLength = change.getControlText().length();
+                change.setRange(0, oldLength);
+            }
+            return change; 
+        });
+
+        comboBoxEditor.setTextFormatter(formatter);
     }
 
 }
