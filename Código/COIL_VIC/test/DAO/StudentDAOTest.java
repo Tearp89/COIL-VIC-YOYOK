@@ -24,7 +24,7 @@ public class StudentDAOTest {
     public void testAddStudentTestSuccess() {
         StudentDAO studentDAO = new StudentDAO();
         Student student = new Student();
-        student.setEmail("torreo@ejemplos.com");
+        student.setEmail("zS22013640@estudiantes.uv.mx");
         student.setProfessorId(40);
         student.setPassword(".");
         int result = studentDAO.addStudent(student);
@@ -43,8 +43,8 @@ public class StudentDAOTest {
 
     @Test
     public void isStudentAssignedToProfessorTestSuccess(){
-        int professorId = 29;
-        String email = "torreo@ejemplo.com";
+        int professorId = 40;
+        String email = "zS22013640@estudiantes.uv.mx";
         StudentDAO studentDAO = new StudentDAO();
         boolean expectedResult = true;
         boolean result = studentDAO.isStudentAssignedToProfessor(email, professorId);

@@ -340,8 +340,8 @@ public class CollaborationDAOTest {
         public void assignStudentToCollaborationSuccess() throws SQLException{
             CollaborationDAO instance = new CollaborationDAO();
             int expectedResult = 1;
-            String studentEmail = "zS22013641@estudiantes.uv.mx";
-            int collaborationId = 45;
+            String studentEmail = "zS22013640@estudiantes.uv.mx";
+            int collaborationId = 50;
             int actualResult = instance.assignStudentToCollaboration(studentEmail, collaborationId);
             assertEquals(expectedResult, actualResult);
         }
@@ -530,6 +530,15 @@ public class CollaborationDAOTest {
             int result = collaborationDAO.getUnreviewedCollaborationsByStudent("loromaro@estudiantes.uv.mx").size();
             assertEquals(expectedResult, result);
 
+        }
+
+        @Test
+        public void validateCollaborationStudentLimitTestSuccess(){
+            int collaborationId = 49;
+            CollaborationDAO collaborationDAO = new CollaborationDAO();
+            boolean expectedResult = true;
+            boolean result = collaborationDAO.validateCollaborationStudentLimit(collaborationId, 25);
+            assertEquals(expectedResult, result);
         }
 
         
