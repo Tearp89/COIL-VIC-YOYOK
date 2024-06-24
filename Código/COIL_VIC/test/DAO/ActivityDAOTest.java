@@ -72,5 +72,47 @@ public class ActivityDAOTest {
 
     }
 
+    @Test
+    public void isActivityAssignedToWeekTestSuccesfull(){
+        int idColaboración = 46;
+        String week = "2";
+        boolean expectedResult = true;
+        ActivityDAO activityDAO = new ActivityDAO();
+        boolean result = activityDAO.isActivityAssignedInWeek(idColaboración, week);
+        assertEquals(expectedResult, result);
+
+    }
+
+    @Test
+    public void isActivityTypeAssignedTestSuccess(){
+        int idColaboración = 46;
+        String type = "Rompe hielo";
+        boolean expectedResult = true;
+        ActivityDAO activityDAO = new ActivityDAO();
+        boolean result = activityDAO.isActivityTypeAssigned(idColaboración, type);
+        assertEquals(expectedResult, result);
+
+    }
+
+    @Test
+    public void getActivityTypeByIdTestSuccess(){
+        int activityId = 13;
+        String expectedResult = "Proyecto COIL";
+        ActivityDAO activityDAO = new ActivityDAO();
+        String result = activityDAO.getActivityTypeById(activityId);
+        assertEquals(expectedResult, result);
+    }
+
+    @Test
+    public void getActivityWeekById(){
+        int activityId = 12;
+        String expectedResult = "2";
+        ActivityDAO activityDAO = new ActivityDAO();
+        String result = activityDAO.getActivityWeekById(activityId);
+        assertEquals(expectedResult, result);
+    }
+
+
+
 
 }

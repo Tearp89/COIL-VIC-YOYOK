@@ -359,24 +359,24 @@ public class CollaborationDAOTest {
         @Test
         public void getCollaborationNameSuccess(){
             CollaborationDAO instance = new CollaborationDAO();
-            String expectedResult = "Interculturalidad UV";
-            String actualResult = instance.getCollaborationNameById(36);
+            String expectedResult = "Bonjour al frances";
+            String actualResult = instance.getCollaborationNameById(47);
             assertEquals(expectedResult, actualResult);
         }
 
         @Test
         public void getCollaborationDescriptionSuccess(){
             CollaborationDAO instance = new CollaborationDAO();
-            String expectedResult = "TestDescripcion";
-            String actualResult = instance.getCollaborationDescriptionById(36);
+            String expectedResult = "Aprendizaje del idioma frances";
+            String actualResult = instance.getCollaborationDescriptionById(47);
             assertEquals(expectedResult, actualResult);
         }
 
         @Test
         public void getCollaborationStartDateSuccess(){
             CollaborationDAO instance = new CollaborationDAO();
-            String expectedResult = "2025-04-11";
-            String actualResult = instance.getCollaborationStartDateById(22);
+            String expectedResult = "2024-06-01";
+            String actualResult = instance.getCollaborationStartDateById(47);
             assertEquals(expectedResult, actualResult);
         }
 
@@ -384,7 +384,7 @@ public class CollaborationDAOTest {
         public void searchCollaborationByStatusAndProfessorIdTestSuccess(){
             CollaborationDAO instance = new CollaborationDAO();
             int expectedResult = 1;
-            int professorId = 24;
+            int professorId = 36;
             String status = "Activa";
             int result = instance.searchCollaborationByStatusAndProfessorId(status, professorId).size();
             assertEquals(expectedResult, result);
@@ -395,9 +395,9 @@ public class CollaborationDAOTest {
         public void searchCollaborationByStatusNameandProfessorIdTestSuccess(){
             CollaborationDAO instance = new CollaborationDAO();
             int expectedResult = 1;
-            int professorId = 24;
+            int professorId = 36;
             String status = "Activa";
-            String collaborationName = "Comunicación en lengua entranjera";
+            String collaborationName = "Nueva Colaboración";
             int result = instance.searchCollaborationByStatusAndProfessorId(status, professorId).size();
             assertEquals(expectedResult, result);
 
@@ -407,15 +407,15 @@ public class CollaborationDAOTest {
         @Test
         public void getCollaboratorNameByIdTestSuccess(){
             CollaborationDAO collaborationDAO = new CollaborationDAO();
-            String expectedResult = "Jorge Alberto";
-            String result = collaborationDAO.getCollaboratorNameById(37, 24);
+            String expectedResult = "Julian Gutierrez";
+            String result = collaborationDAO.getCollaboratorNameById(47, 36);
             assertEquals(expectedResult, result);
         }
 
         @Test
         public void isStudentAssignedTestSuccess(){
-            int collaborationId = 42;
-            String email = "marla@gmail.com";
+            int collaborationId = 47;
+            String email = "loromaro@estudiantes.uv.mx";
             CollaborationDAO collaborationDAO = new CollaborationDAO();
             boolean expectedResult = true;
             boolean result = collaborationDAO.isStudentAssignedToCollaboration(email, collaborationId);
@@ -426,13 +426,13 @@ public class CollaborationDAOTest {
         public void validateCollaborationProfessorsLimitTestSuccess(){
             boolean expectedResult = false;
             CollaborationDAO collaborationDAO = new CollaborationDAO();
-            boolean result = collaborationDAO.validateCollaborationProfessorsLimit(42);
+            boolean result = collaborationDAO.validateCollaborationProfessorsLimit(47);
             assertEquals(expectedResult, result);
         }
 
         @Test
         public void isProfessorInCollaborationTestSuccess(){
-            int professorId = 24;
+            int professorId = 40;
             boolean expectedResult = true;
             CollaborationDAO collaborationDAO = new CollaborationDAO();
             boolean result = collaborationDAO.isProfessorInCollaboration(professorId);
@@ -444,9 +444,23 @@ public class CollaborationDAOTest {
         public void validateCollaborationNameExceptActualTestSuccess(){
             boolean expectedResult = true;
             CollaborationDAO collaborationDAO = new CollaborationDAO();
-            boolean result = collaborationDAO.validateCollaborationNameExceptActual("Lectura y redacción de textos", 29);
+            boolean result = collaborationDAO.validateCollaborationNameExceptActual("NuevoTestNombreCol", 45);
             assertEquals(expectedResult, result);
         }
+
+        @Test
+        public void changeRequestStatusTestSuccess(){
+            String status = "Rechazada";
+            int collaborationId = 46;
+            int professorId = 40;
+            CollaborationDAO collaborationDAO = new CollaborationDAO();
+            int expectedResult = 1;
+            int result = collaborationDAO.changeRequestStatus(professorId, collaborationId, status);
+            assertEquals(expectedResult, result);
+        }
+
+         
+        
 
         
 
