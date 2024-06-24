@@ -271,6 +271,25 @@ public class SearchActivitiesController {
                 comboBoxType.setValue(null);
                 labelActivityId.setText("");
             }
+        } else {
+            ArrayList<Collaboration> activeCollaborations = collaborationDAO.searchCollaborationByStatusAndProfessorId("Activa", professorId);
+            int collaborationId = activeCollaborations.get(0).getCollaborationId();
+            ActivityDAO activityDAO = new ActivityDAO();
+            List<Activity> activities = activityDAO.getActivitiesByCollaborationAndWeek(collaborationId, week);
+
+            if (!activities.isEmpty()) {
+                Activity activity = activities.get(0);
+                textFieldTitle.setText(activity.getTitle());
+                textAreaDescription.setText(activity.getDescription());
+                comboBoxType.setValue(activity.getType());
+                labelActivityId.setText(String.valueOf(activity.getActivityId()));
+            } else {
+                
+                textFieldTitle.clear();
+                textAreaDescription.clear();
+                comboBoxType.setValue(null);
+                labelActivityId.setText("");
+            }
         }
     }
 

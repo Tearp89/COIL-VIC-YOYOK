@@ -15,8 +15,8 @@
 
             
             //Laptop Dani
-            //"projectName": "COIL_VIC_21618bff",            
-            //"vmArgs": "--module-path \"C:/Users/daur0/OneDrive/Documentos/Universidad/4to Semestre/Principios de Construcción/Proyecto COIL-VIC/COIL-VIC-YOYOK/javafx-sdk-21.0.2/lib\" --add-modules javafx.controls,javafx.fxml"            //Computadora Escritorio Dani
+            "projectName": "COIL_VIC_21618bff",            
+            "vmArgs": "--module-path \"C:/Users/daur0/OneDrive/Documentos/Universidad/4to Semestre/Principios de Construcción/Proyecto COIL-VIC/COIL-VIC-YOYOK/javafx-sdk-21.0.2/lib\" --add-modules javafx.controls,javafx.fxml"            //Computadora Escritorio Dani
             
             //Computadora Escritorio Dani
             //"projectName": "COIL_VIC_845c0f60",
