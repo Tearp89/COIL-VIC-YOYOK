@@ -9499,3 +9499,6 @@ Caused by: java.lang.IndexOutOfBoundsException: Index 0 out of bounds for length
 	at GUI.AddActivityController.initialize(AddActivityController.java:250)
 	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
 	... 65 more
+24-06-2024 12:21:28 ERROR DatabaseConnectionChecker:17: No hay conexión con la base de datos Communications link failure
+
+The last packet sent successfully to the server was 0 milliseconds ago. The driver has not received any packets from the server.
