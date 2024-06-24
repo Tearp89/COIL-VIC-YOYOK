@@ -125,7 +125,7 @@
                                     </BorderPane>
                                     <ImageView fitHeight="347.0" fitWidth="423.0" layoutX="223.0" layoutY="89.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
-                                          <Image url="@../../../../Imagenes/descarga-removebg-preview.png" />
+                                          <Image url="@multimedia/descarga-removebg-preview.png" />
                                        </image>
                                     </ImageView>
                                     <Label layoutX="306.0" layoutY="100.0" rotate="-30.0" text="C">
@@ -170,7 +170,7 @@
                                     </Label>
                                     <ImageView fitHeight="61.0" fitWidth="56.0" layoutX="362.0" layoutY="408.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
-                                          <Image url="@../../../../Imagenes/1200px-Logo_de_la_Universidad_Veracruzana.svg.png" />
+                                          <Image url="@multimedia/1200px-Logo_de_la_Universidad_Veracruzana.svg.png" />
                                        </image>
                                     </ImageView>
                                  </children>
