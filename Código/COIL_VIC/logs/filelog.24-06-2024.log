@@ -9624,6 +9624,12 @@ java.sql.SQLIntegrityConstraintViolationException: Duplicate entry 'zS22013641@e
 24-06-2024 12:42:19 ERROR DatabaseConnectionChecker:17: No hay conexión con la base de datos Communications link failure
 
 The last packet sent successfully to the server was 0 milliseconds ago. The driver has not received any packets from the server.
+24-06-2024 12:43:34 ERROR DatabaseConnectionChecker:17: No hay conexión con la base de datos Communications link failure
+
+The last packet sent successfully to the server was 0 milliseconds ago. The driver has not received any packets from the server.
+24-06-2024 13:00:35 INFO  EmailControl:52: Se envió un Email a: juaperez@uv.mx
+24-06-2024 13:01:08 INFO  AddProfessorController:417: Se envió un correo con las credenciales a: juaperez@uv.mx
+24-06-2024 13:03:40 INFO  EmailControl:52: Se envió un Email a: juaperez@uv.mx
 24-06-2024 13:08:47 ERROR AdminDAO:34: ERROR: 
 java.sql.SQLIntegrityConstraintViolationException: Duplicate entry 'UsuarioAdminTest' for key 'administrador.usuario_UNIQUE'
 	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:117)
