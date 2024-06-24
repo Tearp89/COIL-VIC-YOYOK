@@ -107,7 +107,7 @@ public class CollaborationDAO implements ICollaboration {
     public ArrayList<Collaboration> searchCollaborationByStatusAndProfessorId(String status, int professorId) {
         DatabaseManager dbManager = new DatabaseManager();
         ArrayList<Collaboration> collaborations = new ArrayList<>();
-        String query = "SELECT c.* FROM colaboración c INNER JOIN colaboraciones_registradas cr ON c.idColaboración = cr.Colaboración_idColaboración WHERE cr.Profesor_idProfesor = ?";
+        String query = "SELECT c.* FROM colaboración c INNER JOIN colaboraciones_registradas cr ON c.idColaboración = cr.Colaboración_idColaboración WHERE c.estado = ? AND cr.Profesor_idProfesor = ?";
         try (Connection connection = dbManager.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setString(1, status);
@@ -120,6 +120,29 @@ public class CollaborationDAO implements ICollaboration {
                     collaboration.setStartDate(resultSet.getObject("fechaInicio", LocalDate.class));
                     collaboration.setFinishDate(resultSet.getObject("fechaFin", LocalDate.class));
                     collaboration.setCollaborationStatus(status);
+                    collaborations.add(collaboration);
+                }
+            }
+        } catch (SQLException e) {
+            LOG.error("ERROR: ", e);
+        }
+        return collaborations;
+    }
+
+    public ArrayList<Collaboration> searchCollaborationByProfessorId(int professorId) {
+        DatabaseManager dbManager = new DatabaseManager();
+        ArrayList<Collaboration> collaborations = new ArrayList<>();
+        String query = "SELECT c.* FROM colaboración c INNER JOIN colaboraciones_registradas cr ON c.idColaboración = cr.Colaboración_idColaboración WHERE cr.Profesor_idProfesor = ?";
+        try (Connection connection = dbManager.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setInt(1, professorId);
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                while (resultSet.next()) {
+                    Collaboration collaboration = new Collaboration();
+                    collaboration.setCollaborationId(resultSet.getInt("idColaboración"));
+                    collaboration.setCollaborationName(resultSet.getString("nombreColaboración"));
+                    collaboration.setStartDate(resultSet.getObject("fechaInicio", LocalDate.class));
+                    collaboration.setFinishDate(resultSet.getObject("fechaFin", LocalDate.class));
                     collaborations.add(collaboration);
                 }
             }
