@@ -103,8 +103,6 @@ public class StudentsFeedbackCollaborationController {
     private void initialize(){
         Student studentData = new Student();
         studentData = UserSessionManager.getInstance().getStudentUserData();
-        String email = studentData.getEmail();
-        System.out.println(email);
         if(!DatabaseConnectionChecker.isDatabaseConnected()){
             DatabaseConnectionChecker.showNoConnectionDialog();
             return;
