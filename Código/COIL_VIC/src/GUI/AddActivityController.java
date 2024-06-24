@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
+
+import dataAccess.DatabaseConnectionChecker;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -18,6 +20,8 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import log.Log;
+import logic.ActivityValidator;
+import logic.CharLimitValidator;
 import logic.FieldValidator;
 import logic.DAO.ActivityDAO;
 import logic.DAO.CollaborationDAO;
@@ -140,7 +144,6 @@ public class AddActivityController {
         int result =  activityDAO.addActivity(activity);
         if(result > 0){
             buttonAssign.setDisable(false);
-            buttonCancel.setDisable(false);
             activityId = activity.getActivityId();
             buttonSave.setDisable(true);
         }
@@ -164,6 +167,7 @@ public class AddActivityController {
             duplicatedWeekAlert.setContentText("No se puede asignar la actividad, ya existe una actividad para esa semana");
             duplicatedWeekAlert.show();
         } else{
+            
             Alert confirmAssignAlert = new Alert(AlertType.CONFIRMATION);
             confirmAssignAlert.setTitle("Confirmar actividad");
             confirmAssignAlert.setHeaderText("Confirmar actividad");
@@ -184,20 +188,7 @@ public class AddActivityController {
                     return;
                 }
                 int result = activityDAO.assignActivityToCollaboration(collaborationId, activityId);
-                if (result > 0){
-                    Alert assignConfirmationAlert = new Alert(AlertType.INFORMATION);
-                    assignConfirmationAlert.setTitle("Actividad asignada");
-                    assignConfirmationAlert.setHeaderText("Actividad asignada");
-                    assignConfirmationAlert.setContentText("Se asignó la actividad exitosamente");
-                    assignConfirmationAlert.show();
-                    buttonAssign.setDisable(true);
-                } else{
-                    Alert assignErrorAlert = new Alert(AlertType.ERROR);
-                    assignErrorAlert.setTitle("Error conexión");
-                    assignErrorAlert.setHeaderText("Error conexión");
-                    assignErrorAlert.setContentText("Se perdió la conexión a la base de datos, inténtelo de nuevo más tarde");
-                    assignErrorAlert.show();
-                }
+                ActivityValidator.showAlerts(result, buttonAssign);
             });
 
             cancelButon.setOnAction(eventCancelAssign -> {
@@ -270,6 +261,8 @@ public class AddActivityController {
         comboBoxWeek.getItems().setAll(weeks);
         ObservableList<String> types = FXCollections.observableArrayList("Rompe hielo", "Reflexión", "Proyecto COIL", "Retroalimentación", "Introduccion", "Cultura" );
         comboBoxType.getItems().setAll(types);
+
+        CharLimitValidator.setCharLimitTextField(textFieldTitle, 256);
         
 
     }

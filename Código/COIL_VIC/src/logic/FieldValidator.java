@@ -58,7 +58,8 @@ public class FieldValidator {
             textFieldTrim = textFieldTrim.trim();
         }
         if (!textFieldTrim.isBlank()) {
-            return textFieldTrim.replaceAll("[.,-]", "").matches("[a-zA-ZñÑáéíóúÁÉÍÓÚ\\d\\s]+");
+            return textFieldTrim.replaceAll("[.,-]", "")
+            .matches("[a-zA-ZñÑáéíóúÁÉÍÓÚ\\d\\s]+");
         } else {
             return false;
         }

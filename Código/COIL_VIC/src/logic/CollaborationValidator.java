@@ -25,12 +25,12 @@ public class CollaborationValidator {
         String studentProfile = collaboration.getStudentProfile();
         String noStudentsText = String.valueOf(collaboration.getNoStudents());
         String collaborationType = collaboration.getCollaborationType();
-        if(!FieldValidator.onlyText(collaborationName) ||
-        !FieldValidator.onlyText(collaborationDescription) ||
+        if(!FieldValidator.onlyTextAndNumbers(collaborationName) ||
+        !FieldValidator.onlyTextAndNumbers(collaborationDescription) ||
         !FieldValidator.isValidDateRange(startDate, finishDate) ||
-        !FieldValidator.onlyText(collaborationGoal) ||
+        !FieldValidator.onlyTextAndNumbers(collaborationGoal) ||
         !FieldValidator.onlyText(collaborationSubject) ||
-        !FieldValidator.onlyText(studentProfile) ||
+        !FieldValidator.onlyTextAndNumbers(studentProfile) ||
         !FieldValidator.onlyNumber(noStudentsText) || 
         collaborationType.isEmpty()){
             Alert emptyFieldsAlert = new Alert(AlertType.ERROR);

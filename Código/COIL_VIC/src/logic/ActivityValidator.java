@@ -15,7 +15,7 @@ public class ActivityValidator {
         String week = activity.getWeek();
         String type = activity.getType();
         String description = activity.getDescription();
-        if(!FieldValidator.onlyText(title) || !FieldValidator.onlyNumber(week) || !FieldValidator.onlyText(type) || !FieldValidator.onlyText(description)){
+        if(!FieldValidator.onlyText(title) || !FieldValidator.onlyNumber(week) || !FieldValidator.onlyText(type) || !FieldValidator.onlyTextAndNumbers(description)){
             Alert emptyFieldsAlert = new Alert(AlertType.ERROR);
             emptyFieldsAlert.setTitle("Campos vacíos o incorrectos");
             emptyFieldsAlert.setHeaderText("Campos vacíos o incorrectos");

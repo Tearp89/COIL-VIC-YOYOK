@@ -107,10 +107,12 @@ private static final org.apache.log4j.Logger LOG = Log.getLogger(AddProfessorCon
         }
         Access access = new Access();
         String professorName = textFieldProfessorName != null ? textFieldProfessorName.getText() : "";
+        String professorLastName = textFieldProfessorLastName != null ? textFieldProfessorLastName.getText() : "";
+        String professorFullName = "" + professorName + " " + professorLastName;
         String email = textFieldEmail != null ? textFieldEmail.getText() : "";
         Object selectedUniversity = comboBoxUniversity.getSelectionModel().getSelectedItem();
         String universityName = selectedUniversity != null ? selectedUniversity.toString() : null;
-        String user = access.userGenerator(professorName);
+        String user = access.userGenerator(professorFullName);
         String password = access.passwordGenerator(8);  
         
         if (universityName == null){
