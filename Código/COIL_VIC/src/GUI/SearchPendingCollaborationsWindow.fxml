@@ -120,27 +120,32 @@
                                     <String fx:value="shadow" />
                                  </styleClass>
                                  <children>
-                                    <TableView id="tableView" fx:id="tableViewPendingCollaborations" layoutX="75.0" layoutY="53.0" prefHeight="458.0" prefWidth="621.0" stylesheets="@windowsStyle.css">
+                                    <TableView id="tableView" fx:id="tableViewPendingCollaborations" layoutX="20.0" layoutY="49.0" prefHeight="462.0" prefWidth="735.0" stylesheets="@windowsStyle.css">
                                       <columns>
-                                        <TableColumn fx:id="tableColumnCollaborationId" prefWidth="70.0" text="ID">
+                                        <TableColumn fx:id="tableColumnCollaborationId" prefWidth="56.0" text="ID">
                                         <cellValueFactory>
                                         <PropertyValueFactory property="collaborationId" />
                                         </cellValueFactory>
                                         </TableColumn>
-                                        <TableColumn fx:id="tableColumnCollaborationName" prefWidth="250.0" text="Nombre Colaboración">
+                                        <TableColumn fx:id="tableColumnCollaborationName" prefWidth="215.0" text="Nombre Colaboración">
                                         <cellValueFactory>
                                         <PropertyValueFactory property="collaborationName" />
                                         </cellValueFactory>
                                         </TableColumn>
-                                          <TableColumn fx:id="tableColumnStartDate" minWidth="9.0" prefWidth="150.0" text="Fecha inicio">
+                                          <TableColumn fx:id="tableColumnStartDate" minWidth="9.0" prefWidth="126.0" text="Fecha inicio">
                                           <cellValueFactory>
                                           <PropertyValueFactory property="startDate" />
                                           </cellValueFactory>
                                           </TableColumn>
-                                          <TableColumn fx:id="tableColumnFinishDate" minWidth="0.0" prefWidth="150.0" text="Fecha fin">
+                                          <TableColumn fx:id="tableColumnFinishDate" minWidth="0.0" prefWidth="133.0" text="Fecha fin">
                                           <cellValueFactory>
                                           <PropertyValueFactory property="finishDate" />
                                           </cellValueFactory>
+                                          </TableColumn>
+                                          <TableColumn fx:id="tableColumnDescription" prefWidth="204.0" text="Descripción">
+                                             <cellValueFactory>
+                                                <PropertyValueFactory property="description" />
+                                             </cellValueFactory>
                                           </TableColumn>
                                       </columns>
                                     </TableView>

@@ -94,7 +94,8 @@ public class CollaborationDAO implements ICollaboration {
                     collaboration.setStartDate(resultSet.getObject("fechaInicio", LocalDate.class));
                     collaboration.setFinishDate(resultSet.getObject("fechaFin", LocalDate.class));
                     collaboration.setCollaborationStatus(status);
-                    collaborations.add(collaboration);
+                    collaboration.setDescription(resultSet.getString("descripción"));
+                    collaborations.add(collaboration);  
                 }
             }
         } catch (SQLException e) {

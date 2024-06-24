@@ -13,8 +13,10 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.Tooltip;
 import javafx.scene.control.Alert.AlertType;
 import javafx.util.Callback;
+import javafx.util.Duration;
 import log.Log;
 import logic.DAO.CollaborationDAO;
 import logic.classes.Admin;
@@ -32,6 +34,8 @@ public class SearchPendingCollaborationsController {
     private TableColumn<Collaboration, String> tableColumnStartDate;
     @FXML
     private TableColumn<Collaboration, String> tableColumnFinishDate;
+    @FXML
+    private TableColumn<Collaboration, String> tableColumnDescription;
     @FXML
     private Label labelCollaborationNotFound = new Label("No se encontraron colaboraciones pendientes");
 
@@ -243,6 +247,22 @@ public class SearchPendingCollaborationsController {
             DatabaseConnectionChecker.showNoConnectionDialog();
             return;
         }
+        tableColumnDescription.setCellFactory(column -> new TableCell<>() {
+            @Override
+            protected void updateItem(String item, boolean empty) {
+                super.updateItem(item, empty);
+                if (item == null || empty) {
+                    setText(null);
+                    setTooltip(null);
+                } else {
+                    setText(item);
+                    Tooltip tooltip = new Tooltip(item);
+                    tooltip.setShowDelay(Duration.seconds(0.5));
+                    setTooltip(tooltip);
+                }
+            }
+        });
+
         loadPendingCollaborations();
         addAcceptButtonToTable();
         addDeclineButtonToTable();
