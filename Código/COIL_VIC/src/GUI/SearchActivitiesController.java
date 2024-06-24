@@ -126,6 +126,10 @@ public class SearchActivitiesController {
     private Button buttonSave;
     @FXML
     private void save(ActionEvent event){
+        if(!DatabaseConnectionChecker.isDatabaseConnected()){
+            DatabaseConnectionChecker.showNoConnectionDialog();
+            return;
+        }
         String title  = textFieldTitle.getText();
         String type = comboBoxType.getValue();
         String description = textAreaDescription.getText();
