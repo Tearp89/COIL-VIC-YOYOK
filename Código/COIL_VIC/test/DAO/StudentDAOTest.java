@@ -16,7 +16,7 @@ import static org.junit.Assert.*;
  * @author Daniel
  */
 public class StudentDAOTest {
-  
+
     /**
      * Test of addStudent method, of class StudentDAO.
      */
@@ -24,9 +24,9 @@ public class StudentDAOTest {
     public void testAddStudentTestSuccess() {
         StudentDAO studentDAO = new StudentDAO();
         Student student = new Student();
-        student.setEmail("zS2201364@estudiantes.uv.mx");
+        student.setEmail("testExtra@estudiantes.uv.mx");
         student.setProfessorId(40);
-        student.setPassword(".");
+        student.setPassword("contraseñaEstudiante");
         int result = studentDAO.addStudent(student);
         assertEquals(1, result);
     }
@@ -44,7 +44,7 @@ public class StudentDAOTest {
     @Test
     public void isStudentAssignedToProfessorTestSuccess(){
         int professorId = 40;
-        String email = "zS22013640@estudiantes.uv.mx";
+        String email = "testExtra@estudiantes.uv.mx";
         StudentDAO studentDAO = new StudentDAO();
         boolean expectedResult = true;
         boolean result = studentDAO.isStudentAssignedToProfessor(email, professorId);
@@ -62,9 +62,9 @@ public class StudentDAOTest {
 
     @Test
     public void getStudentsByProfessorIdTestSuccess(){
-        int professorId = 29;
+        int professorId = 40;
         StudentDAO studentDAO = new StudentDAO();
-        int expectedResult = 2;
+        int expectedResult = 4;
         int result = studentDAO.getStudentsByProfessorId(professorId).size();
         assertEquals(expectedResult, result);
     }
