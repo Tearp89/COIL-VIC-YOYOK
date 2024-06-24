@@ -6,10 +6,8 @@ package DAO;
 
 import java.util.ArrayList;
 import org.junit.Test;
-
 import logic.DAO.CollaborationDAO;
 import logic.DAO.ProfessorDAO;
-import logic.classes.Collaboration;
 import logic.classes.Professor;
 
 import static org.junit.Assert.*;
@@ -28,7 +26,7 @@ public class ProfessorDAOTest {
         Professor professor = new Professor();
         ProfessorDAO instance = new ProfessorDAO();
         int expResult = 1;
-        professor.setName("Jorge Alberto");
+        professor.setName("Jorge Alejandro");
         professor.setStatus("Aceptado");
         professor.setPhoneNumber("2220000000");
         professor.setEmail("correou89@email.com");
@@ -36,12 +34,12 @@ public class ProfessorDAOTest {
         professor.setUniversityId(6);
         professor.setType("UV");
         professor.setAcademicArea("Económico");
-        professor.setPersonalNumber(222222);
+        professor.setPersonalNumber(454545);
         professor.setRegion("Xalapa");
         professor.setContractType("luegocheco");
         professor.setContractCategory("luegochecox2");
         professor.setDiscipline("luegochecox3");
-        professor.setUser("jAlberto");
+        professor.setUser("jAlberto2");
         professor.setPassword("testtest");
         professor.setLanguage("Inglés");
         int result = instance.addProfessorUV(professor);
@@ -79,14 +77,14 @@ public class ProfessorDAOTest {
         Professor professor = new Professor();
         ProfessorDAO instance = new ProfessorDAO();
         int expResult = 1;
-        professor.setName("Juan Díaz");
+        professor.setName("Juan Díazzz");
         professor.setStatus("Pendiente");
         professor.setPhoneNumber("228976565434");
-        professor.setEmail("juanDia231z@gmail.com");
+        professor.setEmail("juanDia231zzz@gmail.com");
         professor.setCountry("México");
         professor.setUniversityId(6);
         professor.setType("Externo");
-        professor.setUser("jDiazx698");
+        professor.setUser("jDiazx694448");
         professor.setPassword("testtest");
         professor.setLanguage("Español");
         
@@ -179,7 +177,7 @@ public class ProfessorDAOTest {
     }
         @Test
         public void testSearchProfessorSuccess(){
-        int expectedResult = 3;
+        int expectedResult = 6;
         ProfessorDAO instance = new ProfessorDAO();
         int idUniversidad = 6;
         ArrayList<Professor> professors = instance.searchProfessorByUniversityId(idUniversidad);
@@ -197,7 +195,7 @@ public class ProfessorDAOTest {
     
         @Test
         public void testSearchProfessorByCountrySuccess(){
-            int expectedResult = 7;
+            int expectedResult = 10;
             ProfessorDAO instance = new ProfessorDAO();
             String country = "México";
             ArrayList<Professor> professors = instance.searchProfessorByCountry(country);
@@ -265,7 +263,6 @@ public class ProfessorDAOTest {
         @Test
         public void changeProfessorStatusByIdFailed(){
             System.out.println("changeStateProfessor");
-            Professor professor = new Professor();
             int professorId = 1000000;
             String status = "Aceptado";
             ProfessorDAO instance = new ProfessorDAO();
@@ -279,8 +276,8 @@ public class ProfessorDAOTest {
         public void professorRequestCollaborationSuccess(){
             
             ProfessorDAO professorDAO = new ProfessorDAO();
-           int idProfesor = 47;
-           int idColaboración = 45;
+            int idProfesor = 47;
+            int idColaboración = 45;
 
             int result = professorDAO.professorRequestCollaboration(idColaboración, idProfesor);
             assertEquals(1, result);

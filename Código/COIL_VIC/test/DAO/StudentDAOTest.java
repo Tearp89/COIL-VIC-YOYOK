@@ -24,7 +24,7 @@ public class StudentDAOTest {
     public void testAddStudentTestSuccess() {
         StudentDAO studentDAO = new StudentDAO();
         Student student = new Student();
-        student.setEmail("testExtra@estudiantes.uv.mx");
+        student.setEmail("testtestNuevo@estudiantes.uv.mx");
         student.setProfessorId(40);
         student.setPassword("contraseñaEstudiante");
         int result = studentDAO.addStudent(student);

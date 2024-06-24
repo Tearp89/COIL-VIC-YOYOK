@@ -56,22 +56,6 @@ public class OpenCollaborationController {
     private int collaborationId;
     @FXML
     private Label labelCollaborationId;
-
-    private void setValues(Collaboration collaboration){
-        if(!DatabaseConnectionChecker.isDatabaseConnected()){
-            DatabaseConnectionChecker.showNoConnectionDialog();
-            return;
-        }
-        Professor professorData = new Professor();
-        professorData = UserSessionManager.getInstance().getProfessorUserData();
-        labelCollaborationId.setText(String.valueOf(collaboration.getCollaborationId()));
-        textFieldName.setText(collaboration.getCollaborationName());
-        datePickerStartDate.setValue(collaboration.getStartDate());
-        datePickerFinishDate.setValue(collaboration.getFinishDate());
-        textAreaStudentProfile.setText(collaboration.getStudentProfile());
-        textFieldStudentCount.setText(String.valueOf(collaboration.getNoStudents()));
-        textFieldObjective.setText(collaboration.getCollaborationGoal());
-    }
     
     @FXML
     private Label labelUser;
@@ -178,7 +162,6 @@ public class OpenCollaborationController {
             DatabaseConnectionChecker.showNoConnectionDialog();
             return;
         }
-        String collaborationName = textFieldName.getText();
         CollaborationDAO instance = new CollaborationDAO();
         int numberStudents = instance.getNumberStudentsById(collaborationId);
         if (!instance.validateCollaborationProfessorsLimit(collaborationId) && !instance.validateCollaborationStudentLimit(collaborationId, numberStudents)){

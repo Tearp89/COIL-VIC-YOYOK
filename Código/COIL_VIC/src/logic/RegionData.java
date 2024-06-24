@@ -5,12 +5,6 @@
 package logic;
 
 import java.util.ArrayList;
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import logic.DAO.CollaborationStatsDAO;
 
 /**
@@ -31,7 +25,7 @@ public class RegionData {
     
     public static ArrayList<RegionData> getUsers(String year) {
         CollaborationStatsDAO collaborationStatsDAO = new CollaborationStatsDAO();
-        ArrayList<RegionData> regionDataList = new ArrayList();
+        ArrayList<RegionData> regionDataList = new ArrayList<>();
         regionDataList.add(new RegionData("Xalapa", collaborationStatsDAO.countStudentsByRegionAndYear("Xalapa", year), collaborationStatsDAO.countProfessorsByRegionAndYear("Xalapa", year)));
         regionDataList.add(new RegionData("Orizaba-Cordoba", collaborationStatsDAO.countStudentsByRegionAndYear("Orizaba-Cordoba", year), collaborationStatsDAO.countProfessorsByRegionAndYear("Orizaba-Cordoba", year)));
         regionDataList.add(new RegionData("Poza Rica-Tuxpan", collaborationStatsDAO.countStudentsByRegionAndYear("Poza Rica-Tuxpan", year), collaborationStatsDAO.countProfessorsByRegionAndYear("Poza Rica-Tuxpan", year)));

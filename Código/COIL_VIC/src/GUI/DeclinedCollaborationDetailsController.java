@@ -22,7 +22,6 @@ import log.Log;
 import javafx.scene.control.Alert.AlertType;
 import logic.CharLimitValidator;
 import logic.CollaborationValidator;
-import logic.FieldValidator;
 import logic.DAO.CollaborationDAO;
 import logic.classes.Collaboration;
 import logic.classes.Professor;
@@ -43,7 +42,7 @@ public class DeclinedCollaborationDetailsController {
     @FXML
     private TextField textFieldNumberStudents;
     @FXML
-    private ComboBox comboBoxSubject;
+    private ComboBox<String> comboBoxSubject;
     @FXML
     private TextArea textAreaStudentProfile;
     
@@ -180,14 +179,12 @@ public class DeclinedCollaborationDetailsController {
             DatabaseConnectionChecker.showNoConnectionDialog();
             return;
         }
-        CollaborationDAO collaborationDAO = new CollaborationDAO();
         String collaborationName = textFieldCollaborationName.getText();
         String collaborationDescription = textAreaCollaborationDescription.getText();
         LocalDate collaborationStartDate = datePickerStartDate.getValue();
         LocalDate collaborationFinishDate = datePickerFinishDate.getValue();
         String collaborationGoal = textFieldCollaborationGoal.getText();
         String collaborationSubject = comboBoxSubject.getEditor().getText();
-        String numberStudentsText = textFieldNumberStudents.getText();
         int numberStudents = Integer.parseInt(textFieldNumberStudents.getText());
         String studentProfile = textAreaStudentProfile.getText();
         Collaboration collaborationUpdated = new Collaboration();

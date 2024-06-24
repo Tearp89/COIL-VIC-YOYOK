@@ -6,9 +6,6 @@ package logic;
 
 
 import org.junit.Test;
-
-import logic.FieldValidator;
-
 import static org.junit.Assert.*;
 
 /**

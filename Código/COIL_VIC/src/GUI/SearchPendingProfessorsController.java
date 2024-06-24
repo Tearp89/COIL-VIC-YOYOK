@@ -54,7 +54,7 @@ public class SearchPendingProfessorsController {
 
 
     private void addAcceptButtonToTable() {
-    TableColumn<Professor, Void> tableColumnAcceptButton = new TableColumn("Aceptar");
+    TableColumn<Professor, Void> tableColumnAcceptButton = new TableColumn<>("Aceptar");
 
     Callback<TableColumn<Professor, Void>, TableCell<Professor, Void>> cellFactory = new Callback<TableColumn<Professor, Void>, TableCell<Professor, Void>>() {
         @Override
@@ -148,7 +148,7 @@ public class SearchPendingProfessorsController {
     }   
 
     private void addDeclineButtonToTable() {
-        TableColumn<Professor, Void> tableColumnDeclineButtom = new TableColumn("Rechazar");
+        TableColumn<Professor, Void> tableColumnDeclineButtom = new TableColumn<>("Rechazar");
 
         Callback<TableColumn<Professor, Void>, TableCell<Professor, Void>> cellFactory = new Callback<TableColumn<Professor, Void>, TableCell<Professor, Void>>() {
             @Override

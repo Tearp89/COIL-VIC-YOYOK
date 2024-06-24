@@ -1,7 +1,6 @@
 package logic;
 
 import org.junit.Test;
-import logic.EmailControl;
 import javax.mail.MessagingException;
 import log.Log;
 

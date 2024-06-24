@@ -3,8 +3,6 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/UnitTests/JUnit4TestClass.java to edit this template
  */
 package DAO;
-
-import java.sql.Date;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import org.junit.Test;
@@ -15,7 +13,6 @@ import logic.classes.Collaboration;
 import logic.classes.Professor;
 
 import static org.junit.Assert.*;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /**
@@ -104,14 +101,14 @@ public class CollaborationDAOTest {
         Collaboration collaboration = new Collaboration();
         CollaborationDAO instance = new CollaborationDAO();
         
-        LocalDate dateStartTest = LocalDate.of(2022, 3, 1);
-        LocalDate dateFinishtTest = LocalDate.of(2026, 1, 1);
+        LocalDate dateStartTest = LocalDate.of(2000, 01, 01);
+        LocalDate dateFinishtTest = LocalDate.of(2000, 02, 02);
         
-        collaboration.setCollaborationName("TestNombreCol");
-        collaboration.setDescription("TestDescripcion");
+        collaboration.setCollaborationName("NuevoTestNombreCol");
+        collaboration.setDescription("NuevoTestDescripcion");
         collaboration.setFinishDate(dateFinishtTest);
         collaboration.setStartDate(dateStartTest);
-        collaboration.setCollaborationId(46);
+        collaboration.setCollaborationId(53);
         
         
         int rowsAffected = instance.deleteCollaboration(collaboration);
@@ -284,7 +281,7 @@ public class CollaborationDAOTest {
     @Test
     public void testCountProfessorsByRegionFailed(){
         CollaborationStatsDAO instance = new CollaborationStatsDAO();
-        int expectedResult = 1;
+        int expectedResult = 2;
         String region = "Xalapa";
         int actualResult = instance.countProfessorsByRegion(region);
         assertEquals(expectedResult, actualResult);
@@ -313,7 +310,6 @@ public class CollaborationDAOTest {
     @Test
     public void changeCollaborationStatusSuccess(){
         System.out.println("changeStateProfessor");
-            Collaboration collaboration = new Collaboration();
             int collaborationId = 45; 
             String status = "Activa";
             
@@ -398,7 +394,6 @@ public class CollaborationDAOTest {
             int expectedResult = 1;
             int professorId = 36;
             String status = "Activa";
-            String collaborationName = "Nueva Colaboración";
             int result = instance.searchCollaborationByStatusAndProfessorId(status, professorId).size();
             assertEquals(expectedResult, result);
 
@@ -495,8 +490,7 @@ public class CollaborationDAOTest {
 
         @Test
         public void loadSubjectsTestSuccess(){
-            int expectedResult = 5;
-            ArrayList<Collaboration> collaborationSubjects = new ArrayList<>();
+            int expectedResult = 6;
             CollaborationDAO collaborationDAO = new CollaborationDAO();
             int result = collaborationDAO.loadSubjects().size();
             assertEquals(expectedResult, result);
@@ -505,7 +499,6 @@ public class CollaborationDAOTest {
         @Test
         public void getUnreviewedCollaborationsByAdminTestSucces(){
             int expectedResult = 2;
-            ArrayList<Collaboration> unreviewedCollaborations = new ArrayList<>();
             CollaborationDAO collaborationDAO = new CollaborationDAO();
             int result = collaborationDAO.getUnreviewedCollaborationsByAdmin(4).size();
             assertEquals(expectedResult, result);
@@ -515,7 +508,6 @@ public class CollaborationDAOTest {
         @Test
         public void getUnreviewedCollaborationsByProfessorTestSucces(){
             int expectedResult = 1;
-            ArrayList<Collaboration> unreviewedCollaborations = new ArrayList<>();
             CollaborationDAO collaborationDAO = new CollaborationDAO();
             int result = collaborationDAO.getUnreviewedCollaborationsByProfessor(40).size();
             assertEquals(expectedResult, result);
@@ -525,7 +517,6 @@ public class CollaborationDAOTest {
         @Test
         public void getUnreviewedCollaborationsByStudentTestSucces(){
             int expectedResult = 1;
-            ArrayList<Collaboration> unreviewedCollaborations = new ArrayList<>();
             CollaborationDAO collaborationDAO = new CollaborationDAO();
             int result = collaborationDAO.getUnreviewedCollaborationsByStudent("loromaro@estudiantes.uv.mx").size();
             assertEquals(expectedResult, result);

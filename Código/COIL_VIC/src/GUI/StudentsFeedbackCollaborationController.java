@@ -101,8 +101,6 @@ public class StudentsFeedbackCollaborationController {
 
         @FXML
     private void initialize(){
-        Student studentData = new Student();
-        studentData = UserSessionManager.getInstance().getStudentUserData();
         if(!DatabaseConnectionChecker.isDatabaseConnected()){
             DatabaseConnectionChecker.showNoConnectionDialog();
             return;

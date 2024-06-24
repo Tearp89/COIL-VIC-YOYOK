@@ -3,9 +3,6 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
  */
 package logic.interfaces;
-
-import java.util.ArrayList;
-
 import logic.classes.Collaboration;
 
 /**

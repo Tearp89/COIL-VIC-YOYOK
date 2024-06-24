@@ -63,7 +63,6 @@ public class ActivityDAOTest {
     @Test
     public void getActivitiesByCollaborationIdAndWeekTestSuccess(){
         int collaborationId = 46;
-        int activityId = 1;
         int expectedResult = 1;
         ActivityDAO activityDAO = new ActivityDAO();
         int result = activityDAO.getActivitiesByCollaborationAndWeek(collaborationId, "1").size();

@@ -163,8 +163,6 @@ public class StudentGradeCollaborationController {
     private int collaborationId;
     
     public void initialize(int collaborationId){
-        Student studentData = new Student();
-        studentData = UserSessionManager.getInstance().getStudentUserData();
         if(!DatabaseConnectionChecker.isDatabaseConnected()){
             DatabaseConnectionChecker.showNoConnectionDialog();
             return;

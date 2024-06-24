@@ -36,7 +36,7 @@ public class AcademicAreaData {
     
     public static ArrayList<AcademicAreaData> getUsers(String year) {
         CollaborationStatsDAO collaborationStatsDAO = new CollaborationStatsDAO();
-        ArrayList<AcademicAreaData> academicAreaList = new ArrayList();
+        ArrayList<AcademicAreaData> academicAreaList = new ArrayList<>();
         academicAreaList.add(new AcademicAreaData("Humanidades", collaborationStatsDAO.countStudentsByAcademicAreaAndYear("Humanidades", year), collaborationStatsDAO.countProfessorsByAcademicAreaAndYear("Humanidades", year)));
         academicAreaList.add(new AcademicAreaData("Técnica", collaborationStatsDAO.countStudentsByAcademicAreaAndYear("Técnica", year), collaborationStatsDAO.countProfessorsByAcademicAreaAndYear("Técnica", year)));
         academicAreaList.add(new AcademicAreaData("Económico-Administrativo", collaborationStatsDAO.countStudentsByAcademicAreaAndYear("Económico-Administrativo", year), collaborationStatsDAO.countProfessorsByAcademicAreaAndYear("Económico-Administrativo", year)));

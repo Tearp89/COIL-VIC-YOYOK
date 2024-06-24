@@ -5,15 +5,8 @@
 package logic;
 
 import java.util.ArrayList;
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.StringProperty;
 import logic.DAO.CollaborationStatsDAO;
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
-import static org.junit.Assert.*;
 
 /**
  *
@@ -30,7 +23,7 @@ public class RegionDataTest {
     @Test
     public void testGetUsers() {
         CollaborationStatsDAO collaborationStatsDAO = new CollaborationStatsDAO();
-        ArrayList<RegionData> regionDataList = new ArrayList();
+        ArrayList<RegionData> regionDataList = new ArrayList<>();
         regionDataList.add(new RegionData("Xalapa", collaborationStatsDAO.countProfessorsByRegionAndYear("Xalapa", "2022"), collaborationStatsDAO.countStudentsByRegionAndYear("Xalapa", "2022")));
         regionDataList.add(new RegionData("Orizaba", collaborationStatsDAO.countProfessorsByRegionAndYear("Orizaba", "2022"), collaborationStatsDAO.countStudentsByRegionAndYear("Orizaba", "2022")));
         regionDataList.add(new RegionData("Poza Rica", collaborationStatsDAO.countProfessorsByRegionAndYear("Poza Rica", "2022"), collaborationStatsDAO.countStudentsByRegionAndYear("Poza Rica", "2022")));

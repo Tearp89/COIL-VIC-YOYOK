@@ -65,7 +65,7 @@ public class SearchRequestToCollaborateController {
 
     Professor selectedProfessor = new Professor();
     private void addAcceptButtonToTable() {
-    TableColumn<Professor, Void> tableColumnAcceptButton = new TableColumn("Aceptar");
+    TableColumn<Professor, Void> tableColumnAcceptButton = new TableColumn<>("Aceptar");
 
     Callback<TableColumn<Professor, Void>, TableCell<Professor, Void>> cellFactory = new Callback<TableColumn<Professor, Void>, TableCell<Professor, Void>>() {
         @Override

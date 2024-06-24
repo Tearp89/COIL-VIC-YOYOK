@@ -55,7 +55,7 @@ public class SearchPendingCollaborationsController {
     }
 
     private void addAcceptButtonToTable() {
-    TableColumn<Collaboration, Void> tableColumnAcceptButton = new TableColumn("Aceptar");
+    TableColumn<Collaboration, Void> tableColumnAcceptButton = new TableColumn<>("Aceptar");
 
         Callback<TableColumn<Collaboration, Void>, TableCell<Collaboration, Void>> cellFactory = new Callback<TableColumn<Collaboration, Void>, TableCell<Collaboration, Void>>() {
             @Override
@@ -107,7 +107,7 @@ public class SearchPendingCollaborationsController {
     }
 
     private void addDeclineButtonToTable() {
-        TableColumn<Collaboration, Void> tableColumnDeclineButtom = new TableColumn("Rechazar");
+        TableColumn<Collaboration, Void> tableColumnDeclineButtom = new TableColumn<>("Rechazar");
 
         Callback<TableColumn<Collaboration, Void>, TableCell<Collaboration, Void>> cellFactory = new Callback<TableColumn<Collaboration, Void>, TableCell<Collaboration, Void>>() {
             @Override

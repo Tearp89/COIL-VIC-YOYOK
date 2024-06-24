@@ -6,7 +6,6 @@ package log;
 
 import org.apache.log4j.Logger;
 import org.junit.Test;
-import static org.junit.Assert.*;
 
 /**
  *

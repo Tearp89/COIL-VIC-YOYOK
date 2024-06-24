@@ -26,7 +26,7 @@ public class Log {
     private static final String FROM_EMAIL = "coilvic@outlook.com";
     private static final String TO_EMAIL = "daur0704@outlook.com";
     
-    public static Logger getLogger(Class name) {
+    public static Logger getLogger(Class<?> name) {
         try {
             LOG = Logger.getLogger(name);
             String logfile = "logs\\filelog.";

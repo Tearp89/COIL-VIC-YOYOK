@@ -6,6 +6,8 @@ package logic;
 
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import javafx.collections.ObservableList;
@@ -57,6 +59,10 @@ public class SaveToFile {
 
             try (FileOutputStream fileOut = new FileOutputStream(filePath)) {
                 workbook.write(fileOut);
+            }catch (FileNotFoundException e) {
+                LOG.error("El archivo no pudo ser encontrado o no se pudo crear: " + e.getMessage());
+            } catch (IOException e) {
+                LOG.error("Error de entrada/salida al escribir en el archivo: " + e.getMessage());
             }
         }
     }
@@ -121,6 +127,10 @@ public class SaveToFile {
 
             try (FileOutputStream fileOut = new FileOutputStream(filePath)) {
                 workbook.write(fileOut);
+            } catch (FileNotFoundException e) {
+                LOG.error("El archivo no pudo ser encontrado o no se pudo crear: " + e.getMessage());
+            } catch (IOException e) {
+                LOG.error("Error de entrada/salida al escribir en el archivo: " + e.getMessage());
             }
         }
     }

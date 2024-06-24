@@ -22,7 +22,6 @@ import javafx.scene.control.Alert.AlertType;
 import log.Log;
 import logic.ActivityValidator;
 import logic.CharLimitValidator;
-import logic.FieldValidator;
 import logic.DAO.ActivityDAO;
 import logic.DAO.CollaborationDAO;
 import logic.DAO.ProfessorDAO;
@@ -159,7 +158,6 @@ public class AddActivityController {
         ActivityDAO activityDAO = new ActivityDAO();
         int collaborationId = Integer.parseInt(labelCollaborationId.getText()); 
         String week = activityDAO.getActivityWeekById(activityId);
-        String type = activityDAO.getActivityTypeById(activityId);
         if(activityDAO.isActivityAssignedInWeek(collaborationId, week) == true ){
             Alert duplicatedWeekAlert = new Alert(AlertType.ERROR);
             duplicatedWeekAlert.setTitle("Semana duplicada");

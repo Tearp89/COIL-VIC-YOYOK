@@ -10,7 +10,7 @@ import logic.classes.Student;
 
 public class StudentValidator {
 
-    public static boolean validateStudentRegister(StudentDAO studentDAO, Student student, TableView tableViewStudents){
+    public static boolean validateStudentRegister(StudentDAO studentDAO, Student student, TableView<Student> tableViewStudents){
         String email = student.getEmail();
         int professorId = student.getProfessorId();
         if(studentDAO.isStudentRegistered(email) == true){

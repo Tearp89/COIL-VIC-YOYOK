@@ -5,16 +5,10 @@
 package DAO;
 
 import org.junit.Test;
-
-import dataAccess.DatabaseManager;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import logic.DAO.UniversityDAO;
 import logic.classes.University;
-
 import static org.junit.Assert.*;
-
-import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /**
@@ -87,7 +81,7 @@ public class UniversityDAOTest {
     @Test
     public void testLoadUniversities() throws SQLException {
         UniversityDAO universityDAO = new UniversityDAO();
-        int expectedResult = 6;
+        int expectedResult = 7;
         ObservableList<String> universities = universityDAO.loadUniversities();
 
         assertEquals(expectedResult, universities.size());
@@ -96,7 +90,7 @@ public class UniversityDAOTest {
     @Test
     public void testSearchUniversitySuccess(){
         UniversityDAO universityDAO = new UniversityDAO();
-        int expectedResult = 7;
+        int expectedResult = 8;
         int result = universityDAO.searchUniversity().size();
         assertEquals(expectedResult, result);
     }

@@ -53,7 +53,7 @@ public class AdminDAOTest {
         admin.setAdminRol("Administrador");
         admin.setAdminUser("lDominguez");
         admin.setPassword("ContraseñaTest");
-        admin.setAdminId(6);
+        admin.setAdminId(12);
         
         int rowsAffected = adminDAO.updateAdmin(admin);
         assertEquals(1, rowsAffected);

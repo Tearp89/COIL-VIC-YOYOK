@@ -11,9 +11,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Properties;
-import java.util.logging.Level;
 import log.Log;
-import org.apache.log4j.Logger;
 
 
 /**
@@ -21,7 +19,7 @@ import org.apache.log4j.Logger;
  * @author marla
  */
 public class DatabaseManager {
-        private Connection connection;
+    private Connection connection;
     private final String DATABASE_NAME="db.url";
     private final String DATABASE_USER="db.user";
     private final String DATABASE_PASSWORD="db.password";
@@ -58,7 +56,7 @@ public class DatabaseManager {
         Properties properties = new DatabaseManager().getDatabaseConfig();
         if (properties != null){
             connection=DriverManager.getConnection( properties.getProperty(DATABASE_NAME), 
-             properties.getProperty(DATABASE_USER), 
+            properties.getProperty(DATABASE_USER), 
             properties.getProperty(DATABASE_PASSWORD));
         } else {
             throw new SQLException ("No se pudo conectar a la base de datos");
@@ -66,7 +64,7 @@ public class DatabaseManager {
         
     }
     
-         public void closeConnection(){
+    public void closeConnection(){
         if(connection!=null){
             try {
                 if(!connection.isClosed()){
