@@ -107,7 +107,7 @@ public class CollaborationDAO implements ICollaboration {
     public ArrayList<Collaboration> searchCollaborationByStatusAndProfessorId(String status, int professorId) {
         DatabaseManager dbManager = new DatabaseManager();
         ArrayList<Collaboration> collaborations = new ArrayList<>();
-        String query = "SELECT c.* FROM colaboración c INNER JOIN colaboraciones_registradas cr ON c.idColaboración = cr.Colaboración_idColaboración WHERE c.estado = ? AND cr.Profesor_idProfesor = ?";
+        String query = "SELECT c.* FROM colaboración c INNER JOIN colaboraciones_registradas cr ON c.idColaboración = cr.Colaboración_idColaboración WHERE cr.Profesor_idProfesor = ?";
         try (Connection connection = dbManager.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setString(1, status);

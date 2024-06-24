@@ -146,6 +146,12 @@ public class AddActivityController {
             buttonAssign.setDisable(false);
             activityId = activity.getActivityId();
             buttonSave.setDisable(true);
+        } else {
+            Alert duplicatedWeekAlert = new Alert(AlertType.ERROR);
+            duplicatedWeekAlert.setTitle("Error al guardar actividad");
+            duplicatedWeekAlert.setHeaderText("Error al guardar actividad");
+            duplicatedWeekAlert.setContentText("No se puede guardar la actividad, hubo un problema al guardarla");
+            duplicatedWeekAlert.show();
         }
     }
 
@@ -262,7 +268,7 @@ public class AddActivityController {
         ObservableList<String> types = FXCollections.observableArrayList("Rompe hielo", "Reflexión", "Proyecto COIL", "Retroalimentación", "Introduccion", "Cultura" );
         comboBoxType.getItems().setAll(types);
 
-        CharLimitValidator.setCharLimitTextField(textFieldTitle, 250);
+        CharLimitValidator.setCharLimitTextField(textFieldTitle, 100);
         
 
     }
