@@ -383,7 +383,7 @@ public class ProfessorDAO implements IProfessor{
     public ArrayList<Professor> searchProfessorByStatus (String status){
         Professor professor = new Professor();
         ArrayList<Professor> professors = new ArrayList<>();
-        String query = " select * from profesor where estado = ?";
+        String query = " select COUNT (DISTINCT idProfesor)  from profesor where estado = ?";
         DatabaseManager dbManager = new DatabaseManager();
         try (Connection connection = dbManager.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(query)) {

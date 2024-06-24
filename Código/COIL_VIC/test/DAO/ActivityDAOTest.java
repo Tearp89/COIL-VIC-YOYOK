@@ -29,7 +29,7 @@ public class ActivityDAOTest {
     public void deleteActivityTestSuccess() {
         Activity activity = new Activity();
         ActivityDAO activityDAO = new ActivityDAO();
-        activity.setActivityId(18);
+        activity.setActivityId(17);
 
         int rowsAffected = activityDAO.deleteActivity(activity);
         assertEquals(1, rowsAffected);

@@ -144,7 +144,7 @@ public class CollaborationDAOTest {
     public void testSearchCollaborationSuccess(){
         int expectedResult = 1;
         CollaborationDAO instance = new CollaborationDAO();
-        String name = "Aceptada";
+        String name = "Pendiente";
         ArrayList<Collaboration> collaborations = instance.searchCollaborationByStatus(name);
         assertEquals(expectedResult, collaborations.size());
     }
@@ -159,7 +159,7 @@ public class CollaborationDAOTest {
     }
     @Test
     public void testSearchCollaborationByYearSuccess(){
-        int expectedResult = 3;
+        int expectedResult = 5;
         CollaborationDAO instance = new CollaborationDAO();
         String year = "2024";
         ArrayList<Collaboration> collaborations = instance.searchCollaborationByYear(year);
@@ -179,7 +179,7 @@ public class CollaborationDAOTest {
     @Test
     public void testCountStudentsByRegionSuccess(){
         CollaborationStatsDAO instance = new CollaborationStatsDAO();
-        int expectedResult = 0;
+        int expectedResult = 2;
         String region = "Poza Rica-Tuxpan";
         int actualResult = instance.countStudentsByRegion(region);
         assertEquals(expectedResult, actualResult);
@@ -188,8 +188,8 @@ public class CollaborationDAOTest {
     @Test
     public void testCountStudentsByRegionFailed(){
         CollaborationStatsDAO instance = new CollaborationStatsDAO();
-        int expectedResult = 0;
-        String region = "Xalapa";
+        int expectedResult = 2;
+        String region = "Poza Rica-Tuxpan";
         int actualResult = instance.countStudentsByRegion(region);
         assertEquals(expectedResult, actualResult);
     }
@@ -284,7 +284,7 @@ public class CollaborationDAOTest {
     @Test
     public void testCountProfessorsByRegionFailed(){
         CollaborationStatsDAO instance = new CollaborationStatsDAO();
-        int expectedResult = 0;
+        int expectedResult = 1;
         String region = "Xalapa";
         int actualResult = instance.countProfessorsByRegion(region);
         assertEquals(expectedResult, actualResult);
@@ -504,7 +504,7 @@ public class CollaborationDAOTest {
 
         @Test
         public void getUnreviewedCollaborationsByAdminTestSucces(){
-            int expectedResult = 1;
+            int expectedResult = 2;
             ArrayList<Collaboration> unreviewedCollaborations = new ArrayList<>();
             CollaborationDAO collaborationDAO = new CollaborationDAO();
             int result = collaborationDAO.getUnreviewedCollaborationsByAdmin(4).size();

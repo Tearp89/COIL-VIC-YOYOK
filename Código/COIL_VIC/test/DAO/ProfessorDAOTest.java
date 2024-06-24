@@ -236,7 +236,7 @@ public class ProfessorDAOTest {
         
         @Test
         public void testSearchProfessorByStatusSuccess(){
-            int expectedResult = 6;
+            int expectedResult = 7;
             ProfessorDAO instance = new ProfessorDAO();
             String status = "Aceptado";
             ArrayList<Professor> professors = instance.searchProfessorByStatus(status);

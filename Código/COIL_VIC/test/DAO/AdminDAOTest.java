@@ -29,7 +29,7 @@ public class AdminDAOTest {
         AdminDAO adminDAO = new AdminDAO();
         admin.setAdminName("AdminNombreTest");
         admin.setAdminRol("RolTest");
-        admin.setAdminUser("UsuarioAdminTest");
+        admin.setAdminUser("UsuarioTest13");
         admin.setPassword("ContraseñaTest");
         
         int rowsAffected = adminDAO.addAdmin(admin);
@@ -39,18 +39,7 @@ public class AdminDAOTest {
     /**
      * Test of deleteFacilitator method, of class AdminDAO.
      */
-    @Test
-    public void testDeleteAdmin() {
-        Admin admin = new Admin();
-        AdminDAO adminDAO = new AdminDAO();
-        admin.setAdminName("AdminNombreTest");
-        admin.setAdminRol("RolTest");
-        admin.setAdminUser("UsuarioAdminTest");
-        admin.setPassword("ContraseñaTest");
-        
-        int rowsAffected = adminDAO.deleteAdmin(admin);
-        assertEquals(1, rowsAffected);
-    }
+   
 
     /**
      * Test of updateAdmin method, of class AdminDAO.
@@ -60,10 +49,10 @@ public class AdminDAOTest {
         Admin admin = new Admin();
         AdminDAO adminDAO = new AdminDAO();
         
-        admin.setAdminName("NuevoAdminNombreTest");
-        admin.setAdminRol("NuevoRolTest");
-        admin.setAdminUser("NuevoUsuarioAdminTest");
-        admin.setPassword("NuevoContraseñaTest");
+        admin.setAdminName("Leah Dominguez");
+        admin.setAdminRol("Administrador");
+        admin.setAdminUser("lDominguez");
+        admin.setPassword("ContraseñaTest");
         admin.setAdminId(6);
         
         int rowsAffected = adminDAO.updateAdmin(admin);
@@ -88,5 +77,18 @@ public class AdminDAOTest {
         admin.setAdminUser("failedTest");
         String stringExpected = adminDAO.getAdminNameByUser(admin.getAdminUser());
         assertNotEquals("Taylor", stringExpected);
+    }
+
+    @Test
+    public void testDeleteAdmin() {
+        Admin admin = new Admin();
+        AdminDAO adminDAO = new AdminDAO();
+        admin.setAdminName("AdminNombreTest");
+        admin.setAdminRol("RolTest");
+        admin.setAdminUser("UsuarioAdminTest");
+        admin.setPassword("ContraseñaTest");
+        
+        int rowsAffected = adminDAO.deleteAdmin(admin);
+        assertEquals(1, rowsAffected);
     }
 }
