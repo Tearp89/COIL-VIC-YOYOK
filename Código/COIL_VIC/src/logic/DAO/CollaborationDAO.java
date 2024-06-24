@@ -588,6 +588,26 @@ public class CollaborationDAO implements ICollaboration {
         return isValid;
     }
 
+    public boolean validateCollaborationStudentLimit(int collaborationId, int numberStudents) {
+        boolean isValid = false;
+        String query = "SELECT COUNT(Estudiante_correoElectrónico) FROM participa WHERE Colaboración_idColaboración = ?";
+        DatabaseManager dbManager = new DatabaseManager();
+        try (Connection connection = dbManager.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setInt(1, collaborationId);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                int studentCount = resultSet.getInt(1);
+                isValid = studentCount < numberStudents; 
+            }
+        } catch (SQLException validateLimitException) {
+            LOG.error("ERROR:", validateLimitException);
+        }
+
+        return isValid;
+    }
+
     public boolean isProfessorInCollaboration(int professorId) {
         DatabaseManager dbManager = new DatabaseManager();
         String query = "SELECT COUNT(Profesor_idProfesor) FROM colaboraciones_registradas WHERE Profesor_idProfesor = ?";

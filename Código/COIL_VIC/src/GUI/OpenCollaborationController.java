@@ -180,8 +180,8 @@ public class OpenCollaborationController {
         }
         String collaborationName = textFieldName.getText();
         CollaborationDAO instance = new CollaborationDAO();
-
-        if (!instance.validateCollaborationProfessorsLimit(collaborationId)){
+        int numberStudents = instance.getNumberStudentsById(collaborationId);
+        if (!instance.validateCollaborationProfessorsLimit(collaborationId) && !instance.validateCollaborationStudentLimit(collaborationId, numberStudents)){
             Alert collaborationOpenAlert = new Alert(AlertType.CONFIRMATION);
             collaborationOpenAlert.setTitle("Confirmación inicio colaboración");
             collaborationOpenAlert.setHeaderText("Confirmación inicio colaboración");
@@ -214,9 +214,9 @@ public class OpenCollaborationController {
             });
         }else{
             Alert noCollaboratorAlert = new Alert(AlertType.ERROR);
-            noCollaboratorAlert.setTitle("No hay colaborador");
-            noCollaboratorAlert.setHeaderText("No hay colaborador");
-            noCollaboratorAlert.setContentText("No se puede abrir la colaboración, no hay un colaborador asignado");
+            noCollaboratorAlert.setTitle("No hay colaborador o faltan estudiantes");
+            noCollaboratorAlert.setHeaderText("No hay colaborador o estudiantes");
+            noCollaboratorAlert.setContentText("No se puede abrir la colaboración, no hay un colaborador asignado o no se han asignado los estudiante establecidos");
             noCollaboratorAlert.show();
         }
     }
