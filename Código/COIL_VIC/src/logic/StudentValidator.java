@@ -15,7 +15,7 @@ public class StudentValidator {
         int professorId = student.getProfessorId();
         if(studentDAO.isStudentRegistered(email) == true){
             if(studentDAO.isStudentAssignedToProfessor(email, professorId)){
-                Alert studentDuplicatedAlert = new Alert(AlertType.INFORMATION);
+                Alert studentDuplicatedAlert = new Alert(AlertType.ERROR);
                 studentDuplicatedAlert.setTitle("Estudiante duplicado");
                 studentDuplicatedAlert.setHeaderText("Estudiante duplicado");
                 studentDuplicatedAlert.setContentText("No se puede añadir al estudiante, ya se encuentra agregado");
@@ -43,6 +43,24 @@ public class StudentValidator {
         } else {
             return false;
         }
-}
+    }
+
+    public static void showAlert(AlertType type, String title, String content) {
+        Alert alert = new Alert(type);
+        alert.setTitle(title);
+        alert.setHeaderText(title);
+        alert.setContentText(content);
+        alert.showAndWait();
+    }
+
+    public static void showAlerts(int result){
+        if (result > 0){
+            showAlert(AlertType.INFORMATION, "Estudiante asignado", "El estudiante ha sido asignado exitosamente");
+        } else{
+            showAlert(AlertType.ERROR, "Error conexión", "Se perdió la conexión a la base de datos, inténtelo de nuevo más tarde");
+        }
+    }
+
+
 
 }

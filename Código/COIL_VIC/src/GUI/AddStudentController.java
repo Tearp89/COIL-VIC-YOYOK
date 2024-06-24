@@ -20,6 +20,7 @@ import log.Log;
 import logic.Access;
 import logic.EmailControl;
 import logic.FieldValidator;
+import logic.StudentValidator;
 import logic.DAO.CollaborationDAO;
 import logic.DAO.ProfessorDAO;
 import logic.DAO.StudentDAO;
@@ -125,7 +126,7 @@ public class AddStudentController {
         int professorId = professorDAO.getProfessorIdByUser(professorData.getUser());
         String email = textFieldEmailStudent.getText();
         if(!FieldValidator.isEmail(email)){
-            showAlert(AlertType.ERROR, "Correo no válido", "No se puede añadir al estudiante, el correo no es válido");
+            StudentValidator.showAlert(AlertType.ERROR, "Correo no válido", "No se puede añadir al estudiante, el correo no es válido");
             return;
         }
 
@@ -152,21 +153,17 @@ public class AddStudentController {
         ProfessorDAO professorDAO = new ProfessorDAO();
         int professorId = professorDAO.getProfessorIdByUser(professorData.getUser());
         CollaborationDAO collaborationDAO = new CollaborationDAO();
-        ArrayList<Collaboration> collaborations =  collaborationDAO.searchCollaborationByStatusAndProfessorId("Activa", professorId);
+        ArrayList<Collaboration> collaborations =  collaborationDAO.searchCollaborationByStatusAndProfessorId("Publicada", professorId);
         if(collaborations.isEmpty()){
-            showAlert(AlertType.ERROR, "Error colaboración", "No tiene una colaboración activa para asignar el estudiante");
+            StudentValidator.showAlert(AlertType.ERROR, "Error colaboración", "No tiene una colaboración publicada para asignar el estudiante");
             buttonAssign.setDisable(true);
         } else {
             int collaborationId = collaborations.get(0).getCollaborationId();
             if(collaborationDAO.isStudentAssignedToCollaboration(email, collaborationId)){
-                showAlert(AlertType.INFORMATION, "Estudiante duplicado", "No se puede añadir al estudiante, ya se encuentra asignado a esta colaboración");
+                StudentValidator.showAlert(AlertType.INFORMATION, "Estudiante duplicado", "No se puede añadir al estudiante, ya se encuentra asignado a esta colaboración");
             } else {
                 int result =  collaborationDAO.assignStudentToCollaboration(email, collaborationId);
-                if (result > 0){
-                    showAlert(AlertType.INFORMATION, "Estudiante asignado", "El estudiante ha sido asignado exitosamente");
-                } else{
-                    showAlert(AlertType.ERROR, "Error conexión", "Se perdió la conexión a la base de datos, inténtelo de nuevo más tarde");
-                }
+                StudentValidator.showAlerts(result);
             }
         }
         
@@ -208,25 +205,19 @@ public class AddStudentController {
     
     private void handleExistingStudent(StudentDAO studentDAO, String email, int professorId) {
         if (studentDAO.isStudentAssignedToProfessor(email, professorId)) {
-            showAlert(AlertType.INFORMATION, "Estudiante duplicado", "No se puede añadir al estudiante, ya se encuentra agregado");
+            StudentValidator.showAlert(AlertType.INFORMATION, "Estudiante duplicado", "No se puede añadir al estudiante, ya se encuentra agregado");
         } else {
             int result = studentDAO.changeProfessorAssigned(professorId, email);
             if (result > 0) {
-                showAlert(AlertType.INFORMATION, "Estudiante añadido", "Se ha añadido al estudiante exitosamente");
+                StudentValidator.showAlert(AlertType.INFORMATION, "Estudiante añadido", "Se ha añadido al estudiante exitosamente");
                 updateStudentTable(professorId);
             } else {
-                showAlert(AlertType.ERROR, "Error conexión", "Se perdió la conexión a la base de datos, inténtelo de nuevo más tarde");
+                StudentValidator.showAlert(AlertType.ERROR, "Error conexión", "Se perdió la conexión a la base de datos, inténtelo de nuevo más tarde");
             }
         }
     }
 
-    private void showAlert(AlertType type, String title, String content) {
-        Alert alert = new Alert(type);
-        alert.setTitle(title);
-        alert.setHeaderText(title);
-        alert.setContentText(content);
-        alert.showAndWait();
-    }
+    
 
     private void updateStudentTable(int professorId) {
         StudentDAO studentDAO = new StudentDAO();
@@ -245,11 +236,11 @@ public class AddStudentController {
     
         int result = studentDAO.addStudent(student);
         if (result > 0) {
-            showAlert(AlertType.INFORMATION, "Estudiante añadido", "Se ha añadido al estudiante exitosamente");
+            StudentValidator.showAlert(AlertType.INFORMATION, "Estudiante añadido", "Se ha añadido al estudiante exitosamente");
             updateStudentTable(professorId);
             sendEmailToStudent(email, student.getPassword());
         } else {
-            showAlert(AlertType.ERROR, "Error conexión", "Se perdió la conexión a la base de datos, inténtelo de nuevo más tarde");
+            StudentValidator.showAlert(AlertType.ERROR, "Error conexión", "Se perdió la conexión a la base de datos, inténtelo de nuevo más tarde");
         }
     }
 
@@ -257,9 +248,9 @@ public class AddStudentController {
         EmailControl emailControl = new EmailControl();
         try {
             emailControl.sendEmail(email, "Agregado al sistema COIL-VIC", "Su contraseña para el sistema es: " + password);
-            showAlert(AlertType.INFORMATION, "Notificación correo", "Se envió un correo al estudiante sobre su cuenta");
+            StudentValidator.showAlert(AlertType.INFORMATION, "Notificación correo", "Se envió un correo al estudiante sobre su cuenta");
         } catch (MessagingException e) {
-            showAlert(AlertType.ERROR, "Error al enviar el correo",  "No se logró mandar el correo al estudiante, favor de comunicarle sus datos de acceso \nContraseña: " + password);
+            StudentValidator.showAlert(AlertType.ERROR, "Error al enviar el correo",  "No se logró mandar el correo al estudiante, favor de comunicarle sus datos de acceso \nContraseña: " + password);
             LOG.error(e);
         }
     }
