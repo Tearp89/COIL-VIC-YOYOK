@@ -262,7 +262,7 @@ public class AddActivityController {
         ObservableList<String> types = FXCollections.observableArrayList("Rompe hielo", "Reflexión", "Proyecto COIL", "Retroalimentación", "Introduccion", "Cultura" );
         comboBoxType.getItems().setAll(types);
 
-        CharLimitValidator.setCharLimitTextField(textFieldTitle, 256);
+        CharLimitValidator.setCharLimitTextField(textFieldTitle, 250);
         
 
     }
