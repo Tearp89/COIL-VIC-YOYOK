@@ -9621,3 +9621,9 @@ java.sql.SQLIntegrityConstraintViolationException: Duplicate entry 'zS22013641@e
 	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:757)
 	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:452)
 	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:210)
+24-06-2024 12:43:34 ERROR DatabaseConnectionChecker:17: No hay conexión con la base de datos Communications link failure
+
+The last packet sent successfully to the server was 0 milliseconds ago. The driver has not received any packets from the server.
+24-06-2024 13:00:35 INFO  EmailControl:52: Se envió un Email a: juaperez@uv.mx
+24-06-2024 13:01:08 INFO  AddProfessorController:417: Se envió un correo con las credenciales a: juaperez@uv.mx
+24-06-2024 13:03:40 INFO  EmailControl:52: Se envió un Email a: juaperez@uv.mx

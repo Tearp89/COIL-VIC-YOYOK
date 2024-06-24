@@ -15,6 +15,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Menu;
 import javafx.scene.control.TableView;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.FileChooser;
@@ -206,6 +208,11 @@ public class NumeraliaController {
         if (file != null) {
             try {
                 SaveToFile.exportTwoTablesToExcel(regionTable, "Tabla de Región", academicAreaTable, "Tabla por Área Academica", file.getAbsolutePath());
+                Alert downloadNumeraliaAlert = new Alert(AlertType.INFORMATION);
+                downloadNumeraliaAlert.setHeaderText("Descarga completada");
+                downloadNumeraliaAlert.setContentText("Se ha descargado correctamente la numeralia");
+                downloadNumeraliaAlert.show();
+
             } catch (IOException fileNotSavedException){
                 LOG.error(fileNotSavedException);
             }
