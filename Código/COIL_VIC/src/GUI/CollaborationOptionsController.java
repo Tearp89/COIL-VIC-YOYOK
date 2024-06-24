@@ -266,10 +266,11 @@ public class CollaborationOptionsController {
             buttonPublishCollaboration.setDisable(true);
             buttonSendRequest.setDisable(true);
         } else if (validateActiveCollaborations == 0){
-            buttonAddActivity.setDisable(true);
-            buttonSearchActivity.setDisable(true);
-            buttonOpenCollaboration.setDisable(true);
+            buttonAddActivity.setDisable(false);
+            buttonSearchActivity.setDisable(false);
+            buttonOpenCollaboration.setDisable(false);
             buttonAnswerRequest.setDisable(true);
+            buttonSendRequest.setDisable(true);
         }
 
         int validateDeclinedCollaborations = collaborationDAO.searchCollaborationByStatusAndProfessorId("Rechazada", professorId).size();
