@@ -146,13 +146,6 @@ public class SearchActivitiesController {
         activity.setType(type);
         activity.setActivityId(Integer.parseInt(labelActivityId.getText()));
         activity.setWeek(week);
-        Professor professorData = UserSessionManager.getInstance().getProfessorUserData();
-        ProfessorDAO professorDAO = new ProfessorDAO();
-        String user = professorData.getUser();
-        int professorId = professorDAO.getProfessorIdByUser(user);
-        CollaborationDAO collaborationDAO = new CollaborationDAO();
-        ArrayList<Collaboration> publishedCollaborations = collaborationDAO.searchCollaborationByStatusAndProfessorId("Publicada", professorId);
-        int collaborationId = publishedCollaborations.get(0).getCollaborationId();
         ActivityDAO activityDAO = new ActivityDAO();
         if(!FieldValidator.onlyTextAndNumbers(title) || !FieldValidator.onlyText(type) || !FieldValidator.onlyNumber(week)){
             Alert emptyFieldsAlert = new Alert(AlertType.ERROR);
