@@ -151,7 +151,7 @@ public class SearchActivitiesController {
         String user = professorData.getUser();
         int professorId = professorDAO.getProfessorIdByUser(user);
         CollaborationDAO collaborationDAO = new CollaborationDAO();
-        ArrayList<Collaboration> publishedCollaborations = collaborationDAO.searchCollaborationByProfessorId(professorId);
+        ArrayList<Collaboration> publishedCollaborations = collaborationDAO.searchCollaborationByStatusAndProfessorId("Publicada", professorId);
         int collaborationId = publishedCollaborations.get(0).getCollaborationId();
         ActivityDAO activityDAO = new ActivityDAO();
         if(!FieldValidator.onlyTextAndNumbers(title) || !FieldValidator.onlyText(type) || !FieldValidator.onlyNumber(week)){
@@ -251,10 +251,29 @@ public class SearchActivitiesController {
         String user = professorData.getUser();
         int professorId = professorDAO.getProfessorIdByUser(user);
         CollaborationDAO collaborationDAO = new CollaborationDAO();
-        ArrayList<Collaboration> publishedCollaborations = collaborationDAO.searchCollaborationByProfessorId(professorId);
+        ArrayList<Collaboration> publishedCollaborations = collaborationDAO.searchCollaborationByStatusAndProfessorId("Publicada", professorId);
 
         if (!publishedCollaborations.isEmpty()) {
             int collaborationId = publishedCollaborations.get(0).getCollaborationId();
+            ActivityDAO activityDAO = new ActivityDAO();
+            List<Activity> activities = activityDAO.getActivitiesByCollaborationAndWeek(collaborationId, week);
+
+            if (!activities.isEmpty()) {
+                Activity activity = activities.get(0);
+                textFieldTitle.setText(activity.getTitle());
+                textAreaDescription.setText(activity.getDescription());
+                comboBoxType.setValue(activity.getType());
+                labelActivityId.setText(String.valueOf(activity.getActivityId()));
+            } else {
+                
+                textFieldTitle.clear();
+                textAreaDescription.clear();
+                comboBoxType.setValue(null);
+                labelActivityId.setText("");
+            }
+        } else {
+            ArrayList<Collaboration> activeCollaborations = collaborationDAO.searchCollaborationByStatusAndProfessorId("Activa", professorId);
+            int collaborationId = activeCollaborations.get(0).getCollaborationId();
             ActivityDAO activityDAO = new ActivityDAO();
             List<Activity> activities = activityDAO.getActivitiesByCollaborationAndWeek(collaborationId, week);
 
