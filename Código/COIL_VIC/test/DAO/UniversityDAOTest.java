@@ -29,9 +29,9 @@ public class UniversityDAOTest {
     public void testAddUniversity() {
         UniversityDAO universityDAO = new UniversityDAO();
         University university = new University();
-        university.setUniversityCountry("México");
-        university.setUniversityName("UV");
-        university.setUniversityLanguage("Español");
+        university.setUniversityCountry("Uganda");
+        university.setUniversityName("Uganda University");
+        university.setUniversityLanguage("Ingles");
         
         int rowsAffected = universityDAO.addUniversity(university);
         assertEquals(1, rowsAffected);
@@ -44,7 +44,7 @@ public class UniversityDAOTest {
     public void testDeleteUniversity() {
         UniversityDAO universityDAO = new UniversityDAO();
         University university = new University();
-        university.setUniversityName("UV");
+        university.setUniversityName("Uganda University");
         
         int rowsAffected = universityDAO.deleteUniversity(university);
         assertEquals(1, rowsAffected);
@@ -57,10 +57,10 @@ public class UniversityDAOTest {
     public void testUpdateUniversity() {
         UniversityDAO universityDAO = new UniversityDAO();
         University university = new University();
-        university.setUniversityCountry("NuevoPais");
+        university.setUniversityCountry("CambioPaís");
         university.setUniversityName("NuevoNombre");
         university.setUniversityLanguage("NuevoIdioma");
-        university.setUniversityId(11);
+        university.setUniversityId(14);
         int rowsAffected = universityDAO.updateUniversity(university);
         assertEquals(1, rowsAffected);
     }
@@ -77,7 +77,7 @@ public class UniversityDAOTest {
     @Test 
     public void testUniversityRegisteredSucces(){
         UniversityDAO universityDAO = new UniversityDAO();
-        String universityName = "Universidad Veracruzana";
+        String universityName = "MIT";
         boolean expectedResult = true;
         boolean result = universityDAO.isUniversityRegistered(universityName);
         assertEquals(expectedResult, result);
@@ -87,7 +87,7 @@ public class UniversityDAOTest {
     @Test
     public void testLoadUniversities() throws SQLException {
         UniversityDAO universityDAO = new UniversityDAO();
-       int expectedResult = 5;
+        int expectedResult = 6;
         ObservableList<String> universities = universityDAO.loadUniversities();
 
         assertEquals(expectedResult, universities.size());
@@ -96,7 +96,7 @@ public class UniversityDAOTest {
     @Test
     public void testSearchUniversitySuccess(){
         UniversityDAO universityDAO = new UniversityDAO();
-        int expectedResult = 5;
+        int expectedResult = 7;
         int result = universityDAO.searchUniversity().size();
         assertEquals(expectedResult, result);
     }
