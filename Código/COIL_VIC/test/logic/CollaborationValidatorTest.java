@@ -5,8 +5,6 @@ import static org.junit.Assert.assertEquals;
 import java.time.LocalDate;
 
 import org.junit.Test;
-
-import logic.DAO.CollaborationDAO;
 import logic.classes.Collaboration;
 
 public class CollaborationValidatorTest {

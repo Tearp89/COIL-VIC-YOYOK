@@ -46,8 +46,6 @@ public class StudentDAO implements IStudent {
         return result;
     }
 
-    //TODO: Test
-
     public boolean isStudentAssignedToProfessor(String email, int professorId) {
         DatabaseManager dbManager = new DatabaseManager();
         String query = "SELECT COUNT(*) FROM estudiante WHERE Profesor_idProfesor = ? AND correoElectrónico = ?";

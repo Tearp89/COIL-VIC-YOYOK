@@ -3,7 +3,6 @@ package logic;
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
-import org.junit.runner.notification.RunListener.ThreadSafe;
 
 import logic.classes.Professor;
 
