@@ -12,50 +12,52 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import log.Log;
-import logic.DAO.AdminDAO;
-import logic.DAO.CollaborationDAO;
+import logic.DAO.UniversityDAO;
 import logic.classes.Admin;
-import logic.classes.Collaboration;
+import logic.classes.University;
 
-public class AdminFeedbackCollaborationController {
-    private static final org.apache.log4j.Logger LOG = Log.getLogger(AdminFeedbackCollaborationController.class);
+public class UniversitySearcherController {
+    private static final org.apache.log4j.Logger LOG = Log.getLogger(UniversitySearcherController.class);
+    @FXML
+    private TableView<University> tableViewUniversities;
+    @FXML
+    Label labelCollaborationNotFound = new Label("No se encontraron universidades");
 
-    @FXML
-    private TableView<Collaboration> tableViewClosedCollaborations;
-    @FXML
-    private TableColumn<Collaboration, String> tableColumnCollaborationId;
-    @FXML
-    private TableColumn<Collaboration, String> tableColumnCollaborationName;
-    @FXML
-    private TableColumn<Collaboration, String> tableColumnStartDate;
-    @FXML
-    private TableColumn<Collaboration, String> tableColumnFinishDate;
-    @FXML
-    private TableColumn<Collaboration, String> tableColumnStatus;
-    @FXML 
-    Label labelCollaborationNotFound = new Label("No se encontraron colaboraciones");
-
-    public void loadClosedCollaborations(){
+    public void loadUniversities(){
         if(!DatabaseConnectionChecker.isDatabaseConnected()){
             DatabaseConnectionChecker.showNoConnectionDialog();
-            return;
+        } else {
+            UniversityDAO universitiyDAO = new UniversityDAO();
+            ArrayList<University> universities = new ArrayList<>();
+            universities = universitiyDAO.searchUniversity();
+            tableViewUniversities.getItems().addAll(universities);
+            if(universities.size() == 0){
+                tableViewUniversities.setPlaceholder(labelCollaborationNotFound);
+            }
         }
-        Admin adminData = new Admin();
-        adminData = UserSessionManager.getInstance().getAdminUserData();
-        String user = adminData.getAdminUser();
-        AdminDAO adminDAO = new AdminDAO();
-        int adminId = adminDAO.getAdminIdByUser(user);
-        CollaborationDAO collaborationDAO = new CollaborationDAO();
-        ArrayList<Collaboration> closedCollaborations = new ArrayList<>();
-        closedCollaborations = collaborationDAO.getUnreviewedCollaborationsByAdmin(adminId);
-        tableViewClosedCollaborations.getItems().addAll(closedCollaborations);
-        if(closedCollaborations.size() == 0){
-            tableViewClosedCollaborations.setPlaceholder(labelCollaborationNotFound);
+        
+    }
+
+    @FXML
+    private TextField textFieldSearch;
+    public void searchUniversities(ActionEvent e){
+        if(!DatabaseConnectionChecker.isDatabaseConnected()){
+            DatabaseConnectionChecker.showNoConnectionDialog();
+        } else {
+            UniversityDAO universityDAO = new UniversityDAO();
+            ArrayList<University> universities = new ArrayList<>();
+            String universityName = "%" + textFieldSearch.getText() + "%";
+            universities = universityDAO.searchUniversityByName(universityName);
+            tableViewUniversities.getItems().clear();
+            tableViewUniversities.getItems().addAll(universities);
+            if(universities.size() == 0){
+                tableViewUniversities.setPlaceholder(labelCollaborationNotFound);
+            }
         }
     }
 
@@ -98,7 +100,7 @@ public class AdminFeedbackCollaborationController {
     private Button buttonCollaborations;
     @FXML
     private void goToCollaborations(ActionEvent event){
-        FXMLLoader collaborationOptionsLoader = new FXMLLoader(getClass().getResource("/GUI/AdminCollaborationOptionsWindow.fxml"));
+        FXMLLoader collaborationOptionsLoader = new FXMLLoader(getClass().getResource("/GUI/AdminUniversityOptionsWindow.fxml"));
         ChangeWindowManager.changeWindowTo(event, collaborationOptionsLoader);
     }
 
@@ -106,7 +108,7 @@ public class AdminFeedbackCollaborationController {
     private Button buttonProfessors;
     @FXML
     private void goToProfessors(ActionEvent event){
-        FXMLLoader professorOptionsLoader = new FXMLLoader(getClass().getResource("/GUI/AdminProfessorOptionsWindow.fxml"));
+        FXMLLoader professorOptionsLoader = new FXMLLoader(getClass().getResource("/GUI/AdminProfessorsOptionsWindow.fxml"));
         ChangeWindowManager.changeWindowTo(event, professorOptionsLoader);
     }
 
@@ -130,14 +132,16 @@ public class AdminFeedbackCollaborationController {
     private Button buttonBack;
     @FXML
     private void goBack(ActionEvent event){
-        FXMLLoader goBackLoader = new FXMLLoader(getClass().getResource("/GUI/AdminCollaborationOptionsWindow.fxml"));
+        FXMLLoader goBackLoader = new FXMLLoader(getClass().getResource("/GUI/AdminUniversityOptionsWindow.fxml"));
         ChangeWindowManager.changeWindowTo(event, goBackLoader);
     }
 
-        @FXML
+    
+
+    @FXML
     private Label labelUser;
     @FXML
-    private void initialize(){
+    public void initialize(){
         Admin adminData = new Admin();
         adminData = UserSessionManager.getInstance().getAdminUserData();
         labelUser.setText(adminData.getAdminName());
@@ -145,31 +149,28 @@ public class AdminFeedbackCollaborationController {
             DatabaseConnectionChecker.showNoConnectionDialog();
             return;
         }
-        loadClosedCollaborations();
-        tableViewClosedCollaborations.setOnMouseClicked(event ->{
+        loadUniversities();
+        tableViewUniversities.setOnMouseClicked(event -> {
+            University university = tableViewUniversities.getSelectionModel().getSelectedItem();
             if(event.getClickCount() == 1){
-                Collaboration closedCollaboration = tableViewClosedCollaborations.getSelectionModel().getSelectedItem();
-                if(closedCollaboration != null){
-                    try{
-                        FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUI/AdminCollaborationGraderWindow.fxml"));
-                        Parent root = loader.load();
-                        AdminCollaborationGraderController controller = loader.getController();
-                        controller.initialize(closedCollaboration.getCollaborationId());
-                        Stage stage = new Stage();
-                        stage.initStyle(StageStyle.TRANSPARENT);
-                        stage.setScene(new Scene(root));
-                        stage.show();
-                        Node source = (Node) event.getSource();
-                        Stage currenStage = (Stage) source.getScene().getWindow();
-                        currenStage.close();
-                    }catch (IOException e){
-                        LOG.error("ERROR:", e);
-                    }
+                try{
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUI/UniversityDetailsWindow.fxml"));
+                    Parent root = loader.load();
+                    UniversityDetailsController controller = loader.getController();
+                    controller.initialize(university.getUniversityId());
+                    Stage stage = new Stage();
+                    stage.initStyle(StageStyle.TRANSPARENT);
+                    stage.setScene(new Scene(root));
+                    stage.show();
+                    Node source = (Node) event.getSource();
+                    Stage currenStage = (Stage) source.getScene().getWindow();
+                    currenStage.close();
+                } catch (IOException universityDetailsException){
+                    LOG.error("ERROR:", universityDetailsException);
                 }
             }
         });
+
     }
-
-
 
 }

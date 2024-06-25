@@ -163,7 +163,7 @@ public class LoginController {
             buttonLogin.setDisable(true);
             return;
         }
-        FXMLLoader addProfessorLoader = new FXMLLoader(getClass().getResource("/GUI/AddProfessorWindow.fxml"));
+        FXMLLoader addProfessorLoader = new FXMLLoader(getClass().getResource("/GUI/ProfessorAdderWindow.fxml"));
         ChangeWindowManager.changeWindowTo(event, addProfessorLoader);
     }
 

@@ -111,9 +111,9 @@ public class StudentsFeedbackCollaborationController {
                 Collaboration closedCollaboration = tableViewClosedCollaborations.getSelectionModel().getSelectedItem();
                 if(closedCollaboration != null){
                     try{
-                        FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUI/StudentGradeCollaborationWindow.fxml"));
+                        FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUI/StudentCollaborationGraderWindow.fxml"));
                         Parent root = loader.load();
-                        StudentGradeCollaborationController controller = loader.getController();
+                        StudentCollaborationGraderController controller = loader.getController();
                         controller.initialize(closedCollaboration.getCollaborationId());
                         Stage stage = new Stage();
                         stage.initStyle(StageStyle.TRANSPARENT);

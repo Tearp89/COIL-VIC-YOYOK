@@ -21,12 +21,12 @@ public class RequestsController {
     @FXML
     private void answerRequest(ActionEvent event){
         if(comboBoxRequestType.getSelectionModel().getSelectedItem() == "Académico"){
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUI/SearchPendingProfessorWindow.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUI/PendingProfessorsSearcherWindow.fxml"));
             ChangeWindowManager.changeWindowTo(event, loader);;
             
 
         }else{   
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUI/SearchPendingCollaborationsWindow.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUI/PendingCollaborationsSearcherWindow.fxml"));
             ChangeWindowManager.changeWindowTo(event, loader);
         }
     }

@@ -7,26 +7,19 @@ import dataAccess.DatabaseConnectionChecker;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 import log.Log;
-import logic.DAO.AdminDAO;
 import logic.DAO.CollaborationDAO;
 import logic.classes.Admin;
 import logic.classes.Collaboration;
 
-public class AdminFeedbackCollaborationController {
-    private static final org.apache.log4j.Logger LOG = Log.getLogger(AdminFeedbackCollaborationController.class);
-
+public class AdminCollaborationsSearcherController {
+    private static final org.apache.log4j.Logger LOG = Log.getLogger(AdminCollaborationsSearcherController.class);
     @FXML
-    private TableView<Collaboration> tableViewClosedCollaborations;
+    private TableView<Collaboration> tableViewCollaborations;
     @FXML
     private TableColumn<Collaboration, String> tableColumnCollaborationId;
     @FXML
@@ -36,27 +29,21 @@ public class AdminFeedbackCollaborationController {
     @FXML
     private TableColumn<Collaboration, String> tableColumnFinishDate;
     @FXML
-    private TableColumn<Collaboration, String> tableColumnStatus;
-    @FXML 
-    Label labelCollaborationNotFound = new Label("No se encontraron colaboraciones");
+    private Label labelCollaborationNotFound = new Label("No se encontraron colaboraciones");
 
-    public void loadClosedCollaborations(){
+    public void loadCollaborations(){
         if(!DatabaseConnectionChecker.isDatabaseConnected()){
             DatabaseConnectionChecker.showNoConnectionDialog();
             return;
         }
-        Admin adminData = new Admin();
-        adminData = UserSessionManager.getInstance().getAdminUserData();
-        String user = adminData.getAdminUser();
-        AdminDAO adminDAO = new AdminDAO();
-        int adminId = adminDAO.getAdminIdByUser(user);
         CollaborationDAO collaborationDAO = new CollaborationDAO();
-        ArrayList<Collaboration> closedCollaborations = new ArrayList<>();
-        closedCollaborations = collaborationDAO.getUnreviewedCollaborationsByAdmin(adminId);
-        tableViewClosedCollaborations.getItems().addAll(closedCollaborations);
-        if(closedCollaborations.size() == 0){
-            tableViewClosedCollaborations.setPlaceholder(labelCollaborationNotFound);
+        ArrayList<Collaboration> collaborations = new ArrayList<>();
+        collaborations = collaborationDAO.searchCollaborationByStatus("Activa");
+        tableViewCollaborations.getItems().addAll(collaborations);
+        if (collaborations.size() == 0){
+            tableViewCollaborations.setPlaceholder(labelCollaborationNotFound);
         }
+
     }
 
     @FXML
@@ -134,42 +121,20 @@ public class AdminFeedbackCollaborationController {
         ChangeWindowManager.changeWindowTo(event, goBackLoader);
     }
 
-        @FXML
+
+    @FXML
     private Label labelUser;
     @FXML
     private void initialize(){
         Admin adminData = new Admin();
         adminData = UserSessionManager.getInstance().getAdminUserData();
+
         labelUser.setText(adminData.getAdminName());
         if(!DatabaseConnectionChecker.isDatabaseConnected()){
             DatabaseConnectionChecker.showNoConnectionDialog();
             return;
         }
-        loadClosedCollaborations();
-        tableViewClosedCollaborations.setOnMouseClicked(event ->{
-            if(event.getClickCount() == 1){
-                Collaboration closedCollaboration = tableViewClosedCollaborations.getSelectionModel().getSelectedItem();
-                if(closedCollaboration != null){
-                    try{
-                        FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUI/AdminCollaborationGraderWindow.fxml"));
-                        Parent root = loader.load();
-                        AdminCollaborationGraderController controller = loader.getController();
-                        controller.initialize(closedCollaboration.getCollaborationId());
-                        Stage stage = new Stage();
-                        stage.initStyle(StageStyle.TRANSPARENT);
-                        stage.setScene(new Scene(root));
-                        stage.show();
-                        Node source = (Node) event.getSource();
-                        Stage currenStage = (Stage) source.getScene().getWindow();
-                        currenStage.close();
-                    }catch (IOException e){
-                        LOG.error("ERROR:", e);
-                    }
-                }
-            }
-        });
+        loadCollaborations();        
     }
-
-
 
 }

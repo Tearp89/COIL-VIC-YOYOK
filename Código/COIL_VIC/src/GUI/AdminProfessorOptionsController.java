@@ -94,7 +94,7 @@ public class AdminProfessorOptionsController {
     private Button buttonSearchProfessors;
     @FXML
     private void searchProfessors(ActionEvent event){
-        FXMLLoader searchProfessorsController = new FXMLLoader(getClass().getResource("/GUI/ConsultProfessorsWindow.fxml"));
+        FXMLLoader searchProfessorsController = new FXMLLoader(getClass().getResource("/GUI/ProfessorsConsulterWindow.fxml"));
         ChangeWindowManager.changeWindowTo(event, searchProfessorsController);
     }
 

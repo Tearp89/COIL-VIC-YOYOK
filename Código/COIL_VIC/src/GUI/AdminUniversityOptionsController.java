@@ -96,7 +96,7 @@ public class AdminUniversityOptionsController {
     private Button buttonSearchUniversities;
     @FXML
     private void searchUniversities(ActionEvent event){
-        FXMLLoader searchUniversitiesLoader = new FXMLLoader(getClass().getResource("/GUI/SearchUniversityWindow.fxml"));
+        FXMLLoader searchUniversitiesLoader = new FXMLLoader(getClass().getResource("/GUI/UniversitySearcherWindow.fxml"));
         ChangeWindowManager.changeWindowTo(event, searchUniversitiesLoader);
     }
 

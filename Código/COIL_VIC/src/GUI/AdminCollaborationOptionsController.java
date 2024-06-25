@@ -96,7 +96,7 @@ public class AdminCollaborationOptionsController {
     private Button buttonSearchCollaborations;
     @FXML
     private void searchCollaborations(ActionEvent event){
-        FXMLLoader searchCollaborationsLoader = new FXMLLoader(getClass().getResource("/GUI/AdminSearchCollaborationsWindow.fxml"));
+        FXMLLoader searchCollaborationsLoader = new FXMLLoader(getClass().getResource("/GUI/AdminCollaborationsSearcherWindow.fxml"));
         ChangeWindowManager.changeWindowTo(event, searchCollaborationsLoader);
     }
 

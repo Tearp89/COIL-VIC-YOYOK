@@ -62,7 +62,7 @@ public class CollaborationOptionsController {
             disableButtons();
             return;
         }
-        FXMLLoader addCollaborationLoader = new FXMLLoader(getClass().getResource("/GUI/AddCollaborationWindow.fxml"));
+        FXMLLoader addCollaborationLoader = new FXMLLoader(getClass().getResource("/GUI/CollaborationAdderWindow.fxml"));
         ChangeWindowManager.changeWindowTo(event, addCollaborationLoader);
     }
 
@@ -75,7 +75,7 @@ public class CollaborationOptionsController {
             disableButtons();
             return;
         }
-        FXMLLoader publishCollaborationLoader = new FXMLLoader(getClass().getResource("/GUI/AcceptedCollaborationsWindow.fxml"));
+        FXMLLoader publishCollaborationLoader = new FXMLLoader(getClass().getResource("/GUI/AcceptedCollaborationsSearcherWindow.fxml"));
         ChangeWindowManager.changeWindowTo(event, publishCollaborationLoader);
     }
 
@@ -88,7 +88,7 @@ public class CollaborationOptionsController {
             disableButtons();
             return;
         }
-        FXMLLoader editCollaborationLoader = new FXMLLoader(getClass().getResource("/GUI/DeclinedCollaborationsWindow.fxml"));
+        FXMLLoader editCollaborationLoader = new FXMLLoader(getClass().getResource("/GUI/DeclinedCollaborationsSearcherWindow.fxml"));
         ChangeWindowManager.changeWindowTo(event, editCollaborationLoader);
     }
 
@@ -103,7 +103,7 @@ public class CollaborationOptionsController {
             disableButtons();
             return;
         }
-        FXMLLoader openCollaborationLoader = new FXMLLoader(getClass().getResource("/GUI/OpenCollaborationWindow.fxml"));
+        FXMLLoader openCollaborationLoader = new FXMLLoader(getClass().getResource("/GUI/CollaborationOpenerWindow.fxml"));
         ChangeWindowManager.changeWindowTo(event, openCollaborationLoader);
 
     }
@@ -118,7 +118,7 @@ public class CollaborationOptionsController {
             disableButtons();
             return;
         }
-        FXMLLoader closeCollaboraitionLoader = new FXMLLoader(getClass().getResource("/GUI/CloseCollaborationWindow.fxml"));
+        FXMLLoader closeCollaboraitionLoader = new FXMLLoader(getClass().getResource("/GUI/CollaborationCloserWindow.fxml"));
         ChangeWindowManager.changeWindowTo(event, closeCollaboraitionLoader);
     }
 
@@ -161,7 +161,7 @@ public class CollaborationOptionsController {
             disableButtons();
             return;
         }
-        FXMLLoader answerRequestLoader = new FXMLLoader(getClass().getResource("/GUI/SearchRequestToCollaborateWindow.fxml"));
+        FXMLLoader answerRequestLoader = new FXMLLoader(getClass().getResource("/GUI/RequestToCollaborateSearcher.fxml"));
         ChangeWindowManager.changeWindowTo(event, answerRequestLoader);
     }
 
@@ -201,7 +201,7 @@ public class CollaborationOptionsController {
             disableButtons();
             return;
         }
-        FXMLLoader searchActivityLoader = new FXMLLoader(getClass().getResource("/GUI/SearchActivitiesWindow.fxml"));
+        FXMLLoader searchActivityLoader = new FXMLLoader(getClass().getResource("/GUI/ActivitiesSearcherWindow.fxml"));
         ChangeWindowManager.changeWindowTo(event, searchActivityLoader);
 
     }
@@ -215,7 +215,7 @@ public class CollaborationOptionsController {
             disableButtons();
             return;
         }
-        FXMLLoader addActivityLoader = new FXMLLoader(getClass().getResource("/GUI/AddActivityWindow.fxml"));
+        FXMLLoader addActivityLoader = new FXMLLoader(getClass().getResource("/GUI/ActivityAdderWindow.fxml"));
         ChangeWindowManager.changeWindowTo(event, addActivityLoader);
     }
 

@@ -14,6 +14,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import log.Log;
@@ -22,12 +23,11 @@ import logic.DAO.ProfessorDAO;
 import logic.classes.Collaboration;
 import logic.classes.Professor;
 
-public class ProfessorFeedbackCollaborationController {
-
-    private static final org.apache.log4j.Logger LOG = Log.getLogger(PublishedCollaborationsController.class);
+public class DeclinedCollaborationsSearcherController {
+    private static final org.apache.log4j.Logger LOG = Log.getLogger(DeclinedCollaborationsSearcherController.class);
 
     @FXML
-    private TableView<Collaboration> tableViewClosedCollaborations;
+    private TableView<Collaboration> tableViewDeclinedCollaborations;
     @FXML
     private TableColumn<Collaboration, String> tableColumnCollaborationId;
     @FXML
@@ -38,29 +38,46 @@ public class ProfessorFeedbackCollaborationController {
     private TableColumn<Collaboration, String> tableColumnFinishDate;
     @FXML
     private TableColumn<Collaboration, String> tableColumnStatus;
-    @FXML 
-    Label labelCollaborationNotFound = new Label("No se encontraron colaboraciones");
+    @FXML
+    private TextField textFieldSearch; 
 
-    public void loadClosedCollaborations(){
+
+
+    public void loadDeclinedCollaboration(){
         if(!DatabaseConnectionChecker.isDatabaseConnected()){
             DatabaseConnectionChecker.showNoConnectionDialog();
             return;
         }
-        Professor professorData = new Professor();
-        professorData = UserSessionManager.getInstance().getProfessorUserData();
-        String user = professorData.getUser();
-        ProfessorDAO professorDAO = new ProfessorDAO();
-        int professorId = professorDAO.getProfessorIdByUser(user);
-        CollaborationDAO collaborationDAO = new CollaborationDAO();
-        ArrayList<Collaboration> closedCollaborations = new ArrayList<>();
-        closedCollaborations = collaborationDAO.getUnreviewedCollaborationsByProfessor(professorId);
-        tableViewClosedCollaborations.getItems().addAll(closedCollaborations);
-        if(closedCollaborations.size() == 0){
-            tableViewClosedCollaborations.setPlaceholder(labelCollaborationNotFound);
+        CollaborationDAO declinedCollaborations = new CollaborationDAO();
+        ArrayList<Collaboration> collaborations = new ArrayList<>();
+        try{
+            Professor professorData = UserSessionManager.getInstance().getProfessorUserData();
+            ProfessorDAO professorDAO = new ProfessorDAO();
+            int professorId = professorDAO.getProfessorIdByUser(professorData.getUser());
+            collaborations = declinedCollaborations.searchCollaborationByStatusAndProfessorId("Rechazada", professorId);
+        }catch(Exception loadDeclinedCollaborationsException){
+            loadDeclinedCollaborationsException.printStackTrace();
         }
+
+        tableViewDeclinedCollaborations.getItems().addAll(collaborations);
+
     }
 
-
+    public void searchDeclinedCollaborations(ActionEvent event){
+        if(!DatabaseConnectionChecker.isDatabaseConnected()){
+            DatabaseConnectionChecker.showNoConnectionDialog();
+            return;
+        }
+        Professor professorData = UserSessionManager.getInstance().getProfessorUserData();
+            ProfessorDAO professorDAO = new ProfessorDAO();
+            int professorId = professorDAO.getProfessorIdByUser(professorData.getUser());
+        CollaborationDAO collaborationDAO = new CollaborationDAO();
+        ArrayList<Collaboration> collaborations = new ArrayList<>();
+        String collaborationName = "%" + textFieldSearch.getText() + "%";
+        collaborations = collaborationDAO.searchCollaborationByStatusNameandProfessorId("Rechazada", collaborationName, professorId);
+        tableViewDeclinedCollaborations.getItems().clear();
+        tableViewDeclinedCollaborations.getItems().addAll(collaborations);
+    }
 
     @FXML
     private Button buttonHome;
@@ -97,8 +114,6 @@ public class ProfessorFeedbackCollaborationController {
 
     @FXML
     private void goToSettings(ActionEvent event){
-        FXMLLoader settingsLoader = new FXMLLoader(getClass().getResource("/GUI/ProfessorSettingsWindow.fxml"));
-        ChangeWindowManager.changeWindowTo(event, settingsLoader);
 
     }
     @FXML
@@ -136,6 +151,7 @@ public class ProfessorFeedbackCollaborationController {
 
     }
 
+
     @FXML
     private Label labelUser;
     @FXML
@@ -147,30 +163,32 @@ public class ProfessorFeedbackCollaborationController {
             DatabaseConnectionChecker.showNoConnectionDialog();
             return;
         }
-        loadClosedCollaborations();
-        tableViewClosedCollaborations.setOnMouseClicked(event ->{
-            if(event.getClickCount() == 1){
-                Collaboration closedCollaboration = tableViewClosedCollaborations.getSelectionModel().getSelectedItem();
-                if(closedCollaboration != null){
-                    try{
-                        FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUI/ProfessorCollaborationGraderWindow.fxml"));
-                        Parent root = loader.load();
-                        ProfessorCollaborationGraderController controller = loader.getController();
-                        controller.initialize(closedCollaboration.getCollaborationId());
-                        Stage stage = new Stage();
-                        stage.initStyle(StageStyle.TRANSPARENT);
-                        stage.setScene(new Scene(root));
-                        stage.show();
-                        Node source = (Node) event.getSource();
-                        Stage currenStage = (Stage) source.getScene().getWindow();
-                        currenStage.close();
 
-                    }catch (IOException e){
-                        LOG.error("ERROR:", e);
-                    }
+        loadDeclinedCollaboration();
+        tableViewDeclinedCollaborations.setOnMouseClicked(event -> {
+        if(event.getClickCount() == 1){
+            Collaboration declinedCollaboration = tableViewDeclinedCollaborations.getSelectionModel().getSelectedItem();
+            if(declinedCollaboration != null){
+                try {
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("DeclinedCollaborationDetailsWindow.fxml"));
+                    Parent root = loader.load();
+                    DeclinedCollaborationDetailsController controller = loader.getController();
+                    controller.initialize(declinedCollaboration.getCollaborationId());
+                    Stage stage = new Stage();
+                    stage.initStyle(StageStyle.TRANSPARENT);
+                    stage.setScene(new Scene(root));
+                    stage.show();
+                    Node source = (Node) event.getSource();
+                    Stage currenStage = (Stage) source.getScene().getWindow();
+                    currenStage.close();
+                } catch (IOException e) {
+                    LOG.error("ERROR:", e);
                 }
             }
-        });
-    }
+        }
+    });
+    
 
+    }
+    
 }
