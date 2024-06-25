@@ -17,22 +17,8 @@ public class CollaborationValidator {
 
     public static boolean validateCollaborationFields(Collaboration collaboration, CollaborationDAO collaborationDAO){
         String collaborationName = collaboration.getCollaborationName();
-        String collaborationDescription = collaboration.getDescription();
-        LocalDate startDate = collaboration.getStartDate();
-        LocalDate finishDate = collaboration.getFinishDate();
-        String collaborationGoal = collaboration.getCollaborationGoal();
-        String collaborationSubject = collaboration.getSubject();
-        String studentProfile = collaboration.getStudentProfile();
-        String noStudentsText = String.valueOf(collaboration.getNoStudents());
-        String collaborationType = collaboration.getCollaborationType();
-        if(!FieldValidator.onlyTextAndNumbers(collaborationName) ||
-        !FieldValidator.onlyTextAndNumbers(collaborationDescription) ||
-        !FieldValidator.isValidDateRange(startDate, finishDate) ||
-        !FieldValidator.onlyTextAndNumbers(collaborationGoal) ||
-        !FieldValidator.onlyText(collaborationSubject) ||
-        !FieldValidator.onlyTextAndNumbers(studentProfile) ||
-        !FieldValidator.onlyNumber(noStudentsText) || 
-        collaborationType.isEmpty()){
+        
+        if(!onlyValidateCollaborationFields(collaboration)){
             Alert emptyFieldsAlert = new Alert(AlertType.ERROR);
             emptyFieldsAlert.setTitle("Campos vacíos o incorrectos");
             emptyFieldsAlert.setHeaderText("Campos vacíos o incorrectos");
@@ -83,6 +69,31 @@ public class CollaborationValidator {
         }
 
     return true;
+    }
+
+    public static boolean onlyValidateCollaborationFields(Collaboration collaboration) {
+        String collaborationName = collaboration.getCollaborationName();
+        String collaborationDescription = collaboration.getDescription();
+        LocalDate startDate = collaboration.getStartDate();
+        LocalDate finishDate = collaboration.getFinishDate();
+        String collaborationGoal = collaboration.getCollaborationGoal();
+        String collaborationSubject = collaboration.getSubject();
+        String studentProfile = collaboration.getStudentProfile();
+        String noStudentsText = String.valueOf(collaboration.getNoStudents());
+        String collaborationType = collaboration.getCollaborationType();
+
+        if (!FieldValidator.onlyTextAndNumbers(collaborationName) ||
+            !FieldValidator.onlyTextAndNumbers(collaborationDescription) ||
+            !FieldValidator.isValidDateRange(startDate, finishDate) ||
+            !FieldValidator.onlyTextAndNumbers(collaborationGoal) ||
+            !FieldValidator.onlyText(collaborationSubject) ||
+            !FieldValidator.onlyTextAndNumbers(studentProfile) ||
+            !FieldValidator.onlyNumber(noStudentsText) || 
+            collaborationType.isEmpty()) {
+            return false;
+        }
+
+        return true;
     }
 
 

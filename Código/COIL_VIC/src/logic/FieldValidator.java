@@ -7,6 +7,8 @@ package logic;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
@@ -98,6 +100,23 @@ public class FieldValidator {
             System.out.println("Invalid date format: " + dateStr);
             return null;
         }
+    }
+
+    
+    public static boolean validatePassword(String password) {
+        if (password.length() < 8) {
+            return false;
+        }
+        Pattern upperCasePattern = Pattern.compile("[A-Z]");
+        Pattern lowerCasePattern = Pattern.compile("[a-z]");
+        Pattern digitPattern = Pattern.compile("[0-9]");
+        Pattern specialCharacterPattern = Pattern.compile("[^a-zA-Z0-9]");
+        Matcher upperCaseMatcher = upperCasePattern.matcher(password);
+        Matcher lowerCaseMatcher = lowerCasePattern.matcher(password);
+        Matcher digitMatcher = digitPattern.matcher(password);
+        Matcher specialCharacterMatcher = specialCharacterPattern.matcher(password);
+
+        return upperCaseMatcher.find() && lowerCaseMatcher.find() && digitMatcher.find() && specialCharacterMatcher.find();
     }
     
 

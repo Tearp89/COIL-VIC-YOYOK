@@ -66,4 +66,12 @@ public class FieldValidatorTest {
     public void testIsEmailIsBlank() {
         assertFalse(FieldValidator.isEmail(""));
     }
+
+    @Test
+    public void validatePasswordTestSuccess(){
+        String password = "Cont@89-";
+        boolean expectedResult = true;
+        boolean result = FieldValidator.validatePassword(password);
+        assertEquals(expectedResult, result);
+    }
 }
